@@ -7,6 +7,7 @@ import { isDeepStrictEqual as equal } from 'node:util';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { validateFrontier } from './step5-rounds.mjs';
 import { MODELS } from './models.mjs';
+import { reviewCorrectionLedgerAppend } from './step5-owner-review-correction.mjs';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const digest = value => hash(JSON.stringify(value));
@@ -235,7 +236,8 @@ export function pageCorrectionCompletion(root, run, round, context) {
   // A failed parent attempt may already have created genuine child collection
   // receipts. Preserve every original workflow byte, and the complete metadata
   // inventory, without treating later native output files as source changes.
-  need(Object.entries(pack.before_protected).every(([path, value]) => protectedNow[path] === value)
+  need(Object.entries(pack.before_protected).every(([path, value]) => protectedNow[path] === value
+      ||path==='research/defect-ledger.jsonl'&&reviewCorrectionLedgerAppend(root,run,value))
     && equal(Object.keys(protectedNow).filter(path => !path.startsWith(workflowPrefix)),
       Object.keys(pack.before_protected).filter(path => !path.startsWith(workflowPrefix))),
     'original reports, tuples, ledger or owning metadata changed during page-only repair');
@@ -287,13 +289,14 @@ export function verifyPageCorrectionReplay(root, run, round, parent) {
     'parent page correction differs from its genuine frozen child receipt');
   // Root closes findings by appending successors. Require the actual original
   // canonical records, without rerunning OPEN/unsuperseded intake on history.
-  const requests = [metadata.request, ...(parent.native_owner_finding_corrections ? [parent.native_owner_finding_corrections.request] : [])];
+  const requests = [metadata.request, ...(parent.native_owner_finding_corrections ? [parent.native_owner_finding_corrections.request] : []),
+    ...(parent.native_review_correction ? [parent.native_review_correction.request] : [])];
   const refs = [];
   for (const requestRef of requests) {
     need(parent.evidence[requestRef.path] === requestRef.sha256 && hash(readFileSync(requestRef.path)) === requestRef.sha256,
       'parent lost its immutable original root request');
     const request = read(requestRef.path);
-    refs.push(...(request.entries ? request.entries.map(entry => entry.root_finding) : [request.root_finding]));
+    refs.push(...(request.entries ? request.entries.map(entry => entry.root_finding) : [request.runtime_finding??request.root_finding]));
   }
   const ledger = readFileSync(join(root, 'research', 'defect-ledger.jsonl'), 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse);
   for (const finding of refs) {

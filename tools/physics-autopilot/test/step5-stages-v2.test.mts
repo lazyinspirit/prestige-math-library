@@ -79,6 +79,23 @@ test('an authenticated page-parent handoff pauses once before the next gate snap
     assert.equal(executor.state.paused,false);assert.equal(notices.length,1);
   }finally{f.close();}
 });
+test('a malformed unchanged review receives one initial-round-one read-only Sol high child',()=>{
+  const f=fixture();try{
+    const phase='review-correction-initial',unit=phase+':1';
+    writeFileSync(join(f.repo,`research/demo-step5-v2/${phase}-1-progress.json`),'{}');
+    writeFileSync(join(f.repo,'research/demo-step5-v2/initial-1.json'),'{}');
+    const stage=f.stage('5.1-adjudicate'),job=stage.plan(f.ctx,[unit])[0];
+    assert.deepEqual(stage.units(f.ctx),['1','2',unit]);
+    assert.equal(job.role,'alpha-repair');assert.equal(job.profile,MODEL_PROFILE_NAMES.sol61High);
+    assert.deepEqual(job.covers,[unit]);assert.equal(job.label,'step5-v2-review-correction-initial-r1-u1');
+    assert.equal(job.task,'research/demo-step5-v2/step5-v2-review-correction-initial-r1-u1.task.md');
+    assert.equal(stage.pattern(f.ctx).test('alpha-repair-'+job.label+'.result.json'),true);
+    assert.equal(stage.pattern(f.ctx).test('alpha-repair-step5-v2-review-correction-initial-r1-u2.result.json'),false);
+    assert.deepEqual(stage.units({...f.ctx,stageRounds:{'5.1-adjudicate':2}}),['1','2']);
+    assert.deepEqual(f.stage('5.5-adjudicate').units(f.ctx),['1','2']);
+    assert.equal(f.stage('5.5-adjudicate').pattern(f.ctx).test('alpha-repair-'+job.label+'.result.json'),false);
+  }finally{f.close();}
+});
 test('owner continuations run parallel siblings after the preceding pass drains',()=>{
   const f=fixture();try {
     writeFileSync(join(f.repo,'research/demo-step5-v2/impact-initial-1-progress.json'),JSON.stringify({passes:['impact-initial','impact-initial-pass-2']}));

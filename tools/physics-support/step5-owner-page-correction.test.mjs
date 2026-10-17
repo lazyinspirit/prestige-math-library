@@ -11,13 +11,14 @@ import { freezeFrontier } from './step5-rounds.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { statementHash } from './step5-statement.mjs';
 import { MODELS } from './models.mjs';
+import { reviewCorrectionRequest,reviewCorrectionPhase } from './step5-owner-review-correction.mjs';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const digest = value => hash(JSON.stringify(value));
 const evidence = { reason: 'Checked the exact page claim, its dimensional countercase, supplier hypotheses and unchanged affected consumer use.',
   uncertain: false, familiar: true, source_urls: [] };
 
-function fixture(t, { itemQueue = false, relativeSupport = false } = {}) {
+function fixture(t, { itemQueue = false, relativeSupport = false, malformedReview = false, extraInvalidReview = false } = {}) {
   const root = mkdtempSync(join(tmpdir(), 'step5-page-correction-'));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const run = 'demo', round = 1, batch = '43', subject = 'nonnormal-states', item = 'thm-nonnormal-state';
@@ -31,22 +32,23 @@ function fixture(t, { itemQueue = false, relativeSupport = false } = {}) {
   const itemPath = join(root, 'items', item + '.md');
   writeFileSync(itemPath, `---\nid: ${item}\nkind: theorem\nstatus: draft\ndeps: []\n---\n## Statement\nNonnormal for q >= 2.\n\n## Proof\n1.1 The projection argument proves the claim. [given] ∎\n`);
   const originalItem = readFileSync(itemPath, 'utf8'), ids = itemQueue ? [item, 'thm-second-finding', 'thm-third-finding'] : [item];
-  for(const id of ids.slice(1))writeFileSync(join(root,'items',id+'.md'),originalItem.replace('id: '+item,'id: '+id));
-  const originalItems=Object.fromEntries(ids.map(id=>[id,readFileSync(join(root,'items',id+'.md'),'utf8')]));
-  const before=Object.fromEntries(ids.map(id=>[id,itemHashGuard(originalItems[id])]));
-  const statement=Object.fromEntries(ids.map(id=>[id,statementHash(originalItems[id])]));
+  const reviewSubject='def-review-only',allIds=malformedReview?[...ids,reviewSubject]:ids;
+  for(const id of allIds.slice(1))writeFileSync(join(root,'items',id+'.md'),originalItem.replace('id: '+item,'id: '+id));
+  const originalItems=Object.fromEntries(allIds.map(id=>[id,readFileSync(join(root,'items',id+'.md'),'utf8')]));
+  const before=Object.fromEntries(allIds.map(id=>[id,itemHashGuard(originalItems[id])]));
+  const statement=Object.fromEntries(allIds.map(id=>[id,statementHash(originalItems[id])]));
   const excerpt = 'The onsite Gibbs state is unique and has no normal extension.';
   const replacement = 'The onsite Gibbs state is unique. For q >= 2 it has no normal extension.';
   const source = `---\npage: ${subject}\nstatus: draft\nlibrary: physics\nitems: [${item}]\nexamples: []\nrequires: []\n---\n\n${excerpt}\n`;
   writeFileSync(join(root, pagePath), source);
-  writeFileSync(join(root, consumerPath), '---\npage: nonnormal-examples\nstatus: draft\nlibrary: physics\nitems: ['+ids.slice(1).join(', ')+']\nexamples: []\nrequires: [nonnormal-states]\n---\n\nThe example uses q >= 2.\n');
+  writeFileSync(join(root, consumerPath), '---\npage: nonnormal-examples\nstatus: draft\nlibrary: physics\nitems: ['+allIds.slice(1).join(', ')+']\nexamples: []\nrequires: [nonnormal-states]\n---\n\nThe example uses q >= 2.\n');
   save(join(root, 'research', run + '-batch-43.pages.json'), [{ id: subject, category: 'physics', items: [{ id: item }] },
-    { id: 'nonnormal-examples', category: 'physics', items: ids.slice(1).map(id=>({id})) }]);
-  save(join(dir, 'frontier.json'), freezeFrontier({ run, batches: [{ id: batch, items: ids }] }));
+    { id: 'nonnormal-examples', category: 'physics', items: allIds.slice(1).map(id=>({id})) }]);
+  save(join(dir, 'frontier.json'), freezeFrontier({ run, batches: [{ id: batch, items: allIds }] }));
   save(join(dir, 'baseline.json'), before);
   const tuple = { id: item, model: MODELS.sol61.id, context_sha256: 'a'.repeat(64), item_sha256: 'b'.repeat(64), keep: false };
-  const tuples=ids.map(id=>({...tuple,id}));save(join(dir, 'step4-verdicts.json'), tuples);
-  const pack = { version: 2, run, phase: 'initial', round, repair_scope: 'frontier', frontier_ids: ids,
+  const tuples=allIds.map(id=>({...tuple,id}));save(join(dir, 'step4-verdicts.json'), tuples);
+  const pack = { version: 2, run, phase: 'initial', round, repair_scope: 'frontier', frontier_ids: allIds,
     units: [batch], assignments: { [batch]: tuples }, rejected: tuples, before, before_statements: statement, judge_model: MODELS.sol61.id };
   const originalPackPath = join(dir, 'initial-1.json'); save(originalPackPath, pack);
   const originalReportPath = workerReport(root, run, 'initial', 1, batch);
@@ -59,8 +61,10 @@ function fixture(t, { itemQueue = false, relativeSupport = false } = {}) {
     disposition: 'refer_page_owner', reason: 'At dimension one the represented algebra is the scalar field and its unique state is normal, so qualify only nonnormality.' };
   const decision = { id: item, model: tuple.model, context_sha256: tuple.context_sha256, outcome: 'false_positive', ...evidence };
   const originalReport = { run, phase: 'initial', round, unit: batch, input_sha256: digest(pack),
-    decisions: ids.map(id=>({...decision,id})), reviews: ids.map(id=>({ id, disposition: 'unaffected', ...reviewContextHashes(root, [id])[id], ...evidence })),
+    decisions: allIds.map(id=>({...decision,id})), reviews: allIds.map(id=>({ id, disposition: 'unaffected', ...reviewContextHashes(root, [id])[id], ...evidence })),
     created_items: [], downstream: [], supporting_evidence: { [relativeSupport ? relative(root, digestPath) : digestPath]: hash(readFileSync(digestPath)) }, repair_notes: { page_uses: [referral] } };
+  if(malformedReview)originalReport.reviews.find(row=>row.id===reviewSubject).review_context_sha256='f'.repeat(65);
+  if(extraInvalidReview)originalReport.reviews[0].review_context_sha256='e'.repeat(65);
   save(originalReportPath, originalReport);
   save(join(dispatchDir, 'alpha-adjudicate-' + originalLabel + '.result.json'), { ok: true, run, role: 'alpha-adjudicate', label: originalLabel,
     model: MODELS.sol61.id, provider_effort: 'high', covers: [batch], ended_at: '2026-10-17T00:00:00Z' });
@@ -126,9 +130,34 @@ function fixture(t, { itemQueue = false, relativeSupport = false } = {}) {
       covers: [pageCorrectionPhase + ':1'], ended_at: '2026-10-17T00:02:00Z' });
     return { child, report, reportPath, childDispatchPath };
   }
+  function addReviewRequest(){
+    const originalReview=read(originalReportPath).reviews.find(row=>row.id===reviewSubject);
+    const runtime={run,subject:reviewSubject,defect_id:'runtime-malformed-review',class:'breaking-runtime',subclass:'prompt-transcription',caught_by_role:'owner',disposition:'open'};
+    const runtimePath=join(scienceDir,'runtime-finding.json'),ledgerPath=join(root,'research','defect-ledger.jsonl'),ledgerBefore=join(scienceDir,'runtime-ledger-before.jsonl');
+    writeFileSync(ledgerBefore,readFileSync(ledgerPath));save(runtimePath,[runtime]);writeFileSync(ledgerPath,readFileSync(ledgerPath,'utf8')+JSON.stringify(runtime)+'\n');
+    const beforeSource=join(scienceDir,'review-before.md');writeFileSync(beforeSource,originalItems[reviewSubject]);
+    const diagnosisPath=join(scienceDir,'runtime-diagnosis.json');save(diagnosisPath,{run,reviewer:'/root',subject:reviewSubject,original_report:relative(root,originalReportPath),original_review:originalReview,
+      source_repair_required:false,requires_fresh_native_review:true,original_report_edited:false,before_content_sha256:before[reviewSubject]});
+    const request={version:1,run,reviewer:'/root',phase:'initial',round:1,subject:reviewSubject,original_unit:batch,original_pack:ref(originalPackPath),original_report:ref(originalReportPath),
+      original_task:ref(originalReportPath.replace(/\.json$/,'.task.md')),original_dispatch:ref(join(dispatchDir,'alpha-adjudicate-'+originalLabel+'.result.json')),
+      original_tuple:tuples.find(row=>row.id===reviewSubject),original_review:originalReview,before_source:ref(beforeSource),before_raw_sha256:hash(readFileSync(beforeSource)),before_content_sha256:before[reviewSubject],
+      diagnosis:ref(diagnosisPath),runtime_finding:{defect_id:runtime.defect_id,record:ref(runtimePath)},ledger_before:ref(ledgerBefore)};
+    const path=join(dir,'owner-review-correction-current.json');
+    const bind=()=>{save(path,request);save(join(dir,'owner-review-correction-request.json'),{version:1,run,request:ref(path)});};bind();
+    return {request,path,bind,ledgerPath,ledgerBefore,runtime};
+  }
+  function completeReview(){
+    const child=read(join(dir,reviewCorrectionPhase+'-1.json')),label=workerLabel(reviewCorrectionPhase,1,'1');
+    const report={version:1,run,phase:reviewCorrectionPhase,round:1,unit:'1',input_sha256:digest(child),decisions:[],created_items:[],downstream:[],
+      reviews:[{id:reviewSubject,disposition:'unaffected',...reviewContextHashes(root,[reviewSubject])[reviewSubject],...evidence}],
+      root_finding_resolutions:[{defect_id:'runtime-malformed-review',status:'fixed',subjects:[reviewSubject],...evidence}]};
+    const reportPath=workerReport(root,run,reviewCorrectionPhase,1,'1'),dispatchPath=join(dispatchDir,'alpha-repair-'+label+'.result.json');save(reportPath,report);
+    save(dispatchPath,{ok:true,run,role:'alpha-repair',label,model:MODELS.sol61.id,provider_effort:'high',covers:[reviewCorrectionPhase+':1'],ended_at:'2026-10-17T00:03:00Z'});
+    return {child,report,reportPath,dispatchPath};
+  }
   return { root, run, round, dir, subject, item, itemPath, originalItem, originalPackPath, originalReportPath, state, saveState, request, requestPath,
     bind, ref, save, read, advance, completePage, completeItemQueue, candidatePath, pagePath, consumerPath, digestPath, science, sciencePath,
-    intake: () => pageCorrectionRequest(root, run, 'initial', round) };
+    intake: () => pageCorrectionRequest(root, run, 'initial', round),reviewSubject,addReviewRequest,completeReview };
 }
 
 for (const itemQueue of [false, true]) test(`native page-only completion preserves item history${itemQueue ? ' after the item queue and before parent collection' : ''}`, t => {
@@ -227,3 +256,52 @@ for (const [name, mutate, expected] of [
   const f = fixture(t); f.advance(); const child = f.completePage(); mutate(f, child);
   assert.throws(f.advance, expected); assert.equal(existsSync(join(f.dir, 'initial-1-collected.json')), false);
 });
+
+function reviewFixture(t,options={}){
+  const f=fixture(t,{itemQueue:true,malformedReview:true,...options});
+  f.advance();f.completeItemQueue();f.advance();f.completePage();
+  const runtime=f.addReviewRequest();return {...f,runtime};
+}
+test('three item repairs plus page correction compose with a fresh read-only stamp correction and append-only closure replay',t=>{
+  const f=reviewFixture(t),original=readFileSync(f.originalReportPath);
+  assert.equal(f.advance().correction_phase,reviewCorrectionPhase);
+  assert.equal(existsSync(join(f.dir,'initial-1-collected.json')),false);
+  assert.equal(adjudicationCorrectionWork(f.root,f.run,'initial',1).at(-1),reviewCorrectionPhase+':1');
+  const child=f.completeReview();assert.equal(f.advance().parent_collected,true);
+  const parent=f.read(join(f.dir,'initial-1-collected.json')),correction=parent.native_review_correction;
+  assert.equal(correction.field,'review_context_sha256');assert.deepEqual(correction.source_changes,[]);
+  const expected={...correction.original_review,review_context_sha256:correction.native_review.review_context_sha256};
+  assert.deepEqual(correction.effective_review,expected);assert.equal(correction.original_review.review_context_sha256.length,65);
+  assert.equal(correction.native_review.review_context_sha256.length,64);
+  assert.equal(parent.decisions.find(row=>row.id===f.reviewSubject).outcome,'false_positive');
+  assert.deepEqual(readFileSync(f.originalReportPath),original);assert.ok(parent.evidence[child.dispatchPath]);
+  const ledger=readFileSync(f.runtime.ledgerPath,'utf8'),rows=ledger.trim().split('\n').map(JSON.parse);assert.equal(rows.length,5);
+  writeFileSync(f.runtime.ledgerPath,ledger+rows.map(row=>JSON.stringify({...row,defect_id:row.defect_id+'-fixed',disposition:'fixed',supersedes:[row.defect_id]})).join('\n')+'\n');
+  assert.equal(f.advance().parent_collected,true);
+  const source=join(f.root,'items',f.reviewSubject+'.md'),sourceBytes=readFileSync(source);writeFileSync(source,Buffer.concat([sourceBytes,Buffer.from('\nUnlicensed source change.\n')]));
+  assert.throws(f.advance,/current source changed/);writeFileSync(source,sourceBytes);
+  assert.equal(f.advance().parent_collected,true);
+});
+for(const [name,mutate,expected]of[
+  ['extra ledger row',f=>writeFileSync(f.runtime.ledgerPath,readFileSync(f.runtime.ledgerPath,'utf8')+JSON.stringify({...f.runtime.runtime,defect_id:'extra-runtime'})+'\n'),/prefix plus this one runtime row/],
+  ['old ledger rewrite',f=>writeFileSync(f.runtime.ledgerPath,readFileSync(f.runtime.ledgerPath,'utf8').replace('page-q-one','rewritten-page-q-one')),/exact genuine prefix/],
+  ['changed source',f=>{const path=join(f.root,'items',f.reviewSubject+'.md');writeFileSync(path,readFileSync(path,'utf8')+'\nChanged.\n');},/source changed|changed-source set/],
+  ['false original row',f=>{f.runtime.request.original_review.reason='A fabricated replacement review reason that is long enough but never occurred in the original report.';f.runtime.bind();},/exact 65-hex malformed/],
+  ['active writer',f=>{f.state.dispatches.active={startedAt:'now'};f.saveState();},/writers have not drained/],
+  ['wrong stage',f=>{f.state.stage='5.2-impact';f.saveState();},/live initial|initial live/],
+])test(`read-only review intake rejects ${name}`,t=>{const f=reviewFixture(t);mutate(f);
+  assert.throws(()=>reviewCorrectionRequest(f.root,f.run,'initial',1),expected);assert.throws(f.advance);
+  assert.equal(existsSync(join(f.dir,'initial-1-collected.json')),false);
+});
+test('read-only review request cannot hide a second historical review failure',t=>{
+  const f=reviewFixture(t,{extraInvalidReview:true});
+  assert.throws(f.advance,/sole genuine original historical validation failure/);
+});
+for(const [name,mutate,expected]of[
+  ['source edit',(f,c)=>{const path=join(f.root,'items',f.reviewSubject+'.md');writeFileSync(path,readFileSync(path,'utf8')+'\nChanged.\n');},/source changed|changed-source set/],
+  ['stale current review',(f,c)=>{c.report.reviews[0].review_context_sha256='c'.repeat(64);f.save(c.reportPath,c.report);},/fresh unchanged-source/],
+  ['missing native review',(f,c)=>{c.report.reviews=[];f.save(c.reportPath,c.report);},/read-only child cannot author/],
+  ['missing resolution',(f,c)=>{c.report.root_finding_resolutions=[];f.save(c.reportPath,c.report);},/typed runtime/],
+  ['wrong native identity',(f,c)=>{const d=f.read(c.dispatchPath);d.model=MODELS.luna.id;f.save(c.dispatchPath,d);},/native Sol high/],
+  ['fabricated decision',(f,c)=>{c.report.decisions=[{id:f.reviewSubject,outcome:'confirmed_fatal'}];f.save(c.reportPath,c.report);},/read-only child cannot author/],
+])test(`read-only review completion rejects ${name}`,t=>{const f=reviewFixture(t);f.advance();const c=f.completeReview();mutate(f,c);assert.throws(f.advance,expected);assert.equal(existsSync(join(f.dir,'initial-1-collected.json')),false);});

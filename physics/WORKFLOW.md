@@ -495,6 +495,61 @@ Later native impact stages retain their ordinary historical source semantics.
 This route adds no item judge tuple, item fatal count, outside
 authorship, general page permission, impact reopening or gate waiver.
 
+An unchanged originally false-positive item with one malformed native review
+stamp has a separate read-only recovery at the same initial round-1 drained
+join. It applies only when the exact original `unaffected` review has a 65-hex
+`review_context_sha256`, its content/raw guards remain genuine and unchanged,
+and that row is the sole original historical `validateReports` failure. A
+source repair, valid-but-stale stamp, missing scientific review, different
+verdict or additional collection error does not qualify. Never truncate or
+guess a corrected hash, refresh old acceptance mechanically, or edit the
+original report.
+
+Root advertises immutable `owner-review-correction-ID.json` through
+`research/RUN-step5-v2/owner-review-correction-request.json` using the ordinary
+`{version:1,run,request:{path,sha256}}` pointer. The request contains
+`version:1`, `run`, `reviewer:"/root"`, `phase:"initial"`, `round:1`,
+`subject`, `original_unit`, raw path/hash references `original_pack`,
+`original_report`, `original_task`, `original_dispatch`, the exact
+`original_tuple` and malformed `original_review`, `before_source:{path,sha256}`,
+`before_raw_sha256`, `before_content_sha256`, `diagnosis:{path,sha256}`,
+`runtime_finding:{defect_id,record:{path,sha256}}` and
+`ledger_before:{path,sha256}`. The actual completed native Sol 6.1 high
+assignment, frozen frontier, unchanged original/current carrier, original
+false-positive decision and exact owner diagnosis must all authenticate.
+The canonical runtime record must be an OPEN owner
+`breaking-runtime`/`prompt-transcription` finding.
+
+When the page child already bound the old canonical ledger, Root preserves
+its genuine raw ledger preimage before appending that one runtime finding.
+The page's old hash is neither rewritten nor ignored: its protected ledger
+may differ only if this exact request authenticates that exact preimage hash
+and current ledger bytes are precisely the unchanged prefix plus this single
+runtime row. An edited prefix, additional row, stale reference or unrelated
+metadata change fails. This narrow transition grants no source, ledger-edit,
+review or gate authority.
+
+After the item and page children genuinely finish, one native Sol 6.1 high
+`review-correction-initial:1` child actually reviews the exact current item and
+supplier context, then obtains its fresh ordinary `review-contexts` hashes.
+It may write only its own report: one `unaffected` review and typed runtime
+finding resolution, with empty `decisions`, `created_items` and `downstream`.
+Every item/page source and original report, tuple, metadata and ledger byte
+must remain unchanged during this child. Missing/uncertain/stale reviews or
+wrong native identity block completion.
+
+The authenticated parent projects only the fresh native
+`review_context_sha256` into that exact original review row for historical
+and effective validation. It preserves every other original review field,
+decision and tuple, and records the separately attributed actual native review
+and immutable correction receipt. Both source-changing correction sets still
+authenticate normally; the parent collects only once, then pauses for Root
+canonical closure. Appended fixed successors for the runtime and scientific
+findings retain original OPEN history. Replay authenticates those original
+records and current source guards while the initial join is live, without
+reopening already closed findings. No general report repair, source edit,
+fabricated stamp, judge tuple or gate waiver is introduced.
+
 When an actual initial/repeat collection gate reports a missing original-frontier
 downstream inventory, root may complete the routing metadata through
 `research/RUN-step5-v2/owner-downstream-inventory.json` with `version:1`, `run`,
