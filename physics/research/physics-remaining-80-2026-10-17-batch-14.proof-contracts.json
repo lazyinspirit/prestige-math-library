@@ -1,0 +1,496 @@
+{
+  "version": 1,
+  "scope": [
+    "pthm-emg-observer-maxwell-current",
+    "pthm-emg-gauss-global-constraints",
+    "ex-emg-electric-stress"
+  ],
+  "contracts": {
+    "pthm-emg-observer-maxwell-current": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-emg-covariant-maxwell",
+          "source_section": "Postulate",
+          "quote": "$$dF=0,\\qquad \\nabla^g_aF^{ab}=-\\mu_0j^b.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-emg-maxwell-current-forms",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented\nLorentzian four-manifold of [[def-emg-lorentzian-forms]], with signature\n$(-,+,+,+)$, metric-selected connection $\\nabla$ and oriented metric volume\nform $\\mathrm{vol}_g$. Let $F\\in\\Omega^2(M)$ be a smooth real two-form and\n$j\\in\\Gamma(TM)$ a smooth vector field. Fix constants $\\mu_0>0$ and $c>0$;\n$\\mu_0$ is a real coefficient here, and $c$ is the positive coordinate\nconversion in $x^0=ct$ of [[def-emg-lorentzian-forms]]. Assume the mathematical\nfield equations\n\n$$dF=0,\\qquad \\nabla_aF^{ab}=-\\mu_0j^b.$$\n\nThe equations are conditional hypotheses, not physical postulates in this\nmathematical item. Define $v\\in\\Gamma(TM)$ by $v^b:=\\nabla_aF^{ab}$ and\ndefine the current three-form by $\\iota_j\\mathrm{vol}_g$, the contraction\nspecified in [[def-gr-metric-volume-form-and-current-flux]]. Then:\n\n**(a) Sign identity.** On $M$,\n\n$$d(\\star_gF)=-\\iota_v\\mathrm{vol}_g.$$\n\nConsequently the sourced equation is equivalently\n\n$$\\nabla_aF^{ab}=-\\mu_0j^b\\quad\\Longleftrightarrow\\quad d(\\star_gF)=\\mu_0\\iota_j\\mathrm{vol}_g.$$\n\n**(b) Current conservation.** Either equivalent sourced equation implies\n$\\nabla_aj^a=0$. This conclusion requires the sourced equation and $\\mu_0>0$;\nit does not require $dF=0$.\n\n**(c) Local component check.** At any $p\\in M$, choose a positively oriented\npoint-normal chart supplied by\n[[thm-gr-point-normal-and-exponential-coordinate-charts]]. In that chart,\nwrite $E_i(x):=-cF_{0i}(x)$ and\n$B_i(x):=\\frac12\\epsilon_{ijk}F_{jk}(x)$, where $\\epsilon_{123}=+1$ and\n$\\epsilon_{ijk}$ is alternating. These are local component abbreviations in\nthe chosen chart, not global observer fields. With\n$\\operatorname{div}E:=\\partial_iE_i$,\n$(\\operatorname{curl}E)_k:=\\epsilon_{kij}\\partial_iE_j$, and similarly\nfor $B$, the pointwise component identities are\n\n$$v^0=-\\frac{1}{c}\\operatorname{div}E,\\qquad v^k=\\frac{1}{c^2}\\partial_tE_k-(\\operatorname{curl}B)_k,$$\n\n$$ (d\\star_gF)_{123}=\\frac{1}{c}\\operatorname{div}E,\\qquad (d\\star_gF)_{0ij}=\\epsilon_{ijk}\\left(\\frac{1}{c^2}\\partial_tE_k-(\\operatorname{curl}B)_k\\right),$$\n\n$$ (dF)_{123}=\\operatorname{div}B,\\qquad (dF)_{0ij}=\\frac{\\epsilon_{ijk}}{c}\\left(\\partial_tB_k+(\\operatorname{curl}E)_k\\right),$$\n\nwhere $\\partial_t:=c\\,\\partial_0$. The equations are pointwise identities\nin normal coordinates; they do not assert that these component abbreviations\nform global three-vector fields on curved spacetime.\n\nOn an open flat Minkowski domain with a fixed inertial Cartesian chart\n$x^0=ct$, define $\\rho:=j^0/c$, $J^i:=j^i$, and\n$\\epsilon_0:=(\\mu_0c^2)^{-1}$. The same component formulas at every point give\n\n$$\\operatorname{div}E=\\frac{\\rho}{\\epsilon_0},\\qquad \\operatorname{curl}B-\\frac{1}{c^2}\\partial_tE=\\mu_0J,\\qquad \\operatorname{div}B=0,\\qquad \\partial_tB+\\operatorname{curl}E=0.$$\n\nThese are a coordinate reduction of the stated tensor and form equations, not\nclaims that the smooth fields describe an experiment.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-gauss-finite-chain",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth oriented and time-oriented Lorentzian\nfour-manifold of [[def-emg-lorentzian-forms]], let\n$F\\in\\Omega^2(M)$ and $j\\in\\Gamma(TM)$ be smooth, and fix constants\n$c,\\mu_0>0$. Assume\n$dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$, equivalently\n$d(\\star_gF)=\\mu_0\\iota_j\\mathrm{vol}_g$ by\n[[lem-emg-maxwell-current-forms]]. A finite smooth singular $k$-chain means\na finite formal real linear combination of smooth singular $k$-simplices,\nwith the boundary operation of\n[[def-gr-metric-volume-form-and-current-flux]] and\n[[thm-stokes-theorem-for-smooth-singular-chains]].\n\nFor a finite smooth singular three-chain $\\Sigma$, define its charge by\n\n$$Q(\\Sigma):=\\frac1c\\int_\\Sigma\\iota_j\\mathrm{vol}_g.$$\n\nThen:\n\n**(a) Gauss charge formula.** For every such $\\Sigma$,\n\n$$Q(\\Sigma)=\\frac{1}{\\mu_0c}\\int_{\\partial\\Sigma}\\star_gF.$$\n\nConsequently, if $\\partial\\Sigma=0$, then $Q(\\Sigma)=0$. This is the\ncompact-cycle neutrality constraint for a smooth everywhere-defined sourced\nfield.\n\n**(b) Bounding-surface restriction.** For every finite smooth singular\nthree-chain $V$, the magnetic flux through its boundary vanishes:\n\n$$\\int_{\\partial V}F=0.$$\n\nThe equation $dF=0$ does not imply that the flux through every closed\ntwo-cycle is zero; this item gives a zero-flux conclusion only when the cycle\nis the boundary of a finite smooth chain in the field domain. Likewise, the\nelectric flux formula in (a) identifies charge with flux only for a bounding\nsurface.\n\n**(c) Charge balance.** If a finite smooth singular four-chain $C$ satisfies\n$\\partial C=\\Sigma_2-\\Sigma_1+B$ for three-chains\n$\\Sigma_1,\\Sigma_2,B$, then\n\n$$Q(\\Sigma_2)-Q(\\Sigma_1)=-Q(B).$$\n\nEqual charge on the two slices therefore requires zero net side flux. No\nasymptotic charge or flux at infinity is asserted; noncompact limits require\nseparate convergence and boundary-flux hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-point-normal-and-exponential-coordinate-charts",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), whose geodesics\nand exponential map are those of [[thm-gr-local-geodesics-and-exponential-map]].\n\n**(a) Point-normal charts.** For every $p\\in M$ there is a smooth chart\n$(U,x)$ around $p$ with $x(p)=0$ such that, in the components of this chart,\n\n$$\\Gamma^a{}_{bc}(p)=0,\\qquad \\partial_ag_{bc}(p)=0,\\qquad g_{ab}(p)=\\eta_{ab}=\\operatorname{diag}(-1,1,1,1)_{ab}.$$\n\nThe construction starts from any chart around $p$ and is finite: no frame field\non $U$ and no global trivialization of $TM$ is used.\n\n**(b) Exponential charts.** For every $p\\in M$ and every $g_p$-orthonormal\nbasis $e_0,\\dots,e_3$ of $T_pM$ there is a star-shaped open neighborhood\n$W\\subseteq T_pM$ of $0$ on which $\\exp_p$ is a diffeomorphism onto an open\n$U_p\\ni p$, and the chart\n\n$$u:=\\psi\\circ\\exp_p^{-1}:U_p\\longrightarrow\\mathbb R^4,$$\n\nwhere $\\psi:T_pM\\to\\mathbb R^4$ is the coordinate isomorphism of the basis,\nsatisfies $u(p)=0$ and the same three normal-form identities at $p$ as in (a).\nMoreover every geodesic through $p$ has, in the chart $u$, the form\n$u(\\gamma(t))=(t-t_0)\\,k$ for a constant $k\\in\\mathbb R^4$ whenever\n$\\gamma(t_0)=p$, $k=\\psi(\\gamma'(t_0))$, and\n$(t-t_0)\\gamma'(t_0)\\in W$. Thus the portion represented by its radial initial\nvector in $W$ is a straight coordinate ray through the origin. This claim is\nnot made for a later portion of a geodesic that may return to $U_p$ after its\nradial initial vector has left $W$. No assertion is made about the second\nderivatives of the metric at $p$: the construction is first order and does not\nmake a neighborhood of $p$ isometric to Minkowski space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-sylvesters-law-of-inertia",
+          "source_section": "Statement",
+          "quote": "Every symmetric bilinear form on a finite-dimensional real vector space is congruent to exactly one normal form\n\n$$\\operatorname{diag}(I_p,-I_q,0_r),\\qquad p+q+r=\\dim V.$$\n\nEquivalently, the numbers of positive, negative, and zero diagonal entries are independent of the diagonalizing basis.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gr-density-divergence-and-finite-chain-flux",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with an\norientation, metric-selected connection $\\nabla$, metric volume form\n$\\mathrm{vol}_g$ and current flux $\\Phi_J$ as in\n[[def-gr-metric-volume-form-and-current-flux]], and let $J$ be a smooth vector\nfield on $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). Write\n$\\nabla_aJ^a$ for the divergence of $J$.\n\n**(a) Exterior derivative of the current form.** As smooth $4$-forms on $M$,\n\n$$d\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)=\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\n**(b) Flux balance (Stokes).** For every finite smooth singular $4$-chain $C$\nof $M$ — a finite formal real sum of smooth singular $4$-simplices, the\nlibrary convention `def-smooth-singular-chain-and-cochain-complexes` restated\nin [[def-gr-metric-volume-form-and-current-flux]] clause (b) — and the flux\n$\\Phi_J$ of the induced boundary $3$-chain\n([[def-integral-of-a-form-over-a-smooth-singular-simplex]],\n[[thm-stokes-theorem-for-smooth-singular-chains]]),\n\n$$\\Phi_J(\\partial C)=\\int_C\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\nConsequently, if $\\partial C=\\Sigma_2-\\Sigma_1+B$ for smooth singular $3$-chains\n$\\Sigma_1,\\Sigma_2,B$, then\n\n$$\\Phi_J(\\Sigma_2)-\\Phi_J(\\Sigma_1)=-\\Phi_J(B)+\\int_C\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\nIn particular, if $\\nabla_aJ^a=0$ on $C$ then\n$\\Phi_J(\\Sigma_2)-\\Phi_J(\\Sigma_1)=-\\Phi_J(B)$, and if moreover\n$\\Phi_J(B)=0$ then $\\Phi_J(\\Sigma_2)=\\Phi_J(\\Sigma_1)$: equal charges need a\nvanishing side flux, not merely a divergence-free current.\n\n**(c) Non-null face formula.** Let $\\sigma$ be a smooth singular $3$-simplex —\na map $\\sigma:\\Delta^3\\to M$ admitting a smooth extension to a neighbourhood\nof the standard $3$-simplex inside its affine plane, the convention restated\nin [[def-gr-metric-volume-form-and-current-flux]] clause (b) — that is\nnon-null at a parameter point $t$\n([[def-gr-metric-volume-form-and-current-flux]] clause (c)), with\n$v_i:=\\sigma_*\\partial_i|_t$ spanning the hyperplane $H$ and with the unit\nnormal $\\nu^{*}$ adapted to the ordered basis $(v_1,v_2,v_3)$ as in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (c); write\n$\\varepsilon:=g_{\\sigma(t)}(\\nu^{*},\\nu^{*})\\in\\{-1,1\\}$. Then\n\n$$\\sigma^{*}\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)(\\partial_1,\\partial_2,\\partial_3)\\big|_{t} =\\varepsilon\\,g_{\\sigma(t)}\\bigl(J,\\nu^{*}\\bigr)\\sqrt{\\bigl|\\det\\bigl(g_{\\sigma(t)}(v_i,v_j)\\bigr)\\bigr|} .$$\n\nEquivalently, the tangent vector $J$ is decomposed as\n$J=\\varepsilon g(J,\\nu^{*})\\nu^{*}+w'$ with $w'\\in H$, and only the normal\ncomponent contributes to the flux through the face.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-current-conservation",
+          "claim": "By [A1], $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$. The sign identity in\n[F1] gives $d*F=\\mu_0i_j\\mathrm{vol}_g$. Apply $d$ and use $d^2=0$ to get\n$d(i_j\\mathrm{vol}_g)=0$ since $\\mu_0>0$. By the proved density-divergence\nidentity [F5], this is $(\\nabla_aj^a)\\mathrm{vol}_g=0$. The volume form is\nnowhere zero, so $\\nabla_aj^a=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "homogeneous-observer-components",
+          "claim": "At $p$, put $W=n(p)^\\perp$. Every $v\\in T_pM$ has the orthogonal\ndecomposition $v=-g_p(v,n(p))n(p)+(v+g_p(v,n(p))n(p))$; the second term is\northogonal to $n(p)$. The summands intersect only in zero because\n$g_p(n(p),n(p))=-1$, so $T_pM=\\mathbb R n(p)\\oplus W$ and $\\dim W=3$. The\nrestriction of $g_p$ to $W$ is nondegenerate: a vector in its radical is\northogonal to both $W$ and $n(p)$, hence to all of $T_pM$, and must be zero.\nThe first summand has inertia $(0,1,0)$, while $g_p$ has inertia $(3,1,0)$;\n[F4] therefore gives inertia $(3,0,0)$ on $W$, so $g_p|_W$ is positive\ndefinite. Choose a basis $w_1,w_2,w_3$ of $W$ and set\n$e_1=w_1/\\sqrt{g_p(w_1,w_1)}$. Set\n$v_2=w_2-g_p(w_2,e_1)e_1$; linear independence gives $v_2\\ne0$, and direct\nsubstitution gives $g_p(v_2,e_1)=0$. Set $e_2=v_2/\\sqrt{g_p(v_2,v_2)}$.\nNext set $v_3=w_3-g_p(w_3,e_1)e_1-g_p(w_3,e_2)e_2$. Independence gives\n$v_3\\ne0$, and $g_p(v_3,e_1)=g_p(v_3,e_2)=0$ by orthonormality of $e_1,e_2$.\nPositive definiteness makes all three denominators positive; set\n$e_3=v_3/\\sqrt{g_p(v_3,v_3)}$. If needed, reverse $e_3$ so\n$(n(p),e_1,e_2,e_3)$ is positively oriented. This is a $g_p$-orthonormal\nbasis. By [F3], its exponential chart is point-normal and has time axis\n$n(p)$; restrict the chart to its intersection with the open domain\n$\\mathcal D$. Use its component functions\n$\\widehat E_i=-cF_{0i}$ and\n$\\widehat B_i=\\tfrac12\\varepsilon_{ijk}F_{jk}$. The spatial\ncoefficient $(dF)_{123}=0$ is\n$\\partial_1\\widehat B_1+\\partial_2\\widehat B_2+\\partial_3\\widehat B_3=0$. For each cyclic triple\n$(i,j,k)$, $(dF)_{0ij}=0$ reads\n$c^{-1}\\partial_t\\widehat B_k+c^{-1}(\\nabla\\times\\widehat{\\mathbf E})_k=0$, hence\n$\\partial_t\\widehat{\\mathbf B}+\\nabla\\times\\widehat{\\mathbf E}=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "sourced-observer-components",
+          "claim": "The remaining four coefficients of $d*F=\\mu_0i_j\\mathrm{vol}_g$ are\n$(d*F)_{123}=c^{-1}\\nabla\\cdot\\widehat{\\mathbf E}=\\mu_0c\\rho$ and\n$(d*F)_{0ij}=\\varepsilon_{ijk}\\bigl(c^{-2}\\partial_t\\widehat E_k-(\\nabla\\times\\widehat{\\mathbf B})_k\\bigr)=-\\mu_0\\varepsilon_{ijk}J^k$. Multiplying by $c$ in the first identity and using $\\epsilon_0^{-1}=\\mu_0c^2$ gives $\\nabla\\cdot\\widehat{\\mathbf E}=\\rho/\\epsilon_0$; the second gives $\\nabla\\times\\widehat{\\mathbf B}-c^{-2}\\partial_t\\widehat{\\mathbf E}=\\mu_0\\mathbf J$. These equations are pointwise in the chosen normal chart; in an inertial Minkowski chart with constant observer $n=\\partial_0$ the same component identities hold throughout that chart.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-chain-gauss-flux",
+          "claim": "For a finite smooth spacelike chain $\\Sigma$, [F2] applies to the sourced equation from step 1.1 and states\n$Q(\\Sigma)=c^{-1}\\int_\\Sigma i_j\\mathrm{vol}_g=(\\mu_0c)^{-1}\\int_{\\partial\\Sigma}*F$. The coefficient and orientation are those fixed in [A1] and [F1]; no limiting surface is used.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement case: For the zero three-chain both defining integrals vanish, so the finite-chain identity remains 0=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement case: When j=0, the sourced form equation is source-free and the current-conservation conclusion is 0=0; the homogeneous equations remain part of the claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement case: A single finite smooth simplex is included; no multiple-component or asymptotic boundary is required."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Nonsmooth fields and singular or distributional sources are explicitly excluded; the point-normal chart is nondegenerate Lorentzian by definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement case: Only finite chains are integrated; no endpoint at infinity or limiting flux is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement case: The planned mathematical supplier closure carries AC_ω for the inherited countable tangent/tensor subatlas construction, recorded explicitly as A2. The finite component algebra and finite-chain Stokes calculation use no stronger choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states consequences of the adopted Maxwell equations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to Maxwell's equations is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-14, Step 3a",
+        "notes": "Independently checked every current proof step and all seven direct suppliers. Step 1.1 uses d*F=mu0 i_j vol, d^2=0, constant mu0>0 and the published density-divergence identity; no homogeneous equation is needed for conservation. Step 1.2 proves the rest space positive definite by orthogonal splitting and Sylvester inertia, then uses finite Gram-Schmidt with positive denominators and the arbitrary-basis exponential chart theorem. Orientation reversal preserves n(p); restriction to the open field domain preserves the normal identities. Recomputed dF and d*F coefficients, including (i_j vol)_{0ij}=-epsilon_ijk J^k and epsilon0^-1=mu0 c^2. Derivatives act on chart abbreviations, not a varying observer field. Step 3.1 is finite-chain Stokes with charge factor 1/c and includes the zero chain; no noncompact limit, singular source, converse, or extra choice is asserted. Reader and refuter report no findings. Tong section 3.2.5 equations 3.114-3.115 supports the form/Stokes structure in different conventions; the local sign is checked directly. BIPM SI Brochure v4.01 section 2.3.1 confirms exact c and experimentally determined mu0; no numerical measured input is used. No defect found in the owned use; draft suppliers and adopted physical law retain their stated status, without independent certification of their full transitive closure."
+      }
+    },
+    "pthm-emg-gauss-global-constraints": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-emg-covariant-maxwell",
+          "source_section": "Postulate",
+          "quote": "$$dF=0,\\qquad \\nabla^g_aF^{ab}=-\\mu_0j^b.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-emg-gauss-finite-chain",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth oriented and time-oriented Lorentzian\nfour-manifold of [[def-emg-lorentzian-forms]], let\n$F\\in\\Omega^2(M)$ and $j\\in\\Gamma(TM)$ be smooth, and fix constants\n$c,\\mu_0>0$. Assume\n$dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$, equivalently\n$d(\\star_gF)=\\mu_0\\iota_j\\mathrm{vol}_g$ by\n[[lem-emg-maxwell-current-forms]]. A finite smooth singular $k$-chain means\na finite formal real linear combination of smooth singular $k$-simplices,\nwith the boundary operation of\n[[def-gr-metric-volume-form-and-current-flux]] and\n[[thm-stokes-theorem-for-smooth-singular-chains]].\n\nFor a finite smooth singular three-chain $\\Sigma$, define its charge by\n\n$$Q(\\Sigma):=\\frac1c\\int_\\Sigma\\iota_j\\mathrm{vol}_g.$$\n\nThen:\n\n**(a) Gauss charge formula.** For every such $\\Sigma$,\n\n$$Q(\\Sigma)=\\frac{1}{\\mu_0c}\\int_{\\partial\\Sigma}\\star_gF.$$\n\nConsequently, if $\\partial\\Sigma=0$, then $Q(\\Sigma)=0$. This is the\ncompact-cycle neutrality constraint for a smooth everywhere-defined sourced\nfield.\n\n**(b) Bounding-surface restriction.** For every finite smooth singular\nthree-chain $V$, the magnetic flux through its boundary vanishes:\n\n$$\\int_{\\partial V}F=0.$$\n\nThe equation $dF=0$ does not imply that the flux through every closed\ntwo-cycle is zero; this item gives a zero-flux conclusion only when the cycle\nis the boundary of a finite smooth chain in the field domain. Likewise, the\nelectric flux formula in (a) identifies charge with flux only for a bounding\nsurface.\n\n**(c) Charge balance.** If a finite smooth singular four-chain $C$ satisfies\n$\\partial C=\\Sigma_2-\\Sigma_1+B$ for three-chains\n$\\Sigma_1,\\Sigma_2,B$, then\n\n$$Q(\\Sigma_2)-Q(\\Sigma_1)=-Q(B).$$\n\nEqual charge on the two slices therefore requires zero net side flux. No\nasymptotic charge or flux at infinity is asserted; noncompact limits require\nseparate convergence and boundary-flux hypotheses.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-emg-topological-sector",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, oriented and time-oriented Lorentzian four-manifold of [[def-emg-geometry-units]], with signature $(-,+,+,+)$ and no boundary. Write $\\Omega^k(M)$ for the smooth real sections of $\\Lambda^kT^*M$. The classical electromagnetic field type is a smooth real two-form $F\\in\\Omega^2(M)$. In length-coordinate charts its components have SI unit tesla; its integral over an oriented smooth two-surface has unit weber. The exterior derivative is denoted $d$. A field is **closed** when $dF=0$. Closedness is a field condition, not the same condition as having a global potential.\n\nFor an open set $U\\subseteq M$, a **local potential** for $F$ on $U$ is a smooth real one-form $A_U\\in\\Omega^1(U)$ satisfying $dA_U=F|_U$. It is a **global potential** when $U=M$. In a length-coordinate chart the components of $A_U$ have unit tesla metre. This classical real-field description chooses $F$ itself and requires no bundle or global $A$.\n\nAn **optional circle-normalized connection sector** adds the mathematical data of a smooth right principal $U(1)$ bundle $\\pi:P\\to M$ and a connection, using the local-potential and circle-data conventions of [[def-emg-local-potentials-and-circle-data]]. Here $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with multiplication. Concretely, supply a countable open cover $\\{U_i\\}$ and smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$ satisfying $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$. On overlap pieces with smooth real lifts $g_{ij}=e^{if_{ij}}$, the normalized local connection one-forms $a_i$ satisfy $a_j=a_i+df_{ij}$; in local fibre angles the convention is $\\theta_j=\\theta_i-f_{ij}$, so $d\\theta_i+a_i$ patches. The local curvature forms $da_i$ agree. Fix an independent constant $\\kappa_0>0$ with unit weber, and set $A_i=\\kappa_0a_i$ and $F|_{U_i}=\\kappa_0da_i$. Thus $a_i$ has component unit $\\mathrm m^{-1}$ in length coordinates, while $A_i$ has component unit tesla metre. Choosing $P$ and $\\kappa_0$ is extra model data; no claim is made that every smooth closed real $F$ is the curvature of such a fixed-normalization connection.\n\nThe selected **topological sector** is the fixed pair consisting of the bundle $P$ and the normalization $\\kappa_0$; its connection is data on that fixed bundle. Changing $P$ or $\\kappa_0$ selects a different sector.\n\nIn a trivialization, a **gauge transformation** is a single-valued smooth map $h:U\\to U(1)$; its local real lifts may differ by integer multiples of $2\\pi$. A connection on a trivial bundle is **gauge trivial** when one such global map takes its normalized connection form to zero. For a closed piecewise-$C^1$ loop $\\gamma$ lying in a trivialization, horizontal transport is defined by $\\dot\\theta=-a(\\dot\\gamma)$; the endpoint fibre rotation is its **holonomy**. When $a$ is one global one-form along the loop this is $\\exp(-i\\int_\\gamma a)$. These definitions introduce no quantum state or quantum phase. The constant $\\kappa_0$ is not identified with Planck's constant or a unit of electric charge.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-sphere-flux-holonomy",
+          "source_section": "Statement",
+          "quote": "For $b\\in\\mathbb R$, let $M=\\mathbb R_{x^0}\\times(\\mathbb R^3\\setminus\\{0\\})$, $r=(x^2+y^2+z^2)^{1/2}$, and define the smooth real two-form\n\n$$\nF_b:=\\frac{b}{r^3}\\left(x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy\\right).\n$$\n\nGive $M$ its canonical Minkowski metric\n\n$$g:=-(dx^0)^2+dx^2+dy^2+dz^2,$$\n\nof signature $(-,+,+,+)$, the time orientation selected by the smooth timelike vector field $N:=\\partial_{x^0}$, and the product orientation $o:=dx^0\\wedge dx\\wedge dy\\wedge dz$. Thus $(M,g,N,o)$ is the smooth, Hausdorff, second-countable, boundaryless, oriented and time-oriented Lorentzian four-manifold required by [[def-emg-lorentzian-forms]]. Its underlying product smooth structure and orientation are the standard ones on this open subset of $\\mathbb R^4$.\n\nUse the standard Euclidean inner product and norm on the spatial $\\mathbb R^3$ factor in all spatial dot products and radii below.\n\nOn the locus $x^2+y^2>0$, define dimensionless polar coordinates by $x=r\\sin\\theta\\cos\\phi$, $y=r\\sin\\theta\\sin\\phi$, $z=r\\cos\\theta$, where $0<\\theta<\\pi$ and $\\phi\\in\\mathbb R/(2\\pi\\mathbb Z)$. There $d\\phi=(x\\,dy-y\\,dx)/(x^2+y^2)$; only this differential, not a global real-valued angle, is used on the north-south overlap. The displayed north and south potential formulas are interpreted on angular coordinate neighborhoods and extended across their respective axes as verified in step 2.2.\n\nIn a fixed $x^0$-slice, write $S^2:=\\{u\\in\\mathbb R^3:|u|_2=1\\}$, where $|u|_2=(u_1^2+u_2^2+u_3^2)^{1/2}$, and give it the outward orientation: its area form is $\\omega_u(v,w):=\\det(u,v,w)$ for tangent vectors $v,w\\in T_uS^2$. This is a compact smooth sphere; compactness follows from closedness and boundedness by [[thm-heine-borel-rn]].\n\nLet $U_N=\\{(x^0,x,y,z)\\in M:r+z>0\\}$ and $U_S=\\{(x^0,x,y,z)\\in M:r-z>0\\}$; these two open sets cover $M$. Then $dF_b=0$ and its flux through the unit sphere with outward orientation is $4\\pi b$. If $b\\ne0$, $F_b$ has no global one-form potential on $M$. On $U_N$ and $U_S$,\n\n$$\nA_N=b(1-\\cos\\theta)\\,d\\phi,\\qquad A_S=-b(1+\\cos\\theta)\\,d\\phi\n$$\n\nare smooth local potentials with $dA_N=dA_S=F_b$, and $A_S-A_N=-2b\\,d\\phi$ on the overlap. For a chosen normalization $\\kappa_0>0$, these local forms define the normalized circle-connection data of [[def-emg-local-potentials-and-circle-data]] precisely when the transition $g_{NS}=e^{-2ib\\phi/\\kappa_0}$ is single-valued, equivalently $2b/\\kappa_0\\in\\mathbb Z$. For a smooth loop $g(e^{i\\phi})=e^{i\\chi(\\phi)}$, its winding is $[\\chi(2\\pi)-\\chi(0)]/(2\\pi)$, with both circles oriented by increasing angle. Existence of a smooth phase lift, integrality of its endpoint change, and independence of the lift are proved in the phase-lift construction below. The transition winding has sign $-2b/\\kappa_0$ in the stated north-to-south convention, while $\\int_{S^2}F_b/(2\\pi\\kappa_0)=2b/\\kappa_0$. This is an exact condition for this chosen circle normalization, not a claim that every classical real flux is quantized. When $2b/\\kappa_0\\in\\mathbb Z$, the compatible two-set data also produce a smooth principal circle-bundle connection, using the actual set-size interface in [A1] and the gluing statement of [[lem-emg-circle-connection-gluing]].\n\nThere is also a flat example with nontrivial holonomy. On $M_0=\\mathbb R\\times S^1\\times\\mathbb R^2$ with product smooth structure, take $S^1=U(1)$ with the smooth structure defined above. Write $w\\in S^1$ for the base-circle coordinate and let $\\nu=-i w^{-1}dw$ be its global real angular one-form, normalized by $\\int_{S^1}\\nu=2\\pi$. For dimensionless $a\\in\\mathbb R$, set $A=\\kappa_0 a\\,\\nu$. On the product bundle $P_0=M_0\\times U(1)$ with projection $\\pi(x,z)=x$ and right action $(x,z)\\cdot\\zeta=(x,z\\zeta)$, use $\\omega=\\vartheta+a\\pi^*\\nu$, where $z\\in U(1)$ is the fibre coordinate and $\\vartheta=-i z^{-1}dz$ is its real angular form. Holonomy means the fibre multiplier of the horizontal lift around the indicated base loop; gauge trivial means gauge-equivalent to $\\vartheta$ under a smooth bundle map $G_u(x,z)=(x,z u(x))$ covering the identity. Then $F=dA=0$ but holonomy around the circle is $e^{-2\\pi ia}$, so this connection is gauge trivial exactly when $a\\in\\mathbb Z$. If $b$ and $\\kappa_0$ are assigned physical units, both are measured in webers; the ratio $2b/\\kappa_0$ is dimensionless. No general classification of circle bundles is asserted.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-emg-maxwell-current-forms",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented\nLorentzian four-manifold of [[def-emg-lorentzian-forms]], with signature\n$(-,+,+,+)$, metric-selected connection $\\nabla$ and oriented metric volume\nform $\\mathrm{vol}_g$. Let $F\\in\\Omega^2(M)$ be a smooth real two-form and\n$j\\in\\Gamma(TM)$ a smooth vector field. Fix constants $\\mu_0>0$ and $c>0$;\n$\\mu_0$ is a real coefficient here, and $c$ is the positive coordinate\nconversion in $x^0=ct$ of [[def-emg-lorentzian-forms]]. Assume the mathematical\nfield equations\n\n$$dF=0,\\qquad \\nabla_aF^{ab}=-\\mu_0j^b.$$\n\nThe equations are conditional hypotheses, not physical postulates in this\nmathematical item. Define $v\\in\\Gamma(TM)$ by $v^b:=\\nabla_aF^{ab}$ and\ndefine the current three-form by $\\iota_j\\mathrm{vol}_g$, the contraction\nspecified in [[def-gr-metric-volume-form-and-current-flux]]. Then:\n\n**(a) Sign identity.** On $M$,\n\n$$d(\\star_gF)=-\\iota_v\\mathrm{vol}_g.$$\n\nConsequently the sourced equation is equivalently\n\n$$\\nabla_aF^{ab}=-\\mu_0j^b\\quad\\Longleftrightarrow\\quad d(\\star_gF)=\\mu_0\\iota_j\\mathrm{vol}_g.$$\n\n**(b) Current conservation.** Either equivalent sourced equation implies\n$\\nabla_aj^a=0$. This conclusion requires the sourced equation and $\\mu_0>0$;\nit does not require $dF=0$.\n\n**(c) Local component check.** At any $p\\in M$, choose a positively oriented\npoint-normal chart supplied by\n[[thm-gr-point-normal-and-exponential-coordinate-charts]]. In that chart,\nwrite $E_i(x):=-cF_{0i}(x)$ and\n$B_i(x):=\\frac12\\epsilon_{ijk}F_{jk}(x)$, where $\\epsilon_{123}=+1$ and\n$\\epsilon_{ijk}$ is alternating. These are local component abbreviations in\nthe chosen chart, not global observer fields. With\n$\\operatorname{div}E:=\\partial_iE_i$,\n$(\\operatorname{curl}E)_k:=\\epsilon_{kij}\\partial_iE_j$, and similarly\nfor $B$, the pointwise component identities are\n\n$$v^0=-\\frac{1}{c}\\operatorname{div}E,\\qquad v^k=\\frac{1}{c^2}\\partial_tE_k-(\\operatorname{curl}B)_k,$$\n\n$$ (d\\star_gF)_{123}=\\frac{1}{c}\\operatorname{div}E,\\qquad (d\\star_gF)_{0ij}=\\epsilon_{ijk}\\left(\\frac{1}{c^2}\\partial_tE_k-(\\operatorname{curl}B)_k\\right),$$\n\n$$ (dF)_{123}=\\operatorname{div}B,\\qquad (dF)_{0ij}=\\frac{\\epsilon_{ijk}}{c}\\left(\\partial_tB_k+(\\operatorname{curl}E)_k\\right),$$\n\nwhere $\\partial_t:=c\\,\\partial_0$. The equations are pointwise identities\nin normal coordinates; they do not assert that these component abbreviations\nform global three-vector fields on curved spacetime.\n\nOn an open flat Minkowski domain with a fixed inertial Cartesian chart\n$x^0=ct$, define $\\rho:=j^0/c$, $J^i:=j^i$, and\n$\\epsilon_0:=(\\mu_0c^2)^{-1}$. The same component formulas at every point give\n\n$$\\operatorname{div}E=\\frac{\\rho}{\\epsilon_0},\\qquad \\operatorname{curl}B-\\frac{1}{c^2}\\partial_tE=\\mu_0J,\\qquad \\operatorname{div}B=0,\\qquad \\partial_tB+\\operatorname{curl}E=0.$$\n\nThese are a coordinate reduction of the stated tensor and form equations, not\nclaims that the smooth fields describe an experiment.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.4",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-side-flux-balance",
+          "claim": "The four-chain balance in [F1] gives\n$Q(\\Sigma_2)-Q(\\Sigma_1)=-Q(B)$. In [F1], the finite-chain functional\n$Q(C)$ is defined as $c^{-1}\\int_C i_j\\mathrm{vol}_g$ for every three-chain\n$C$; thus its $Q(B)$ equals the source-current flux $\\Phi_j(B)$ defined here.\nThis is exactly the claimed signed identity, conditional on the sourced\nMaxwell equations in [A1] as in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "bounding-cycle-flux",
+          "claim": "The bounding-surface clause of [F1] gives\n$\\int_{\\partial W}F=0$ for every finite smooth three-chain $W$. If $j=0$\nthroughout $W$, [A1] and [F4] give $d*F=0$ there, and finite smooth Stokes\nthen yields $\\int_{\\partial W}*F=\\int_Wd*F=0$. A closed nonbounding surface\nis not $\\partial W$ for a chain in the field domain, so these arguments assign\nit no flux value.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonbounding-magnetic-flux",
+          "claim": "The draft supplier [F3] states that $F_b$ is smooth and closed on the\npunctured domain. In spherical coordinates\n$x=r\\sin\\theta\\cos\\phi$, $y=r\\sin\\theta\\sin\\phi$,\n$z=r\\cos\\theta$, the form restricts to\n$F_b=b\\sin\\theta\\,d\\theta\\wedge d\\phi$ on each sphere $S^2_r$, so direct integration over\n$0\\leq\\theta\\leq\\pi$, $0\\leq\\phi\\leq2\\pi$ yields\n$\\int_{S^2_r}F_b=4\\pi b\\ne0$. If the sphere were the boundary of a finite\nsmooth three-chain in that domain, the closed-form bounding-surface result\n[F1] would force this integral to vanish. Thus it is nonbounding with\nnonzero magnetic flux, conditional on the exact claim of draft supplier [F3];\nthis use does not constitute independent proof acceptance of that supplier.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "source-free-monopole-form",
+          "claim": "In the positively oriented orthonormal spherical coframe\n$e^0=dx^0$, $e^1=dr$, $e^2=r\\,d\\theta$, $e^3=r\\sin\\theta\\,d\\phi$,\n$F_b=(b/r^2)e^2\\wedge e^3$. The Hodge formula of [F5] gives\n$*F_b=(b/r^2)e^0\\wedge e^1=(b/r^2)dx^0\\wedge dr$ because the complementary\nindex permutation $(2,3,0,1)$ is even and both spatial metric signs are\npositive. Hence on this dense polar-coordinate region\n$d*F_b=d(b/r^2)\\wedge dx^0\\wedge dr=0$; smoothness of $F_b$ and $g$ extends\nthis identity across the polar axes. Along with $dF_b=0$ from [F3], [F4]\ngives $\\nabla_aF_b^{ab}=0$, so $F_b$ satisfies the smooth\nsource-free Maxwell equations adopted in [A1] with $j=0$.",
+          "step": "1.4",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compact-slice-neutrality",
+          "claim": "If $\\Sigma$ is a compact boundaryless finite smooth three-cycle, then\n$\\partial\\Sigma=0$. The Gauss formula in [F1] therefore gives\n$Q(\\Sigma)=(\\mu_0c)^{-1}\\int_{\\partial\\Sigma}*F=0$. This is the stated\ncompact-slice neutrality consequence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "topology-not-exactness",
+          "claim": "[A2, F2] distinguishes the global real closed-form model from an additional\nnormalized circle-connection choice. Thus the bounding-surface deductions\nabove impose neither exactness of every closed field form nor a flux rule on\nnonbounding cycles, and they introduce no charge-quantization premise.",
+          "step": "2.2",
+          "inputs": [
+            "A2",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "nonbounding-electric-flux",
+          "claim": "Put $\\widetilde F:=-*F_b$. Then $d\\widetilde F=-d*F_b=0$, and [F5]\ngives $*\\widetilde F=-*^2F_b=F_b$; consequently\n$d*\\widetilde F=dF_b=0$, so [F4] also gives the source-free divergence\nequation for $\\widetilde F$. Its electric flux through the same nonbounding\nsphere is $\\int_{S^2_r}*\\widetilde F=\\int_{S^2_r}F_b=4\\pi b\\ne0$. By [F4],\n$\\widetilde F$ also satisfies the adopted equations [A1] with $j=0$. These are\nsmooth fields on the punctured domain and make no source or field assertion at\nthe excluded origin.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "A1",
+            "A2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement case: The empty chain has zero integrals in both the charge and flux identities."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At b=0 the punctured-space example has zero field and zero flux; the nonzero-flux clause explicitly assumes b≠0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement case: The single sphere S^2_r is an explicit finite closed 2-cycle and has flux 4πb."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement case: The origin is excluded from the smooth field domain; no singular field value or source at r=0 is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement case: The charge and flux formulas apply to finite chains; noncompact slices and limits at infinity are explicitly excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement case: AC_ω is stated as A2 for the planned supplier closure; the explicit spherical field and finite Stokes calculations use no stronger choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha batch-14, Step 3a",
+        "notes": "Read every current proof step and all seven direct dependencies, including the current sphere supplier proof rather than the historical missing-carrier note. Step 1.1 matches finite-chain Q(B)=Phi_j(B), preserving the minus sign. Step 1.2 uses Stokes only on bounding finite chains and requires j=0 throughout W for electric zero flux. Step 1.3 follows the current sphere supplier step 1.1: r>0 gives smooth Cartesian coefficients, polar closure extends by continuity, and outward spherical pullback is b sin(theta) dtheta wedge dphi; integration gives 4pi b for every R>0. Nonzero b contradicts bounding via Stokes. Step 1.4 has positive star(e2 wedge e3)=e0 wedge e1, d*F_b=0 on a dense polar region and hence everywhere on the punctured domain. Step 2.1 needs the explicitly assumed finite three-cycle representation, so no triangulation or noncompact exhaustion is inferred. Step 2.2 uses only the real-form versus optional normalized-circle distinction, not a quantization theorem. Step 3.1 uses *^2=-id to obtain *(-*F_b)=F_b and both source-free equations. Empty/zero chains and b=0 are consistent; the nonzero-flux clause expressly excludes b=0, the origin is outside the field domain, and no iff or extra choice is introduced. Reader/refuter findings are empty. Exact contract citation excerpts match current sources. No confirmed defect in owned uses; current draft suppliers retain their actual proof/acceptance status and no full transitive audit is claimed."
+      }
+    },
+    "ex-emg-electric-stress": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-maxwell-observer-stress",
+          "source_section": "Statement",
+          "quote": "**(b) Orthonormal observer components.** In any positively oriented\northonormal tetrad with $E_0=n$ and spatial orientation\n$\\epsilon_{123}=+1$, the components are\n\n$$T_{\\mathrm{EM}}^{00}=\\frac12\\left(\\epsilon_0\\sum_iE_i^2+\\frac1{\\mu_0}\\sum_iB_i^2\\right),\\qquad T_{\\mathrm{EM}}^{0i}=\\frac{(\\mathbf E\\times\\mathbf B)_i}{\\mu_0c},$$\n\n$$T_{\\mathrm{EM}}^{ij}=-\\left[\\epsilon_0\\left(E_iE_j-\\frac12\\delta_{ij}\\sum_kE_k^2\\right)+\\frac1{\\mu_0}\\left(B_iB_j-\\frac12\\delta_{ij}\\sum_kB_k^2\\right)\\right].$$\n\nHere $(\\mathbf E\\times\\mathbf B)_i:=\\epsilon_{ijk}E_jB_k$. In particular,\n$T_{\\mathrm{EM},0i}=-T_{\\mathrm{EM}}^{0i}$ in this tetrad.\n\n**(c) Observer energy and flux.** The measured energy density\n$u_n:=T_{\\mathrm{EM},ab}n^an^b$ equals the nonnegative value in part (b), and\nthe spatial vector $S_n$ has components\n$S_n^i=(\\mathbf E\\times\\mathbf B)_i/\\mu_0$ and $S_n^0=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "pure-electric-stress",
+          "claim": "For $\\mathbf E=(E_0,0,0)$ and $\\mathbf B=0$, [F1] gives\n$T^{00}=\\epsilon_0E_0^2/2$ and $T^{0i}=0$. The electric quadratic matrix\n$E_iE_j-\\delta_{ij}|E|^2/2$ is\n$\\operatorname{diag}(E_0^2/2,-E_0^2/2,-E_0^2/2)$, so the minus sign in the\nspatial formula of [F1] gives the displayed spatial diagonal. Contracting with\n$g_{ab}=\\operatorname{diag}(-1,1,1,1)$ yields\n$T^a{}_a=-\\epsilon_0E_0^2/2-\\epsilon_0E_0^2/2+\\epsilon_0E_0^2/2+\\epsilon_0E_0^2/2=0$.\nThe spatial diagonal entries are all equal exactly when\n$\\epsilon_0E_0^2/2=0$, equivalently $E_0=0$ since $\\epsilon_0>0$.\nThen all tensor components vanish; otherwise the spatial stress is\nanisotropic by the definition in the Example.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pure-magnetic-stress",
+          "claim": "For $\\mathbf E=0$ and $\\mathbf B=(0,0,B_0)$, [F1] gives\n$T^{00}=B_0^2/(2\\mu_0)$ and $T^{0i}=0$. The magnetic quadratic matrix\n$B_iB_j-\\delta_{ij}|B|^2/2$ is\n$\\operatorname{diag}(-B_0^2/2,-B_0^2/2,B_0^2/2)$, so the spatial minus\nsign in [F1] gives the displayed magnetic diagonal. Its metric trace is\n$-B_0^2/(2\\mu_0)+B_0^2/(2\\mu_0)+B_0^2/(2\\mu_0)-B_0^2/(2\\mu_0)=0$.\nThe spatial diagonal entries are all equal exactly when\n$B_0^2/(2\\mu_0)=0$, equivalently $B_0=0$ since $\\mu_0>0$.\nThen all tensor components vanish; otherwise the spatial stress is\nanisotropic by the definition in the Example.\nThe calculation is pointwise and supplies no global or empirical claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes one event, one tetrad, and two field vectors; it quantifies over no set that could be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At step 1.1 if E0=0 in the electric case, or at step 2.1 if B0=0 in the magnetic case, every tensor component is zero, and the spatial matrix is isotropic with q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement case: The single nonzero field component is explicitly placed along e1 for E or e3 for B; the remaining two spatial directions are computed separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement case: No degenerate metric is admitted; the metric is diag(−1,1,1,1), and the zero-field limits are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The calculation is pointwise and has no interval or limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement case: AC_ω is carried by the planned lemma's dependency closure and recorded in A2; the finite component arithmetic uses no stronger choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "If the electric spatial matrix is anisotropic then E0 is nonzero, since E0=0 gives the zero matrix; the identical implication holds for B0 in the magnetic case (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "For E0 nonzero, epsilon0>0 makes the electric first diagonal entry differ from the other two. For B0 nonzero, mu0>0 makes the magnetic third entry differ from the first two (steps 1.1 and 2.1)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "batch-14 author",
+        "notes": "Checked both matrix substitutions, the signs in T^{ij}, and the Lorentz trace against the current observer-stress Statement. Tong and Carroll use different displayed normalizations; no coefficients are imported. The carrier is present and its formula matches, but its proof remains conditional on missing connection/circle-gluing interfaces and seven MG01 replacements, so this example is escalated."
+      },
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    }
+  }
+}

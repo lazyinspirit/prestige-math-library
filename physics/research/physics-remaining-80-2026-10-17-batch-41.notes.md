@@ -1,0 +1,40 @@
+# Batch 41 authoring notes
+
+Run: `physics-remaining-80-2026-10-17`  
+Pair: `qsm-kms-equilibrium` and `qsm-kms-equilibrium-examples`  
+Assigned output: `research/physics-remaining-80-2026-10-17-batch-41.pages.json`
+
+## Inventory, plan, and levels
+
+The A page contains six assigned items: `def-qsm-kms-state` (level 7), `lem-qsm-kms-strip-uniqueness` (8), `lem-qsm-gibbs-strip-limit` (9), `lem-qsm-kms-invariance` (9), `thm-qsm-finite-kms-gibbs-characterization` (9), and `thm-qsm-infinite-spin-kms-existence` (10). The B page contains `ex-qsm-kms-two-level-gibbs-boundary` (level 10). The full direct `deps`, `dependency_roles`, computed item levels, supplier interfaces, and current cross-batch evidence are in `batch-41.pages.json` and `batch-41.dependency-inputs.json`. The pair remains within the 100-item page cap.
+
+The prose design reserves these six A items; `plan-spec.json` has empty item inventories, so it supplies no contrary item mapping. There is one page-level prerequisite conflict: the prose design also lists `qsm-quasilocal-states` and `qsm-states-ensembles`, while `plan-spec.json` declares exactly four direct page requirements: `analyticity-liouville-and-morera`, `goursat-and-cauchys-theorem-in-a-convex-domain`, `qsm-finite-range-spin-dynamics`, and `the-identity-theorem-and-the-open-mapping-theorem`. The A-page `requires` list follows `plan-spec.json`; the exact item-level dependencies on the QSM state and quasi-local carriers remain in each consuming item. The current batch graph consequently places batch 41 at level 3 with in-run suppliers 36, 38, and 39.
+
+Recomputation after the assigned item-level corrections gives levels 7, 8, 9, 9, 9, 10, and 10, respectively. The batch-41 prerequisite closure contains 23 in-run items and has zero dependency-level errors.
+
+## Source and supplier review
+
+Two independent complete full-text treatments were inspected for the A page: Naaijkens, §3.4, printed pp. 74–78, and Ruelle, Chapter 1 §7, pp. 12–13, and Chapter 2 §6, pp. 23–24. Their harvested headings, supported items, locators, and dispositions are in `batch-41-sources/source-reading.md`; source-fetch records and all source-result dispositions are in `batch-41.coverage.json`. Naaijkens fixes the physical strip width and reversed upper edge but does not state global strip boundedness in the base definition; Ruelle states the correlation norm bound. The local definition makes boundedness explicit, and the proofs use it as a hypothesis. Both sources use an `hbar=1` or rescaled-time convention in places; the authored interface consistently retains width `beta*hbar` in seconds.
+
+All 16 in-run suppliers from batches 36, 38, and 39 have current Step-1 `ready` records. The finite-matrix C*-identity/state-duality, matrix spectral/trace calculus, quasi-local algebra and state suppliers, finite-range dynamics, and local generator statements were read at their current carriers. The earlier paragraph in the source-reading record that reported a missing current C*-identity readiness record and a batch-39 carrier mismatch was superseded by the owner’s current QSM resolutions; the current batch-39 statement, dependencies, contract, and readiness record agree. These suppliers remain draft and their Step-1 rows record authoring readiness only. Batch 41 uses their exact statements and hypotheses conditionally; no independent acceptance is inferred.
+
+The infinite-volume argument carries Countable Choice, the finite-matrix C*-identity, and finite state/density norm clauses explicitly. No full Axiom of Choice, physical measurement, empirical premise, uniqueness, global trace-class Gibbs density, phase classification, or relaxation claim is introduced. The source fetch check returned 4/4 source records verified and resolved, with zero new stamps and zero documented drops; no source-resolution decision was needed.
+
+## Readiness
+
+All seven assigned items have current `ready` Step-1 records with `owner: false`. The two pages, assigned item bodies, proof contracts, coverage, and dependency inputs match. The contextual link from `lem-qsm-gibbs-strip-limit` to its later all-observable consumer is in Remarks, so it adds no reverse dependency. The infinite-spin KMS theorem directly declares all cited local state, finite Gibbs, matrix spectral/trace, compactness, and dynamics suppliers.
+
+## Scoped checks
+
+- `author-check.mts` passed: precheck, rendercheck, content-policy, and strict proof-contract validation all returned exit 0. Its current fingerprint is `0f39c13b40282bbb0128b1dfcf83c1a4948ccbccc4e7324c2af1e782b5835a74`.
+- `proof-layout.mjs` passed for the six proof-bearing items: 31 steps, 0 defects. `proof-contract.mjs --strict` passed: 6/6 contracts, 0 errors, 0 warnings.
+- Focused `depcheck` passed for 7 items and their prerequisite closure (1,388 items / 511 pages checked); focused `fwdcheck` and `extcheck` passed with 0 errors and 0 warnings.
+- `coverage-checklist --require-destination` passed with 0 errors. It reports two low-yield advisories: each page has 1 of 11 harvested source headings scaffolded as a new item; Alpha should confirm the inline/out-of-scope dispositions. These are recorded in coverage, not treated as proof gaps.
+- `source-fetch-check --stamp` returned 4/4 fetch-verified and 4/4 resolved; 0 new stamps, 0 drops.
+- The current batch graph recomputes to level 3 with `requires: [36, 38, 39]`. The shared `physics-remaining-80-2026-10-17-batch-dependency-levels.json` input hash is stale after the assigned manifest’s item-level metadata correction: stored `2f4f39f4278dc89c3f6aab6d0ba61a1790e3bce6a0483da898fe467f7249c977`, current `b9ea2b7acf5a26d5bffc8a21dd382094bef997b9805798566f6a1817144720e6`. Its recorded numeric batch-41 level and supplier list still match the recomputation. The shared receipt was left for the owner to refresh.
+
+The whole-run item-level scan is not a batch-41 result. Its out-of-scope empty inventories were `emg-mm03`, `emg-mm03-examples`, `emg-mm02`, `emg-mm02-examples`, `emg-mp03`, `emg-mp03-examples`, `emg-mp02`, `emg-mp02-examples`, `emg-ms03`, `emg-ms03-examples`, `emg-s01`, `emg-s01-examples`, `emg-s02`, `emg-s02-examples`, `qsm-commuting-quantum-phases`, `qsm-commuting-quantum-phases-examples`, `qsm-nonnormal-thermal-states`, `qsm-nonnormal-thermal-states-examples`, `qsm-infinite-spin-physical-models`, `qsm-infinite-spin-physical-models-examples`, `qsm-interacting-exact-models`, `qsm-interacting-exact-models-examples`, `qsm-dt-response`, `qsm-dt-response-examples`, `qsm-dt-channels`, `qsm-dt-channels-examples`, `qsm-dt-relaxation`, `qsm-dt-relaxation-examples`, `tgr-c04`, `tgr-c04-examples`, `tgr-et03`, `tgr-et03-examples`, `tgr-pet01`, `tgr-pet01-examples`, `tgr-pet02`, `tgr-pet02-examples`, `tgr-pet03`, `tgr-pet03-examples`, `tgr-mg01`, `tgr-mg01-examples`, `tgr-g01`, `tgr-g01-examples`, `tgr-g02`, `tgr-g02-examples`, `tgr-mhs01`, `tgr-mhs01-examples`, `tgr-phs01`, `tgr-phs01-examples`, `tgr-phs02`, `tgr-phs02-examples`, `tgr-phs03`, `tgr-phs03-examples`, `tgr-phs04`, and `tgr-phs04-examples`.
+
+The same whole-run scan also reported preexisting EM level-label mismatches: `pthm-emg-matter-symmetry-charges` 5→7; `def-emg-xs-ingoing-rn` 5→7; `thm-emg-xs-rn-crossing` 6→8; `prop-emg-xs-rn-horizon-data` 6→8; `thm-emg-xs-kn-extension` 5→7; `lem-emg-xs-null-barrier` 6→8; `thm-emg-xs-rn-escape` 7→9; `prop-emg-xs-kn-horizon-data` 6→8; `thm-emg-xs-kn-escape` 7→9; `prop-emg-xs-kn-ergoregion` 6→8; `prop-emg-xs-charged-ring-obstruction` 6→8; `prop-emg-xs-rn-local-gauges` 5→7; `ex-emg-xs-extremal-horizon` 7→9; `cex-emg-xs-ergo-is-not-horizon` 7→9; `ex-emg-xs-superextremal-rn` 7→9; and `ex-emg-xs-topological-charge` 6→8. No other batch was edited. The focused dependency-closure result above confirms none of these pages/items supplies batch 41.
+
+A mistaken `fwdcheck.mjs --help` probe also ran the full-corpus checker because that tool has no `--help` mode; its 437-error global output was not used as a batch result and caused no edits. The final focused forward-reference check is clean.

@@ -1,0 +1,15 @@
+# Batch 43: repair 1
+
+Run: physics-remaining-80-2026-10-17
+Batch: 43
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qsm-nonnormal-thermal-states, qsm-nonnormal-thermal-states-examples
+Items: def-qsm-vacuum-spin-representation, lem-qsm-vacuum-representation-irreducible, thm-qsm-onsite-product-kms, thm-qsm-product-thermal-state-nonnormal, cex-qsm-invariant-not-kms, cex-qsm-global-spin-thermal-trace-diverges, ex-qsm-nonnormal-tracial-spin-state
+Consolidated findings: [{"id":"ex-qsm-nonnormal-tracial-spin-state","type":"local","reason":"In step 3.1, add the exact content of def-qsm-quasilocal-spin-algebra: the quasi-local algebra is the norm completion of the strictly local algebra, so local observables are norm dense. Include the dependency and cite that density in the approximation argument."}]
+Authorized source files: ["items/def-qsm-vacuum-spin-representation.md","items/lem-qsm-vacuum-representation-irreducible.md","items/thm-qsm-onsite-product-kms.md","items/thm-qsm-product-thermal-state-nonnormal.md","items/cex-qsm-invariant-not-kms.md","items/cex-qsm-global-spin-thermal-trace-diverges.md","items/ex-qsm-nonnormal-tracial-spin-state.md","library/quantum-statistical-mechanics/qsm-nonnormal-thermal-states.md","library/quantum-statistical-mechanics/qsm-nonnormal-thermal-states-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

@@ -1,0 +1,41 @@
+from pathlib import Path
+import json,re,yaml,hashlib,datetime
+B=Path(__file__).resolve().parents[2];O=Path(__file__).parent;R='physics-remaining-80-2026-10-17';oldroot=B/'research'/f'{R}-owner-step2-source-preimages-60/items';H=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+ids=['cor-emg-regular-counterpoised-sphere','ex-emgmath-ml-b05','ex-emgmath-ml-b06','pthm-emg-counterpoised-smooth-sphere','ex-emg-ml-b05','ex-emg-ml-b06'];seeds=set(ids);g={};alias={};paths={};docs=[]
+for directory in [B/'items',B.parent/'items',oldroot]:
+ for p in directory.glob('*.md'):
+  t=p.read_text();m=re.match(r'\A---\s*\n(.*?)\n---\s*(?:\n|$)',t,re.S)
+  if not m:continue
+  d=yaml.load(m.group(1),Loader=yaml.CSafeLoader);i=d.get('id',p.stem);alias.update({a:i for a in d.get('aliases',[])or[]});docs.append((i,p,t,d));paths.setdefault(i,[]).append(str(p))
+for i,p,t,d in docs:g.setdefault(i,set()).update(alias.get(x,x)for x in set(d.get('deps',[])or[])|set(d.get('justified_by',[])or[])|set(re.findall(r'\[\[([^]|#]+)',t)))
+seen=set(seeds)
+while True:
+ new=seen|{i for i,e in g.items()if e&seen}
+ if new==seen:break
+ seen=new
+assert seen==seeds,sorted(seen-seeds)
+fm=lambda t:yaml.load(re.match(r'\A---\s*\n(.*?)\n---\s*(?:\n|$)',t,re.S).group(1),Loader=yaml.CSafeLoader)
+def public(t):return t.split('## ',1)[1].split('## Facts & Assumptions')[0]
+sourcebindings=[]
+for i in ids:
+ p=B/'items'/f'{i}.md';pre=O/'before/items'/p.name;old=oldroot/p.name;t=p.read_text();before=pre.read_text();row={'id':i,'batch':17 if i in ids[:3] else 20,'path':str(p.relative_to(B)),'current_raw_sha256':H(p),'immediate_preimage_raw_sha256':H(pre),'authenticated_step1_raw_sha256':H(old),'public_section_unchanged_from_native_rebased_preimage':public(t)==public(before),'new_deps':sorted(set(fm(t).get('deps',[])or[])-set(fm(before).get('deps',[])or[]))};sourcebindings.append(row)
+for n,owned in [(17,set(ids[:3])),(20,set(ids[3:]))]:
+ p=B/'research'/f'{R}-batch-{n}.proof-contracts.json';before=json.loads((O/'before/research'/p.name).read_text());now=json.loads(p.read_text());assert all(v==now['contracts'][i]for i,v in before['contracts'].items()if i not in owned)
+# Explicit preservation of native17 support/worldline and central-geodesic text in public sections.
+assert all(x['public_section_unchanged_from_native_rebased_preimage']for x in sourcebindings[:3])
+assert 'central static worldline is geodesic' in (B/'items/ex-emgmath-ml-b06.md').read_text()
+context_ids=set()
+for n,selected in [(17,ids[:3]),(20,ids[3:])]:
+ d=json.loads((B/'research'/f'{R}-batch-{n}.proof-contracts.json').read_text())
+ for i in selected:context_ids.update(x['source']for x in d['contracts'][i]['citations'])
+contexts=[{'id':i,'path':f'items/{i}.md','raw_sha256':H(B/'items'/f'{i}.md')}for i in sorted(context_ids)]
+checks=json.loads((O/'checks.json').read_text());assert all(x['exit_code']==0 for x in checks)
+report={'version':1,'run':R,'owner':'/root/emg_remaining_interfaces','recorded_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'outside_distinct_defect_repair_cycle':1,'trigger_review':{'path':f'research/{R}-scope-review/batch-20/review-0.json','raw_sha256':H(B/'research'/f'{R}-scope-review/batch-20/review-0.json')},'write_release':{'path':f'.physics-autopilot/{R}/owner-step2-11-12-17-20-write-release.json','raw_sha256':H(B/'.physics-autopilot'/R/'owner-step2-11-12-17-20-write-release.json')},'defects_and_repairs':[
+{'supplier':'cor-emg-regular-counterpoised-sphere','defect':'Integral remainder in2.3 was asserted and6.1 invoked uncited MVT.','repair':'Derive G_zprime=(z-u)fsecond with explicit endpoint differences and continuous-integrand Newton–Leibniz; compare integrals by exact published monotonicity. Derive density difference as integral0..z3(1+u)^-4; handle z0 directly. No corollary Statement change.'},
+{'consumer':'ex-emgmath-ml-b05','defect':'F1 attributed observer E_i and coordinate profile derivatives to a supplier Statement that omitted the observer result.','repair':'Differentiate the explicit positive-root profile using current exact root/chain/quotient suppliers; calculate dA and cF(e_i,n) in its own proof. Keep native topological support definition and all values unchanged.'},
+{'consumer':'ex-emgmath-ml-b06','defect':'Proof1.1 attributed sharper3z² intermediate to public corollary although only3delta² was stated.','repair':'Keep sharper true bound and prove it locally using G_z and exact Newton–Leibniz/monotonicity suppliers. Native full proper-time worldline and central-geodesic/noncentral-force branch preserved exactly in the Example.'},
+{'consumer':'pthm-emg-counterpoised-smooth-sphere','defect':'Mass continuity/observer E_i were taken from inside supplier proof; AComega pointer targeted physicalA1.','repair':'Current typed positive-root convention and exact indexed countable-choice Definition are explicit mathematical premises. Calculate continuity from static components and connection trace, calculate dA/frame electric components, and verify undivided acceleration/force at all points including rho0. All formulas/physical claims retained.'},
+{'consumers':['ex-emg-ml-b05','ex-emg-ml-b06'],'defect':'Inherited AComega premise was absent from Given/F1.','repair':'State exact indexed AComega in Example/Given/A1, add direct mathematical-premise dependency and use it in both finite substitutions; current A-page quote refreshed.'}],
+'consumer_closure':{'method':'Union old authenticated709 Step1 sources and current complete physics/items plus root/items published-user context; both deps and nonempty justified_by, aliases canonicalized, every wikilink included for nonlogical uses. Fixed-point reverse ancestry; no title/notation aliases.','authenticated_old_inventory_items':len(list(oldroot.glob('*.md'))),'all_actual_affected_ids':sorted(seen),'additional_consumers_outside_six':[],'published_users_outside_six':[],'source_before_consumer_order':ids,'scientific_dispositions':{'cor-emg-regular-counterpoised-sphere':'Supplier bounds now derived for every allowed delta and point, including the directly evaluated zero intermediate; proper-integral/measure proof unchanged.','ex-emgmath-ml-b05':'a=b>0 sign+1 substitution and local observer formula compatible with repaired supplier; native explicit nonzero-set closure preserved.','ex-emgmath-ml-b06':'0<delta<=1/10 retained; sharp3z² proved locally, public3delta² and density inequalities inherited at exact Statement; native positive-density force and central-geodesic branch preserved.','pthm-emg-counterpoised-smooth-sphere':'All current model equations matched directly and zero-density force/mass/current checks undivided; no self-field/existence/stability claim added.','ex-emg-ml-b05':'Exact central values/proper integrals and E_i0 apply under explicit inherited indexed choice; no numerical coefficient changed.','ex-emg-ml-b06':'Exact delta<=1/10 gives3/100,1/100,3/10; inherited choice explicit and no bound weakened.'}},
+'current_source_bindings':sourcebindings,'current_supplied_context_bindings':contexts,'typed_power_context':'Concurrent typed owner rational-zero convention successor read: all uses here are strictlypositive H/Psi/Q_s and integer reciprocal powers. Refresh only exact positive-root clause quotes; no use of0^0 or arbitraryrealpower at0.','native17_rebase_preserved':True,'original_worksheet_bindings':[{'batch':n,'path':f'research/{R}-batch-{n}.proof-contracts.json','raw_sha256':H(B/'research'/f'{R}-batch-{n}.proof-contracts.json')}for n in(17,20)],'nonowned_original_worksheet_entry_objects_unchanged':True,'checks':checks,'source_mutations':ids,'worksheet_mutations':[17,20],'pages_mutated':[],'no_imported_or_root_original_edits':True,'no_native_metadata_acceptance_registration_level_hash_or_gate_edits':True,'remaining_scientific_conditions':[],'disposition':'Assigned Step2batch20 distinct outside-batch cycle1 and all actual affected scientific uses complete; six current sources plus original worksheets17/20 released. Root alone owns mechanical metadata/newedge registration/recertification/native disposition.'}
+p=O/'final-report.json';p.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');print(str(p));print(H(p));print(json.dumps(sourcebindings,indent=2))

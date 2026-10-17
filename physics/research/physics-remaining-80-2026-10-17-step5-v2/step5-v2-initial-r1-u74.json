@@ -1,0 +1,148 @@
+{
+  "run": "physics-remaining-80-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "74",
+  "input_sha256": "34da341a1db0c97e52a6a7416782ee6b88786a786457765413eee2fcfc4a3d68",
+  "decisions": [
+    {
+      "id": "lem-tgr-positive-damping-boundary",
+      "model": "gpt-6-luna",
+      "context_sha256": "4dd24640d10df1e18f8c368e53020c61af0f322b51ae2c4507c35a553811bcbd",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 2.2 incorrectly attributed analytic bounds to Countable Choice. The bounds follow immediately from the Statement hypotheses c<=d_epsilon<=C and |s-i epsilon d_epsilon|^2=s^2+epsilon^2 d_epsilon^2. Corrected the attribution and given tag; the linearization and O(epsilon log(1/epsilon)) error argument remain valid.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-tgr-exponential-current",
+      "model": "gpt-6-luna",
+      "context_sha256": "5d507f3682741600be1fa368ea7a3949b6e5566b11c10dacd464a48ee828bede",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The three linked exponential suppliers are genuinely used in Definitions and conventions: complex exp defines sinh/cosh, addition and real extension give their identities, and reciprocal positivity gives cosh>0. Their direct deps and mathematical-premise roles were missing, although the suppliers were already available transitively. Added exactly those declarations and synchronized the owning manifest; the existing argument is sound without a claim change.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-tgr-positive-damping-boundary",
+      "disposition": "repaired",
+      "post_sha256": "7f988ecf5afc68c52b34f4d63167ffcbd7a5566fda5306f3a7518c4375d7890d",
+      "review_context_sha256": "1beffd3706d718b1320f1fbf62bc6a9632906d1e299a66cbcff3f0d020c9268d",
+      "reason": "Checked the full local proof and twelve direct supplier interfaces. Three integrations by parts give continuous compact-test functionals; the Laplace identity fixes the lower-boundary sign. Taylor expansion gives Im(a_epsilon) comparable to epsilon and Re(a_epsilon)=O(epsilon^2); the inverse-square error integrates to O(epsilon)+O(epsilon log(R/epsilon)). Fixed-epsilon spectral Fubini is justified by positive Im(a_epsilon) uniformly on compact parameter support, and dominated convergence gives the stated limit, including m=0. Step 2.2 now cites its actual given damping hypotheses. Statement and Definitions and conventions are unchanged. This is author repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-tgr-exponential-current",
+      "disposition": "repaired",
+      "post_sha256": "49ae57ae803478517099fd8f8b043382a0ad95e1b70a234323b8171563e4ddf5",
+      "review_context_sha256": "208fdc8bdaa5e73a3449f92ecb4fc82b419d818ddc3180f377cfcadc296a9973",
+      "reason": "Reviewed the complete construction after the damping proof repair. Checked complexification and restriction for separability, both Fourier norm bounds, conjugate-linear annihilation giving linear J, finite-sector continuity, real-test Segal closure including h=0, and the vacuum sign and positive type. The exponential coordinate has positive derivative; its Jacobian cancellation gives damping exp(kappa v), and the analytic sinh boundary gives positive compact-uniform smooth damping after the Y_b substitution. The repaired damping supplier has exactly the hypotheses these two uses require. The three newly declared published exponential suppliers establish the hyperbolic identities, positivity, range and smooth inverse. All statements and definitions and the proof text are unchanged. This is author repair review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": {
+    "defect_ledger": [
+      {
+        "id": "lem-tgr-positive-damping-boundary",
+        "classification": "nonfatal",
+        "status": "fixed",
+        "location": "Proof step 2.2",
+        "evidence": "The given real bounds imply the displayed modulus comparison; Countable Choice is retained only for measure constructions."
+      },
+      {
+        "id": "lem-tgr-exponential-current",
+        "classification": "nonfatal",
+        "status": "fixed",
+        "location": "Frontmatter deps and dependency_roles; Definitions and conventions",
+        "evidence": "Three explicitly linked and used published mathematical suppliers were absent from direct declarations. Added them and mirrored them in batch 74 pages manifest; no mathematical interface changed."
+      }
+    ],
+    "published_consumer_ledger": []
+  },
+  "repair_notes": {
+    "completed_items": [
+      "lem-tgr-positive-damping-boundary",
+      "lem-tgr-exponential-current"
+    ],
+    "pending_items": [],
+    "sources_consulted": [
+      "items/def-countable-choice.md: Definition",
+      "items/lem-tgr-positive-damping-boundary.md: all sections and direct supplier statements",
+      "items/lem-tgr-exponential-current.md: all sections and direct supplier statements/definitions",
+      "items/lem-qft-fock-ccr-car.md: Proof step 1.2 for sector bounds",
+      "items/def-complex-exponential.md: Definition",
+      "items/thm-complex-exponential-addition-and-real-extension.md: Statement",
+      "items/cor-exponential-reciprocal-and-positivity.md: Statement"
+    ],
+    "source_retrieval": "No external source retrieval claimed. The supplied sources are contextual; adjudication uses the complete local estimate and exact library suppliers.",
+    "validation": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-remaining-80-2026-10-17-batch-74.proof-contracts.json --strict --items lem-tgr-positive-damping-boundary,lem-tgr-exponential-current",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings; 2/2 assigned items checked."
+      },
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/lem-tgr-positive-damping-boundary.md items/lem-tgr-exponential-current.md",
+        "exit_code": 0,
+        "result": "Both direct proofs pass; 2 checked, 0 failing."
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/lem-tgr-positive-damping-boundary.md items/lem-tgr-exponential-current.md",
+        "exit_code": 0,
+        "result": "Both files pass renderer YAML and KaTeX checks."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/lem-tgr-positive-damping-boundary.md items/lem-tgr-exponential-current.md",
+        "exit_code": 0,
+        "result": "2 items, 12 steps, 0 defects; run after all item edits."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u74-items.json --json",
+        "exit_code": 0,
+        "result": "Focused selection contains exactly both assigned items; 0 errors and 0 warnings, with 1208 prerequisite items and 250 prerequisite pages checked as context."
+      }
+    ],
+    "next_action": "Hand off the completed report to the controller; no judges, judgments, stamps, certificates, shared ledgers or round state were written.",
+    "operational_history": [
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u74-items.txt --json",
+        "exit_code": 1,
+        "result": "Temporary input was mistakenly plain text; parser requires a nonempty JSON array. Corrected only the temporary selector and reran successfully."
+      }
+    ],
+    "interface_checks": {
+      "lem-tgr-positive-damping-boundary": {
+        "frozen_statement_sha256": "f27034bba570f7d50d77f82fa0f38d26bbeb130907b69812e8928406f7b11251",
+        "unchanged": true,
+        "affected_sections": "Only Proof step 2.2 and its owning contract derivation/citation-use list changed."
+      },
+      "lem-tgr-exponential-current": {
+        "frozen_statement_sha256": "c8acae7f4e232266ef14794bd2074beb787a3c114fe967e814203a00ca9bddaa",
+        "unchanged": true,
+        "affected_sections": "Only frontmatter deps/dependency_roles and their owning manifest fields changed; Definitions and conventions and the proof are unchanged."
+      }
+    },
+    "transitive_supplier_paths": [
+      "lem-tgr-exponential-current -> thm-complex-exponential-is-entire-with-derivative-itself -> cor-complex-exponential-cartesian-form-modulus-and-eulers-identity -> cor-exponential-reciprocal-and-positivity",
+      "lem-tgr-exponential-current -> thm-complex-exponential-is-entire-with-derivative-itself -> cor-complex-exponential-cartesian-form-modulus-and-eulers-identity -> thm-complex-exponential-addition-and-real-extension -> def-complex-exponential"
+    ],
+    "metadata_integration": "Both owning metadata updates reread the current file and ran under step5-shared-write-lock with owner step5-v2-initial-r1-u74. The current manifest update asserted that all other entries remained identical; strict focused proof contracts pass.",
+    "unresolved_obligations": [],
+    "downstream_disposition": "No public interface changed, no prerequisites were authored, and the frozen statement hashes remain identical. Proof and dependency declaration repairs do not trigger consumer propagation. No published-consumer defects discovered.",
+    "support_use": "The rejection-blind Step-4 digest identified the missing direct declarations; all mathematical dispositions above were checked against current items and supplier interfaces. No source retrieval or independent acceptance from that digest is claimed."
+  },
+  "supporting_evidence": {
+    "research/physics-remaining-80-2026-10-17-batch-74-step5-context.json": "9716ae83e2ae4e5593526aa735119f86df4a70e9c3f7773b48c29b0e6fe27777"
+  }
+}

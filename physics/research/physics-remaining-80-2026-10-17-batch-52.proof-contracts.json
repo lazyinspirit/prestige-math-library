@@ -1,0 +1,549 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "52",
+  "level": 1,
+  "scope": [
+    "lem-tgr-killing-energy-normalization",
+    "cor-tgr-killing-no-work-support",
+    "ex-tgr-reference-wall-normalization"
+  ],
+  "contracts": {
+    "lem-tgr-killing-energy-normalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-inverse-metric-and-musical-isomorphisms",
+          "source_section": "Definition",
+          "quote": "**Musical isomorphisms.** Define the **flat map**\n\n$$\\flat_p:T_pM\\longrightarrow T_p^*M,\\qquad \\flat_p(v):=g_p(v,\\cdot),$$\n\nso that $\\flat_p(v)(w)=g_p(v,w)$; it is $\\mathbb R$-linear by bilinearity of\n$g_p$. Its kernel is $\\{v:g_p(v,w)=0\\text{ for all }w\\}=\\{0\\}$ because $g_p$ is\nnondegenerate, and $\\dim_{\\mathbb R}T_pM=\\dim_{\\mathbb R}T_p^*M=4$ since the\ncoordinate derivations of a chart form a basis of $T_pM$\n([[thm-coordinate-derivations-form-a-basis-of-the-tangent-space]]); hence\n$\\flat_p$ i",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-tensor-fields-and-components",
+          "source_section": "Definition",
+          "quote": "**(c) Index conventions.** Indices are written $a,b,c,\\dots$ for components in\na chart, with the Einstein summation convention: a repeated index, once upper\nand once lower, is summed over $0,1,2,3$. An upper index is a contravariant\nslot in which a covector is evaluated, a lower index a covariant slot in which\na vector is evaluated. Slots are moved between these positions with the\nmusical isomorphisms $\\flat_p,\\sharp_p$ of\n[[def-gr-inverse-metric-and-musical-isomorphisms]] to change slot varianc",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "The field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([",
+          "uses": [
+            "1.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "where the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gr-killing-and-on-shell-matter-identities",
+          "source_section": "Statement",
+          "quote": "**(a) Characterization of Killing fields.** For every smooth vector field\n$\\xi$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]), with\n$\\xi_b=g_{bc}\\xi^c$ the lowered field,\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0 .$$\n\n**(b) Contraction along geodesics.** If $\\xi$ is a Killing field and\n$\\gamma:I\\to M$ is a geodesic with $D_t\\gamma'=0$ in its affine parameter\n([[def-geodesic-of-an-affine-connection]],\n[[def-covariant-derivative",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Choose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad\n\\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad\nK=[t_0,t_1]\\times\\Omega,\\qquad\n\\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad\n\\alpha:=(-g^{00})^{-1/2},\\qquad\nn^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3\n-J^1dx^0\\wedge dx^2\\wedge dx^3\n+J^2dx^0\\wedge dx^1\\wedge dx^3\n-J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\we",
+          "uses": [
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tgr-finite-current-production-balance",
+          "source_section": "Statement",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ background of\n[[def-tgr-spacelike-current-slab]]. Let $K$, $\\Sigma_t$, the $C^1$ current\n$J$, its slice charge $Q_J(t)$ and its net outward side flux $\\Phi_J(B)$ be\nas in [[def-tgr-spacelike-current-slab]]. Use the oriented metric volume form\nof [[def-gr-metric-volume-form-and-current-flux]] clause (a). Put\n$\\Pi:=\\nabla_aJ^a$, using the $C^1$ divergence of\n[[lem-tgr-c1-current-density-divergence]]. Then the exact finite-slab balance\nis\n$$Q_J(t_1)-Q_J(t_0)+\\Phi_J(B)=\\int_K\\Pi\\,\\mathrm{vol}_g.$$\nHere the four-volume integral is the Riemann integral on the bounded Jordan\nslab $K$, whose compact closure is the supplied coordinate box. If\n$\\Pi\\ge0$ everywhere on $K$, then\n$Q_J(t_1)+\\Phi_J(B)\\ge Q_J(t_0)$. In particular, nonnegative local\nproduction implies $Q_J(t_1)\\ge Q_J(t_0)$ when the **net outward side flux**\nis zero. If $\\Pi=0$, the identity instead reads\n$Q_J(t_1)-Q_J(t_0)=-\\Phi_J(B)$, so zero production alone does not imply\nconstant slice charge.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "product-rule-killing-current",
+          "claim": "By [A1] and [F4], the induced covariant derivative obeys the tensor product rule, so differentiating $j_\\xi^a=-T^{ab}\\xi_b$ and using the given $\\nabla_aT^{ab}=0$ gives $\\nabla_a j_\\xi^a=-(\\nabla_aT^{ab})\\xi_b-T^{ab}\\nabla_a\\xi_b=-T^{ab}\\nabla_a\\xi_b$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kill-symmetric-contraction",
+          "claim": "Symmetry of $T^{ab}$ and [F3, F5] give $T^{ab}\\nabla_a\\xi_b=\\tfrac12T^{ab}(\\nabla_a\\xi_b+\\nabla_b\\xi_a)=0$; hence $\\nabla_a j_\\xi^a=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-finite-balance",
+          "claim": "The current is smooth, so it is $C^1$ as required by [L1]. In the finite-slab balance [L2], set $J=j_\\xi$; its production term vanishes by step 2.1. Using $n^a=g^{ab}n_b$ and $T_{ab}=g_{ac}g_{bd}T^{cd}$, the proper normal flux is $-g(j_\\xi,n)=-n_a(-T^{ab}\\xi_b)=n_aT^{ab}\\xi_b=T_{ab}n^a\\xi^b$, so $Q_{j_\\xi}(s)=H_\\xi(s)$. Substitution into the exact balance interface yields the stated conditional identity.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "L1",
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "side-flux-equivalence",
+          "claim": "In the balance from step 3.1, $\\Phi_{j_\\xi}(B)=0$ implies equal endpoint charges. Conversely, if the endpoint charges are equal, that same equation gives $\\Phi_{j_\\xi}(B)=0$. This is a statement about net outward flux, not pointwise vanishing on each side face.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "static-redshifted-charge",
+          "claim": "In the static clause [A2], $\\xi^a=\\mathcal N_\\xi u^a$ and $n=u$, so $T_{ab}n^a\\xi^b=\\mathcal N_\\xi T_{ab}u^au^b=\\mathcal N_\\xi\\epsilon$ pointwise; integrating with the slice volume element of [L1] gives the stated $H_\\xi=\\int_\\Omega\\mathcal N_\\xi\\epsilon\\sqrt{\\det h}\\,d^3x$.",
+          "step": "4.2",
+          "inputs": [
+            "A2",
+            "L1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "positive-generator-scaling",
+          "claim": "For dimensionless constant $a>0$, the metric-selected connection is linear, so $\\nabla_a(a\\xi)_b+\\nabla_b(a\\xi)_a=a(\\nabla_a\\xi_b+\\nabla_b\\xi_a)=0$ by [F5]; its reverse implication shows that $a\\xi$ is Killing. Direct substitution gives $j_{a\\xi}=a j_\\xi$, $\\mathcal N_{a\\xi}=a\\mathcal N_\\xi$, and $u_{a\\xi}=u_\\xi$; the slice charge, side flux, temperature definition, and each covector pairing with the generator therefore scale by $a$.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "A2",
+            "step 4.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "si-covector-units",
+          "claim": "In the length-flow convention of [A3], $T_{ab}\\sqrt{\\det h}\\,d^3x$ has units $\\mathrm{J}$. For mechanical $p_a$, $p_a\\xi^a$ has units $\\mathrm{kg\\,m\\,s^{-1}}$, and multiplication by $c$ gives $\\mathrm{kg\\,m^2\\,s^{-2}}=\\mathrm J$. For $k_a$ in $\\mathrm{m^{-1}}$, $\\hbar c k_a\\xi^a$ has units $\\mathrm J$. For an energy-valued covector $\\pi_a$ already in joules, no $c$ is needed, and $p_a:=\\pi_a/c$ has units $\\mathrm{kg\\,m\\,s^{-1}}$. These are distinct covector types.",
+          "step": "6.1",
+          "inputs": [
+            "A3",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-horizon-parameter-scaling",
+          "claim": "Under [A1] and [A4], $\\nabla_{a\\xi}(a\\xi)=a^2\\nabla_\\xi\\xi=a^2\\kappa_\\xi\\xi=(a\\kappa_\\xi)(a\\xi)$ on $\\mathcal H$. Since $\\xi$ is nonzero there, the scalar in the defining equation is $\\kappa_{a\\xi}=a\\kappa_\\xi$. The supplied units give $c^2\\kappa_\\xi$ the acceleration units $\\mathrm{m\\,s^{-2}}$. This uses the defining equation only and asserts no existence or constancy result.",
+          "step": "7.1",
+          "inputs": [
+            "A1",
+            "A4",
+            "F4",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement requires t0<t1 and ai<bi, so K and each slice have nonempty rectangular factors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If T=0 or xi=0, then j=0, H=0 and Phi=0 by the current and flux definitions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At scale a=1, step 5.1 reduces each rescaling identity to the identity map."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes degenerate slices by positive-definite h and g00<0; the horizon clause separately requires xi nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1\u20134.1 retain both closed time endpoints and the exact finite balance."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC_omega for the tangent/tensor and Levi-Civita suppliers; it is explicitly used in steps 1.1 and 7.1, with the finite balance carrying the same background."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves zero net outward side flux implies equal endpoint charges."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 substitutes equal endpoint charges into the balance and obtains zero net outward side flux."
+        }
+      ],
+      "finite_smoke": [],
+      "notes": "The exact MI01 suppliers were inspected before this consumer in the owner TGR readiness round1 report. The finite balance uses an open spatial rectangle, compact closure, C1 current and outward side flux. No independent publication approval is recorded; finite_smoke remains empty for arbitrary-field identities. Step-3a Alpha: corrected the Given tuple from (M,g,V,U) to (M,g,N,U), matching the unchanged Statement and F1; repair_confidence 1.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Independently read all eight current proof steps and all nine direct supplier Statements/Definitions, reader52 and refuter52. Product differentiation uses the supplied AC_omega Levi-Civita connection, symmetric T kills the antisymmetric Killing derivative, and the smooth current satisfies the C1 compact-closure slab interface. The normal contraction has the correct minus sign. The exact draft balance gives both directions of endpoint equality iff net outward flux is zero. Static n=u gives Nxi epsilon; a>0 preserves time orientation and gives sqrt(a^2 Nxi^2)=a Nxi, while a=1, T=0 and unrestricted xi=0 are valid (static/horizon nonzero conditions exclude the latter there). Dimensional pairings include c for mechanical momentum and hbar c for wave covectors; no c for an energy-valued covector. Horizon scaling follows from constant bilinearity and its assumed equation, with no existence/constancy assertion. Rectangular factors and positive lapse exclude empty/degenerate integration data. Reall sections 5.3 and 8.7, Tong 4.5.5 and Carroll equations 5.41-5.43 checked at author-hosted/arXiv sources. Confirmed refuter notation defect repaired only in Given: V to N; Statement, definitions, dependencies and empirical scope unchanged."
+      }
+    },
+    "cor-tgr-killing-no-work-support": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-killing-energy-normalization",
+          "source_section": "Statement",
+          "quote": "Define the Killing current by\n$$j_\\xi^a:=-T^{ab}\\xi_b .$$\nOn an open neighborhood of $\\overline K$, write $h_{ij}:=g_{ij}$, assume $h$ is positive definite and $g^{00}<0$, and choose the time orientation so that $n^a=-\\alpha g^{a0}$ is future-directed, where $\\alpha:=(-g^{00})^{-1/2}$; the future unit normal is $n_a=-\\alpha\\delta_a^0$. Put $w:=\\sqrt{|\\det(g_{ab})|}$, and let $dV_h:=\\sqrt{\\det h}\\,d^3x$ be the induced positive spatial volume element. For $x^0=s\\in[x_0^-,x_0^+]$, define the finite slice charge\n$$H_\\xi(s):=\\int_\\Omega [-g(j_\\xi,n)]\\,dV_h=\\int_\\Omega T_{ab}n^a\\xi^b\\,dV_h .$$\nLet $B$ be the union of the six side faces of $K$, and let $\\Phi_J(B)$ be the net outward side flux defined in [[def-tgr-spacelike-current-slab]]; explicitly it is the sum of the three upper-minus-lower face integrals of $wJ^i$ over the remaining coordinate variables. Conditional on the exact finite-slab balance stated in [[thm-tgr-finite-current-production-balance]],\n$$H_\\xi(x_0^+)-H_\\xi(x_0^-)+\\Phi_{j_\\xi}(B)=0 .$$\nThus the endpoint charges are equal exactly when the net outward side flux is zero; divergence-free current alone does not imply that equality. The balance uses precisely the open spatial rectangle and compact-closure convention of that theorem.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "The field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "where the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-killing-and-on-shell-matter-identities",
+          "source_section": "Statement",
+          "quote": "**(a) Characterization of Killing fields.** For every smooth vector field\n$\\xi$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]), with\n$\\xi_b=g_{bc}\\xi^c$ the lowered field,\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0 .$$\n\n**(b) Contraction along geodesics.** If $\\xi$ is a Killing field and\n$\\gamma:I\\to M$ is a geodesic with $D_t\\gamma'=0$ in its affine parameter\n([[def-geodesic-of-an-affine-connection]],\n[[def-covariant-derivative",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Choose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad\n\\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad\nK=[t_0,t_1]\\times\\Omega,\\qquad\n\\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad\n\\alpha:=(-g^{00})^{-1/2},\\qquad\nn^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3\n-J^1dx^0\\wedge dx^2\\wedge dx^3\n+J^2dx^0\\wedge dx^1\\wedge dx^3\n-J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\we",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tgr-finite-current-production-balance",
+          "source_section": "Statement",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ background of\n[[def-tgr-spacelike-current-slab]]. Let $K$, $\\Sigma_t$, the $C^1$ current\n$J$, its slice charge $Q_J(t)$ and its net outward side flux $\\Phi_J(B)$ be\nas in [[def-tgr-spacelike-current-slab]]. Use the oriented metric volume form\nof [[def-gr-metric-volume-form-and-current-flux]] clause (a). Put\n$\\Pi:=\\nabla_aJ^a$, using the $C^1$ divergence of\n[[lem-tgr-c1-current-density-divergence]]. Then the exact finite-slab balance\nis\n$$Q_J(t_1)-Q_J(t_0)+\\Phi_J(B)=\\int_K\\Pi\\,\\mathrm{vol}_g.$$\nHere the four-volume integral is the Riemann integral on the bounded Jordan\nslab $K$, whose compact closure is the supplied coordinate box. If\n$\\Pi\\ge0$ everywhere on $K$, then\n$Q_J(t_1)+\\Phi_J(B)\\ge Q_J(t_0)$. In particular, nonnegative local\nproduction implies $Q_J(t_1)\\ge Q_J(t_0)$ when the **net outward side flux**\nis zero. If $\\Pi=0$, the identity instead reads\n$Q_J(t_1)-Q_J(t_0)=-\\Phi_J(B)$, so zero production alone does not imply\nconstant slice charge.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "source-divergence-expansion",
+          "claim": "By [A1] and [F3], the induced tensor product rule and the supplied source equation give $\\nabla_a j_\\xi^a=-(\\nabla_aT^{ab})\\xi_b-T^{ab}\\nabla_a\\xi_b=-f^b\\xi_b-T^{ab}\\nabla_a\\xi_b$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "zero-work-killing-contraction",
+          "claim": "Symmetry of $T^{ab}$, the Killing definition [F2], and its exact characterization [F4] give $T^{ab}\\nabla_a\\xi_b=\\tfrac12T^{ab}(\\nabla_a\\xi_b+\\nabla_b\\xi_a)=0$. The assumed zero Killing contraction therefore gives $\\nabla_a j_\\xi^a=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "conditional-source-balance",
+          "claim": "The smooth current is $C^1$, so the balance [L2] applies at its stated interface. Substituting step 2.1 into its production integral gives zero, while [F1] identifies the normal current flux with $H_\\xi$; hence the conditional endpoint-plus-side-flux identity follows.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "side-flux-and-static-work",
+          "claim": "In the balance from step 3.1, zero net side flux implies equal endpoint charges, and equal endpoint charges imply zero net side flux. In the static case, $f^b\\xi_b=\\mathcal N_\\xi f^bu_b=0$ whenever $u_bf^b=0$; thus zero local work suffices for current conservation.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "L2",
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement inherits t0<t1 and ai<bi from the specified nonempty compact product box."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If f=0 the sourced equation specializes to conserved stress; if f\u00b7xi=0 step 2.1 yields zero divergence."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No scale parameter occurs in the corollary statement; generator normalization is handled by the preceding lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement inherits positive-definite h and g00<0 from the slab setup; the static clause in the Statement requires Nxi>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the finite balance at both closed time endpoints; step 4.1 proves the endpoint equality criterion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the exact AC_omega connection hypothesis and step 1.1 cites it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves zero net side flux implies equal endpoint charges."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves equal endpoint charges imply zero net side flux from the conditional balance."
+        }
+      ],
+      "finite_smoke": [],
+      "notes": "The title names the proved local conclusion precisely: zero Killing contraction makes the sourced current divergence-free. The endpoint balance remains conditional on the stated finite-slab theorem, with equality requiring zero net side flux.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Independently read all four steps, eight direct supplier Statements/Definitions and the batch52 reader/refuter evidence. The corollary explicitly replaces div T=0 with the sourced equation div T=f; it uses only the lemma geometry and current/charge definitions, never its conserved-stress conclusion. The AC_omega tensor product rule gives div j=-f\u00b7xi-T^{ab} nabla_a xi_b; symmetry and Killing characterization remove the latter, and the assumed contraction removes the former. Smoothness gives C1 on the compact-closure rectangle and the exact current-production theorem gives the conditional balance with correct sign. Both iff directions follow from that balance; net side flux is essential. For xi=Nxi u with positive Nxi, lowering is linear, giving f\u00b7xi=Nxi(f\u00b7u); f=0, xi=0 in the nonstatic case, zero stress and both endpoints are consistent. Nonempty slab and nondegenerate slice assumptions are inherited; no infinite limit or empirical support is asserted. The revised title states only this proved local divergence result. No further carrier repair needed; retain reader title correction."
+      }
+    },
+    "ex-tgr-reference-wall-normalization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-killing-energy-normalization",
+          "source_section": "Statement",
+          "quote": "For every constant $a>0$, replacing $\\xi$ by $\\widetilde{\\xi}=a\\xi$ preserves the Killing equation and gives $\\widetilde j=a j$ and $\\widetilde H=aH$. In the static subcase it also gives $\\widetilde{\\mathcal N}_\\xi=a\\mathcal N_\\xi$ and the same normalized field $u=\\xi/\\mathcal N_\\xi$. In the SI convention below, $a$ is dimensionless. If a function $\\vartheta:U\\to(0,\\infty)$ is supplied and interpreted as the local temperature assigned to the observer field $u$, with SI unit kelvins, define $\\mathcal T_\\xi(q):=\\mathcal N_\\xi(q)\\vartheta(q)$ for $q\\in U$. No regularity of $\\vartheta$ is needed for this pointwise definition. Then $\\mathcal T_{a\\xi}=a\\mathcal T_\\xi$; no equilibrium or constancy of $\\mathcal T_\\xi$ is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Choose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad\n\\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad\nK=[t_0,t_1]\\times\\Omega,\\qquad\n\\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad\n\\alpha:=(-g^{00})^{-1/2},\\qquad\nn^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3\n-J^1dx^0\\wedge dx^2\\wedge dx^3\n+J^2dx^0\\wedge dx^1\\wedge dx^3\n-J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\we",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-killing-energy-normalization",
+          "source_section": "Statement",
+          "quote": "the metric components are dimensionless, and $\\xi$ is normalized so that its flow parameter has units of length, hence its components are dimensionless",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "reference-lapse-normalization",
+          "claim": "Since $\\widehat\\xi=a\\xi$ with $a=1/\\mathcal N_{\\rm ref}>0$, its norm satisfies $\\widehat{\\mathcal N}_\\xi(x)=\\mathcal N_\\xi(x)/\\mathcal N_{\\rm ref}$, and $\\widehat{\\mathcal N}_\\xi(q_{\\rm ref})=1$. The normalized field $u=\\xi/\\mathcal N_\\xi$ is unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "preserved-proper-ratios",
+          "claim": "The temperature definition gives $\\mathcal T_{\\widehat\\xi}(x)=\\mathcal T_\\xi(x)/\\mathcal N_{\\rm ref}$; the mechanical pairing gives $E_{\\widehat\\xi}(p;x)=E_\\xi(p;x)/\\mathcal N_{\\rm ref}$; and [F1] gives the same scaling for the finite Killing charge. Dividing by $\\widehat{\\mathcal N}_\\xi=\\mathcal N_\\xi/\\mathcal N_{\\rm ref}$ proves both displayed ratio identities and the charge statement.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "L1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "no-equilibrium-inference",
+          "claim": "The right sides of the ratio identities are the supplied $\\vartheta(x)$ and the contraction $-c\\,p_a u^a$. Neither definition imposes spatial constancy, so the normalization calculation proves neither thermal equilibrium nor equality between distinct wall choices.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example supplies a reference event q_ref in W, so the selected reference set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The energy pairing is linear in p; if p=0, both particle-energy ratios vanish by step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If N_ref=1, then a=1 and step 1.1 leaves the generator unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The static lapse and reference lapse are positive by the Example assumptions, and the inherited slab has positive-definite h."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example asserts no relation between charges at different time endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement A1 states the exact AC_omega assumption inherited from the lemma; step 2.1 cites it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no biconditional claim."
+        }
+      ],
+      "finite_smoke": [],
+      "notes": "The lapse, temperature, particle-energy and charge ratios are algebraic. The finite charge uses the exact open spatial rectangle with compact closure; finite_smoke remains empty.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-52",
+        "notes": "Read all three Verification steps, all three direct suppliers, all five citation records and reader/refuter reports. The static field is future timelike throughout U, so Nxi(q)>0 and Nref>0 at the supplied wall event. Its reciprocal is a dimensionless positive constant; thus the lemma applies on the unchanged chart/slab. The lapse becomes Nxi/Nref with reference value one, while u is unchanged. Temperature, mechanical-energy pairing and finite charge each scale by 1/Nref; division by the positive lapse cancels that common factor at every point. No derivatives or integrals of the temperature or momentum are used, so no extra regularity is needed. The wall is supplied and nonempty by its selected event; no wall existence theorem is inferred. Unit assignments and p=g(P,.) causal interpretation are explicit. Zero covector works for the algebraic reading, scale one is identity, and no equilibrium, spatial temperature constancy, infinite limit or empirical data are inferred. The finite charge uses the supplied smooth tensor and finite open rectangle with compact closure. Retain reader domain/unit clarifications without further carrier edits."
+      }
+    }
+  }
+}

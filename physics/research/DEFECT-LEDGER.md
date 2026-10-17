@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ b51a4fff8d74 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ 1bab00927a43 by `tools/physics-support/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 3117 |
+| defects caught before publication | 3546 |
 | now mechanically prevented | 0 |
 | escaped to publication | 0 |
-| still open | 84 |
+| still open | 95 |
 
 ## physics-cm-qm-gr-79-2026-10-11 — 1605 row(s)
 
@@ -131,6 +131,35 @@
 | page-all-mode-comparison | 1 |  |  |
 | missing-explicit-prerequisite | 1 |  |  |
 | missing-map | 1 |  |  |
+
+## physics-remaining-80-2026-10-17 — 429 row(s)
+
+| subclass | 3a-adjudicate | 5-adjudicate |
+|---|---|---|
+| undefined-notation | 73 | 3 |
+| missing-hypothesis | 48 | 14 |
+| citation-inaccurate | 53 | 1 |
+| frontmatter-schema | 42 | 6 |
+| ill-typed-construction | 21 | 4 |
+| ill-formed | 24 |  |
+| reader-repair | 22 |  |
+| citation-missing | 17 | 2 |
+| unlicensed-inference | 18 |  |
+| invalid-inference | 9 | 5 |
+| false-or-overstrong-statement | 10 | 3 |
+| citation-inflated | 6 | 5 |
+| ill-typed-claim | 5 | 3 |
+| false-claim | 6 |  |
+| false-or-overstrong-title | 5 |  |
+| missing-choice-scope | 4 |  |
+| citation-truncated | 1 | 3 |
+| contract-mismatch |  | 4 |
+| unsupported-inference | 3 |  |
+| missing-case | 2 | 1 |
+| overstrong-title-or-statement | 2 |  |
+| prompt-transcription |  | 2 |
+| arithmetic-error | 1 |  |
+| citation-corrupted | 1 |  |
 
 ## physics-td-qft-rpm-62-2026-10-14 — 578 row(s)
 
@@ -254,3 +283,14 @@
 - `physics-td-qft-rpm-62-2026-10-14-owner-step5-thermometer-product-operational-records` physics-td-qft-rpm-62-2026-10-14 · missing-hypothesis · cex-td-degenerate-thermometer-comparison
 - `physics-td-qft-rpm-62-2026-10-14-owner-step5-profile-distinct-convention-and-supplier-use` physics-td-qft-rpm-62-2026-10-14 · ill-typed-construction · ex-td-local-equilibrium-profile
 - `physics-td-qft-rpm-62-2026-10-14-owner-step5-phase-rule-entropy-neutral-auxiliary-scope` physics-td-qft-rpm-62-2026-10-14 · scope-drop · pthm-td-regular-gibbs-phase-rule
+- `physics-remaining-80-2026-10-17-3a-batch-26-gibbs-self-admissibility-alert` physics-remaining-80-2026-10-17 · missing-hypothesis · thm-csm-relative-gibbs-variational-principle
+- `physics-remaining-80-2026-10-17-3a-batch-38-upstream-1` physics-remaining-80-2026-10-17 · undefined-notation · lem-qsm-matrix-state-calculus
+- `physics-remaining-80-2026-10-17-3a-batch-38-upstream-2` physics-remaining-80-2026-10-17 · undefined-notation · lem-qsm-matrix-state-calculus
+- `physics-remaining-80-2026-10-17-3a-batch-38-upstream-3` physics-remaining-80-2026-10-17 · undefined-notation · lem-qsm-matrix-state-calculus
+- `physics-remaining-80-2026-10-17-batch-41-producer36-supremum` physics-remaining-80-2026-10-17 · unlicensed-inference · lem-qsm-matrix-state-calculus
+- `physics-remaining-80-2026-10-17-owner-initial-weak-slow-containment` physics-remaining-80-2026-10-17 · missing-hypothesis · pthm-emg-weak-slow-test-motion
+- `physics-remaining-80-2026-10-17-owner-initial-gaussian-temperature-parameter` physics-remaining-80-2026-10-17 · undefined-notation · lem-csm-gaussian-mark-moments
+- `physics-remaining-80-2026-10-17-owner-initial-nonnormal-page-q-one` physics-remaining-80-2026-10-17 · false-or-overstrong-statement · qsm-nonnormal-thermal-states
+- `physics-remaining-80-2026-10-17-owner-initial-normal-transport-speed` physics-remaining-80-2026-10-17 · invalid-inference · thm-emg-local-charged-barotropic-development
+- `physics-remaining-80-2026-10-17-owner-initial-u6-review-hash-transcription` physics-remaining-80-2026-10-17 · prompt-transcription · def-emg-periodic-high-sobolev-state
+- `physics-remaining-80-2026-10-17-owner-foreign-original-yaml-scope-open` physics-remaining-80-2026-10-17 · contract-mismatch · physics-content-original-supplier-loading

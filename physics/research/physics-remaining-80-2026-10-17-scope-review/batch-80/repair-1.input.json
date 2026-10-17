@@ -1,0 +1,137 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-80-1",
+  "inventory": {
+    "pages": [
+      "tgr-phs04",
+      "tgr-phs04-examples"
+    ],
+    "items": [
+      "def-tgr-emitter-quasistatic-diagnostic",
+      "lem-tgr-emitter-quasistatic-bounds",
+      "post-tgr-photon-emitter-and-quasistatic-balance",
+      "pthm-tgr-ideal-photon-emission",
+      "texp-tgr-half-mass-emitter"
+    ],
+    "pairs": [
+      "tgr-phs04"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-tgr-emitter-quasistatic-diagnostic.md",
+    "items/lem-tgr-emitter-quasistatic-bounds.md",
+    "items/post-tgr-photon-emitter-and-quasistatic-balance.md",
+    "items/pthm-tgr-ideal-photon-emission.md",
+    "items/texp-tgr-half-mass-emitter.md",
+    "library/thermodynamics-and-general-relativity/tgr-phs04.md",
+    "library/thermodynamics-and-general-relativity/tgr-phs04-examples.md"
+  ],
+  "write_batches": [
+    "80"
+  ],
+  "consumer_scope": [
+    {
+      "id": "lem-tgr-emitter-quasistatic-bounds",
+      "path": [
+        "def-tgr-emitter-quasistatic-diagnostic",
+        "lem-tgr-emitter-quasistatic-bounds"
+      ],
+      "paths": [
+        [
+          "def-tgr-emitter-quasistatic-diagnostic",
+          "lem-tgr-emitter-quasistatic-bounds"
+        ]
+      ]
+    },
+    {
+      "id": "pthm-tgr-ideal-photon-emission",
+      "path": [
+        "def-tgr-emitter-quasistatic-diagnostic",
+        "pthm-tgr-ideal-photon-emission"
+      ],
+      "paths": [
+        [
+          "def-tgr-emitter-quasistatic-diagnostic",
+          "pthm-tgr-ideal-photon-emission"
+        ],
+        [
+          "lem-tgr-emitter-quasistatic-bounds",
+          "pthm-tgr-ideal-photon-emission"
+        ],
+        [
+          "post-tgr-photon-emitter-and-quasistatic-balance",
+          "pthm-tgr-ideal-photon-emission"
+        ]
+      ]
+    },
+    {
+      "id": "texp-tgr-half-mass-emitter",
+      "path": [
+        "def-tgr-emitter-quasistatic-diagnostic",
+        "pthm-tgr-ideal-photon-emission",
+        "texp-tgr-half-mass-emitter"
+      ],
+      "paths": [
+        [
+          "def-tgr-emitter-quasistatic-diagnostic",
+          "pthm-tgr-ideal-photon-emission",
+          "texp-tgr-half-mass-emitter"
+        ],
+        [
+          "lem-tgr-emitter-quasistatic-bounds",
+          "pthm-tgr-ideal-photon-emission",
+          "texp-tgr-half-mass-emitter"
+        ],
+        [
+          "post-tgr-photon-emitter-and-quasistatic-balance",
+          "pthm-tgr-ideal-photon-emission",
+          "texp-tgr-half-mass-emitter"
+        ],
+        [
+          "pthm-tgr-ideal-photon-emission",
+          "texp-tgr-half-mass-emitter"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-tgr-emitter-quasistatic-diagnostic": [
+      null,
+      "## Definition\n\nAssume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]] and use the fixed-reference mathematical emitter model of [[prop-tgr-ideal-evaporation-accounting]], with positive constants $G,c$, a positive mass function $M(t_\\infty)$, and the model horizon radius $r_H(M)=2GM/c^2$. Here $t_\\infty$ is measured in seconds, $M$ in kilograms, $r_H$ in metres, $G$ in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $c$ in $\\mathrm{m\\,s^{-1}}$. At each $t_\\infty$ before the positive-mass cutoff, define the selected crossing-time scale and dimensionless fractional-change diagnostic by\n\n$$ t_{\\mathrm{cross}}(t_\\infty):=\\frac{r_H(M(t_\\infty))}{c}, \\qquad \\epsilon_{\\mathrm{qs}}(t_\\infty):=\\frac{|M'(t_\\infty)|\\,t_{\\mathrm{cross}}(t_\\infty)}{M(t_\\infty)}. $$\n\nThus $t_{\\mathrm{cross}}$ has units of seconds and $\\epsilon_{\\mathrm{qs}}$ is dimensionless. This is a diagnostic defined from the adopted mass ODE and the chosen length scale $r_H/c$; it is not a measured crossing time, an estimate of error against a time-dependent Einstein solution, or a proof that the ideal model approximates such a solution."
+    ],
+    "lem-tgr-emitter-quasistatic-bounds": [
+      null,
+      "## Statement\n\nAssume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]]. Let $G,c,\\hbar,\\eta,M_0,M_{\\min}>0$ be the relevant constants and initial/cutoff data of [[prop-tgr-ideal-evaporation-accounting]], with $0<\\eta\\leq1$ and $0<M_{\\min}<M_0$. Let\n$$\nM(t_\\infty)=(M_0^3-3\\alpha t_\\infty)^{1/3}, \\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G^2}, \\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}\n$$\nbe the positive solution and cutoff supplied by that proposition.\nUse the diagnostic of [[def-tgr-emitter-quasistatic-diagnostic]]. Then\n$$\n\\epsilon_{\\mathrm{qs}}(t_\\infty)=\\frac{2G\\alpha}{c^3M(t_\\infty)^2} \\leq\\frac{2G\\alpha}{c^3M_{\\min}^2}.\n$$\nFor any $\\epsilon_0>0$, the condition $M_{\\min}^2\\geq2G\\alpha/(c^3\\epsilon_0)$ therefore implies $\\epsilon_{\\mathrm{qs}}(t_\\infty)\\leq\\epsilon_0$ throughout $[0,\\tau]$.\n\nThere is also an exact finite-interval bound. If $0\\leq t_\\infty\\leq t_\\infty+\\Delta t\\leq\\tau$ and\n$$\n\\delta:=\\frac{3\\alpha\\Delta t}{M(t_\\infty)^3}\\leq\\frac12,\n$$\nthen\n$$\n\\frac{M(t_\\infty+\\Delta t)}{M(t_\\infty)}=(1-\\delta)^{1/3}, \\qquad \\left|\\frac{M(t_\\infty+\\Delta t)}{M(t_\\infty)}-1\\right| \\leq\\frac{2^{2/3}}{3}\\,\\delta.\n$$\nBoth bounds are exact internal consequences of the adopted ODE. They give no error bound between that ODE and an unconstructed Einstein–quantum backreaction solution."
+    ],
+    "post-tgr-photon-emitter-and-quasistatic-balance": [
+      {
+        "kind": "postulate",
+        "domain": "physics",
+        "physical_scope": "An adopted zero-mode-excluded ideal photon reservoir and isotropic ray model attached to the positive-mass Schwarzschild stationary family with one fixed asymptotic time and energy normalization. The emitter area is the phenomenological far-field value eta A_H, incoming flux is zero, and the model stops at a strictly positive mass cutoff. The statement is not a time-dependent Einstein solution, a Hawking collapse derivation, a material null-horizon emitter, a measured flux, or a generalized second law.\n",
+        "empirical_premises": []
+      },
+      "## Postulate\n\nUse SI constants $G_N>0$ in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $c>0$ in $\\mathrm{m\\,s^{-1}}$, $\\hbar>0$ in $\\mathrm{J\\,s}$, and $k_B>0$ in $\\mathrm{J\\,K^{-1}}$. In [[prop-tgr-ideal-evaporation-accounting]], the mathematical constant $G$ is identified with this same $G_N$.\n\nFor each fixed mass $M>0$ in kilograms, take the zero-angular-momentum, zero-charge member of the selected Kerr–Newman stationary family [[pthm-tgr-kn-family-mechanics]], with geometric mass length $m=G_NM/c^2$ in metres. In the Schwarzschild exterior use coordinates $(x^0,r,\\vartheta,\\varphi)$, $x^0=ct_\\infty$ in metres, $r>2m$, and metric\n$$\nds^2=-\\left(1-\\frac{2m}{r}\\right)(dx^0)^2+ \\left(1-\\frac{2m}{r}\\right)^{-1}dr^2+r^2d\\Omega_2^2,\n$$\nwhere $d\\Omega_2^2$ is the unit-sphere metric. The asymptotic generator is $\\xi=\\partial_{x^0}$, with $g(\\xi,\\xi)\\to-1$ at infinity. The selected stationary-family radius, area, and geometric surface gravity are\n$$\nr_H(M)=2m=\\frac{2G_NM}{c^2},\\qquad A_H(M)=4\\pi r_H(M)^2,\\qquad \\kappa_{\\rm geom}(M)=\\frac{1}{4m}=\\frac{c^2}{4G_NM}.\n$$\nThus $r_H$ is in metres, $A_H$ in $\\mathrm{m^2}$, and $\\kappa_{\\rm geom}$ in $\\mathrm{m^{-1}}$, using the length-normalized generator convention of [[def-tgr-framework-units]].\n\nAdopt the selected reduced-model reference temperature from [[post-tgr-thermodynamic-horizon-identification]] on this Schwarzschild subfamily:\n$$\nT_\\infty(M):=T_K=T_{\\rm red} =\\frac{\\hbar c\\kappa_{\\rm geom}(M)}{2\\pi k_B} =\\frac{\\hbar c^3}{8\\pi G_NMk_B}>0.\n$$\nThis is an adopted model identification for one fixed asymptotic reference. It is not a local proper-temperature field and does not assert a general Hawking state. The reversible entropy state $S_H$ is the value of the stationary-family state function on each Schwarzschild member; evaluating that family function along a changing parameter $M(t_\\infty)$ is bookkeeping in this model, not a claim that the changing family is an exact spacetime solution.\n\nAdopt the zero-mode-excluded, zero-point-subtracted, two-polarization photon Gibbs model and isotropic freely streaming ray convention of [[thm-tgr-photon-planck-flux]], under $\\mathrm{AC}_\\omega$ from [[def-countable-choice]]. Its energy density $u$, coarse diagonal-mode entropy density $s$, and one-sided fluxes are those of that theorem. This identification is an ideal reservoir assumption; no photon-wall equilibration theorem or physical preparation is asserted.\n\nFix $0<\\eta\\leq1$, a constant dimensionless active-area fraction, an initial mass $M_0>0$, and a positive cutoff $0<M_{\\min}<M_0$. Let $M(t_\\infty)>0$ be $C^1$ on an interval containing its first cutoff time $\\tau$, with $M(0)=M_0$, and let $t_\\infty$ be measured in seconds by the fixed asymptotic time parameter. Define $E_\\infty(t_\\infty)=M(t_\\infty)c^2$ in joules and the effective far-field emitting area\n$$\nA_{\\rm eff}(M):=\\eta A_H(M).\n$$\nAdopt zero incoming flux, the power law $P_\\infty=A_{\\rm eff}\\sigma T_\\infty^4$ in watts, the balance equation\n$$\n\\frac{dE_\\infty}{dt_\\infty}=c^2M'(t_\\infty)=-P_\\infty(t_\\infty),\n$$\nand the coarse exported entropy rate $S_{\\rm rad}'=(4/3)P_\\infty/T_\\infty$, with $S_{\\rm rad}(0)=0$. Here $S_{\\rm rad}$ is the entropy carried by the ideal Gibbs/ray model, not an outside von Neumann entropy. The effective area is not a material patch of the null horizon and $\\eta$ is not a frequency-independent greybody factor applied separately to entropy.\n\nThe model holds only for the fixed normalization $\\xi$. Under $\\xi\\mapsto b\\xi$, $b>0$, the model conventions scale $E_\\xi\\mapsto bE_\\xi$, $t_\\xi\\mapsto t_\\xi/b$, $\\kappa_{\\rm geom}\\mapsto b\\kappa_{\\rm geom}$, and leave $A_H$ unchanged. The Stefan closure above is therefore not stipulated as a reference-independent luminosity law. No experiment, coupled backreaction solution, physical extinction event, or universal generalized second law is adopted."
+    ],
+    "pthm-tgr-ideal-photon-emission": [
+      {
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "physical_scope": "Conditional exact conclusion in the zero-mode-excluded Planck/Gibbs ray model and fixed-asymptotic-reference positive-cutoff Schwarzschild effective-area ODE. The area entropy input is restricted to the stationary family interface, and the explicit AC_omega assumption is carried. The quasistatic ratio is an internal diagnostic, not an error bound against a dynamic Einstein solution. No actual Hawking flux, coupled backreaction, empirical observation, reference-independent Stefan law, or universal generalized second law is asserted.\n",
+        "empirical_premises": []
+      },
+      "## Statement\n\nAssume the ideal model and fixed asymptotic normalization of [[post-tgr-photon-emitter-and-quasistatic-balance]], and explicitly assume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]]. Use $G=G_N$ between the mathematical ODE input and the physical Schwarzschild family. Also assume the conditional family-entropy interface stated by [[pthm-tgr-area-entropy-calibration]] with its actual hypotheses. Let $S_H(M)$ denote that state-function value at the stationary Schwarzschild member of mass $M$, and put\n$$\n\\Delta S_H:=S_H(M_0)-S_H(M_{\\min}).\n$$\nFor the fixed-reference effective-area model,\n$$\nP_\\infty(M)=\\frac{\\eta\\hbar c^6}{15360\\pi G_N^2M^2}, \\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G_N^2}, \\qquad M(t_\\infty)=(M_0^3-3\\alpha t_\\infty)^{1/3}, \\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}.\n$$\nThe model exports energy $c^2(M_0-M_{\\min})$ joules, and its coarse photon entropy satisfies\n$$\nS_H(M)=\\frac{4\\pi k_BG_NM^2}{\\hbar c}+s_*, \\qquad s_*\\in\\mathbb R\\ \\text{constant on the stationary family},\n$$\n$$\nS_{\\rm rad}(\\tau)=\\frac43\\Delta S_H>0, \\qquad \\Delta(S_H+S_{\\rm rad})=\\frac13\\Delta S_H>0.\n$$\nThe absolute entropy offsets in the mathematical ODE model and the stationary-family state function need not be identified; their differences agree because both have the same area coefficient on this branch.\n\nFor the diagnostic of [[def-tgr-emitter-quasistatic-diagnostic]],\n$$\n\\epsilon_{\\rm qs}(t_\\infty)=\\frac{2G_N\\alpha}{c^3M(t_\\infty)^2}, \\qquad \\sup_{0\\leq t_\\infty\\leq\\tau}\\epsilon_{\\rm qs} =\\frac{2G_N\\alpha}{c^3M_{\\min}^2}.\n$$\nThus $M_{\\min}^2\\geq2G_N\\alpha/(c^3\\epsilon_0)$ implies $\\epsilon_{\\rm qs}\\leq\\epsilon_0$ for any $\\epsilon_0>0$. The finite-interval bound in [[lem-tgr-emitter-quasistatic-bounds]] also applies whenever its stated $\\delta\\leq1/2$ condition holds.\n\nThe Stefan closure is tied to the fixed reference: under $\\xi\\mapsto b\\xi$, power scales as $b^2$, while $T_\\xi^4$ scales as $b^4$ and area is unchanged. This is an exact conditional model calculation, not a Hawking-radiation theorem, a time-dependent Einstein solution, a backreaction error estimate, an observed evaporation history, or a universal generalized second law."
+    ],
+    "texp-tgr-half-mass-emitter": [
+      {
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "physical_scope": "Conditional fixed-asymptotic-reference ideal emitter calculation with eta=1 and a positive half-mass cutoff. The effective area is not a material null-horizon surface, the exported entropy is coarse Gibbs/ray entropy, and the example is not an observation or a duration prediction for an actual evaporating black hole.\n",
+        "empirical_premises": []
+      },
+      "## Statement\n\nAssume $\\mathrm{AC}_\\omega$ and the conditional model conclusion of [[pthm-tgr-ideal-photon-emission]]. Choose $\\eta=1$ and $M_{\\min}=M_0/2$ for $M_0>0$, with $G_N,c,\\hbar,k_B$ as in that theorem. Define the model's algebraic zero-mass time scale\n$$\nt_*:=\\frac{M_0^3}{3\\alpha} =\\frac{5120\\pi G_N^2M_0^3}{\\hbar c^4}.\n$$\nThe stipulated model stops earlier, at\n$$\n\\tau=\\frac78t_*=\\frac{4480\\pi G_N^2M_0^3}{\\hbar c^4},\n$$\nwhen its mass parameter first reaches $M_0/2>0$. It exports energy $c^2M_0/2$ joules. Its stationary-family entropy drop, coarse photon entropy export, and total coarse entropy gain are respectively\n$$\n\\Delta S_H=\\frac{3\\pi k_BG_NM_0^2}{\\hbar c},\\qquad S_{\\rm rad}(\\tau)=\\frac{4\\pi k_BG_NM_0^2}{\\hbar c},\\qquad \\Delta(S_H+S_{\\rm rad})=\\frac{\\pi k_BG_NM_0^2}{\\hbar c}.\n$$\nFor any $\\epsilon_0>0$, if $M_0^2\\geq\\hbar c/(1920\\pi G_N\\epsilon_0)$, then the model's maximum diagnostic satisfies $\\epsilon_{\\rm qs}\\leq\\epsilon_0$ before the cutoff. This is an exact ideal-model calculation, not a measured evaporation time or an error estimate for a gravitational backreaction solution."
+    ]
+  }
+}

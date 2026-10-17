@@ -1,0 +1,11 @@
+import {readFileSync as read,readdirSync as ls,writeFileSync as write} from 'node:fs';
+import {parseFrontmatter} from '../../tools/physics-support/content-policy-lib.mjs';
+import {splitFrontmatter} from '../../tools/physics-support/facts-block.mjs';
+const root=new URL('../../',import.meta.url),base=new URL('./',import.meta.url),oldroot=new URL('research/physics-remaining-80-2026-10-17-owner-step2-source-preimages-60/items/',root);
+const seeds=['lem-tgr-constant-linear-energy-causality','lem-tgr-perfect-linear-causality','lem-tgr-bulk-relaxation-entropy','lem-tgr-bulk-linear-causality','ex-tgrmath-bulk-speed-parameters'];
+function scan(dir){const rows=new Map();for(const file of ls(dir)){if(!file.endsWith('.md'))continue;const text=read(new URL(file,dir),'utf8');let fm;try{fm=parseFrontmatter(splitFrontmatter(text).fm);}catch{continue;}if(!fm.id)continue;rows.set(fm.id,{fm,text,file});}return rows;}
+const current=scan(new URL('items/',root)),old=scan(oldroot),aliases=new Map();for(const r of [...old.values(),...current.values()])for(const a of r.fm.aliases??[])aliases.set(a,r.fm.id);
+const targets=new Map();for(const map of [old,current])for(const [id,r]of map){let links=[...r.text.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map(m=>m[1].trim());for(const kind of ['deps','justified_by','forward_refs','external_refs'])links.push(...(Array.isArray(r.fm[kind])?r.fm[kind]:[]));for(let s of links){s=aliases.get(s)??s;if(!targets.has(s))targets.set(s,new Set());targets.get(s).add(id);}}
+const closure=new Set(seeds),paths=Object.fromEntries(seeds.map(s=>[s,[s]]));let queue=[...seeds];while(queue.length){const s=queue.shift();for(const c of targets.get(s)??[]){if(!closure.has(c)){closure.add(c);paths[c]=[...paths[s],c];queue.push(c);}}}
+const rows=[...closure].map(id=>({id,path:paths[id],direct_seed_uses:seeds.filter(s=>(targets.get(s)??new Set()).has(id)),current:current.has(id),old:old.has(id)}));
+write(new URL('consumer-closure.json',base),JSON.stringify({seeds,old_items:old.size,current_items:current.size,scope:'Union old/current deps, justified_by, forward_refs, external_refs, aliases and all body/frontmatter wikilinks',items:rows},null,2)+'\n');console.log(JSON.stringify(rows));

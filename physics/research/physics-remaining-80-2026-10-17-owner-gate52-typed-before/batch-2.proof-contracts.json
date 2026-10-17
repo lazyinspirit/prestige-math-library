@@ -1,0 +1,1909 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "2",
+  "level": 0,
+  "scope": [
+    "def-emg-finite-real-supremum-domain",
+    "def-emg-real-metric-axiom-convention",
+    "lem-emg-metric-axioms-imply-nonnegativity",
+    "def-emg-explicit-power-regimes",
+    "lem-emg-positive-square-root-smoothness",
+    "lem-emg-sequence-limit-criterion-with-choice",
+    "def-emg-boundaryless-completeness-domain",
+    "def-emg-set-size-and-class-schema",
+    "def-emg-extended-pointwise-product",
+    "def-emg-lp-class-and-representative",
+    "def-emg-local-potentials-and-circle-data",
+    "lem-emg-local-potential-construction",
+    "lem-emg-circle-connection-gluing",
+    "lem-emg-sphere-flux-holonomy",
+    "ex-emgmath-monopole-patch-flux"
+  ],
+  "contracts": {
+    "def-emg-local-potentials-and-circle-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition permits an empty base and supplied empty cover; all base-indexed compatibility clauses are then vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition requires κ₀>0 and permits zero forms; it imposes no positive-curvature or nonzero-class condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows a one-chart countable cover and retains the full U(1) fibre."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: empty overlaps impose no transition conditions; local phase lifts are required only on actual overlaps."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition has no interval parameter or endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The cover is supplied and the definition selects no global section, representatives, or phase lift."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: F=dA places F in B²(M), so its quotient class is zero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: a zero quotient class means F∈B²(M), which by the stated exact-form definition supplies a global smooth A."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite/computational check is applicable; the identities and boundary values are established analytically in the cited proof steps.",
+      "conditional_supplier_context": [
+        {
+          "id": "def-emg-finite-real-supremum-domain",
+          "anchor": "supremum-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the real ordered field of [[def-real-numbers]] and [[def-complete-ordered-field]]. For a nonempty set $S\\subseteq\\mathbb R$ bounded above, $\\sup S$ denotes the unique real upper bound $u$ such that $u\\le v$ for every upper bound $v$. Existence is the least-upper-bound property established for these reals by [[thm-reals-cauchy-complete]]; if $u,u'$ both satisfy it, $u\\le u'$ and $u'\\le u$ imply equality. The notation is restricted to this domain.\n\nFor nonempty $S$ bounded below, use [[def-infimum]] and [[thm-infimum-property]]: $\\inf S=-\\sup(-S)$, where $-S=\\{-s:s\\in S\\}$. Indeed a lower bound $l$ for $S$ gives the upper bound $-l$ for $-S$; negating its least upper bound gives a lower bound for $S$ greater than every other one.\n\nNeither $\\sup\\varnothing$ nor $\\inf\\varnothing$ is defined in $\\mathbb R$: every real is an upper and lower bound, with no least upper or greatest lower bound. If another construction stipulates the value zero for an empty path family, that stipulation is a separate total definition, not $\\sup\\varnothing=0$. Infinite values require an explicitly specified extended ordered set; no extended-real field operations are introduced here."
+        },
+        {
+          "id": "def-emg-real-metric-axiom-convention",
+          "anchor": "metric-definition",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $X$ be a set and use the ordered real field of [[def-real-numbers]], [[def-complete-ordered-field]] and [[def-ordered-field]]. In the convention of [[def-metric-space]], a **real metric** is a function $d:X\\times X\\to\\mathbb R$ satisfying, for all $x,y,z\\in X$, separation $d(x,y)=0\\iff x=y$, symmetry $d(x,y)=d(y,x)$ and the triangle inequality $d(x,z)\\le d(x,y)+d(y,z)$. A **real pseudometric** replaces separation by $d(x,x)=0$ and retains the other two axioms. All values are finite real numbers. Neither definition assumes nonnegativity as an additional axiom.\n\nFor either structure, put $B_d(x,r)=\\{y\\in X:d(x,y)<r\\}$ for real $r>0$. The induced topology consists of the subsets $O\\subseteq X$ for which every $x\\in O$ admits $r>0$ with $B_d(x,r)\\subseteq O$. After the nonnegativity deduction in the well-definedness lemma, these balls form a basis: $x\\in B_d(x,r)$ by reflexivity, and if $z\\in B_d(x,r)\\cap B_d(y,s)$, the positive radius $t=\\min\\{r-d(x,z),s-d(y,z)\\}$ has $B_d(z,t)$ contained in that intersection by the triangle inequality. This argument also works for pseudometrics and for empty $X$ (the empty topology). No infinite-distance, semimetric or quasimetric convention is consumed."
+        },
+        {
+          "id": "lem-emg-metric-axioms-imply-nonnegativity",
+          "anchor": "metric-nonnegativity",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For any real metric or pseudometric $d$ on a set $X$ in [[def-emg-real-metric-axiom-convention]], $d(x,y)\\ge0$ for every $x,y\\in X$. Thus these three-axiom definitions already have values in $[0,\\infty)$, including the vacuous assertion when $X=\\varnothing$."
+        },
+        {
+          "id": "def-emg-explicit-power-regimes",
+          "anchor": "power-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For $a>0$, integer $m$ and integer $n\\ge1$, define the rational regime by\n\n$$\na^{m/n}:=(a^{1/n})^m,\n$$\n\nwhere $a^{1/n}$ is the unique positive root of $s^n=a$ in [[thm-nth-roots-exist]], and integer powers include reciprocals for negative $m$. This is [[def-rational-power]]; [[lem-rational-power-well-defined]] proves independence of the fraction representative and [[lem-rational-power-laws]] gives the rational exponent laws. The supplementary convention is $0^r=0$ for rational $r>0$; $0^0$ and negative powers of zero remain undefined.\n\nThe separate real regime is [[def-real-power]]: for $a>0$ and $x\\in\\mathbb R$, $a^x=\\exp(x\\log a)$, with the laws of [[thm-real-power-laws]]. For $x>0$ set $0^x=0$; no arbitrary real power is assigned to a negative base. The real-power laws are supplied by that theorem, not inferred from the rational root formula. Use the real-number structure of [[def-real-numbers]].\n\nIn particular $s(q)=q^{1/2}$ for $q>0$ is the unique positive solution of $s(q)^2=q$. Its smoothness and derivative are a separate well-definedness result, not an assumption about fractional notation."
+        },
+        {
+          "id": "lem-emg-sequence-limit-criterion-with-choice",
+          "anchor": "heine-choice",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $A\\subseteq\\mathbb R$, let $c\\in\\mathbb R$ be a limit point of $A$, let $f:A\\to\\mathbb R$ and $L\\in\\mathbb R$. Assume the indexed axiom of countable choice $\\mathrm{AC}_\\omega$ of [[def-countable-choice]]. Then the epsilon-delta condition $\\lim_{x\\to c}f(x)=L$ of [[def-function-limit]] is equivalent to the following: for every sequence $(x_n)_{n\\in\\mathbb N}$ with $x_n\\in A\\setminus\\{c\\}$ and $x_n\\to c$, one has $f(x_n)\\to L$. Sequence and sequence convergence mean [[def-sequence]] and [[def-real-limit]]. The forward direction uses no choice; the reverse direction uses only the stated indexed $\\mathrm{AC}_\\omega$, not arbitrary-index choice."
+        },
+        {
+          "id": "def-emg-boundaryless-completeness-domain",
+          "anchor": "boundaryless-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $M$ be a smooth Hausdorff second-countable manifold **without boundary**, in the sense of [[def-smooth-manifold]]. Let $g$ be a positive definite smooth Riemannian metric as in [[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]. Use the Levi-Civita connection of [[def-levi-civita-connection]] with the existence and coordinate formula supplied by [[prop-christoffel-formula-for-the-levi-civita-connection]]; in coordinates it has coefficients $\\Gamma^k_{ij}=\\frac12g^{kl}(\\partial_i g_{jl}+\\partial_j g_{il}-\\partial_l g_{ij})$. A parametrized affine geodesic is a smooth curve $\\gamma:J\\to M$ on an interval with nonempty interior satisfying $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$, equivalently $\\ddot\\gamma^k+\\Gamma^k_{ij}(\\gamma)\\dot\\gamma^i\\dot\\gamma^j=0$, where covariant differentiation along the curve is defined by [[def-covariant-derivative-along-a-curve]]; the coordinate equation is the expansion of that derivative in a coordinate basis. Its maximal domain is an interval on which it cannot be extended with the same affine parameter as a solution. **Two-sided geodesic completeness** means that every maximal affine geodesic is defined on all of $\\mathbb R$.\n\nIndependently, for a real metric $d$ in [[def-metric-space]], a sequence $(x_n)$ is Cauchy when for every $\\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\\varepsilon$ whenever $m,n\\ge N$. It converges to $x$ when for every $\\varepsilon>0$ eventually $d(x_n,x)<\\varepsilon$. **Metric completeness** means that every Cauchy sequence converges in the given metric space. In a Riemannian application the metric must be the distance induced by $g$ on a connected component: the infimum of lengths $\\int\\sqrt{g(\\dot\\alpha,\\dot\\alpha)}\\,dt$ over piecewise-$C^1$ connecting curves. Its definition and finite metric property are supplied by [[def-riemannian-distance-on-a-connected-manifold]] and [[thm-riemannian-distance-is-a-metric]]. Specify that induced metric, rather than an arbitrary compatible metric. Distinct components are treated separately; no infinite distance is inserted into a real metric.\n\nThese are different completeness conditions. Their equivalence is a Hopf–Rinow theorem requiring its own hypotheses and proof; it is not part of this definition. In particular, a Lorentzian metric is not a positive definite distance, and this convention supplies no Lorentzian Hopf–Rinow implication.\n\nThe boundaryless restriction matters: the Euclidean interval $[0,1]$ is metrically complete, while the curve $\\gamma(t)=1/2+t$ stays inside it only for $-1/2\\le t\\le1/2$ and cannot be continued there as a two-sided affine geodesic with velocity $1$. Completeness of this interval follows because a real Cauchy sequence converges in $\\mathbb R$ by [[thm-reals-cauchy-complete]] and its limit remains between $0$ and $1$. This boundary example explains the domain restriction; it is not an instance of the boundaryless equivalence."
+        },
+        {
+          "id": "def-emg-set-size-and-class-schema",
+          "anchor": "category-size",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the first-order language of [[def-language-of-set-theory]]: all quantified objects are sets, and a **definable class** $\\{x:\\varphi(x,p)\\}$ abbreviates a formula with set parameters $p$. It is not a new set or a domain for unrestricted quantification. Work with the usual set axioms, in particular [[def-axiom-of-power-set]] and [[def-axiom-schema-of-separation]], and the ordered pairs, products and functions of [[def-ordered-pair]], [[def-cartesian-product]] and [[def-function]]. The power-set axiom supplies a collecting set; Separation trims it to exactly $\\mathcal P(X)=\\{Y:Y\\subseteq X\\}$.\n\nA **small category** has a set $O$ of objects, a set $A$ of arrows, source and target functions $s,t:A\\to O$, an identity function $e:O\\to A$, and a composition function on the set $\\{(a,b)\\in A\\times A:s(a)=t(b)\\}$, where $ab$ denotes $a\\circ b$ and the laws are $s(e(x))=t(e(x))=x$, $s(ab)=s(b)$, $t(ab)=t(a)$, $e(t(a))a=a=ae(s(a))$, and $(ab)c=a(bc)$ whenever the displayed compositions are defined. It is **locally small** when each specified hom-collection is a set. A definable large category is a schema of formulas for its objects, arrows and operations, with those laws asserted as formulas; it is not a set of all objects or a category of all large categories. No Grothendieck universe is assumed.\n\nAll indexed families in the local bundle construction have a supplied set index $I$. If $U_i\\subseteq M$ and $G$ is a set, their tagged disjoint union is the subset $D=\\{(i,x,z)\\in I\\times M\\times G:x\\in U_i\\}$, formed by Separation. Given a set equivalence relation $E\\subseteq D\\times D$, each class $[u]_E=\\{v\\in D:(u,v)\\in E\\}$ is a subset of $D$, and the quotient is the set\n\n$$\nD/E=\\{C\\in\\mathcal P(D):\\exists u\\in D\\ \\forall v\\in D\\ (v\\in C\\iff(u,v)\\in E)\\}.\n$$\n\nThus the quotient is obtained by Separation in $\\mathcal P(D)$, without choosing representatives. Transition-map graphs and connection data are subsets of specified finite products and power sets, not arbitrary proper-class objects.\n\nFor the Cauchy-development coding application, fix a set manifold $\\Sigma$ and the tensor-bundle total spaces over $\\Sigma\\times\\mathbb R$. A code consists of an open set $D\\subseteq\\Sigma\\times\\mathbb R$, graphs of a metric and a two-form on $D$ inside those fixed total spaces, a time orientation, and a fixed initial embedding. All of its coordinates belong to fixed products and power sets. Separation selects the tuples satisfying the specified smoothness, Lorentzian, field-equation and initial-data formulas. Hence these codes form a set. This size assertion does not prove field-equation existence, maximality or uniqueness, and makes no proper-class representative choice."
+        }
+      ],
+      "owner_round2_note": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "lem-emg-local-potential-construction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-oriented-chart]]. The metric and time orientation do not select $o$. Write $\\mathrm{vol}_g$ for the oriented metric volume form of [[def-gr-metric-volume-form-and-current-flux]]; in any positively oriented chart it has components $\\sqrt{|\\det(g_{ab})|}\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$.\n\nA smooth real $k$-form is a smooth section of $\\bigwedge^kT^*M$, and its space is denoted $\\Omega^k(M)$, as in [[def-smooth-differential-k-form]]. In this page, $F\\in\\Omega^2(M)$ means an arbitrary smooth real two-form. No equation such as $dF=0$, no global potential, and no physical field law is included in this definition.\n\nAn **observer at $p\\in M$** is a vector $n\\in T_pM$ with $g_p(n,n)=-1$ and $g_p(n,N_p)<0$; its **rest space** is $n^\\perp=\\{v:g_p(v,n)=0\\}$, as in [[def-gr-observer-and-rest-space]]. A smooth **observer congruence** on an open set $U\\subseteq M$ is a smooth vector field whose value at every point is an observer. Its observer curves are the maximal integral curves, and a chart is adapted to it when its three spatial coordinate functions are constant along those curves, as in [[def-gr-observer-congruence-and-adapted-charts]]. Such a congruence need not be hypersurface-orthogonal.\n\nA **local frame field** on $U$ is an ordered smooth basis field of $TM|_U$. A **coordinate frame** is the basis of coordinate vector fields supplied by a chart. A **tetrad field** is a local frame $(E_0,E_1,E_2,E_3)$ with $g(E_A,E_B)=\\operatorname{diag}(-1,1,1,1)_{AB}$; it is future-directed when $E_0$ is future-directed, as in [[def-gr-local-frame-and-tetrad-fields]]. These are distinct objects: an observer congruence is a vector field, an adapted chart is a coordinate chart, and a tetrad is a basis field. A tetrad field is not presumed to be a coordinate frame. For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.\n\nA **worldline** on this Lorentzian manifold means a $C^1$ or piecewise-$C^1$ regular curve with future-timelike tangent and specified interval domain, as defined precisely in [[def-gr-timelike-worldline-and-proper-time]]. Its parameter is arbitrary; the proper-time and four-velocity constructions of that definition apply under their stated hypotheses. A worldline is a mathematical curve here and does not assert the existence or motion of a physical body.\n\nFor coordinate bookkeeping only, when a chart is chosen with all four coordinate values assigned the metre, write $x^0=ct$, where $t$ is assigned seconds and $c>0$ is the corresponding scale in $\\mathrm m\\,\\mathrm s^{-1}$. Then $g_{ab}$ is recorded as dimensionless. This is a unit convention on a chart, not a claim that the chart is inertial, orthonormal, global, or physically realized; $c$ in this mathematical convention has no asserted measured value.\n\nUse the unique torsion-free metric-compatible connection $\\nabla^g$ and the curvature convention of [[def-gr-metric-selected-connection]] and [[thm-gr-curvature-tensoriality-and-coordinate-formula]]. In a length-coordinate chart, the displayed Christoffel formula differentiates dimensionless metric components once, so $\\Gamma^a{}_{bc}$ is recorded in $\\mathrm m^{-1}$. The curvature coordinate formula contains one derivative of $\\Gamma$ or a product of two $\\Gamma$ components, so $R^a{}_{bcd}$ and its Ricci and scalar contractions are recorded in $\\mathrm m^{-2}$. These component assignments apply only in length-coordinate charts; other coordinate units transform by their Jacobians.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "source_section": "Statement",
+          "quote": "Let $a<b$ and $c<d$. Suppose $g,h:[a,b]\\times[c,d]\\to\\mathbb R$ are continuous and, for every fixed $t\\in[c,d]$, the function $x\\mapsto g(x,t)$ is differentiable on $(a,b)$ with derivative $h(x,t)$. Define\n\n$$G(x):=\\int_c^d g(x,t)\\,dt.$$\n\nThen $G$ is differentiable on $[a,b]$ as a function on that interval and\n\n$$G'(x)=\\int_c^d h(x,t)\\,dt\\qquad(x\\in[a,b]).$$\n\nAt $a$ and $b$ the derivative is relative and one-sided. The derivative hypothesis is imposed only for interior parameter values; continuity of $h$ supplies its endpoint values.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ],
+          "claim": "Put $y=x-p$. Fix $x_0\\in D$ and choose a closed coordinate box $K\\subset D$ with $x_0$ in its interior. The image of $K\\times[0,1]$ under $(x,t)\\mapsto p+t(x-p)$ is compact and lies in $D$, so the integrand $G_b(x,t)=t(x-p)^aF_{ab}(p+t(x-p))$ and every $x$-partial derivative are continuous on $K\\times[0,1]$. Fixing all but one coordinate, [F3] passes that parameter derivative through the integral on the corresponding compact rectangle; applying it repeatedly to each derivative shows that every partial derivative of $A_b$ exists and is continuous near $x_0$. Since $x_0$ was arbitrary, $A_b$ is smooth on $D$, and $A=A_b\\,dx^b$ is a smooth one-form."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "By the differentiation-under-the-integral justification in step 1.1, differentiate the integral and use antisymmetry to obtain $\\partial_cA_b-\\partial_bA_c=\\int_0^1\\left(2tF_{cb}(p+ty)+t^2y^a(\\partial_cF_{ab}-\\partial_bF_{ac})(p+ty)\\right)dt$. The closure identity in [F2] gives $\\partial_cF_{ab}-\\partial_bF_{ac}=\\partial_aF_{cb}$. Thus the integrand is $\\frac{d}{dt}\\bigl(t^2F_{cb}(p+ty)\\bigr)$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "The function $t\\mapsto t^2F_{cb}(p+ty)$ is continuous on $[0,1]$, differentiable on $(0,1)$, and its derivative extends continuously to both endpoints, hence is integrable by [F5]. The Newton–Leibniz formula [F4] evaluates the integral as $F_{cb}(x)-0$, since $t^2F_{cb}(p+ty)=0$ at $t=0$. Therefore every coefficient of $dA$ equals the corresponding coefficient of $F$, so $dA=F$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "For the one-form formula, [F3] applies to the smooth integrand on the same compact-image rectangles as in step 1.1, so $\\chi$ is smooth. Closedness gives $\\partial_b\\alpha_a=\\partial_a\\alpha_b$, and hence $\\partial_b\\chi=\\int_0^1\\left(\\alpha_b(p+ty)+t y^a\\partial_a\\alpha_b(p+ty)\\right)dt=\\int_0^1\\frac{d}{dt}\\bigl(t\\alpha_b(p+ty)\\bigr)dt=\\alpha_b(x)$ by [F4] and [F5]; the lower endpoint vanishes. Thus $d\\chi=\\alpha$, proving this local gauge-difference assertion without assuming a global real phase."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis p∈D makes the star-shaped open domain nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 and 4.1 leave the two-form and one-form integrals zero when F=0 or α=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result is fixed on an open subset of R⁴ and has no one-element cardinality hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle the zero two-form coefficientwise through the stated coordinate identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 evaluate t=0 and t=1 explicitly, including the vanishing lower endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses local compact rectangles; it makes no simultaneous choice over points or charts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives explicit primitives; it does not claim a necessary-and-sufficient criterion for exactness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives explicit primitives; it does not claim a necessary-and-sufficient criterion for exactness."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite/computational check is applicable; the identities and boundary values are established analytically in the cited proof steps.",
+      "conditional_supplier_context": [
+        {
+          "id": "def-emg-finite-real-supremum-domain",
+          "anchor": "supremum-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the real ordered field of [[def-real-numbers]] and [[def-complete-ordered-field]]. For a nonempty set $S\\subseteq\\mathbb R$ bounded above, $\\sup S$ denotes the unique real upper bound $u$ such that $u\\le v$ for every upper bound $v$. Existence is the least-upper-bound property established for these reals by [[thm-reals-cauchy-complete]]; if $u,u'$ both satisfy it, $u\\le u'$ and $u'\\le u$ imply equality. The notation is restricted to this domain.\n\nFor nonempty $S$ bounded below, use [[def-infimum]] and [[thm-infimum-property]]: $\\inf S=-\\sup(-S)$, where $-S=\\{-s:s\\in S\\}$. Indeed a lower bound $l$ for $S$ gives the upper bound $-l$ for $-S$; negating its least upper bound gives a lower bound for $S$ greater than every other one.\n\nNeither $\\sup\\varnothing$ nor $\\inf\\varnothing$ is defined in $\\mathbb R$: every real is an upper and lower bound, with no least upper or greatest lower bound. If another construction stipulates the value zero for an empty path family, that stipulation is a separate total definition, not $\\sup\\varnothing=0$. Infinite values require an explicitly specified extended ordered set; no extended-real field operations are introduced here."
+        },
+        {
+          "id": "def-emg-real-metric-axiom-convention",
+          "anchor": "metric-definition",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $X$ be a set and use the ordered real field of [[def-real-numbers]], [[def-complete-ordered-field]] and [[def-ordered-field]]. In the convention of [[def-metric-space]], a **real metric** is a function $d:X\\times X\\to\\mathbb R$ satisfying, for all $x,y,z\\in X$, separation $d(x,y)=0\\iff x=y$, symmetry $d(x,y)=d(y,x)$ and the triangle inequality $d(x,z)\\le d(x,y)+d(y,z)$. A **real pseudometric** replaces separation by $d(x,x)=0$ and retains the other two axioms. All values are finite real numbers. Neither definition assumes nonnegativity as an additional axiom.\n\nFor either structure, put $B_d(x,r)=\\{y\\in X:d(x,y)<r\\}$ for real $r>0$. The induced topology consists of the subsets $O\\subseteq X$ for which every $x\\in O$ admits $r>0$ with $B_d(x,r)\\subseteq O$. After the nonnegativity deduction in the well-definedness lemma, these balls form a basis: $x\\in B_d(x,r)$ by reflexivity, and if $z\\in B_d(x,r)\\cap B_d(y,s)$, the positive radius $t=\\min\\{r-d(x,z),s-d(y,z)\\}$ has $B_d(z,t)$ contained in that intersection by the triangle inequality. This argument also works for pseudometrics and for empty $X$ (the empty topology). No infinite-distance, semimetric or quasimetric convention is consumed."
+        },
+        {
+          "id": "lem-emg-metric-axioms-imply-nonnegativity",
+          "anchor": "metric-nonnegativity",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For any real metric or pseudometric $d$ on a set $X$ in [[def-emg-real-metric-axiom-convention]], $d(x,y)\\ge0$ for every $x,y\\in X$. Thus these three-axiom definitions already have values in $[0,\\infty)$, including the vacuous assertion when $X=\\varnothing$."
+        },
+        {
+          "id": "def-emg-explicit-power-regimes",
+          "anchor": "power-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For $a>0$, integer $m$ and integer $n\\ge1$, define the rational regime by\n\n$$\na^{m/n}:=(a^{1/n})^m,\n$$\n\nwhere $a^{1/n}$ is the unique positive root of $s^n=a$ in [[thm-nth-roots-exist]], and integer powers include reciprocals for negative $m$. This is [[def-rational-power]]; [[lem-rational-power-well-defined]] proves independence of the fraction representative and [[lem-rational-power-laws]] gives the rational exponent laws. The supplementary convention is $0^r=0$ for rational $r>0$; $0^0$ and negative powers of zero remain undefined.\n\nThe separate real regime is [[def-real-power]]: for $a>0$ and $x\\in\\mathbb R$, $a^x=\\exp(x\\log a)$, with the laws of [[thm-real-power-laws]]. For $x>0$ set $0^x=0$; no arbitrary real power is assigned to a negative base. The real-power laws are supplied by that theorem, not inferred from the rational root formula. Use the real-number structure of [[def-real-numbers]].\n\nIn particular $s(q)=q^{1/2}$ for $q>0$ is the unique positive solution of $s(q)^2=q$. Its smoothness and derivative are a separate well-definedness result, not an assumption about fractional notation."
+        },
+        {
+          "id": "lem-emg-sequence-limit-criterion-with-choice",
+          "anchor": "heine-choice",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $A\\subseteq\\mathbb R$, let $c\\in\\mathbb R$ be a limit point of $A$, let $f:A\\to\\mathbb R$ and $L\\in\\mathbb R$. Assume the indexed axiom of countable choice $\\mathrm{AC}_\\omega$ of [[def-countable-choice]]. Then the epsilon-delta condition $\\lim_{x\\to c}f(x)=L$ of [[def-function-limit]] is equivalent to the following: for every sequence $(x_n)_{n\\in\\mathbb N}$ with $x_n\\in A\\setminus\\{c\\}$ and $x_n\\to c$, one has $f(x_n)\\to L$. Sequence and sequence convergence mean [[def-sequence]] and [[def-real-limit]]. The forward direction uses no choice; the reverse direction uses only the stated indexed $\\mathrm{AC}_\\omega$, not arbitrary-index choice."
+        },
+        {
+          "id": "def-emg-boundaryless-completeness-domain",
+          "anchor": "boundaryless-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $M$ be a smooth Hausdorff second-countable manifold **without boundary**, in the sense of [[def-smooth-manifold]]. Let $g$ be a positive definite smooth Riemannian metric as in [[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]. Use the Levi-Civita connection of [[def-levi-civita-connection]] with the existence and coordinate formula supplied by [[prop-christoffel-formula-for-the-levi-civita-connection]]; in coordinates it has coefficients $\\Gamma^k_{ij}=\\frac12g^{kl}(\\partial_i g_{jl}+\\partial_j g_{il}-\\partial_l g_{ij})$. A parametrized affine geodesic is a smooth curve $\\gamma:J\\to M$ on an interval with nonempty interior satisfying $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$, equivalently $\\ddot\\gamma^k+\\Gamma^k_{ij}(\\gamma)\\dot\\gamma^i\\dot\\gamma^j=0$, where covariant differentiation along the curve is defined by [[def-covariant-derivative-along-a-curve]]; the coordinate equation is the expansion of that derivative in a coordinate basis. Its maximal domain is an interval on which it cannot be extended with the same affine parameter as a solution. **Two-sided geodesic completeness** means that every maximal affine geodesic is defined on all of $\\mathbb R$.\n\nIndependently, for a real metric $d$ in [[def-metric-space]], a sequence $(x_n)$ is Cauchy when for every $\\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\\varepsilon$ whenever $m,n\\ge N$. It converges to $x$ when for every $\\varepsilon>0$ eventually $d(x_n,x)<\\varepsilon$. **Metric completeness** means that every Cauchy sequence converges in the given metric space. In a Riemannian application the metric must be the distance induced by $g$ on a connected component: the infimum of lengths $\\int\\sqrt{g(\\dot\\alpha,\\dot\\alpha)}\\,dt$ over piecewise-$C^1$ connecting curves. Its definition and finite metric property are supplied by [[def-riemannian-distance-on-a-connected-manifold]] and [[thm-riemannian-distance-is-a-metric]]. Specify that induced metric, rather than an arbitrary compatible metric. Distinct components are treated separately; no infinite distance is inserted into a real metric.\n\nThese are different completeness conditions. Their equivalence is a Hopf–Rinow theorem requiring its own hypotheses and proof; it is not part of this definition. In particular, a Lorentzian metric is not a positive definite distance, and this convention supplies no Lorentzian Hopf–Rinow implication.\n\nThe boundaryless restriction matters: the Euclidean interval $[0,1]$ is metrically complete, while the curve $\\gamma(t)=1/2+t$ stays inside it only for $-1/2\\le t\\le1/2$ and cannot be continued there as a two-sided affine geodesic with velocity $1$. Completeness of this interval follows because a real Cauchy sequence converges in $\\mathbb R$ by [[thm-reals-cauchy-complete]] and its limit remains between $0$ and $1$. This boundary example explains the domain restriction; it is not an instance of the boundaryless equivalence."
+        }
+      ],
+      "owner_round2_note": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "lem-emg-circle-connection-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nLet $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication, the subspace topology and the usual smooth circle structure. A **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, a smooth real phase lift $f_{ij}$ exists with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. Different lifts differ locally by an integer multiple of $2\\pi$, so their differentials agree and this compatibility condition is independent of the lift. Equivalently, with the globally defined real one-form $\\lambda(g)=-i\\,g^{-1}dg$ on each overlap, the condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe circle is a smooth Lie group and in particular a topological group: multiplication is the restriction of continuous complex multiplication and inversion is complex conjugation. A right principal $U(1)$-bundle has a continuous right action and locally trivial equivariant product charts; those charts make the action free and transitive on each fibre, as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-principal-g-bundle-and-associated-fiber-bundle",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a topological group, as in [[def-topological-group]], with identity $1$. A **right principal $G$-bundle** is a continuous map $\\pi:P\\to B$ with a continuous right action $(p,g)\\mapsto pg$, satisfying $p1=p$, $(pg)h=p(gh)$ and $\\pi(pg)=\\pi(p)$, together with equivariant bundle charts $\\theta_i:\\pi^{-1}(U_i)\\cong U_i\\times G$ over an open cover. Equivariance means $\\theta_i(pg)=(b,ag)$ whenever $\\theta_i(p)=(b,a)$. Charts use ordinary products as in [[def-locally-trivial-fiber-bundle]]. In each fiber the action is free and transitive: right multiplication on $G$ has those properties and the chart identifies the actions. Freeness alone is not the definition.\n\nA **left $G$-space** is a topological space $F$ with a continuous map $(g,x)\\mapsto gx$ such that $1x=x$ and $g(hx)=(gh)x$. Effectiveness of this action is not required. Define\n$$P\\times_G F=(P\\times F)/\\bigl((pg,x)\\sim(p,gx)\\bigr)$$\nwith the ordinary quotient topology, and write $[p,x]$ for its points. Precisely, the relation is the orbit relation of the right action $(p,x)\\cdot g=(pg,g^{-1}x)$. Its action law is $((p,x)\\cdot g)\\cdot h=(pgh,h^{-1}g^{-1}x)=(p,x)\\cdot(gh)$, and its generating relations are exactly the displayed ones. Thus the equivalence relation and quotient are defined without choosing orbit representatives.\n\nThe projection $r([p,x])=\\pi(p)$ is well-defined and continuous by [[thm-quotient-universal-property]], since $(p,x)\\mapsto\\pi(p)$ is continuous and constant on every orbit. This is the **associated fiber-bundle construction**; the next proposition proves its local triviality and pullback property. The quotient construction and projection already make sense before that proof.\n\nIf $B$ is empty then $P$ is empty. If $F$ is empty the associated space is empty even for nonempty $B$; this is allowed by our bundle convention. For singleton $F$ the construction is the orbit projection of the principal bundle. For the trivial group it is the product with $F$ over the chart-identified base. No AC is used.",
+          "uses": [
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-set-size-and-class-schema",
+          "source_section": "Definition",
+          "quote": "Use the first-order language of [[def-language-of-set-theory]]: all quantified objects are sets, and a **definable class** $\\{x:\\varphi(x,p)\\}$ abbreviates a formula with set parameters $p$. It is not a new set or a domain for unrestricted quantification. Work with the usual set axioms, in particular [[def-axiom-of-power-set]] and [[def-axiom-schema-of-separation]], and the ordered pairs, products and functions of [[def-ordered-pair]], [[def-cartesian-product]] and [[def-function]]. The power-set axiom supplies a collecting set; Separation trims it to exactly $\\mathcal P(X)=\\{Y:Y\\subseteq X\\}$.\n\nA **small category** has a set $O$ of objects, a set $A$ of arrows, source and target functions $s,t:A\\to O$, an identity function $e:O\\to A$, and a composition function on the set $\\{(a,b)\\in A\\times A:s(a)=t(b)\\}$, where $ab$ denotes $a\\circ b$ and the laws are $s(e(x))=t(e(x))=x$, $s(ab)=s(b)$, $t(ab)=t(a)$, $e(t(a))a=a=ae(s(a))$, and $(ab)c=a(bc)$ whenever the displayed compositions are defined. It is **locally small** when each specified hom-collection is a set. A definable large category is a schema of formulas for its objects, arrows and operations, with those laws asserted as formulas; it is not a set of all objects or a category of all large categories. No Grothendieck universe is assumed.\n\nAll indexed families in the local bundle construction have a supplied set index $I$. If $U_i\\subseteq M$ and $G$ is a set, their tagged disjoint union is the subset $D=\\{(i,x,z)\\in I\\times M\\times G:x\\in U_i\\}$, formed by Separation. Given a set equivalence relation $E\\subseteq D\\times D$, each class $[u]_E=\\{v\\in D:(u,v)\\in E\\}$ is a subset of $D$, and the quotient is the set\n\n$$\nD/E=\\{C\\in\\mathcal P(D):\\exists u\\in D\\ \\forall v\\in D\\ (v\\in C\\iff(u,v)\\in E)\\}.\n$$\n\nThus the quotient is obtained by Separation in $\\mathcal P(D)$, without choosing representatives. Transition-map graphs and connection data are subsets of specified finite products and power sets, not arbitrary proper-class objects.\n\nFor the Cauchy-development coding application, fix a set manifold $\\Sigma$ and the tensor-bundle total spaces over $\\Sigma\\times\\mathbb R$. A code consists of an open set $D\\subseteq\\Sigma\\times\\mathbb R$, graphs of a metric and a two-form on $D$ inside those fixed total spaces, a time orientation, and a fixed initial embedding. All of its coordinates belong to fixed products and power sets. Separation selects the tuples satisfying the specified smoothness, Lorentzian, field-equation and initial-data formulas. Hence these codes form a set. This size assertion does not prove field-equation existence, maximality or uniqueness, and makes no proper-class representative choice.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "construct"
+          ],
+          "claim": "Form the set-sized disjoint union $\\coprod_i(U_i\\times U(1))$ and identify $(x,z_i)$ with $(x,g_{ij}^{-1}(x)z_i)$ in chart $j$. Reflexivity follows from $g_{ii}=1$; the cocycle gives $g_{ji}=g_{ij}^{-1}$ and shows that transfer from $i$ to $j$ to $k$ equals direct transfer from $i$ to $k$. Hence these identifications define an equivalence relation and a well-defined projection $\\pi:P\\to M$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "For fixed $i$, the quotient map restricts to a bijection from $U_i\\times U(1)$ onto $\\pi^{-1}(U_i)$: every representative over $x\\in U_i$ transfers uniquely to chart $i$, and a transition loop acts as the identity by the cocycle. On overlaps the chart changes are $(x,z_i)\\mapsto(x,g_{ij}^{-1}(x)z_i)$, smooth diffeomorphisms with smooth inverse. The quotient map is open because the saturation of any open set is a union of its images under these overlap diffeomorphisms; therefore the bijections are homeomorphisms and form a smooth atlas."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "Distinct base points have disjoint preimage neighborhoods because $M$ is Hausdorff. For two distinct points over the same base point, choose a chart containing that base point and disjoint fibre neighborhoods in $U(1)$; their products with a common base neighborhood separate the total-space points. Thus $P$ is Hausdorff. Fix one countable base $(B_n)$ of $M$ and the explicit countable base $(C_m)$ of circle arcs obtained by intersecting $U(1)\\subset\\mathbb R^2$ with rational open rectangles. In chart $i$, the products $(B_n\\cap U_i)\\times C_m$ form a base. Their images under the open charts form a base of $P$ indexed by the countable set $I\\times\\mathbb N\\times\\mathbb N$, which has an explicit finite-product enumeration. Thus $P$ is second countable, without selecting separate bases for a countable family of spaces."
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct"
+          ],
+          "claim": "Define the right action by $[x,z_i]\\cdot\\zeta=[x,z_i\\zeta]$. It is well-defined because the chart transition is left multiplication by $g_{ij}^{-1}$ and hence commutes with right multiplication. In each chart it is smooth; it is free and transitive on every fibre. The charts in step 2.1 are equivariant, so $P\\to M$ satisfies the principal-bundle definition in [F2]."
+        },
+        {
+          "id": "derive-3-3",
+          "step": "3.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "Let $\\eta=-i z^{-1}dz$ be the real invariant one-form on $U(1)$, normalized by $\\eta(\\partial_\\theta)=1$ for the local angle $z=e^{i\\theta}$. In chart $i$ set $\\omega_i=\\eta+a_i$. If $z_j=g_{ij}^{-1}z_i$, then $\\eta_j=\\eta_i-\\lambda(g_{ij})$, while [F1] gives $a_j=a_i+\\lambda(g_{ij})$; thus $\\omega_j=\\omega_i$ on every overlap and the local forms define a global smooth one-form $\\omega$. Its value on the vertical generator is $1$, it is right invariant, and in every chart $\\ker\\omega_i$ is a complement to the vertical line, since for each base tangent vector there is a unique circle tangent vector cancelling $a_i$. Hence $\\omega$ is a principal connection."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.3",
+            "algebra"
+          ],
+          "claim": "In chart $i$, $d\\omega=d a_i$ because $d\\eta=0$. On overlaps $d a_j=d a_i+d\\lambda(g_{ij})=d a_i$, since locally $\\lambda(g_{ij})=df_{ij}$ and $d^2f_{ij}=0$ by [F3]. The forms $da_i$ therefore glue to a global two-form $f$, and the local identity $d\\omega=\\pi^*f$ proves the curvature is basic and closed. Multiplication by the fixed constant $\\kappa_0$ gives $A_i=\\kappa_0a_i$ and $F=\\kappa_0f$ with $dA_i=F$."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "algebra"
+          ],
+          "claim": "If $(a_i')$ is another compatible family for the same transition maps, then $(a_j'-a_j)-(a_i'-a_i)=0$ on each overlap. Thus the differences patch to a global one-form $\\alpha$ on $M$. Conversely, adding any global one-form $\\alpha$ to every $a_i$ preserves $a_j=a_i+\\lambda(g_{ij})$ and changes curvature from $f$ to $f+d\\alpha$ without changing the transition data. This proves the fixed-bundle variation claim."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the construction clauses are vacuous over an empty base; no point of P is asserted to exist over a base point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.3 and 4.1 show zero local forms give zero curvature whenever transition compatibility holds."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: a one-chart cover gives the trivial chart construction, and the same formulas define the normalized connection."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 do not assume connected overlaps or nonconstant transitions; identities and cocycles are checked on each actual overlap."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The base has no distinguished interval or endpoint data."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 define equivalence classes directly and use chartwise uniqueness; no representatives are chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 shows compatible families with fixed transitions differ by restrictions of one global one-form."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 shows adding any global one-form preserves the same transition compatibility."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite/computational check is applicable; the identities and boundary values are established analytically in the cited proof steps.",
+      "conditional_supplier_context": [
+        {
+          "id": "def-emg-finite-real-supremum-domain",
+          "anchor": "supremum-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the real ordered field of [[def-real-numbers]] and [[def-complete-ordered-field]]. For a nonempty set $S\\subseteq\\mathbb R$ bounded above, $\\sup S$ denotes the unique real upper bound $u$ such that $u\\le v$ for every upper bound $v$. Existence is the least-upper-bound property established for these reals by [[thm-reals-cauchy-complete]]; if $u,u'$ both satisfy it, $u\\le u'$ and $u'\\le u$ imply equality. The notation is restricted to this domain.\n\nFor nonempty $S$ bounded below, use [[def-infimum]] and [[thm-infimum-property]]: $\\inf S=-\\sup(-S)$, where $-S=\\{-s:s\\in S\\}$. Indeed a lower bound $l$ for $S$ gives the upper bound $-l$ for $-S$; negating its least upper bound gives a lower bound for $S$ greater than every other one.\n\nNeither $\\sup\\varnothing$ nor $\\inf\\varnothing$ is defined in $\\mathbb R$: every real is an upper and lower bound, with no least upper or greatest lower bound. If another construction stipulates the value zero for an empty path family, that stipulation is a separate total definition, not $\\sup\\varnothing=0$. Infinite values require an explicitly specified extended ordered set; no extended-real field operations are introduced here."
+        },
+        {
+          "id": "def-emg-real-metric-axiom-convention",
+          "anchor": "metric-definition",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $X$ be a set and use the ordered real field of [[def-real-numbers]], [[def-complete-ordered-field]] and [[def-ordered-field]]. In the convention of [[def-metric-space]], a **real metric** is a function $d:X\\times X\\to\\mathbb R$ satisfying, for all $x,y,z\\in X$, separation $d(x,y)=0\\iff x=y$, symmetry $d(x,y)=d(y,x)$ and the triangle inequality $d(x,z)\\le d(x,y)+d(y,z)$. A **real pseudometric** replaces separation by $d(x,x)=0$ and retains the other two axioms. All values are finite real numbers. Neither definition assumes nonnegativity as an additional axiom.\n\nFor either structure, put $B_d(x,r)=\\{y\\in X:d(x,y)<r\\}$ for real $r>0$. The induced topology consists of the subsets $O\\subseteq X$ for which every $x\\in O$ admits $r>0$ with $B_d(x,r)\\subseteq O$. After the nonnegativity deduction in the well-definedness lemma, these balls form a basis: $x\\in B_d(x,r)$ by reflexivity, and if $z\\in B_d(x,r)\\cap B_d(y,s)$, the positive radius $t=\\min\\{r-d(x,z),s-d(y,z)\\}$ has $B_d(z,t)$ contained in that intersection by the triangle inequality. This argument also works for pseudometrics and for empty $X$ (the empty topology). No infinite-distance, semimetric or quasimetric convention is consumed."
+        },
+        {
+          "id": "lem-emg-metric-axioms-imply-nonnegativity",
+          "anchor": "metric-nonnegativity",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For any real metric or pseudometric $d$ on a set $X$ in [[def-emg-real-metric-axiom-convention]], $d(x,y)\\ge0$ for every $x,y\\in X$. Thus these three-axiom definitions already have values in $[0,\\infty)$, including the vacuous assertion when $X=\\varnothing$."
+        },
+        {
+          "id": "def-emg-explicit-power-regimes",
+          "anchor": "power-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For $a>0$, integer $m$ and integer $n\\ge1$, define the rational regime by\n\n$$\na^{m/n}:=(a^{1/n})^m,\n$$\n\nwhere $a^{1/n}$ is the unique positive root of $s^n=a$ in [[thm-nth-roots-exist]], and integer powers include reciprocals for negative $m$. This is [[def-rational-power]]; [[lem-rational-power-well-defined]] proves independence of the fraction representative and [[lem-rational-power-laws]] gives the rational exponent laws. The supplementary convention is $0^r=0$ for rational $r>0$; $0^0$ and negative powers of zero remain undefined.\n\nThe separate real regime is [[def-real-power]]: for $a>0$ and $x\\in\\mathbb R$, $a^x=\\exp(x\\log a)$, with the laws of [[thm-real-power-laws]]. For $x>0$ set $0^x=0$; no arbitrary real power is assigned to a negative base. The real-power laws are supplied by that theorem, not inferred from the rational root formula. Use the real-number structure of [[def-real-numbers]].\n\nIn particular $s(q)=q^{1/2}$ for $q>0$ is the unique positive solution of $s(q)^2=q$. Its smoothness and derivative are a separate well-definedness result, not an assumption about fractional notation."
+        },
+        {
+          "id": "lem-emg-sequence-limit-criterion-with-choice",
+          "anchor": "heine-choice",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $A\\subseteq\\mathbb R$, let $c\\in\\mathbb R$ be a limit point of $A$, let $f:A\\to\\mathbb R$ and $L\\in\\mathbb R$. Assume the indexed axiom of countable choice $\\mathrm{AC}_\\omega$ of [[def-countable-choice]]. Then the epsilon-delta condition $\\lim_{x\\to c}f(x)=L$ of [[def-function-limit]] is equivalent to the following: for every sequence $(x_n)_{n\\in\\mathbb N}$ with $x_n\\in A\\setminus\\{c\\}$ and $x_n\\to c$, one has $f(x_n)\\to L$. Sequence and sequence convergence mean [[def-sequence]] and [[def-real-limit]]. The forward direction uses no choice; the reverse direction uses only the stated indexed $\\mathrm{AC}_\\omega$, not arbitrary-index choice."
+        },
+        {
+          "id": "def-emg-boundaryless-completeness-domain",
+          "anchor": "boundaryless-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $M$ be a smooth Hausdorff second-countable manifold **without boundary**, in the sense of [[def-smooth-manifold]]. Let $g$ be a positive definite smooth Riemannian metric as in [[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]. Use the Levi-Civita connection of [[def-levi-civita-connection]] with the existence and coordinate formula supplied by [[prop-christoffel-formula-for-the-levi-civita-connection]]; in coordinates it has coefficients $\\Gamma^k_{ij}=\\frac12g^{kl}(\\partial_i g_{jl}+\\partial_j g_{il}-\\partial_l g_{ij})$. A parametrized affine geodesic is a smooth curve $\\gamma:J\\to M$ on an interval with nonempty interior satisfying $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$, equivalently $\\ddot\\gamma^k+\\Gamma^k_{ij}(\\gamma)\\dot\\gamma^i\\dot\\gamma^j=0$, where covariant differentiation along the curve is defined by [[def-covariant-derivative-along-a-curve]]; the coordinate equation is the expansion of that derivative in a coordinate basis. Its maximal domain is an interval on which it cannot be extended with the same affine parameter as a solution. **Two-sided geodesic completeness** means that every maximal affine geodesic is defined on all of $\\mathbb R$.\n\nIndependently, for a real metric $d$ in [[def-metric-space]], a sequence $(x_n)$ is Cauchy when for every $\\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\\varepsilon$ whenever $m,n\\ge N$. It converges to $x$ when for every $\\varepsilon>0$ eventually $d(x_n,x)<\\varepsilon$. **Metric completeness** means that every Cauchy sequence converges in the given metric space. In a Riemannian application the metric must be the distance induced by $g$ on a connected component: the infimum of lengths $\\int\\sqrt{g(\\dot\\alpha,\\dot\\alpha)}\\,dt$ over piecewise-$C^1$ connecting curves. Its definition and finite metric property are supplied by [[def-riemannian-distance-on-a-connected-manifold]] and [[thm-riemannian-distance-is-a-metric]]. Specify that induced metric, rather than an arbitrary compatible metric. Distinct components are treated separately; no infinite distance is inserted into a real metric.\n\nThese are different completeness conditions. Their equivalence is a Hopf–Rinow theorem requiring its own hypotheses and proof; it is not part of this definition. In particular, a Lorentzian metric is not a positive definite distance, and this convention supplies no Lorentzian Hopf–Rinow implication.\n\nThe boundaryless restriction matters: the Euclidean interval $[0,1]$ is metrically complete, while the curve $\\gamma(t)=1/2+t$ stays inside it only for $-1/2\\le t\\le1/2$ and cannot be continued there as a two-sided affine geodesic with velocity $1$. Completeness of this interval follows because a real Cauchy sequence converges in $\\mathbb R$ by [[thm-reals-cauchy-complete]] and its limit remains between $0$ and $1$. This boundary example explains the domain restriction; it is not an instance of the boundaryless equivalence."
+        },
+        {
+          "id": "def-emg-set-size-and-class-schema",
+          "anchor": "category-size",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the first-order language of [[def-language-of-set-theory]]: all quantified objects are sets, and a **definable class** $\\{x:\\varphi(x,p)\\}$ abbreviates a formula with set parameters $p$. It is not a new set or a domain for unrestricted quantification. Work with the usual set axioms, in particular [[def-axiom-of-power-set]] and [[def-axiom-schema-of-separation]], and the ordered pairs, products and functions of [[def-ordered-pair]], [[def-cartesian-product]] and [[def-function]]. The power-set axiom supplies a collecting set; Separation trims it to exactly $\\mathcal P(X)=\\{Y:Y\\subseteq X\\}$.\n\nA **small category** has a set $O$ of objects, a set $A$ of arrows, source and target functions $s,t:A\\to O$, an identity function $e:O\\to A$, and a composition function on the set $\\{(a,b)\\in A\\times A:s(a)=t(b)\\}$, where $ab$ denotes $a\\circ b$ and the laws are $s(e(x))=t(e(x))=x$, $s(ab)=s(b)$, $t(ab)=t(a)$, $e(t(a))a=a=ae(s(a))$, and $(ab)c=a(bc)$ whenever the displayed compositions are defined. It is **locally small** when each specified hom-collection is a set. A definable large category is a schema of formulas for its objects, arrows and operations, with those laws asserted as formulas; it is not a set of all objects or a category of all large categories. No Grothendieck universe is assumed.\n\nAll indexed families in the local bundle construction have a supplied set index $I$. If $U_i\\subseteq M$ and $G$ is a set, their tagged disjoint union is the subset $D=\\{(i,x,z)\\in I\\times M\\times G:x\\in U_i\\}$, formed by Separation. Given a set equivalence relation $E\\subseteq D\\times D$, each class $[u]_E=\\{v\\in D:(u,v)\\in E\\}$ is a subset of $D$, and the quotient is the set\n\n$$\nD/E=\\{C\\in\\mathcal P(D):\\exists u\\in D\\ \\forall v\\in D\\ (v\\in C\\iff(u,v)\\in E)\\}.\n$$\n\nThus the quotient is obtained by Separation in $\\mathcal P(D)$, without choosing representatives. Transition-map graphs and connection data are subsets of specified finite products and power sets, not arbitrary proper-class objects.\n\nFor the Cauchy-development coding application, fix a set manifold $\\Sigma$ and the tensor-bundle total spaces over $\\Sigma\\times\\mathbb R$. A code consists of an open set $D\\subseteq\\Sigma\\times\\mathbb R$, graphs of a metric and a two-form on $D$ inside those fixed total spaces, a time orientation, and a fixed initial embedding. All of its coordinates belong to fixed products and power sets. Separation selects the tuples satisfying the specified smoothness, Lorentzian, field-equation and initial-data formulas. Hence these codes form a set. This size assertion does not prove field-equation existence, maximality or uniqueness, and makes no proper-class representative choice."
+        }
+      ],
+      "owner_round2_note": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "lem-emg-sphere-flux-holonomy": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "thm-stokes-theorem-for-smooth-singular-chains",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, possibly with boundary. For $k\\ge1$, $c\\in C_k^\\infty(M;\\mathbb R)$ and $\\omega\\in\\Omega^{k-1}(M)$, define integration over a chain by the finite linear sum of its simplex integrals. Then\n$$\\int_c d\\omega=\\int_{\\partial c}\\omega.$$\nThe zero chain has integral zero. In degree zero the boundary is zero; no degree-minus-one form is required by this statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nLet $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication, the subspace topology and the usual smooth circle structure. A **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, a smooth real phase lift $f_{ij}$ exists with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. Different lifts differ locally by an integer multiple of $2\\pi$, so their differentials agree and this compatibility condition is independent of the lift. Equivalently, with the globally defined real one-form $\\lambda(g)=-i\\,g^{-1}dg$ on each overlap, the condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe circle is a smooth Lie group and in particular a topological group: multiplication is the restriction of continuous complex multiplication and inversion is complex conjugation. A right principal $U(1)$-bundle has a continuous right action and locally trivial equivariant product charts; those charts make the action free and transitive on each fibre, as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "uses": [
+            "1.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "In ZF, let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be smooth, and let $a\\in U$. If $Df(a)$ is invertible, then there are open neighbourhoods $a\\in V\\subseteq U$ and $f(a)\\in W$ such that $f|_V:V\\to W$ is a diffeomorphism. Writing $g=(f|_V)^{-1}$,\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\nNo choice axiom is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-emg-circle-connection-gluing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ],
+          "claim": "Put $Q=x^2+y^2+z^2$. At every point with $Q>0$, [F5] gives a positive root $r_0$ of $s^2=Q$; the map $s\\mapsto s^2$ on $(0,\\infty)$ has derivative $2r_0\\ne0$, so [F6] gives a smooth local inverse near $Q$, which agrees with the unique positive root by [F5]. Composing this local inverse with the smooth function $Q$ proves that $r=\\sqrt Q$ is smooth near each point of the punctured space. Thus the Cartesian coefficients of $F_b$ are smooth. On the dense open set $x^2+y^2>0$, write $x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy=\\iota_{x\\partial_x+y\\partial_y+z\\partial_z}(dx\\wedge dy\\wedge dz)$. The spherical-coordinate volume form is $r^2\\sin\\theta\\,dr\\wedge d\\theta\\wedge d\\phi$, and the radial vector is $r\\partial_r$, so contraction gives $r^3\\sin\\theta\\,d\\theta\\wedge d\\phi$. Hence $F_b=b\\sin\\theta\\,d\\theta\\wedge d\\phi$ and $dF_b=b\\cos\\theta\\,d\\theta\\wedge d\\theta\\wedge d\\phi=0$. Since $dF_b$ is continuous by [F4], it vanishes on the closure, which is the whole punctured space. Pulling back to the outward unit sphere and integrating gives $\\int_{S^2}F_b=b\\int_0^{2\\pi}\\int_0^\\pi\\sin\\theta\\,d\\theta\\,d\\phi=4\\pi b$."
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ],
+          "claim": "Let $\\vartheta=-i z^{-1}dz$ be the invariant one-form on the fibre circle and let $\\nu=-i w^{-1}dw$ be the base angular form in the statement. In a local angle $z=e^{i\\theta}$, $\\vartheta=d\\theta$, so it evaluates to $1$ on the vertical generator; it is right invariant, as is $\\pi^*\\nu$. Thus $\\omega=\\vartheta+a\\pi^*\\nu$ on the trivial bundle is a principal connection: for each base tangent vector $X$, the unique vertical component $-a\\nu(X)\\partial_\\theta$ makes $\\omega$ vanish, so its kernel is a horizontal complement. Since the base circle has dimension one, $d\\nu$ is a two-form on a one-dimensional manifold and is zero by [F4]. Along $w=e^{i\\phi}$, the explicit fibre curve $z(\\phi)=z_0e^{-ia\\phi}$ has $\\dot\\theta+a\\dot\\phi=0$, so it is horizontal and ends at $z_0e^{-2\\pi ia}$. Hence the holonomy is $e^{-2\\pi ia}$, and $F=dA=\\kappa_0a\\,d\\nu=0$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "construct"
+          ],
+          "claim": "Suppose $F_b=dA$ for a global smooth one-form $A$ on $M$. Choose a tetrahedron with ordered vertices $v_0,v_1,v_2,v_3$, positively oriented in $\\mathbb R^3$, with the origin in its interior. On each face take the affine parametrization $\\sigma_j$ by the standard $2$-simplex with increasing remaining vertex order and coefficient $(-1)^j$. Radial projection $R(x)=x/|x|$ is smooth on a neighborhood of every face, since no face contains the origin. The maps $R\\circ\\sigma_j$ extend smoothly to neighborhoods of the simplices. Each edge restriction has the identical ordered affine edge map in the two adjacent faces, with opposite boundary coefficients. Thus $c=\\sum_{j=0}^3(-1)^jR\\circ\\sigma_j$ is a finite smooth singular cycle. The oriented tetrahedral boundary projects outward and covers the sphere once up to edges, so change of variables on its four faces identifies its integral with the sphere integral in step 1.1. Include this cycle in a fixed $x^0$-slice of $M$. Stokes and [F2] then give $\\int_{S^2}F_b=\\int_c dA=\\int_{\\partial c}A=0$, contradicting $4\\pi b\\ne0$. Thus no global potential exists when $b\\ne0$."
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "Since $r\\ge |z|$ and $(r+z)+(r-z)=2r>0$, at least one of $r+z,r-z$ is positive, so $U_N,U_S$ cover $M$. On the north patch, $(1-\\cos\\theta)d\\phi=(x\\,dy-y\\,dx)/(r(r+z))$; the denominator is nonzero there, so $A_N$ extends smoothly across the north axis. On the south patch, $(1+\\cos\\theta)d\\phi=(x\\,dy-y\\,dx)/(r(r-z))$; the denominator is nonzero there, so $A_S$ extends smoothly across the south axis. Differentiating on the dense overlap gives $dA_N=dA_S=b\\sin\\theta\\,d\\theta\\wedge d\\phi=F_b$. Both sides are smooth, so the identities extend by continuity to the respective full patches. Subtraction gives $A_S-A_N=-2b\\,d\\phi$ on the overlap."
+        },
+        {
+          "id": "derive-2-3",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "step 1.2",
+            "algebra"
+          ],
+          "claim": "Let $u:M_0\\to U(1)$ be any smooth gauge map and restrict it to $\\gamma(\\phi)=(x^0_*,e^{i\\phi},y_*,z_*)$, with the other base coordinates fixed; write $v(\\phi)=u(\\gamma(\\phi))$. The chain rule [F10] and smooth group inversion [F3] make $v$ and $v^{-1}$ smooth. Since $|v|=1$, differentiating $\\bar v v=1$ gives $\\overline{v^{-1}v'}+v^{-1}v'=0$, so $q(\\phi):=-i v^{-1}v'$ is real and smooth. It is continuous on $[0,2\\pi]$, hence integrable by [F7]. By [F12] and [F13], choose $\\chi_0\\in[0,2\\pi)$ with $e^{i\\chi_0}=v(0)$, and set $\\chi(\\phi)=\\chi_0+\\int_0^\\phi q(s)\\,ds$; [F8] gives $\\chi'=q$. By [F10] and [F14], $h=e^{i\\chi}$ satisfies $h'=iqh$, while the definition of $q$ gives $v'=iqv$. Thus $(vh^{-1})'=0$; applying [F9] to its real and imaginary parts, whose zero derivatives are integrable by [F7], yields $vh^{-1}=v(0)h(0)^{-1}=1$, so $v=e^{i\\chi}$ on the full interval. Any other smooth phase lift $\\widetilde\\chi$ of $v$ has the same derivative as $\\chi$ by [F10] and [F14]; applying [F9] to $\\widetilde\\chi-\\chi$ shows the difference is constant. Since $v(2\\pi)=v(0)$, $e^{i(\\chi(2\\pi)-\\chi(0))}=1$, and [F11] gives $\\chi(2\\pi)-\\chi(0)=2\\pi n$ for some integer $n$, independently of the phase lift. Since this argument uses only a smooth circle-valued loop and its equal endpoint values, it proves the same phase-lift and winding claims for every smooth $g:S^1\\to U(1)$. Hence $\\int_\\gamma(-iu^{-1}du)=2\\pi n$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "L1",
+            "F3",
+            "step 1.1",
+            "step 2.2",
+            "algebra"
+          ],
+          "claim": "Put $a_N=A_N/\\kappa_0$ and $a_S=A_S/\\kappa_0$. By [F3], the required transition convention is $a_S=a_N+df_{NS}$ with $g_{NS}=e^{if_{NS}}$. Here $f_{NS}=-2b\\phi/\\kappa_0$, so $g_{NS}=e^{-2ib\\phi/\\kappa_0}$. Replacing $\\phi$ by $\\phi+2\\pi$ leaves this map unchanged exactly when $e^{-4\\pi ib/\\kappa_0}=1$, equivalently $n:=2b/\\kappa_0\\in\\mathbb Z$. For this two-set cover set $g_{NN}=g_{SS}=1$ and $g_{SN}=g_{NS}^{-1}$; these maps obey the cocycle, and $a_N=a_S+\\lambda(g_{SN})$ follows from $\\lambda(g_{SN})=-\\lambda(g_{NS})$, so both overlap directions satisfy [F3]. The degree of the smooth map $\\phi\\mapsto e^{-in\\phi}$ is $-n$, while the flux quotient in step 1.1 is $n$. Under the set-size interface [A1], the conditional construction statement [L1] applies to these compatible countable-cover data and supplies the selected circle-bundle connection."
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F10",
+            "F14",
+            "step 1.2",
+            "step 2.3",
+            "algebra"
+          ],
+          "claim": "On any local angle arc $u=e^{i\\psi}$, the gauge map sends $(x,e^{i\\theta})$ to $(x,e^{i(\\theta+\\psi(x))})$, so [F10] and [F14] give $G_u^*\\vartheta=\\vartheta+d\\psi=\\vartheta-iu^{-1}du$. Its pullback adds $-iu^{-1}du$ to the base form of $\\omega=\\vartheta+a\\pi^*\\nu$, whose loop period is $2\\pi(a+n)$ by step 2.3; consequently the holonomy remains $e^{-2\\pi ia}$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F10",
+            "F11",
+            "F14",
+            "step 3.2",
+            "algebra"
+          ],
+          "claim": "If $a\\notin\\mathbb Z$, [F11] makes $e^{-2\\pi ia}\\ne1$, so no gauge can make the connection trivial. If $a\\in\\mathbb Z$, the global map $u(x)=w^{-a}$ is smooth by [F3] because it is an integer power in the smooth circle group; on a local parameter $w=e^{i\\phi}$, [F10] and [F14] give $-iu^{-1}du=-a\\,d\\phi=-a\\nu$, cancelling the base form. Therefore gauge triviality is equivalent to $a\\in\\mathbb Z$."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The specified punctured spatial domain and its unit sphere are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 give zero flux at b=0; step 3.1 also shows the flat example at a=0 is trivial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 gives winding −1 when 2b/κ₀=1; the integer condition is nonsingular."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 extends each potential smoothly over its own axis, while step 1.1 treats the polar axis by continuity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 2.3 check the patch-axis extensions and the phase-lift endpoint difference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.3 constructs the phase lift by an explicit integral from one initial phase; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 prove single-valuedness forces 2b/κ₀∈Z and trivial holonomy forces a∈Z."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 prove integer 2b/κ₀ makes the transition single-valued and construct a trivializing gauge for integer a."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite/computational check is applicable; the identities and boundary values are established analytically in the cited proof steps.",
+      "conditional_supplier_context": [
+        {
+          "id": "def-emg-finite-real-supremum-domain",
+          "anchor": "supremum-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the real ordered field of [[def-real-numbers]] and [[def-complete-ordered-field]]. For a nonempty set $S\\subseteq\\mathbb R$ bounded above, $\\sup S$ denotes the unique real upper bound $u$ such that $u\\le v$ for every upper bound $v$. Existence is the least-upper-bound property established for these reals by [[thm-reals-cauchy-complete]]; if $u,u'$ both satisfy it, $u\\le u'$ and $u'\\le u$ imply equality. The notation is restricted to this domain.\n\nFor nonempty $S$ bounded below, use [[def-infimum]] and [[thm-infimum-property]]: $\\inf S=-\\sup(-S)$, where $-S=\\{-s:s\\in S\\}$. Indeed a lower bound $l$ for $S$ gives the upper bound $-l$ for $-S$; negating its least upper bound gives a lower bound for $S$ greater than every other one.\n\nNeither $\\sup\\varnothing$ nor $\\inf\\varnothing$ is defined in $\\mathbb R$: every real is an upper and lower bound, with no least upper or greatest lower bound. If another construction stipulates the value zero for an empty path family, that stipulation is a separate total definition, not $\\sup\\varnothing=0$. Infinite values require an explicitly specified extended ordered set; no extended-real field operations are introduced here."
+        },
+        {
+          "id": "def-emg-real-metric-axiom-convention",
+          "anchor": "metric-definition",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $X$ be a set and use the ordered real field of [[def-real-numbers]], [[def-complete-ordered-field]] and [[def-ordered-field]]. In the convention of [[def-metric-space]], a **real metric** is a function $d:X\\times X\\to\\mathbb R$ satisfying, for all $x,y,z\\in X$, separation $d(x,y)=0\\iff x=y$, symmetry $d(x,y)=d(y,x)$ and the triangle inequality $d(x,z)\\le d(x,y)+d(y,z)$. A **real pseudometric** replaces separation by $d(x,x)=0$ and retains the other two axioms. All values are finite real numbers. Neither definition assumes nonnegativity as an additional axiom.\n\nFor either structure, put $B_d(x,r)=\\{y\\in X:d(x,y)<r\\}$ for real $r>0$. The induced topology consists of the subsets $O\\subseteq X$ for which every $x\\in O$ admits $r>0$ with $B_d(x,r)\\subseteq O$. After the nonnegativity deduction in the well-definedness lemma, these balls form a basis: $x\\in B_d(x,r)$ by reflexivity, and if $z\\in B_d(x,r)\\cap B_d(y,s)$, the positive radius $t=\\min\\{r-d(x,z),s-d(y,z)\\}$ has $B_d(z,t)$ contained in that intersection by the triangle inequality. This argument also works for pseudometrics and for empty $X$ (the empty topology). No infinite-distance, semimetric or quasimetric convention is consumed."
+        },
+        {
+          "id": "lem-emg-metric-axioms-imply-nonnegativity",
+          "anchor": "metric-nonnegativity",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For any real metric or pseudometric $d$ on a set $X$ in [[def-emg-real-metric-axiom-convention]], $d(x,y)\\ge0$ for every $x,y\\in X$. Thus these three-axiom definitions already have values in $[0,\\infty)$, including the vacuous assertion when $X=\\varnothing$."
+        },
+        {
+          "id": "def-emg-explicit-power-regimes",
+          "anchor": "power-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "For $a>0$, integer $m$ and integer $n\\ge1$, define the rational regime by\n\n$$\na^{m/n}:=(a^{1/n})^m,\n$$\n\nwhere $a^{1/n}$ is the unique positive root of $s^n=a$ in [[thm-nth-roots-exist]], and integer powers include reciprocals for negative $m$. This is [[def-rational-power]]; [[lem-rational-power-well-defined]] proves independence of the fraction representative and [[lem-rational-power-laws]] gives the rational exponent laws. The supplementary convention is $0^r=0$ for rational $r>0$; $0^0$ and negative powers of zero remain undefined.\n\nThe separate real regime is [[def-real-power]]: for $a>0$ and $x\\in\\mathbb R$, $a^x=\\exp(x\\log a)$, with the laws of [[thm-real-power-laws]]. For $x>0$ set $0^x=0$; no arbitrary real power is assigned to a negative base. The real-power laws are supplied by that theorem, not inferred from the rational root formula. Use the real-number structure of [[def-real-numbers]].\n\nIn particular $s(q)=q^{1/2}$ for $q>0$ is the unique positive solution of $s(q)^2=q$. Its smoothness and derivative are a separate well-definedness result, not an assumption about fractional notation."
+        },
+        {
+          "id": "lem-emg-sequence-limit-criterion-with-choice",
+          "anchor": "heine-choice",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $A\\subseteq\\mathbb R$, let $c\\in\\mathbb R$ be a limit point of $A$, let $f:A\\to\\mathbb R$ and $L\\in\\mathbb R$. Assume the indexed axiom of countable choice $\\mathrm{AC}_\\omega$ of [[def-countable-choice]]. Then the epsilon-delta condition $\\lim_{x\\to c}f(x)=L$ of [[def-function-limit]] is equivalent to the following: for every sequence $(x_n)_{n\\in\\mathbb N}$ with $x_n\\in A\\setminus\\{c\\}$ and $x_n\\to c$, one has $f(x_n)\\to L$. Sequence and sequence convergence mean [[def-sequence]] and [[def-real-limit]]. The forward direction uses no choice; the reverse direction uses only the stated indexed $\\mathrm{AC}_\\omega$, not arbitrary-index choice."
+        },
+        {
+          "id": "def-emg-boundaryless-completeness-domain",
+          "anchor": "boundaryless-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Let $M$ be a smooth Hausdorff second-countable manifold **without boundary**, in the sense of [[def-smooth-manifold]]. Let $g$ be a positive definite smooth Riemannian metric as in [[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]. Use the Levi-Civita connection of [[def-levi-civita-connection]] with the existence and coordinate formula supplied by [[prop-christoffel-formula-for-the-levi-civita-connection]]; in coordinates it has coefficients $\\Gamma^k_{ij}=\\frac12g^{kl}(\\partial_i g_{jl}+\\partial_j g_{il}-\\partial_l g_{ij})$. A parametrized affine geodesic is a smooth curve $\\gamma:J\\to M$ on an interval with nonempty interior satisfying $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$, equivalently $\\ddot\\gamma^k+\\Gamma^k_{ij}(\\gamma)\\dot\\gamma^i\\dot\\gamma^j=0$, where covariant differentiation along the curve is defined by [[def-covariant-derivative-along-a-curve]]; the coordinate equation is the expansion of that derivative in a coordinate basis. Its maximal domain is an interval on which it cannot be extended with the same affine parameter as a solution. **Two-sided geodesic completeness** means that every maximal affine geodesic is defined on all of $\\mathbb R$.\n\nIndependently, for a real metric $d$ in [[def-metric-space]], a sequence $(x_n)$ is Cauchy when for every $\\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\\varepsilon$ whenever $m,n\\ge N$. It converges to $x$ when for every $\\varepsilon>0$ eventually $d(x_n,x)<\\varepsilon$. **Metric completeness** means that every Cauchy sequence converges in the given metric space. In a Riemannian application the metric must be the distance induced by $g$ on a connected component: the infimum of lengths $\\int\\sqrt{g(\\dot\\alpha,\\dot\\alpha)}\\,dt$ over piecewise-$C^1$ connecting curves. Its definition and finite metric property are supplied by [[def-riemannian-distance-on-a-connected-manifold]] and [[thm-riemannian-distance-is-a-metric]]. Specify that induced metric, rather than an arbitrary compatible metric. Distinct components are treated separately; no infinite distance is inserted into a real metric.\n\nThese are different completeness conditions. Their equivalence is a Hopf–Rinow theorem requiring its own hypotheses and proof; it is not part of this definition. In particular, a Lorentzian metric is not a positive definite distance, and this convention supplies no Lorentzian Hopf–Rinow implication.\n\nThe boundaryless restriction matters: the Euclidean interval $[0,1]$ is metrically complete, while the curve $\\gamma(t)=1/2+t$ stays inside it only for $-1/2\\le t\\le1/2$ and cannot be continued there as a two-sided affine geodesic with velocity $1$. Completeness of this interval follows because a real Cauchy sequence converges in $\\mathbb R$ by [[thm-reals-cauchy-complete]] and its limit remains between $0$ and $1$. This boundary example explains the domain restriction; it is not an instance of the boundaryless equivalence."
+        },
+        {
+          "id": "def-emg-set-size-and-class-schema",
+          "anchor": "category-size",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Approved typed convention retained; gluing actually uses set-size construction. Finite radial/sphere formulas do not spend the sequence criterion choice hypothesis.",
+          "exact_current_interface": "Use the first-order language of [[def-language-of-set-theory]]: all quantified objects are sets, and a **definable class** $\\{x:\\varphi(x,p)\\}$ abbreviates a formula with set parameters $p$. It is not a new set or a domain for unrestricted quantification. Work with the usual set axioms, in particular [[def-axiom-of-power-set]] and [[def-axiom-schema-of-separation]], and the ordered pairs, products and functions of [[def-ordered-pair]], [[def-cartesian-product]] and [[def-function]]. The power-set axiom supplies a collecting set; Separation trims it to exactly $\\mathcal P(X)=\\{Y:Y\\subseteq X\\}$.\n\nA **small category** has a set $O$ of objects, a set $A$ of arrows, source and target functions $s,t:A\\to O$, an identity function $e:O\\to A$, and a composition function on the set $\\{(a,b)\\in A\\times A:s(a)=t(b)\\}$, where $ab$ denotes $a\\circ b$ and the laws are $s(e(x))=t(e(x))=x$, $s(ab)=s(b)$, $t(ab)=t(a)$, $e(t(a))a=a=ae(s(a))$, and $(ab)c=a(bc)$ whenever the displayed compositions are defined. It is **locally small** when each specified hom-collection is a set. A definable large category is a schema of formulas for its objects, arrows and operations, with those laws asserted as formulas; it is not a set of all objects or a category of all large categories. No Grothendieck universe is assumed.\n\nAll indexed families in the local bundle construction have a supplied set index $I$. If $U_i\\subseteq M$ and $G$ is a set, their tagged disjoint union is the subset $D=\\{(i,x,z)\\in I\\times M\\times G:x\\in U_i\\}$, formed by Separation. Given a set equivalence relation $E\\subseteq D\\times D$, each class $[u]_E=\\{v\\in D:(u,v)\\in E\\}$ is a subset of $D$, and the quotient is the set\n\n$$\nD/E=\\{C\\in\\mathcal P(D):\\exists u\\in D\\ \\forall v\\in D\\ (v\\in C\\iff(u,v)\\in E)\\}.\n$$\n\nThus the quotient is obtained by Separation in $\\mathcal P(D)$, without choosing representatives. Transition-map graphs and connection data are subsets of specified finite products and power sets, not arbitrary proper-class objects.\n\nFor the Cauchy-development coding application, fix a set manifold $\\Sigma$ and the tensor-bundle total spaces over $\\Sigma\\times\\mathbb R$. A code consists of an open set $D\\subseteq\\Sigma\\times\\mathbb R$, graphs of a metric and a two-form on $D$ inside those fixed total spaces, a time orientation, and a fixed initial embedding. All of its coordinates belong to fixed products and power sets. Separation selects the tuples satisfying the specified smoothness, Lorentzian, field-equation and initial-data formulas. Hence these codes form a set. This size assertion does not prove field-equation existence, maximality or uniqueness, and makes no proper-class representative choice."
+        }
+      ],
+      "owner_round2_note": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "ex-emgmath-monopole-patch-flux": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-emg-sphere-flux-holonomy",
+          "source_section": "Statement",
+          "quote": "For $b\\in\\mathbb R$, let $M=\\mathbb R_{x^0}\\times(\\mathbb R^3\\setminus\\{0\\})$, $r=(x^2+y^2+z^2)^{1/2}$, and define the smooth real two-form\n\n$$\nF_b:=\\frac{b}{r^3}\\left(x\\,dy\\wedge dz+y\\,dz\\wedge dx+z\\,dx\\wedge dy\\right).\n$$\n\nUse the standard product smooth structure and orientation on $M$; it is an open subset of $\\mathbb R^4$, hence smooth, Hausdorff and second-countable.\n\nLet $U_N=\\{(x^0,x,y,z)\\in M:r+z>0\\}$ and $U_S=\\{(x^0,x,y,z)\\in M:r-z>0\\}$; these two open sets cover $M$. Then $dF_b=0$ and its flux through the unit sphere with outward orientation is $4\\pi b$. If $b\\ne0$, $F_b$ has no global one-form potential on $M$. On $U_N$ and $U_S$,\n\n$$\nA_N=b(1-\\cos\\theta)\\,d\\phi,\\qquad A_S=-b(1+\\cos\\theta)\\,d\\phi\n$$\n\nare smooth local potentials with $dA_N=dA_S=F_b$, and $A_S-A_N=-2b\\,d\\phi$ on the overlap. For a chosen normalization $\\kappa_0>0$, these local forms define the normalized circle-connection data of [[def-emg-local-potentials-and-circle-data]] precisely when the transition $g_{NS}=e^{-2ib\\phi/\\kappa_0}$ is single-valued, equivalently $2b/\\kappa_0\\in\\mathbb Z$. For a smooth loop $g(e^{i\\phi})=e^{i\\chi(\\phi)}$, its winding is $[\\chi(2\\pi)-\\chi(0)]/(2\\pi)$, with both circles oriented by increasing angle. Existence of a smooth phase lift, integrality of its endpoint change, and independence of the lift are proved in the phase-lift construction below. The transition winding has sign $-2b/\\kappa_0$ in the stated north-to-south convention, while $\\int_{S^2}F_b/(2\\pi\\kappa_0)=2b/\\kappa_0$. This is an exact condition for this chosen circle normalization, not a claim that every classical real flux is quantized. When $2b/\\kappa_0\\in\\mathbb Z$, the compatible two-set data also produce a smooth principal circle-bundle connection, using the actual set-size interface in [A1] and the gluing statement of [[lem-emg-circle-connection-gluing]].\n\nThere is also a flat example with nontrivial holonomy. On $M_0=\\mathbb R\\times S^1\\times\\mathbb R^2$, let $\\nu=-i w^{-1}dw$ be the global angular one-form on the base circle $S^1=\\{w\\in\\mathbb C:|w|=1\\}$, normalized by $\\int_{S^1}\\nu=2\\pi$, and take $A=\\kappa_0 a\\,\\nu$ for dimensionless $a\\in\\mathbb R$. On the trivial bundle use $\\omega=\\vartheta+a\\pi^*\\nu$, where $\\vartheta=-i z^{-1}dz$ is the fibre angular form. Holonomy means the fibre multiplier of the horizontal lift around the indicated base loop; gauge trivial means gauge-equivalent to $\\vartheta$ under a smooth bundle map $G_u(x,z)=(x,z u(x))$ covering the identity. Then $F=dA=0$ but holonomy around the circle is $e^{-2\\pi ia}$, so this connection is gauge trivial exactly when $a\\in\\mathbb Z$. If $b$ and $\\kappa_0$ are assigned physical units, both are measured in webers; the ratio $2b/\\kappa_0$ is dimensionless. No general classification of circle bundles is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "L1",
+            "algebra"
+          ],
+          "claim": "Under the exact planned conditional interfaces in [A1], substitute $b=\\kappa_0/2$ into the flux $4\\pi b$ from [L1] to obtain $\\int_{S^2}F=2\\pi\\kappa_0$ and hence $\\int_{S^2}F/(2\\pi\\kappa_0)=1$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "The same substitution gives $A_S-A_N=-\\kappa_0\\,d\\phi$ and $g_{NS}=e^{-i\\phi}$. As $\\phi$ runs from $0$ to $2\\pi$, this transition makes one negative turn, so its winding number is $-1$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "The transition is single-valued because $e^{-i(\\phi+2\\pi)}=e^{-i\\phi}$; the local forms are smooth at their respective poles and both differentiate to $F$. By [[lem-emg-sphere-flux-holonomy]], the nonzero flux rules out a global potential. The calculation is conditional mathematical verification, not evidence about nature."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The inherited sphere calculation has a specified nonempty unit sphere."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "κ₀>0 and b=κ₀/2 make the example flux nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 give the unit flux ratio and transition winding −1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives a smooth single-turn transition at the chosen nonzero value b=κ₀/2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks e^{-i(φ+2π)}=e^{-iφ}; pole smoothness is inherited from the A-page statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example is a finite substitution into the inherited exact formulas and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example verifies one chosen integer sector; it states no new necessary-and-sufficient classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example verifies one chosen integer sector; it states no new necessary-and-sufficient classification."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite/computational check is applicable; the identities and boundary values are established analytically in the cited proof steps.",
+      "conditional_supplier_context": [
+        {
+          "id": "def-emg-finite-real-supremum-domain",
+          "anchor": "supremum-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "Use the real ordered field of [[def-real-numbers]] and [[def-complete-ordered-field]]. For a nonempty set $S\\subseteq\\mathbb R$ bounded above, $\\sup S$ denotes the unique real upper bound $u$ such that $u\\le v$ for every upper bound $v$. Existence is the least-upper-bound property established for these reals by [[thm-reals-cauchy-complete]]; if $u,u'$ both satisfy it, $u\\le u'$ and $u'\\le u$ imply equality. The notation is restricted to this domain.\n\nFor nonempty $S$ bounded below, use [[def-infimum]] and [[thm-infimum-property]]: $\\inf S=-\\sup(-S)$, where $-S=\\{-s:s\\in S\\}$. Indeed a lower bound $l$ for $S$ gives the upper bound $-l$ for $-S$; negating its least upper bound gives a lower bound for $S$ greater than every other one.\n\nNeither $\\sup\\varnothing$ nor $\\inf\\varnothing$ is defined in $\\mathbb R$: every real is an upper and lower bound, with no least upper or greatest lower bound. If another construction stipulates the value zero for an empty path family, that stipulation is a separate total definition, not $\\sup\\varnothing=0$. Infinite values require an explicitly specified extended ordered set; no extended-real field operations are introduced here."
+        },
+        {
+          "id": "def-emg-real-metric-axiom-convention",
+          "anchor": "metric-definition",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "Let $X$ be a set and use the ordered real field of [[def-real-numbers]], [[def-complete-ordered-field]] and [[def-ordered-field]]. In the convention of [[def-metric-space]], a **real metric** is a function $d:X\\times X\\to\\mathbb R$ satisfying, for all $x,y,z\\in X$, separation $d(x,y)=0\\iff x=y$, symmetry $d(x,y)=d(y,x)$ and the triangle inequality $d(x,z)\\le d(x,y)+d(y,z)$. A **real pseudometric** replaces separation by $d(x,x)=0$ and retains the other two axioms. All values are finite real numbers. Neither definition assumes nonnegativity as an additional axiom.\n\nFor either structure, put $B_d(x,r)=\\{y\\in X:d(x,y)<r\\}$ for real $r>0$. The induced topology consists of the subsets $O\\subseteq X$ for which every $x\\in O$ admits $r>0$ with $B_d(x,r)\\subseteq O$. After the nonnegativity deduction in the well-definedness lemma, these balls form a basis: $x\\in B_d(x,r)$ by reflexivity, and if $z\\in B_d(x,r)\\cap B_d(y,s)$, the positive radius $t=\\min\\{r-d(x,z),s-d(y,z)\\}$ has $B_d(z,t)$ contained in that intersection by the triangle inequality. This argument also works for pseudometrics and for empty $X$ (the empty topology). No infinite-distance, semimetric or quasimetric convention is consumed."
+        },
+        {
+          "id": "lem-emg-metric-axioms-imply-nonnegativity",
+          "anchor": "metric-nonnegativity",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "For any real metric or pseudometric $d$ on a set $X$ in [[def-emg-real-metric-axiom-convention]], $d(x,y)\\ge0$ for every $x,y\\in X$. Thus these three-axiom definitions already have values in $[0,\\infty)$, including the vacuous assertion when $X=\\varnothing$."
+        },
+        {
+          "id": "def-emg-explicit-power-regimes",
+          "anchor": "power-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "For $a>0$, integer $m$ and integer $n\\ge1$, define the rational regime by\n\n$$\na^{m/n}:=(a^{1/n})^m,\n$$\n\nwhere $a^{1/n}$ is the unique positive root of $s^n=a$ in [[thm-nth-roots-exist]], and integer powers include reciprocals for negative $m$. This is [[def-rational-power]]; [[lem-rational-power-well-defined]] proves independence of the fraction representative and [[lem-rational-power-laws]] gives the rational exponent laws. The supplementary convention is $0^r=0$ for rational $r>0$; $0^0$ and negative powers of zero remain undefined.\n\nThe separate real regime is [[def-real-power]]: for $a>0$ and $x\\in\\mathbb R$, $a^x=\\exp(x\\log a)$, with the laws of [[thm-real-power-laws]]. For $x>0$ set $0^x=0$; no arbitrary real power is assigned to a negative base. The real-power laws are supplied by that theorem, not inferred from the rational root formula. Use the real-number structure of [[def-real-numbers]].\n\nIn particular $s(q)=q^{1/2}$ for $q>0$ is the unique positive solution of $s(q)^2=q$. Its smoothness and derivative are a separate well-definedness result, not an assumption about fractional notation."
+        },
+        {
+          "id": "lem-emg-sequence-limit-criterion-with-choice",
+          "anchor": "heine-choice",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "Let $A\\subseteq\\mathbb R$, let $c\\in\\mathbb R$ be a limit point of $A$, let $f:A\\to\\mathbb R$ and $L\\in\\mathbb R$. Assume the indexed axiom of countable choice $\\mathrm{AC}_\\omega$ of [[def-countable-choice]]. Then the epsilon-delta condition $\\lim_{x\\to c}f(x)=L$ of [[def-function-limit]] is equivalent to the following: for every sequence $(x_n)_{n\\in\\mathbb N}$ with $x_n\\in A\\setminus\\{c\\}$ and $x_n\\to c$, one has $f(x_n)\\to L$. Sequence and sequence convergence mean [[def-sequence]] and [[def-real-limit]]. The forward direction uses no choice; the reverse direction uses only the stated indexed $\\mathrm{AC}_\\omega$, not arbitrary-index choice."
+        },
+        {
+          "id": "def-emg-boundaryless-completeness-domain",
+          "anchor": "boundaryless-domain",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "Let $M$ be a smooth Hausdorff second-countable manifold **without boundary**, in the sense of [[def-smooth-manifold]]. Let $g$ be a positive definite smooth Riemannian metric as in [[def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian]]. Use the Levi-Civita connection of [[def-levi-civita-connection]] with the existence and coordinate formula supplied by [[prop-christoffel-formula-for-the-levi-civita-connection]]; in coordinates it has coefficients $\\Gamma^k_{ij}=\\frac12g^{kl}(\\partial_i g_{jl}+\\partial_j g_{il}-\\partial_l g_{ij})$. A parametrized affine geodesic is a smooth curve $\\gamma:J\\to M$ on an interval with nonempty interior satisfying $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$, equivalently $\\ddot\\gamma^k+\\Gamma^k_{ij}(\\gamma)\\dot\\gamma^i\\dot\\gamma^j=0$, where covariant differentiation along the curve is defined by [[def-covariant-derivative-along-a-curve]]; the coordinate equation is the expansion of that derivative in a coordinate basis. Its maximal domain is an interval on which it cannot be extended with the same affine parameter as a solution. **Two-sided geodesic completeness** means that every maximal affine geodesic is defined on all of $\\mathbb R$.\n\nIndependently, for a real metric $d$ in [[def-metric-space]], a sequence $(x_n)$ is Cauchy when for every $\\varepsilon>0$ there is $N$ with $d(x_m,x_n)<\\varepsilon$ whenever $m,n\\ge N$. It converges to $x$ when for every $\\varepsilon>0$ eventually $d(x_n,x)<\\varepsilon$. **Metric completeness** means that every Cauchy sequence converges in the given metric space. In a Riemannian application the metric must be the distance induced by $g$ on a connected component: the infimum of lengths $\\int\\sqrt{g(\\dot\\alpha,\\dot\\alpha)}\\,dt$ over piecewise-$C^1$ connecting curves. Its definition and finite metric property are supplied by [[def-riemannian-distance-on-a-connected-manifold]] and [[thm-riemannian-distance-is-a-metric]]. Specify that induced metric, rather than an arbitrary compatible metric. Distinct components are treated separately; no infinite distance is inserted into a real metric.\n\nThese are different completeness conditions. Their equivalence is a Hopf–Rinow theorem requiring its own hypotheses and proof; it is not part of this definition. In particular, a Lorentzian metric is not a positive definite distance, and this convention supplies no Lorentzian Hopf–Rinow implication.\n\nThe boundaryless restriction matters: the Euclidean interval $[0,1]$ is metrically complete, while the curve $\\gamma(t)=1/2+t$ stays inside it only for $-1/2\\le t\\le1/2$ and cannot be continued there as a two-sided affine geodesic with velocity $1$. Completeness of this interval follows because a real Cauchy sequence converges in $\\mathbb R$ by [[thm-reals-cauchy-complete]] and its limit remains between $0$ and $1$. This boundary example explains the domain restriction; it is not an instance of the boundaryless equivalence."
+        },
+        {
+          "id": "def-emg-set-size-and-class-schema",
+          "anchor": "category-size",
+          "carrier_status": "Authored local draft on emg-mg02; no independent acceptance.",
+          "direct_use": "Retained reserved closure input; the example inherits the conditional supplier status of its A-page source and does not assert this contract as proved.",
+          "exact_current_interface": "Use the first-order language of [[def-language-of-set-theory]]: all quantified objects are sets, and a **definable class** $\\{x:\\varphi(x,p)\\}$ abbreviates a formula with set parameters $p$. It is not a new set or a domain for unrestricted quantification. Work with the usual set axioms, in particular [[def-axiom-of-power-set]] and [[def-axiom-schema-of-separation]], and the ordered pairs, products and functions of [[def-ordered-pair]], [[def-cartesian-product]] and [[def-function]]. The power-set axiom supplies a collecting set; Separation trims it to exactly $\\mathcal P(X)=\\{Y:Y\\subseteq X\\}$.\n\nA **small category** has a set $O$ of objects, a set $A$ of arrows, source and target functions $s,t:A\\to O$, an identity function $e:O\\to A$, and a composition function on the set $\\{(a,b)\\in A\\times A:s(a)=t(b)\\}$, where $ab$ denotes $a\\circ b$ and the laws are $s(e(x))=t(e(x))=x$, $s(ab)=s(b)$, $t(ab)=t(a)$, $e(t(a))a=a=ae(s(a))$, and $(ab)c=a(bc)$ whenever the displayed compositions are defined. It is **locally small** when each specified hom-collection is a set. A definable large category is a schema of formulas for its objects, arrows and operations, with those laws asserted as formulas; it is not a set of all objects or a category of all large categories. No Grothendieck universe is assumed.\n\nAll indexed families in the local bundle construction have a supplied set index $I$. If $U_i\\subseteq M$ and $G$ is a set, their tagged disjoint union is the subset $D=\\{(i,x,z)\\in I\\times M\\times G:x\\in U_i\\}$, formed by Separation. Given a set equivalence relation $E\\subseteq D\\times D$, each class $[u]_E=\\{v\\in D:(u,v)\\in E\\}$ is a subset of $D$, and the quotient is the set\n\n$$\nD/E=\\{C\\in\\mathcal P(D):\\exists u\\in D\\ \\forall v\\in D\\ (v\\in C\\iff(u,v)\\in E)\\}.\n$$\n\nThus the quotient is obtained by Separation in $\\mathcal P(D)$, without choosing representatives. Transition-map graphs and connection data are subsets of specified finite products and power sets, not arbitrary proper-class objects.\n\nFor the Cauchy-development coding application, fix a set manifold $\\Sigma$ and the tensor-bundle total spaces over $\\Sigma\\times\\mathbb R$. A code consists of an open set $D\\subseteq\\Sigma\\times\\mathbb R$, graphs of a metric and a two-form on $D$ inside those fixed total spaces, a time orientation, and a fixed initial embedding. All of its coordinates belong to fixed products and power sets. Separation selects the tuples satisfying the specified smoothness, Lorentzian, field-equation and initial-data formulas. Hence these codes form a set. This size assertion does not prove field-equation existence, maximality or uniqueness, and makes no proper-class representative choice."
+        }
+      ],
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-finite-real-supremum-domain": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The real supremum/infimum notation excludes the empty set; the stipulated empty-family zero is explicitly separated."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A set containing only zero has supremum and infimum zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Unbounded sets have no finite-real supremum notation under this domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain conditions are nonemptiness and one-sided boundedness, not an interval boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-real-metric-axiom-convention": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty X has the unique empty metric/pseudometric and topology."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Pseudometrics may vanish on distinct points; metrics require separation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "On one point reflexivity forces zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All distances are finite; radius is strictly positive; no extended-distance topology is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "lem-emg-metric-axioms-imply-nonnegativity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-real-metric-axiom-convention",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and use the ordered real field of [[def-real-numbers]], [[def-complete-ordered-field]] and [[def-ordered-field]]. In the convention of [[def-metric-space]], a **real metric** is a function $d:X\\times X\\to\\mathbb R$ satisfying, for all $x,y,z\\in X$, separation $d(x,y)=0\\iff x=y$, symmetry $d(x,y)=d(y,x)$ and the triangle inequality $d(x,z)\\le d(x,y)+d(y,z)$. A **real pseudometric** replaces separation by $d(x,x)=0$ and retains the other two axioms. All values are finite real numbers. Neither definition assumes nonnegativity as an additional axiom.\n\nFor either structure, put $B_d(x,r)=\\{y\\in X:d(x,y)<r\\}$ for real $r>0$. The induced topology consists of the subsets $O\\subseteq X$ for which every $x\\in O$ admits $r>0$ with $B_d(x,r)\\subseteq O$. After the nonnegativity deduction in the well-definedness lemma, these balls form a basis: $x\\in B_d(x,r)$ by reflexivity, and if $z\\in B_d(x,r)\\cap B_d(y,s)$, the positive radius $t=\\min\\{r-d(x,z),s-d(y,z)\\}$ has $B_d(z,t)$ contained in that intersection by the triangle inequality. This argument also works for pseudometrics and for empty $X$ (the empty topology). No infinite-distance, semimetric or quasimetric convention is consumed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ],
+          "claim": "Fix $x,y\\in X$. Reflexivity, the triangle inequality with endpoints $x,x$, and symmetry give $0=d(x,x)\\le d(x,y)+d(y,x)=2d(x,y)$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "The real number $2$ is positive, so dividing the inequality in step 1.1 by $2$ yields $0\\le d(x,y)$. This proves the universally quantified claim; if $X$ is empty there are no pairs to check."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Universal assertion is vacuous on empty X."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At coincident points reflexivity gives equality zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Singleton X is the same zero case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof only divides by positive2, never by a distance."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-explicit-power-regimes": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "No empty family or supremum operation appears."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero base is allowed only for positive exponents; 0^0 and negative powers of0 remain undefined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Base1 and exponent0 at positive base use canonical power suppliers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Negative bases have no arbitrary real power; positive roots are unique."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "lem-emg-positive-square-root-smoothness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-explicit-power-regimes",
+          "source_section": "Definition",
+          "quote": "For $a>0$, integer $m$ and integer $n\\ge1$, define the rational regime by\n\n$$\na^{m/n}:=(a^{1/n})^m,\n$$\n\nwhere $a^{1/n}$ is the unique positive root of $s^n=a$ in [[thm-nth-roots-exist]], and integer powers include reciprocals for negative $m$. This is [[def-rational-power]]; [[lem-rational-power-well-defined]] proves independence of the fraction representative and [[lem-rational-power-laws]] gives the rational exponent laws. The supplementary convention is $0^r=0$ for rational $r>0$; $0^0$ and negative powers of zero remain undefined.\n\nThe separate real regime is [[def-real-power]]: for $a>0$ and $x\\in\\mathbb R$, $a^x=\\exp(x\\log a)$, with the laws of [[thm-real-power-laws]]. For $x>0$ set $0^x=0$; no arbitrary real power is assigned to a negative base. The real-power laws are supplied by that theorem, not inferred from the rational root formula. Use the real-number structure of [[def-real-numbers]].\n\nIn particular $s(q)=q^{1/2}$ for $q>0$ is the unique positive solution of $s(q)^2=q$. Its smoothness and derivative are a separate well-definedness result, not an assumption about fractional notation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "In ZF, let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be smooth, and let $a\\in U$. If $Df(a)$ is invertible, then there are open neighbourhoods $a\\in V\\subseteq U$ and $f(a)\\in W$ such that $f|_V:V\\to W$ is a diffeomorphism. Writing $g=(f|_V)^{-1}$,\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\nNo choice axiom is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ],
+          "claim": "Define $P:(0,\\infty)\\to\\mathbb R$ by $P(t)=t^2$. By [F3], $P$ is smooth with $P'(t)=2t$. Fix $q>0$ and put $t=s(q)>0$. Then $P(t)=q$ and the one-dimensional derivative is invertible because $2t\\ne0$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ],
+          "claim": "By [F2], there are open neighborhoods $V\\subseteq(0,\\infty)$ of $t$ and $W$ of $q$ on which $P|_V$ has a smooth inverse $h$. Shrink $W$ inside $(0,\\infty)$. For $y\\in W$, $h(y)>0$ and $h(y)^2=y$, so uniqueness in [F1] implies $h(y)=s(y)$. Thus $s$ agrees with a smooth function near every point of its domain and is smooth."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "Differentiate $s(q)^2=q$ using [F3] to obtain $2s(q)s'(q)=1$. Since $s(q)>0$, division gives the stated derivative. The domain excludes the zero endpoint; no smooth extension through zero is claimed. The local inverses agree by uniqueness, without any choice of a family of inverses."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Domain is the nonempty open positive real axis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero endpoint is excluded; no smooth extension through zero is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At q=1, s=1 and derivative1/2 by the proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "IFT derivative2s(q) never vanishes on this domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Every IFT neighborhood is shrunk within positive reals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "lem-emg-sequence-limit-criterion-with-choice": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-function-limit",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]]) with its order and absolute value\n([[def-real-order]]).\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$, let $c \\in \\mathbb{R}$\nbe a **limit point** of $A$ ([[def-limit-point-r]]), and let $L \\in \\mathbb{R}$.\nWe say that **$f(x)$ tends to $L$ as $x$ tends to $c$**, and write\n\n$$\\lim_{x \\to c} f(x) = L ,$$\n\nwhen\n\n$$(\\forall \\varepsilon > 0)\\ (\\exists \\delta > 0)\\ (\\forall x \\in A)\\ \\bigl[\\ 0 < |x - c| < \\delta \\ \\Longrightarrow\\ |f(x) - L| < \\varepsilon\\ \\bigr],$$\n\nwhere $\\varepsilon$ and $\\delta$ range over the **positive reals**.\n\nIn the language of neighbourhoods ([[def-neighbourhood-r]]) the condition reads:\nfor every real $\\varepsilon > 0$ there is a real $\\delta > 0$ with\n\n$$f\\bigl(A \\cap N^{*}_{\\delta}(c)\\bigr) \\;\\subseteq\\; N_{\\varepsilon}(L),$$\n\n$N^{*}_{\\delta}(c) = \\{\\, y : 0 < |y - c| < \\delta \\,\\}$ being the punctured\n$\\delta$-neighbourhood of $c$ and $N_{\\varepsilon}(L) = (L - \\varepsilon,\\ L +\n\\varepsilon)$ the open interval of [[def-interval]]. The two forms agree because\n$|f(x) - L| < \\varepsilon$ says exactly $f(x) \\in N_\\varepsilon(L)$, and\n$0 < |x - c| < \\delta$ says exactly $x \\in N^{*}_\\delta(c)$.\n\n**Three features of this definition are load bearing, not decoration.**\n\n1. **$c$ is required to be a limit point of $A$.** By [[def-limit-point-r]] that\n   says every punctured neighbourhood of $c$ meets $A$, so for every $\\delta > 0$\n   the set $A \\cap N^{*}_\\delta(c)$ over which the implication quantifies is\n   nonempty. Drop the requirement and the implication can be satisfied\n   vacuously by *every* real $L$ at once, which is exactly what\n   [[fs-limit-unique-at-every-point-of-the-domain]] records. At a point of $A$\n   that is not a limit point of $A$ — an isolated point — the symbol\n   $\\lim_{x \\to c} f(x)$ is therefore **not defined** in this library.\n\n2. **$c \\in A$ is not required.** A limit point of $A$ need not belong to $A$\n   ([[def-limit-point-r]]), and the definition never evaluates $f$ at $c$. This\n   is what allows a limit to be taken at a point where the function is not\n   defined at all, as at $0$ for $x \\mapsto x\\,\\psi(1/x)$.\n\n3. **The value $f(c)$, when it exists, is irrelevant.** The hypothesis\n   $0 < |x - c|$ excludes $x = c$ from the quantifier, so changing $f$ at the\n   single point $c$ changes nothing. Equality of the limit with the value is an\n   extra condition, not a consequence: [[fs-limit-equals-value]].\n\n**The notation presumes uniqueness.** Writing $\\lim_{x \\to c} f(x) = L$ treats\nthe left-hand side as a name for a single real number, which is legitimate only\nbecause at a limit point at most one $L$ can satisfy the displayed condition.\nThat obligation is discharged by [[lem-function-limit-unique]], recorded in this\nitem's `justified_by`. As with $\\sup S$ ([[rem-sup-conventions]]) and\n$\\lim_k x_k$ ([[lem-limit-unique]]), the symbol is written only for a function\nalready known to have a limit at $c$.\n\n**Real and rational $\\varepsilon$ define the same relation.** Above,\n$\\varepsilon$ and $\\delta$ range over the positive reals. Restricting either\nquantifier to the positive rationals gives the same relation: every positive\nrational is a positive real, and below every positive real lies a positive\nrational ([[lem-rat-embeds-dense]]), so an $\\varepsilon$-condition verified for\nall positive rationals is verified for an arbitrary positive real $\\eta$ by\nrunning it at a rational $\\varepsilon$ with $0 < \\varepsilon < \\eta$, and a\n$\\delta$ produced as a real may be shrunk to a rational one below it. This is\nthe passage sanctioned in the remarks of [[def-sequence]], and it is what lets\nthis definition be compared with [[def-real-limit]], whose $\\varepsilon$ is\nrational, in [[thm-sequential-criterion-for-function-limits]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-limit-point-r",
+          "source_section": "Definition",
+          "quote": "Let $A \\subseteq \\mathbb{R}$ and $x \\in \\mathbb{R}$, with neighbourhoods as in\n[[def-neighbourhood-r]] and closure as in\n[[def-interior-closure-boundary-r]].\n\n- $x$ is an **adherent point** of $A$ when $N_\\varepsilon(x) \\cap A \\ne\n  \\varnothing$ for every real $\\varepsilon > 0$.\n- $x$ is a **limit point** (or *accumulation point*) of $A$ when\n  $N^{*}_\\varepsilon(x) \\cap A \\ne \\varnothing$ for every real\n  $\\varepsilon > 0$: every punctured neighbourhood of $x$ meets $A$.\n- $x$ is an **isolated point** of $A$ when $x \\in A$ and there is a real\n  $\\varepsilon > 0$ with $N_\\varepsilon(x) \\cap A = \\{x\\}$.\n- The **derived set** of $A$ is\n  $$A' \\;:=\\; \\{\\, x \\in \\mathbb{R} : x \\text{ is a limit point of } A \\,\\}.$$\n- $A$ is **dense in $\\mathbb{R}$** when $\\overline{A} = \\mathbb{R}$.\n\n**A limit point is an adherent point**, since $N^{*}_\\varepsilon(x) \\subseteq\nN_\\varepsilon(x)$; and an element of $A$ is an adherent point of $A$, since\n$x \\in N_\\varepsilon(x) \\cap A$ ([[def-neighbourhood-r]]). So the adherent\npoints of $A$ are exactly the points of $A \\cup A'$, a statement proved as part\nof [[thm-closure-characterisations-r]].\n\n**Limit point and isolated point are exact opposites inside $A$.** For\n$x \\in A$: $x$ is an isolated point of $A$ exactly when it is not a limit point\nof $A$. Indeed $N_\\varepsilon(x) \\cap A = \\{x\\}$ says precisely that\n$N^{*}_\\varepsilon(x) \\cap A = \\varnothing$, because $x$ itself always lies in\n$N_\\varepsilon(x) \\cap A$ when $x \\in A$; so the existence of an $\\varepsilon$\nwitnessing isolation is the negation of the condition defining a limit point.\nA point of $A$ is therefore either isolated in $A$ or a limit point of $A$, and\nnever both.\n\n**A limit point need not belong to the set, and a point of the set need not be a\nlimit point.** Both possibilities occur, and the two examples that matter later\nare $0$, which is a limit point of $\\{\\, 1/k : k \\ge 1 \\,\\}$ without belonging\nto it, and $0$ again, which belongs to $\\{0\\} \\cup [1,2]$ as an isolated point.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-neighbourhood-r",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n([[def-complete-ordered-field]], [[def-ordered-field]]) with its order\n([[def-real-order]]) and its absolute value ([[def-abs-value]]).\n\nLet $x \\in \\mathbb{R}$ and let $\\varepsilon \\in \\mathbb{R}$ with\n$\\varepsilon > 0$. The **$\\varepsilon$-neighbourhood of $x$** is\n\n$$N_\\varepsilon(x) \\;:=\\; \\{\\, y \\in \\mathbb{R} : |y - x| < \\varepsilon \\,\\},$$\n\nand the **punctured $\\varepsilon$-neighbourhood of $x$** is\n\n$$N^{*}_\\varepsilon(x) \\;:=\\; N_\\varepsilon(x) \\setminus \\{x\\} \\;=\\; \\{\\, y \\in \\mathbb{R} : 0 < |y - x| < \\varepsilon \\,\\}.$$\n\nThe two descriptions of $N^{*}_\\varepsilon(x)$ agree because $|y - x| = 0$ holds\nexactly when $y = x$ ([[lem-of-abs-value]]).\n\n**A neighbourhood is an open interval.** For every $x$ and every\n$\\varepsilon > 0$,\n\n$$N_\\varepsilon(x) \\;=\\; (x - \\varepsilon,\\ x + \\varepsilon),$$\n\nthe interval of [[def-interval]]. Indeed [[lem-of-abs-value]] gives, for\n$\\varepsilon > 0$, the equivalence $|y - x| < \\varepsilon \\iff -\\varepsilon <\ny - x < \\varepsilon$, and adding $x$ throughout turns the right-hand side into\n$x - \\varepsilon < y < x + \\varepsilon$ ([[def-ordered-field]]).\n\n**The centre lies in its own neighbourhoods.** $x \\in N_\\varepsilon(x)$, since\n$|x - x| = |0| = 0 < \\varepsilon$ ([[lem-of-abs-value]]).\n\n**Punctured neighbourhoods are never empty.** The element\n$y := x + \\varepsilon/2$ satisfies $|y - x| = \\varepsilon/2$, which is\n$> 0$ and $< \\varepsilon$, so $y \\in N^{*}_\\varepsilon(x)$\n([[lem-of-abs-value]], [[def-ordered-field]]).\n\n**Monotonicity in the radius.** If $0 < \\delta \\le \\varepsilon$ then\n$N_\\delta(x) \\subseteq N_\\varepsilon(x)$, because $|y - x| < \\delta \\le\n\\varepsilon$ ([[def-ordered-field]]).\n\n**Nesting at an interior point.** If $y \\in N_\\varepsilon(x)$ and\n$0 < \\delta \\le \\varepsilon - |y - x|$, then\n\n$$N_\\delta(y) \\;\\subseteq\\; N_\\varepsilon(x).$$\n\nIndeed for $z \\in N_\\delta(y)$ the triangle inequality\n([[lem-of-triangle-inequality]]) gives\n$|z - x| = |(z - y) + (y - x)| \\le |z - y| + |y - x| < \\delta + |y - x| \\le\n\\varepsilon$. Note that $\\varepsilon - |y - x| > 0$ precisely because\n$y \\in N_\\varepsilon(x)$, so such a $\\delta$ always exists.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sequence",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]],\n[[def-real-numbers]]) with its order and absolute value ([[def-real-order]]), and\n$\\mathbb{N}$ is the set of natural numbers with its order ([[def-natural-numbers]],\n[[def-nat-order]]).\n\nA **sequence of reals** is a function $x : \\mathbb{N} \\to \\mathbb{R}$. We write\n$x_k$ for the value $x(k)$, call it the **$k$-th term**, and write $(x_k)$, or\n$(x_k)_{k \\in \\mathbb{N}}$, for the function itself. The **range** of $(x_k)$ is\nthe subset $\\{\\, x_k : k \\in \\mathbb{N} \\,\\} \\subseteq \\mathbb{R}$.\n\nLet $(x_k)$ be a sequence of reals and let $P$ be a property of indices.\n\n- $(x_k)$ is **bounded** if there is $M \\in \\mathbb{R}$ with $|x_k| \\le M$ for\n  every $k \\in \\mathbb{N}$; it is **unbounded** otherwise.\n- $P$ holds **eventually** if there is $K \\in \\mathbb{N}$ such that $P(k)$ holds\n  for every $k \\ge K$.\n- $P$ holds **frequently** if for every $K \\in \\mathbb{N}$ there is some\n  $k \\ge K$ for which $P(k)$ holds.\n- For $K \\in \\mathbb{N}$, the **$K$-th tail** of $(x_k)$ is the sequence\n  $x^{(K)}$ defined by $x^{(K)}_j := x_{j + K}$ for $j \\in \\mathbb{N}$; it is\n  again a sequence of reals.\n- A function $n : \\mathbb{N} \\to \\mathbb{N}$ is **strictly increasing** if\n  $n_j < n_k$ whenever $j < k$. For such an $n$, the **subsequence** of $(x_k)$\n  along $n$ is the composite $x \\circ n$, written $(x_{n_k})_{k \\in \\mathbb{N}}$;\n  it is again a sequence of reals.\n\n**Convergence and Cauchyness are not defined here.** They are already fixed, for\nsequences of reals, by the published [[def-real-limit]]: $(x_k)$ *converges* to\n$x \\in \\mathbb{R}$ when for every rational $\\varepsilon > 0$ there is\n$K \\in \\mathbb{N}$ with $|x_k - x| < \\varepsilon$ for all $k \\ge K$, and $(x_k)$\nis *Cauchy* when for every rational $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$\nwith $|x_k - x_l| < \\varepsilon$ for all $k, l \\ge K$. This page builds the\ntoolkit for those two notions and does not restate them. A sequence\n**converges** if it converges to some real, and **diverges** if it does not.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-real-limit",
+          "source_section": "Definition",
+          "quote": "A sequence $(x_k)$ of reals **converges** to $x \\in \\mathbb{R}$ when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x| < \\hat\\varepsilon$ for all $k \\ge K$. It is **Cauchy** when for\nevery rational $\\varepsilon > 0$ there is $K$ with\n$|x_k - x_l| < \\hat\\varepsilon$ for all $k, l \\ge K$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-naturals-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field, with field structure as in [[def-field]], and for\n$n \\ge 1$ let $n \\cdot 1_F$ denote the canonical natural number\n$\\underbrace{1_F + \\cdots + 1_F}_{n}$, defined recursively by $1 \\cdot 1_F = 1_F$\nand $(n+1) \\cdot 1_F = n \\cdot 1_F + 1_F$. Then for every $n \\ge 1$:\n\n- $n \\cdot 1_F > 0$ and $(n+1) \\cdot 1_F > n \\cdot 1_F$;\n- the map $n \\mapsto n \\cdot 1_F$ is strictly increasing, hence injective, on $\\{1, 2, 3, \\dots\\}$;\n- $(m+n) \\cdot 1_F = m \\cdot 1_F + n \\cdot 1_F$ and $(mn) \\cdot 1_F = (m \\cdot 1_F)(n \\cdot 1_F)$ for all $m, n \\ge 1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-numbers",
+          "source_section": "Definition",
+          "quote": "The **real numbers** are the quotient ring\n\n$$\\mathbb{R} := \\mathcal{C} / \\mathcal{N}$$\n\nof the ring of Cauchy sequences ([[thm-cauchy-ring]]) by the ideal of null\nsequences ([[lem-null-ideal]]). The class of $(a_n)$ is written\n$[(a_n)]$. Each rational $q$ maps to the class $\\hat q$ of the constant\nsequence $(q, q, q, \\dots)$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ordered-field",
+          "source_section": "Definition",
+          "quote": "An **ordered field** is a field $F$ ([[def-field]]) together with a subset\n$P \\subseteq F$, the set of **positive** elements (the *positive cone*),\nsatisfying:\n\n- **(O1) Trichotomy.** For each $x \\in F$, exactly one of the following holds:\n  $x \\in P$, or $x = 0$, or $-x \\in P$.\n- **(O2) Closure.** If $x, y \\in P$ then $x + y \\in P$ and $x \\cdot y \\in P$.\n\nWe write $x > 0$ for $x \\in P$ (read \"$x$ is positive\"), and define the order by\n\n$$a < b \\;:\\Longleftrightarrow\\; b - a \\in P, \\qquad a \\le b \\;:\\Longleftrightarrow\\; a < b \\text{ or } a = b.$$\n\nThus $a > b$ means $b < a$, and $a \\ge b$ means $b \\le a$. An element $x$ with\n$-x \\in P$ (equivalently $x < 0$) is called **negative**.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-order",
+          "source_section": "Definition",
+          "quote": "A real $x$ is **positive** when it has a representative $(a_n)$ together\nwith a rational $\\delta > 0$ and an index $N$ such that $a_n > \\delta$\nfor all $n \\ge N$. Define\n\n$$x \\le y \\iff x = y \\;\\text{ or }\\; y - x \\text{ is positive},$$\n\nand $|x| = x$ if $x \\ge 0$, $|x| = -x$ otherwise.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ],
+          "claim": "Assume the epsilon-delta condition and fix any stated sequence $x_n\\to c$. For positive rational $\\varepsilon$, [F1] gives a real $\\delta>0$ such that $0<|x-c|<\\delta$ implies $|f(x)-L|<\\varepsilon$. By [F2], eventually $|x_n-c|<\\delta$, and $x_n\\ne c$ gives strict positivity. Thus eventually $|f(x_n)-L|<\\varepsilon$, proving convergence in [F2]. No family of witnesses is selected: the sequence and one tolerance are fixed."
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "construct"
+          ],
+          "claim": "Conversely suppose the sequential condition holds but the epsilon-delta condition fails. Its negation yields one real $\\varepsilon_0>0$ such that for every $\\delta>0$ there exists $x\\in A$ with $0<|x-c|<\\delta$ and $|f(x)-L|\\ge\\varepsilon_0$. For each $n\\in\\mathbb N$, define $X_n=\\{x\\in A:0<|x-c|<1/(n+1),\\ |f(x)-L|\\ge\\varepsilon_0\\}$. Positivity of $n+1$ and the negated condition make every $X_n$ nonempty. These sets are a specified indexed family of subsets of the given set $A$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.2"
+          ],
+          "claim": "Apply [A1] exactly once to obtain $x_n\\in X_n$ for every $n$. Then $x_n\\in A\\setminus\\{c\\}$ and $|x_n-c|<1/(n+1)$. For every positive rational $q$, [F3] gives a threshold beyond which $1/(n+1)<q$, so $x_n\\to c$ by [F2]. The sequential hypothesis therefore implies $f(x_n)\\to L$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 2.1"
+          ],
+          "claim": "Choose one rational $q$ with $0<q<\\varepsilon_0$ by [F2]. Convergence in step 2.1 makes $|f(x_n)-L|<q<\\varepsilon_0$ eventually, contradicting membership in $X_n$. Hence the epsilon-delta condition holds. The only countable selection was step 2.1; the forward implication and the two single rational choices require no choice axiom. The limit-point hypothesis and exclusion of $c$ are retained throughout."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypothesis c is a limit point excludes empty A."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "f need not be evaluated at c, including c=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A singleton has no limit point and is outside the hypotheses."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A may omit c; all witness sets exclude c."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only countable choice is selecting x_n from the failure sets in Heine Proof 2.1; the forward direction and rational-density witnesses are finite fixed choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof1.1 uses a fixed sequence and epsilon/delta without choice."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof1.2–3.1 constructs failure sets, spends AComega once, and contradicts convergence using rational density."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "The only countable choice is selecting x_n from the failure sets in Heine Proof 2.1; the forward direction and rational-density witnesses are finite fixed choices.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-boundaryless-completeness-domain": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty manifold has no curves or Cauchy sequences to test."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Constant affine geodesics solve the local equation; the Riemannian metric is positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The domain convention includes dimension1 and separately treats connected components."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Lorentzian metrics do not supply the positive-definite distance used by metric completeness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The [0,1] boundary example has a finite affine lifetime; no boundaryful equivalence is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-set-size-and-class-schema": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty indexed union and quotient are sets by the displayed separated formulas."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "No field-theoretic zero or numerical division occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single chart is represented by the same tagged-set construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definable classes are formula abbreviations, not objects quantified as universal sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No corresponding endpoint or biconditional assertion occurs in this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "The proof or exact canonical suppliers handle the finite algebra; no numerical experiment or sampled check is used.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "production_page": "emg-mg02",
+        "review": "Local proof/interface transcription, not external full-text retrieval or independent acceptance."
+      },
+      "choice_assumptions": "No arbitrary or countable family of witnesses is selected; constructions are explicit or uniquely specified.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-extended-pointwise-product": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: For empty X the pointwise map is the unique empty function; the scalar table is still defined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The first clause assigns0 whenever either factor is0, including either sign of infinity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: For finite1 the finite rule or the sign rule gives1 star a=a, including infinities."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Both infinite factors have a unique sign product;0 at infinity is a new operation, not the partial arithmetic or a limit value."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This total scalar operation and its pointwise lift have no interval endpoint or biconditional claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: No representative or family of witnesses is selected; every pair receives its explicitly determined value."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This total scalar operation and its pointwise lift have no interval endpoint or biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This total scalar operation and its pointwise lift have no interval endpoint or biconditional claim."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No sampled numerical check or computational proof is needed: the clauses define the objects, and the cited exact quotient suppliers establish the existing norm and equivalence properties.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "anchor": "extended-product",
+        "production_page": "emg-mg02",
+        "review": "Exact approved typed contract transcribed and checked against current published source definitions. No external full-text retrieval or independent acceptance is claimed."
+      },
+      "choice_assumptions": "No representative or family of witnesses is selected; every pair receives its explicitly determined value.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    },
+    "def-emg-lp-class-and-representative": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: The empty measure space has one real-valued function and its zero quotient class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The zero representative has zero norm and represents the zero class; null-set changes leave that class fixed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: The p=1 case is included using the ordinary integral and published quotient norm. A one-point space uses the same a.e. quotient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Zero-measure spaces collapse all real measurable functions to the zero class; no nonzero point value is defined on a class. Complex-valued quotients are not silently asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: The endpoint p=infinity has its own essentially bounded real representative branch and published essential-supremum norm; p<1 is outside this convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: A representative is supplied or individually named; no simultaneous choice of representatives for all classes is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: Equality of classes is exactly the published a.e. relation; if f~g, their discrepancy set is null."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: A null discrepancy set gives f~g and the same class by the exact quotient definition."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No sampled numerical check or computational proof is needed: the clauses define the objects, and the cited exact quotient suppliers establish the existing norm and equivalence properties.",
+      "source_design": {
+        "path": "research/extended-frameworks-2026-10-03/einstein-maxwell-models/foundational-replacements.md",
+        "anchor": "lp-representatives",
+        "production_page": "emg-mg02",
+        "review": "Exact approved typed contract transcribed and checked against current published source definitions. No external full-text retrieval or independent acceptance is claimed."
+      },
+      "choice_assumptions": "A representative is supplied or individually named; no simultaneous choice of representatives for all classes is made.",
+      "owner_round2_supplier_status": "The seven typed prerequisites and positive-root well-definedness lemma are authored on emg-mg02. The previous kind-only imported remark flag is withdrawn by the separate owner false-positive disposition; no independent acceptance or readiness is asserted."
+    }
+  }
+}

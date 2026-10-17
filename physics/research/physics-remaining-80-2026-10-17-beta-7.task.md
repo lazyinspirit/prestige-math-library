@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `emg-cp02` · order **449** · `einstein-maxwell-models-mathematics` |
 | B page | `emg-cp02-examples` |
 | title | Positive symmetric Maxwell field-strength reduction |
-| requires | `emg-cp01`, `inverse-and-implicit-function-theorems` |
+| requires | `emg-cp01`, `inverse-and-implicit-function-theorems`, `gr-gr13-convex-normal-neighborhoods`, `gr-gr15-exact-checked-sbierski-smooth-mghd-proof-with-complete-local-prerequisites-and-quotient-second-countability` |
 | design | `research/plan-einstein-maxwell-models-track.md` L270 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.

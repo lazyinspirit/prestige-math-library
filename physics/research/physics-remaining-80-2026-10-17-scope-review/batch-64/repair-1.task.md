@@ -1,0 +1,15 @@
+# Batch 64: repair 1
+
+Run: physics-remaining-80-2026-10-17
+Batch: 64
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: tgr-et03, tgr-et03-examples
+Items: thm-tgr-finite-cell-gibbs-factorization, thm-tgr-kms-orbit-time-rescaling, thm-tgr-finite-response-redshift, lem-tgr-countable-l2-completeness, prop-tgr-rotating-mode-gibbs-obstruction, ex-tgr-proper-clock-qubit-response
+Consolidated findings: [{"id":"thm-tgr-finite-cell-gibbs-factorization","type":"prerequisite","reason":"Specify a map from cell labels i to points x_i in the Lorentzian domain and define N_i, Phi_i, T_i, and mu_i by evaluation there. State the exact whole-mass-shell stationarity premise, including L_{F,q}f=0 with f as defined by the cited supplier. As written, the field values and supplier hypotheses are not instantiated at specified cells."},{"id":"thm-tgr-kms-orbit-time-rescaling","type":"local","reason":"Define the observer orbit as a curve with a domain and Killing-time parameter, and specify proper time from the metric along that curve. Then derive d tau = N dt_K using the constant lapse; the current statement asserts tau = N t_K without defining the curve or proper-time relation."},{"id":"prop-tgr-rotating-mode-gibbs-obstruction","type":"local","reason":"Complete the state construction by defining B(H) as the bounded linear operators and showing boundedness, for example |omega(B)| <= ||B||. Also state that a has energy units and J has angular-momentum units, and make explicit why finite-support truncations converge under the finite-subsum norm."}]
+Authorized source files: ["items/thm-tgr-finite-cell-gibbs-factorization.md","items/thm-tgr-kms-orbit-time-rescaling.md","items/thm-tgr-finite-response-redshift.md","items/lem-tgr-countable-l2-completeness.md","items/prop-tgr-rotating-mode-gibbs-obstruction.md","items/ex-tgr-proper-clock-qubit-response.md","library/thermodynamics-and-general-relativity-mathematics/tgr-et03.md","library/thermodynamics-and-general-relativity-mathematics/tgr-et03-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

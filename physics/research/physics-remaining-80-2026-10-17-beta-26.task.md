@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `csm-phase-ensembles` · order **487** · `classical-statistical-mechanics` |
 | B page | `csm-phase-ensembles-examples` |
 | title | Classical configuration, phase and reference spaces |
-| requires | `cm-math-canonical`, `improper-and-parameter-dependent-multiple-integrals`, `td-math-mixture-dynamics-and-shells`, `the-lebesgue-integral-and-the-convergence-theorems` |
+| requires | `cm-math-canonical`, `improper-and-parameter-dependent-multiple-integrals`, `td-math-mixture-dynamics-and-shells`, `the-lebesgue-integral-and-the-convergence-theorems`, `em-potentials-and-gauge`, `cm12-legendre-transformation-and-hamiltonian-mechanics` |
 | design | `research/plan-classical-statistical-mechanics-track.md` L17 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.

@@ -1,0 +1,967 @@
+[
+  {
+    "order": 477,
+    "id": "emg-ms01",
+    "kind": "A",
+    "category": "einstein-maxwell-models-mathematics",
+    "library": "mathematics",
+    "title": "Geometric electrovac equations and flux normalization",
+    "companion": "emg-ms01-examples",
+    "requires": [
+      "emg-mg03",
+      "gr-spherical-vacuum-model",
+      "emg-cp01",
+      "algebraic-closure-embeddings-and-separability",
+      "the-field-of-fractions-and-localisation",
+      "polynomial-rings-and-roots",
+      "the-derivative-and-mean-value-theorems",
+      "emg-mg01",
+      "emg-mg02",
+      "gr-curvature-and-tides",
+      "gr-einstein-and-matter"
+    ],
+    "items": [
+      {
+        "id": "alg-emg-rational-electrovac-verification",
+        "kind": "algorithm",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Finite exact rational electrovac tensor verification",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 0,
+        "deps": [
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-field-of-fractions",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-polynomial-ring-on-a-family-of-indeterminates": "mathematical-premise",
+          "cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction": "mathematical-premise",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain": "mathematical-premise",
+          "def-field-of-fractions": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "statement": "**Inputs.** Fix the integral domain\n$P=\\mathbb Q[r,y,M,a,q]$ on the ordered variables $(r,y,M,a,q)$ and its field of fractions\n$K=\\operatorname{Frac}(P)$. A run receives a symmetric $4\\times4$ matrix\n$g=(g_{ij})$ and a covector $A=(A_i)$ with entries in $K$, represented by\nfinite sparse polynomial numerator-denominator pairs, together with a specified\npolynomial $w\\in P$. It also receives the chart hypothesis that $\\det g$ is\nnonzero in $K$ and that on the real open chart under consideration all input\ndenominators are nonzero and $w=\\sqrt{|\\det g|}>0$. The coordinate derivations\nare $\\delta_0=\\delta_3=0$, $\\delta_1=\\partial_r$, and $\\delta_2=\\partial_y$.\nThe chart hypothesis is input; the procedure does not prove Lorentz signature\nor check the volume identity. For geometric interpretation use the curvature\nconvention $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$,\nwith $R^a{}_{bcd}$ the coefficient of $R(\\partial_c,\\partial_d)\\partial_b$ and\n$\\operatorname{Ric}_{bd}:=R^a{}_{bad}$. Expanding this definition yields the\ncoordinate Ricci schedule in Instruction 3.\n\n**Outputs.** Return the finite tables of: the sixteen entries of\n$gg^{-1}-I$; the six independent components of\n$F_{ij}:=\\delta_iA_j-\\delta_jA_i$; all sixteen raised components\n$F^{ij}$; the four Maxwell-density residuals\n$\\sum_i\\delta_i(wF^{ij})$; all sixty-four Christoffel entries; the sixteen\nRicci entries\n$$\\operatorname{Ric}_{ij} =\\sum_k\\left(\\delta_k\\Gamma^k{}_{ij}-\\delta_j\\Gamma^k{}_{ik}\\right) +\\sum_{k,l}\\left(\\Gamma^k{}_{kl}\\Gamma^l{}_{ij} -\\Gamma^k{}_{jl}\\Gamma^l{}_{ik}\\right);$$\nthe scalar $F_{ij}F^{ij}$; the sixteen entries of\n$$\\operatorname{Ric}_{ij} -2\\left(F_{ik}F_j{}^k-\\frac14g_{ij}F_{kl}F^{kl}\\right);$$\nthe scalar curvature and the Ricci-square. For every output rational function,\nreturn its numerator-denominator pair, its exact numerator-zero flag, and the\nfinite list of all divisor polynomials used.\n\n**Instructions.**\n\n1. Represent a polynomial by its finite set of exponent-vector/coefficient\n   pairs. Addition merges equal exponent vectors, multiplication enumerates\n   every pair of input monomials and collects equal exponent vectors, and\n   $\\partial_r,\\partial_y$ differentiate each monomial by the integer-power\n   rule. Represent a rational function by $(p,d)$ with $p,d\\in P$ and\n   $d\\ne0$. Addition and multiplication use cross-products, and division\n   replaces $(p,d)/(u,v)$ by $(pv,du)$ only when $u\\ne0$ in $P$.\n   Differentiation uses $(p'd-pd',d^2)$.\n\n2. Compute $\\det g$ by its twenty-four signed permutation products and form\n   $g^{-1}$ from cofactors divided by $\\det g$. Record and check all sixteen\n   entries of $gg^{-1}-I$.\n\n3. Compute every $F_{ij}$ and $F^{ij}$, then all four\n   $\\sum_i\\delta_i(wF^{ij})$. Compute every Christoffel entry by\n   $\\Gamma^i{}_{jk}=\\frac12\\sum_lg^{il}\n   (\\delta_jg_{lk}+\\delta_kg_{jl}-\\delta_lg_{jk})$, then all sixteen Ricci\n   entries by the displayed formula, with no symmetry-based component omitted.\n   Compute $F_{ij}F^{ij}$, every Einstein residual, $g^{ij}\\operatorname{Ric}_{ij}$\n   and $g^{ik}g^{jl}\\operatorname{Ric}_{ij}\\operatorname{Ric}_{kl}$ by their\n   full finite contractions.\n\n4. Record every polynomial divisor introduced by inversion, division, or a\n   rational derivative in the admissibility list. Do not remove a divisor from\n   that list when a later cancellation removes its factor from the displayed\n   numerator or denominator. Return failure if any required divisor is the\n   zero polynomial or an input denominator is zero.\n\nA zero flag means exactly that the polynomial numerator is the zero element of\n$P$. No floating-point tolerance, parameter sample, convergence test, or\nchoice of roots is part of the procedure. This is a finite mathematical\nprocedure; its operational correctness, termination, and resource bounds are\nseparate proved claims.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2: Kerr-Newman metric and Maxwell field and their direct Einstein-Maxwell verification"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-emg-rational-electrovac-verification-correctness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Correctness of finite rational tensor verification",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "deps": [
+          "alg-emg-rational-electrovac-verification",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "def-field-of-fractions",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "alg-emg-rational-electrovac-verification": "mathematical-premise",
+          "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain": "mathematical-premise",
+          "def-field-of-fractions": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "statement": "For every admissible input of [[alg-emg-rational-electrovac-verification]], every returned rational numerator-denominator pair represents the corresponding displayed inverse, Maxwell, Christoffel, Ricci, scalar, or Einstein-residual expression in\n$K=\\operatorname{Frac}(\\mathbb Q[r,y,M,a,q])$. Its numerator-zero flag is true if and only if that rational function is identically zero in $K$. On any real open chart where the recorded divisors are nonzero and $w=\\sqrt{|\\det g|}$, a zero flag therefore certifies the corresponding exact coordinate identity. The signature and volume hypotheses are not certified by this lemma.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2: exact Kerr-Newman field and tensor verification, used as a comparison treatment"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-emg-rational-electrovac-verification-termination-resources",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Termination and separate algebraic resource account for rational tensor verification",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "deps": [
+          "alg-emg-rational-electrovac-verification"
+        ],
+        "dependency_roles": {
+          "alg-emg-rational-electrovac-verification": "mathematical-premise"
+        },
+        "statement": "For an input of [[alg-emg-rational-electrovac-verification]] with $N_{\\mathrm{in}}$ input coefficient/exponent records, suppose the expanded fixed schedule has $K$ polynomial operations and every intermediate polynomial support has at most $R$ monomials. The algorithm terminates. Under elementary rational-coefficient arithmetic, sparse addition, multiplication, differentiation and sorted-list insertion perform at most $K(2R^2+2R)$ coefficient operations and at most that many ordered exponent-vector insertions; sorted-list insertion uses at most $R$ support comparisons per insertion. If every intermediate support is retained, memory is at most $(K+N_{\\mathrm{in}})R$ coefficient/exponent records. These are algebraic-operation and record bounds in terms of actual intermediate support; the statement gives no polynomial input-size bound, bit-complexity bound, practical runtime estimate or optimality claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2: tensor calculation scope; no complexity claim is borrowed"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-emg-xs-geometric-electrovac",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Geometric electrovac equations and flux normalization",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "deps": [
+          "lem-emg-lorentz-hodge-calculus",
+          "lem-emg-maxwell-current-forms",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "lem-emg-lorentz-hodge-calculus": "mathematical-premise",
+          "lem-emg-maxwell-current-forms": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "Let $(M,g,N,o)$ be a smooth oriented, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$; $o$ is the manifold orientation, $N$ is a smooth future timelike field, and the metric volume form is chosen to agree with $o$. Let $\\nabla$ be the metric-selected connection, let $\\mathcal F$ be a smooth real two-form on $M$, and use the curvature convention\n$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$.\nDefine\n$$Q_{ab}(\\mathcal F):=\\mathcal F_{ac}\\mathcal F_b{}^c-\\frac14 g_{ab}\\mathcal F_{cd}\\mathcal F^{cd},$$\nwhere both raised indices use $g^{-1}$. A **geometric electrovac datum with zero cosmological constant** is the tuple $(M,g,N,o,\\mathcal F)$ satisfying\n$$d\\mathcal F=0,\\qquad d(\\star_g\\mathcal F)=0,\\qquad \\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F)$$\nat every point of $M$. Here $\\star_g$ is the Lorentzian Hodge map determined by $g$ and $o$; on two-forms $\\star_g^2=-1$. No material current, matter tensor, global potential, asymptotic flatness, positive mass, horizon, or extension condition is part of this definition.\n\nFor an oriented embedded sphere $S$ on which the integrals converge, define its geometric electric and magnetic flux parameters by\n$$q_e(S):=\\frac1{4\\pi}\\int_S\\star_g\\mathcal F,\\qquad q_m(S):=\\frac1{4\\pi}\\int_S\\mathcal F.$$\nWhen $M$ and the coordinates have length units, these parameters have units of length. A magnetic flux need not have a global potential; no flux quantization is included. The background Lorentzian geometry and Hodge conventions carry the countable-choice assumption $\\mathrm{AC}_\\omega$ of their named suppliers; the algebraic identities in this definition require no additional choice principle.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.112), printed pp. 201-202 (PDF pp. 207-208): source-free Einstein-Maxwell equations and the electric/magnetic two-form conventions"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): RN starting solution and direct Einstein-Maxwell verification of its KN extension"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-emg-xs-rn-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Dyonic Reissner-Nordström metric and field domains",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 2,
+        "deps": [
+          "def-emg-xs-geometric-electrovac",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-geometric-electrovac": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "Let $M,q_e,q_m\\in\\mathbb R$ be length parameters and put\n$Q^2:=q_e^2+q_m^2$. Let $J\\subset(0,\\infty)$ be open and require\n$$f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2}\\ne0\\qquad(r\\in J).$$\nOn the smooth product $\\mathcal M_J:=\\mathbb R_{x^0}\\times J_r\\times S^2$,\nlet $\\gamma_{S^2}$ be the unit round metric and $\\omega_{S^2}$ its positively\noriented area form. The **dyonic RN datum** is\n$$g=-f(r)\\,dx^0\\otimes dx^0+f(r)^{-1}\\,dr\\otimes dr+r^2\\gamma_{S^2}, \\qquad \\mathcal F=-\\frac{q_e}{r^2}\\,dx^0\\wedge dr+q_m\\omega_{S^2}.$$\nHere $x^0$ and $r$ have units of metres, angles on $S^2$ are dimensionless,\nand $M,q_e,q_m$ have units of metres. The metric components are dimensionless\nin length coordinates; the nonzero coordinate components of $\\mathcal F$ have\nunits inherited from their coordinate Jacobians. Use the orientation\n$dx^0\\wedge dr\\wedge\\omega_{S^2}$.\n\nThe set $J$ may have several connected components. On $\\{f>0\\}$ choose the\ntime orientation $\\partial_{x^0}$; on $\\{f<0\\}$ choose $\\partial_r$. These\nare smooth timelike fields on their respective open subsets because\n$g(\\partial_{x^0},\\partial_{x^0})=-f<0$ when $f>0$ and\n$g(\\partial_r,\\partial_r)=f^{-1}<0$ when $f<0$. Since $f$ has no zero on\n$\\mathcal M_J$, this defines a smooth time orientation on the whole product.\nThe sphere area form and the displayed two-form are global on $S^2$.\n\nLet $N,S$ denote the north and south poles. On\n$U_N:=S^2\\setminus\\{S\\}$ and $U_S:=S^2\\setminus\\{N\\}$, respectively,\nlocal potential one-forms are\n$$\\mathcal A_N=-\\frac{q_e}{r}\\,dx^0+q_m(1-\\cos\\theta)\\,d\\phi,\\qquad \\mathcal A_S=-\\frac{q_e}{r}\\,dx^0-q_m(1+\\cos\\theta)\\,d\\phi.$$\nEach displayed potential extends smoothly over its named included pole:\n$(1-\\cos\\theta)d\\phi$ is smooth at $N$ and\n$(1+\\cos\\theta)d\\phi$ is smooth at $S$. Direct differentiation gives\n$d\\mathcal A_N=d\\mathcal A_S=\\mathcal F$ on the respective patches. Their\noverlap difference is $2q_m\\,d\\phi$; it is local potential data, not a global\nreal gauge function on the entire sphere. The definition assumes no $U(1)$\nbundle or charge quantization.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.113), printed pp. 201-203 (PDF pp. 207-209): dyonic RN metric, field and parameter range"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Section 2.1, equations (2.1)-(2.9), printed pp. 4-5 (PDF pp. 5-6): RN metric, charge parameters, two-form and flux convention"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-emg-xs-kn-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Kerr-Newman metric and potential on the exact Boyer-Lindquist domain",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 2,
+        "deps": [
+          "def-emg-xs-geometric-electrovac",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-geometric-electrovac": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "Let $M,a,q\\in\\mathbb R$ have units of metres. Write\n$$\\Sigma(r,\\theta):=r^2+a^2\\cos^2\\theta,\\quad \\Delta(r):=r^2-2Mr+a^2+q^2,\\quad R(r):=r^2+a^2,\\quad B(\\theta):=\\sin^2\\theta.$$\nLet $U$ be an open subset of the Boyer-Lindquist coordinate region\n$\\{(x^0,r,\\theta,\\phi):\\Sigma>0,\\ \\Delta\\ne0,\\ 0<\\theta<\\pi\\}$.\nCoordinates $x^0,r$ have units of metres and $\\theta,\\phi$ are dimensionless.\nOn $U$ define\n$$g=-\\frac{\\Delta}{\\Sigma}(dx^0-aB\\,d\\phi)^2 +\\frac{\\Sigma}{\\Delta}\\,dr^2+\\Sigma\\,d\\theta^2 +\\frac{B}{\\Sigma}(R\\,d\\phi-a\\,dx^0)^2,\\qquad \\mathcal A=-\\frac{qr}{\\Sigma}(dx^0-aB\\,d\\phi),\\quad\\mathcal F:=d\\mathcal A.$$\nThe metric is the exact real symmetric tensor given by this display; no value\non $\\Delta=0$, the axes $\\theta=0,\\pi$, or $\\Sigma=0$ is part of this\ndefinition. The scalar $q$ is a geometric electric flux-length parameter; no\nSI conversion is fixed in this Definition.\n\n**Well-definedness on the stated patch.** In the coordinates\n$(x^0,r,y,\\phi)$ with $y=\\cos\\theta$ and $b=1-y^2$, the coordinate change is\na smooth diffeomorphism because $dy/d\\theta=-\\sin\\theta\\ne0$. The metric\nmatrix has\n$$g_{00}=-\\frac{\\Delta-a^2b}{\\Sigma},\\quad g_{03}=-\\frac{ab(R-\\Delta)}{\\Sigma},\\quad g_{33}=\\frac{b(R^2-a^2\\Delta b)}{\\Sigma},\\quad g_{11}=\\frac{\\Sigma}{\\Delta},\\quad g_{22}=\\frac{\\Sigma}{b}.$$\nThe inverse has nonzero entries\n$$g^{00}=-\\frac{R^2-a^2\\Delta b}{\\Sigma\\Delta},\\quad g^{03}=-\\frac{a(R-\\Delta)}{\\Sigma\\Delta},\\quad g^{33}=\\frac{\\Delta-a^2b}{\\Sigma\\Delta b},\\quad g^{11}=\\frac{\\Delta}{\\Sigma},\\quad g^{22}=\\frac{b}{\\Sigma}.$$\nMultiplying the $0,3$ blocks and the reciprocal $1,1$ and $2,2$ entries\ngives $gg^{-1}=I_4$.\nThe $t,\\phi$ block determinant is $-\\Delta b$, and the full determinant is\n$-\\Sigma^2$ in these coordinates. If $\\Delta>0$, the $t,\\phi$ block has one\npositive and one negative eigenvalue while the $r,\\theta$ entries are positive.\nIf $\\Delta<0$, $g_{33}>0$ and the $t,\\phi$ block has positive determinant,\nhence is positive definite, while $g_{11}<0$ and $g_{22}>0$. Thus $g$ is\nnondegenerate of signature $(-,+,+,+)$ on every component of $U$. Since this\nis a coordinate patch, a smooth time orientation may be supplied locally;\nthe geometric electrovac equations below do not use its choice.\n\nThe potential is a smooth real one-form on $U$ because $\\Sigma>0$, so $\\mathcal F$\nis a smooth real two-form. Exterior differentiation gives $d\\mathcal F=d^2\\mathcal A=0$\nusing commutation of smooth mixed coordinate derivatives. This definition is\nonly on the pole-free Boyer-Lindquist patch and asserts no global potential,\naxis extension, horizon extension, or global topology.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Section 2.1, equations (2.15)-(2.21), printed pp. 6-8 (PDF pp. 7-9): complexification, null metric and charged rotating coefficients"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.114)-(7.116) and the following charge substitution, printed pp. 208-209 (PDF pp. 214-215): Kerr metric and charged rotating form"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-emg-xs-rn-tensor-identities",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Exact Reissner-Nordström Ricci and curvature identities",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": true,
+        "dependency_level": 3,
+        "deps": [
+          "def-emg-xs-rn-data",
+          "lem-gr-warped-spherical-christoffel-and-ricci",
+          "def-gr-curvature-tensor-and-derived-tensors",
+          "thm-gr-curvature-tensoriality-and-coordinate-formula",
+          "thm-gr-curvature-algebraic-symmetries"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-rn-data": "mathematical-premise",
+          "lem-gr-warped-spherical-christoffel-and-ricci": "mathematical-premise",
+          "def-gr-curvature-tensor-and-derived-tensors": "mathematical-premise",
+          "thm-gr-curvature-tensoriality-and-coordinate-formula": "mathematical-premise",
+          "thm-gr-curvature-algebraic-symmetries": "mathematical-premise"
+        },
+        "statement": "Let $M,q_e,q_m\\in\\mathbb R$, $Q^2=q_e^2+q_m^2$, and let $J\\subset(0,\\infty)$ be open with\n$f(r)=1-2M/r+Q^2/r^2\\ne0$ on $J$. For the dyonic RN datum of\n[[def-emg-xs-rn-data]], in a spherical-polar chart its Ricci components are\n$$\\operatorname{Ric}_{00}=f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=\\frac{fQ^2}{r^4},\\quad \\operatorname{Ric}_{11}=-\\frac1f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=-\\frac{Q^2}{fr^4},$$\n$$\\operatorname{Ric}_{22}=1-f-rf'=\\frac{Q^2}{r^2},\\qquad \\operatorname{Ric}_{33}=(1-f-rf')\\sin^2\\theta=\\frac{Q^2\\sin^2\\theta}{r^2},$$\nand all mixed components vanish. The scalar curvature is zero and\n$\\operatorname{Ric}_{ab}\\operatorname{Ric}^{ab}=4Q^4/r^8$. The Kretschmann scalar is\n$$R_{abcd}R^{abcd}=f''^2+\\frac{4(f')^2}{r^2}+\\frac{4(1-f)^2}{r^4} =\\frac{48M^2}{r^6}-\\frac{96MQ^2}{r^7}+\\frac{56Q^4}{r^8}.$$\nAll formulas hold on every component of $J$, including $f<0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.112), printed pp. 201-202 (PDF pp. 207-208): the RN source-free equations and two-form"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Section 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): RN seed and exact electrovac verification"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-emg-xs-kn-full-sphere-exterior",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Full-sphere exterior extension of the Kerr-Newman datum",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": true,
+        "dependency_level": 3,
+        "deps": [
+          "def-emg-xs-kn-data",
+          "def-emg-xs-geometric-electrovac"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-kn-data": "mathematical-premise",
+          "def-emg-xs-geometric-electrovac": "mathematical-premise"
+        },
+        "statement": "Let $M,a,q\\in\\mathbb R$ have units of metres, choose $R_0>4|M|$, and\nset\n$$\\mathcal X:=\\mathbb R_{x^0}\\times(R_0,\\infty)_r\\times S^2,\\qquad R=r^2+a^2,\\quad b=1-Z^2,\\quad \\Sigma=r^2+a^2Z^2,\\quad \\Delta=r^2-2Mr+a^2+q^2,$$\nwhere $S^2=\\{(X,Y,Z)\\in\\mathbb R^3:X^2+Y^2+Z^2=1\\}$ has its induced\nunit round metric $\\gamma$ and outward area form $\\omega$. Write\n$$\\lambda:=X\\,dY-Y\\,dX,\\qquad \\bar g:=-\\frac{\\Delta-a^2b}{\\Sigma}(dx^0)^2 +\\frac{\\Sigma}{\\Delta}\\,dr^2+\\Sigma\\gamma +\\frac{a^2(R+\\Sigma-\\Delta)}{\\Sigma}\\lambda^2 -\\frac{2a(R-\\Delta)}{\\Sigma}\\,dx^0\\odot\\lambda,$$\n$$\\bar{\\mathcal A}:=-\\frac{qr}{\\Sigma}(dx^0-a\\lambda),\\qquad \\bar{\\mathcal F}:=d\\bar{\\mathcal A}.$$\nHere $\\lambda^2=\\lambda\\otimes\\lambda$ and\n$u\\odot v=(u\\otimes v+v\\otimes u)/2$. This is the **full-sphere exterior\nextension** of the pole-free datum in [[def-emg-xs-kn-data]]. The coordinates\n$x^0,r$ and parameters $M,a,q$ have units of metres; sphere coordinates\nare dimensionless. The field $\\bar{\\mathcal F}$ is the geometric\nlength-normalized two-form and no SI conversion is part of this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Section 2.1, equations (2.15)-(2.21), printed pp. 6-8 (PDF pp. 7-9): the Boyer-Lindquist Kerr-Newman metric and potential"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.114)-(7.116) and charged substitution, printed pp. 208-209 (PDF pp. 214-215): rotating metric in its exterior coordinate form"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-emg-xs-kn-rational-calculus",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Exact rational Kerr-Newman component derivation",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "deps": [
+          "def-emg-xs-kn-data",
+          "def-gr-curvature-tensor-and-derived-tensors",
+          "thm-gr-curvature-tensoriality-and-coordinate-formula",
+          "thm-gr-curvature-algebraic-symmetries",
+          "def-gr-metric-volume-form-and-current-flux",
+          "thm-gr-density-divergence-and-finite-chain-flux",
+          "lem-emg-lorentz-hodge-calculus",
+          "alg-emg-rational-electrovac-verification",
+          "lem-emg-rational-electrovac-verification-correctness",
+          "lem-emg-rational-electrovac-verification-termination-resources",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-kn-data": "mathematical-premise",
+          "def-gr-curvature-tensor-and-derived-tensors": "mathematical-premise",
+          "thm-gr-curvature-tensoriality-and-coordinate-formula": "mathematical-premise",
+          "thm-gr-curvature-algebraic-symmetries": "mathematical-premise",
+          "def-gr-metric-volume-form-and-current-flux": "mathematical-premise",
+          "thm-gr-density-divergence-and-finite-chain-flux": "mathematical-premise",
+          "lem-emg-lorentz-hodge-calculus": "mathematical-premise",
+          "alg-emg-rational-electrovac-verification": "mathematical-premise",
+          "lem-emg-rational-electrovac-verification-correctness": "mathematical-premise",
+          "lem-emg-rational-electrovac-verification-termination-resources": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "Let $M,a,q\\in\\mathbb R$ and use the electric Kerr-Newman datum on a\nBoyer-Lindquist chart with $\\Sigma>0$, $\\Delta\\ne0$, $0<\\theta<\\pi$. Set\n$y=\\cos\\theta$, $b=1-y^2$, $R=r^2+a^2$, and use the rational procedure of\n[[alg-emg-rational-electrovac-verification]] with volume polynomial $w=\\Sigma$.\nIts exact component table is: the metric and inverse entries and determinant\nin Facts [F1]-[F2]; the field components\n$$\\mathcal F_{10}=\\frac{q(r^2-a^2y^2)}{\\Sigma^2},\\quad \\mathcal F_{20}=\\frac{2qra^2y}{\\Sigma^2},\\quad \\mathcal F_{13}=-\\frac{abq(r^2-a^2y^2)}{\\Sigma^2},\\quad \\mathcal F_{23}=-\\frac{2qraR\\,y}{\\Sigma^2};$$\nthe compact Ricci table in [F3]; and the exact contractions\n$$\\mathcal F_{ij}\\mathcal F^{ij} =-\\frac{2q^2(r^4-6a^2r^2y^2+a^4y^4)}{\\Sigma^4},\\qquad \\operatorname{Ric}_{ij}\\operatorname{Ric}^{ij}=\\frac{4q^4}{\\Sigma^4}, \\qquad g^{ij}\\operatorname{Ric}_{ij}=0.$$\nThe exact rational calculation returns zero numerator flags for all four\nMaxwell-density residuals and all sixteen Einstein residuals.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): KN metric, Maxwell field and direct field-equation verification"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.114)-(7.116) and charge substitution, printed pp. 208-209 (PDF pp. 214-215): Kerr metric and charged rotating form"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-emg-xs-rn-verification",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Full dyonic Reissner-Nordström electrovac verification",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "deps": [
+          "def-emg-xs-geometric-electrovac",
+          "def-emg-xs-rn-data",
+          "lem-emg-xs-rn-tensor-identities",
+          "lem-emg-lorentz-hodge-calculus",
+          "lem-emg-maxwell-observer-stress",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-rn-data": "mathematical-premise",
+          "lem-emg-xs-rn-tensor-identities": "mathematical-premise",
+          "lem-emg-lorentz-hodge-calculus": "mathematical-premise",
+          "lem-emg-maxwell-observer-stress": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise",
+          "def-emg-xs-geometric-electrovac": "mathematical-premise"
+        },
+        "statement": "For arbitrary $M,q_e,q_m\\in\\mathbb R$, put $Q^2=q_e^2+q_m^2$ and\n$f(r)=1-2M/r+Q^2/r^2$. On every open $J\\subset(0,\\infty)$ with $f\\ne0$, the\ndyonic RN datum of [[def-emg-xs-rn-data]] is a geometric electrovac datum of\n[[def-emg-xs-geometric-electrovac]] on\n$\\mathbb R_{x^0}\\times J\\times S^2$. In particular, its global two-form is\nsmooth, $d\\mathcal F=d(\\star_g\\mathcal F)=0$, and\n$\\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F)$ everywhere on that domain.\n\nFor arbitrary formal $c,\\mu_0,G_N>0$, set $\\alpha=\\sqrt{4\\pi G_N/(\\mu_0c^4)}$, $F=\\mathcal F/\\alpha$, and $T_{ab}:=\\mu_0^{-1}Q_g(F)_{ab}$. Then the same datum satisfies\n\n$$dF=d(\\star_gF)=0,\\qquad S=0,\\qquad G_{ab}=\\operatorname{Ric}_{ab}=\\frac{8\\pi G_N}{c^4}T_{ab},$$\n\nwhere $S$ is scalar curvature and $G_{ab}=\\operatorname{Ric}_{ab}-\\frac12Sg_{ab}$. This is the formal SI-to-geometric tensor normalization of [[lem-emg-maxwell-observer-stress]](d). It asserts neither measured parameter values nor a bundle realization for arbitrary flux. When the separate fixed-sector action hypotheses hold, $T$ is also the electromagnetic Hilbert tensor of that supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.112), printed pp. 201-202 (PDF pp. 207-208): the RN source-free equations and two-form"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Section 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): RN seed and exact electrovac verification"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-emg-xs-kn-verification",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Fully verified electric Kerr-Newman electrovacuum",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "deps": [
+          "lem-emg-xs-kn-rational-calculus",
+          "def-emg-xs-kn-data",
+          "def-emg-xs-kn-full-sphere-exterior",
+          "def-emg-xs-geometric-electrovac",
+          "lem-emg-maxwell-current-forms",
+          "lem-emg-maxwell-observer-stress",
+          "lem-emg-lorentz-hodge-calculus",
+          "thm-gr-density-divergence-and-finite-chain-flux",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "lem-emg-xs-kn-rational-calculus": "mathematical-premise",
+          "def-emg-xs-geometric-electrovac": "mathematical-premise",
+          "lem-emg-maxwell-current-forms": "mathematical-premise",
+          "lem-emg-maxwell-observer-stress": "mathematical-premise",
+          "lem-emg-lorentz-hodge-calculus": "mathematical-premise",
+          "thm-gr-density-divergence-and-finite-chain-flux": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise",
+          "def-emg-xs-kn-full-sphere-exterior": "mathematical-premise",
+          "def-emg-xs-kn-data": "mathematical-premise"
+        },
+        "statement": "For $M,a,q\\in\\mathbb R$, on every pole-free Boyer-Lindquist domain with\n$\\Sigma>0$ and $\\Delta\\ne0$, the metric and potential of\n[[def-emg-xs-kn-data]] satisfy the equations below. In addition, for every\n$R_0>4|M|$, the full-sphere exterior extension of\n[[def-emg-xs-kn-full-sphere-exterior]] satisfies the same equations on\n$\\mathbb R_{x^0}\\times(R_0,\\infty)\\times S^2$. On all these domains,\n$$d\\mathcal F=0,\\qquad d(\\star_g\\mathcal F)=0,\\qquad \\operatorname{Ric}_{ij}=2\\left(\\mathcal F_{ik}\\mathcal F_j{}^k -\\frac14g_{ij}\\mathcal F_{kl}\\mathcal F^{kl}\\right).$$\nThus it is a geometric electrovac datum on every such chart component. No\nmaximal extension, uniqueness, horizon classification, or physical\nmeasurement is asserted.\n\nFor arbitrary formal $c,\\mu_0,G_N>0$, set $\\alpha=\\sqrt{4\\pi G_N/(\\mu_0c^4)}$, $F=\\mathcal F/\\alpha$, and $T_{ab}:=\\mu_0^{-1}Q_g(F)_{ab}$. Then the same datum satisfies\n\n$$dF=d(\\star_gF)=0,\\qquad S=0,\\qquad G_{ab}=\\operatorname{Ric}_{ab}=\\frac{8\\pi G_N}{c^4}T_{ab},$$\n\nwhere $S$ is scalar curvature and $G_{ab}=\\operatorname{Ric}_{ab}-\\frac12Sg_{ab}$. This is the formal SI-to-geometric tensor normalization of [[lem-emg-maxwell-observer-stress]](d). It asserts neither measured parameter values nor a bundle realization for arbitrary flux. When the separate fixed-sector action hypotheses hold, $T$ is also the electromagnetic Hilbert tensor of that supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): KN metric, Maxwell field and direct Newman-Penrose verification"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.114)-(7.116) and charge substitution, printed pp. 208-209 (PDF pp. 214-215): rotating metric and charged form"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-emg-xs-duality",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Classical electrovac dual rotation",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "deps": [
+          "def-emg-xs-geometric-electrovac",
+          "lem-emg-lorentz-hodge-calculus",
+          "lem-emg-maxwell-observer-stress",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "def-emg-xs-geometric-electrovac": "mathematical-premise",
+          "lem-emg-lorentz-hodge-calculus": "mathematical-premise",
+          "lem-emg-maxwell-observer-stress": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "Let $(M,g,N,o,\\mathcal F)$ be a smooth geometric electrovac datum with zero\ncosmological constant, and let $\\beta\\in\\mathbb R$ be constant. Define\n$$\\mathcal F_\\beta:=\\cos\\beta\\,\\mathcal F+\\sin\\beta\\,\\star_g\\mathcal F.$$\nThen $d\\mathcal F_\\beta=d(\\star_g\\mathcal F_\\beta)=0$ and\n$Q_{ab}(\\mathcal F_\\beta)=Q_{ab}(\\mathcal F)$, so the same metric satisfies\n$\\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F_\\beta)$. This is a classical\ntwo-form identity; it asserts no charge quantization or empirical existence\nof magnetic monopoles.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): the KN metric, Maxwell field and direct Newman-Penrose verification"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.113), printed pp. 201-203 (PDF pp. 207-209): the dyonic RN field and finite-charge context"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-emg-xs-rn-curvature",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "RN curvature invariants and the C2 extension obstruction",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "deps": [
+          "thm-emg-xs-rn-verification",
+          "lem-emg-xs-rn-tensor-identities",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-extended-pointwise-product",
+          "def-emg-lp-class-and-representative",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "thm-emg-xs-rn-verification": "mathematical-premise",
+          "lem-emg-xs-rn-tensor-identities": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-extended-pointwise-product": "mathematical-premise",
+          "def-emg-lp-class-and-representative": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "On the dyonic RN datum with real length parameters $M,q_e,q_m$, let\n$Q^2=q_e^2+q_m^2$ and $r>0$, $f(r)\\ne0$. Then the scalar curvature is\n$S=0$, while\n$$\\operatorname{Ric}_{ab}\\operatorname{Ric}^{ab}=\\frac{4Q^4}{r^8},\\qquad R_{abcd}R^{abcd}=\\frac{48M^2}{r^6}-\\frac{96MQ^2}{r^7}+\\frac{56Q^4}{r^8}.$$\nIf $Q\\ne0$, the Ricci-square diverges as $r\\downarrow0$; if $Q=0$ and\n$M\\ne0$, the Kretschmann scalar diverges there. Consequently no $C^2$\nnondegenerate metric extension can add an approached $r=0$ point in either\ncase. For $M=Q=0$ the metric is flat and these invariants give no obstruction.\nNo distributional source at $r=0$ is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.112), printed pp. 201-202 (PDF pp. 207-208): the RN source-free equations and two-form"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Section 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): RN seed and exact electrovac verification"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-emg-xs-kn-invariants",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Kerr-Newman Maxwell and Ricci invariants",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "deps": [
+          "thm-emg-xs-kn-verification",
+          "lem-emg-xs-kn-rational-calculus",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "thm-emg-xs-kn-verification": "mathematical-premise",
+          "lem-emg-xs-kn-rational-calculus": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "For the electric Kerr-Newman datum with real parameters $M,a,q$ on\n$\\Sigma>0$, $\\Delta\\ne0$, $0<\\theta<\\pi$, its scalar curvature is zero and\n$$\\mathcal F_{ab}\\mathcal F^{ab} =-\\frac{2q^2(r^4-6a^2r^2\\cos^2\\theta+a^4\\cos^4\\theta)}{\\Sigma^4}, \\qquad \\operatorname{Ric}_{ab}\\operatorname{Ric}^{ab}=\\frac{4q^4}{\\Sigma^4}.$$\nIf $q\\ne0$, the Ricci-square diverges as $\\Sigma\\to0$; hence no $C^2$\nnondegenerate metric extension can add a point approached with $\\Sigma\\to0$.\nWhen $a\\ne0$, the excluded set $r=0,\\theta=\\pi/2$ maps under the oblate\ncoordinate map to the ring $X^2+Y^2=a^2,\\ Z=0$. If $q=0$, these charged\ninvariants give no obstruction; no vacuum Kerr Weyl-singularity claim is\nmade.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): KN metric and Maxwell field"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.114)-(7.116), printed pp. 208-209 (PDF pp. 214-215): rotating metric and singularity domain"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-emg-xs-kn-dyonic-flux",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Dyonic Kerr-Newman parameters and conserved electric/magnetic flux",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "deps": [
+          "def-emg-xs-kn-full-sphere-exterior",
+          "thm-emg-xs-kn-verification",
+          "lem-emg-xs-duality",
+          "lem-emg-maxwell-current-forms",
+          "lem-emg-gauss-finite-chain",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "thm-emg-xs-kn-verification": "mathematical-premise",
+          "lem-emg-xs-duality": "mathematical-premise",
+          "lem-emg-gauss-finite-chain": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise",
+          "lem-emg-maxwell-current-forms": "mathematical-premise",
+          "def-emg-xs-kn-full-sphere-exterior": "mathematical-premise"
+        },
+        "statement": "Let $M,a,q\\in\\mathbb R$ and use the full-sphere exterior extension\n[[def-emg-xs-kn-full-sphere-exterior]] with parameters $(M,a,q)$ on an annulus\n$r\\in(R_0,R_1)\\subset(0,\\infty)$ where $\\Delta>0$. For example, take\n$R_0=4|M|+1$. For every $r>R_0$, $1-2M/r>1/2$ and\n$(a^2+q^2)/r^2\\ge0$, so $\\Delta/r^2>1/2$. For constant\n$\\beta\\in\\mathbb R$,\nthe dual-rotated field $\\mathcal F_\\beta=\\cos\\beta\\,\\mathcal F+\n\\sin\\beta\\,\\star_g\\mathcal F$ has flux parameters\n$$q_e=q\\cos\\beta,\\qquad q_m=q\\sin\\beta.$$\nThe metric depends on these two parameters only through\n$q_e^2+q_m^2=q^2$. The unrotated electric field has zero magnetic sphere flux\nand electric sphere flux $4\\pi q$. Flux conservation is asserted only between\nfinite homologous exterior spheres; no quantization or noncompact side-flux\nclaim is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): the KN metric, Maxwell field and direct Newman-Penrose verification"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.113), printed pp. 201-203 (PDF pp. 207-209): the dyonic RN field and finite-charge context"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 478,
+    "id": "emg-ms01-examples",
+    "kind": "B",
+    "category": "einstein-maxwell-models-mathematics",
+    "library": "mathematics",
+    "title": "Geometric electrovac equations and flux normalization — Examples",
+    "companion": "emg-ms01",
+    "requires": [
+      "emg-ms01"
+    ],
+    "items": [
+      {
+        "id": "ex-emg-xs-zero-rotation",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Zero-rotation and zero-charge metric substitutions",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "deps": [
+          "thm-emg-xs-kn-verification",
+          "thm-emg-xs-rn-verification",
+          "def-gr-schwarzschild-exterior-model",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "thm-emg-xs-kn-verification": "mathematical-premise",
+          "thm-emg-xs-rn-verification": "mathematical-premise",
+          "def-gr-schwarzschild-exterior-model": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise"
+        },
+        "statement": "Consider the exact Kerr-Newman metric and potential on a pole-free domain with\n$\\Sigma>0$ and $\\Delta\\ne0$. Its three parameter substitutions give the\nReissner-Nordström, vacuum Kerr, and Schwarzschild metric forms as follows.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): the KN metric, Maxwell field and direct Newman-Penrose verification"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.113), printed pp. 201-203 (PDF pp. 207-209): the dyonic RN field and finite-charge context"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-emg-xs-rn-charge-sign",
+        "kind": "example",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Opposite electric charges give the same RN metric",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "deps": [
+          "def-emg-xs-rn-data",
+          "thm-emg-xs-rn-verification",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "thm-emg-xs-rn-verification": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise",
+          "def-emg-xs-rn-data": "mathematical-premise"
+        },
+        "statement": "Fix a length $\\ell>0$ and a real mass parameter $M$. On any positive-radius\ninterval where the two functions\n$f_\\pm(r)=1-2M/r+\\ell^2/r^2$ are nonzero, compare the pure electric RN data\nwith $q_e=+\\ell$ and $q_e=-\\ell$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.113), printed pp. 201-203 (PDF pp. 207-209): RN field and charge parameters"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): KN field and exact Einstein-Maxwell verification"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-emg-xs-scalar-trace",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "library": "mathematics",
+        "title": "Zero scalar curvature does not imply vacuum Ricci",
+        "physical_scope": null,
+        "reference": "research/plan-einstein-maxwell-models-track.md#L704",
+        "design_state": "Authored draft; current supplier status and exact uses are recorded in batch-21 dependency inputs.",
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "deps": [
+          "thm-emg-xs-rn-verification",
+          "lem-emg-xs-rn-tensor-identities",
+          "def-emg-finite-real-supremum-domain",
+          "def-emg-real-metric-axiom-convention",
+          "lem-emg-metric-axioms-imply-nonnegativity",
+          "def-emg-explicit-power-regimes",
+          "lem-emg-sequence-limit-criterion-with-choice",
+          "def-emg-boundaryless-completeness-domain",
+          "def-emg-set-size-and-class-schema"
+        ],
+        "dependency_roles": {
+          "thm-emg-xs-rn-verification": "mathematical-premise",
+          "def-emg-finite-real-supremum-domain": "mathematical-premise",
+          "def-emg-real-metric-axiom-convention": "mathematical-premise",
+          "lem-emg-metric-axioms-imply-nonnegativity": "mathematical-premise",
+          "def-emg-explicit-power-regimes": "mathematical-premise",
+          "lem-emg-sequence-limit-criterion-with-choice": "mathematical-premise",
+          "def-emg-boundaryless-completeness-domain": "mathematical-premise",
+          "def-emg-set-size-and-class-schema": "mathematical-premise",
+          "lem-emg-xs-rn-tensor-identities": "mathematical-premise"
+        },
+        "statement": "For every four-dimensional Lorentzian metric, scalar curvature $S=0$ implies\n$\\operatorname{Ric}=0$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019",
+              "locator": "Chapter 7, equations (7.106)-(7.113), printed pp. 201-203 (PDF pp. 207-209): RN field and charge parameters"
+            },
+            {
+              "title": "Tim Adamo and E. T. Newman, The Kerr-Newman Metric: A Review, arXiv:1410.6626v2",
+              "url": "https://arxiv.org/pdf/1410.6626",
+              "locator": "Sections 2.1-2.2, printed pp. 4-11 (PDF pp. 5-12): KN field and exact Einstein-Maxwell verification"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

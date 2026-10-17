@@ -1,0 +1,844 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "42",
+  "batch_dependency_level": 4,
+  "batch_in_run_suppliers": [
+    "27",
+    "36",
+    "38",
+    "39",
+    "40",
+    "41"
+  ],
+  "plan_page_requirements": [
+    "csm-gibbs-lattice",
+    "qsm-kms-equilibrium"
+  ],
+  "batch_page_requirements": [
+    {
+      "page": "csm-gibbs-lattice",
+      "batch": "27",
+      "used_items": [
+        "def-csm-finite-range-lattice-interaction",
+        "def-csm-lattice-gibbs-specification",
+        "lem-csm-lattice-product-and-measure-compactness",
+        "lem-csm-lattice-specification-consistency",
+        "thm-csm-chain-dlr-uniqueness",
+        "thm-csm-ising-coexistence-pressure-cusp",
+        "thm-csm-ising-high-temperature-state",
+        "thm-csm-ising-low-temperature-coexistence",
+        "thm-csm-lattice-van-hove-pressure"
+      ],
+      "kind": "plan-page-requirement",
+      "dependency_level": 1,
+      "path": "library/classical-statistical-mechanics/csm-gibbs-lattice.md",
+      "status": "draft; current carriers present and all 9 direct used-item Step-1 records are hash-current where present; conditional interface use, not independent proof approval",
+      "interface": "def-csm-finite-range-lattice-interaction: Fix an integer dimension $d\\geq1$ and a finite nonempty alphabet $A$. A configuration is a function $\\sigma:\\mathbb Z^d\\to A$. An interaction list consists of a finite index set $\\mathcal R$ and, for each $r\\in\\mathcal R$, a finite nonempty shape $S_r\\subset\\mathbb Z^d$ containing $0$ and a function $\\Phi_r:A^{S_r}\\to\\mathbb R$. The index $r$ is part of the data: two equal shapes with different indices represent two terms and are both counted. Every translate $x+S_r$ contributes once, with value $\\Phi_r((\\sigma_{x+y})_{y\\in S_r})$.\n\nThe range is $R=\\max_{r\\in\\mathcal R}\\operatorname{diam}_\\infty(S_r)$, with $R=0$ when $\\mathcal R$ is empty. For finite $\\Lambda\\subset\\mathbb Z^d$, define the free-volume energy and the energy conditioned on an exterior configuration $\\eta\\in A^{\\Lambda^c}$ by\n$$H^{\\mathrm{free}}_\\Lambda(\\sigma)=\\sum_{r\\in\\mathcal R}\\ \\sum_{x:x+S_r\\subseteq\\Lambda}\\Phi_r(\\sigma_{x+S_r}),\\qquad E_\\Lambda(\\tau_\\Lambda\\mid\\eta)=\\sum_{r\\in\\mathcal R}\\ \\sum_{x:(x+S_r)\\cap\\Lambda\\ne\\varnothing}\\Phi_r((\\tau_\\Lambda\\eta)_{x+S_r}).$$\nThese are finite sums: for each finite shape $S_r$, only finitely many anchors $x$ make $x+S_r$ meet $\\Lambda$. Terms meeting $\\Lambda$ but not contained in it appear in the conditional energy and not in the free-volume energy. The definitions are mathematical and assign no physical units; a physical model must state its units separately.\ndef-csm-lattice-gibbs-specification: Assume Countable Choice for the product-measure extension framework of [[def-countable-choice]] and [[lem-csm-lattice-product-and-measure-compactness]]. Work in the finite-alphabet configuration space $X=A^{\\mathbb Z^d}$ with its cylinder-generated Borel sigma-algebra. Let the finite-range interaction and its conditional energy be as in [[def-csm-finite-range-lattice-interaction]], and fix $\\beta>0$. For a finite $\\Lambda\\subset\\mathbb Z^d$ and exterior configuration $\\eta\\in A^{\\Lambda^c}$, put\n$$Z_\\Lambda^\\eta=\\sum_{\\tau\\in A^\\Lambda}e^{-\\beta E_\\Lambda(\\tau\\mid\\eta)},\\qquad \\gamma_\\Lambda(f\\mid\\eta)=\\frac{\\sum_{\\tau\\in A^\\Lambda}f(\\tau\\eta)e^{-\\beta E_\\Lambda(\\tau\\mid\\eta)}}{Z_\\Lambda^\\eta}$$\nfor bounded measurable $f:X\\to\\mathbb R$. Here $\\gamma_\\Lambda f$ denotes the function $\\eta\\mapsto\\gamma_\\Lambda(f\\mid\\eta)$, composition is operator composition, and $\\mu\\gamma_\\Lambda(f)=\\int\\gamma_\\Lambda(f\\mid\\eta)\\,d\\mu(\\eta)$. A proper kernel leaves every exterior-measurable event fixed. A specification is a family $(\\gamma_\\Lambda)_{\\Lambda\\text{ finite}}$ of proper probability kernels satisfying $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever $\\Delta\\subseteq\\Lambda$. A DLR state is a probability measure $\\mu$ on $X$ satisfying $\\mu\\gamma_\\Lambda=\\mu$ for every finite $\\Lambda$.\n\nFor the existence and uniqueness results below, a specification has **finite range** when for every finite $\\Delta$ and every cylinder event $C$ the function $\\eta\\mapsto\\gamma_\\Delta(\\mathbf1_C\\mid\\eta)$ depends on only finitely many coordinates of $\\eta$. The displayed finite-range Gibbs formula has this property because only finitely many interaction terms meet $\\Delta$, and a cylinder indicator depends on only finitely many additional coordinates.\n\nThe formula is the candidate Gibbs specification; [[lem-csm-lattice-specification-consistency]] establishes its positive finite normalization, measurability, properness and consistency under the stated hypotheses. The Countable Choice assumption is used for the product-measure construction, not for any finite conditional sum.\nlem-csm-lattice-product-and-measure-compactness: Assume the Axiom of Countable Choice. Let $d\\geq1$, let $A$ be a finite nonempty set, and put $X=A^{\\mathbb Z^d}$. Give $X$ the metric $d_X(\\sigma,\\eta)=\\sum_{n\\geq1}2^{-n}\\mathbf 1_{\\{\\sigma_{i_n}\\ne\\eta_{i_n}\\}}$ for a fixed enumeration $(i_n)$ of $\\mathbb Z^d$, and let $\\mathcal C$ be its cylinder algebra. Then $X$ is compact, the Borel sigma-algebra is $\\sigma(\\mathcal C)$, and every consistent normalized finitely additive probability on $\\mathcal C$ extends uniquely to a probability on $\\sigma(\\mathcal C)$. Moreover, every sequence of probabilities on this sigma-algebra has a subsequence whose cylinder probabilities converge to those of a probability measure; along that subsequence integrals of every continuous $f:X\\to\\mathbb R$ converge.\nlem-csm-lattice-specification-consistency: Assume the finite-alphabet product-measure convention and conditional Gibbs formula of [[def-csm-lattice-gibbs-specification]], a finite-range interaction, and $\\beta>0$. For every finite $\\Lambda$ and exterior $\\eta$, the displayed partition $Z_\\Lambda^\\eta$ is finite and strictly positive, the formula $\\gamma_\\Lambda(\\cdot\\mid\\eta)$ defines a measurable proper probability kernel, and the family satisfies $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever finite $\\Delta\\subseteq\\Lambda$.\nthm-csm-chain-dlr-uniqueness: Assume Countable Choice, finite $\\beta>0$, finite $J,h\\in\\mathbb R$, and the one-dimensional nearest-neighbor Ising specification from [[def-csm-lattice-gibbs-specification]]. Then there is exactly one DLR state. It is the stationary Markov law constructed from the positive transfer matrix in [[lem-csm-chain-markov-bridge]]. For every fixed cylinder, finite-interval Gibbs probabilities converge to that law uniformly over the two endpoint boundary spins.\nthm-csm-ising-coexistence-pressure-cusp: Assume Countable Choice. For the two-dimensional nearest-neighbor ferromagnetic Ising model with $J>0$, $h=0$, and $\\beta J\\geq2$, the dimensionless pressure per site $p(h)$ as a function of field $h$ is not differentiable at $h=0$. More precisely, if the stationary DLR states at zero field have magnetizations at least $m_*>0$ and at most $-m_*$, then every positive-field secant slope from zero is at least $\\beta m_*$ and every negative-field secant slope is at most $-\\beta m_*$. This proves a sufficient coexistence cusp; it does not identify the critical coupling.\nthm-csm-ising-high-temperature-state: Assume Countable Choice, spins $s_i\\in\\{-1,+1\\}$, inverse temperature $\\beta>0$, a constant finite field $h\\in\\mathbb R$, and symmetric pair couplings satisfying $J_{ij}=J_{ji}$, $J_{i+k,j+k}=J_{ij}$ for all $i,j,k\\in\\mathbb Z^d$, and $J_{ij}=0$ when $\\|i-j\\|_\\infty>R$ for some finite $R$. For finite $\\Lambda$, use the conditional energy\n$$E_\\Lambda(s_\\Lambda\\mid\\eta)=-\\sum_{\\{i,j\\}:\\{i,j\\}\\cap\\Lambda\\ne\\varnothing}J_{ij}\\widehat s_i\\widehat s_j-h\\sum_{i\\in\\Lambda}s_i,$$\nwhere $\\widehat s_i=s_i$ on $\\Lambda$ and $\\widehat s_i=\\eta_i$ outside; let $\\gamma$ be the corresponding finite-alphabet Gibbs specification from [[def-csm-lattice-gibbs-specification]]. If\n$$\\sup_i\\sum_j\\tanh(\\beta|J_{ij}|)<1,$$\nthen there exists exactly one DLR state. For homogeneous nearest-neighbor coupling $J$ this sufficient condition is $2d\\tanh(\\beta|J|)<1$. It is not asserted to be sharp.\nthm-csm-ising-low-temperature-coexistence: Assume Countable Choice. For the nearest-neighbor ferromagnetic Ising model on $\\mathbb Z^2$ with coupling $J>0$, zero field, and $\\beta J\\geq2$, there exist two distinct translation-stationary DLR states $\\mu_+$ and $\\mu_-$ such that for every site $i$,\n$$\\mu_+(s_i)\\geq m_*>0,\\qquad \\mu_-(s_i)\\leq-m_*.$$\nOne may take $m_*=1-2\\delta(\\beta J)$, where\n$$\\delta(K)=\\frac43\\,\\frac{r^4(5-4r)}{(1-r)^2},\\qquad r=3e^{-2K}.$$\nThis is a sufficient low-temperature bound; the states are not asserted to be extremal and $K=2$ is not claimed to be critical.\nthm-csm-lattice-van-hove-pressure: Let $d\\geq1$, $A$ be finite nonempty, and let a bounded translation-invariant finite-range interaction on $A^{\\mathbb Z^d}$ be as in [[def-csm-finite-range-lattice-interaction]]. Fix $\\beta>0$. For a van Hove sequence of finite sets $\\Lambda_n\\subset\\mathbb Z^d$, meaning $|\\Lambda_n|\\to\\infty$ and $|\\{x\\in\\Lambda_n:\\operatorname{dist}_\\infty(x,\\Lambda_n^c)\\leq r\\}|/|\\Lambda_n|\\to0$ for every fixed $r$, the free-boundary pressure\n$$p_{\\Lambda_n}=\\frac{1}{|\\Lambda_n|}\\log\\sum_{\\sigma\\in A^{\\Lambda_n}}e^{-\\beta H_{\\Lambda_n}^{\\rm free}(\\sigma)}$$\nconverges to the same finite limit as along cubic boxes. Bounded finite-range interactions are essential; this statement does not concern continuum particles or long-range models."
+    },
+    {
+      "page": "qsm-states-ensembles",
+      "batch": "36",
+      "used_items": [
+        "lem-qsm-finite-matrix-cstar-and-state-duality",
+        "lem-qsm-matrix-state-calculus"
+      ],
+      "kind": "item-prerequisite",
+      "dependency_level": 0,
+      "path": "library/quantum-statistical-mechanics/qsm-states-ensembles.md",
+      "status": "draft; current carriers present and all 2 direct used-item Step-1 records are hash-current where present; conditional interface use, not independent proof approval",
+      "interface": "lem-qsm-finite-matrix-cstar-and-state-duality: Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.\nlem-qsm-matrix-state-calculus: Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set."
+    },
+    {
+      "page": "qsm-quasilocal-states",
+      "batch": "38",
+      "used_items": [
+        "def-qsm-local-spin-algebras",
+        "def-qsm-quasilocal-spin-algebra",
+        "lem-qsm-quasilocal-completion"
+      ],
+      "kind": "item-prerequisite",
+      "dependency_level": 1,
+      "path": "library/quantum-statistical-mechanics/qsm-quasilocal-states.md",
+      "status": "draft; current carriers present and all 3 direct used-item Step-1 records are hash-current where present; conditional interface use, not independent proof approval",
+      "interface": "def-qsm-local-spin-algebras: Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.\ndef-qsm-quasilocal-spin-algebra: Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.\nlem-qsm-quasilocal-completion: Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$."
+    },
+    {
+      "page": "qsm-finite-range-spin-dynamics",
+      "batch": "39",
+      "used_items": [
+        "def-qsm-bounded-finite-range-interaction",
+        "thm-qsm-finite-range-spin-dynamics"
+      ],
+      "kind": "item-prerequisite",
+      "dependency_level": 2,
+      "path": "library/quantum-statistical-mechanics/qsm-finite-range-spin-dynamics.md",
+      "status": "draft; current carriers present and all 2 direct used-item Step-1 records are hash-current where present; conditional interface use, not independent proof approval",
+      "interface": "def-qsm-bounded-finite-range-interaction: Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.\nthm-qsm-finite-range-spin-dynamics: Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$, the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of $*$-automorphisms of $\\mathcal A$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space."
+    },
+    {
+      "page": "qsm-spin-thermodynamic-limits",
+      "batch": "40",
+      "used_items": [
+        "def-qsm-translation-invariant-spin-interaction"
+      ],
+      "kind": "item-prerequisite",
+      "dependency_level": 3,
+      "path": "library/quantum-statistical-mechanics/qsm-spin-thermodynamic-limits.md",
+      "status": "draft; current carriers present and all 1 direct used-item Step-1 records are hash-current where present; conditional interface use, not independent proof approval",
+      "interface": "def-qsm-translation-invariant-spin-interaction: Use the lattice $\\Gamma=\\mathbb Z^d$, the finite-site Hilbert spaces, local matrix algebras, factor inclusions, and norm-completed local algebra $\\mathcal A$ of [[def-qsm-local-spin-algebras]] and [[def-qsm-quasilocal-spin-algebra]]. Write $\\tau_x$ for spatial translation by $x\\in\\Gamma$. For a finite region $\\Lambda$ and its configuration basis $(e_s)_{s\\in\\{1,\\ldots,q\\}^{\\Lambda}}$, the bijection $s\\mapsto s_x$ defined by $s_x(y+x)=s(y)$ gives a unitary $U_{x,\\Lambda}:\\mathcal H_\\Lambda\\to\\mathcal H_{\\Lambda+x}$ by $U_{x,\\Lambda}e_s=e_{s_x}$. On $A\\in\\mathcal A_\\Lambda$ put $\\tau_x(A)=U_{x,\\Lambda}AU_{x,\\Lambda}^*$.\n\nFor $x,y\\in\\Gamma$, the basis relabellings satisfy $U_{x,\\Lambda+y}U_{y,\\Lambda}=U_{x+y,\\Lambda}$, since both sides send each configuration vector $e_s$ to $e_{s_{x+y}}$. Consequently $\\tau_0$ is the identity and $\\tau_{x+y}=\\tau_x\\circ\\tau_y$ on local observables; continuity extends the action law to $\\mathcal A$.\n\nThis local map is independent of the chosen localization region: enlarging $\\Lambda$ tensors both representatives with identities, and the same site relabelling gives the corresponding enlarged unitary. On each finite region it is a unitary conjugation, hence isometric and preserves products, adjoints, and identities. It therefore extends uniquely to an isometric *-automorphism of the norm completion $\\mathcal A$: if $A_n$ is local and converges to $A$, define $\\tau_x(A)=\\lim_n\\tau_x(A_n)$; isometry makes this limit independent of the approximating sequence, and $\\tau_{-x}$ is its inverse. This construction uses the norm-completion property and the isometric local maps; it does not use the separate finite-matrix C*-identity condition.\n\nLet $\\Phi$ be a uniformly bounded finite-range interaction in the sense of [[def-qsm-bounded-finite-range-interaction]], with parameters $M,R,\\kappa$. It is translation invariant when $\\tau_x(\\Phi(Z))=\\Phi(Z+x)$ for every finite nonempty support $Z$ and every $x\\in\\Gamma$. Let $\\mathscr S_\\Phi$ contain one representative of each nonzero translation orbit, anchored so that the lexicographically least site of each representative is $0$, using the standard coordinate lexicographic order on $\\mathbb Z^d$. The least site exists because each support is finite and nonempty; every representative contains $0$. The list $\\mathscr S_\\Phi$ is finite: every such support has at most $M$ sites and lies in the finite cube $[-\\lceil R\\rceil,\\lceil R\\rceil]^d$. For finite $\\Lambda$, the free-boundary Hamiltonian is $H_\\Lambda=\\sum_{Z\\subseteq\\Lambda}\\Phi(Z)$, as in the interaction definition.\n\nWhen $\\Phi(Z)$ represents an energy, its norm, $H_\\Lambda$, and the constant $J_\\Phi:=\\sum_{S\\in\\mathscr S_\\Phi}\\|\\Phi(S)\\|$ have units joules. The definition is mathematical and makes no empirical identification of an interaction with a material."
+    },
+    {
+      "page": "qsm-kms-equilibrium",
+      "batch": "41",
+      "used_items": [
+        "def-qsm-kms-state",
+        "lem-qsm-kms-strip-uniqueness",
+        "thm-qsm-finite-kms-gibbs-characterization"
+      ],
+      "kind": "plan-page-requirement",
+      "dependency_level": 3,
+      "path": "library/quantum-statistical-mechanics/qsm-kms-equilibrium.md",
+      "status": "draft; current carriers present and all 3 direct used-item Step-1 records are hash-current where present; conditional interface use, not independent proof approval",
+      "interface": "def-qsm-kms-state: Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative norm, and a conjugate-linear involution satisfying $\\|A^*A\\|=\\|A\\|^2$; **unital** means that it has a nonzero identity $I$ ([[def-c-star-algebra]]). A $*$-automorphism is a bijective complex-linear map preserving multiplication and involution. Let $t\\mapsto\\alpha_t$ be a one-parameter group of such automorphisms, so $\\alpha_0$ is the identity and $\\alpha_s\\alpha_t=\\alpha_{s+t}$. It is **strongly continuous** when $t\\mapsto\\alpha_t(A)$ is norm-continuous for each fixed $A\\in\\mathcal A$. A **state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ with $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$; this is the state convention of [[def-qsm-infinite-algebraic-state]].\n\nFix absolute temperature $T>0$ in kelvins and Boltzmann's constant $k_B>0$ in J K$^{-1}$; the inverse-temperature parameter is $\\beta:=(k_BT)^{-1}>0$, measured in J$^{-1}$. Let the reduced Planck constant $\\hbar>0$ have units J s. Write $b:=\\beta\\hbar$, measured in seconds, and\n\n$$S_b:=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\},\\qquad S_b^\\circ:=\\{z\\in\\mathbb C:0<\\operatorname{Im}z<b\\}.$$\n\nA state $\\omega$ is a **$\\beta$-KMS state for $\\alpha$ in physical time** when for every $A,B\\in\\mathcal A$ there is a bounded function $F_{A,B}:S_b\\to\\mathbb C$ (that is, $\\sup_{z\\in S_b}|F_{A,B}(z)|<\\infty$) that is continuous on $S_b$, complex-differentiable at every point of $S_b^\\circ$, and satisfies\n\n$$F_{A,B}(t)=\\omega\\!\\left(A\\alpha_t(B)\\right),\\qquad F_{A,B}(t+ib)=\\omega\\!\\left(\\alpha_t(B)A\\right)\\quad(t\\in\\mathbb R).$$\n\nFor the assigned quantum spin model, $\\mathcal A$ is the norm-completed quasi-local algebra of [[def-qsm-quasilocal-spin-algebra]] and $\\alpha$ is the thermodynamic dynamics of [[thm-qsm-finite-range-spin-dynamics]], under that theorem's stated hypotheses. The strip width is $\\beta\\hbar$ in physical seconds; setting $\\hbar=1$ is a separate natural-unit convention. This is a mathematical equilibrium criterion for the specified algebra and dynamics. It does not assert that a model describes a material, that a system has dynamically relaxed, or that all stationary states are KMS.\nlem-qsm-kms-strip-uniqueness: Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}$. Let $F:S_b\\to\\mathbb C$ be bounded (so $\\sup_{z\\in S_b}|F(z)|<\\infty$), continuous, and complex-differentiable at every point of $S_b^\\circ$, and set\n\n$$M_0:=\\sup_{t\\in\\mathbb R}|F(t)|,\\qquad M_1:=\\sup_{t\\in\\mathbb R}|F(t+ib)|.$$\n\nFor $0<s<b$,\n\n$$\\sup_{t\\in\\mathbb R}|F(t+is)|\\le M_0^{1-s/b}M_1^{s/b},$$\n\nwhere each exponent is positive and $0^r=0$ for $r>0$. In particular, if $M_0,M_1\\le C$ then $|F(z)|\\le C$ on $S_b$. If two bounded continuous functions on $S_b$, holomorphic inside, have the same lower boundary values, then they agree on all of $S_b$.\nthm-qsm-finite-kms-gibbs-characterization: Let $\\mathcal H$ be a nonzero finite-dimensional complex Hilbert space, let $H=H^*$ on $\\mathcal H$ with energy units J, let $\\hbar>0$ have units J s, and let $\\beta>0$ have units J$^{-1}$. Write $\\operatorname{Tr}$ for the ordinary finite-dimensional trace. Assume the finite spectral-calculus and unital C$^*$-algebra clauses [A1]–[A2] below. Define the finite-matrix Heisenberg group\n\n$$\\alpha_t^H(X):=e^{itH/\\hbar}Xe^{-itH/\\hbar}\\qquad(X\\in\\mathcal B(\\mathcal H),\\ t\\in\\mathbb R).$$\n\nA state $\\omega$ on the unital C$^*$-algebra $\\mathcal B(\\mathcal H)$ satisfies the $\\beta$-KMS strip condition of [[def-qsm-kms-state]] for $\\alpha^H$ if and only if\n\n$$\\omega(X)=\\frac{\\operatorname{Tr}(e^{-\\beta H}X)}{\\operatorname{Tr}(e^{-\\beta H})}\\qquad(X\\in\\mathcal B(\\mathcal H)).$$\n\nHere $\\beta$ has units J$^{-1}$, $H$ has units J, and the physical-time strip has width $\\beta\\hbar$ seconds. The result is finite-dimensional and makes no infinite-volume or relaxation claim."
+    }
+  ],
+  "item_dependency_levels": [
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "def-qsm-diagonal-ising-interaction",
+      "dependency_level": 4,
+      "deps": [
+        "def-qsm-local-spin-algebras",
+        "def-qsm-bounded-finite-range-interaction",
+        "def-csm-finite-range-lattice-interaction",
+        "def-csm-lattice-gibbs-specification",
+        "def-countable-choice"
+      ],
+      "dependency_roles": {
+        "def-qsm-local-spin-algebras": "mathematical-premise",
+        "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+        "def-csm-finite-range-lattice-interaction": "mathematical-premise",
+        "def-csm-lattice-gibbs-specification": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": ""
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "lem-qsm-diagonal-ising-specification-consistency",
+      "dependency_level": 5,
+      "deps": [
+        "def-qsm-diagonal-ising-interaction",
+        "def-csm-finite-range-lattice-interaction",
+        "def-csm-lattice-gibbs-specification",
+        "lem-csm-lattice-specification-consistency"
+      ],
+      "dependency_roles": {
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "def-csm-finite-range-lattice-interaction": "mathematical-premise",
+        "def-csm-lattice-gibbs-specification": "mathematical-premise",
+        "lem-csm-lattice-specification-consistency": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "For the model of [[def-qsm-diagonal-ising-interaction]] and every finite $\\Delta\\subset\\mathbb Z^d$, the displayed $\\gamma_\\Delta$ is a finite-range proper probability kernel, and the family $(\\gamma_\\Delta)_{\\Delta\\text{ finite}}$ satisfies $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever $\\Delta\\subseteq\\Lambda$. Thus it is a specification in the sense of [[def-csm-lattice-gibbs-specification]], including when the bounded finite-range coefficients depend on position.\n\nIf in addition $J_{i,i+v}=J(v)=J(-v)$ is translation invariant and $h_i=h$ is constant, this specification is exactly the CSM specification obtained by taking one interaction shape $\\{0\\}$ for the field and one shape $\\{0,v\\}$ for each chosen representative $v$ of the nonzero displacement pairs $\\{v,-v\\}$. The latter identification uses the translated-shape convention of [[def-csm-finite-range-lattice-interaction]] and agrees with [[lem-csm-lattice-specification-consistency]]."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "lem-qsm-commuting-local-dynamics",
+      "dependency_level": 7,
+      "deps": [
+        "def-qsm-diagonal-ising-interaction",
+        "thm-qsm-finite-range-spin-dynamics",
+        "def-countable-choice",
+        "lem-qsm-finite-matrix-cstar-and-state-duality"
+      ],
+      "dependency_roles": {
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "thm-qsm-finite-range-spin-dynamics": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "Assume Countable Choice and the finite-matrix C*-identity for the local spin algebras. Let $\\alpha_t$ be the thermodynamic dynamics for the diagonal interaction of [[def-qsm-diagonal-ising-interaction]], as constructed under the exact hypotheses of [[thm-qsm-finite-range-spin-dynamics]]. For a local observable $A\\in\\mathcal A_X$, define the finite self-adjoint matrix\n$$K_X:=\\sum_{S:S\\cap X\\ne\\varnothing}\\Phi(S),$$\nwhere the sum ranges over the singleton and pair supports of that Ising interaction. Then the sum is finite and\n$$\\alpha_t(A)=e^{itK_X/\\hbar}Ae^{-itK_X/\\hbar}\\qquad(t\\in\\mathbb R).$$\nIn particular, every local diagonal observable is fixed by $\\alpha_t$. The formula is exact for this commuting diagonal model and uses the full local matrix algebra; it does not restrict observables to diagonal matrices."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "lem-qsm-kms-diagonal-reduction",
+      "dependency_level": 9,
+      "deps": [
+        "def-qsm-kms-state",
+        "def-qsm-diagonal-ising-interaction",
+        "lem-qsm-commuting-local-dynamics",
+        "lem-qsm-kms-strip-uniqueness",
+        "def-countable-choice",
+        "lem-qsm-finite-matrix-cstar-and-state-duality"
+      ],
+      "dependency_roles": {
+        "def-qsm-kms-state": "mathematical-premise",
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "lem-qsm-commuting-local-dynamics": "mathematical-premise",
+        "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "Assume Countable Choice and the finite-matrix C*-identity for the local spin algebras. Let $\\omega$ be a $\\beta$-KMS state, with $\\beta>0$, for the thermodynamic dynamics of [[def-qsm-diagonal-ising-interaction]] in the full quasi-local matrix algebra. For every finite region $\\Lambda$ and any two distinct product-basis configurations $\\sigma,\\tau\\in\\{-1,+1\\}^\\Lambda$, the local matrix unit $E_{\\sigma,\\tau}$ satisfies $\\omega(E_{\\sigma,\\tau})=0$. Consequently the density matrix representing $\\omega$ on each finite local matrix algebra is diagonal in the joint eigenbasis of the matrices $Z_i$."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "thm-qsm-diagonal-kms-dlr-bijection",
+      "dependency_level": 10,
+      "deps": [
+        "def-qsm-diagonal-ising-interaction",
+        "def-qsm-local-spin-algebras",
+        "lem-qsm-diagonal-ising-specification-consistency",
+        "lem-qsm-commuting-local-dynamics",
+        "lem-qsm-kms-diagonal-reduction",
+        "def-qsm-kms-state",
+        "lem-qsm-kms-strip-uniqueness",
+        "thm-qsm-finite-kms-gibbs-characterization",
+        "def-qsm-quasilocal-spin-algebra",
+        "lem-qsm-quasilocal-completion",
+        "lem-qsm-finite-matrix-cstar-and-state-duality",
+        "lem-qsm-matrix-state-calculus",
+        "lem-csm-lattice-product-and-measure-compactness",
+        "def-csm-lattice-gibbs-specification",
+        "def-countable-choice",
+        "thm-dynkin-pi-lambda",
+        "thm-weierstrass-convergence-holomorphic-functions",
+        "thm-qsm-finite-range-spin-dynamics"
+      ],
+      "dependency_roles": {
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "def-qsm-local-spin-algebras": "mathematical-premise",
+        "lem-qsm-diagonal-ising-specification-consistency": "mathematical-premise",
+        "lem-qsm-commuting-local-dynamics": "mathematical-premise",
+        "lem-qsm-kms-diagonal-reduction": "mathematical-premise",
+        "def-qsm-kms-state": "mathematical-premise",
+        "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+        "thm-qsm-finite-kms-gibbs-characterization": "mathematical-premise",
+        "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+        "lem-qsm-quasilocal-completion": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+        "lem-qsm-matrix-state-calculus": "mathematical-premise",
+        "lem-csm-lattice-product-and-measure-compactness": "mathematical-premise",
+        "def-csm-lattice-gibbs-specification": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "thm-dynkin-pi-lambda": "mathematical-premise",
+        "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+        "thm-qsm-finite-range-spin-dynamics": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "Fix $d\\geq1$, the inhomogeneous bounded finite-range diagonal spin-$\\tfrac12$ Ising interaction of [[def-qsm-diagonal-ising-interaction]], $\\beta>0$, $\\hbar>0$, Countable Choice, and the finite-matrix C*-identity supplied by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. Let $\\mathcal A$ be its norm-completed quasi-local matrix algebra and let $\\alpha_t$ be its thermodynamic dynamics. Let $\\mathcal D_\\beta$ be the set of Borel probability measures on $\\{-1,+1\\}^{\\mathbb Z^d}$ fixed by every finite conditional kernel $\\gamma_\\Delta$ of the model. Let $\\mathcal K_\\beta$ be the set of $\\beta$-KMS states for $\\alpha$ on the full algebra $\\mathcal A$, using the physical-time strip width $\\beta\\hbar$ seconds.\n\nFor a local matrix $A\\in\\mathcal A_\\Lambda$, define its diagonal cylinder function by\n$$\\operatorname{diag}(A)(\\sigma):=\\langle A e_{\\sigma|_\\Lambda},e_{\\sigma|_\\Lambda}\\rangle.$$\nThen the map\n$$\\mathcal D_\\beta\\longrightarrow\\mathcal K_\\beta,\\qquad \\mu\\longmapsto\\omega_\\mu,\\qquad \\omega_\\mu(A):=\\int\\operatorname{diag}(A)(\\sigma)\\,d\\mu(\\sigma)\\quad(A\\in\\mathcal A_{\\mathrm{loc}}),$$\nextends uniquely to an affine bijection from classical DLR measures to $\\beta$-KMS states. The KMS conclusion holds on the full matrix algebra, including off-diagonal observables; no translation invariance is assumed for this correspondence."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "thm-qsm-chain-kms-uniqueness",
+      "dependency_level": 11,
+      "deps": [
+        "thm-qsm-diagonal-kms-dlr-bijection",
+        "def-qsm-diagonal-ising-interaction",
+        "thm-csm-chain-dlr-uniqueness",
+        "def-countable-choice",
+        "lem-qsm-finite-matrix-cstar-and-state-duality"
+      ],
+      "dependency_roles": {
+        "thm-qsm-diagonal-kms-dlr-bijection": "mathematical-premise",
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "thm-csm-chain-dlr-uniqueness": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "Assume Countable Choice, the finite-matrix C*-identity, $d=1$, finite $\\beta>0$, $\\hbar>0$, a uniform field $h_i=h\\in\\mathbb R$, and nearest-neighbor couplings $J_{i,i+1}=J_{i+1,i}=J\\in\\mathbb R$ with all other pair couplings zero, in the diagonal model of [[def-qsm-diagonal-ising-interaction]]. Then the full quasi-local matrix algebra has exactly one $\\beta$-KMS state. The conclusion concerns the longitudinal diagonal Ising chain; no transverse-field term is included."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "thm-qsm-ising-high-temperature-kms-uniqueness",
+      "dependency_level": 11,
+      "deps": [
+        "thm-qsm-diagonal-kms-dlr-bijection",
+        "def-qsm-diagonal-ising-interaction",
+        "thm-csm-ising-high-temperature-state",
+        "def-countable-choice",
+        "lem-qsm-finite-matrix-cstar-and-state-duality"
+      ],
+      "dependency_roles": {
+        "thm-qsm-diagonal-kms-dlr-bijection": "mathematical-premise",
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "thm-csm-ising-high-temperature-state": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "Assume Countable Choice, the finite-matrix C*-identity, $d\\geq1$, a translation-invariant symmetric pair coupling $J_{i+k,j+k}=J_{ij}$ with $J_{ij}=0$ for $\\|i-j\\|_\\infty>R$ for some finite $R$, a constant finite field $h_i=h\\in\\mathbb R$, and $\\beta>0$, in the diagonal model of [[def-qsm-diagonal-ising-interaction]]. If\n$$\\sup_{i\\in\\mathbb Z^d}\\sum_{j\\ne i}\\tanh(\\beta|J_{ij}|)<1,$$\nthen the full quasi-local matrix algebra has exactly one $\\beta$-KMS state. This strict influence bound is sufficient, not sharp. For homogeneous nearest-neighbor coupling $J$, it reduces to $2d\\tanh(\\beta|J|)<1$. The result is for the longitudinal diagonal interaction and makes no transverse-field claim."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases",
+      "id": "thm-qsm-ising-kms-coexistence",
+      "dependency_level": 11,
+      "deps": [
+        "thm-qsm-diagonal-kms-dlr-bijection",
+        "def-qsm-diagonal-ising-interaction",
+        "lem-qsm-diagonal-ising-specification-consistency",
+        "def-qsm-local-spin-algebras",
+        "def-qsm-translation-invariant-spin-interaction",
+        "def-csm-finite-range-lattice-interaction",
+        "thm-csm-lattice-van-hove-pressure",
+        "thm-csm-ising-low-temperature-coexistence",
+        "thm-csm-ising-coexistence-pressure-cusp",
+        "def-countable-choice",
+        "lem-qsm-finite-matrix-cstar-and-state-duality"
+      ],
+      "dependency_roles": {
+        "thm-qsm-diagonal-kms-dlr-bijection": "mathematical-premise",
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "lem-qsm-diagonal-ising-specification-consistency": "mathematical-premise",
+        "def-qsm-local-spin-algebras": "mathematical-premise",
+        "def-qsm-translation-invariant-spin-interaction": "mathematical-premise",
+        "def-csm-finite-range-lattice-interaction": "mathematical-premise",
+        "thm-csm-lattice-van-hove-pressure": "mathematical-premise",
+        "thm-csm-ising-low-temperature-coexistence": "mathematical-premise",
+        "thm-csm-ising-coexistence-pressure-cusp": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "Assume Countable Choice, the finite-matrix C*-identity, $d=2$, uniform nearest-neighbor coupling $J>0$, zero field, $\\beta J\\geq2$, and $\\hbar>0$, in the diagonal spin-$\\tfrac12$ model of [[def-qsm-diagonal-ising-interaction]]. Let $\\tau_k$ be the spatial translation automorphisms of [[def-qsm-translation-invariant-spin-interaction]]; a state is **translation-invariant** when $\\omega(\\tau_k(A))=\\omega(A)$ for every local $A$ and $k\\in\\mathbb Z^2$. Then there are two distinct translation-invariant full-algebra $\\beta$-KMS states $\\omega_+$ and $\\omega_-$ with\n$$\\omega_+(Z_i)\\geq m_*>0,\\qquad \\omega_-(Z_i)\\leq-m_*<0\\quad(i\\in\\mathbb Z^2),$$\nwhere one may take $m_*=1-2\\delta(\\beta J)$, $\\delta(K)=\\frac43\\,\\frac{r^4(5-4r)}{(1-r)^2}$, and $r=3e^{-2K}$. This conservative bound does not assert extremality or that $\\beta J=2$ is critical.\n\nFor the same uniform model with field parameter $h_i=h$, let\n$$p_Q(h):=\\lim_{n\\to\\infty}\\frac{1}{|\\Lambda_n|}\\log\\operatorname{Tr}_{\\Lambda_n}\\!\\left(e^{-\\beta H_{\\Lambda_n}(h)}\\right),\\qquad \\Lambda_n=[-n,n]^2,$$\nthe dimensionless pressure per site along cubic boxes. This limit is the corresponding classical CSM pressure. It is not differentiable at $h=0$; for every $h>0$ its secant slope from zero is at least $\\beta m_*$, and for every $h<0$ it is at most $-\\beta m_*$. These are exact consequences of the stated diagonal model and the CSM suppliers, not empirical material claims."
+    },
+    {
+      "page": "qsm-commuting-quantum-phases-examples",
+      "id": "cex-qsm-finite-gibbs-unique-infinite-not",
+      "dependency_level": 12,
+      "deps": [
+        "def-qsm-diagonal-ising-interaction",
+        "def-qsm-local-spin-algebras",
+        "thm-qsm-finite-kms-gibbs-characterization",
+        "thm-qsm-ising-kms-coexistence",
+        "def-countable-choice",
+        "lem-qsm-finite-matrix-cstar-and-state-duality",
+        "lem-qsm-matrix-state-calculus"
+      ],
+      "dependency_roles": {
+        "def-qsm-diagonal-ising-interaction": "mathematical-premise",
+        "def-qsm-local-spin-algebras": "mathematical-premise",
+        "thm-qsm-finite-kms-gibbs-characterization": "mathematical-premise",
+        "thm-qsm-ising-kms-coexistence": "mathematical-premise",
+        "def-countable-choice": "mathematical-premise",
+        "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+        "lem-qsm-matrix-state-calculus": "mathematical-premise"
+      },
+      "physical_scope": null,
+      "empirical_premises": [],
+      "statement": "For every bounded finite-range quantum spin model, uniqueness of the finite-volume Gibbs state for each finite region implies uniqueness of the infinite-volume KMS state."
+    }
+  ],
+  "transitive_in_run_suppliers": [
+    {
+      "id": "def-csm-finite-range-lattice-interaction",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 0,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-csm-finite-range-lattice-interaction.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "37dcd8a70ce7c8ceaf530f5e6ae7566d119c04c7f2613747914208936403d37f",
+      "interface": "Fix an integer dimension $d\\geq1$ and a finite nonempty alphabet $A$. A configuration is a function $\\sigma:\\mathbb Z^d\\to A$. An interaction list consists of a finite index set $\\mathcal R$ and, for each $r\\in\\mathcal R$, a finite nonempty shape $S_r\\subset\\mathbb Z^d$ containing $0$ and a function $\\Phi_r:A^{S_r}\\to\\mathbb R$. The index $r$ is part of the data: two equal shapes with different indices represent two terms and are both counted. Every translate $x+S_r$ contributes once, with value $\\Phi_r((\\sigma_{x+y})_{y\\in S_r})$.\n\nThe range is $R=\\max_{r\\in\\mathcal R}\\operatorname{diam}_\\infty(S_r)$, with $R=0$ when $\\mathcal R$ is empty. For finite $\\Lambda\\subset\\mathbb Z^d$, define the free-volume energy and the energy conditioned on an exterior configuration $\\eta\\in A^{\\Lambda^c}$ by\n$$H^{\\mathrm{free}}_\\Lambda(\\sigma)=\\sum_{r\\in\\mathcal R}\\ \\sum_{x:x+S_r\\subseteq\\Lambda}\\Phi_r(\\sigma_{x+S_r}),\\qquad E_\\Lambda(\\tau_\\Lambda\\mid\\eta)=\\sum_{r\\in\\mathcal R}\\ \\sum_{x:(x+S_r)\\cap\\Lambda\\ne\\varnothing}\\Phi_r((\\tau_\\Lambda\\eta)_{x+S_r}).$$\nThese are finite sums: for each finite shape $S_r$, only finitely many anchors $x$ make $x+S_r$ meet $\\Lambda$. Terms meeting $\\Lambda$ but not contained in it appear in the conditional energy and not in the free-volume energy. The definitions are mathematical and assign no physical units; a physical model must state its units separately."
+    },
+    {
+      "id": "def-csm-lattice-gibbs-specification",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-csm-lattice-gibbs-specification.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "43b06bc5b700251af49562f83a984ce33d150f91c2805c9aed85349e2d01f19c",
+      "interface": "Assume Countable Choice for the product-measure extension framework of [[def-countable-choice]] and [[lem-csm-lattice-product-and-measure-compactness]]. Work in the finite-alphabet configuration space $X=A^{\\mathbb Z^d}$ with its cylinder-generated Borel sigma-algebra. Let the finite-range interaction and its conditional energy be as in [[def-csm-finite-range-lattice-interaction]], and fix $\\beta>0$. For a finite $\\Lambda\\subset\\mathbb Z^d$ and exterior configuration $\\eta\\in A^{\\Lambda^c}$, put\n$$Z_\\Lambda^\\eta=\\sum_{\\tau\\in A^\\Lambda}e^{-\\beta E_\\Lambda(\\tau\\mid\\eta)},\\qquad \\gamma_\\Lambda(f\\mid\\eta)=\\frac{\\sum_{\\tau\\in A^\\Lambda}f(\\tau\\eta)e^{-\\beta E_\\Lambda(\\tau\\mid\\eta)}}{Z_\\Lambda^\\eta}$$\nfor bounded measurable $f:X\\to\\mathbb R$. Here $\\gamma_\\Lambda f$ denotes the function $\\eta\\mapsto\\gamma_\\Lambda(f\\mid\\eta)$, composition is operator composition, and $\\mu\\gamma_\\Lambda(f)=\\int\\gamma_\\Lambda(f\\mid\\eta)\\,d\\mu(\\eta)$. A proper kernel leaves every exterior-measurable event fixed. A specification is a family $(\\gamma_\\Lambda)_{\\Lambda\\text{ finite}}$ of proper probability kernels satisfying $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever $\\Delta\\subseteq\\Lambda$. A DLR state is a probability measure $\\mu$ on $X$ satisfying $\\mu\\gamma_\\Lambda=\\mu$ for every finite $\\Lambda$.\n\nFor the existence and uniqueness results below, a specification has **finite range** when for every finite $\\Delta$ and every cylinder event $C$ the function $\\eta\\mapsto\\gamma_\\Delta(\\mathbf1_C\\mid\\eta)$ depends on only finitely many coordinates of $\\eta$. The displayed finite-range Gibbs formula has this property because only finitely many interaction terms meet $\\Delta$, and a cylinder indicator depends on only finitely many additional coordinates.\n\nThe formula is the candidate Gibbs specification; [[lem-csm-lattice-specification-consistency]] establishes its positive finite normalization, measurability, properness and consistency under the stated hypotheses. The Countable Choice assumption is used for the product-measure construction, not for any finite conditional sum."
+    },
+    {
+      "id": "lem-csm-chain-markov-bridge",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-chain-markov-bridge.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "968706e54a8f8315f7fda86671b7fd3d7b80941305feee58cfec5c4b016a55d7",
+      "interface": "Assume Countable Choice. For finite $\\beta>0$ and $J,h\\in\\mathbb R$, set $K=\\beta J$, $b=\\beta h$, and define the positive symmetric transfer matrix on $\\{-1,+1\\}$ by\n$$T_{s,t}=e^{Kst+b(s+t)/2}.$$\nLet $\\lambda_+$ be its larger eigenvalue and let $r$ be its strictly positive unit eigenvector, with coordinates $r_s$. Then\n$$Q_{s,t}=\\frac{T_{s,t}r_t}{\\lambda_+r_s},\\qquad \\pi_s=r_s^2$$\ndefine a stochastic matrix $Q$ and invariant probability vector $\\pi$. Their consistent consecutive-block laws $\\pi_{s_\\ell}\\prod_{i=\\ell}^{r-1}Q_{s_i,s_{i+1}}$ extend uniquely to a stationary probability measure on $\\{-1,+1\\}^{\\mathbb Z}$."
+    },
+    {
+      "id": "lem-csm-finite-gibbs-variational-identity",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 0,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-finite-gibbs-variational-identity.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "9335b19de6f7427aec998d020477a4fc1dc1ac413f5d93df4d37b06e1c772a49",
+      "interface": "Let $S$ be a finite nonempty set, $H:S\\to\\mathbb R$, and $\\beta>0$. Define $Z=\\sum_{s\\in S}e^{-\\beta H(s)}$ and $\\gamma(s)=Z^{-1}e^{-\\beta H(s)}$. For every probability vector $p$ on $S$, with $0\\log0=0$, its Shannon entropy $H_{\\rm Sh}(p)=-\\sum_s p(s)\\log p(s)$ and relative entropy $D(p\\Vert\\gamma)=\\sum_{p(s)>0}p(s)\\log(p(s)/\\gamma(s))$ satisfy\n$$D(p\\Vert\\gamma)=-H_{\\rm Sh}(p)+\\beta\\sum_s p(s)H(s)+\\log Z\\geq0.$$\nEquality holds exactly when $p=\\gamma$. Equivalently, $\\gamma$ is the unique minimizer of $\\sum_s p(s)H(s)-\\beta^{-1}H_{\\rm Sh}(p)$, and the minimum is $-\\beta^{-1}\\log Z$."
+    },
+    {
+      "id": "lem-csm-ising-influence-bound",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-ising-influence-bound.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "00b55b2019dfa055ccb97d92e218b87b99b502eebaf1a8693a21d24ce576eb6e",
+      "interface": "For a finite-range Ising pair interaction on $\\mathbb Z^d$ with spins $s_i\\in\\{-1,+1\\}$, energy $-\\sum_{\\{i,j\\}}J_{ij}s_is_j-\\sum_i h_i s_i$, finite couplings, and $\\beta>0$, let $\\gamma_i(\\cdot\\mid\\eta)$ be the one-site conditional Gibbs law. Define $c_{ij}$ as the supremum of the half-total-variation distance between $\\gamma_i(\\cdot\\mid\\eta)$ and $\\gamma_i(\\cdot\\mid\\eta')$ over boundaries differing only at $j$. Then $c_{ij}=0$ if no interaction term joins $i$ to $j$, and otherwise\n$$c_{ij}\\leq\\tanh(\\beta|J_{ij}|).$$\nIn particular, $\\sup_i\\sum_j\\tanh(\\beta|J_{ij}|)<1$ is a sufficient Dobrushin row-sum bound for every bounded field profile $(h_i)$."
+    },
+    {
+      "id": "lem-csm-ising-parity-contours",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-ising-parity-contours.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "1b0020b5265d6c6317c503ac00523134294feb79192d1e4e20565c3aff3326be",
+      "interface": "For a finite $+1$-boundary configuration of the nearest-neighbor Ising model on a square box in $\\mathbb Z^2$, draw a dual edge across each nearest-neighbor bond whose endpoint spins disagree. The resulting finite dual graph has even degree at every vertex and decomposes into edge-disjoint simple dual cycles. For each such cycle $\\gamma$, define the inside of a primal site by the parity of intersections of the horizontal ray from that site to $+\\infty$ with $\\gamma$. Then the inside is finite and contained in the variable box, and two neighboring primal sites have different inside parity exactly when their bond is crossed by $\\gamma$. Consequently, if the spin at the origin is $-1$, at least one cycle in the decomposition has the origin inside.\n\nThe schematic below places primal sites at integer-coordinate intersections and dual vertices at pairs of half-integers. Each thick dual segment crosses the perpendicular primal bond at its midpoint; the dashed ray from the origin crosses the displayed cycle once. The center spin is negative and the surrounding spins are positive. This is one local picture of the parity convention, not a proof of the separation or cycle-decomposition claims.\n\n```tikz\n\\begin{tikzpicture}[scale=1.15]\n  \\foreach \\x in {-1,0,1} {\n    \\draw[gray!55] (\\x,-1.3) -- (\\x,1.3);\n    \\draw[gray!55] (-1.3,\\x) -- (1.3,\\x);\n  }\n  \\draw[red!75!black,dashed,->] (0,0) -- (1.25,0) node[right] {$+\\infty$};\n  \\draw[very thick,blue!75!black] (-0.5,-0.5) -- (0.5,-0.5) -- (0.5,0.5) -- (-0.5,0.5) -- cycle;\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (-1,-1) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (0,-1) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (1,-1) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (-1,0) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (0,0) {$-$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (1,0) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (-1,1) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (0,1) {$+$};\n  \\node[draw,circle,fill=white,inner sep=1.5pt] at (1,1) {$+$};\n  \\foreach \\x/\\y in {-0.5/-0.5,0.5/-0.5,0.5/0.5,-0.5/0.5} {\n    \\node[draw,rectangle,fill=blue!75!black,inner sep=1.2pt] at (\\x,\\y) {};\n  }\n  \\node[below] at (0,-1.45) {primal spins and bonds};\n  \\node[right] at (0.65,0.48) {dual contour};\n\\end{tikzpicture}\n```"
+    },
+    {
+      "id": "lem-csm-lattice-product-and-measure-compactness",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 0,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-lattice-product-and-measure-compactness.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "0ea65da9326977533070ed26cbeec9858f64c20d372702a9407d16cdedc0a205",
+      "interface": "Assume the Axiom of Countable Choice. Let $d\\geq1$, let $A$ be a finite nonempty set, and put $X=A^{\\mathbb Z^d}$. Give $X$ the metric $d_X(\\sigma,\\eta)=\\sum_{n\\geq1}2^{-n}\\mathbf 1_{\\{\\sigma_{i_n}\\ne\\eta_{i_n}\\}}$ for a fixed enumeration $(i_n)$ of $\\mathbb Z^d$, and let $\\mathcal C$ be its cylinder algebra. Then $X$ is compact, the Borel sigma-algebra is $\\sigma(\\mathcal C)$, and every consistent normalized finitely additive probability on $\\mathcal C$ extends uniquely to a probability on $\\sigma(\\mathcal C)$. Moreover, every sequence of probabilities on this sigma-algebra has a subsequence whose cylinder probabilities converge to those of a probability measure; along that subsequence integrals of every continuous $f:X\\to\\mathbb R$ converge."
+    },
+    {
+      "id": "lem-csm-lattice-specification-consistency",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 2,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-lattice-specification-consistency.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "43b06bc5b700251af49562f83a984ce33d150f91c2805c9aed85349e2d01f19c",
+      "interface": "Assume the finite-alphabet product-measure convention and conditional Gibbs formula of [[def-csm-lattice-gibbs-specification]], a finite-range interaction, and $\\beta>0$. For every finite $\\Lambda$ and exterior $\\eta$, the displayed partition $Z_\\Lambda^\\eta$ is finite and strictly positive, the formula $\\gamma_\\Lambda(\\cdot\\mid\\eta)$ defines a measurable proper probability kernel, and the family satisfies $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever finite $\\Delta\\subseteq\\Lambda$."
+    },
+    {
+      "id": "lem-csm-maximal-coupling-and-heat-bath",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 3,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-maximal-coupling-and-heat-bath.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "88d20190a4ba803db4999722fedeca8139ba4a9303c66ead318d8fc4bc9624cb",
+      "interface": "For probability vectors $p,q$ on a finite set $A$, there is a coupling $(X,Y)$ with $\\Pr(X\\ne Y)=\\tfrac12\\sum_{a\\in A}|p(a)-q(a)|$. For a finite region $\\Lambda$ with strictly positive single-site Gibbs conditionals, the random-scan heat-bath chain has the finite-volume Gibbs law as its unique stationary distribution. This chain is an auxiliary finite-state proof device, not a physical time evolution."
+    },
+    {
+      "id": "lem-csm-peierls-energy-injection",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 2,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-peierls-energy-injection.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "9d9f4865ec1966dcdbac4b50a91e47790b77fdc697e0a5007038a2f6b16d943d",
+      "interface": "For the nearest-neighbor Ising model on a finite square box $B_n\\subset\\mathbb Z^2$ with exterior spins fixed to $+1$, coupling $J>0$, zero field, and $\\beta>0$, let $\\gamma_{B_n}^+$ be its normalized Gibbs law. For any simple dual cycle $\\gamma$ that occurs in the disagreement graph of a configuration, let $A_\\gamma$ be the event that all primal bonds crossed by $\\gamma$ have disagreeing spins. Then\n$$\\gamma_{B_n}^+(A_\\gamma)\\leq e^{-2\\beta J|\\gamma|}.$$\nFor each such cycle, the parity-inside is defined by [[lem-csm-ising-parity-contours]] and lies in the variable box."
+    },
+    {
+      "id": "lem-csm-stationary-dlr-construction",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 3,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-stationary-dlr-construction.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "2b71827fd6eec3625a0b2319850e14894f1946d57b12fa990f5e80849ef691ef",
+      "interface": "Assume Countable Choice, a translation-invariant finite-range interaction on $\\mathbb Z^d$ with finite alphabet, and a nonempty DLR state set. Then there exists at least one translation-stationary DLR state. This assertion does not imply uniqueness or ergodicity."
+    },
+    {
+      "id": "lem-csm-stationary-lattice-entropy-energy",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-csm-stationary-lattice-entropy-energy.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "ad375845d5484d7838ec1d9346d50f9c21a0c19e6566a227573ba2d82be3becb",
+      "interface": "Assume Countable Choice and let a consistent translation-stationary family of finite-dimensional distributions on a finite alphabet lattice be given. It extends to a unique stationary probability $\\mu$ on the cylinder sigma-algebra. For any such stationary $\\mu$ and any bounded translation-invariant finite-range interaction, define\n$H_n=-\\sum_{\\sigma\\in A^{B_n}}\\mu_{B_n}(\\sigma)\\log\\mu_{B_n}(\\sigma)$ and\n$u(\\mu)=\\sum_{r\\in\\mathcal R}\\mathbb E_\\mu[\\Phi_r]$.\nThen\n$$h(\\mu)=\\lim_{n\\to\\infty}\\frac{H_n}{|B_n|}=\\inf_{\\ell\\geq1}\\frac{H_\\ell}{|B_\\ell|}$$\nexists in $[0,\\log|A|]$, and the free-boundary interaction-energy density satisfies\n$$\\lim_{n\\to\\infty}\\frac{\\mathbb E_\\mu[H^{\\rm free}_{B_n}]}{|B_n|}=u(\\mu).$$"
+    },
+    {
+      "id": "thm-csm-chain-dlr-uniqueness",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 3,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-chain-dlr-uniqueness.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "9792eba8650597ee06f250356d810cb1da60a0d095e1612b365001165b9771bc",
+      "interface": "Assume Countable Choice, finite $\\beta>0$, finite $J,h\\in\\mathbb R$, and the one-dimensional nearest-neighbor Ising specification from [[def-csm-lattice-gibbs-specification]]. Then there is exactly one DLR state. It is the stationary Markov law constructed from the positive transfer matrix in [[lem-csm-chain-markov-bridge]]. For every fixed cylinder, finite-interval Gibbs probabilities converge to that law uniformly over the two endpoint boundary spins."
+    },
+    {
+      "id": "thm-csm-dobrushin-finite-range-uniqueness",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 4,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-dobrushin-finite-range-uniqueness.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "ec307503f83b64b3432a4da36ef886815d4f8c9114e40ec22a82aaf194c62c3d",
+      "interface": "Assume Countable Choice, a finite-alphabet finite-range lattice specification on $\\mathbb Z^d$, and $\\beta>0$. For each pair of sites define $c_{ij}$ as the supremum of the half-total-variation change in the one-site conditional law at $i$ when only exterior spin $j$ is changed, with $c_{ii}=0$. If\n$$c=\\sup_i\\sum_jc_{ij}<1,$$\nthen the DLR state is unique. Moreover, for a finite region $\\Lambda$, two boundary conditions $\\xi,\\eta$, and a nonnegative integer $r$, if site $i$ has lattice $\\ell^\\infty$-distance at least $r(R+1)$ from $\\Lambda^c$, its stationary disagreement probability in the finite-volume heat-bath coupling is at most $c^r/(1-c)$, where $R$ is the interaction range defined by [[def-csm-finite-range-lattice-interaction]]. Consequently every local conditional expectation becomes uniformly insensitive to boundary conditions as $\\Lambda\\uparrow\\mathbb Z^d$."
+    },
+    {
+      "id": "thm-csm-ising-coexistence-pressure-cusp",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 5,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-ising-coexistence-pressure-cusp.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "d4a9dd3e5523ea403891f74dd4889698f84261465bc1e8fc16d265bf4bf329c0",
+      "interface": "Assume Countable Choice. For the two-dimensional nearest-neighbor ferromagnetic Ising model with $J>0$, $h=0$, and $\\beta J\\geq2$, the dimensionless pressure per site $p(h)$ as a function of field $h$ is not differentiable at $h=0$. More precisely, if the stationary DLR states at zero field have magnetizations at least $m_*>0$ and at most $-m_*$, then every positive-field secant slope from zero is at least $\\beta m_*$ and every negative-field secant slope is at most $-\\beta m_*$. This proves a sufficient coexistence cusp; it does not identify the critical coupling."
+    },
+    {
+      "id": "thm-csm-ising-high-temperature-state",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 5,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-ising-high-temperature-state.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "d9786d940f87d5fd363a420356457f447321813235383e76e34e4fb8045e4362",
+      "interface": "Assume Countable Choice, spins $s_i\\in\\{-1,+1\\}$, inverse temperature $\\beta>0$, a constant finite field $h\\in\\mathbb R$, and symmetric pair couplings satisfying $J_{ij}=J_{ji}$, $J_{i+k,j+k}=J_{ij}$ for all $i,j,k\\in\\mathbb Z^d$, and $J_{ij}=0$ when $\\|i-j\\|_\\infty>R$ for some finite $R$. For finite $\\Lambda$, use the conditional energy\n$$E_\\Lambda(s_\\Lambda\\mid\\eta)=-\\sum_{\\{i,j\\}:\\{i,j\\}\\cap\\Lambda\\ne\\varnothing}J_{ij}\\widehat s_i\\widehat s_j-h\\sum_{i\\in\\Lambda}s_i,$$\nwhere $\\widehat s_i=s_i$ on $\\Lambda$ and $\\widehat s_i=\\eta_i$ outside; let $\\gamma$ be the corresponding finite-alphabet Gibbs specification from [[def-csm-lattice-gibbs-specification]]. If\n$$\\sup_i\\sum_j\\tanh(\\beta|J_{ij}|)<1,$$\nthen there exists exactly one DLR state. For homogeneous nearest-neighbor coupling $J$ this sufficient condition is $2d\\tanh(\\beta|J|)<1$. It is not asserted to be sharp."
+    },
+    {
+      "id": "thm-csm-ising-low-temperature-coexistence",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 4,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-ising-low-temperature-coexistence.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "57ffb0f2326691bac9245d403bcc41f0f5e17bcdf2fdc8c37365fc03491d1069",
+      "interface": "Assume Countable Choice. For the nearest-neighbor ferromagnetic Ising model on $\\mathbb Z^2$ with coupling $J>0$, zero field, and $\\beta J\\geq2$, there exist two distinct translation-stationary DLR states $\\mu_+$ and $\\mu_-$ such that for every site $i$,\n$$\\mu_+(s_i)\\geq m_*>0,\\qquad \\mu_-(s_i)\\leq-m_*.$$\nOne may take $m_*=1-2\\delta(\\beta J)$, where\n$$\\delta(K)=\\frac43\\,\\frac{r^4(5-4r)}{(1-r)^2},\\qquad r=3e^{-2K}.$$\nThis is a sufficient low-temperature bound; the states are not asserted to be extremal and $K=2$ is not claimed to be critical."
+    },
+    {
+      "id": "thm-csm-lattice-dlr-existence",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 2,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-lattice-dlr-existence.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "049fd912b83a535a8ab1274dc341d8cc513babf09879024b03ec6ea2c7a9d076",
+      "interface": "Assume Countable Choice, a finite nonempty alphabet $A$, and a proper consistent finite-range specification $\\gamma$ on $X=A^{\\mathbb Z^d}$, with finite range as defined in [[def-csm-lattice-gibbs-specification]]. No translation invariance is required. For every exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$ and every sequence of exterior configurations $\\eta_n$, the measures $\\gamma_{\\Lambda_n}(\\cdot\\mid\\eta_n)$ extended with the fixed exterior have a cylinder-convergent subsequence. Every such subsequential limit is a DLR state. Consequently the DLR state set is nonempty, convex, and closed under cylinder convergence. No uniqueness is asserted."
+    },
+    {
+      "id": "thm-csm-lattice-dlr-variational-pressure",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 4,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-lattice-dlr-variational-pressure.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "fccf8890dadc2522c16e76e6a0424169f7afcc053e3046b6de51a1b42a65fd8a",
+      "interface": "Assume Countable Choice, a bounded translation-invariant finite-range lattice interaction on a finite alphabet, and $\\beta>0$. Let $p$ be its dimensionless pressure per site, and let $\\mu$ be a translation-stationary probability with entropy density $h(\\mu)$ and energy density $u(\\mu)$ as in [[lem-csm-stationary-lattice-entropy-energy]]. Then\n$$h(\\mu)-\\beta u(\\mu)\\leq p.$$\nIf $\\mu$ is a DLR state for the specification, equality holds. Since stationary DLR states exist under these hypotheses, the supremum of $h(\\mu)-\\beta u(\\mu)$ over stationary probabilities is attained and equals $p$. The converse “every maximizing stationary probability is DLR” is not asserted."
+    },
+    {
+      "id": "thm-csm-lattice-van-hove-pressure",
+      "batch": "27",
+      "page": "csm-gibbs-lattice",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-csm-lattice-van-hove-pressure.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "855c959f21eecc102f2350002f0cfa47ba5b891c6b16297deedf0440dc18131d",
+      "interface": "Let $d\\geq1$, $A$ be finite nonempty, and let a bounded translation-invariant finite-range interaction on $A^{\\mathbb Z^d}$ be as in [[def-csm-finite-range-lattice-interaction]]. Fix $\\beta>0$. For a van Hove sequence of finite sets $\\Lambda_n\\subset\\mathbb Z^d$, meaning $|\\Lambda_n|\\to\\infty$ and $|\\{x\\in\\Lambda_n:\\operatorname{dist}_\\infty(x,\\Lambda_n^c)\\leq r\\}|/|\\Lambda_n|\\to0$ for every fixed $r$, the free-boundary pressure\n$$p_{\\Lambda_n}=\\frac{1}{|\\Lambda_n|}\\log\\sum_{\\sigma\\in A^{\\Lambda_n}}e^{-\\beta H_{\\Lambda_n}^{\\rm free}(\\sigma)}$$\nconverges to the same finite limit as along cubic boxes. Bounded finite-range interactions are essential; this statement does not concern continuum particles or long-range models."
+    },
+    {
+      "id": "lem-qsm-finite-gibbs-kms",
+      "batch": "36",
+      "page": "qsm-states-ensembles",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-finite-gibbs-kms.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "328f0af5b80492f8753f9566b589833c23e9119454101ce8a796770fc040d8cf",
+      "interface": "Let $H=H^*$ be a finite-dimensional Hamiltonian with energy unit J and let $\\hbar>0$ have unit J s. For $t\\in\\mathbb R$, $U(t)=e^{-itH/\\hbar}$ is unitary and $U(t+s)=U(t)U(s)$. For a density $\\rho$, the Schrödinger state $U(t)\\rho U(t)^*$ and the Heisenberg observable $\\alpha_t(A)=U(t)^*AU(t)$ have the same trace expectation, and the von Neumann entropy is unchanged. If $\\sigma_\\beta=e^{-\\beta H}/Z_\\beta$, $Z_\\beta=\\operatorname{Tr}e^{-\\beta H}$, then it is stationary and satisfies the finite Gibbs KMS strip identity\n$\nF_{A,B}(t+i\\beta\\hbar)=\\operatorname{Tr}(\\sigma_\\beta\\alpha_t(B)A),\\qquad\nF_{A,B}(z)=\\operatorname{Tr}(\\sigma_\\beta A\\alpha_z(B)),\n$\nwhere $\\alpha_z(B)=e^{izH/\\hbar}Be^{-izH/\\hbar}$. The function is entire and bounded on $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$. No infinite-volume KMS existence or approach to equilibrium follows."
+    },
+    {
+      "id": "lem-qsm-finite-matrix-cstar-and-state-duality",
+      "batch": "36",
+      "page": "qsm-states-ensembles",
+      "dependency_level": 1,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-finite-matrix-cstar-and-state-duality.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "914f4240e731606cc7650d7c652ec80ce5da0760d4771415da5b0988f58bd62e",
+      "interface": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion."
+    },
+    {
+      "id": "lem-qsm-matrix-state-calculus",
+      "batch": "36",
+      "page": "qsm-states-ensembles",
+      "dependency_level": 0,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-matrix-state-calculus.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "dae52b9de1319666dbe7c9e78c1c14b6059dd25190f2c6b73fcfe8aa5fdf9f9c",
+      "interface": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy–Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set."
+    },
+    {
+      "id": "def-qsm-infinite-algebraic-state",
+      "batch": "38",
+      "page": "qsm-quasilocal-states",
+      "dependency_level": 6,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-qsm-infinite-algebraic-state.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "d8fa827749500b2e04090f7cb45a06600635eb687f86f07045f9768fca09d024",
+      "interface": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, the local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$, with partial trace characterized by its pairing against every $A\\otimes I_{\\Lambda'\\setminus\\Lambda}$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted."
+    },
+    {
+      "id": "def-qsm-local-spin-algebras",
+      "batch": "38",
+      "page": "qsm-quasilocal-states",
+      "dependency_level": 2,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-qsm-local-spin-algebras.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "1e3730fb27d4ad104b6fb8e2fa2a3b0723b891c1c6846580949f5ddb52a75b6a",
+      "interface": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space."
+    },
+    {
+      "id": "def-qsm-quasilocal-spin-algebra",
+      "batch": "38",
+      "page": "qsm-quasilocal-states",
+      "dependency_level": 4,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-qsm-quasilocal-spin-algebra.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "46b75b48f1590c67486fb9f7f628526ca649290a44409d962e108b14fefca16d",
+      "interface": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra."
+    },
+    {
+      "id": "lem-qsm-integer-lattice-countable",
+      "batch": "38",
+      "page": "qsm-quasilocal-states",
+      "dependency_level": 0,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-integer-lattice-countable.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "ce682eb78006465db2e0971553f83d433144be12e149f4fcd5e615e80793a8ad",
+      "interface": "For every positive integer $d$, the integer lattice $\\Gamma=\\mathbb{Z}^d$ is at most countable. Countability here means finite or in bijection with $\\mathbb{N}$, as in [[def-countable]]."
+    },
+    {
+      "id": "lem-qsm-local-spin-inclusions-isometric",
+      "batch": "38",
+      "page": "qsm-quasilocal-states",
+      "dependency_level": 3,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-local-spin-inclusions-isometric.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "e1a498bbf87dd24d0e8a0d04b1dce40c55299dd46b1b375d7ea725e3f30bd631",
+      "interface": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$."
+    },
+    {
+      "id": "lem-qsm-quasilocal-completion",
+      "batch": "38",
+      "page": "qsm-quasilocal-states",
+      "dependency_level": 5,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-quasilocal-completion.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "46b75b48f1590c67486fb9f7f628526ca649290a44409d962e108b14fefca16d",
+      "interface": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$."
+    },
+    {
+      "id": "def-qsm-bounded-finite-range-interaction",
+      "batch": "39",
+      "page": "qsm-finite-range-spin-dynamics",
+      "dependency_level": 3,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-qsm-bounded-finite-range-interaction.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "b06a9f7c9cc6175a16003e700958d65e1163b264b15b7a100ed3b803ffd66c7b",
+      "interface": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value."
+    },
+    {
+      "id": "lem-qsm-boundary-dynamics-cauchy",
+      "batch": "39",
+      "page": "qsm-finite-range-spin-dynamics",
+      "dependency_level": 5,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-boundary-dynamics-cauchy.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "fb354a311fca6aebee8c1acd1d5f571b808320fc45b048970fbd3951d63c634d",
+      "interface": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]], fix $\\mu>0$, and let $X\\subseteq\\Lambda\\subseteq\\Lambda'$ be finite regions with $X\\ne\\varnothing$. For every $A\\in\\mathcal A_X$ and $t\\in\\mathbb R$,\n\n$$\\|\\alpha_t^{\\Lambda'}(A)-\\alpha_t^\\Lambda(A)\\|\\le\\frac{2\\kappa |X|\\|A\\||t|}{\\hbar}e^{(2\\kappa M e^{\\mu R}/\\hbar)|t|+\\mu R}\\sum_{y\\notin\\Lambda}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}.$$\n\nThe infinite sum is finite. It tends to zero as $\\Lambda$ exhausts $\\mathbb Z^d$, so the estimate gives compact-time norm Cauchy convergence of free-boundary finite-volume dynamics on each local observable."
+    },
+    {
+      "id": "lem-qsm-finite-range-commutator-path-bound",
+      "batch": "39",
+      "page": "qsm-finite-range-spin-dynamics",
+      "dependency_level": 4,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-finite-range-commutator-path-bound.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "1e77b9b5bbb8f751e7aeccc4cee664973c7b1017e6ef1d1346a7f8ac508f1970",
+      "interface": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]] with parameters $M,R,\\kappa,\\hbar$. Let $\\mu>0$, let $\\Lambda\\subset\\mathbb Z^d$ be finite, let $X\\subseteq\\Lambda$ be finite and nonempty, and let $Y\\subset\\mathbb Z^d$ be any finite nonempty set. Take $A\\in\\mathcal A_X$ and $B\\in\\mathcal A_Y$, with both embedded in the common finite algebra $\\mathcal A_{\\Lambda\\cup Y}$. Then for every $t\\in\\mathbb R$,\n\n$$\\bigl\\|[\\alpha_t^\\Lambda(A),B]\\bigr\\|\\le 2\\|A\\|\\,\\|B\\|\\,|X|\\exp\\!\\left(\\frac{2\\kappa M e^{\\mu R}}{\\hbar}|t|-\\mu\\operatorname{dist}_\\infty(X,Y)\\right).$$\n\nHere the finite-volume dynamics is extended by the identity on sites outside $\\Lambda$, as in [[def-qsm-bounded-finite-range-interaction]]. The parameter $\\mu$ is measured per lattice step in the dimensionless max-coordinate metric. The bound is uniform over finite volumes containing $X$; it is an operator-norm estimate for the stipulated spin model, not a relativistic light cone."
+    },
+    {
+      "id": "thm-qsm-finite-range-spin-dynamics",
+      "batch": "39",
+      "page": "qsm-finite-range-spin-dynamics",
+      "dependency_level": 6,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-qsm-finite-range-spin-dynamics.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "bbd8774a8a6973977e9587a125fdfa96e44a2a56073052c52d9c32fb26a713f9",
+      "interface": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$, the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of $*$-automorphisms of $\\mathcal A$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space."
+    },
+    {
+      "id": "def-qsm-translation-invariant-spin-interaction",
+      "batch": "40",
+      "page": "qsm-spin-thermodynamic-limits",
+      "dependency_level": 5,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-qsm-translation-invariant-spin-interaction.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "365253246fe81e9c52452dea4c5972f58ff5d209a3dd40c2571f51b48d1bd165",
+      "interface": "Use the lattice $\\Gamma=\\mathbb Z^d$, the finite-site Hilbert spaces, local matrix algebras, factor inclusions, and norm-completed local algebra $\\mathcal A$ of [[def-qsm-local-spin-algebras]] and [[def-qsm-quasilocal-spin-algebra]]. Write $\\tau_x$ for spatial translation by $x\\in\\Gamma$. For a finite region $\\Lambda$ and its configuration basis $(e_s)_{s\\in\\{1,\\ldots,q\\}^{\\Lambda}}$, the bijection $s\\mapsto s_x$ defined by $s_x(y+x)=s(y)$ gives a unitary $U_{x,\\Lambda}:\\mathcal H_\\Lambda\\to\\mathcal H_{\\Lambda+x}$ by $U_{x,\\Lambda}e_s=e_{s_x}$. On $A\\in\\mathcal A_\\Lambda$ put $\\tau_x(A)=U_{x,\\Lambda}AU_{x,\\Lambda}^*$.\n\nFor $x,y\\in\\Gamma$, the basis relabellings satisfy $U_{x,\\Lambda+y}U_{y,\\Lambda}=U_{x+y,\\Lambda}$, since both sides send each configuration vector $e_s$ to $e_{s_{x+y}}$. Consequently $\\tau_0$ is the identity and $\\tau_{x+y}=\\tau_x\\circ\\tau_y$ on local observables; continuity extends the action law to $\\mathcal A$.\n\nThis local map is independent of the chosen localization region: enlarging $\\Lambda$ tensors both representatives with identities, and the same site relabelling gives the corresponding enlarged unitary. On each finite region it is a unitary conjugation, hence isometric and preserves products, adjoints, and identities. It therefore extends uniquely to an isometric *-automorphism of the norm completion $\\mathcal A$: if $A_n$ is local and converges to $A$, define $\\tau_x(A)=\\lim_n\\tau_x(A_n)$; isometry makes this limit independent of the approximating sequence, and $\\tau_{-x}$ is its inverse. This construction uses the norm-completion property and the isometric local maps; it does not use the separate finite-matrix C*-identity condition.\n\nLet $\\Phi$ be a uniformly bounded finite-range interaction in the sense of [[def-qsm-bounded-finite-range-interaction]], with parameters $M,R,\\kappa$. It is translation invariant when $\\tau_x(\\Phi(Z))=\\Phi(Z+x)$ for every finite nonempty support $Z$ and every $x\\in\\Gamma$. Let $\\mathscr S_\\Phi$ contain one representative of each nonzero translation orbit, anchored so that the lexicographically least site of each representative is $0$, using the standard coordinate lexicographic order on $\\mathbb Z^d$. The least site exists because each support is finite and nonempty; every representative contains $0$. The list $\\mathscr S_\\Phi$ is finite: every such support has at most $M$ sites and lies in the finite cube $[-\\lceil R\\rceil,\\lceil R\\rceil]^d$. For finite $\\Lambda$, the free-boundary Hamiltonian is $H_\\Lambda=\\sum_{Z\\subseteq\\Lambda}\\Phi(Z)$, as in the interaction definition.\n\nWhen $\\Phi(Z)$ represents an energy, its norm, $H_\\Lambda$, and the constant $J_\\Phi:=\\sum_{S\\in\\mathscr S_\\Phi}\\|\\Phi(S)\\|$ have units joules. The definition is mathematical and makes no empirical identification of an interaction with a material."
+    },
+    {
+      "id": "def-qsm-kms-state",
+      "batch": "41",
+      "page": "qsm-kms-equilibrium",
+      "dependency_level": 7,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-def-qsm-kms-state.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "aa139ef1e19c3aa31125dad998ec1c44e4282a5167944f6fff6c4d8765e7c467",
+      "interface": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative norm, and a conjugate-linear involution satisfying $\\|A^*A\\|=\\|A\\|^2$; **unital** means that it has a nonzero identity $I$ ([[def-c-star-algebra]]). A $*$-automorphism is a bijective complex-linear map preserving multiplication and involution. Let $t\\mapsto\\alpha_t$ be a one-parameter group of such automorphisms, so $\\alpha_0$ is the identity and $\\alpha_s\\alpha_t=\\alpha_{s+t}$. It is **strongly continuous** when $t\\mapsto\\alpha_t(A)$ is norm-continuous for each fixed $A\\in\\mathcal A$. A **state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ with $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$; this is the state convention of [[def-qsm-infinite-algebraic-state]].\n\nFix absolute temperature $T>0$ in kelvins and Boltzmann's constant $k_B>0$ in J K$^{-1}$; the inverse-temperature parameter is $\\beta:=(k_BT)^{-1}>0$, measured in J$^{-1}$. Let the reduced Planck constant $\\hbar>0$ have units J s. Write $b:=\\beta\\hbar$, measured in seconds, and\n\n$$S_b:=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\},\\qquad S_b^\\circ:=\\{z\\in\\mathbb C:0<\\operatorname{Im}z<b\\}.$$\n\nA state $\\omega$ is a **$\\beta$-KMS state for $\\alpha$ in physical time** when for every $A,B\\in\\mathcal A$ there is a bounded function $F_{A,B}:S_b\\to\\mathbb C$ (that is, $\\sup_{z\\in S_b}|F_{A,B}(z)|<\\infty$) that is continuous on $S_b$, complex-differentiable at every point of $S_b^\\circ$, and satisfies\n\n$$F_{A,B}(t)=\\omega\\!\\left(A\\alpha_t(B)\\right),\\qquad F_{A,B}(t+ib)=\\omega\\!\\left(\\alpha_t(B)A\\right)\\quad(t\\in\\mathbb R).$$\n\nFor the assigned quantum spin model, $\\mathcal A$ is the norm-completed quasi-local algebra of [[def-qsm-quasilocal-spin-algebra]] and $\\alpha$ is the thermodynamic dynamics of [[thm-qsm-finite-range-spin-dynamics]], under that theorem's stated hypotheses. The strip width is $\\beta\\hbar$ in physical seconds; setting $\\hbar=1$ is a separate natural-unit convention. This is a mathematical equilibrium criterion for the specified algebra and dynamics. It does not assert that a model describes a material, that a system has dynamically relaxed, or that all stationary states are KMS."
+    },
+    {
+      "id": "lem-qsm-kms-strip-uniqueness",
+      "batch": "41",
+      "page": "qsm-kms-equilibrium",
+      "dependency_level": 8,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-lem-qsm-kms-strip-uniqueness.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "71225b3285ecb2f1c6761d95444865054be18fcc61d848114194c76feb462e35",
+      "interface": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}$. Let $F:S_b\\to\\mathbb C$ be bounded (so $\\sup_{z\\in S_b}|F(z)|<\\infty$), continuous, and complex-differentiable at every point of $S_b^\\circ$, and set\n\n$$M_0:=\\sup_{t\\in\\mathbb R}|F(t)|,\\qquad M_1:=\\sup_{t\\in\\mathbb R}|F(t+ib)|.$$\n\nFor $0<s<b$,\n\n$$\\sup_{t\\in\\mathbb R}|F(t+is)|\\le M_0^{1-s/b}M_1^{s/b},$$\n\nwhere each exponent is positive and $0^r=0$ for $r>0$. In particular, if $M_0,M_1\\le C$ then $|F(z)|\\le C$ on $S_b$. If two bounded continuous functions on $S_b$, holomorphic inside, have the same lower boundary values, then they agree on all of $S_b$."
+    },
+    {
+      "id": "thm-qsm-finite-kms-gibbs-characterization",
+      "batch": "41",
+      "page": "qsm-kms-equilibrium",
+      "dependency_level": 9,
+      "readiness_record": "research/physics-remaining-80-2026-10-17-step1-thm-qsm-finite-kms-gibbs-characterization.json",
+      "readiness": "ready",
+      "owner_record": true,
+      "hash_current": true,
+      "dependency_closure_sha256": "34cbd6552c0ca63b1248fb252ba35179be2d5d582b663002e570e987a727c13f",
+      "interface": "Let $\\mathcal H$ be a nonzero finite-dimensional complex Hilbert space, let $H=H^*$ on $\\mathcal H$ with energy units J, let $\\hbar>0$ have units J s, and let $\\beta>0$ have units J$^{-1}$. Write $\\operatorname{Tr}$ for the ordinary finite-dimensional trace. Assume the finite spectral-calculus and unital C$^*$-algebra clauses [A1]–[A2] below. Define the finite-matrix Heisenberg group\n\n$$\\alpha_t^H(X):=e^{itH/\\hbar}Xe^{-itH/\\hbar}\\qquad(X\\in\\mathcal B(\\mathcal H),\\ t\\in\\mathbb R).$$\n\nA state $\\omega$ on the unital C$^*$-algebra $\\mathcal B(\\mathcal H)$ satisfies the $\\beta$-KMS strip condition of [[def-qsm-kms-state]] for $\\alpha^H$ if and only if\n\n$$\\omega(X)=\\frac{\\operatorname{Tr}(e^{-\\beta H}X)}{\\operatorname{Tr}(e^{-\\beta H})}\\qquad(X\\in\\mathcal B(\\mathcal H)).$$\n\nHere $\\beta$ has units J$^{-1}$, $H$ has units J, and the physical-time strip has width $\\beta\\hbar$ seconds. The result is finite-dimensional and makes no infinite-volume or relaxation claim."
+    }
+  ],
+  "imported_mathematical_suppliers": [
+    {
+      "id": "def-countable-choice",
+      "status": "published read-only import; bytes match research/math-imports.json",
+      "path": "items/def-countable-choice.md",
+      "sha256": "28c60d2bef81c4dc87391283f7224d87e51eaa1e2106bb41d4f3c8157d80b006",
+      "interface": "Definition\n\nThe **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function."
+    },
+    {
+      "id": "thm-dynkin-pi-lambda",
+      "status": "published read-only import; bytes match research/math-imports.json",
+      "path": "items/thm-dynkin-pi-lambda.md",
+      "sha256": "51c045ea2ba75db23cac8f1b736d8a39a8466d2273713618ed41bdf9ce7287b4",
+      "interface": "Statement\n\nLet $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$."
+    },
+    {
+      "id": "thm-weierstrass-convergence-holomorphic-functions",
+      "status": "published read-only import; bytes match research/math-imports.json",
+      "path": "items/thm-weierstrass-convergence-holomorphic-functions.md",
+      "sha256": "308eb5944c76a206f09f1991eb3ebd06ab8cb30823f3fb1649142c4b6d2a4c55",
+      "interface": "Statement\n\nLet $\\Omega\\subseteq\\mathbb C$ be open, let each $f_n:\\Omega\\to\\mathbb C$ be holomorphic, and suppose $f_n\\to f$ locally uniformly on $\\Omega$. Then $f$ is holomorphic and\n\n$$f_n^{(k)}\\longrightarrow f^{(k)}$$\n\nlocally uniformly on $\\Omega$ for every natural $k$, with $f^{(0)}=f$.\n\nA locally uniform limit of holomorphic functions is holomorphic, and for every natural $k$ the $k$th derivatives converge locally uniformly to the $k$th derivative of the limit."
+    }
+  ],
+  "transitive_supplier_gaps": [],
+  "scheduler_receipt": {
+    "path": "research/physics-remaining-80-2026-10-17-batch-dependency-levels.json",
+    "recorded_input_sha256": "3b064bec9f79b6f70d41473e1d0a8072f75dac17f21cbb7f0e167616fd653fe3",
+    "recomputed_input_sha256": "7e92fc29e2e8b2dc5890647a98333fe38d226fd87627da1f7206893335b4e11a",
+    "recorded_batch_42": {
+      "batch": "42",
+      "dependency_level": 4,
+      "requires": [
+        "27",
+        "41"
+      ]
+    },
+    "recomputed_batch_42": {
+      "batch": "42",
+      "dependency_level": 4,
+      "requires": [
+        "27",
+        "36",
+        "38",
+        "39",
+        "40",
+        "41"
+      ]
+    },
+    "numeric_level_matches": true,
+    "owner_action": "Refresh shared scheduler receipt: the current item dependency on def-qsm-translation-invariant-spin-interaction adds batch 40 to batch 42 requires; the numeric level remains 4."
+  },
+  "readiness_limit": "Current upstream Step-1 ready rows establish authoring readiness and hash currency only. Batch-42 deductions remain conditional on the exact stated draft supplier interfaces; no independent proof approval or native gate acceptance is claimed."
+}

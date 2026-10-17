@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "46",
+  "round": 0,
+  "reviewed_items": [
+    "def-qsm-pauli-two-qubit-conventions",
+    "def-qsm-finite-two-qubit-state-and-separability",
+    "lem-qsm-pauli-dimer-spectrum",
+    "lem-qsm-qubit-bloch-ball",
+    "lem-qsm-pauli-separable-correlation-bound",
+    "lem-qsm-pauli-boundary-mixture",
+    "thm-qsm-models-dimer-entanglement",
+    "pthm-qsm-interacting-dimer-gibbs",
+    "pthm-qsm-commuting-lattice-countermodels",
+    "pthm-qsm-onsite-interacting-atoms",
+    "ex-qsm-commuting-lattice-countermodels",
+    "ex-qsm-interacting-dimer-gibbs",
+    "ex-qsm-onsite-interacting-atoms"
+  ],
+  "reviewed_pages": [
+    "qsm-interacting-exact-models",
+    "qsm-interacting-exact-models-examples"
+  ],
+  "decision": "repair",
+  "reason": "The current A/B inventory preserves the reserved claims and examples. The inspected Ising, sector-model, QSM preparation, trace, and Fock suppliers have matching hypotheses and proof status; no empirical observations are asserted. Request one local repair for the definition, tensor-product, Bloch-ball, operator-domain, and physical-scope gaps below.",
+  "findings": [
+    {
+      "id": "def-qsm-pauli-two-qubit-conventions:Definition",
+      "type": "local",
+      "reason": "The Definition calls the Pauli matrices and C Hermitian without defining the matrix adjoint or Hermitian condition, and downstream items use |u><v| without defining its action. State A*=overline(A)^T, Hermitian iff A=A*, and |u><v|(x)=<x,v>u under the linear-first convention; verify the stated Pauli properties."
+    },
+    {
+      "id": "lem-qsm-pauli-dimer-spectrum:Statement",
+      "type": "prerequisite",
+      "reason": "The Statement uses eigenvector and eigenvalue without identifying their definition. Add the published mathematical supplier def-eigenvalue-eigenvector-eigenspace-and-spectrum as a dependency and state the relevant condition Cv=lambda v with v nonzero."
+    },
+    {
+      "id": "lem-qsm-qubit-bloch-ball:scope",
+      "type": "scope",
+      "reason": "The Statement only represents density matrices already given; it does not assert that every a in R^3 with |a|<=1 produces a density matrix. lem-qsm-pauli-boundary-mixture Facts F3 uses that converse, and the approved Bloch-ball scope requires it. State the full representation and positivity equivalence."
+    },
+    {
+      "id": "lem-qsm-qubit-bloch-ball:Proof-2.1",
+      "type": "prerequisite",
+      "reason": "Step 2.1 infers positivity from the characteristic roots using the Hermitian spectral theorem, but no such supplier or complete 2x2 positivity argument is declared or proved. Add the finite matrix argument or an exact earlier supplier; the draft lem-qsm-matrix-state-calculus has an inspected finite-Hermitian diagonalization proof."
+    },
+    {
+      "id": "def-qsm-finite-two-qubit-state-and-separability:Definition",
+      "type": "prerequisite",
+      "reason": "The definition calls rho_A tensor rho_B a product density matrix without establishing that tensor products preserve positivity and trace one. Supply this finite-dimensional well-definedness result; lem-qsm-pauli-boundary-mixture 1.1 and thm-qsm-models-dimer-entanglement 4.1 use it."
+    },
+    {
+      "id": "lem-qsm-pauli-separable-correlation-bound:Proof-1.1",
+      "type": "prerequisite",
+      "reason": "Step 1.1 asserts tensor multiplication and trace factorization, tr((A tensor B)(C tensor D))=tr(AC)tr(BD), without a proof or supplier. Derive the identities from the displayed product basis or cite an exact mathematical result."
+    },
+    {
+      "id": "pthm-qsm-onsite-interacting-atoms:Proof-2.1",
+      "type": "prerequisite",
+      "reason": "The item defines K_B as a separate maximal diagonal multiplier, then applies the Postulate to H_B-mu N_B without identifying the operators or domains. The inspected diagonal-trace supplier explicitly makes no general domain-equality claim. Since U>0, prove locally that D(H_B)=D(K_B) is contained in D(N_B), so the operator sum equals K_B on its domain, or align the preparation definition with K_B."
+    },
+    {
+      "id": "pthm-qsm-commuting-lattice-countermodels:Statement-and-Proof-1.1",
+      "type": "prerequisite",
+      "reason": "The product eigenbasis labels s_i=+/-1 are not mapped explicitly to e_0/e_1. Also the consumed CSM correlation formula uses tanh without this item declaring its definition. State the basis mapping and add the published mathematical def-hyperbolic-functions prerequisite, which defines tanh=sinh/cosh and establishes cosh>0."
+    },
+    {
+      "id": "pthm-qsm-commuting-lattice-countermodels:Statement-energy-domain",
+      "type": "scope",
+      "reason": "The piecewise mean-energy statement calls the result canonical but does not restrict it to beta>0, while A1 and the actual CSM supplier qualify the canonical mean limit to positive beta and treat beta<=0 algebraically. State the positive-beta ranges or label the extension for beta<=0 as algebraic."
+    },
+    {
+      "id": "pthm-qsm-commuting-lattice-countermodels:Proof-3.1",
+      "type": "local",
+      "reason": "The extra claim that the eigenvalue gap and lambda_+>0 imply an analytic Ising limit is not established by those facts; the item only claims derivative convergence. Remove this aside or prove analyticity from the displayed formula with the needed analytic suppliers."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-qsm-finite-two-qubit-state-and-separability",
+      "decision": "repair",
+      "reason": "Direct consumer of the matrix conventions; it also needs the product-density well-definedness support."
+    },
+    {
+      "id": "lem-qsm-pauli-dimer-spectrum",
+      "decision": "repair",
+      "reason": "Its eigenvector calculations are sound, but the eigenpair definition must be supplied."
+    },
+    {
+      "id": "lem-qsm-qubit-bloch-ball",
+      "decision": "repair",
+      "reason": "Its Statement must cover the full Bloch ball and its positivity proof needs an explicit 2x2 spectral argument."
+    },
+    {
+      "id": "lem-qsm-pauli-separable-correlation-bound",
+      "decision": "repair",
+      "reason": "Step 1.1 needs the finite tensor trace identity."
+    },
+    {
+      "id": "lem-qsm-pauli-boundary-mixture",
+      "decision": "repair",
+      "reason": "Its density and separability claims use the Bloch-ball converse and product-density well-definedness."
+    },
+    {
+      "id": "thm-qsm-models-dimer-entanglement",
+      "decision": "repair",
+      "reason": "Its boundary decomposition is sound but relies on the missing Bloch-ball converse and product-density support."
+    },
+    {
+      "id": "pthm-qsm-interacting-dimer-gibbs",
+      "decision": "accept",
+      "reason": "The Hamiltonian levels, positive finite trace, and zero-field threshold use match the inspected supplier hypotheses."
+    },
+    {
+      "id": "pthm-qsm-commuting-lattice-countermodels",
+      "decision": "repair",
+      "reason": "It needs the basis and tanh definitions, the beta qualification, and removal or proof of the analytic aside."
+    },
+    {
+      "id": "pthm-qsm-onsite-interacting-atoms",
+      "decision": "repair",
+      "reason": "Its grand-canonical Bose generator must be identified with H_B-mu N_B on the exact operator domain."
+    },
+    {
+      "id": "ex-qsm-commuting-lattice-countermodels",
+      "decision": "accept",
+      "reason": "Its N=2 calculation is at positive beta_c and remains within the qualified physical branch."
+    },
+    {
+      "id": "ex-qsm-interacting-dimer-gibbs",
+      "decision": "accept",
+      "reason": "Its threshold comparison uses the positive-beta dimer result and remains valid."
+    },
+    {
+      "id": "ex-qsm-onsite-interacting-atoms",
+      "decision": "accept",
+      "reason": "Its substitutions are correct once the supplier's Bose generator is identified."
+    },
+    {
+      "id": "qsm-interacting-exact-models",
+      "decision": "accept",
+      "reason": "The A-page summary and level sketch remain consistent with the reviewed conditional claims."
+    },
+    {
+      "id": "qsm-interacting-exact-models-examples",
+      "decision": "accept",
+      "reason": "The B-page summary matches its three conditional examples and makes no empirical claim."
+    }
+  ]
+}

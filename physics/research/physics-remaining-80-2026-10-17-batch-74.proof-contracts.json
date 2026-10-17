@@ -1,0 +1,1086 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "level": "physics-remaining-80-2026-10-17",
+  "scope": [
+    "lem-tgr-positive-damping-boundary",
+    "lem-tgr-exponential-current",
+    "lem-tgr-thermal-contour-spectrum",
+    "ex-tgr-chiral-generator-rescaling"
+  ],
+  "contracts": {
+    "lem-tgr-positive-damping-boundary": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Three integrations by parts give $|\\widehat\\varphi(k)|\\le\\|\\varphi\\|_1$ for $0\\le k\\le1$ and $|\\widehat\\varphi(k)|\\le k^{-3}\\|\\varphi^{(3)}\\|_1$ for $k\\ge1$. Hence $\\int_0^\\infty k|\\widehat\\varphi(k)|\\,dk\\le\\frac12\\|\\varphi\\|_1+\\|\\varphi^{(3)}\\|_1$, so $B$ is a continuous linear functional on each fixed-support test space. Applying the same bound to $\\psi(v,\\cdot)$ and integrating over the compact $v$-projection bounds $|\\langle K,\\psi\\rangle|$ by a constant times the suprema of $|\\psi|$ and $|\\partial_s^3\\psi|$ on its compact support; thus $K$ is also a distribution and its displayed pairing is absolutely convergent.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $q=\\eta+ix$ with $\\eta>0$, an antiderivative of $e^{-qk}$ is $-q^{-1}e^{-qk}$ by [F2]. Applying integration by parts to its real and imaginary parts gives\n$$\\int_0^R e^{-qk}\\,dk=\\frac{1-e^{-qR}}q,\\qquad \\int_0^R ke^{-qk}\\,dk=-\\frac{R e^{-qR}}q+\\frac{1-e^{-qR}}{q^2}.$$\nBy [F3]–[F4], $|e^{-qR}|=e^{-\\eta R}$ and $R e^{-\\eta R}\\to0$; therefore $\\int_0^\\infty ke^{-qk}\\,dk=q^{-2}$. For $a=x_0+i\\eta$, take $q=\\eta+i(s-x_0)=i(s-a)$ to obtain\n$$-\\frac1{(s-a)^2}=\\int_0^\\infty k e^{-k\\operatorname{Im}a}e^{-ik(s-\\operatorname{Re}a)}\\,dk.$$\nIn particular this represents every constant positive damping $-(s-i\\epsilon)^{-2}$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fix a compact parameter set $V$ and a compact interval $[-R,R]$ containing the $s$-support of a test $\\psi$. Taylor's formula with integral remainder, obtained by applying [F8] twice, gives\n$$d_\\epsilon(v,s)=d_{0,\\epsilon}(v)+d_{1,\\epsilon}(v)s+s^2r_\\epsilon(v,s),$$\nwhere $d_{0,\\epsilon}=d_\\epsilon(v,0)$, $d_{1,\\epsilon}=\\partial_s d_\\epsilon(v,0)$, and $r_\\epsilon$ is uniformly bounded on $V\\times[-R,R]$. Put $q_\\epsilon=1-i\\epsilon d_{1,\\epsilon}$ and $a_\\epsilon=i\\epsilon d_{0,\\epsilon}/q_\\epsilon$. Direct multiplication gives\n$$s-i\\epsilon d_\\epsilon(v,s)=q_\\epsilon(s-a_\\epsilon)-i\\epsilon s^2r_\\epsilon.$$\nMoreover\n$$\\operatorname{Im}a_\\epsilon=\\frac{\\epsilon d_{0,\\epsilon}}{1+\\epsilon^2d_{1,\\epsilon}^2}\\asymp\\epsilon,\\qquad \\operatorname{Re}a_\\epsilon=\\frac{-\\epsilon^2d_{0,\\epsilon}d_{1,\\epsilon}}{1+\\epsilon^2d_{1,\\epsilon}^2}=O(\\epsilon^2),$$\nuniformly on $V$.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The linearized kernel $-q_\\epsilon^{-2}(s-a_\\epsilon)^{-2}$ has the representation of step 1.2. Pairing it with $\\psi(v,s)$ and using Fubini gives the $v,k$ integrand\n$$q_\\epsilon(v)^{-2}k e^{-k\\operatorname{Im}a_\\epsilon(v)}e^{ik\\operatorname{Re}a_\\epsilon(v)}\\widehat\\psi(v,k).$$\nThree integrations by parts in $s$ show that $k|\\widehat\\psi(v,k)|$ is integrable over $V\\times(0,\\infty)$; sigma-finiteness follows from [F7] and [F6] justifies the order change. The integrand converges pointwise to $k\\widehat\\psi(v,k)$ and is bounded by an integrable constant multiple of it. Dominated convergence [F5] therefore gives the limit $\\langle K,\\psi\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $D_\\epsilon=s-i\\epsilon d_\\epsilon(v,s)$ and $L_\\epsilon=q_\\epsilon(s-a_\\epsilon)$. The given real-valued damping bounds $c\\le d_\\epsilon\\le C$ imply $|D_\\epsilon|^2=s^2+\\epsilon^2d_\\epsilon^2$ on the compact set, hence $|D_\\epsilon|\\ge\\min(1,c)\\sqrt{s^2+\\epsilon^2}$ and $|D_\\epsilon|\\le\\max(1,C)\\sqrt{s^2+\\epsilon^2}$. step 1.3 gives $\\operatorname{Im}a_\\epsilon\\ge c\\epsilon$ and $|\\operatorname{Re}a_\\epsilon|\\le C\\epsilon^2$. If $|s|\\ge2C\\epsilon^2$, then $|s-\\operatorname{Re}a_\\epsilon|\\ge|s|/2$; otherwise $|s|=O(\\epsilon^2)$ and $|\\operatorname{Im}a_\\epsilon|\\ge c\\epsilon$. Thus $|L_\\epsilon|\\ge c'\\sqrt{s^2+\\epsilon^2}$ for small $\\epsilon$, while the upper bound follows from bounded $q_\\epsilon$ and $a_\\epsilon=O(\\epsilon)$. The factorization in step 1.3 gives $|D_\\epsilon-L_\\epsilon|\\le C'\\epsilon s^2$. Therefore\n$$|D_\\epsilon^{-2}-L_\\epsilon^{-2}|=\\frac{|D_\\epsilon-L_\\epsilon|\\,|D_\\epsilon+L_\\epsilon|}{|D_\\epsilon|^2|L_\\epsilon|^2}\\le C'\\frac{\\epsilon s^2}{(s^2+\\epsilon^2)^{3/2}}.$$\nThe integral of this bound over $|s|\\le\\epsilon$ is $O(\\epsilon)$, and over $\\epsilon<|s|\\le R$ is $O(\\epsilon\\log(R/\\epsilon))$; both tend to zero. Since $\\psi$ is bounded and $V$ has finite measure by [F7], the pairing difference tends to zero.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "step 2.2 shows that replacing the variable-damping kernel by the linearized kernel changes every compact-test pairing by a quantity tending to zero; step 2.1 gives the latter's limit as $\\langle K,\\psi\\rangle$. Hence $K_\\epsilon\\to K=1\\otimes B$ in distributions.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero test gives zero on both sides by the definitions in Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The damping lower bound c>0 excludes a vanishing regulator; steps 1.1–1.2 define the distributional value at s=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: For dε=1, step 1.2 gives the constant positive regulator and step 2.1 its limit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The allowed m=0 case is the one-variable boundary; step 3.1 records this specialization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The limit only uses 0<ε<ε0 with ε↓0; no kernel value at ε=0 is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is declared explicitly in [A1], matching the Lebesgue-measure supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Uniform positive lower/upper regulator bounds and two s-derivative bounds imply the same tested inverse-square boundary K; this is a sufficient convergence theorem for the specified d_epsilon, not a characterization of every convergent regulator."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The existence of the limit K is not asserted to force the displayed compact-uniform bounds on d_epsilon or its derivatives; the proof uses those bounds as inputs when estimating the Taylor remainder."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set dε=1 and a=iε in step 1.2.",
+          "result": "The kernel is -(s-iε)^-2=∫₀∞ k e^-εk e^-iks dk, so the sign and Fourier convention match B.",
+          "verifies": "Steps 1.1, 1.2, and 2.1."
+        },
+        {
+          "check": "Split ∫εs²/(s²+ε²)^(3/2) ds into |s|≤ε and ε<|s|≤R.",
+          "result": "The first part is O(ε) and the second O(ε log(R/ε)); both vanish.",
+          "verifies": "Step 2.2."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74-3a",
+        "notes": "Independently checked current Definitions, Statement and all proof steps against the twelve direct supplier statements. On each compact support, three integrations by parts give the integrable k-weighted Fourier bound and continuity in fixed-support seminorms. The Laplace identity has the required minus sign and pole in the upper half plane. Taylor remainder uses exactly two uniformly bounded s derivatives; Im(a_epsilon) is comparable to epsilon and Re(a_epsilon)=O(epsilon^2). For fixed epsilon the raw Fubini integral is absolutely integrable by positive damping; after Fourier integration its majorant is k|hat psi|, so dominated convergence applies along every epsilon sequence. The kernel difference is bounded by C epsilon s^2/(s^2+epsilon^2)^(3/2), whose inner and outer integrals are O(epsilon) and O(epsilon log(R/epsilon)). Empty/zero tests and m=0 are covered explicitly. Countable Choice is retained for Lebesgue/product measure. Reader/refuter identify no separate defect; cited distribution notes are contextual and the damping estimate is proved locally. No physical or empirical inference is made."
+      }
+    },
+    "lem-tgr-exponential-current": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a complex\nHilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qft-segal-weyl-domain",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]], and let $\\mathcal F_s(H)$ and\n$\\mathcal D_{\\rm fin}$ be its bosonic Fock space and finite-particle domain.\nFor $h\\in H$ define on $\\mathcal D_{\\rm fin}$ the Segal field\n$$\\phi_0(h):=2^{-1/2}\\bigl(a^\\dagger(h)+a(h)\\bigr).$$\nFor $h\\ne0$, this symmetric operator is essentially self-adjoint; write\n$\\Phi(h)=\\overline{\\phi_0(h)}$. If $r=\\|h\\|$, $e=h/r$, $K=e^\\perp$,\n$G=\\mathcal F_s(K)$, choose a countable orthonormal basis $(u_j)$ of $G$\nwhose vectors are finite-particle, and use the one-mode splitting of\n[[lem-qft-fock-one-mode-splitting]] followed by the Hermite unitary\n$|n\\rangle\\mapsto g_n$ into $L^2(\\mathbb R,dx;\\mathbb C)$ with pairing\n$\\langle f,g\\rangle_2=\\int\\overline f g$ to write a vector as\n$(f_j)_{j\\in J}\\in\\ell^2(J;L^2(\\mathbb R,dx;\\mathbb C))$. Then the exact domain and\naction are\n$$D(\\Phi(h))=\\left\\{(f_j):\\sum_{j\\in J}\\int_{\\mathbb R}(1+r^2x^2)|f_j(x)|^2\\,dx<\\infty\\right\\},\\qquad (\\Phi(h)f)_j(x)=rx f_j(x).$$\nFor $h=0$, $\\phi_0(0)$ closes to the zero operator on all of $\\mathcal F_s(H)$.\n\nDefine $\\epsilon(z)=\\bigoplus_{n\\ge0}z^{\\otimes n}/\\sqrt{n!}$ for $z\\in H$.\nThere are unitaries $W(h)$ determined on these total exponential vectors by\n$$W(h)\\epsilon(z)=\\exp\\!\\left(-\\frac{\\|h\\|^2}{4} +\\frac{i}{\\sqrt2}\\langle h,z\\rangle_2\\right) \\epsilon\\!\\left(z+\\frac{i h}{\\sqrt2}\\right).$$\nThey obey\n$$W(h)W(k)=\\exp\\!\\left(-\\frac{i}{2}\\operatorname{Im}\\langle h,k\\rangle_2\\right)W(h+k),\\qquad \\langle\\Omega,W(h)\\Omega\\rangle_2=e^{-\\|h\\|^2/4},$$\nand $h\\mapsto W(h)$ is strongly continuous. For every $h$, the one-parameter\ngroup $t\\mapsto W(th)$ has norm derivative at zero exactly on\n$D(\\Phi(h))$, with derivative $i\\Phi(h)$ (for $h=0$ this is the zero\ngenerator). Thus the displayed bounded Weyl operators have precisely the\nclosed Segal fields as their generators; no point-field or measurement claim\nis included.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. The finite linear combinations of indicator functions of\nhalf-open boxes with rational endpoints and rational coefficients form a\ncountable dense subset of $L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-exponential-is-a-bijection-onto-positive-reals",
+          "source_section": "Statement",
+          "quote": "$$\\exp:\\mathbb R\\longrightarrow(0,\\infty)$$\nis a bijection.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-tgr-positive-damping-boundary",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and use Euclidean Lebesgue measure. Let $m\\ge0$. For $m=0$ take $\\mathbb R^0$ to be a singleton with measure $1$. For each sufficiently small $\\epsilon>0$ let $d_\\epsilon:\\mathbb R^m\\times\\mathbb R\\to(0,\\infty)$ be smooth and real-valued. Assume that for every compact $V\\subseteq\\mathbb R^m$ and every $R>0$ there are constants $c,C,M,\\epsilon_0>0$ such that, on $V\\times[-R,R]$ and for $0<\\epsilon<\\epsilon_0$,\n$$c\\le d_\\epsilon(v,s)\\le C,\\qquad |\\partial_s d_\\epsilon(v,s)|+|\\partial_s^2d_\\epsilon(v,s)|\\le M.$$\nFor $\\varphi\\in C_c^\\infty(\\mathbb R;\\mathbb C)$ set $\\widehat\\varphi(k)=\\int_{\\mathbb R}\\varphi(s)e^{-iks}\\,ds$ and define $B$ by\n$$\\langle B,\\varphi\\rangle:=\\int_0^\\infty k\\widehat\\varphi(k)\\,dk.$$\nFor $\\psi\\in C_c^\\infty(\\mathbb R^m\\times\\mathbb R;\\mathbb C)$ write $\\widehat\\psi(v,k)=\\int_{\\mathbb R}\\psi(v,s)e^{-iks}\\,ds$ and define $K$ by\n$$\\langle K,\\psi\\rangle:=\\int_{\\mathbb R^m}\\int_0^\\infty k\\widehat\\psi(v,k)\\,dk\\,dv.$$\nThen $B$ and $K$ are distributions, $B$ is the lower boundary denoted $-(s-i0)^{-2}$, and $K=1\\otimes B$ in the explicitly defined pairing above. The smooth kernels\n$$K_\\epsilon(v,s):=-\\bigl(s-i\\epsilon d_\\epsilon(v,s)\\bigr)^{-2}$$\nconverge to $K$ in the distributional sense: $\\int K_\\epsilon(v,s)\\psi(v,s)\\,dv\\,ds\\to\\langle K,\\psi\\rangle$ for every such $\\psi$. When $s$ and $\\epsilon$ carry units of length, $d_\\epsilon$ is dimensionless.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F4], $\\mathcal H$ is a complex Hilbert space; the change from its first-variable-linear inner product to $\\langle h,q\\rangle_2=\\int\\bar hq$ is conjugation and preserves its norm. Let $D$ be the countable dense real rational box-step family in real $L^2(\\mathbb R)$ from [F5]. The family $D+iD=\\{d_1+id_2:d_1,d_2\\in D\\}$ is countable. Given $h\\in\\mathcal H$ and $\\delta>0$, extend $h$ by zero to $\\tilde h\\in L^2(\\mathbb R;\\mathbb C)$. Its real and imaginary parts lie in real $L^2(\\mathbb R)$; choose $d_1,d_2\\in D$ with $\\|\\operatorname{Re}\\tilde h-d_1\\|_2<\\delta/2$ and $\\|\\operatorname{Im}\\tilde h-d_2\\|_2<\\delta/2$. Pointwise $|a+ic|^2=a^2+c^2$ for real $a,c$, so $\\|\\tilde h-(d_1+id_2)\\|_2^2<\\delta^2/2$. Restriction to $(0,\\infty)$ cannot increase this norm; hence the restricted countable family is dense in $\\mathcal H$. Thus $\\mathcal H$ is separable and [F3] applies.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "construct",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $f$ supported in a compact interval $K$ and write $F_f(k)=\\int_K f(U)e^{ikU}\\,dU$. For $0<k\\le1$, $|F_f(k)|\\le\\|f\\|_1$. For $k\\ge1$, two integrations by parts with vanishing endpoint terms give $|F_f(k)|\\le k^{-2}\\|f''\\|_1$. Therefore\n$$\\|h_f\\|_2^2=\\frac1{4\\pi}\\int_0^\\infty k|F_f(k)|^2\\,dk\\le\\frac{\\|f\\|_1^2+\\|f''\\|_1^2}{8\\pi}<\\infty.$$\nThe same estimate holds for $\\bar f$; on fixed $K$, each $L^1$ norm is bounded by $|K|$ times the corresponding supremum seminorm. This proves both membership in $\\mathcal H$ and continuity on each fixed-support test space.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $f\\mapsto h_f$ is linear, $f\\mapsto h_{\\bar f}$ is conjugate-linear, annihilation is conjugate-linear in its one-particle argument, and creation is linear, $J$ is linear. Its two summands preserve the finite-particle domain by [F1]–[F2]. For fixed finite-particle vectors $\\Psi,\\Xi$, only finitely many sectors occur; Cauchy--Schwarz [F11] and the sector bounds [F2] bound $|\\langle\\Psi,J(f)\\Xi\\rangle_2|$ by a finite constant depending on $\\Psi,\\Xi$ times $\\|h_f\\|_2+\\|h_{\\bar f}\\|_2$; hence each matrix coefficient is a continuous test distribution. If $f$ is real, $J(f)=a(h_f)+a^\\dagger(h_f)=\\sqrt2\\,\\phi_0(h_f)$, so [F3] gives $\\overline{J(f)}=\\sqrt2\\Phi(h_f)$. Finally $J(g)\\Omega=a^\\dagger(h_g)\\Omega$, and the sector formulas in [F1] give\n$$\\langle\\Omega,J(\\bar f)J(g)\\Omega\\rangle_2=\\langle h_f,h_g\\rangle_2.$$\nIn particular the form at $g=f$ is $\\|h_f\\|_2^2\\ge0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F11",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $\\epsilon>0$ and real $s$, direct integration with $\\operatorname{Re}(\\epsilon+is)>0$ gives\n$$C_\\epsilon(s):=\\frac1{4\\pi}\\int_0^\\infty k e^{-\\epsilon k}e^{-iks}\\,dk=-\\frac1{4\\pi(s-i\\epsilon)^2}.$$\nFor $f,g\\in C_c^\\infty(\\mathbb R)$, $\\varphi_{f,g}(s)=\\int_{\\mathbb R}\\overline{f(x+s)}g(x)\\,dx$ is a compact smooth test, and Fubini [F8] gives $\\widehat\\varphi_{f,g}(k)=\\overline{F_f(k)}F_g(k)$. Hence\n$$\\langle C_\\epsilon,\\varphi_{f,g}\\rangle=\\frac1{4\\pi}\\int_0^\\infty k e^{-\\epsilon k}\\overline{F_f(k)}F_g(k)\\,dk,$$\nthe damped vacuum covariance of step 2.1. For a general test $\\varphi\\in C_c^\\infty(\\mathbb R)$, its Fourier transform $\\widehat\\varphi(k)=\\int\\varphi(s)e^{-iks}\\,ds$ satisfies $|\\widehat\\varphi(k)|\\le k^{-3}\\|\\varphi^{(3)}\\|_1$ for $k\\ge1$ by [F6]. Thus $k|\\widehat\\varphi(k)|$ is integrable on $(0,\\infty)$, and [F7] shows $\\langle C_\\epsilon,\\varphi\\rangle\\to(4\\pi)^{-1}\\int_0^\\infty k\\widehat\\varphi(k)\\,dk$. This defines the boundary distribution $C(s)=-(4\\pi)^{-1}(s-i0)^{-2}$ and, by the same domination on $\\varphi_{f,g}$, its pairing is exactly the covariance in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F9], $U_\\kappa$ is a smooth increasing diffeomorphism onto $(-\\infty,0)$. If $g$ is supported in $[a,b]$, then $f_g$ is supported in the compact interval $[U_\\kappa(a),U_\\kappa(b)]\\subset(-\\infty,0)$, separated from $0$; its zero extension is smooth. The chain rule on this compact interval bounds every fixed-support derivative seminorm of $f_g$ by finitely many such seminorms of $g$, so [F1]–[F2] show $j_\\kappa(g)=J(f_g)$ is well-defined and continuous. In the two-point test pairing the smooth change of variable contributes $U_\\kappa'(u)U_\\kappa'(u')$, where $U_\\kappa'(u)=e^{-\\kappa u}$. Put $v=(u+u')/2$, $s=u-u'$, and $b=\\kappa/2$. Direct algebra gives\n$$U_\\kappa(u)-U_\\kappa(u')=b^{-1}e^{-\\kappa v}\\sinh(bs),\\qquad U_\\kappa'(u)U_\\kappa'(u')=e^{-2\\kappa v}.$$\nApplying [F10] to the damped kernel $C_\\epsilon(U_\\kappa(u)-U_\\kappa(u'))U_\\kappa'(u)U_\\kappa'(u')$ yields\n$$-\\frac1{4\\pi}\\left(Y_b(s)-i\\epsilon e^{\\kappa v}\\right)^{-2},\\qquad Y_b(s)=\\frac{\\sinh(bs)}b.$$\nThe linear change $(u,u')\\mapsto(v,s)$ has determinant $-1$, hence absolute Jacobian $1$. Now change variables $y=Y_b(s)$, which is the smooth increasing diffeomorphism defined in the Statement. In each test pairing this replaces $\\psi(v,s)$ by the compact smooth test $\\widetilde\\psi(v,y)=\\psi(v,Y_b^{-1}(y))(Y_b^{-1})'(y)$. The positive smooth damping $e^{\\kappa v}$ is bounded above and below on each compact test support, so [F12] in the $y$-coordinate gives the boundary $-(4\\pi)^{-1}Y_b^*((y-i0)^{-2})$. Since $b=\\kappa/2$, this is exactly $C_\\kappa(s)$ as defined in the Statement. For $0<\\epsilon<\\pi/(2b)$, one has $0<b\\epsilon<\\pi/2$, hence $\\cos(b\\epsilon)>0$ and $\\tan(b\\epsilon)>0$; the analytic regularization satisfies\n$$\\frac{\\sinh(b(s-i\\epsilon))}{b}=\\cos(b\\epsilon)\\left(Y_b(s)-i\\epsilon d_\\epsilon(s)\\right),\\qquad d_\\epsilon(s)=\\frac{\\cosh(bs)\\tan(b\\epsilon)}{b\\epsilon}.$$\nAfter the change of variable $y=Y_b(s)$, the damping is $\\widetilde d_\\epsilon(y)=d_\\epsilon(Y_b^{-1}(y))$. On every compact support this family is smooth, bounded above and below positively, and converges smoothly to $\\cosh(bY_b^{-1}(y))>0$, so it meets [F12] with $m=0$. Thus [F12] gives the same boundary for $\\sinh(b(s-i\\epsilon))^{-2}$; the scalar factor $\\cos(b\\epsilon)^{-2}$ tends to $1$. This identifies $C_\\kappa$ with the lower boundary of $-\\kappa^2(16\\pi)^{-1}\\operatorname{csch}^2(bz)$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "step 3.1",
+            "algebra",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The notation $i0$ in the Statement is therefore the lower-half-plane boundary induced by the positive orientation $U_\\kappa'(u)>0$; it is a distributional two-point covariance, not an ordinary value at $s=0$. The construction uses only smooth compact tests in one coordinate and makes no four-dimensional null pullback.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: For the zero test f, h_f=0, J(f)=0, and the covariance pairing vanishes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The k→0 contribution is bounded by the exact integral ∫₀¹k dk=1/2; the distribution at s=0 is a boundary value, not a point evaluation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The positive half-line one-particle space and the single chiral test coordinate are explicitly defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: κ=0 is excluded; strict κ>0 is needed for Uκ to be an increasing diffeomorphism onto (−∞,0)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Every compact u-test maps to a compact interval strictly inside (−∞,0), so the zero extension vanishes near U=0 and is smooth."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is explicitly stated and is the only choice premise used by the L², separability, and Fock suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "∫₀¹k dk=1/2 and ∫₁∞k⁻³dk=1/2 in the h_f norm bound.",
+          "result": "Both infrared and ultraviolet pieces are finite under the stated compact smooth test hypotheses.",
+          "verifies": "Step 1.2."
+        },
+        {
+          "check": "At ε>0, Cε(0)=−1/(4π(−iε)²)=1/(4πε²).",
+          "result": "The regulated kernel is finite for ε>0 while the limit is distributional.",
+          "verifies": "Step 3.1 and the no-point-value scope."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74-3a",
+        "notes": "Independently checked all current proof steps and nineteen direct supplier statements. Confirmed and repaired real-to-complex separability by the countable family D+iD with explicit squared-norm error and restriction contraction; the complete L2 supplier is conjugated to the second-linear convention and the Segal supplier includes h=0. Checked both infrared/ultraviolet integrals (each 1/2), complex linearity of J via conjugate-linear annihilation, invariant finite-particle domains and coefficient continuity using sector bounds/Cauchy-Schwarz. Vacuum contraction equals <h_f,h_g> and is positive for f=g; three integrations by parts supply the distributional majorant with the lower-boundary sign. Compact u support maps strictly inside U<0, so zero extension is smooth. Coordinate Jacobians cancel the exponential center variable except in positive damping; the earlier damping lemma applies after the smooth Y_b substitution. Replaced undefined beta by epsilon<pi/(2b), explicitly giving positive cosine and tangent; all damping derivatives are bounded on compact supports for sufficiently small epsilon. No four-dimensional null restriction, physical energy assignment or empirical claim is deduced. Reader/refuter findings 1 and 2 are nonfatal and completely repaired; Statements and prerequisites are unchanged."
+      }
+    },
+    "lem-tgr-thermal-contour-spectrum": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-exponential-current",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let\n$$\\mathcal H=L^2((0,\\infty),dk;\\mathbb C),\\qquad \\langle h,q\\rangle_2=\\int_0^\\infty\\overline{h(k)}q(k)\\,dk,$$\nusing the second-variable-linear convention. For\n$f\\in\\mathcal D(\\mathbb R;\\mathbb C)=C_c^\\infty(\\mathbb R;\\mathbb C)$ define\n$$h_f(k)=\\sqrt{\\frac{k}{4\\pi}}\\int_{\\mathbb R}f(U)e^{ikU}\\,dU\\quad(k>0).$$\nThen $h_f,h_{\\bar f}\\in\\mathcal H$, and $f\\mapsto h_f$ is continuous on each fixed-compact-support test space. With the bosonic Fock conventions of [[def-qft-fock-and-test-spaces]], define on its finite-particle domain\n$$J(f)=a(h_{\\bar f})+a^\\dagger(h_f).$$\nThis is a complex-linear operator-valued distribution on that invariant domain. For real $f$, its closure is $\\overline{J(f)}=\\sqrt2\\,\\Phi(h_f)$, where $\\Phi(h_f)$ is the closed Segal field of [[lem-qft-segal-weyl-domain]]; the corresponding Weyl one-parameter group has generator $i\\Phi(h_f)$. The vacuum two-point form is positive type and has boundary kernel\n$$C(s)=-\\frac{1}{4\\pi(s-i0)^2},$$\nwhere $s-i0$ means the distributional limit from $s-i\\epsilon$, $\\epsilon\\downarrow0$.\n\nFor $\\kappa>0$ with units of inverse length, let $u,U$ have units of length and set\n$$U_\\kappa(u)=-\\kappa^{-1}e^{-\\kappa u},\\qquad u_\\kappa(U)=-\\kappa^{-1}\\log(-\\kappa U)\\quad(U<0).$$\nFor $g\\in\\mathcal D(\\mathbb R;\\mathbb C)$ put $f_g(U)=g(u_\\kappa(U))$ for $U<0$ and $f_g(U)=0$ for $U\\ge0$, and define $j_\\kappa(g)=J(f_g)$. The zero extension is smooth and compactly supported. Its vacuum covariance is the positive-type distribution\n$$C_\\kappa(s)=-\\frac{\\kappa^2}{16\\pi}\\,\\operatorname{csch}^2\\!\\left(\\frac{\\kappa}{2}(s-i0)\\right).$$\nHere the notation is fixed as follows: for $b=\\kappa/2$, set $Y_b(s)=\\sinh(bs)/b$. Since $Y_b'(s)=\\cosh(bs)>0$ and $Y_b(s)\\to\\pm\\infty$ as $s\\to\\pm\\infty$, it is a smooth increasing diffeomorphism. Define $\\operatorname{csch}^2(b(s-i0)):=b^{-2}Y_b^*((y-i0)^{-2})$, where\n$$\\langle Y_b^*T,\\varphi\\rangle:=\\left\\langle T,\\varphi(Y_b^{-1}(y))(Y_b^{-1})'(y)\\right\\rangle.$$\nThis is a one-dimensional chiral test-coordinate model. It asserts no restriction of a four-dimensional field to a null curve.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-schwartz-topology-and-convergence",
+          "source_section": "Definition",
+          "quote": "For the seminorms of [[def-schwartz-space-and-its-seminorms]], a basic neighbourhood of $f_0\\in\\mathcal S$ is\n$$\\{f:p_{\\alpha_r\\beta_r}(f-f_0)<\\varepsilon_r\\ (1\\le r\\le m)\\},\\qquad m<\\infty,\\quad\\varepsilon_r>0.$$\nThe empty intersection is the whole space. The topology consists of unions of these neighbourhoods. A sequence $f_k$ converges to $f$ precisely when $p_{\\alpha\\beta}(f_k-f)\\to0$ for every pair of multi-indices: necessity follows from the one-condition neighbourhoods, and sufficiency follows by taking the maximum of the finitely many convergence thresholds in a basic neighbourhood.\n\nA complex topological vector space is called locally convex here when zero has a base of convex balanced sets; balanced means $|c|\\le1$ implies $cV\\subseteq V$. The displayed sets about zero are convex and balanced by the seminorm inequalities. They also show addition is continuous, by halving each tolerance. Scalar multiplication is jointly continuous: near $(c_0,f_0)$, restrict $|c-c_0|<1$ and use\n$$p_{\\alpha\\beta}(cf-c_0f_0)\\le (|c_0|+1)p_{\\alpha\\beta}(f-f_0)+|c-c_0|p_{\\alpha\\beta}(f_0).$$\nThere are finitely many bounds to enforce. Finally $p_{00}(f-g)>0$ for distinct functions; balls of radius less than half this number separate them. Thus this is a Hausdorff locally convex topological vector space. All these verifications use only finite choices.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$.  A **tempered distribution** on $\\mathbb R^n$ is a\ncontinuous complex-linear functional\n\n$$u:\\mathcal S(\\mathbb R^n)\\longrightarrow\\mathbb C,$$\n\nwhere Schwartz space and its locally convex topology are those of\n[[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]].  The space of all such functionals\nis denoted $\\mathcal S'(\\mathbb R^n)$.\n\nWe write $\\langle u,\\varphi\\rangle=u(\\varphi)$.  This pairing is bilinear:\nthe test variable is not conjugated.  Thus $u(a\\varphi+b\\psi)=\na\\langle u,\\varphi\\rangle+b\\langle u,\\psi\\rangle$ for $a,b\\in\\mathbb C$.\nThe zero functional is tempered.  Continuity is topological continuity, and,\nbecause the Schwartz topology is generated by a countable cofinal family of\nseminorms, it is equivalently continuity on every convergent sequence.  No\nchoice principle is used in this definition.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. The negative-sign, $2\\pi$-normalized Fourier transform is continuous $\\mathcal F:\\mathcal S\\to\\mathcal S$, and\n$$\\mathcal F(\\partial^\\alpha f)(\\xi)=(2\\pi i\\xi)^\\alpha\\widehat f(\\xi),\\qquad \\partial^\\beta\\widehat f=\\mathcal F((-2\\pi ix)^\\beta f).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-theorem-for-null-homotopic-loops",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let $f:\\Omega\\to\\mathbb C$ be\nholomorphic, and let $\\gamma:[0,1]\\to\\Omega$ be a closed rectifiable contour. If\n$\\gamma$ is path-homotopic relative to the endpoints to a constant loop in\n$\\Omega$, then\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-line-integral-over-a-rectifiable-path",
+          "source_section": "Definition",
+          "quote": "Let $\\gamma=x+iy:[a,b]\\to\\mathbb C$ be a rectifiable contour in the sense of [[def-complex-contours-reversal-concatenation-and-closedness]] and let $f=u+iv$ be continuous on its trace, with real and imaginary parts from [[def-complex-conjugate-real-imaginary-part-and-modulus]]. Define\n$$\\int_\\gamma f(z)\\,dz:=\\int_a^b u(\\gamma(t))\\,dx(t)-\\int_a^b v(\\gamma(t))\\,dy(t)+i\\left(\\int_a^b v(\\gamma(t))\\,dx(t)+\\int_a^b u(\\gamma(t))\\,dy(t)\\right),$$\nwhere the four integrals are the real Riemann–Stieltjes integrals of [[def-riemann-stieltjes-sum-and-integral]]. Their existence is proved in [[thm-existence-of-complex-line-integrals-on-rectifiable-paths]]. On a singleton parameter interval the integral is $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be rectifiable and let $f$ be continuous on its trace. Then the complex line integral [[def-complex-line-integral-over-a-rectifiable-path]] and the absolute line integral [[def-absolute-line-integral-over-a-rectifiable-path]] both exist.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fundamental-theorem-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\\gamma:[a,b]\\to\\mathbb C$. If $F'=f$ is continuous, then\n$$\\int_\\gamma f(z)\\,dz=F(\\gamma(b))-F(\\gamma(a)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-kernel-and-fibres-of-complex-exponential",
+          "source_section": "Statement",
+          "quote": "$$\\ker(\\exp)=2\\pi i\\mathbb Z,$$\nand $\\exp z=\\exp w$ exactly when $z-w\\in2\\pi i\\mathbb Z$. The conventions and prerequisite facts used below are recorded in [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-exponential-is-strictly-increasing]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-parametrize-the-unit-circle]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z,\\qquad \\cos x=0\\Longleftrightarrow x=(m+1/2)\\pi\\text{ for some }m\\in\\mathbb Z.$$\nBoth sine and cosine have period $2\\pi$, and no smaller positive number is a common period.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-complex-differentiability-holomorphic-and-entire",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and let $f:U\\to\\mathbb C$. The function $f$ is **complex differentiable at $a$** if the limit\n\n$$ \\lim_{\\substack{h\\to0\\\\ h\\ne0,\\ a+h\\in U}}\\frac{f(a+h)-f(a)}{h} $$\n\nexists in the metric of [[def-complex-metric-convergence-and-continuity]]. Its value is the **complex derivative** of $f$ at $a$, denoted $f'(a)$. The increments are nonzero and remain in the domain; because $U$ is open, all sufficiently small increments are allowed.\n\nThe function $f$ is **holomorphic on $U$** when it is complex differentiable at every point of $U$. A function holomorphic on all of $\\mathbb C$ is **entire**. The word analytic is reserved for the local power-series notion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-termwise-differentiation-of-complex-power-series",
+          "source_section": "Statement",
+          "quote": "Let $f(z)=\\sum_{n\\ge0}c_n(z-a)^n$ have radius $R$. If $|z-a|<R$, then $f$ is complex differentiable at $z$ and\n$$f'(z)=\\sum_{n\\ge1}n c_n(z-a)^{n-1}.$$\nConsequently $f$ is holomorphic on its open disc of convergence ([[def-complex-differentiability-holomorphic-and-entire]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $u, v : [a,b] \\to \\mathbb{R}$ be differentiable at\nevery point of $[a,b]$ as functions on $[a,b]$ ([[def-derivative]]). Suppose\n$u'$ and $v'$ are integrable on $[a,b]$ ([[def-darboux-integral]]). Then $uv'$\nand $u'v$ are integrable and\n\n$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$\n\n**The integrability of $u'$ and $v'$ is a hypothesis, not a formality.** Without\nit the two integrals in the display need not exist at all, and the identity is\nthen not false but ill-formed; that is\nthe false statement that deletes it on the companion\npage. The hypothesis is automatic when $u$ and $v$ are continuously\ndifferentiable, since a continuous function on $[a,b]$ is integrable\n([[thm-continuous-implies-integrable]]).",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\sinh w=(e^w-e^{-w})/2$ and $\\operatorname{csch}w=1/\\sinh w$ where the denominator is nonzero. From [F5]–[F6], $\\sinh(w+i\\pi)=-\\sinh w$, $\\sinh(-w)=-\\sinh(w)$, and $\\sinh w=0$ exactly when $w\\in i\\pi\\mathbb Z$. Thus $C(z)$ has poles only at $z=in\\beta$ ($n\\in\\mathbb Z$). It is holomorphic on the stated strip: $\\sinh$ is holomorphic by [F5] and the chain rule; where it is nonzero, its reciprocal is complex differentiable because\n$$\\frac{1/\\sinh(w+h)-1/\\sinh(w)}{h}=-\\frac{\\sinh(w+h)-\\sinh(w)}{h\\sinh(w+h)\\sinh(w)}$$\nconverges as $h\\to0$, using continuity from [F7]. The exponential addition law gives period $i\\beta$, and oddness of $\\sinh$ gives evenness of $C$. These are identities of the general analytic kernel; their distributional boundary interpretation follows once the boundary has been constructed.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $z_0=-i\\beta$ and $\\delta=z-z_0$. Since $bz_0=-i\\pi$, $\\sinh(bz)=-b\\delta q(\\delta)$, where $q(\\delta)=\\sinh(b\\delta)/(b\\delta)$ for $\\delta\\ne0$ and $q(0)=1$. Its power series $q(\\delta)=\\sum_{m=0}^{\\infty}(b\\delta)^{2m}/(2m+1)!$ converges for all $\\delta$ as a subseries of the complex exponential series. The termwise-differentiation theorem in [F7] makes $q$ holomorphic and its displayed series makes it even. Since $q(0)=1$, continuity from [F7] makes $q$ nonzero on a small disk; the reciprocal difference quotient using [F7] makes $q^{-2}$ holomorphic there, and its even series is $1+O(\\delta^2)$. Therefore\n$$C(z)=-\\frac{L}{(z-z_0)^2}+H(z),\\qquad L=\\frac{A}{b^2},$$\nwhere $H(z)$ is holomorphic at $z_0$, with no simple-pole term.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $\\omega\\in\\mathbb R\\setminus\\{0\\}$ and $0<\\epsilon<\\beta$. Integrate $e^{-i\\omega z}C(z)$ around the clockwise rectangle with top from $-R-i\\epsilon$ to $R-i\\epsilon$ and bottom at imaginary part $-(\\beta+\\epsilon)$. Its interior lies in $-2\\beta<\\operatorname{Im}z<0$ and contains only $z_0$. The holomorphic part $e^{-i\\omega z}H(z)$ integrates to zero by [F3] on a slightly enlarged convex rectangle: its closure contains the contour, and convexity contracts the closed contour to a constant loop inside that open domain. For the double-pole term, the function $(e^{-i\\omega z}-e^{-i\\omega z_0})/(z-z_0)$ extends holomorphically at $z_0$, so [F3] gives zero for its contour integral. To evaluate the remaining simple pole, write $a=\\beta-\\epsilon>0$ and $c=\\epsilon>0$. Relative to $z_0$, the rectangle's vertices are $(-R,a),(R,a),(R,-c),(-R,-c)$. With $\\theta_a=\\arctan(a/R)$ and $\\theta_c=\\arctan(c/R)$, the continuous argument changes along its four clockwise sides by $-\\pi+2\\theta_a$, $-\\theta_a-\\theta_c$, $-\\pi+2\\theta_c$, and $-\\theta_a-\\theta_c$, respectively; their sum is $-2\\pi$. The net change of $\\log|z-z_0|$ is zero, so $\\oint dz/(z-z_0)=-2\\pi i$ and $\\oint e^{-i\\omega z}(z-z_0)^{-1}dz=-2\\pi i e^{-i\\omega z_0}$. The function $e^{-i\\omega z}/(z-z_0)$ is single-valued and has continuous derivative on a neighborhood of the contour, which avoids $z_0$; by [F4] its derivative integrates to zero. Since\n$$d\\!\\left(\\frac{e^{-i\\omega z}}{z-z_0}\\right)=\\left(-i\\omega\\frac{e^{-i\\omega z}}{z-z_0}-\\frac{e^{-i\\omega z}}{(z-z_0)^2}\\right)dz,$$\nwe obtain $\\oint e^{-i\\omega z}(z-z_0)^{-2}dz=-2\\pi\\omega e^{-i\\omega z_0}$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The vertical-side integrals tend to zero as $R\\to\\infty$: for $\\operatorname{Re}z=R$, $\\operatorname{csch}^2(bz)=4e^{-2bz}(1-e^{-2bz})^{-2}=O(e^{-2bR})$ uniformly on the finite vertical interval, and the analogous formula with $e^{2bz}$ gives the same bound on $\\operatorname{Re}z=-R$. The factor $e^{-i\\omega z}$ is bounded there for fixed $\\omega,\\epsilon$. The bottom line is the top line translated by $-i\\beta$; periodicity of $C$ and the Fourier phase multiply its oriented integral by $-e^{-\\beta\\omega}$. Combining this with step 2.1 gives\n$$ (1-e^{-\\beta\\omega})I_\\epsilon(\\omega)=2\\pi L\\omega e^{-\\beta\\omega},$$\nwhere $I_\\epsilon(\\omega)=\\int_{\\mathbb R}e^{-i\\omega(s-i\\epsilon)}C(s-i\\epsilon)\\,ds$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each fixed $0<\\epsilon<\\beta$, $s\\mapsto C(s-i\\epsilon)$ has no real pole, is bounded on compact intervals, and decays exponentially at both ends, so it is in $L^1(\\mathbb R)$. If $\\omega_n\\to\\omega$, the integrands converge pointwise and are bounded by $|C(s-i\\epsilon)|\\in L^1$; [F8] therefore makes its Fourier transform $J_\\epsilon(\\omega)=\\int e^{-i\\omega s}C(s-i\\epsilon)ds$ continuous. Since $I_\\epsilon=e^{-\\omega\\epsilon}J_\\epsilon$, step 3.1 yields, for $\\omega\\ne0$,\n$$J_\\epsilon(\\omega)=2\\pi L e^{\\omega\\epsilon}\\frac{\\omega}{e^{\\beta\\omega}-1}.$$\nContinuity forces the value at $\\omega=0$ to be $2\\pi L/\\beta$; no point value at zero is left arbitrary.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Define $S(\\omega)=2\\pi L\\omega/(e^{\\beta\\omega}-1)$ with its continuous value $2\\pi L/\\beta$ at zero. Continuity bounds $S$ on $[-1,1]$. For $\\omega\\ge1$, $|S(\\omega)|\\le C\\omega e^{-\\beta\\omega}$, while for $\\omega\\le-1$, $|S(\\omega)|\\le C|\\omega|$ because $1-e^{\\beta\\omega}\\ge1-e^{-\\beta}$. Thus $|S(\\omega)|\\le C(1+|\\omega|)$ globally. For any Schwartz test $\\varphi$, with seminorms $p_{m,n}(\\varphi)=\\sup_\\omega|\\omega^m\\varphi^{(n)}(\\omega)|$, split at $|\\omega|=1$: the integral of $(1+|\\omega|)|\\varphi(\\omega)|$ is bounded by a constant times $p_{0,0}(\\varphi)+p_{3,0}(\\varphi)$, since the tail is bounded by $2p_{3,0}|\\omega|^{-2}$. Hence $S$ defines a tempered distribution. For $0<\\epsilon\\le\\beta/2$, $e^{\\omega\\epsilon}S(\\omega)$ is bounded by $C(1+|\\omega|)$ for $\\omega\\le0$ and by $C(1+\\omega)e^{-\\beta\\omega/2}$ for $\\omega\\ge0$. These bounds make the Schwartz-test product integrable and give an integrable majorant independent of $\\epsilon$; [F8] yields $J_\\epsilon\\to S$ in the tempered-distribution sense. To construct the boundary without assuming a chiral specialization, apply Fourier inversion [F2] to a Schwartz test $\\varphi$ and use $C_\\epsilon\\in L^1$ and $\\widehat\\varphi\\in L^1$ to justify Fubini [F9]:\n$$\\langle C_\\epsilon,\\varphi\\rangle=\\frac1{2\\pi}\\int_{\\mathbb R}J_\\epsilon(\\omega)\\widehat\\varphi(-\\omega)\\,d\\omega.$$\nThe same majorant and [F8] give the limit\n$$\\langle C_{A,b},\\varphi\\rangle:=\\frac1{2\\pi}\\int_{\\mathbb R}S(\\omega)\\widehat\\varphi(-\\omega)\\,d\\omega.$$\nThis is continuous in the Schwartz topology by the seminorm bound above and continuity of the Schwartz Fourier map in [F2]; hence it defines a tempered distribution and $C_\\epsilon\\to C_{A,b}$ on every Schwartz test. Angular Fourier inversion gives $\\widehat{\\widehat\\varphi}(-\\omega)=2\\pi\\varphi(\\omega)$, so the displayed formula applied to $\\widehat\\varphi$ yields $\\langle\\widehat C_{A,b},\\varphi\\rangle=\\int S(\\omega)\\varphi(\\omega)d\\omega$. Thus the general boundary has exactly the stated spectrum.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F8",
+            "F9",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For $\\omega>0$, the numerator and denominator of $S_{A,b}(\\omega)$ are positive; for $\\omega<0$ both are negative, and its zero limit $2\\pi L/\\beta=2A/b$ is positive. Direct algebra gives $S_{A,b}(-\\omega)=e^{\\beta\\omega}S_{A,b}(\\omega)$. The analytic period and reflection from step 1.1 give $C(s-i\\beta+i\\epsilon)=C(s+i\\epsilon)=C(-s-i\\epsilon)$; reflection preserves Schwartz tests, so step 5.1 gives the stated tested boundary relation. For the chiral specialization $A=\\kappa^2/(16\\pi)$, $b=\\kappa/2$, [F1] identifies the same analytic regularizations with the compact-test boundary $C_\\kappa$. Uniqueness of their distributional limit makes it the restriction of $C_{A,b}$, giving its tempered extension. Substituting $L=1/(4\\pi)$ and $\\beta=2\\pi/\\kappa$ yields the original chiral spectrum, zero value and ratio. The units follow because the phase $\\omega s$ is dimensionless and Fourier transformation integrates once in the coordinate. These are two-point mathematical deductions only; neither the contour proof nor the strip identity establishes a full $C^*$-algebra KMS state or an exact detector transition probability.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty geometric or algebraic classification is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 fixes the continuous value 2πL/β=2A/b at each damping; step 6.1 recovers κ/(4π) in the original chiral specialization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The contour contains exactly one pole, z₀=−iβ, and its order is exactly two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A>0 and b>0 are explicit; β=π/b and L=A/b² are defined. The original chiral specialization retains κ>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The continuous spectral formula includes ω=0 by a proved limit; no pointwise Fourier integral at the boundary double pole is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Countable Choice is stated explicitly and no stronger choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Given A,b>0 and Countable Choice, the clockwise one-double-pole rectangle and tested limit produce the stated continuous spectral density and balance identity. The statement does not classify all kernels satisfying detailed balance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A density obeying S(-omega)=exp(beta omega)S(omega) is not asserted to determine the analytic kernel -A csch²(bz) or the selected chiral current; only the forward calculation and its explicit specialization are proved."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For general A,b>0, β=π/b and L=A/b² give 2πL/β=2A/b. For A=κ²/(16π), b=κ/2 this is κ/(4π).",
+          "result": "Both continuous zero-frequency values follow from the fixed-damping Fourier continuity; the specialized amplitude is retained.",
+          "verifies": "Steps 1.2, 4.1 and 6.1."
+        },
+        {
+          "check": "For ω>0, (-ω)/(e^(-βω)-1)=e^(βω)ω/(e^(βω)-1).",
+          "result": "The general and specialized spectra have exactly the stated detailed-balance ratios.",
+          "verifies": "Step 6.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74-3a",
+        "notes": "Independently read Definitions, Statement and all numbered proof steps and all 25 direct supplier statements/definitions (shared suppliers already inspected at earlier levels). Zeros of sinh are exactly i*pi*Z, giving one double pole at -i*beta inside the clockwise rectangle; subtracting its principal part leaves a holomorphic function on a slightly enlarged rectangle with no other poles. The local even expansion gives coefficient -A/b^2 and no simple-pole term. Checked clockwise argument increments sum to -2*pi, integration of the derivative of exp(-i*omega*z)/(z-z0), and the resulting positive 2*pi*L*omega*exp(-beta*omega) contour value. Vertical sides decay as exp(-2*b*R); translating the bottom gives -exp(-beta*omega). The factor I_epsilon=exp(-omega*epsilon)J_epsilon gives the claimed spectrum with the correct sign. Fixed-epsilon L1 continuity determines the removable zero value 2*A/b. Schwartz seminorm p00+p30 controls the linear negative-frequency growth; the epsilon<=beta/2 majorant proves the boundary and Fourier identity with bilinear pairing and angular factor 1/(2*pi). Period/reflection yields the tested boundary relation. Chiral substitution agrees with the repaired current supplier; compact-test uniqueness supplies its tempered extension. A,b>0 exclude degeneracy, the zero test is harmless, and detailed balance is verified for omega>0. Reader/refuter reports contain no independent defect in this carrier. Literature is contextual; no physical KMS dynamics or detector observation is claimed."
+      }
+    },
+    "ex-tgr-chiral-generator-rescaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tgr-exponential-current",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let\n$$\\mathcal H=L^2((0,\\infty),dk;\\mathbb C),\\qquad \\langle h,q\\rangle_2=\\int_0^\\infty\\overline{h(k)}q(k)\\,dk,$$\nusing the second-variable-linear convention. For\n$f\\in\\mathcal D(\\mathbb R;\\mathbb C)=C_c^\\infty(\\mathbb R;\\mathbb C)$ define\n$$h_f(k)=\\sqrt{\\frac{k}{4\\pi}}\\int_{\\mathbb R}f(U)e^{ikU}\\,dU\\quad(k>0).$$\nThen $h_f,h_{\\bar f}\\in\\mathcal H$, and $f\\mapsto h_f$ is continuous on each fixed-compact-support test space. With the bosonic Fock conventions of [[def-qft-fock-and-test-spaces]], define on its finite-particle domain\n$$J(f)=a(h_{\\bar f})+a^\\dagger(h_f).$$\nThis is a complex-linear operator-valued distribution on that invariant domain. For real $f$, its closure is $\\overline{J(f)}=\\sqrt2\\,\\Phi(h_f)$, where $\\Phi(h_f)$ is the closed Segal field of [[lem-qft-segal-weyl-domain]]; the corresponding Weyl one-parameter group has generator $i\\Phi(h_f)$. The vacuum two-point form is positive type and has boundary kernel\n$$C(s)=-\\frac{1}{4\\pi(s-i0)^2},$$\nwhere $s-i0$ means the distributional limit from $s-i\\epsilon$, $\\epsilon\\downarrow0$.\n\nFor $\\kappa>0$ with units of inverse length, let $u,U$ have units of length and set\n$$U_\\kappa(u)=-\\kappa^{-1}e^{-\\kappa u},\\qquad u_\\kappa(U)=-\\kappa^{-1}\\log(-\\kappa U)\\quad(U<0).$$\nFor $g\\in\\mathcal D(\\mathbb R;\\mathbb C)$ put $f_g(U)=g(u_\\kappa(U))$ for $U<0$ and $f_g(U)=0$ for $U\\ge0$, and define $j_\\kappa(g)=J(f_g)$. The zero extension is smooth and compactly supported. Its vacuum covariance is the positive-type distribution\n$$C_\\kappa(s)=-\\frac{\\kappa^2}{16\\pi}\\,\\operatorname{csch}^2\\!\\left(\\frac{\\kappa}{2}(s-i0)\\right).$$\nHere the notation is fixed as follows: for $b=\\kappa/2$, set $Y_b(s)=\\sinh(bs)/b$. Since $Y_b'(s)=\\cosh(bs)>0$ and $Y_b(s)\\to\\pm\\infty$ as $s\\to\\pm\\infty$, it is a smooth increasing diffeomorphism. Define $\\operatorname{csch}^2(b(s-i0)):=b^{-2}Y_b^*((y-i0)^{-2})$, where\n$$\\langle Y_b^*T,\\varphi\\rangle:=\\left\\langle T,\\varphi(Y_b^{-1}(y))(Y_b^{-1})'(y)\\right\\rangle.$$\nThis is a one-dimensional chiral test-coordinate model. It asserts no restriction of a four-dimensional field to a null curve.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-thermal-contour-spectrum",
+          "source_section": "Statement",
+          "quote": "In particular, for $\\kappa>0$ in inverse length, take $A=\\kappa^2/(16\\pi)$ and $b=\\kappa/2$. Then $L=1/(4\\pi)$, $\\beta=2\\pi/\\kappa$, and $C_{A,b}$ is precisely the tested chiral covariance $C_\\kappa$ of [[lem-tgr-exponential-current]]. Its spectrum and detailed balance are\n$$S_\\kappa(\\omega)=\\frac{\\omega}{2(e^{2\\pi\\omega/\\kappa}-1)},\\qquad S_\\kappa(0)=\\frac{\\kappa}{4\\pi},\\qquad S_\\kappa(-\\omega)=e^{2\\pi\\omega/\\kappa}S_\\kappa(\\omega)\\quad(\\omega>0).$$\nHere $C_\\kappa$ has units of inverse length squared and $S_\\kappa$ inverse length. This is a two-point strip and detailed-balance statement, including the specified chiral current as a specialization. It does not assert a norm-continuous $C^*$-algebra KMS dynamics or an exact detector transition probability.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under [A1], change the length-flow coordinate to $u'=u/b$ and define the primed smeared current by $j'(g')=j_\\kappa(g'(\\cdot/b))$ for $g'\\in C_c^\\infty(\\mathbb R)$. Since $u=bu'$, the current density transforms as $j'(u')=b j_\\kappa(bu')$ in the distributional sense, so its two-point covariance is $C'(s')=b^2 C_\\kappa(bs')$. Substituting [F1] and using $b>0$ to preserve the lower-boundary orientation gives $C'(s')=C_{b\\kappa}(s')$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\kappa'=b\\kappa$ and $\\omega'=b\\omega$. Then [F2] gives\n$$S_{\\kappa'}(\\omega')=\\frac{b\\omega}{2(e^{2\\pi b\\omega/(b\\kappa)}-1)}=bS_\\kappa(\\omega),$$\nand therefore $S_{\\kappa'}(-\\omega')/S_{\\kappa'}(\\omega')=e^{2\\pi\\omega/\\kappa}$. For any $E'>0$ define $\\omega'=E'/\\sigma$. Phase preservation for every $u\\in\\mathbb R$ is the identity $E'u/(b\\sigma)=Eu/\\sigma$; comparing coefficients of $u$ and using $b,\\sigma>0$ gives $E'/b=E$, hence $E'=bE$. Conversely, $E'=bE$ gives $E'u'/\\sigma=(bE)(u/b)/\\sigma=Eu/\\sigma$ for every $u$, and therefore $\\omega'=b\\omega$. Equivalently, the length-flow strip width $\\beta_\\ell=2\\pi/\\kappa$ rescales to $\\beta_\\ell'=\\beta_\\ell/b$, while $\\beta_\\ell'\\omega'=\\beta_\\ell\\omega$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty input or empty-family statement is present."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: b=0 is excluded; positive b is required to preserve orientation and make u′=u/b invertible."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: At b=1 the coordinate, κ, E, covariance, spectrum, and detailed-balance ratio are unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: E>0 and σ>0 give ω>0, so the displayed detailed-balance relation is applied only in its stated domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The lower-boundary orientation is unchanged because b>0; a negative rescaling is not claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example selects no object from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Verification2.1: if Eprime=bE and uprime=u/b, then Eprime uprime/sigma=Eu/sigma for every u; together with kappaprime=bkappa this preserves the detailed-balance exponent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Verification2.1: equality Eprime(u/b)/sigma=Eu/sigma for all u, with b,sigma>0, implies Eprime/b=E by comparing the coefficient of u, hence Eprime=bE. This supplies the reverse direction of the phrase exactly when."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set b=1 in all rescaling formulas.",
+          "result": "κ′=κ, E′=E, and the primed covariance and spectrum equal their originals.",
+          "verifies": "Steps 1.1 and 2.1."
+        },
+        {
+          "check": "Compute β′ω′=(2π/(bκ))(bω).",
+          "result": "β′ω′=2πω/κ, so the detailed-balance exponent is unchanged.",
+          "verifies": "Step 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-74-3a",
+        "notes": "Reviewed both verification steps against the three direct suppliers already inspected. Positive dimensionless b gives the current-density factor b, covariance factor b^2 and preserved i0 orientation. The spectrum formula at positive omega and omega prime=b omega gives b S and unchanged beta omega. Repaired the immediate reverse-implication omission by explicitly defining omega prime=E prime/sigma and equating phase coefficients for every real coordinate u; sufficiency is computed separately. Checked b=1, excluded b=0 and E,sigma>0. The stale finite-check reference now names steps 1.1 and 2.1. Consumer search found only the owned B-page summary, whose actual formulas remain valid without edits. No physical clock, energy identification or temperature is inferred."
+      }
+    }
+  }
+}

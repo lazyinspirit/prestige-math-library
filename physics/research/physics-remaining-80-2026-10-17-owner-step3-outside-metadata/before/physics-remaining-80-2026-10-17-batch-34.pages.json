@@ -1,0 +1,871 @@
+[
+  {
+    "order": 503,
+    "id": "csm-exact-models",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Gaussian and gamma product tools",
+    "companion": "csm-exact-models-examples",
+    "requires": [
+      "csm-phase-ensembles",
+      "cm-math-continuum",
+      "mixed-partials-taylor-and-extrema",
+      "the-total-derivative",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "fubini-and-change-of-variables",
+      "the-derivative-and-mean-value-theorems",
+      "continuity-ivt-evt-and-uniform-continuity",
+      "rpm-geometry-actions",
+      "the-logarithm-and-general-powers",
+      "td-math-ensembles-and-limits",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "countability-and-uncountability",
+      "power-series-and-real-analytic-functions"
+    ],
+    "items": [
+      {
+        "id": "lem-csm-examples-gamma-gaussian-tools",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Gaussian, gamma and beta product integrals",
+        "reference": "workers/examples/proofs.md#M0",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 0,
+        "deps": [
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "lem-gaussian-integral-is-finite-and-positive",
+          "lem-gaussian-square-is-the-plane-gaussian-integral",
+          "lem-plane-gaussian-integral-in-polar-coordinates",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system": "mathematical-premise",
+          "lem-gaussian-integral-is-finite-and-positive": "mathematical-premise",
+          "lem-gaussian-square-is-the-plane-gaussian-integral": "mathematical-premise",
+          "lem-plane-gaussian-integral-in-polar-coordinates": "mathematical-premise",
+          "thm-change-of-variables-for-compact-jordan-sets": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For $a>0$ and an integer $r\\ge0$, define $I_r(a):=\\int_{\\mathbb R}x^{2r}e^{-ax^2}\\,dx$ as the two-sided improper Riemann integral. Then\n\n$$I_r(a)=\\frac{\\Gamma(r+\\tfrac12)}{a^{r+1/2}},\\qquad \\int_{\\mathbb R}x^{2r+1}e^{-ax^2}\\,dx=0,$$\n\nwhere $\\Gamma(s):=\\int_0^\\infty t^{s-1}e^{-t}\\,dt$ for $s>0$. In particular, $I_0(a)=\\sqrt{\\pi/a}$ and $I_1(a)=\\sqrt\\pi/(2a^{3/2})$. For every compact interval $K=[a_0,a_1]\\subset(0,\\infty)$, $I_r$ is continuously differentiable on $K$ and\n\n$$I_r'(a)=-I_{r+1}(a).$$\n\nFor $s,t>0$, put $B(s,t):=\\int_0^1u^{s-1}(1-u)^{t-1}\\,du$. Then $B(s,t)$ is finite and\n\n$$\\Gamma(s)\\Gamma(t)=\\Gamma(s+t)B(s,t),\\qquad \\Gamma(s+1)=s\\Gamma(s),\\qquad \\Gamma(\\tfrac12)=\\sqrt\\pi.$$\n\nConsequently, if independent positive random variables have densities $x^{s-1}e^{-x}/\\Gamma(s)$ and $x^{t-1}e^{-x}/\\Gamma(t)$, their sum has density $x^{s+t-1}e^{-x}/\\Gamma(s+t)$.",
+        "strategy": "1.1 For $s>0$, the gamma integrand on $(0,1)$ is bounded by $t^{s-1}$, whose integral is $1/s$. For $t\\ge1$, $t^{s-1}e^{-t/2}$ is bounded, so $t^{s-1}e^{-t}\\le C_se^{-t/2}$ and the tail converges. On a compact positive $s$-interval, the lower endpoint bounds the near-zero power and the upper endpoint bounds the exponential tail uniformly. Hence $\\Gamma(s)$ is finite and has controlled endpoint tails. [given, algebra]\n\n1.2 Let $I=\\int_{\\mathbb R}e^{-x^2}dx$. By [F2], $I^2$ equals the nonnegative plane Gaussian integral, and [F3] evaluates that integral as $\\pi$. Hence $I^2=\\pi$. [F2, F3, algebra]\n\n2.1 By [F1], $I$ is finite and positive. The positive square root in step 1.2 is therefore $I=\\sqrt\\pi$. [F1, step 1.2, algebra]\n\n2.2 Integration by parts on $[\\varepsilon,R]$ gives $\\int_\\varepsilon^R t^se^{-t}\\,dt=[-t^se^{-t}]_\\varepsilon^R+s\\int_\\varepsilon^R t^{s-1}e^{-t}\\,dt$. The boundary terms vanish by step 1.1, so $\\Gamma(s+1)=s\\Gamma(s)$; direct integration gives $\\Gamma(1)=1$. [step 1.1, algebra]\n\n2.3 For $s,t>0$, the beta integrand is integrable near $0$ by comparison with $u^{s-1}$ and near $1$ by comparison with $(1-u)^{t-1}$. On each compact rectangle $[1/j,j]^2$ the continuous product integrand $x^{s-1}y^{t-1}e^{-(x+y)}$ has integral equal to the product of its one-dimensional integrals, as follows by factoring the finite rectangular Riemann sums. These nested rectangles exhaust the positive quadrant and their integrals tend to $\\Gamma(s)\\Gamma(t)$ by step 1.1. [step 1.1, algebra]\n\n3.1 Substitution $t=x^2$ on compact half-intervals and passage to the convergent improper limits gives $\\Gamma(\\tfrac12)=2\\int_0^\\infty e^{-x^2}\\,dx=I=\\sqrt\\pi$ by steps 1.2 and 2.1. [step 1.2, step 2.1, algebra]\n\n3.2 On $A_j=[1/j,j]\\times[1/j,1-1/j]$ in coordinates $(r,u)$, the map $\\Phi(r,u)=(ru,r(1-u))$ is injective, has determinant $-r\\ne0$, and is a $C^1$ diffeomorphism on an open neighborhood. Its image is a compact Jordan set. The images exhaust the positive quadrant cofinally with the rectangles in step 2.3: each compact rectangle stays a positive distance from both axes and has bounded $x+y$, while each image is compact and stays away from the axes. Applying [F4] on $A_j$ and taking the increasing limits gives $\\Gamma(s)\\Gamma(t)=\\int_0^\\infty r^{s+t-1}e^{-r}\\,dr\\,B(s,t)=\\Gamma(s+t)B(s,t)$. The limits are finite by step 1.1 and the endpoint bounds in step 2.3. [step 1.1, step 2.3, F4, algebra]\n\n4.1 For integer $r\\ge0$, $x^{2r}e^{-ax^2/2}$ is bounded on $\\mathbb R$, so $x^{2r}e^{-ax^2}\\le C e^{-ax^2/2}$ and [F1] gives absolute convergence; odd moments converge absolutely and vanish by reflection. On compact intervals the substitution $y=\\sqrt a\\,x$ is covered by [F4], and its improper limit gives $I_0(a)=a^{-1/2}I_0(1)=\\sqrt{\\pi/a}$ by steps 1.2 and 2.1. The substitution $t=ax^2$ on both half-lines gives $I_r(a)=a^{-r-1/2}\\Gamma(r+\\tfrac12)$; finiteness follows from step 1.1, the half-integer starting value from step 3.1, and recurrence from step 2.2. [given, F1, F4, step 1.1, step 1.2, step 2.1, step 2.2, step 3.1, algebra]\n\n5.1 Fix the integer $r\\ge0$. Step 4.1 evaluated $I_r(a)=\\Gamma(r+\\tfrac12)a^{-r-1/2}$ for every $a>0$ using only convergent improper substitutions, and step 2.2 proved the Gamma recurrence by integration by parts; neither argument used parameter differentiation. By [F5], differentiation of this established explicit function gives $$I_r'(a)=-(r+\\tfrac12)\\Gamma(r+\\tfrac12)a^{-r-3/2}=-\\Gamma(r+\\tfrac32)a^{-r-3/2}=-I_{r+1}(a).$$ The same positive-base power formula makes this derivative continuous on $(0,\\infty)$, hence on a neighborhood of every compact $K\\subset(0,\\infty)$. This proves the full parameter clause without interchanging a derivative and an improper integral. [F5, step 2.2, step 4.1, algebra]\n\n6.1 Let $C=[c,d]\\subset(0,\\infty)$ and set $Q_j=[1/j,j]^2$. The event $A_j=Q_j\\cap\\{(x,y):x+y\\in C\\}$ is Jordan measurable. On each grid rectangle $I\\times J\\subset Q_j$, independence gives probability $P(X\\in I)P(Y\\in J)=(\\int_I f_s)(\\int_J f_t)$; because the marginal densities are continuous on $Q_j$, the finite rectangular Riemann sums factor and converge to the integral of $f_s(x)f_t(y)$ on that rectangle. The inner and outer grid unions for $A_j$ differ only in cells meeting its finitely many line-segment boundary pieces; their total area tends to zero, and $f_sf_t$ is bounded on $Q_j$. Thus $P((X,Y)\\in A_j)=\\int_{A_j}f_sf_t\\,dx\\,dy$. As $Q_j$ increases to the positive quadrant, countable additivity gives probabilities increasing to $P(X+Y\\in C)$, and the nonnegative improper integrals increase to the integral over $x,y>0$. The images of $C\\times[1/j,1-1/j]$ under $(r,u)\\mapsto(ru,r(1-u))$ increase to $A_C=\\{x,y>0:x+y\\in C\\}$. On each such compact set the map is injective with absolute Jacobian $r$, so [F4] transforms the integral to $r^{s+t-1}e^{-r}u^{s-1}(1-u)^{t-1}/(\\Gamma(s)\\Gamma(t))$. Its rectangular Riemann sums factor; as $j\\to\\infty$ the $u$-integral tends to $B(s,t)$. By step 3.2, $P(X+Y\\in C)=\\int_C r^{s+t-1}e^{-r}/\\Gamma(s+t)\\,dr$. A singleton C has probability zero by the same zero-area grid-boundary argument. The density integrates to one by step 1.1, so these interval probabilities determine the sum law. [given, step 1.1, step 3.2, F4, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Introduction to Analysis in Several Variables (Advanced Calculus), \u00a73.1, equations (3.1.72)\u2013(3.1.75)",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/analmv.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a75.2(i), Euler's integral",
+              "url": "https://dlmf.nist.gov/5.2"
+            }
+          ]
+        },
+        "library": "physics",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-csm-examples-smooth-flow-jacobian",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Jacobian identity for a specified smooth diffeomorphic flow",
+        "reference": "workers/examples/proofs.md#M3J",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 0,
+        "deps": [
+          "lem-cm-determinant-derivative-along-a-matrix-curve",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "cor-mean-value-theorem",
+          "thm-intermediate-value"
+        ],
+        "dependency_roles": {
+          "lem-cm-determinant-derivative-along-a-matrix-curve": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-trace-of-ab-equals-trace-of-ba": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-intermediate-value": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $I\\subseteq\\mathbb R$ be an open interval containing $0$, and let $U\\subseteq\\mathbb R^n$ be open. Suppose $\\chi:I\\times U\\to\\mathbb R^n$ is jointly $C^2$, each $\\chi_t(a):=\\chi(t,a)$ is a $C^2$ diffeomorphism from $U$ onto an open set $U_t$, and $\\chi_0(a)=a$. Let $D:=\\{(t,x):t\\in I,\\ x\\in U_t\\}$ be open and let $b:D\\to\\mathbb R^n$ be $C^1$ with $\\partial_t\\chi(t,a)=b(t,\\chi(t,a))$. Define $F(t,a):=D_a\\chi(t,a)$, $J(t,a):=\\det F(t,a)$, and $\\operatorname{div}b:=\\sum_{i=1}^n\\partial_{x_i}b_i$. Then\n\n$$\\partial_tF=(D_xb)(t,\\chi)F,\\qquad \\partial_tJ=J(\\operatorname{div}b)(t,\\chi),\\qquad J(0,a)=1.$$\n\nIn particular $J(t,a)>0$ for all $(t,a)\\in I\\times U$, and if $\\operatorname{div}b=0$ on $D$, then $J(t,a)=1$. The same identities hold on the flat torus $\\mathbb T^n:=\\mathbb R^n/\\Lambda$, where $\\Lambda=\\mathbb Z\\ell_1+\\cdots+\\mathbb Z\\ell_n$ for a linearly independent basis $\\ell_1,\\ldots,\\ell_n$ and the smooth structure and Euclidean metric descend from $\\mathbb R^n$. In that clause, let $\\chi:I\\times\\mathbb T^n\\to\\mathbb T^n$ be jointly $C^2$, with each $\\chi_t$ a diffeomorphism and $\\chi_0=\\operatorname{id}$. Let $\\pi:T\\mathbb T^n\\to\\mathbb T^n$ be the tangent-bundle projection, and let $b:I\\times\\mathbb T^n\\to T\\mathbb T^n$ have $C^1$ chart coefficients and satisfy $\\pi(b(t,a))=a$ and $\\partial_t\\chi(t,a)=b(t,\\chi(t,a))$. In every translation chart write $b=\\sum_i b^i\\partial_{x^i}$ and define $\\operatorname{div}b:=\\sum_i\\partial_{x^i}b^i$. Define $F(t,a)$ to be the matrix of $D_a\\chi_t:T_a\\mathbb T^n\\to T_{\\chi_t(a)}\\mathbb T^n$ in the translation frames and $J(t,a):=\\det F(t,a)$. Translation-chart changes have derivative $I$, so these matrices, determinants and divergences agree on overlaps. These are identities for supplied flow data; no existence or global-flow theorem is asserted.",
+        "strategy": "1.1 For each component $\\chi_i$, joint $C^2$ regularity and [F1] give $\\partial_t\\partial_{a_j}\\chi_i=\\partial_{a_j}\\partial_t\\chi_i$. Differentiating the given velocity equation in $a$ and applying [F2] yields $\\partial_tF=LF$, where $L(t,a):=(D_xb)(t,\\chi(t,a))$. [given, F1, F2, algebra]\n\n2.1 Each $F(t,a)$ is invertible: differentiating $\\chi_t^{-1}\\circ\\chi_t=\\operatorname{id}$ by [F2] gives $D\\chi_t^{-1}(\\chi_t(a))F(t,a)=I$. Thus [F3] applies to the $C^1$ matrix curve $t\\mapsto F(t,a)$ and gives $\\partial_tJ=J\\operatorname{tr}(F^{-1}LF)$. [given, F2, F3, step 1.1]\n\n3.1 By [F4], $\\operatorname{tr}(F^{-1}LF)=\\operatorname{tr}(FF^{-1}L)=\\operatorname{tr}L=\\sum_i\\partial_{x_i}b_i(t,\\chi(t,a))$. Also $F(0,a)=I$, so $J(0,a)=1$. [F4, step 1.1, step 2.1, algebra]\n\n4.1 The determinant $J(t,a)$ is continuous and nonzero on $I$ by step 2.1. If it were negative for some $t$, [F6] on the closed segment with endpoints $0$ and $t$ would give a point where $J=0$, contradicting invertibility. Hence $J>0$. [given, F6, step 2.1, step 3.1]\n\n4.2 If $\\operatorname{div}b=0$, step 3.1 gives $\\partial_tJ=0$. For each fixed $a$, the case $t=0$ is already $J(0,a)=1$. For $t\\ne0$, apply [F5] to $J(\\cdot,a)$ on $[\\min(0,t),\\max(0,t)]$, whose endpoints are distinct; since its derivative is zero, its endpoint difference is zero, so $J(t,a)=J(0,a)=1$. [given, F5, step 3.1, algebra]\n\n5.1 For the torus clause, fix $a\\in\\mathbb T^n$ and $t_0\\in I$. By continuity, choose a time neighborhood of $t_0$ on which $a$ and $\\chi_t(a)$ stay in translation charts. Their transition maps are translations, so the coordinate matrices of $D_a\\chi_t$, their determinants, and the coordinate divergence of $b$ agree on overlaps. In these charts the Euclidean calculations in steps 1.1\u20133.1 prove both differential identities, and $\\chi_0=\\operatorname{id}$ gives $J(0,a)=1$. Since $t_0$ was arbitrary, the identities hold throughout $I$; applying steps 4.1 and 4.2 on the closed segment between $0$ and any $t\\in I$ gives positivity and the divergence-free conclusion. [given, step 1.1, step 2.1, step 3.1, step 4.1, step 4.2] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Introduction to Analysis in Several Variables (Advanced Calculus), \u00a7\u00a72.1\u20132.3",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/analmv.pdf"
+            },
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, 4th edition, Theorem 8.49",
+              "url": "https://linear.axler.net/LADR4e.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-csm-examples-flow-fine-entropy",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Fine entropy under a specified incompressible periodic flow",
+        "reference": "workers/examples/proofs.md#M3",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 1,
+        "deps": [
+          "thm-natural-logarithm-laws",
+          "def-natural-logarithm",
+          "lem-csm-examples-smooth-flow-jacobian",
+          "thm-change-of-variables-for-compact-jordan-sets"
+        ],
+        "dependency_roles": {
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "lem-csm-examples-smooth-flow-jacobian": "mathematical-premise",
+          "thm-change-of-variables-for-compact-jordan-sets": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use $\\log$ for the natural logarithm of [[def-natural-logarithm]]. Let $\\mathbb T^n:=\\mathbb R^n/\\Lambda$ be a flat translation torus, where $\\Lambda=\\mathbb Z\\ell_1+\\cdots+\\mathbb Z\\ell_n$ for a linearly independent basis $\\ell_1,\\ldots,\\ell_n$, with the smooth structure and Euclidean metric descended from $\\mathbb R^n$. Let $\\mu=c\\,da$ be its fixed translation-invariant volume measure in dimensionless translation coordinates, with $c>0$. Let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Suppose $\\chi:I\\times\\mathbb T^n\\to\\mathbb T^n$ is jointly $C^2$, each $\\chi_t$ is a diffeomorphism, and $\\chi_0=\\operatorname{id}$. Let $\\pi:T\\mathbb T^n\\to\\mathbb T^n$ be the tangent-bundle projection and let $b:I\\times\\mathbb T^n\\to T\\mathbb T^n$ have $C^1$ chart coefficients with $\\pi(b(t,a))=a$ and $\\partial_t\\chi(t,a)=b(t,\\chi(t,a))$. In translation charts write $b=\\sum_i b^i\\partial_{x^i}$ and define $\\operatorname{div}b=\\sum_i\\partial_{x^i}b^i$. Assume $\\operatorname{div}b=0$ in these charts. Let $f_0\\in C^1(\\mathbb T^n)$ satisfy $0<m\\le f_0\\le M<\\infty$ and $\\int f_0\\,d\\mu=1$, and define $f_t:=f_0\\circ\\chi_t^{-1}$. Then $f_t$ is a probability density for every $t\\in I$, the integral $H(f_t):=-\\int_{\\mathbb T^n}f_t\\log f_t\\,d\\mu$ is finite, and $H(f_t)=H(f_0)$. Here $H$ is the dimensionless fine entropy of this density; multiplication by a physical constant such as $k_B$ is a separate interpretation.",
+        "strategy": "1.1 Apply [F1] to the given family. Its hypotheses are exactly the supplied $C^2$ diffeomorphisms, identity initial map and $C^1$ divergence-free velocity, so every local translation-chart Jacobian is $J_t=1$. [given, F1]\n\n\n\n2.1 For fixed $t$, around each point choose a source chart and a smaller coordinate neighborhood whose closure maps under $\\chi_t$ into a target chart. Continuity and compactness give finitely many closed coordinate boxes $Q_j$ with interiors covering the torus and with each $\\chi_t(Q_j)$ inside a target chart. Put $E_1=Q_1$ and $E_j=Q_j\\setminus\\bigcup_{i<j}\\operatorname{int}(Q_i)$; each $E_j$ is compact, the pieces cover the torus, and any overlap lies on one of the box faces. Each $E_j$ is Jordan because its boundary lies in a finite union of coordinate faces, which are compact $C^1$ hypersurface patches. A $C^1$ graph patch has bounded slope on a compact subpatch, so its mesh-$h$ box cover has total $n$-volume $O(h)$ and hence content zero. On compact chart neighborhoods $\\chi_t$ has bounded derivative, so it maps these zero-content boundaries to zero-content boundaries. Each compact piece and its image therefore have Jordan boundaries and lie in source and target charts; [F2] applies there. Summing over the pieces, overlaps do not affect the integrals, translation chart changes preserve $da$, and the constant $c$ is the same on both sides. Thus for every continuous $\\varphi$ on the torus, $\\int\\varphi\\circ\\chi_t\\,d\\mu=\\int\\varphi J_t\\,d\\mu=\\int\\varphi\\,d\\mu$. [given, F1, F2, step 1.1]\n\n\n\n3.1 The function $f_t=f_0\\circ\\chi_t^{-1}$ is positive and continuous. The substitution of step 2.1 with $\\varphi=f_t$ gives $\\int f_t\\,d\\mu=\\int f_0\\,d\\mu=1$, so $f_t$ is normalized. [given, step 2.1]\n\n\n\n4.1 The bounds $m\\le f_0\\le M$ also hold for $f_t$; by [F3], $\\log$ is continuous on $[m,M]$, so $f_t\\log f_t$ is bounded and continuous on the compact torus and its integral is finite. Applying step 2.1 to $\\varphi=f_t\\log f_t$ gives $\\int f_t\\log f_t\\,d\\mu=\\int (f_t\\log f_t)\\circ\\chi_t\\,d\\mu=\\int f_0\\log f_0\\,d\\mu$, since $f_t\\circ\\chi_t=f_0$. Negating proves $H(f_t)=H(f_0)$. [given, F3, step 2.1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Introduction to Analysis in Several Variables (Advanced Calculus), \u00a73.1 and Chapter 4, \u00a74.5",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/analmv.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a71.2, entropy as a functional of a specified state",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-csm-examples-quadratic-covariance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Gaussian covariance for positive quadratic forms and a boundary counterexample",
+        "reference": "workers/examples/proofs.md#M1",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 1,
+        "deps": [
+          "lem-csm-examples-gamma-gaussian-tools",
+          "def-countable-choice",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_roles": {
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]]. Let $n\\ge1$, let $K\\in\\mathbb R^{n\\times n}$ be symmetric positive definite, and let $\\beta>0$. For $x\\in\\mathbb R^n$ put $H(x)=\\tfrac12x^{\\mathsf T}Kx$, and use the Euclidean Lebesgue measure $\\lambda_n$ to define the density $Z^{-1}e^{-\\beta H(x)}$. Then\n\n$$Z=\\int_{\\mathbb R^n}e^{-\\beta H(x)}dx=\\left(\\frac{2\\pi}{\\beta}\\right)^{n/2}(\\det K)^{-1/2},\\quad \\mathbb E[x]=0,\\quad \\mathbb E[xx^{\\mathsf T}]=\\beta^{-1}K^{-1},\\quad \\mathbb E[H]=\\frac{n}{2\\beta}.$$\n\nPositive definiteness and $\\beta>0$ are essential for this normalized full-space Gaussian. The unrestricted identity $\\mathbb E[x\\,H'(x)]=\\beta^{-1}$ is false without a boundary hypothesis: on $[-L,L]$ with $L>0$ and $H\\equiv0$, the normalized expectation on the left is $0$.",
+        "strategy": "1.1 We construct $R$ with $K=R^{\\mathsf T}R$ by induction on $n$. For $n=1$, take $R=\\sqrt{K_{11}}>0$. For $n>1$, write $K=\\begin{pmatrix}a&b^{\\mathsf T}\\\\b&C\\end{pmatrix}$; positive definiteness gives $a>0$ and $S:=C-bb^{\\mathsf T}/a$ positive definite, since $y^{\\mathsf T}Sy=(-b^{\\mathsf T}y/a,y)^{\\mathsf T}K(-b^{\\mathsf T}y/a,y)>0$ for $y\\ne0$. By induction $S=R_1^{\\mathsf T}R_1$; then $R=\\begin{pmatrix}\\sqrt a&b^{\\mathsf T}/\\sqrt a\\\\0&R_1\\end{pmatrix}$ satisfies $R^{\\mathsf T}R=K$. Its diagonal entries are positive, so $\\det R>0$; taking determinants gives $\\det K=(\\det R)^2$ and therefore $\\det R=\\sqrt{\\det K}$. [given, construct, algebra]\n\n2.1 Put $T(x)=Rx$. This is a $C^1$ diffeomorphism of $\\mathbb R^n$ with $|\\det DT|=\\det R$. Since $H(x)=|Rx|^2/2$, [F2] gives $$Z=(\\det R)^{-1}\\int_{\\mathbb R^n}e^{-\\beta|y|^2/2}\\,d\\lambda_n(y).$$ By [F3], $\\lambda_n$ is the finite product of $n$ sigma-finite one-dimensional Lebesgue measures; Tonelli and the factorization $e^{-\\beta|y|^2/2}=\\prod_i e^{-\\beta y_i^2/2}$ give the integral as $I_0(\\beta/2)^n$. By [F1] and [F4], $I_0(\\beta/2)=\\sqrt{2\\pi/\\beta}$. Hence $$Z=(2\\pi/\\beta)^{n/2}(\\det K)^{-1/2},$$ which is finite and positive. [given, F1, F2, F3, F4, step 1.1, algebra]\n\n3.1 Let $Y$ have the normalized density proportional to $e^{-\\beta|y|^2/2}$ with respect to $\\lambda_n$. For each $i$, [F3] and Tonelli factor the nonnegative second-moment integral into $I_1(\\beta/2)I_0(\\beta/2)^{n-1}$, while the normalizer is $I_0(\\beta/2)^n$; [F1] gives $\\mathbb E[Y_i^2]=I_1(\\beta/2)/I_0(\\beta/2)=1/\\beta$. Also $\\int |y_i|e^{-\\beta|y|^2/2}d\\lambda_n<\\infty$, since $|y_i|\\le1+y_i^2$ and the same Tonelli factorization makes both integrals finite. For $i\\ne j$, $|y_iy_j|\\le(y_i^2+y_j^2)/2$, so the cross moments are absolutely integrable. Fubini [F3] factors these signed moments; the one-dimensional first and odd moments vanish by [F1]. Thus $\\mathbb E[Y]=0$ and $\\mathbb E[YY^{\\mathsf T}]=\\beta^{-1}I$. [F1, F3, step 2.1, algebra]\n\n4.1 By [F2], the normalized law of $X$ is the pullback of the law of $Y$ under $x=R^{-1}y$. The absolute integrability established in step 3.1 permits the same change of variables for signed first and second moments by applying [F2] to their positive and negative parts. Hence $\\mathbb E[X]=0$ and $$\\mathbb E[XX^{\\mathsf T}]=R^{-1}(\\beta^{-1}I)R^{-\\mathsf T}=\\beta^{-1}(R^{\\mathsf T}R)^{-1}=\\beta^{-1}K^{-1}.$$ Since $H(X)=|Y|^2/2$, summing the diagonal second moments gives $\\mathbb E[H]=n/(2\\beta)$. [F2, step 1.1, step 3.1, algebra]\n\n5.1 For the stated boundary counterexample, the density on $[-L,L]$ is the constant $(2L)^{-1}$ because $H=0$ and the normalizing integral is $2L$ by [F3]. Since $H'(x)=0$ everywhere, $\\mathbb E[xH'(x)]=0\\ne\\beta^{-1}$ for $\\beta>0$. [given, F3, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Introduction to Analysis in Several Variables (Advanced Calculus), \u00a73.1",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/analmv.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a72.2.1, equipartition of quadratic degrees of freedom",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-csm-examples-spherical-marginal",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact spherical-shell coordinate marginal and fixed-block Gaussian limit",
+        "reference": "workers/examples/proofs.md#M2",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 1,
+        "deps": [
+          "lem-csm-examples-gamma-gaussian-tools",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]]. Let $D\\ge2$, $1\\le k<D$, and $R>0$. Let $Z_1,\\ldots,Z_D$ be independent real random variables with common Lebesgue probability density $\\phi(x):=(2\\pi)^{-1/2}e^{-x^2/2}$; its integral is one by the Gaussian integral in [[lem-csm-examples-gamma-gaussian-tools]], and this is the standard-normal coordinate law. Set $Z=(Z_1,\\ldots,Z_D)$ and define $P:=RZ/|Z|$ when $Z\\ne0$, and $P:=0$ when $Z=0$. The joint density of $Z$ makes $\\mathbb P(Z=0)=0$. The distribution of $P$ is rotationally invariant, meaning that for every orthogonal map $Q\\in O(D)$ and Borel set $A\\subseteq\\mathbb R^D$, $\\mathbb P(QP\\in A)=\\mathbb P(P\\in A)$. It is concentrated on the sphere in the precise sense that $\\mathbb P(|P|=R)=1$. Its first $k$ coordinates have Lebesgue density\n\n$$f_{D,k}(y)=\\frac{\\Gamma(D/2)}{\\Gamma((D-k)/2)(\\pi R^2)^{k/2}}\\left(1-\\frac{|y|^2}{R^2}\\right)^{(D-k-2)/2}\\quad (|y|<R),$$\n\nand zero for $|y|\\ge R$. This density is integrable even when it diverges at the boundary. Also $\\mathbb E[P_i]=0$, $\\mathbb E[P_iP_j]=0$ for $i\\ne j$, and $\\mathbb E[P_i^2]=R^2/D$.\n\nFor fixed $k$ and $\\sigma>0$, set $R_D=\\sqrt D\\,\\sigma$ and let $D\\to\\infty$ through integers $D>k$. If $g:\\mathbb R^k\\to\\mathbb R$ is bounded and Lipschitz in the Euclidean norm, meaning that finite constants $B_g,L_g$ satisfy $|g(x)|\\le B_g$ and $|g(x)-g(y)|\\le L_g|x-y|$ for all $x,y\\in\\mathbb R^k$, then\n\n$$\\mathbb E\\,g\\bigl((P_1,\\ldots,P_k)\\bigr)\\longrightarrow\\mathbb E\\,g\\bigl(\\sigma(Z_1,\\ldots,Z_k)\\bigr).$$\n\nThis is a fixed-block bounded-Lipschitz test limit; it makes no claim uniform in $k$ or for unbounded test functions. If $k=D$, the projection is singular on the sphere and the displayed Lebesgue density is not asserted.",
+        "strategy": "1.1 The joint density of $Z$ is $(2\\pi)^{-D/2}e^{-|z|^2/2}$. For every orthogonal $Q$, the substitution $z\\mapsto Qz$ has absolute determinant $1$ and preserves $|z|$, so $QZ$ has the same law as $Z$. Therefore $P=RZ/|Z|$ is rotationally invariant and satisfies $|P|=R$ almost surely. [given, F1, F2, algebra]\n\n\n\n1.2 Write $Z=(A,B)$ with $A\\in\\mathbb R^k$ and $B\\in\\mathbb R^{D-k}$. The vectors are independent. By the one-coordinate substitution $w=Z_j^2/2$, each $w$ has gamma density $w^{-1/2}e^{-w}/\\Gamma(1/2)$; repeated application of [F1] shows $T:=|B|^2$ has density $t^{b-1}e^{-t/2}/(2^b\\Gamma(b))$ for $t>0$, where $b=(D-k)/2$, independently of $A$. [F1, algebra]\n\n\n\n1.3 For fixed $t>0$, the first $k$ coordinates $y=RA/\\sqrt{|A|^2+t}$ range over $|y|<R$. The inverse is $A=\\sqrt t\\,y/\\sqrt{R^2-|y|^2}$. Its derivative has radial eigenvalue $\\sqrt t\\,R^2/(R^2-|y|^2)^{3/2}$ and $k-1$ tangential eigenvalues $\\sqrt t/(R^2-|y|^2)^{1/2}$, hence Jacobian $t^{k/2}R^2/(R^2-|y|^2)^{k/2+1}$. [given, construct, algebra]\n\n\n\n2.1 The map $(y,t)\\mapsto(A(y,t),t)$ is a $C^1$ diffeomorphism from $\\{|y|<R,t>0\\}$ to $\\mathbb R^k\\times(0,\\infty)$. Apply [F2] first on compact subsets away from $t=0$ and $|y|=R$ and then take increasing nonnegative limits. Substituting the Gaussian density of $A$, the gamma density of $T$, and the Jacobian from step 1.3 gives $f_{D,k}(y)=\\frac{R^2}{(2\\pi)^{k/2}2^b\\Gamma(b)(R^2-|y|^2)^{k/2+1}}\\int_0^\\infty t^{D/2-1}\\exp\\!\\left(-\\frac{tR^2}{2(R^2-|y|^2)}\\right)dt$. The substitution $u=tR^2/[2(R^2-|y|^2)]$ evaluates the integral as $\\Gamma(D/2)[2(R^2-|y|^2)/R^2]^{D/2}$. Since $D/2=k/2+b$, simplification gives the displayed density. The boundary singularity, when present, has exponent $b-1>-1$ in the radial variable and is integrable; the pushforward construction and $\\mathbb P(Z=0)=0$ show the density has total mass one and no boundary atom. [F1, F2, step 1.2, step 1.3, algebra]\n\n\n\n2.2 Sign changes of one Gaussian coordinate show $\\mathbb E[P_i]=0$ and $\\mathbb E[P_iP_j]=0$ for $i\\ne j$. Permutation invariance makes all $\\mathbb E[P_i^2]$ equal, while $\\sum_{i=1}^D P_i^2=R^2$ almost surely; summing expectations gives $\\mathbb E[P_i^2]=R^2/D$. [step 1.1, given, algebra]\n\n\n\n3.1 For each finite $D$, take the product Gaussian vector $Z=(Z_1,\\ldots,Z_D)$ in that dimension and set $S_D:=D^{-1}\\sum_{i=1}^D Z_i^2$. By [F1] and independence, $\\mathbb E S_D=1$, $\\mathbb E[(S_D-1)^2]=2/D$, and $\\mathbb E|Z_{1:k}|^2=k$. Fix $0<\\delta<1/2$ and $M>0$. On $E_D=\\{|Z_{1:k}|\\le M,\\ |S_D-1|\\le\\delta\\}$, the derivative of $u^{-1/2}$ is bounded by $\\sqrt2$ on $[1/2,3/2]$, so $|\\sigma Z_{1:k}/\\sqrt{S_D}-\\sigma Z_{1:k}|\\le\\sqrt2\\sigma M\\delta$. If $g$ is bounded Lipschitz with bound $B_g$ and Lipschitz constant $L_g$, then $M^2\\mathbf 1_{\\{|Z_{1:k}|>M\\}}\\le |Z_{1:k}|^2$ and $\\delta^2\\mathbf 1_{\\{|S_D-1|>\\delta\\}}\\le(S_D-1)^2$ imply $\\mathbb P(E_D^c)\\le k/M^2+2/(D\\delta^2)$. Therefore $|\\mathbb E g(P_{1:k})-\\mathbb E g(\\sigma Z_{1:k})|\\le L_g\\sqrt2\\sigma M\\delta+2B_g\\left(\\frac{k}{M^2}+\\frac{2}{D\\delta^2}\\right)$. Choose $M$ large, then $\\delta$ small, then $D$ large. The right side becomes arbitrarily small, proving the stated test convergence without assuming independence between $Z_{1:k}$ and $S_D$. [F1, step 1.1, algebra] \u220e\n\n",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Michael E. Taylor, Introduction to Analysis in Several Variables (Advanced Calculus), \u00a73.1",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/analmv.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, \u00a75.2(i), Euler's integral",
+              "url": "https://dlmf.nist.gov/5.2"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 13 (Fall 2013), IV.D",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/0cdb670a825c6aaea7e229ac40776cbf_MIT8_333F13_Lec13.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "post-csm-examples-ensemble-preparations",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Declared example preparations and thermodynamic interpretation",
+        "reference": "workers/examples/proofs.md#P0",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 3,
+        "deps": [
+          "def-natural-logarithm",
+          "lem-csm-examples-gamma-gaussian-tools",
+          "post-csm-counting-and-physical-observables"
+        ],
+        "dependency_roles": {
+          "def-natural-logarithm": "formulation-prerequisite",
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "post-csm-counting-and-physical-observables": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Here $\\log$ denotes the natural logarithm defined in [[def-natural-logarithm]].\n\nFor each named finite classical model in this page, adopt the preparation explicitly stated in its theorem. In a canonical branch, take a measurable phase space with a specified reference measure $\\nu$, a measurable Hamiltonian $H$, an inverse energy parameter $\\beta>0$, and a finite positive partition function $Z=\\int e^{-\\beta H}\\,d\\nu$; the adopted probability measure is $dP=Z^{-1}e^{-\\beta H}\\,d\\nu$. In a grand-canonical branch, take disjoint particle-number sectors with sector partition functions $Z_N$ and a dimensionless activity $z>0$ for which $\\Xi=\\sum_{N\\ge0}z^N Z_N$ is finite; sector $N$ has probability weight $z^N Z_N/\\Xi$. The spherical-shell and product preparations are separate explicitly specified probability laws in their consuming theorem statements. These are alternative model assumptions, not consequences of a Hamiltonian flow and not assertions that a laboratory system realizes them.\n\nFor a canonical model whose reference measure and Hamiltonian are fixed, adopt the statistical thermodynamic definitions $U=\\mathbb E_P[H]$, $F=-\\beta^{-1}\\log Z$, and $S=k_B(\\log Z+\\beta U)$ when the displayed integrals are finite. For a volume-dependent model, define the model pressure as $-\\partial_V F$ only along the declared fixed-shape volume family. Here $k_B>0$ has SI units J K$^{-1}$, temperature $T>0$ has units K, and $\\beta=(k_BT)^{-1}$ has units J$^{-1}$. The fixed reference measure is part of the preparation; changing it changes the numerical partition function and entropy convention.\n\nFor the continuous particle examples, adopt the operational species and\ncounting convention of [[post-csm-counting-and-physical-observables]]. Use\none fixed primitive action reference $a_0>0$ in J s, and write $h_0:=a_0$\nwhere the consuming model uses the notation $h_0$. In a Cartesian physical\nphase chart $dq\\,dp$ has action dimension $(\\mathrm{J\\,s})^{dN}$, so the\nreference $dq\\,dp/(\\prod_sN_s!\\,a_0^{dN})$ is dimensionless. Each model\nretains its declared operational labels: an omitted factorial for resolved\nharmonic coordinates is not replaced by a particle-exchange quotient. The\nfinite spin examples use their stated discrete counting measure, without a\ncontinuous phase-cell factor. Choosing a numerical reference action, or\nidentifying it with Planck's constant, is an additional convention; no such\nvalue or identification is imposed here. The Gaussian and gamma identities\nin [[lem-csm-examples-gamma-gaussian-tools]] establish the mathematical\nnormalizations, not the physical preparation or empirical equilibration.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a71.2\u20131.5 and \u00a72.2",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 14, \u00a7\u00a7IV.G and IV.I (Fall 2013)",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/89259a8fd183acfaec06922c88a6024b_MIT8_333F13_Lec14.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Separate finite classical canonical, grand-canonical, spherical-shell and product preparations in the named model examples; no claim of equilibration, empirical truth, or statistical inference from observations.",
+        "verification": {
+          "precheck": "n/a"
+        }
+      },
+      {
+        "id": "pthm-csm-harmonic-ensemble",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Confined coupled quadratic canonical systems",
+        "reference": "workers/examples/proofs.md#E3",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "post-csm-examples-ensemble-preparations",
+          "thm-csm-examples-quadratic-covariance",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "thm-csm-examples-quadratic-covariance": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]] for the Euclidean Lebesgue product measure used below. Let $n\\ge1$, let $M=\\operatorname{diag}(m_1,\\ldots,m_n)$ with $m_i>0$ in kg, and let $K$ be a real symmetric positive-definite stiffness matrix with entries in J m$^{-2}$. For displacement $q\\in\\mathbb R^n$ in metres and momentum $p\\in\\mathbb R^n$ in kg m s$^{-1}$, define\n$$H(q,p)=\\tfrac12p^{\\mathsf T}M^{-1}p+\\tfrac12q^{\\mathsf T}Kq.$$\nAdopt the canonical probability density proportional to $e^{-\\beta H}$ relative to $dq\\,dp/h_0^n$, where $\\beta>0$ has units J$^{-1}$ and the fixed action reference $h_0>0$ has units J s. Under the preparation of [[post-csm-examples-ensemble-preparations]], the dimensionless partition function and moments are\n$$Z=\\left(\\frac{2\\pi}{\\beta h_0}\\right)^n\\sqrt{\\frac{\\det M}{\\det K}},\\quad \\mathbb E[q]=\\mathbb E[p]=0,\\quad \\mathbb E[qq^{\\mathsf T}]=\\beta^{-1}K^{-1},\\quad \\mathbb E[pp^{\\mathsf T}]=\\beta^{-1}M,\\quad \\mathbb E[qp^{\\mathsf T}]=0.$$\nThe model mean energy is $U=\\mathbb E[H]=n/\\beta$. With $k_B>0$ in J K$^{-1}$ and $T>0$ in K from [[post-csm-examples-ensemble-preparations]], so that $\\beta=(k_BT)^{-1}$, define the fixed-parameter heat-capacity response by\n$$C_{\\mathrm{harm}}:=\\left(\\frac{\\partial U}{\\partial T}\\right)_{M,K,h_0}=nk_B.$$\nIt has units J K$^{-1}$. This model has no volume variable, so $C_{\\mathrm{harm}}$ is not a fixed-volume derivative.",
+        "strategy": "1.1 By [F1], the phase-space weight factors as $e^{-\\beta p^{\\mathsf T}M^{-1}p/2}e^{-\\beta q^{\\mathsf T}Kq/2}$. The product-measure identity and Tonelli [F3] justify multiplying the two nonnegative Lebesgue integrals. Applying [F2] to the $q$ factor gives normalization $(2\\pi/\\beta)^{n/2}(\\det K)^{-1/2}$ and covariance $\\beta^{-1}K^{-1}$. [given, F1, F2, F3, algebra]\n\n\n\n1.2 The momentum quadratic form has symmetric positive-definite matrix $M^{-1}$. Applying [F2] with $K=M^{-1}$ gives its integral $(2\\pi/\\beta)^{n/2}\\sqrt{\\det M}$ and covariance of $p$ equal to $\\beta^{-1}(M^{-1})^{-1}=\\beta^{-1}M$. [given, F2, algebra]\n\n\n\n2.1 Multiplying the two integrals from steps 1.1\u20131.2 and dividing by the reference factor $h_0^n$ gives $Z=(2\\pi/(\\beta h_0))^n\\sqrt{\\det M/\\det K}$. The phase-space Lebesgue measure is the product of its $q$ and $p$ factors by [F3]; the normalized canonical density therefore factors into independent $q$ and $p$ laws. Each factor is even, so its mean is zero, and its covariance is the one computed in steps 1.1\u20131.2. [A1, F3, step 1.1, step 1.2, algebra]\n\n\n\n3.1 By [F1], taking the expectation of $H$ and summing the diagonal traces of the two covariance identities gives $$U=\\tfrac12\\mathbb E[p^{\\mathsf T}M^{-1}p]+\\tfrac12\\mathbb E[q^{\\mathsf T}Kq]=\\frac{n}{2\\beta}+\\frac{n}{2\\beta}=\\frac{n}{\\beta}.$$ The adopted relation $\\beta^{-1}=k_BT$ makes $U=nk_BT$. Holding the model parameters $M,K,h_0$ fixed therefore gives $C_{\\mathrm{harm}}=(\\partial U/\\partial T)_{M,K,h_0}=nk_B$, with units J K$^{-1}$. [A1, F1, step 1.1, step 1.2, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a72.2.1, equipartition of quadratic degrees of freedom",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 14, IV.G (Fall 2013)",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/89259a8fd183acfaec06922c88a6024b_MIT8_333F13_Lec14.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite classical continuous canonical model with positive diagonal mass matrix, strictly positive stiffness matrix, fixed positive action reference and beta>0; the Lebesgue product calculations assume AC\u03c9; no unpinned zero mode or empirical equilibration claim.",
+        "empirical_premises": [],
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-csm-ideal-gas-ensemble",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Exact canonical and grand ideal-gas preparations",
+        "reference": "workers/examples/proofs.md#E1",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "thm-natural-logarithm-laws",
+          "post-csm-examples-ensemble-preparations",
+          "post-csm-counting-and-physical-observables",
+          "lem-csm-examples-gamma-gaussian-tools",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-volume-of-the-unit-n-ball",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "thm-monotone-convergence-for-the-integral",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "post-rpm-null-test-particle-action",
+          "def-rpm-mechanical-momentum-and-observer-energy",
+          "def-gr-observer-and-rest-space",
+          "lem-gr-observer-projection-decomposition"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "post-csm-counting-and-physical-observables": "physical-assumption",
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "cor-volume-of-the-unit-n-ball": "mathematical-premise",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null": "mathematical-premise",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "post-rpm-null-test-particle-action": "physical-assumption",
+          "def-rpm-mechanical-momentum-and-observer-energy": "formulation-prerequisite",
+          "def-gr-observer-and-rest-space": "formulation-prerequisite",
+          "lem-gr-observer-projection-decomposition": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]], for the Euclidean Lebesgue product and polar-coordinate suppliers used below. Let $\\exp(x):=\\sum_{n=0}^\\infty x^n/n!$ be the real exponential of [[def-real-exponential-function-and-e]], and let $\\log$ be the natural logarithm of [[def-natural-logarithm]], with $\\log'(x)=1/x$ for $x>0$ by [[thm-logarithm-derivative-and-integral]]. Let $d,N\\ge1$ and let $B=\\prod_{j=1}^d[0,L_j]\\subset\\mathbb R^d$, where each side length $L_j>0$ is in metres and $V:=\\prod_jL_j$ is in $\\mathrm m^d$. Let $m>0$ be the common particle mass in kg, $\\beta>0$ in J$^{-1}$, and let $h_0:=a_0>0$ be the fixed action reference in J s from [[post-csm-examples-ensemble-preparations]]. Take one species of $N$ operationally indistinguishable particles as in [[post-csm-counting-and-physical-observables]]. On its auxiliary labelled cover, positions $q_i\\in B$ are in metres and momenta $p_i\\in\\mathbb R^d$ are in kg m s$^{-1}$; the Hamiltonian is permutation invariant and the reference measure is\n$$d\\nu_N=\\frac{dq\\,dp}{N!h_0^{dN}}.$$\nThe symmetric labelled law represents the quotient preparation; a one-particle marginal below means the law of a uniformly selected particle. For $N\\ge1$, define\n$$H_N(q,p)=\\sum_{i=1}^N\\frac{|p_i|^2}{2m}$$\nand use the canonical preparation of [[post-csm-examples-ensemble-preparations]]. For the vacuum sector $N=0$, define $B^0\\times\\mathbb R^{d\\cdot0}$ to be a singleton with reference measure $\\nu_0=1$, set $H_0=0$, and use empty-product conventions $V^0=0!=h_0^0=1$; thus $Z_0=1$. The mass parameter $m$ applies when particles are present; the vacuum sector has no mass coordinate. For all $N\\ge0$, set $\\lambda:=h_0\\sqrt{\\beta/(2\\pi m)}$ (metres) and\n$$Z_N=\\int e^{-\\beta H_N}\\,d\\nu_N=\\frac{V^N}{N!\\lambda^{dN}}.$$\nFor $N\\ge1$, the labelled-cover position coordinates are independent uniform points of $B$ and are independent of the momenta; all momentum components are independent centered Gaussians of variance $m/\\beta$. The joint law is permutation invariant. The energy satisfies $U=\\mathbb E H_N=dN/(2\\beta)$ and $\\operatorname{Var}(H_N)=dN/(2\\beta^2)$, with variance in J$^2$. With the adopted Boltzmann constant $k_B>0$ in J K$^{-1}$ and temperature $T:=(k_B\\beta)^{-1}>0$ in K from [[post-csm-examples-ensemble-preparations]], define $F=-\\beta^{-1}\\log Z_N$ and scale all box side lengths uniformly when varying $V$, holding the shape, $N,T,d,m,h_0$ fixed. The model pressure $\\mathcal P:=-\\left(\\partial F/\\partial V\\right)_{N,T,d,m,h_0,\\,\\mathrm{shape}}$ has units J m$^{-d}$ (equivalently N m$^{1-d}$; Pa when $d=3$) and obeys $\\mathcal PV=N/\\beta=Nk_BT$. The fixed-reference entropy is $S=k_B(\\log Z_N+\\beta U)$ and retains the chosen $N!$ and $h_0$ convention.\n\nFor $d=3$, the speed $v=|p|/m$ of a uniformly selected particle, in m s$^{-1}$, has density\n$$f(v)=4\\pi\\left(\\frac{m\\beta}{2\\pi}\\right)^{3/2}v^2e^{-\\beta mv^2/2},\\qquad v\\ge0.$$\nIts squared-speed expectation, modal speed, and mean speed are $\\mathbb E[v^2]=3/(m\\beta)$ in m$^2$ s$^{-2}$, $\\sqrt{2/(m\\beta)}$ in m s$^{-1}$, and $\\mathbb E[v]=\\sqrt{8/(\\pi m\\beta)}$ in m s$^{-1}$, respectively.\n\nFor the separate grand-canonical preparation of [[post-csm-examples-ensemble-preparations]] on disjoint number sectors $N\\in\\{0,1,\\ldots\\}$, whose sector weights are proportional to $z^NZ_N$, let $\\mu_{\\rm chem}$ be a chemical potential in joules and $z=\\exp(\\beta\\mu_{\\rm chem})>0$ the dimensionless activity. Then\n$$\\Xi=\\sum_{N=0}^\\infty z^NZ_N=\\exp(zV/\\lambda^d),\\qquad \\mathbb P(N=j)=\\exp(-\\nu)\\frac{\\nu^j}{j!},\\quad \\nu:=zV/\\lambda^d,$$\nso $\\mathbb E N=\\operatorname{Var}(N)=\\nu$ and the conditional law given $N$ is the canonical law above.\n\nA distinct three-dimensional classical ultra-relativistic model adopts $H_{\\rm ur}(p)=c|p|$ for every $p\\in\\mathbb R^3$, with $c>0$ in m s$^{-1}$ and $p$ in kg m s$^{-1}$, in the same box volume $V$ in m$^3$. This extends the nonzero massless momentum formula continuously to $p=0$ only to define a density on all of $\\mathbb R^3$; the point has Lebesgue measure zero and no physical zero-momentum massless state is asserted. Its separate canonical partition function is\n$$Z_{N,{\\rm ur}}=\\frac{V^N}{N!h_0^{3N}}\\left(\\frac{8\\pi}{(\\beta c)^3}\\right)^N,$$\nwith $U_{\\rm ur}=3N/\\beta$ J and $\\operatorname{Var}(H_{\\rm ur})=3N/\\beta^2$ J$^2$. Define its fixed-volume heat capacity by $C_{V,\\rm ur}:=(\\partial U_{\\rm ur}/\\partial T)_{V,N,c,h_0}=3Nk_B$; it has units J K$^{-1}$. Its three-dimensional pressure obeys $\\mathcal PV=N/\\beta$ and has units Pa. This branch is not obtained by setting $m=0$ in the Gaussian model and makes no photon-number or quantum-statistics claim.",
+        "strategy": "**Given:** $\\mathrm{AC}_\\omega$, $d,N\\ge1$, the rectangular box $B$ with side lengths in metres and volume $V$ in $\\mathrm m^d$, one operationally indistinguishable species, $m>0$ kg, $h_0=a_0>0$ J s, $\\beta>0$ J$^{-1}$, and the Hamiltonian and symmetric reference measure in the Statement.\n\n1.1 By [F3], Euclidean Lebesgue measure in the position and momentum coordinates is their product measure; [F5] then factors the nonnegative normalization integral. The box-volume formula [F4] gives $\\lambda_{dN}(B^N)=V^N$. Each of the $dN$ scalar momentum factors contributes $\\int_{\\mathbb R}e^{-\\beta p^2/(2m)}dp=\\sqrt{2\\pi m/\\beta}$ by [F2] and [F7]. Including the stipulated factor $1/(N!h_0^{dN})$ from [F12] yields $Z_N=V^N(N!h_0^{dN})^{-1}(2\\pi m/\\beta)^{dN/2}=V^N/(N!\\lambda^{dN})$. [given, F1, F2, F3, F4, F5, F7, F12, algebra]\n\n1.2 For the separate massless branch, let $N_{\\rm time}$ denote the background's smooth future-timelike field $N$ from [F10] and normalize it at the event by $n=N_{\\rm time}/\\sqrt{-g(N_{\\rm time},N_{\\rm time})}$. [F8] makes $P$ future null, so $g(P,n)<0$. By [F11], $|q_n(P)|^2=g(q_n(P),q_n(P))=g(P,n)^2$, hence $E_n(P)=-cg(P,n)=c|q_n(P)|$. Identifying $q_n$ with its components in an orthonormal basis of the positive rest space gives the adopted $H_{\\rm ur}(p)=c|p|$ with the stated units. [given, A2, F8, F9, F10, F11, algebra]\n\n2.1 After normalization, the canonical density is the product of the uniform position density on $B^N$ and the $dN$ scalar Gaussian momentum densities. For measurable coordinate rectangles, [F3] and [F5] show their probabilities factor; hence the positions and all momentum components are independent, each position is uniform on $B$, and each momentum component is centered with variance $m/\\beta$ by [F2]. [given, F2, F3, F5, step 1.1]\n\n2.2 In the grand preparation of [F1], use the vacuum convention $Z_0=1$ and substitute $Z_N=V^N/(N!\\lambda^{dN})$ for all $N\\ge0$ into the sector sum. With $\\nu=zV/\\lambda^d$, [F13] gives $\\Xi=\\sum_{N\\ge0}\\nu^N/N!=\\exp(\\nu)$, and [F14] gives the normalized sector weight $\\nu^N/(N!\\exp(\\nu))=\\exp(-\\nu)\\nu^N/N!$. [A1, F1, F13, F14, step 1.1, algebra]\n\n2.3 By [F6], the momentum integral for one ultra-relativistic particle is $$\\int_{\\mathbb R^3}e^{-\\beta c|p|}\\,d\\lambda_3(p)=4\\pi\\int_0^\\infty r^2e^{-\\beta cr}dr=4\\pi\\frac{\\Gamma(3)}{(\\beta c)^3}=\\frac{8\\pi}{(\\beta c)^3},$$ using [F2]. The point $p=0$ is Lebesgue null by [F18], so the continuous extension adds no massless zero-momentum state. Product measure and Tonelli [F3, F5] give the $N$-particle product, and the stated positional/counting reference then gives $Z_{N,\\rm ur}$. [A1, A2, F1, F2, F3, F5, F6, F18, step 1.1, algebra]\n\n3.1 Each scalar momentum coordinate has second moment $m/\\beta$ and fourth moment $3m^2/\\beta^2$ from [F2]. Thus each term $p_{i\\alpha}^2/(2m)$ has mean $1/(2\\beta)$ and variance $1/(2\\beta^2)$; independence from step 2.1 makes means and variances add, giving the stated $U$ and $\\operatorname{Var}(H_N)$. [given, F2, step 2.1, algebra]\n\n3.2 For $d=3$, write $a=\\beta/(2m)$. The one-particle momentum density is $(a/\\pi)^{3/2}e^{-a|p|^2}$. By [F6], for every Borel $A\\subseteq[0,\\infty)$ the probability that $v=|p|/m$ lies in $A$ is $$4\\pi(a/\\pi)^{3/2}\\int_{mA}r^2e^{-ar^2}\\,dr.$$ The substitution $r=mv$ therefore gives the speed density $4\\pi(m\\beta/(2\\pi))^{3/2}v^2e^{-\\beta mv^2/2}$ on $v\\ge0$. [given, F2, F6, step 2.1, algebra]\n\n3.3 Shifting the index in the absolutely convergent series [F13] gives $\\sum_{j\\ge0}j\\nu^j/j!=\\nu\\exp(\\nu)$ and $\\sum_{j\\ge0}j(j-1)\\nu^j/j!=\\nu^2\\exp(\\nu)$. After normalization by [F14], $\\mathbb E N=\\nu$ and $\\mathbb E[N(N-1)]=\\nu^2$, hence $\\operatorname{Var}(N)=\\mathbb E[N(N-1)]+\\mathbb EN-(\\mathbb EN)^2=\\nu$. Conditioning on sector $N$ recovers the canonical density because its factor $z^N$ is constant within that sector. [F13, F14, step 2.2, algebra]\n\n4.1 By [F17] and [A1], $F=-\\beta^{-1}[N\\log(V/\\lambda^d)-\\log N!]$ for fixed $T,N$ and fixed box shape. The log derivative [F16] gives $-\\partial_VF=N/(\\beta V)$, with $\\mathcal P$ in J m$^{-d}$, and therefore $\\mathcal PV=N/\\beta$. The entropy definition in [F1] gives $S=k_B(\\log Z_N+\\beta U)$ with the same fixed $h_0$ and factorial convention. [A1, F1, F15, F16, F17, step 1.1, step 3.1, algebra]\n\n4.2 The speed density is proportional to $v^2e^{-av^2}$ with $a=\\beta m/2$. Its derivative has the sign of $2v(1-av^2)$ for $v>0$, so its unique positive maximum occurs at $v_{\\rm mode}=a^{-1/2}$. The second moment is $3/(2a)=3/(m\\beta)$ by the gamma recurrence in [F2]. The mean is $$\\mathbb E v=\\frac{4a^{3/2}}{\\sqrt\\pi}\\int_0^\\infty v^3e^{-av^2}dv=\\frac{4a^{3/2}}{\\sqrt\\pi}\\frac{\\Gamma(2)}{2a^2}=\\frac{2}{\\sqrt{\\pi a}}=\\sqrt{\\frac{8}{\\pi\\beta m}}.$$ These are model-distribution moments, not values for an individual measured particle. [F2, step 3.2, algebra]\n\n5.1 Under the normalized radial density proportional to $r^2e^{-\\beta cr}$, gamma moments give mean energy $3/\\beta$ and variance $3/\\beta^2$ per particle. Independence from the product preparation adds these to $U_{\\rm ur}=3N/\\beta$ and $\\operatorname{Var}(H_{\\rm ur})=3N/\\beta^2$; differentiating at fixed $V,N,c,h_0$ with $\\beta^{-1}=k_BT$ gives $C_{V,\\rm ur}=3Nk_B$ J K$^{-1}$. Since $Z_{N,\\rm ur}$ is proportional to $V^N$, [F16] gives $-\\partial_VF=N/(\\beta V)$ and $\\mathcal PV=N/\\beta$, with $\\mathcal P$ in Pa for this three-dimensional branch. [A1, F1, F2, F5, F16, step 2.3, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a72.2\u20132.2.1 and \u00a72.2.4",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 13, IV.D\u2013IV.E (Fall 2013)",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/0cdb670a825c6aaea7e229ac40776cbf_MIT8_333F13_Lec13.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 14, IV.G and IV.I (Fall 2013)",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/89259a8fd183acfaec06922c88a6024b_MIT8_333F13_Lec14.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite-N canonical sectors of a classical ideal gas of one operationally indistinguishable species on a bounded rectangular box, their grand-canonical sum including N=0, and a separately adopted three-dimensional classical H=c|p| branch; the Lebesgue product and polar calculations assume AC\u03c9; excludes quantum statistics, actual equilibration, and identifying the massless branch with m->0.",
+        "empirical_premises": [],
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-csm-ising-ring-correlation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite periodic Ising-ring correlations and exact decay",
+        "reference": "workers/examples/proofs.md#E4",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "post-csm-examples-ensemble-preparations",
+          "thm-tdmath-ising-chain-limit",
+          "def-real-exponential-function-and-e",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "def-natural-logarithm",
+          "def-real-analytic-function",
+          "thm-power-series-sums-are-real-analytic",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-log-one-plus-x-power-series",
+          "thm-natural-logarithm-laws"
+        ],
+        "dependency_roles": {
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "thm-tdmath-ising-chain-limit": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "def-real-analytic-function": "mathematical-premise",
+          "thm-power-series-sums-are-real-analytic": "mathematical-premise",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition": "mathematical-premise",
+          "thm-log-one-plus-x-power-series": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the real exponential $\\exp(x)=\\sum_{n\\ge0}x^n/n!$ of [[def-real-exponential-function-and-e]] and the hyperbolic functions $\\cosh x=(\\exp x+\\exp(-x))/2$, $\\sinh x=(\\exp x-\\exp(-x))/2$. Define $\\tanh x:=\\sinh x/\\cosh x$; the denominator is positive for every real $x$. Let $N\\ge2$, let $\\Omega_N=\\{-1,1\\}^N$ with cyclic indexing $s_{N+1}=s_1$, and count exactly the $N$ indexed periodic bonds (so $N=2$ has two bonds). For coupling $J\\ge0$ in joules, zero field, and $\\beta>0$ in J$^{-1}$, adopt the finite canonical law\n$$\\mathbb P_N(s)=Z_N^{-1}\\exp\\!\\left(\\beta J\\sum_{i=1}^Ns_is_{i+1}\\right).$$\nSet $t=\\tanh(\\beta J)\\in[0,1)$. For $1\\le r\\le N-1$,\n$$\\mathbb E_N[s_i]=0,\\qquad \\mathbb E_N[s_i s_{i+r}]=\\frac{t^r+t^{N-r}}{1+t^N}.$$\nFor each fixed positive integer separation $r$ and $N\\to\\infty$, the correlation tends to $t^r$, with absolute error at most $t^{N-r}+t^{N+r}$. When $J>0$, define the limiting correlation length $\\xi>0$ in lattice spacings as the unique number satisfying $t^r=e^{-r/\\xi}$ for every positive integer separation $r$; equivalently, $\\xi=-1/\\log t$. The zero-field susceptibility per spin, defined by $\\chi_N:=N^{-1}\\partial_h\\mathbb E_{N,h}[\\sum_i s_i]|_{h=0}$ for the field-coupled law with energy $-\\!J\\sum_i s_is_{i+1}-h\\sum_i s_i$, where the field parameter $h\\in\\mathbb R$ is in joules, has limit\n$$\\chi_\\infty=\\beta\\frac{1+t}{1-t}.$$\nBoth $\\chi_N$ and $\\chi_\\infty$ have units J$^{-1}$ per spin (the spin variables are dimensionless).\nDefine the finite-ring model free energy by $F_N:=-\\beta^{-1}\\log Z_N$ and its limiting free energy per spin, when the limit exists, by $f_\\infty:=\\lim_{N\\to\\infty}F_N/N$. Then $f_\\infty=-\\beta^{-1}\\log(2\\cosh(\\beta J))$, analytic at every finite positive temperature. No statement is made for arbitrary one-dimensional interactions.",
+        "strategy": "1.1 In the zero-field case the transfer matrix in [F2] is $T_{s,t}=e^{Kst}$ with $K=\\beta J$, so $T=\\begin{pmatrix}e^K&e^{-K}\\\\e^{-K}&e^K\\end{pmatrix}$. Direct multiplication gives orthonormal eigenvectors $u_+=(1,1)/\\sqrt2$, $u_-=(1,-1)/\\sqrt2$ with eigenvalues $\\lambda_+=2\\cosh K$ and $\\lambda_-=2\\sinh K$. Hence $Z_N=\\operatorname{tr}(T^N)=\\lambda_+^N+\\lambda_-^N=\\lambda_+^N(1+t^N)$, where $t=\\lambda_-/\\lambda_+=\\tanh K$. [given, F2, algebra]\n\n\n\n2.1 By the finite preparation [F1], the partition sum is the normalization for the adopted law. Put $D_0=\\operatorname{diag}(1,-1)$; then $D_0u_+=u_-$ and $D_0u_-=u_+$. Expanding the finite canonical sum over the $N$ cyclic indices with $s_i s_{i+r}$ inserted gives numerator $\\operatorname{tr}(D_0T^rD_0T^{N-r})$. Evaluating this trace in the eigenbasis yields $\\lambda_-^r\\lambda_+^{N-r}+\\lambda_+^r\\lambda_-^{N-r}$. Dividing by $Z_N$ from step 1.1 gives the stated correlation formula. [A1, F1, F2, step 1.1, algebra]\n\n\n\n3.1 The map $s\\mapsto-s$ preserves every bond product and reverses $\\sum_i s_i$, so at zero field $\\mathbb E_N[s_i]=0$. For fixed $r$, subtracting $t^r$ from the formula of step 2.1 gives $(t^{N-r}-t^{N+r})/(1+t^N)$; its absolute value is at most $t^{N-r}+t^{N+r}$ because $0\\le t<1$. Thus the fixed-distance limit is $t^r$. When $0<t<1$, writing $t^r=e^{-r/\\xi}$ gives $\\xi=-1/\\log t$; for $J=0$, $t=0$ and all nonzero-separation correlations vanish. [step 2.1, algebra]\n\n\n\n3.2 For the field-coupled finite law [A1], differentiating its finite numerator and denominator sums gives $\\partial_h\\mathbb E_{N,h}[M]=\\beta(\\mathbb E_{N,h}[M^2]-\\mathbb E_{N,h}[M]^2)$, where $M=\\sum_i s_i$. At $h=0$, spin-flip symmetry gives $\\mathbb E M=0$ and translation invariance gives $$\\frac1N\\mathbb E[M^2]=1+\\sum_{r=1}^{N-1}\\mathbb E[s_1s_{1+r}]=1+\\frac{2\\sum_{r=1}^{N-1}t^r}{1+t^N}.$$ The finite geometric sum tends to $2t/(1-t)$ as $N\\to\\infty$, so $\\chi_N\\to\\beta(1+t)/(1-t)$. This also gives $\\chi_N=\\beta$ when $J=0$. [A1, step 2.1, algebra]\n\n\n\n4.1 From step 1.1, $N^{-1}\\log Z_N=\\log(2\\cosh(\\beta J))+N^{-1}\\log(1+t^N)$. Since $1\\le1+t^N\\le2$, the second term tends to zero; the limit is analytic for every finite $\\beta>0$ because $\\cosh(\\beta J)>0$. The correlation length diverges only in the excluded zero-temperature limit $\\beta J\\to\\infty$. [step 1.1, step 3.1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a75.3.1, the one-dimensional Ising chain",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 14, IV.G (Fall 2013), finite spin partition examples",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/89259a8fd183acfaec06922c88a6024b_MIT8_333F13_Lec14.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite periodic one-dimensional nearest-neighbor Ising ring with N>=2, exactly N indexed bonds, J>=0, zero field, and finite beta>0; no general long-range or higher-dimensional claim.",
+        "empirical_premises": [],
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-csm-tonks-rod-ensemble",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Exact Tonks hard-rod pressure and convergent virial series",
+        "reference": "workers/examples/proofs.md#E5",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "def-natural-logarithm",
+          "post-csm-examples-ensemble-preparations",
+          "lem-csm-examples-gamma-gaussian-tools",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content",
+          "thm-jordan-boundary-criterion",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-heine-borel-rn",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "thm-change-of-variables-for-compact-jordan-sets": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content": "mathematical-premise",
+          "thm-jordan-boundary-criterion": "mathematical-premise",
+          "thm-graphs-of-continuous-functions-have-content-zero": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]] for the Euclidean Lebesgue product and Jordan-volume identifications below. Use the natural logarithm $\\log$ of [[def-natural-logarithm]]. Let $N\\ge1$, let $a\\ge0$ be a hard-rod length in metres, and let $L>Na$ be the one-dimensional box length in metres. Rod centers are $x_i\\in[a/2,L-a/2]$ with $|x_i-x_j|\\ge a$ for $i\\ne j$. Let each rod have mass $m>0$ kg, momentum $p_i\\in\\mathbb R$ in kg m s$^{-1}$, and Hamiltonian $H=\\sum_{i=1}^Np_i^2/(2m)$ on the allowed configuration set, with infinite energy outside it. Adopt the reference $dx\\,dp/(N!h_0^N)$, where $h_0>0$ is a fixed action in J s, and canonical inverse temperature $\\beta>0$ in J$^{-1}$. Put $\\lambda=h_0\\sqrt{\\beta/(2\\pi m)}$. Then\n$$Z_N=\\frac{(L-Na)^N}{N!\\lambda^N},\\quad U=\\mathbb E H=\\frac{N}{2\\beta},\\quad p_{1D}:=-\\left(\\frac{\\partial F}{\\partial L}\\right)_{N,a,m,\\beta,h_0}=\\frac{N}{\\beta(L-Na)},\\quad F=-\\beta^{-1}\\log Z_N.$$\nHere $p_{1D}$ is the one-dimensional force conjugate to length and has units N; it is not a three-dimensional pressure. With number density $\\rho=N/L$, the exact equation is\n$$\\beta p_{1D}=\\frac{\\rho}{1-a\\rho}=\\sum_{j=1}^\\infty a^{j-1}\\rho^j,\\qquad a\\rho<1.$$\nAfter the first $M\\ge1$ terms, the exact nonnegative remainder (strictly positive when $a>0$) is $\\rho(a\\rho)^M/(1-a\\rho)$, bounded by $\\rho r^M/(1-r)$ whenever $a\\rho\\le r<1$. At fixed $\\rho>0$ with $a\\rho<1$, as $N,L\\to\\infty$ with $N/L=\\rho$,\n$$\\lim\\frac{\\beta F}{N}=\\log\\!\\left(\\frac{\\rho\\lambda}{1-a\\rho}\\right)-1,$$\nwith finite-size excess between $0$ and $(1+\\log N)/N$.",
+        "strategy": "1.1 The single-rod momentum Lebesgue integral is $\\int_{\\mathbb R}e^{-\\beta p^2/(2m)}dp=\\sqrt{2\\pi m/\\beta}$ by [F2] and [F8]. By [F5] and Tonelli [F6], the $N$ momentum factors integrate to the product of these integrals. Dividing by $h_0^N$ gives $\\lambda^{-N}$. [given, F2, F5, F6, F8, algebra]\n\n1.2 By [F2] and the bounded Riemann-to-Lebesgue agreement in [F8], each normalized scalar momentum Gaussian has second moment $m/\\beta$. Thus the mean kinetic energy of each rod is $1/(2\\beta)$ and the total mean is $U=N/(2\\beta)$. [given, F2, F8, algebra]\n\n1.3 The allowed labelled position set is a finite union of closed bounded ordering polytopes in $[a/2,L-a/2]^N$, hence compact by [F9]. Its boundary is contained in finitely many box faces and contact hyperplanes $x_i-x_j=\\pm a$, each a compact graph over a coordinate rectangle, so [F7] makes it Jordan measurable. Fix one label ordering $\\pi$ and sort its centers as $x_{\\pi(1)}\\le\\cdots\\le x_{\\pi(N)}$. On that sector set $y_i=x_{\\pi(i)}-a/2-(i-1)a$ and $\\ell=L-Na>0$; the hard-core inequalities become the closed bounded, hence compact, ordered simplex $S_\\ell:=\\{0\\le y_1\\le\\cdots\\le y_N\\le\\ell\\}$ by [F9]. Its boundary is contained in the box faces and finitely many tie hyperplanes, each a compact graph over a coordinate rectangle; [F7] therefore makes $S_\\ell$ Jordan measurable. The affine permutation map has absolute determinant $1$, so [F3] preserves Jordan volume. The $N!$ coordinate permutations of $S_\\ell$ partition $[0,\\ell]^N$ up to the tie hyperplanes, which have content zero by [F7]; their equal volumes sum to $\\ell^N$, hence each simplex has volume $\\ell^N/N!$. The $N!$ labelled order sectors cover the allowed set and overlap only on the stated content-zero contact hyperplanes. Therefore its Jordan content is $\\ell^N$, and [F5] gives the full labelled position Lebesgue measure $\\ell^N$. [given, A1, F3, F5, F7, F9, algebra]\n\n2.1 The reference measure divides the position-momentum integral by $N!h_0^N$. Product Lebesgue measure and Tonelli [F5, F6] separate the position measure $\\ell^N$ from step 1.3 and the momentum integral from step 1.1. Thus $Z_N=\\ell^N/(N!\\lambda^N)$. [F1, F5, F6, step 1.1, step 1.3, algebra]\n\n3.1 By the product, quotient and integer-power laws in [F4], $F=-\\beta^{-1}[N\\log((L-Na)/\\lambda)-\\log N!]$, using the logarithm derivative in [F4] at fixed $N,a,\\beta$ gives $p_{1D}=N/[\\beta(L-Na)]$. Substituting $\\rho=N/L$ yields $\\beta p_{1D}=\\rho/(1-a\\rho)$. [F1, F4, step 2.1, algebra]\n\n4.1 At $a=0$, the virial series has first term $\\rho$ and all higher terms zero, so its remainder after any $M\\ge1$ terms is zero. For $0\\le a\\rho<1$, the finite geometric identity $\\sum_{j=1}^M(a\\rho)^{j-1}=(1-(a\\rho)^M)/(1-a\\rho)$ gives the stated virial partial sum and exact remainder after multiplication by $\\rho$. If $a\\rho\\le r<1$, then $(a\\rho)^M/(1-a\\rho)\\le r^M/(1-r)$, proving the uniform bound. [step 3.1, algebra]\n\n5.1 At fixed $\\rho>0$, $L-Na=N(1/\\rho-a)>0$, so the laws in [F4] give $$\\frac{\\beta F}{N}=-\\log((L-Na)/\\lambda)+\\frac{\\log N!}{N}.$$ For each integer $k=1,\\ldots,N-1$, monotonicity of $\\log$ bounds its integral on $[k,k+1]$ between $\\log k$ and $\\log(k+1)$. Summing gives $$\\int_1^N\\log x\\,dx\\le\\log N!\\le\\int_1^N\\log x\\,dx+\\log N.$$ For $N=1$ the sums and integral are empty and zero. Since [F4] gives $(x\\log x-x)'=\\log x$, the integral is $N\\log N-N+1$. Hence $\\log N!=N\\log N-N+\\epsilon_N$ with $1\\le\\epsilon_N\\le1+\\log N$. Substitution and [F4] cancel $\\log N$, yielding $$\\frac{\\beta F}{N}=\\log\\!\\left(\\frac{\\rho\\lambda}{1-a\\rho}\\right)-1+\\frac{\\epsilon_N}{N}.$$ The excess is nonnegative and at most $(1+\\log N)/N$. Finally, $\\log N=\\int_1^Ndx/x\\le\\int_1^Ndx/\\sqrt{x}=2(\\sqrt N-1)$, so that upper bound tends to zero and proves the stated thermodynamic limit. [F4, step 2.1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "University of Warwick, PX439/CO904 Statistical Mechanics of Complex Systems, lecture notes, \u00a73.5 The Tonks gas",
+              "url": "https://warwick.ac.uk/fac/cross_fac/complexity/study/msc_and_phd/co904/lecture_notes_co904px439.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a72.2, classical ideal-gas normalization",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite-N one-dimensional classical hard rods of common length a>=0 with L>Na and quadratic momenta; the Euclidean Lebesgue product and Jordan-volume calculations assume AC\u03c9; exact thermodynamic and virial statements only for this Tonks model, not an all-fluid cluster expansion.",
+        "empirical_premises": [],
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-csm-spherical-shell-gas",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite spherical-shell gas and its exact marginal",
+        "reference": "workers/examples/proofs.md#E2",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "post-csm-examples-ensemble-preparations",
+          "post-csm-counting-and-physical-observables",
+          "thm-csm-examples-spherical-marginal",
+          "def-countable-choice",
+          "pthm-csm-ideal-gas-ensemble"
+        ],
+        "dependency_roles": {
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "post-csm-counting-and-physical-observables": "physical-assumption",
+          "thm-csm-examples-spherical-marginal": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "pthm-csm-ideal-gas-ensemble": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]], the mathematical hypothesis required by the spherical-marginal supplier. Let $N,d\\ge1$, $D=dN\\ge2$, and let $B=\\prod_{j=1}^d[0,L_j]\\subset\\mathbb R^d$ have side lengths $L_j>0$ in metres and volume $V=\\prod_jL_j$ in $\\mathrm m^d$. Let $m>0$ kg and $E>0$ joules, and set $R=\\sqrt{2mE}$ in kg m s$^{-1}$. Take one operationally indistinguishable species of $N$ particles as specified by [[post-csm-counting-and-physical-observables]]. On the auxiliary labelled cover, take independent uniform positions $q_i\\in B$ with density $V^{-1}$ and, independently, the momentum law\n$$P=RZ/|Z|,$$\nwhere $Z\\in\\mathbb R^D$ has the independent standard-normal coordinate law defined in [[thm-csm-examples-spherical-marginal]] and $P=0$ is assigned on the null event $Z=0$. This product law is invariant under particle permutations, so it defines the stated model preparation on the quotient; a one-particle marginal means the law of a uniformly selected particle. This is a specified spherical-shell preparation: $H(P)=|P|^2/(2m)=E$ almost surely, with no assumption about a trajectory or equilibration. For any momentum block of $k$ coordinates with $1\\le k<D$, its density is $f_{D,k}$ from [[thm-csm-examples-spherical-marginal]]. In particular the total-energy variance is zero J$^2$.\n\nCompare the separate canonical ideal-gas preparation of [[pthm-csm-ideal-gas-ensemble]] with the same $N,d,m,B$ and one-species convention, at $\\beta=D/(2E)>0$. Its mean total energy is also $E$, but its variance is $D/(2\\beta^2)>0$ J$^2$. If $N>1$, the uniformly selected particle's $d$-component shell marginal has compact support because $d<D$, whereas its canonical Gaussian momentum has positive probability outside every finite-radius ball. The two finite preparations therefore differ despite their matched mean energy. For $N=1$, the full momentum vector is singular on its sphere and the density formula for $k=D$ is not asserted.",
+        "strategy": "1.1 Under the shell preparation [F1] and its explicit law [A1], $|P|=R$ almost surely by the definition of $P$; hence $H(P)=R^2/(2m)=E$ on every realization outside the null event $Z=0$. A constant random variable has variance zero. [given, F1, A1, algebra]\n\n\n\n2.1 For $1\\le k<D$, the first $k$ momentum coordinates are the projection in [F2], so their exact Lebesgue density is the displayed $f_{D,k}$ with support in $|p|\\le R$. Its boundary may carry no atom; the underlying Gaussian direction has a density and $Z=0$ is null. [F2, step 1.1]\n\n\n\n2.2 Choose $\\beta=D/(2E)$. By [F3], the canonical mean energy is $D/(2\\beta)=E$ and its variance is $D/(2\\beta^2)>0$. Thus it cannot have the shell law of step 1.1, whose energy variance is zero. [given, F3, step 1.1, algebra]\n\n\n\n3.1 If $N>1$, then $d<D$ and [F2] gives the one-particle momentum block a density supported in the radius-$R$ ball. By [F3], its canonical Gaussian has strictly positive density at every point of $\\mathbb R^d$, so its integral over, for example, the open annulus $R<|p|<2R$ is positive, while the shell probability of that annulus is zero. Therefore the one-particle marginals differ as well. For $N=1$, $d=D$ and the full shell law is singular, so no $k=D$ density assertion has been used. [F2, F3, step 2.1] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 13, IV.D, finite microcanonical momentum sphere (Fall 2013)",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/0cdb670a825c6aaea7e229ac40776cbf_MIT8_333F13_Lec13.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a72.2, canonical ideal-gas momentum distribution",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite-N classical ideal kinetic energy for one operationally indistinguishable species, conditional on Countable Choice for the exact shell marginal, with a specifically adopted rotational Gaussian-direction preparation; no dynamical ergodicity or general coarea claim.",
+        "empirical_premises": [],
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
+  },
+  {
+    "order": 504,
+    "id": "csm-exact-models-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Gaussian and gamma product tools \u2014 Examples",
+    "companion": "csm-exact-models",
+    "requires": [
+      "csm-exact-models"
+    ],
+    "items": [
+      {
+        "id": "ex-csm-harmonic-ensemble",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Unpinned translation zero-mode divergence",
+        "reference": "workers/examples/proofs.md#E3",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "post-csm-examples-ensemble-preparations",
+          "def-countable-choice",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content",
+          "thm-extreme-value-metric",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-real-exponential-function-and-e"
+        ],
+        "dependency_roles": {
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "thm-change-of-variables-for-compact-jordan-sets": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-jordan-measurable-sets-are-lebesgue-measurable-with-equal-content": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]] for the Euclidean Lebesgue measure of the phase-space boxes below. Take $N\\ge3$ resolved displacement coordinates $q_i\\in\\mathbb R$ in metres and momenta $p_i\\in\\mathbb R$ in kg m s$^{-1}$ on a periodic chain, with $q_{N+1}=q_1$, mass $m>0$ kg, spring stiffness $\\kappa>0$ in J m$^{-2}$, and\n$$H(q,p)=\\sum_{i=1}^N\\frac{p_i^2}{2m}+\\frac{\\kappa}{2}\\sum_{i=1}^N(q_{i+1}-q_i)^2.$$\nAdopt inverse temperature $\\beta>0$ in J$^{-1}$ and fixed action reference $h_0=a_0>0$ in J s under [[post-csm-examples-ensemble-preparations]]. Because the coordinates are resolved, use the reference $dq\\,dp/h_0^N$ with no particle-exchange factorial. Define the partition integral\n$$Z:=\\int_{\\mathbb R^N\\times\\mathbb R^N}\\exp(-\\beta H(q,p))\\,\\frac{dq\\,dp}{h_0^N},$$\nwhere $\\exp$ is the real exponential of [[def-real-exponential-function-and-e]]. The unpinned position integral is infinite, so this model has no normalized canonical probability on the full position space.",
+        "strategy": "1.1 Put $r_1:=0$ and use coordinates $u:=q_1$, $r_i:=q_i-q_1$ for $2\\le i\\le N$. The linear bijection $(u,r_2,\\ldots,r_N)\\mapsto(q_1,\\ldots,q_N)=(u,u+r_2,\\ldots,u+r_N)$ has determinant $1$. With $r_{N+1}:=r_1$, every periodic difference satisfies $q_{i+1}-q_i=r_{i+1}-r_i$, so the potential is independent of $u$; the momentum term is also independent of $u$. On each compact coordinate box the change-of-variables supplier [F3] therefore gives the phase-volume Jacobian $1$. [given, A1, F3, algebra]\n\n\n\n2.1 Under the declared reference convention [F1], choose any compact coordinate box $C$ of positive volume in $(r_2,\\ldots,r_N,p)$. The Hamiltonian is continuous and hence bounded above on $C$ by a finite $H_C$ by [F4]. By [F2], $C$ has Lebesgue measure $\\operatorname{vol}(C)$. On $u\\in[-R,R]$ and $(r,p)\\in C$, the integrand is at least $e^{-\\beta H_C}$; the determinant-one map in step 1.1 and [F2] show this slab contributes at least $2R e^{-\\beta H_C}\\operatorname{vol}(C)/h_0^N$ to the partition integral by [F5]. This lower bound is unbounded as $R\\to\\infty$, so $Z=\\infty$ and no normalization exists. [F1, F2, F4, F5, step 1.1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a72.2.1, quadratic degrees of freedom",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Finite periodic harmonic chain with no pinning; conditional on AC\u03c9 for the declared Euclidean Lebesgue reference, the continuous translation zero mode makes the canonical partition function diverge.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-csm-ideal-gas-ensemble",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Maxwell speed marginal and Poisson number example",
+        "reference": "workers/examples/proofs.md#E1",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-csm-ideal-gas-ensemble",
+          "def-countable-choice",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm"
+        ],
+        "dependency_roles": {
+          "pthm-csm-ideal-gas-ensemble": "physical-result",
+          "def-countable-choice": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as required by [[pthm-csm-ideal-gas-ensemble]]. In a canonical sector $N\\ge1$ of the massive $d=3$ ideal-gas model of one operationally indistinguishable species, choose any mass $m>0$ in kg and inverse temperature $\\beta>0$ in J$^{-1}$. The most probable speed of a uniformly selected particle is $\\sqrt{2/(m\\beta)}$ and its ensemble mean speed is $\\sqrt{8/(\\pi m\\beta)}$. In the separate grand model, which includes the vacuum sector, choose the chemical potential\n$$\\mu_{\\rm chem}=\\beta^{-1}\\log(\\lambda^3/V),$$\nso the mean activity parameter $\\nu=\\exp(\\beta\\mu_{\\rm chem})V/\\lambda^3$ equals $1$, where $V$ is in m$^3$, $\\lambda$ in metres, and $\\mu_{\\rm chem}$ in joules. The particle count then has the Poisson$(1)$ law, including $\\mathbb P(N=0)=\\mathbb P(N=1)=\\exp(-1)$.",
+        "strategy": "1.1 Specializing the $d=3$ clauses of [F1] gives the stated mode and mean of the model speed distribution; these are distributional functionals, not values assigned to every individual particle. [F1]\n\n2.1 Substituting [A1] and applying [F2] gives $\\exp(\\beta\\mu_{\\rm chem})=\\lambda^3/V$, hence $\\nu=1$ in [F1]. The Poisson formula then gives $\\mathbb P(N=j)=\\exp(-1)/j!$, so the $j=0$ and $j=1$ probabilities both equal $\\exp(-1)$. [A1, F1, F2, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a72.2\u20132.2.4, ideal gas and Maxwell speed distribution",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 14, ideal gas in the grand canonical ensemble",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/89259a8fd183acfaec06922c88a6024b_MIT8_333F13_Lec14.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Conditional on AC\u03c9 for the Euclidean Lebesgue product reference; exact d=3 massive ideal-gas canonical speed law and one grand-canonical activity choice for one operationally indistinguishable species, including the vacuum sector; no measured gas data.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-csm-ising-ring-correlation",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Exact finite-ring correlation length at a chosen coupling",
+        "reference": "workers/examples/proofs.md#E4",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-csm-ising-ring-correlation"
+        ],
+        "dependency_roles": {
+          "pthm-csm-ising-ring-correlation": "physical-result"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For any finite $N\\ge2$ at zero field, choose coupling $J>0$ in joules and inverse temperature $\\beta=(\\log2)/(2J)$ in J$^{-1}$. Then $t=\\tanh(\\beta J)=1/3$ and the exact ring correlation at separation $1\\le r<N$ is\n$$\\mathbb E_N[s_i s_{i+r}]=\\frac{3^{-r}+3^{-(N-r)}}{1+3^{-N}}.$$\nAt fixed $r$, the limit is $3^{-r}=e^{-r\\log3}$, so the correlation length is $1/\\log3$ lattice spacings.",
+        "strategy": "1.1 Since $\\tanh(x)=(e^{2x}-1)/(e^{2x}+1)$, the choice [A1] gives $t=(2-1)/(2+1)=1/3$. [A1, algebra]\n\n\n\n2.1 Substituting $t=1/3$ in [F1] gives the displayed finite-$N$ correlation. Its fixed-$r$ limit is $3^{-r}$ by the theorem's error bound, and $3^{-r}=e^{-r\\log3}$ gives $\\xi=1/\\log3$. [F1, step 1.1, algebra] \u220e\n\n",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a75.3.1, the one-dimensional Ising chain",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Zero-field finite periodic nearest-neighbor Ising ring at the exact parameter choice beta J=(log 2)/2; no observed magnetic data.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-csm-tonks-rod-ensemble",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Packing boundary and exact truncated virial error",
+        "reference": "workers/examples/proofs.md#E5",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-csm-tonks-rod-ensemble",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-csm-tonks-rod-ensemble": "physical-result",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as required by [[pthm-csm-tonks-rod-ensemble]]. Use the one-species hard-rod model of [[pthm-csm-tonks-rod-ensemble]] with $N\\ge1$, rod length $a>0$ in metres, mass $m>0$ in kg, inverse temperature $\\beta>0$ in J$^{-1}$, and fixed action reference $h_0>0$ in J s. Set box length $L=2Na$ in metres. Then $L>Na$ and number density $\\rho=N/L=1/(2a)$ in m$^{-1}$, so $a\\rho=1/2$. The exact force-conjugate pressure is $\\beta p_{1D}=2\\rho$. Truncating its virial series after the first two terms gives $\\rho+a\\rho^2=3\\rho/2$, with exact remainder $\\rho/2$.",
+        "strategy": "1.1 The choices give $\\rho=N/(2Na)=1/(2a)$ and therefore $a\\rho=1/2$. [A1, algebra]\n\n2.1 The exact equation in [F1] gives $\\beta p_{1D}=\\rho/(1-1/2)=2\\rho$. The first two series terms are $\\rho+a\\rho^2=\\rho+\\rho/2=3\\rho/2$. Applying the remainder formula in [F1] with $M=2$ gives $\\rho(1/2)^2/(1-1/2)=\\rho/2$, exactly the difference. [F1, step 1.1, A1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "University of Warwick, PX439/CO904 Statistical Mechanics of Complex Systems, lecture notes, \u00a73.5 The Tonks gas",
+              "url": "https://warwick.ac.uk/fac/cross_fac/complexity/study/msc_and_phd/co904/lecture_notes_co904px439.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Conditional on AC\u03c9 for the Euclidean Lebesgue product reference; finite one-dimensional Tonks gas with common positive rod length, positive mass, inverse temperature and action reference at half the close-packing density; exact force-conjugate pressure and geometric virial remainder only.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-csm-spherical-shell-gas",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Finite shell support versus canonical Gaussian tails",
+        "reference": "workers/examples/proofs.md#E2",
+        "design_state": "Initial authoring complete; current prerequisite availability and readiness disposition are recorded in batch evidence.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-csm-spherical-shell-gas",
+          "pthm-csm-ideal-gas-ensemble",
+          "lem-csm-examples-gamma-gaussian-tools",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-csm-spherical-shell-gas": "physical-result",
+          "pthm-csm-ideal-gas-ensemble": "physical-result",
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ as required by [[pthm-csm-spherical-shell-gas]], and use its one-species rectangular-box model. Take $d=3$, $N=2$, $D=6$, mass $m>0$ in kg, and energy $E>0$ in joules, so the momentum radius is $R=\\sqrt{2mE}$ in kg m s$^{-1}$. A uniformly selected particle's three-momentum block ($k=3$) under the shell preparation has density\n$$f_{6,3}(p)=\\frac{4}{\\pi^2R^3}\\sqrt{1-\\frac{|p|^2}{R^2}},\\qquad |p|<R,$$\nand zero for $|p|\\ge R$. A canonical ideal gas with $\\beta=D/(2E)=3/E$ in J$^{-1}$ has the same mean total energy but assigns positive probability to the annulus $R<|p_\\star|<2R$ for the uniformly selected particle's momentum $p_\\star$.",
+        "strategy": "1.1 Substituting $D=6,k=3$ into [F1] gives exponent $(6-3-2)/2=1/2$ and coefficient $\\Gamma(3)/[\\Gamma(3/2)(\\pi R^2)^{3/2}]=4/(\\pi^2R^3)$ using $\\Gamma(3)=2$ and $\\Gamma(3/2)=\\sqrt\\pi/2$. This is the displayed density. [A1, F1, algebra]\n\n2.1 The shell block has probability zero outside the radius-$R$ ball by [F1]. The canonical Gaussian vector density from [F2] is positive throughout the nonempty annulus $R<|p|<2R$, which has positive volume, so that event has positive canonical probability. Therefore the two finite momentum marginals differ. [F1, F2, step 1.1] \u220e\n\n",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Statistical Mechanics I, Lecture 13, IV.D, finite microcanonical momentum sphere (Fall 2013)",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/0cdb670a825c6aaea7e229ac40776cbf_MIT8_333F13_Lec13.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a72.2, canonical ideal-gas momentum distribution",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Two operationally indistinguishable particles in a three-dimensional spherical-shell preparation compared with the matched-mean canonical ideal gas, conditional on Countable Choice for the marginal theorem; exact distributions only.",
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1643 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "scope": [
+    "def-qsm-dt-gns-detailed-balance",
+    "thm-qsm-dt-detailed-balance-gap",
+    "thm-qsm-dt-gibbs-jump",
+    "def-qsm-dt-monitored-chain",
+    "thm-qsm-dt-commuting-kl",
+    "thm-qsm-dt-open-correlation-integral",
+    "thm-qsm-dt-open-kubo",
+    "post-qsm-dt-effective-bath",
+    "thm-qsm-dt-monitored-transport",
+    "pthm-qsm-dt-bath-relaxation",
+    "pthm-qsm-dt-record-transport",
+    "ex-qsm-dt-thermal-qubit",
+    "ex-qsm-dt-qubit-record-diffusion"
+  ],
+  "contracts": {
+    "def-qsm-dt-gns-detailed-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-gksl-definition",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\geq1$, a positive constant $\\hbar$ in joule-seconds, a Hermitian matrix $H\\in M_d(\\mathbb C)$ in joules, and a finite family $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ with units ${\\rm s}^{-1/2}$, where $m\\geq0$. On dimensionless matrices $X\\in M_d(\\mathbb C)$, define the **finite Gorini\u2013Kossakowski\u2013Sudarshan\u2013Lindblad (GKSL) generator**\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H,X]+\\sum_{a=1}^{m}\\left(L_aXL_a^*-\\frac12\\{L_a^*L_a,X\\}\\right),$$\n\nwhere $[A,B]=AB-BA$, $\\{A,B\\}=AB+BA$, and $A^*$ is the conjugate transpose. Each summand has units ${\\rm s}^{-1}$ times the units of $X$. An empty sum when $m=0$ is zero. The resulting $\\mathcal L$ is a linear map on the matrix space used in the finite-channel definition [[def-qsm-dt-channel-definition]].\n\nFor a compact time interval $I\\subset\\mathbb R$ whose coordinate is time in seconds, continuous functions $H:I\\to M_d(\\mathbb C)$ and $L_a:I\\to M_d(\\mathbb C)$ with $H(t)=H(t)^*$ define the corresponding **continuous finite GKSL family** $\\mathcal L_t$ by the same formula at each $t$. A propagator for this family means a family of linear maps $\\Lambda(t,s)$, $s\\leq t$ in $I$, satisfying $\\partial_t\\Lambda(t,s)=\\mathcal L_t\\circ\\Lambda(t,s)$ and $\\Lambda(s,s)=\\operatorname{id}$. This definition alone asserts neither existence nor uniqueness.\n\nThese are finite-dimensional mathematical definitions. They do not assert that a physical system follows this generator or that a microscopic bath has a Markovian limit.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The square root $\\sigma^{1/2}$ exists by [F2] and is invertible because $\\sigma>0$. Thus $\\langle A,A\\rangle_\\sigma=\\operatorname{Tr}((A\\sigma^{1/2})^*(A\\sigma^{1/2}))>0$ for every nonzero $A$. Linearity in the first variable is immediate, and cyclicity [F3] gives Hermitian symmetry; hence the displayed form is a positive-definite inner product.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the Hamiltonian term, cyclicity in [F3] gives $\\operatorname{Tr}(-i[H_{\\rm s},X]A/\\hbar)=\\operatorname{Tr}(X\\,i[H_{\\rm s},A]/\\hbar)$. Indeed, $\\operatorname{Tr}(H_{\\rm s}XA)=\\operatorname{Tr}(XA H_{\\rm s})$ and $\\operatorname{Tr}(XH_{\\rm s}A)$ is already in the desired input-first order.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each jump matrix, $\\operatorname{Tr}(L_jXL_j^*A)=\\operatorname{Tr}(X L_j^* A L_j)$. The first anticommutator term satisfies $\\operatorname{Tr}(L_j^*L_jXA)=\\operatorname{Tr}(X A L_j^*L_j)$ by cyclicity, and the second is already $\\operatorname{Tr}(X L_j^*L_j A)$. Thus the trace-dual dissipator is exactly the displayed $D$. Substituting $A=I$ cancels $L_j^*L_j-\\frac12(L_j^*L_j+L_j^*L_j)=0$ term by term, so $D(I)=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition fixes d\u22651 and a faithful trace-one sigma, while permitting m=0 jumps. Step 3.1 cancels the dissipator term by term; for an empty list D=0 and D(I)=0 still holds."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no zero case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no one case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no degenerate case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no endpoints case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no nonempty choice case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no iff forward case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no iff reverse case or biconditional in this item; its stated hypotheses exclude that case."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qsm-dt-detailed-balance-gap": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-gns-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $d\\geq1$ be finite, let $\\mathcal H=\\mathbb C^d$ with its standard inner product, and write $M_d(\\mathbb C)$ for its matrices. Let $H_{\\rm s}=H_{\\rm s}^*\\in M_d(\\mathbb C)$ be a Hamiltonian in joules, let $\\hbar>0$ have units joule-seconds, and let $m\\geq0$ be an integer with $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ a finite family of jump matrices in seconds$^{-1/2}$. Matrices on which the generators act are dimensionless. The Schr\u00f6dinger generator $\\mathcal L$ is the finite GKSL generator of [[def-qsm-dt-gksl-definition]].\n\nIts trace-dual observable generator is\n\n$$G(A)=\\frac{i}{\\hbar}[H_{\\rm s},A]+D(A),\\qquad D(A)=\\sum_{j=1}^{m}\\left(L_j^*AL_j-\\frac12\\{L_j^*L_j,A\\}\\right).$$\n\nHere $[U,V]=UV-VU$, $\\{U,V\\}=UV+VU$, and $A^*$ is the conjugate transpose. The units of $G$, $D$, and $\\mathcal L$ are seconds$^{-1}$. The generator preserves the identity, $D(I)=0$, so $e^{tD}(I)=I$.\n\nLet $\\sigma=\\sigma^*>0$ be a dimensionless density matrix on $\\mathcal H$, so $\\operatorname{Tr}\\sigma=1$. Define\n\n$$\\langle A,B\\rangle_\\sigma:=\\operatorname{Tr}(\\sigma B^*A),\\qquad \\|A\\|_\\sigma:=\\langle A,A\\rangle_\\sigma^{1/2}.$$\n\nThis inner product is linear in its first variable. It is positive definite because $\\sigma>0$. The data satisfy **the specified finite GNS detailed-balance convention** when $[H_{\\rm s},\\sigma]=0$ and $D$ is self-adjoint for this inner product, meaning $\\langle D(A),B\\rangle_\\sigma=\\langle A,D(B)\\rangle_\\sigma$ for all $A,B\\in M_d(\\mathbb C)$. The Hamiltonian part of $G$ is kept separate and is anti-self-adjoint. Quantum detailed-balance conventions vary; in particular, this definition does not identify GNS symmetry with KMS or Kubo\u2013Mori symmetry.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-gksl-sufficient",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ be a finite GKSL generator on $M_d(\\mathbb C)$, $d\\geq1$, with the units and conventions of [[def-qsm-dt-gksl-definition]]. Then $T_t=e^{t\\mathcal L}$ is a finite channel for every $t\\geq0$. The family satisfies $T_0=\\operatorname{id}$, $T_{t+s}=T_t\\circ T_s$, and is norm-continuous. Time is measured in seconds; no negative-time channel or physical bath limit is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-channel-duality",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be a finite channel as defined in [[def-qsm-dt-channel-definition]]. There is a unique linear map $\\Phi^\\dagger:M_e(\\mathbb C)\\to M_d(\\mathbb C)$ satisfying the trace-pairing identity\n\n$$\\operatorname{Tr}(\\Phi(X)A)=\\operatorname{Tr}(X\\Phi^\\dagger(A))\\qquad(X\\in M_d(\\mathbb C),\\ A\\in M_e(\\mathbb C)).$$\n\nIf $\\Phi(X)=\\sum_aK_aXK_a^*$, then $\\Phi^\\dagger(A)=\\sum_aK_a^*AK_a$; in particular, $\\Phi^\\dagger$ is completely positive and unital. Composition and finite convex combinations of channels are channels. A limit in the induced operator norm $\\|\\Psi\\|_{\\infty\\to\\infty}:=\\sup_{\\|X\\|_\\infty\\leq1}\\|\\Psi(X)\\|_\\infty$, where $\\|X\\|_\\infty:=\\sup_{\\|v\\|=1}\\|Xv\\|$, of channels $M_d(\\mathbb C)\\to M_e(\\mathbb C)$ is also a channel. Moreover, a norm limit of completely positive maps of these fixed finite dimensions is completely positive.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qsm-dt-trace-contraction",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi:M_d(\\mathbb C)\\to M_e(\\mathbb C)$ be a finite channel, and define $\\|X\\|_\\infty=\\sup_{\\|v\\|=1}\\|Xv\\|$ and $\\|X\\|_1=\\operatorname{Tr}\\sqrt{X^*X}$. Its trace dual $\\Phi^\\dagger:M_e(\\mathbb C)\\to M_d(\\mathbb C)$ from [[thm-qsm-dt-channel-duality]] satisfies\n\n$$\\|\\Phi^\\dagger(A)\\|_\\infty\\leq\\|A\\|_\\infty\\qquad(A\\in M_e(\\mathbb C)).$$ For every $X\\in M_d(\\mathbb C)$, the Schr\u00f6dinger map contracts the trace norm: $$\\|\\Phi(X)\\|_1\\leq\\|X\\|_1.$$\n\nThe second inequality applies to arbitrary complex matrices, not only density matrices.",
+          "uses": [
+            "2.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $d=1$, then $\\mathcal M_0=\\{0\\}$ and the only density matrix is $\\sigma$, so all assertions are immediate. For the remainder assume $d>1$. By [F1], self-adjointness and $D(I)=0$ give $\\operatorname{Tr}(\\sigma D(A))=\\langle D(A),I\\rangle_\\sigma=\\langle A,D(I)\\rangle_\\sigma=0$. For the Hamiltonian part, cyclicity [F6] and $[H_{\\rm s},\\sigma]=0$ give $\\operatorname{Tr}(\\sigma K(A))=0$. Since $G$ is the trace dual of $\\mathcal L$, differentiating $\\operatorname{Tr}(\\sigma e^{tG}A)$ now shows it is constant. Applying the same calculation with $K=0$ shows $\\operatorname{Tr}(\\sigma e^{tD}A)=\\operatorname{Tr}(\\sigma A)$. Thus $\\sigma$ is stationary for both dual semigroups.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\mathcal L_D(X)=\\sum_j(L_jXL_j^*-\\frac12\\{L_j^*L_j,X\\})$, the Schr\u00f6dinger GKSL generator with zero Hamiltonian and the same jump matrices. The finite trace calculation in [F1], [F6] shows its trace dual is $D$. Applying [F2] to $\\mathcal L_D$ and [F3] to its channel semigroup makes $e^{tD}$ unital and completely positive. The Schwarz inequality [F4] and stationarity from step 1.1 give\n$$\n\\|e^{tD}A\\|_\\sigma^2=\\operatorname{Tr}(\\sigma(e^{tD}A)^*e^{tD}A)\\leq\\operatorname{Tr}(\\sigma e^{tD}(A^*A))=\\|A\\|_\\sigma^2.\n$$\nDifferentiating at $t=0$ yields $\\operatorname{Re}\\langle D(A),A\\rangle_\\sigma\\leq0$; self-adjointness in [F1] makes this quantity real.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The subspace $\\mathcal M_0$ is the orthogonal complement of $\\mathbb C I$, and [F1] gives $D(\\mathcal M_0)\\subseteq\\mathcal M_0$. The finite-dimensional spectral theorem [F5] applies to the self-adjoint endomorphism $D$ on $(M_d,\\langle\\cdot,\\cdot\\rangle_\\sigma)$. Step 2.1 makes all eigenvalues nonpositive; $\\ker D=\\mathbb C I$ excludes zero on $\\mathcal M_0$. Because $d>1$, $\\mathcal M_0\\ne\\{0\\}$, so its finite nonempty list of eigenvalues has maximum $-\\gamma<0$, and $\\langle D(A),A\\rangle_\\sigma\\leq-\\gamma\\|A\\|_\\sigma^2$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F6] and $[H_{\\rm s},\\sigma]=0$, $K$ is anti-self-adjoint for $\\langle\\cdot,\\cdot\\rangle_\\sigma$. Both $K$ and $D$ preserve $\\mathcal M_0$: for $D$ this follows from step 1.1, and for $K$ from the same trace-cyclicity calculation. For $A_t=e^{tG}A$ with centered $A$, differentiating gives\n$$\n\\frac{d}{dt}\\|A_t\\|_\\sigma^2=2\\operatorname{Re}\\langle G(A_t),A_t\\rangle_\\sigma=2\\langle D(A_t),A_t\\rangle_\\sigma\\leq-2\\gamma\\|A_t\\|_\\sigma^2.\n$$\nThus $e^{2\\gamma t}\\|A_t\\|_\\sigma^2$ is nonincreasing, proving the asserted decay. Cauchy\u2013Schwarz [F5] then bounds each centered correlation by $e^{-\\gamma t}\\|A\\|_\\sigma\\|B\\|_\\sigma$, an integrable function.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The decay in step 4.1 makes $Y:=\\int_0^\\infty e^{tG}A\\,dt$ converge in the finite-dimensional space $\\mathcal M_0$. Differentiating $e^{tG}A$ and integrating gives $-GY=A$. If $GZ=0$ for centered $Z$, then step 4.1 gives $\\|Z\\|_\\sigma=\\|e^{tG}Z\\|_\\sigma\\leq e^{-\\gamma t}\\|Z\\|_\\sigma$, so $Z=0$; hence $-G|_{\\mathcal M_0}$ is invertible and $Y=(-G|_{\\mathcal M_0})^{-1}A$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Let $Y$ be as in step 5.1. Then $\\Gamma(A)=\\operatorname{Re}\\langle Y,-G(Y)\\rangle_\\sigma$. The anti-self-adjoint $K$ contributes zero real part, while step 3.1 gives $\\langle Y,-D(Y)\\rangle_\\sigma\\geq\\gamma\\|Y\\|_\\sigma^2\\geq0$. Therefore $\\Gamma(A)\\geq0$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Let $X=\\rho-\\sigma=X^*$, and take any $A$ with $\\|A\\|_\\infty\\leq1$. Set $A_0=A-\\operatorname{Tr}(\\sigma A)I$. Stationarity and trace duality give $\\operatorname{Tr}((\\rho_t-\\sigma)A)=\\operatorname{Tr}(X e^{tG}A_0)$. By cyclicity [F6], the trace-norm dual formula [F4] applies to this product order. Put $C=e^{tG}A_0$. Since $\\operatorname{Tr}(XC)=\\operatorname{Tr}(CX)=\\operatorname{Tr}((C\\sigma^{1/2})(\\sigma^{-1/2}X))$, the Hilbert\u2013Schmidt trace inequality $|\\operatorname{Tr}(UV)|\\leq\\|U\\|_2\\|V\\|_2$ yields\n$$\n|\\operatorname{Tr}(X e^{tG}A_0)|\\leq\\|\\sigma^{-1/2}X\\|_2\\,\\|e^{tG}A_0\\|_\\sigma\\leq\\|\\sigma^{-1/2}X\\|_2e^{-\\gamma t}\\|A_0\\|_\\sigma.\n$$\nThe identity $\\|A_0\\|_\\sigma^2=\\operatorname{Tr}(\\sigma A^*A)-|\\operatorname{Tr}(\\sigma A)|^2\\leq\\|A\\|_\\infty^2\\leq1$ gives a bound independent of $A$. Taking the supremum in [F4] proves the stated trace-norm relaxation estimate.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 separates d=1, when M_0={0} and no gamma is defined. Step 3.1 uses d>1 to ensure the centered eigenvalue list defining gamma is finite and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement includes the d=1 zero-dimensional centered case and step 1.1 proves it separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement treats d=1 in step 1.1 and defines no gamma in that branch."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite spectrum and scalar kernel are the only spectral hypotheses; step 3.1 handles all multiplicities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The semigroup estimate includes t=0, where equality holds; step 4.1 derives it for all t\u22650."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 takes a minimum of a finite nonempty eigenvalue list for d>1; step 1.1 treats d=1 separately, so no choice from an empty spectral set is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The kernel assumption ker D=C I implies the stated relaxation and resolvent conclusions; the theorem does not state equivalence between a gap and detailed balance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse derives dissipative GNS symmetry or the kernel hypothesis from exponential decay; steps 3.1\u20137.1 use those assumptions in the forward estimates."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qsm-dt-gibbs-jump": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-gns-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $d\\geq1$ be finite, let $\\mathcal H=\\mathbb C^d$ with its standard inner product, and write $M_d(\\mathbb C)$ for its matrices. Let $H_{\\rm s}=H_{\\rm s}^*\\in M_d(\\mathbb C)$ be a Hamiltonian in joules, let $\\hbar>0$ have units joule-seconds, and let $m\\geq0$ be an integer with $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ a finite family of jump matrices in seconds$^{-1/2}$. Matrices on which the generators act are dimensionless. The Schr\u00f6dinger generator $\\mathcal L$ is the finite GKSL generator of [[def-qsm-dt-gksl-definition]].\n\nIts trace-dual observable generator is\n\n$$G(A)=\\frac{i}{\\hbar}[H_{\\rm s},A]+D(A),\\qquad D(A)=\\sum_{j=1}^{m}\\left(L_j^*AL_j-\\frac12\\{L_j^*L_j,A\\}\\right).$$\n\nHere $[U,V]=UV-VU$, $\\{U,V\\}=UV+VU$, and $A^*$ is the conjugate transpose. The units of $G$, $D$, and $\\mathcal L$ are seconds$^{-1}$. The generator preserves the identity, $D(I)=0$, so $e^{tD}(I)=I$.\n\nLet $\\sigma=\\sigma^*>0$ be a dimensionless density matrix on $\\mathcal H$, so $\\operatorname{Tr}\\sigma=1$. Define\n\n$$\\langle A,B\\rangle_\\sigma:=\\operatorname{Tr}(\\sigma B^*A),\\qquad \\|A\\|_\\sigma:=\\langle A,A\\rangle_\\sigma^{1/2}.$$\n\nThis inner product is linear in its first variable. It is positive definite because $\\sigma>0$. The data satisfy **the specified finite GNS detailed-balance convention** when $[H_{\\rm s},\\sigma]=0$ and $D$ is self-adjoint for this inner product, meaning $\\langle D(A),B\\rangle_\\sigma=\\langle A,D(B)\\rangle_\\sigma$ for all $A,B\\in M_d(\\mathbb C)$. The Hamiltonian part of $G$ is kept separate and is anti-self-adjoint. Quantum detailed-balance conventions vary; in particular, this definition does not identify GNS symmetry with KMS or Kubo\u2013Mori symmetry.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-gksl-sufficient",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L$ be a finite GKSL generator on $M_d(\\mathbb C)$, $d\\geq1$, with the units and conventions of [[def-qsm-dt-gksl-definition]]. Then $T_t=e^{t\\mathcal L}$ is a finite channel for every $t\\geq0$. The family satisfies $T_0=\\operatorname{id}$, $T_{t+s}=T_t\\circ T_s$, and is norm-continuous. Time is measured in seconds; no negative-time channel or physical bath limit is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-detailed-balance-gap",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq1$, and let $G=K+D$ and the faithful density matrix $\\sigma$ satisfy [[def-qsm-dt-gns-detailed-balance]], with $\\ker D=\\mathbb C I$. Write $\\mathcal M_0=\\{A\\in M_d(\\mathbb C):\\operatorname{Tr}(\\sigma A)=0\\}$. If $d>1$, the restriction $D|_{\\mathcal M_0}$ has only strictly negative eigenvalues. Define\n\n$$\\gamma:=\\min\\{-\\lambda:\\lambda\\in\\operatorname{spec}(D|_{\\mathcal M_0})\\}>0.$$\n\nThen for every $A\\in\\mathcal M_0$ and $t\\geq0$,\n\n$$\\|e^{tG}A\\|_\\sigma\\leq e^{-\\gamma t}\\|A\\|_\\sigma.$$\n\nFor every density matrix $\\rho$, let $\\rho_t=e^{t\\mathcal L}\\rho$, where $\\mathcal L$ is the Schr\u00f6dinger trace-dual generator. Then\n\n$$\\|\\rho_t-\\sigma\\|_1\\leq\\|\\sigma^{-1/2}(\\rho-\\sigma)\\|_2e^{-\\gamma t}.$$\n\nHere $\\|X\\|_1=\\operatorname{Tr}\\sqrt{X^*X}$ and $\\|X\\|_2=(\\operatorname{Tr}X^*X)^{1/2}$. For centered $A,B\\in\\mathcal M_0$, the correlation $t\\mapsto\\langle e^{tG}A,B\\rangle_\\sigma$ is absolutely integrable. Also\n\n$$\\Gamma(A):=\\operatorname{Re}\\int_0^\\infty\\langle e^{tG}A,A\\rangle_\\sigma\\,dt=\\operatorname{Re}\\langle(-G|_{\\mathcal M_0})^{-1}A,A\\rangle_\\sigma\\geq0.$$\n\nFor $d=1$, $\\mathcal M_0=\\{0\\}$, $\\rho=\\sigma$, and all centered and relaxation claims are trivial; no $\\gamma$ is defined. The units of $\\gamma$ are seconds$^{-1}$. These are finite-dimensional conditional model results; they assert no infinite-dimensional bath limit.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The finite sum $Z_\\beta$ is strictly positive, so each $\\pi_a>0$ and $\\sum_a\\pi_a=1$. Hence $\\sigma>0$, $\\operatorname{Tr}\\sigma=1$, and $[H_{\\rm s},\\sigma]=0$. The finite GKSL semigroup exists by [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $R=\\sum_{x\\ne y}L_{xy}^*L_{xy}=\\sum_a r_a|a\\rangle\\langle a|$. For a diagonal density $\\rho=\\sum_a p_a|a\\rangle\\langle a|$, $L_{xy}\\rho L_{xy}^*=w_{xy}p_x|y\\rangle\\langle y|$, while the anticommutator contributes $-r_ap_a|a\\rangle\\langle a|$. Summing entries gives the Schr\u00f6dinger population equation\n$$\n\\dot p_a=\\sum_{b\\ne a}(p_bw_{ba}-p_aw_{ab}),\n$$\nFor a diagonal observable $f=\\sum_a f_a|a\\rangle\\langle a|$, direct multiplication gives\n$$\nD(f)=\\sum_a\\left(\\sum_{b\\ne a}w_{ab}(f_b-f_a)\\right)|a\\rangle\\langle a|,\n$$\nso its diagonal action is exactly $W$.\nFor $a\\ne b$, every gain term $L_{xy}|a\\rangle\\langle b|L_{xy}^*$ vanishes; the $R$ anticommutator contributes $-(r_a+r_b)|a\\rangle\\langle b|/2$, and the Hamiltonian commutator contributes $-i(E_a-E_b)|a\\rangle\\langle b|/\\hbar$. Thus the coherence equation is\n$$\n\\dot\\rho_{ab}=\\left(-\\frac{i(E_a-E_b)}{\\hbar}-\\frac{r_a+r_b}{2}\\right)\\rho_{ab}.\n$$\nFor $c_{ab}:=\\pi_aw_{ab}=c_{ba}$ and sums over $a\\ne b$, the cross terms satisfy $\\sum_{a\\ne b}c_{ab}f_bg_a=\\sum_{a\\ne b}c_{ab}f_ag_b$ after swapping $a,b$, so $\\langle Wf,g\\rangle_\\pi=\\langle f,Wg\\rangle_\\pi$. Symmetrizing the quadratic form gives\n$$\n-\\langle Wf,f\\rangle_\\pi=\\frac12\\sum_a\\sum_{b\\ne a}\\pi_aw_{ab}|f_b-f_a|^2,\n$$\nso $W$ is self-adjoint on the diagonal subspace.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $a\\ne b$, direct multiplication with diagonal $\\sigma$ gives $\\langle |a\\rangle\\langle b|,|c\\rangle\\langle d|\\rangle_\\sigma=0$ unless $(a,b)=(c,d)$, and $\\||a\\rangle\\langle b|\\|_\\sigma^2=\\pi_b$. Also each jump gain $L_{xy}^*|a\\rangle\\langle b|L_{xy}$ is zero when $a\\ne b$, and the anticommutator with $R$ gives $D(|a\\rangle\\langle b|)=-(r_a+r_b)|a\\rangle\\langle b|/2$. Diagonal and off-diagonal subspaces are orthogonal. Together with the diagonal self-adjointness from step 1.2, these real eigenvalues prove that $D$ is self-adjoint on all of $M_d(\\mathbb C)$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Connectivity and $d\\geq2$ imply $r_a>0$ for each $a$, so every off-diagonal matrix unit has a strictly negative $D$-eigenvalue. The Dirichlet identity in step 1.2 vanishes only when $f_a=f_b$ along every positive-rate edge; connectedness then forces $f$ to be constant. Therefore the diagonal kernel is $\\mathbb C I$, the off-diagonal kernel is zero, and $\\ker D=\\mathbb C I$. Applying the finite spectral theorem [F4] to the self-adjoint $W|_{\\pi^\\perp}$ shows its finite list of eigenvalues is strictly negative; their minimum absolute value is $\\gamma_{\\rm cl}>0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1, 1.2, 2.1, and 3.1 verify every hypothesis of [[def-qsm-dt-gns-detailed-balance]] and [F3]. Applying [F3] yields the positive gap, exponential relaxation, trace-norm bound, and absolutely integrable centered correlations for this Gibbs jump generator.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes E={1,...,d} with d\u22652; step 1.1 sums strictly positive Gibbs weights, and step 3.1 obtains r_a>0 from connectivity, excluding an edgeless graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Connectedness with d\u22652 excludes every zero-degree vertex; step 3.1 uses r_a>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement assumes d\u22652, so the one-state chain is outside scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Equal energy levels are permitted; the proof uses the positive Gibbs weights and detailed balance, not distinct energies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement assumes finite energies and beta>0, with no zero-temperature beta\u2192infinity limit. Step 1.1 obtains strictly positive finite Gibbs weights; its finite semigroup includes time zero through F2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: The finite chain proof uses no choice principle; the external Axiom of Choice is not a premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Connected Gibbs rates are sufficient hypotheses for the GNS symmetry and gap conclusions; the statement does not characterize all detailed-balance generators by rank-one Gibbs jumps."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 4.1 applies the generic gap theorem after checking its premises; it asserts no converse that an arbitrary gapped generator has this particular energy-resolved form."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-state connected specialization",
+          "result": "W has eigenvalues 0 and -(a+b); each off-diagonal dissipator eigenvalue is -(a+b)/2, so ker D is exactly the scalar matrices.",
+          "evidence": "Statement and step 3.1"
+        }
+      ]
+    },
+    "def-qsm-dt-monitored-chain": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-gibbs-jump",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq2$, let $E=\\{1,\\ldots,d\\}$, let $E_a\\in\\mathbb R$ be finite energies in joules, and let $\\beta>0$ have units joule$^{-1}$. Define\n\n$$Z_\\beta:=\\sum_{a\\in E}e^{-\\beta E_a},\\qquad \\pi_a:=Z_\\beta^{-1}e^{-\\beta E_a}.$$\n\nFor each $a\\ne b$, let $w_{ab}\\geq0$ be a rate in seconds$^{-1}$ satisfying Gibbs detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$, and assume the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ is connected. On $\\mathcal H=\\mathbb C^d$, fix an orthonormal energy basis $(|a\\rangle)$, set $H_{\\rm s}=\\sum_aE_a|a\\rangle\\langle a|$, and define $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ for $a\\ne b$. Fix $\\hbar>0$ in joule-seconds. For real functions $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_a\\pi_af_ag_a$, and define the row-generator action on column observables by $(Wf)_a:=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$. Let\n\n$$\\sigma:=\\sum_a\\pi_a|a\\rangle\\langle a|,\\qquad r_a:=\\sum_{b\\ne a}w_{ab}.$$\n\nUse the finite GKSL generator with Hamiltonian $H_{\\rm s}$ and the jump matrices $L_{ab}$. Its observable dissipator $D$ is self-adjoint for the $\\sigma$-GNS inner product of [[def-qsm-dt-gns-detailed-balance]], $H_{\\rm s}$ commutes with $\\sigma$, and $\\ker D=\\mathbb C I$. On diagonal observables, $W$ is self-adjoint on $L^2(E,\\pi)$ with constants as its kernel; for $d\\geq2$ its restriction to $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$ has a positive spectral gap $\\gamma_{\\rm cl}$. Thus the generator satisfies the specified finite GNS detailed-balance convention and the generic gap conclusion of [[thm-qsm-dt-detailed-balance-gap]] applies. This claim does not assert a microscopic bath limit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-dt-gksl-definition",
+          "source_section": "Definition",
+          "quote": "Fix a finite dimension $d\\geq1$, a positive constant $\\hbar$ in joule-seconds, a Hermitian matrix $H\\in M_d(\\mathbb C)$ in joules, and a finite family $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ with units ${\\rm s}^{-1/2}$, where $m\\geq0$. On dimensionless matrices $X\\in M_d(\\mathbb C)$, define the **finite Gorini\u2013Kossakowski\u2013Sudarshan\u2013Lindblad (GKSL) generator**\n\n$$\\mathcal L(X)=-\\frac{i}{\\hbar}[H,X]+\\sum_{a=1}^{m}\\left(L_aXL_a^*-\\frac12\\{L_a^*L_a,X\\}\\right),$$\n\nwhere $[A,B]=AB-BA$, $\\{A,B\\}=AB+BA$, and $A^*$ is the conjugate transpose. Each summand has units ${\\rm s}^{-1}$ times the units of $X$. An empty sum when $m=0$ is zero. The resulting $\\mathcal L$ is a linear map on the matrix space used in the finite-channel definition [[def-qsm-dt-channel-definition]].\n\nFor a compact time interval $I\\subset\\mathbb R$ whose coordinate is time in seconds, continuous functions $H:I\\to M_d(\\mathbb C)$ and $L_a:I\\to M_d(\\mathbb C)$ with $H(t)=H(t)^*$ define the corresponding **continuous finite GKSL family** $\\mathcal L_t$ by the same formula at each $t$. A propagator for this family means a family of linear maps $\\Lambda(t,s)$, $s\\leq t$ in $I$, satisfying $\\partial_t\\Lambda(t,s)=\\mathcal L_t\\circ\\Lambda(t,s)$ and $\\Lambda(s,s)=\\operatorname{id}$. This definition alone asserts neither existence nor uniqueness.\n\nThese are finite-dimensional mathematical definitions. They do not assert that a physical system follows this generator or that a microscopic bath has a Markovian limit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and let $E,\\pi,w,Q$ be the finite model data of [[def-csm-dk-finite-reversible-rate-model]], with $|E|=r\\ge2$. For every initial probability row vector $p_0$, there exists a time-homogeneous continuous-time Markov chain $X_t$ on $E$, $t\\ge0$, with no finite accumulation of jumps, transition matrix $P_t=e^{tQ}$, and law $p_t=p_0P_t$. The detailed-balance law $\\pi$ is stationary. On the real inner-product space $L^2(E,\\pi)$, $Q$ is self-adjoint and has an orthonormal eigenbasis $\\phi_0=1,\\phi_1,\\ldots,\\phi_{r-1}$ with eigenvalues $0,-\\lambda_1,\\ldots,-\\lambda_{r-1}$, where every $\\lambda_j>0$. Thus the spectral gap $\\lambda_*:=\\min_j\\lambda_j$ is positive and $P_t$ converges exponentially to projection onto constants.\n\nHere a finite-state continuous-time Markov chain means a process with piecewise-constant paths whose conditional transition matrix over an interval of length $t$ is $P_t$, independent of the starting time. For initial law $\\pi$, the chain has a two-sided stationary extension $X_t$, $t\\in\\mathbb R$, whose finite-dimensional laws at $t_1<\\cdots<t_n$ are $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. Its sample paths are locally piecewise constant with finitely many jumps on every bounded time interval.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The jump matrices give $L_{ab}^*L_{ab}=w_{ab}|a\\rangle\\langle a|$, so $R=\\sum_a r_a|a\\rangle\\langle a|$ and $K^*+K=-R$. Hence $M_0(dt)^*M_0(dt)=I-Rdt+o(dt)$, while the sum of jump effects is $Rdt$; the total effect is $I+o(dt)$ as required for a normalized infinitesimal instrument. Also $K|a\\rangle=(-iE_a/\\hbar-r_a/2)|a\\rangle$, so $\\|e^{tK}|a\\rangle\\|^2=e^{-r_at}$. The no-click survival probability is exactly the exponential holding-time law of rate $r_a$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a short interval $dt$, the instrument outcome $a\\to b$ has probability $dt\\,\\langle a|L_{ab}^*L_{ab}|a\\rangle+o(dt)=w_{ab}dt+o(dt)$. Summing over $b\\ne a$ gives total jump rate $r_a$, and conditioning on a jump gives destination probability $w_{ab}/r_a$. The post-jump normalized state is $|b\\rangle$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an arbitrary matrix $X$, the no-click branch contributes $M_0(dt)XM_0(dt)^*=X+dt(KX+XK^*)+o(dt)$, and the jump branches contribute $dt\\sum_{a\\ne b}L_{ab}XL_{ab}^*+o(dt)$. Since $K=-iH_{\\rm s}/\\hbar-R/2$ and $R=\\sum_{a\\ne b}L_{ab}^*L_{ab}$, their sum is $X+dt\\mathcal L(X)+o(dt)$ with exactly the generator in [F2]. Thus the selected infinitesimal outcomes have the specified GKSL generator.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The holding-time and destination laws in steps 1.1\u20131.2 are exactly those of the chain in [F3]. Full AC [A1] and [F3] supply its joint path law and nonexplosion; hence the specified instrument's recorded path is the finite continuous-time chain with generator $W$, not a law inferred from noncommuting one-time correlations.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The inherited connected Gibbs data have d\u22652 and r_a>0. Steps 1.1\u20131.2 thus give nonzero total waiting rate at each label; absent individual edges contribute zero jump probability rather than an empty state set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Connectedness and d\u22652 imply r_a>0; step 1.1 uses the nonzero holding rate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The supplier theorem assumes d\u22652; the one-label zero-rate case is not part of this instrument definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rule allows zero individual transition rates; only positive edges contribute, and step 1.2 conditions on the total rate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no endpoints case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The complete Axiom of Choice is explicitly assumed in A1 and is used for the joint path law in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no iff forward case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition statement supplies no iff reverse case or biconditional in this item; its stated hypotheses exclude that case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "one state a with total rate r_a",
+          "result": "No-click survival is exp(-r_a t), and the conditional destination law is w_ab/r_a.",
+          "evidence": "steps 1.1\u20131.2"
+        },
+        {
+          "check": "infinitesimal ensemble generator",
+          "result": "M0 X M0* plus the sum of jump branches equals X+dt L(X)+o(dt) for the stated GKSL generator.",
+          "evidence": "step 2.1"
+        }
+      ]
+    },
+    "thm-qsm-dt-commuting-kl": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-gibbs-jump",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq2$, let $E=\\{1,\\ldots,d\\}$, let $E_a\\in\\mathbb R$ be finite energies in joules, and let $\\beta>0$ have units joule$^{-1}$. Define\n\n$$Z_\\beta:=\\sum_{a\\in E}e^{-\\beta E_a},\\qquad \\pi_a:=Z_\\beta^{-1}e^{-\\beta E_a}.$$\n\nFor each $a\\ne b$, let $w_{ab}\\geq0$ be a rate in seconds$^{-1}$ satisfying Gibbs detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$, and assume the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ is connected. On $\\mathcal H=\\mathbb C^d$, fix an orthonormal energy basis $(|a\\rangle)$, set $H_{\\rm s}=\\sum_aE_a|a\\rangle\\langle a|$, and define $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ for $a\\ne b$. Fix $\\hbar>0$ in joule-seconds. For real functions $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_a\\pi_af_ag_a$, and define the row-generator action on column observables by $(Wf)_a:=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$. Let\n\n$$\\sigma:=\\sum_a\\pi_a|a\\rangle\\langle a|,\\qquad r_a:=\\sum_{b\\ne a}w_{ab}.$$\n\nUse the finite GKSL generator with Hamiltonian $H_{\\rm s}$ and the jump matrices $L_{ab}$. Its observable dissipator $D$ is self-adjoint for the $\\sigma$-GNS inner product of [[def-qsm-dt-gns-detailed-balance]], $H_{\\rm s}$ commutes with $\\sigma$, and $\\ker D=\\mathbb C I$. On diagonal observables, $W$ is self-adjoint on $L^2(E,\\pi)$ with constants as its kernel; for $d\\geq2$ its restriction to $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$ has a positive spectral gap $\\gamma_{\\rm cl}$. Thus the generator satisfies the specified finite GNS detailed-balance convention and the generic gap conclusion of [[thm-qsm-dt-detailed-balance-gap]] applies. This claim does not assert a microscopic bath limit.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The population equation in [F1] is $p'_t=p_tW$ for row probability vectors, so $p_t=p_0e^{tW}$. Let $\\lambda>\\max_a r_a$ and $P:=I+W/\\lambda$. Then $P$ is a finite stochastic matrix with $P_{aa}>0$, and the matrix exponential satisfies\n$$\ne^{tW}=e^{-\\lambda t}\\sum_{n=0}^{\\infty}\\frac{(\\lambda t)^n}{n!}P^n.\n$$\nFor any initial probability vector, choose $a$ with $p_a(0)>0$. For every $b$, graph connectivity gives a finite positive-rate path from $a$ to $b$; the corresponding power $P^n$ has $(P^n)_{ab}>0$. Its coefficient in the series is positive for $t>0$, so $p_b(t)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "choose",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $t>0$, put $u_a=p_a(t)/\\pi_a>0$ and, for $a\\ne b$, put $c_{ab}:=\\pi_aw_{ab}=c_{ba}$. Differentiating $K$ and using $\\sum_a p'_a=0$ gives\n$$\n\\frac{d}{dt}K(p_t\\mid\\pi)=\\sum_a p'_a\\log u_a=\\sum_{a\\ne b}c_{ab}(u_b-u_a)\\log u_a.\n$$\nPairing the $(a,b)$ and $(b,a)$ terms yields the displayed symmetric formula. Since $\\log$ is increasing, each $(u_a-u_b)(\\log u_a-\\log u_b)\\geq0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equality in step 2.1 forces $u_a=u_b$ on every positive-rate edge. Connectedness makes all $u_a$ equal, and $\\sum_a p_a=\\sum_a\\pi_a=1$ then gives $u_a=1$, so $p_t=\\pi$. Conversely $p_t=\\pi$ makes every term zero. Finally $x\\log(x/\\pi_a)\\to0$ as $x\\downarrow0$, so $K(p_t\\mid\\pi)$ is continuous at $t=0$; applying the derivative inequality on $[\\varepsilon,t]$ and taking $\\varepsilon\\downarrow0$ proves nonincrease from any initial probability vector.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The inherited Gibbs set has d\u22652 and all pi_a>0. Step 1.1 chooses an initially positive component because the finite probability vector sums to one; its support cannot be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 covers initial zero populations by proving strict positivity for every t>0; step 3.1 proves continuity at t=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The connected Gibbs jump setup has d\u22652, as in its cited supplier."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero entries at initial time are allowed; step 3.1 handles the limit x log x at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 proves continuity at t=0 and monotonicity from t=0; the derivative claim is for t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects one positive component of a finite probability vector and finite positive-rate paths in a finite connected graph; these finite selections introduce no full AC premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 shows equality of the derivative forces equal u on every positive edge, hence p_t=pi."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 verifies p_t=pi makes every summand vanish."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-state detailed-balance edge",
+          "result": "The ordered-edge sum reduces to -c(u0-u1)(log u0-log u1) with c=pi0 w01=pi1 w10\u22650, hence is nonpositive and equality on a connected edge forces u0=u1.",
+          "evidence": "Statement and steps 2.1 and 3.1"
+        }
+      ]
+    },
+    "thm-qsm-dt-open-correlation-integral": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-detailed-balance-gap",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq1$, and let $G=K+D$ and the faithful density matrix $\\sigma$ satisfy [[def-qsm-dt-gns-detailed-balance]], with $\\ker D=\\mathbb C I$. Write $\\mathcal M_0=\\{A\\in M_d(\\mathbb C):\\operatorname{Tr}(\\sigma A)=0\\}$. If $d>1$, the restriction $D|_{\\mathcal M_0}$ has only strictly negative eigenvalues. Define\n\n$$\\gamma:=\\min\\{-\\lambda:\\lambda\\in\\operatorname{spec}(D|_{\\mathcal M_0})\\}>0.$$\n\nThen for every $A\\in\\mathcal M_0$ and $t\\geq0$,\n\n$$\\|e^{tG}A\\|_\\sigma\\leq e^{-\\gamma t}\\|A\\|_\\sigma.$$\n\nFor every density matrix $\\rho$, let $\\rho_t=e^{t\\mathcal L}\\rho$, where $\\mathcal L$ is the Schr\u00f6dinger trace-dual generator. Then\n\n$$\\|\\rho_t-\\sigma\\|_1\\leq\\|\\sigma^{-1/2}(\\rho-\\sigma)\\|_2e^{-\\gamma t}.$$\n\nHere $\\|X\\|_1=\\operatorname{Tr}\\sqrt{X^*X}$ and $\\|X\\|_2=(\\operatorname{Tr}X^*X)^{1/2}$. For centered $A,B\\in\\mathcal M_0$, the correlation $t\\mapsto\\langle e^{tG}A,B\\rangle_\\sigma$ is absolutely integrable. Also\n\n$$\\Gamma(A):=\\operatorname{Re}\\int_0^\\infty\\langle e^{tG}A,A\\rangle_\\sigma\\,dt=\\operatorname{Re}\\langle(-G|_{\\mathcal M_0})^{-1}A,A\\rangle_\\sigma\\geq0.$$\n\nFor $d=1$, $\\mathcal M_0=\\{0\\}$, $\\rho=\\sigma$, and all centered and relaxation claims are trivial; no $\\gamma$ is defined. The units of $\\gamma$ are seconds$^{-1}$. These are finite-dimensional conditional model results; they assert no infinite-dimensional bath limit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-dt-gns-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $d\\geq1$ be finite, let $\\mathcal H=\\mathbb C^d$ with its standard inner product, and write $M_d(\\mathbb C)$ for its matrices. Let $H_{\\rm s}=H_{\\rm s}^*\\in M_d(\\mathbb C)$ be a Hamiltonian in joules, let $\\hbar>0$ have units joule-seconds, and let $m\\geq0$ be an integer with $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ a finite family of jump matrices in seconds$^{-1/2}$. Matrices on which the generators act are dimensionless. The Schr\u00f6dinger generator $\\mathcal L$ is the finite GKSL generator of [[def-qsm-dt-gksl-definition]].\n\nIts trace-dual observable generator is\n\n$$G(A)=\\frac{i}{\\hbar}[H_{\\rm s},A]+D(A),\\qquad D(A)=\\sum_{j=1}^{m}\\left(L_j^*AL_j-\\frac12\\{L_j^*L_j,A\\}\\right).$$\n\nHere $[U,V]=UV-VU$, $\\{U,V\\}=UV+VU$, and $A^*$ is the conjugate transpose. The units of $G$, $D$, and $\\mathcal L$ are seconds$^{-1}$. The generator preserves the identity, $D(I)=0$, so $e^{tD}(I)=I$.\n\nLet $\\sigma=\\sigma^*>0$ be a dimensionless density matrix on $\\mathcal H$, so $\\operatorname{Tr}\\sigma=1$. Define\n\n$$\\langle A,B\\rangle_\\sigma:=\\operatorname{Tr}(\\sigma B^*A),\\qquad \\|A\\|_\\sigma:=\\langle A,A\\rangle_\\sigma^{1/2}.$$\n\nThis inner product is linear in its first variable. It is positive definite because $\\sigma>0$. The data satisfy **the specified finite GNS detailed-balance convention** when $[H_{\\rm s},\\sigma]=0$ and $D$ is self-adjoint for this inner product, meaning $\\langle D(A),B\\rangle_\\sigma=\\langle A,D(B)\\rangle_\\sigma$ for all $A,B\\in M_d(\\mathbb C)$. The Hamiltonian part of $G$ is kept separate and is anti-self-adjoint. Quantum detailed-balance conventions vary; in particular, this definition does not identify GNS symmetry with KMS or Kubo\u2013Mori symmetry.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Cauchy\u2013Schwarz in the finite weighted inner product and [F1] give $|C_{A,B}(t)|\\leq e^{-\\gamma t}\\|A\\|_\\sigma\\|B\\|_\\sigma$. The right side is integrable on $[0,\\infty)$, so the correlation integral converges absolutely.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The integral $Y:=\\int_0^\\infty e^{tG}A\\,dt$ converges in the finite-dimensional invariant space $\\mathcal M_0$. Since $\\frac{d}{dt}e^{tG}A=G(e^{tG}A)$ and the decay in [F1] sends the endpoint to zero, integrating gives $G(Y)=-A$. If $GZ=0$ for centered $Z$, then [F1] gives $\\|Z\\|_\\sigma=\\|e^{tG}Z\\|_\\sigma\\leq e^{-\\gamma t}\\|Z\\|_\\sigma$, hence $Z=0$. Thus $-G|_{\\mathcal M_0}$ is invertible and $Y=(-G|_{\\mathcal M_0})^{-1}A$, which proves the resolvent identity.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $Y$ from step 1.2, $\\Gamma(A)=\\operatorname{Re}\\langle Y,-G(Y)\\rangle_\\sigma$. The term $\\operatorname{Re}\\langle Y,-K(Y)\\rangle_\\sigma$ vanishes because $K$ is anti-self-adjoint. The remaining term is $\\langle Y,-D(Y)\\rangle_\\sigma\\geq\\gamma\\|Y\\|_\\sigma^2\\geq0$ by [F1]\u2013[F2]. Therefore $\\Gamma$ is a nonnegative real quadratic form on the real vector space of Hermitian centered observables; real polarization gives a positive-semidefinite symmetric matrix.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement imposes d>1, so the centered matrix space has positive dimension. In step 2.1 polarization on an empty finite list yields the empty matrix with vacuous positive-semidefinite condition, while no spectral minimum over an empty list is taken."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If A=0, the correlation and coefficient vanish by the formulas in steps 1.1 and 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement assumes d>1; d=1 is excluded because the centered space is zero and gamma is undefined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proof uses only the dissipator gap and anti-self-adjoint Hamiltonian part; no simple spectrum is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The integral includes t=0 and converges at infinity by the bound in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20131.2 define Y by a convergent finite-dimensional integral and uniquely invert \u2212G on M_0; no independent selection of inverse images or spectral representatives is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The correlation and resolvent identities follow from the assumed gap; the statement does not assert an equivalence between absolute integrability and a positive dissipator gap."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 proves nonnegativity of Gamma using \u2212D\u2265gamma I, without inferring that hypothesis from a nonnegative correlation coefficient."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qsm-dt-open-kubo": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-gns-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $d\\geq1$ be finite, let $\\mathcal H=\\mathbb C^d$ with its standard inner product, and write $M_d(\\mathbb C)$ for its matrices. Let $H_{\\rm s}=H_{\\rm s}^*\\in M_d(\\mathbb C)$ be a Hamiltonian in joules, let $\\hbar>0$ have units joule-seconds, and let $m\\geq0$ be an integer with $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ a finite family of jump matrices in seconds$^{-1/2}$. Matrices on which the generators act are dimensionless. The Schr\u00f6dinger generator $\\mathcal L$ is the finite GKSL generator of [[def-qsm-dt-gksl-definition]].\n\nIts trace-dual observable generator is\n\n$$G(A)=\\frac{i}{\\hbar}[H_{\\rm s},A]+D(A),\\qquad D(A)=\\sum_{j=1}^{m}\\left(L_j^*AL_j-\\frac12\\{L_j^*L_j,A\\}\\right).$$\n\nHere $[U,V]=UV-VU$, $\\{U,V\\}=UV+VU$, and $A^*$ is the conjugate transpose. The units of $G$, $D$, and $\\mathcal L$ are seconds$^{-1}$. The generator preserves the identity, $D(I)=0$, so $e^{tD}(I)=I$.\n\nLet $\\sigma=\\sigma^*>0$ be a dimensionless density matrix on $\\mathcal H$, so $\\operatorname{Tr}\\sigma=1$. Define\n\n$$\\langle A,B\\rangle_\\sigma:=\\operatorname{Tr}(\\sigma B^*A),\\qquad \\|A\\|_\\sigma:=\\langle A,A\\rangle_\\sigma^{1/2}.$$\n\nThis inner product is linear in its first variable. It is positive definite because $\\sigma>0$. The data satisfy **the specified finite GNS detailed-balance convention** when $[H_{\\rm s},\\sigma]=0$ and $D$ is self-adjoint for this inner product, meaning $\\langle D(A),B\\rangle_\\sigma=\\langle A,D(B)\\rangle_\\sigma$ for all $A,B\\in M_d(\\mathbb C)$. The Hamiltonian part of $G$ is kept separate and is anti-self-adjoint. Quantum detailed-balance conventions vary; in particular, this definition does not identify GNS symmetry with KMS or Kubo\u2013Mori symmetry.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-time-dependent-gksl",
+          "source_section": "Statement",
+          "quote": "Let $I=[s_0,s_1]\\subset\\mathbb R$ be a compact time interval in seconds, $d\\geq1$, $H:I\\to M_d(\\mathbb C)$ continuous with $H(t)=H(t)^*$ in joules, and $L_a:I\\to M_d(\\mathbb C)$ continuous with finite $a=1,\\ldots,m$ in ${\\rm s}^{-1/2}$. At each $t\\in I$, form $\\mathcal L_t$ by [[def-qsm-dt-gksl-definition]]. For every $s\\leq t$ in $I$, the propagator $\\Lambda(t,s)$ solving\n\n$$\\partial_t\\Lambda(t,s)=\\mathcal L_t\\circ\\Lambda(t,s),\\qquad \\Lambda(s,s)=\\operatorname{id},$$\n\nexists uniquely and is a finite channel. No semigroup law is asserted when $t\\mapsto\\mathcal L_t$ varies.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-detailed-balance-gap",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq1$, and let $G=K+D$ and the faithful density matrix $\\sigma$ satisfy [[def-qsm-dt-gns-detailed-balance]], with $\\ker D=\\mathbb C I$. Write $\\mathcal M_0=\\{A\\in M_d(\\mathbb C):\\operatorname{Tr}(\\sigma A)=0\\}$. If $d>1$, the restriction $D|_{\\mathcal M_0}$ has only strictly negative eigenvalues. Define\n\n$$\\gamma:=\\min\\{-\\lambda:\\lambda\\in\\operatorname{spec}(D|_{\\mathcal M_0})\\}>0.$$\n\nThen for every $A\\in\\mathcal M_0$ and $t\\geq0$,\n\n$$\\|e^{tG}A\\|_\\sigma\\leq e^{-\\gamma t}\\|A\\|_\\sigma.$$\n\nFor every density matrix $\\rho$, let $\\rho_t=e^{t\\mathcal L}\\rho$, where $\\mathcal L$ is the Schr\u00f6dinger trace-dual generator. Then\n\n$$\\|\\rho_t-\\sigma\\|_1\\leq\\|\\sigma^{-1/2}(\\rho-\\sigma)\\|_2e^{-\\gamma t}.$$\n\nHere $\\|X\\|_1=\\operatorname{Tr}\\sqrt{X^*X}$ and $\\|X\\|_2=(\\operatorname{Tr}X^*X)^{1/2}$. For centered $A,B\\in\\mathcal M_0$, the correlation $t\\mapsto\\langle e^{tG}A,B\\rangle_\\sigma$ is absolutely integrable. Also\n\n$$\\Gamma(A):=\\operatorname{Re}\\int_0^\\infty\\langle e^{tG}A,A\\rangle_\\sigma\\,dt=\\operatorname{Re}\\langle(-G|_{\\mathcal M_0})^{-1}A,A\\rangle_\\sigma\\geq0.$$\n\nFor $d=1$, $\\mathcal M_0=\\{0\\}$, $\\rho=\\sigma$, and all centered and relaxation claims are trivial; no $\\gamma$ is defined. The units of $\\gamma$ are seconds$^{-1}$. These are finite-dimensional conditional model results; they assert no infinite-dimensional bath limit.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-dt-finite-trace-pairing-cyclicity",
+          "source_section": "Statement",
+          "quote": "Let $d,e\\geq1$. For $A\\in M_{e\\times d}(\\mathbb C)$ and $B\\in M_{d\\times e}(\\mathbb C)$,\n$$ \\operatorname{Tr}_e(AB)=\\operatorname{Tr}_d(BA), $$\nwhere $\\operatorname{Tr}_r$ is the diagonal-sum trace on $M_r(\\mathbb C)$. This includes cyclicity for square matrices. For $C\\in M_d(\\mathbb C)$, the bilinear trace pairing is nondegenerate: if $\\operatorname{Tr}_d(XC)=0$ for every $X\\in M_d(\\mathbb C)$, then $C=0$. No adjoint is inserted in this pairing.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $V(X):=i[B,X]/\\hbar$. The perturbed Schr\u00f6dinger generator is $\\mathcal L_\\epsilon(t)=\\mathcal L_0+\\epsilon h(t)V$. Since $\\mathcal L_0$ leaves $\\sigma$ stationary by [F3], variation of constants gives\n$$\n\\rho^\\epsilon_t=\\sigma+\\epsilon\\int_0^t h(s)e^{(t-s)\\mathcal L_0}V(\\sigma)\\,ds+\\epsilon^2\\int_{0\\leq u\\leq s\\leq t}h(s)h(u)e^{(t-s)\\mathcal L_0}V e^{(s-u)\\mathcal L_0}V(\\rho^\\epsilon_u)\\,du\\,ds.\n$$\nThe second integral is $O(\\epsilon^2)$ uniformly on $[0,T]$: $h$ is bounded, $V$ is a bounded linear map on the finite matrix space, $\\sup_{0\\leq s\\leq t\\leq T}\\|e^{(t-s)\\mathcal L_0}\\|_1<\\infty$, and $\\|\\rho^\\epsilon_u\\|_1=1$ because [F2] gives a channel propagator. Thus the first derivative exists and equals $\\int_0^t h(s)e^{(t-s)\\mathcal L_0}V(\\sigma)\\,ds$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the generator duality in [F1], the exponential power series gives $\\operatorname{Tr}(A e^{\\tau\\mathcal L_0}X)=\\operatorname{Tr}(e^{\\tau G}A\\,X)$ for every finite matrix $X$. Using [F4] and $V(\\sigma)=i[B,\\sigma]/\\hbar$,\n$$\n\\operatorname{Tr}\\!\\left(Ae^{\\tau\\mathcal L_0}V(\\sigma)\\right)=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\sigma[e^{\\tau G}A,B]\\right).\n$$\nThe scalar part of $A$ commutes with $B$, so $A$ may be replaced by $A_0$. Substituting this identity into step 1.1 gives the stated response formula.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $C=e^{\\tau G}A_0$. The gap theorem gives $\\|C\\|_\\sigma\\leq e^{-\\gamma\\tau}\\|A_0\\|_\\sigma$. If $\\mu>0$ is the smallest eigenvalue of $\\sigma$, then\n$$\n\\|C\\|_\\infty\\leq\\frac{\\|C\\sigma^{1/2}\\|_2}{\\sqrt\\mu}=\\frac{\\|C\\|_\\sigma}{\\sqrt\\mu}.\n$$\nThe finite density trace satisfies $|\\operatorname{Tr}(\\sigma M)|\\leq\\|M\\|_\\infty$: diagonalize $\\sigma$, write its nonnegative eigenvalues summing to one, and bound each diagonal matrix element of $M$ by $\\|M\\|_\\infty$. Therefore $|\\operatorname{Tr}(\\sigma[C,B])|\\leq2\\|B\\|_\\infty\\|C\\|_\\infty$, which proves the exponential bound and absolute integrability.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes d>1 and a finite interval [0,T]. Step 1.1 has zero integrals at t=0, giving zero first-order response; it never presumes a positive integration length."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If h is identically zero, the perturbation is zero and step 1.1 gives zero derivative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement assumes d>1 for its positive gap; the d=1 response is not claimed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite eigenvalue multiplicities do not affect the bounded variation-of-constants argument in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: At t=0 the response integral is empty; steps 1.1\u20132.1 hold on each finite interval [0,T]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the unique propagator from F2, and step 3.1 uses the smallest eigenvalue of a specified finite faithful density; no arbitrary selection of states or solutions is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The response formula follows from a fixed dissipator and a Hamiltonian perturbation of a stationary preparation; it is not a characterization of all response kernels."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exponential kernel bound in step 3.1 does not reconstruct GKSL dynamics or a bath from a kernel; the gap and faithful state remain given hypotheses."
+        }
+      ],
+      "finite_checks": []
+    },
+    "post-qsm-dt-effective-bath": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Postulate specifies a finite effective GKSL model, positive temperature and rates, names the finite generator and the Gibbs-jump specialization, and separately adopts the exact energy-resolved instrument. It asserts an assumption rather than a theorem."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "Postulate limits the adopted model to a selected subsystem, preparation, resolved time scale and coarse observables; it explicitly excludes microscopic derivation, weak-coupling error, exact reset, calibration and reported measurement."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The Alicki\u2013Lendi mirror\u2019s fetch failure and its dropped-source record are preserved in batch-49.coverage.json; complete Plenio\u2013Knight and other full-text sources were inspected and stamped. The postulate treats these as formulation context, not proof of physical realization."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The text says \u201cwe adopt\u201d the reduced GKSL and instrument assumptions; it supplies no empirical observation and draws no deduction purporting to establish their physical truth."
+        }
+      },
+      "finite_checks": []
+    },
+    "thm-qsm-dt-monitored-transport": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-dt-monitored-chain",
+          "source_section": "Definition",
+          "quote": "Use the finite energy basis, energies $E_a$, rates $w_{ab}$, Hamiltonian $H_{\\rm s}$, and jump matrices $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ of [[thm-qsm-dt-gibbs-jump]]. Define $R:=\\sum_{a\\ne b}L_{ab}^*L_{ab}=\\sum_a r_a|a\\rangle\\langle a|$ and the no-click matrix $K:=-iH_{\\rm s}/\\hbar-R/2$. The **specified energy-resolved instrument** has the following outcomes:\n\n1. If the current state is the energy eigenstate $|a\\rangle$, then during a no-click interval of length $t$ the unnormalized state is $e^{tK}|a\\rangle$.\n2. In an infinitesimal interval $dt$, the outcome labelled $a\\to b$ has jump operation $\\sqrt{dt}\\,L_{ab}$ and probability $dt\\,\\langle a|L_{ab}^*L_{ab}|a\\rangle+o(dt)$. Its normalized post-click state is $L_{ab}|a\\rangle/\\|L_{ab}|a\\rangle\\|=|b\\rangle$.\n3. The no-click operation over $dt$ is $M_0(dt)=I+Kdt+o(dt)$. Since $K^*+K=-R$ and $\\sum_{a\\ne b}L_{ab}^*L_{ab}=R$, the no-click and jump effects sum to $I+o(dt)$.\n4. After each recorded jump, repeat the same rule from the new energy label.\n\nThe output path records the current label $a(t)\\in E$. This is one selected instrument model; the one-time GKSL semigroup alone does not specify a unique record process.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-gibbs-jump",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq2$, let $E=\\{1,\\ldots,d\\}$, let $E_a\\in\\mathbb R$ be finite energies in joules, and let $\\beta>0$ have units joule$^{-1}$. Define\n\n$$Z_\\beta:=\\sum_{a\\in E}e^{-\\beta E_a},\\qquad \\pi_a:=Z_\\beta^{-1}e^{-\\beta E_a}.$$\n\nFor each $a\\ne b$, let $w_{ab}\\geq0$ be a rate in seconds$^{-1}$ satisfying Gibbs detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$, and assume the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ is connected. On $\\mathcal H=\\mathbb C^d$, fix an orthonormal energy basis $(|a\\rangle)$, set $H_{\\rm s}=\\sum_aE_a|a\\rangle\\langle a|$, and define $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ for $a\\ne b$. Fix $\\hbar>0$ in joule-seconds. For real functions $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_a\\pi_af_ag_a$, and define the row-generator action on column observables by $(Wf)_a:=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$. Let\n\n$$\\sigma:=\\sum_a\\pi_a|a\\rangle\\langle a|,\\qquad r_a:=\\sum_{b\\ne a}w_{ab}.$$\n\nUse the finite GKSL generator with Hamiltonian $H_{\\rm s}$ and the jump matrices $L_{ab}$. Its observable dissipator $D$ is self-adjoint for the $\\sigma$-GNS inner product of [[def-qsm-dt-gns-detailed-balance]], $H_{\\rm s}$ commutes with $\\sigma$, and $\\ker D=\\mathbb C I$. On diagonal observables, $W$ is self-adjoint on $L^2(E,\\pi)$ with constants as its kernel; for $d\\geq2$ its restriction to $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$ has a positive spectral gap $\\gamma_{\\rm cl}$. Thus the generator satisfies the specified finite GNS detailed-balance convention and the generic gap conclusion of [[thm-qsm-dt-detailed-balance-gap]] applies. This claim does not assert a microscopic bath limit.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The path in [F1] has locally piecewise-constant sample paths with finitely many jumps on bounded intervals. Each coordinate $a(s)$ is measurable under the supplied path law; since $E$ is finite, $(s,\\omega)\\mapsto v_{a(s,\\omega)}$ is jointly measurable and bounded, so its time integral $Y_T$ is a measurable bounded random variable. It is stationary when initialized with $\\pi$, since [F2] gives $\\pi W=0$. For $s,t\\geq0$, stationarity and the transition semigroup give\n$$\n\\mathbb E_\\pi[v_{a(s)}v_{a(t)}]=\\langle v,e^{|t-s|W}v\\rangle_\\pi=C_v(|t-s|).\n$$\nFor $t\\geq s$, this is the Markov property; for $s>t$, the same scalar follows by self-adjointness of $e^{(s-t)W}$. Since $v$ is centered, $\\mathbb E_\\pi[Y_T]=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $v_{a(s)}$ is bounded because $E$ is finite, so the product covariance is bounded on the finite square $[0,T]^2$ and Fubini's theorem applies. Therefore\n$$\n\\operatorname{Var}_\\pi(Y_T)=\\int_0^T\\int_0^T\\mathbb E_\\pi[v_{a(s)}v_{a(t)}]\\,ds\\,dt\n=2\\int_0^T(T-s)C_v(s)\\,ds,\n$$\nusing the covariance identity from step 1.1 and splitting the square into its two triangles.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Expand $v$ in an orthonormal eigenbasis of the self-adjoint $W|_{\\pi^\\perp}$. Its eigenvalues are at most $-\\gamma_{\\rm cl}<0$, so the expansion gives $|C_v(s)|\\leq e^{-\\gamma_{\\rm cl}s}\\|v\\|_\\pi^2$. The finite matrix exponential makes $C_v$ continuous. On $[0,\\infty)$, set $f_T(s)=\\mathbf1_{[0,T]}(s)(1-s/T)C_v(s)$. For every sequence $T_n\\to\\infty$, $f_{T_n}(s)\\to C_v(s)$ pointwise and $|f_{T_n}(s)|\\leq\\|v\\|_\\pi^2e^{-\\gamma_{\\rm cl}s}$, an integrable majorant.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F3] to step 2.2 gives $\\int_0^{T_n}(1-s/T_n)C_v(s)\\,ds\\to\\int_0^\\infty C_v(s)\\,ds$ for every $T_n\\to\\infty$, hence the real-$T$ limit exists and equals that integral. The same finite spectral expansion gives $\\int_0^\\infty e^{sW}v\\,ds=(-W|_{\\pi^\\perp})^{-1}v$, so the integral is $\\langle(-W|_{\\pi^\\perp})^{-1}v,v\\rangle_\\pi$. Each eigencomponent contributes its squared coefficient divided by a positive gap eigenvalue, proving nonnegativity.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The connected Gibbs supplier has at least two labels and positive pi. Step 2.1 integrates over [0,T]\u00b2, which has zero area when T=0, giving Y_0=0 and zero variance; the asymptotic ratio is used only as T\u2192infinity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For v=0, Y_T, C_v and D_rec all vanish by the displayed formulas and step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Connected Gibbs data have d\u22652, so pi-perp has a positive gap as stated in step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated nonzero eigenvalues are allowed; the finite spectral expansion in steps 2.2\u20133.1 sums every eigenspace."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At T=0, Y_0=0 and the variance integral in step 2.1 is zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Full AC is an explicit assumption A1 and is retained for the path-law construction in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement derives a selected record model variance coefficient from its Markov path law; it does not characterize all quantum records by that coefficient."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 3.1 identifies the limit by dominated convergence and a finite resolvent, without inferring a Markov path law or a central-limit theorem from existence of the limit."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-state chain with rates a,b and centered label v",
+          "result": "C_v(s)=<v,v>_pi exp(-(a+b)s), so D_rec=<v,v>_pi/(a+b).",
+          "evidence": "General finite spectral proof in steps 2.2\u20133.1; B-page specialization in ex-qsm-dt-qubit-record-diffusion."
+        }
+      ]
+    },
+    "pthm-qsm-dt-bath-relaxation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-qsm-dt-effective-bath",
+          "source_section": "Postulate",
+          "quote": "For the specified finite-dimensional subsystem, we adopt that during the declared resolved time scale its reduced state is described by a chosen finite GKSL generator $\\mathcal L$ with Hamiltonian $H_{\\rm s}$, coupling matrices, positive temperature $1/(k_{\\rm B}\\beta)$, and finite rates. The model uses the finite generator and units of [[def-qsm-dt-gksl-definition]]; for the Gibbs-jump specialization, $H_{\\rm s}$, $\\beta$, and $w_{ab}$ have the hypotheses and units in [[thm-qsm-dt-gibbs-jump]]. This is an effective model assumption for the selected subsystem, preparation, time window, and coarse observables. No microscopic derivation, weak-coupling error estimate, exact bath reset, or measured calibration is included.\n\nFor record predictions, we additionally adopt the particular ideal energy-resolved monitoring rule defined in [[def-qsm-dt-monitored-chain]]. It is one chosen instrument for the model; a one-time channel family alone does not select this record law. Full AC is retained as the formal set-theoretic premise in the monitored-chain supplier's construction of the joint path law; this is not a physical postulate about nature.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-qsm-dt-effective-bath",
+          "source_section": "Postulate",
+          "quote": "For the specified finite-dimensional subsystem, we adopt that during the declared resolved time scale its reduced state is described by a chosen finite GKSL generator $\\mathcal L$ with Hamiltonian $H_{\\rm s}$, coupling matrices, positive temperature $1/(k_{\\rm B}\\beta)$, and finite rates. The model uses the finite generator and units of [[def-qsm-dt-gksl-definition]]; for the Gibbs-jump specialization, $H_{\\rm s}$, $\\beta$, and $w_{ab}$ have the hypotheses and units in [[thm-qsm-dt-gibbs-jump]]. This is an effective model assumption for the selected subsystem, preparation, time window, and coarse observables. No microscopic derivation, weak-coupling error estimate, exact bath reset, or measured calibration is included.\n\nFor record predictions, we additionally adopt the particular ideal energy-resolved monitoring rule defined in [[def-qsm-dt-monitored-chain]]. It is one chosen instrument for the model; a one-time channel family alone does not select this record law. Full AC is retained as the formal set-theoretic premise in the monitored-chain supplier's construction of the joint path law; this is not a physical postulate about nature.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-gibbs-jump",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq2$, let $E=\\{1,\\ldots,d\\}$, let $E_a\\in\\mathbb R$ be finite energies in joules, and let $\\beta>0$ have units joule$^{-1}$. Define\n\n$$Z_\\beta:=\\sum_{a\\in E}e^{-\\beta E_a},\\qquad \\pi_a:=Z_\\beta^{-1}e^{-\\beta E_a}.$$\n\nFor each $a\\ne b$, let $w_{ab}\\geq0$ be a rate in seconds$^{-1}$ satisfying Gibbs detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$, and assume the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ is connected. On $\\mathcal H=\\mathbb C^d$, fix an orthonormal energy basis $(|a\\rangle)$, set $H_{\\rm s}=\\sum_aE_a|a\\rangle\\langle a|$, and define $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ for $a\\ne b$. Fix $\\hbar>0$ in joule-seconds. For real functions $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_a\\pi_af_ag_a$, and define the row-generator action on column observables by $(Wf)_a:=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$. Let\n\n$$\\sigma:=\\sum_a\\pi_a|a\\rangle\\langle a|,\\qquad r_a:=\\sum_{b\\ne a}w_{ab}.$$\n\nUse the finite GKSL generator with Hamiltonian $H_{\\rm s}$ and the jump matrices $L_{ab}$. Its observable dissipator $D$ is self-adjoint for the $\\sigma$-GNS inner product of [[def-qsm-dt-gns-detailed-balance]], $H_{\\rm s}$ commutes with $\\sigma$, and $\\ker D=\\mathbb C I$. On diagonal observables, $W$ is self-adjoint on $L^2(E,\\pi)$ with constants as its kernel; for $d\\geq2$ its restriction to $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$ has a positive spectral gap $\\gamma_{\\rm cl}$. Thus the generator satisfies the specified finite GNS detailed-balance convention and the generic gap conclusion of [[thm-qsm-dt-detailed-balance-gap]] applies. This claim does not assert a microscopic bath limit.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-detailed-balance-gap",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq1$, and let $G=K+D$ and the faithful density matrix $\\sigma$ satisfy [[def-qsm-dt-gns-detailed-balance]], with $\\ker D=\\mathbb C I$. Write $\\mathcal M_0=\\{A\\in M_d(\\mathbb C):\\operatorname{Tr}(\\sigma A)=0\\}$. If $d>1$, the restriction $D|_{\\mathcal M_0}$ has only strictly negative eigenvalues. Define\n\n$$\\gamma:=\\min\\{-\\lambda:\\lambda\\in\\operatorname{spec}(D|_{\\mathcal M_0})\\}>0.$$\n\nThen for every $A\\in\\mathcal M_0$ and $t\\geq0$,\n\n$$\\|e^{tG}A\\|_\\sigma\\leq e^{-\\gamma t}\\|A\\|_\\sigma.$$\n\nFor every density matrix $\\rho$, let $\\rho_t=e^{t\\mathcal L}\\rho$, where $\\mathcal L$ is the Schr\u00f6dinger trace-dual generator. Then\n\n$$\\|\\rho_t-\\sigma\\|_1\\leq\\|\\sigma^{-1/2}(\\rho-\\sigma)\\|_2e^{-\\gamma t}.$$\n\nHere $\\|X\\|_1=\\operatorname{Tr}\\sqrt{X^*X}$ and $\\|X\\|_2=(\\operatorname{Tr}X^*X)^{1/2}$. For centered $A,B\\in\\mathcal M_0$, the correlation $t\\mapsto\\langle e^{tG}A,B\\rangle_\\sigma$ is absolutely integrable. Also\n\n$$\\Gamma(A):=\\operatorname{Re}\\int_0^\\infty\\langle e^{tG}A,A\\rangle_\\sigma\\,dt=\\operatorname{Re}\\langle(-G|_{\\mathcal M_0})^{-1}A,A\\rangle_\\sigma\\geq0.$$\n\nFor $d=1$, $\\mathcal M_0=\\{0\\}$, $\\rho=\\sigma$, and all centered and relaxation claims are trivial; no $\\gamma$ is defined. The units of $\\gamma$ are seconds$^{-1}$. These are finite-dimensional conditional model results; they assert no infinite-dimensional bath limit.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The rate relation $b/a=e^{-\\beta\\Delta}$ is exactly $\\pi_0a=\\pi_1b$ for $\\pi_j\\propto e^{-\\beta E_j}$ with $E_0=\\Delta/2$, $E_1=-\\Delta/2$. Since $a,b>0$, the two-vertex rate graph is connected. The postulate [A2] adopts this finite generator for the selected physical model; [F1] therefore supplies its faithful stationary Gibbs state and scalar dissipative kernel.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Applying [F2] to this finite GNS detailed-balance generator proves the trace-norm estimate for $d>1$. For $d=1$ there is only one density matrix, so the difference from $\\sigma$ is zero.",
+          "step": "1.2",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the qubit basis, direct matrix multiplication gives $\\dot\\rho_{00}=-a\\rho_{00}+b\\rho_{11}$, $\\dot\\rho_{11}=a\\rho_{00}-b\\rho_{11}$, and $\\dot\\rho_{01}=-(\\gamma_2+i\\omega)\\rho_{01}$. The dephasing jump contributes $-\\gamma_\\phi\\rho_{01}$ and vanishes on diagonal entries. With $z=\\rho_{00}-\\rho_{11}$, the population equations become $\\dot z=(b-a)-(a+b)z=-\\gamma_1(z-z_{\\rm eq})$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Solving the scalar linear equations in step 1.3 yields $z(t)=z_{\\rm eq}+e^{-\\gamma_1t}(z(0)-z_{\\rm eq})$ and $\\rho_{01}(t)=e^{-(\\gamma_2+i\\omega)t}\\rho_{01}(0)$. The dual observable generator acts as $G(X)=-\\gamma_2X-\\omega Y$, $G(Y)=\\omega X-\\gamma_2Y$, and $G(Z)=-\\gamma_1(Z-z_{\\rm eq}I)$; exponentiating these two-dimensional and one-dimensional invariant subspaces gives the displayed formulas for $e^{tG}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The physics-theorem statement supplies no empty case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The optional dephasing boundary gamma_phi=0 is allowed; step 2.1 then gives gamma_2=(a+b)/2>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The d=1 branch is stated and proved in steps 1.1\u20131.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: No nondegeneracy beyond the stated qubit energy gap Delta>0 is used; the finite general theorem allows repeated energies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0 the population and coherence formulas reproduce the initial state; step 2.1 gives the solutions for all t\u22650."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Full AC is explicitly assumed in A1 for the selected monitoring supplier; the density estimate itself is finite-dimensional."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The physics-theorem statement supplies no iff forward case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The physics-theorem statement supplies no iff reverse case or biconditional in this item; its stated hypotheses exclude that case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "thermal qubit",
+          "result": "gamma_1=a+b; gamma_2=(a+b)/2+gamma_phi; z_eq=(b-a)/(a+b); the displayed correlation and response integrals reduce by integrating decaying sine/cosine terms.",
+          "evidence": "items/ex-qsm-dt-thermal-qubit.md, steps 1.1, 1.2, 1.3, 2.1, and 3.1"
+        }
+      ]
+    },
+    "pthm-qsm-dt-record-transport": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qsm-dt-monitored-transport",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice and the connected finite Gibbs jump data of [[thm-qsm-dt-gibbs-jump]]. Use the energy-resolved record path supplied by [[def-qsm-dt-monitored-chain]], initialized with law $\\pi$. Let $v:E\\to\\mathbb R$ be a real velocity observable with units metres per second and $\\pi(v):=\\sum_a\\pi_av_a=0$. Define the record displacement\n\n$$Y_T:=\\int_0^T v_{a(s)}\\,ds,\\qquad C_v(s):=\\langle v,e^{sW}v\\rangle_\\pi,$$\n\nwhere $Wf(a)=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$, $\\langle f,g\\rangle_\\pi=\\sum_a\\pi_a f_ag_a$, and $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$. Then for every $T\\geq0$,\n\n$$\\mathbb E_\\pi[Y_T]=0,\\qquad \\operatorname{Var}_\\pi(Y_T)=2\\int_0^T(T-s)C_v(s)\\,ds.$$\n\nIf $\\gamma_{\\rm cl}>0$ is the reversible spectral gap of $W$ on $\\pi$-centered functions, then $|C_v(s)|\\leq e^{-\\gamma_{\\rm cl}s}\\sum_a\\pi_av_a^2$, and\n\n$$D_{\\rm rec}:=\\lim_{T\\to\\infty}\\frac{\\operatorname{Var}_\\pi(Y_T)}{2T}=\\int_0^\\infty C_v(s)\\,ds=\\langle(-W|_{\\pi^\\perp})^{-1}v,v\\rangle_\\pi\\geq0.$$\n\nThe units of $D_{\\rm rec}$ are square metres per second. This proves a variance coefficient for the selected finite record model; it does not prove a central-limit theorem or a generic quantum transport law.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "post-qsm-dt-effective-bath",
+          "source_section": "Postulate",
+          "quote": "For the specified finite-dimensional subsystem, we adopt that during the declared resolved time scale its reduced state is described by a chosen finite GKSL generator $\\mathcal L$ with Hamiltonian $H_{\\rm s}$, coupling matrices, positive temperature $1/(k_{\\rm B}\\beta)$, and finite rates. The model uses the finite generator and units of [[def-qsm-dt-gksl-definition]]; for the Gibbs-jump specialization, $H_{\\rm s}$, $\\beta$, and $w_{ab}$ have the hypotheses and units in [[thm-qsm-dt-gibbs-jump]]. This is an effective model assumption for the selected subsystem, preparation, time window, and coarse observables. No microscopic derivation, weak-coupling error estimate, exact bath reset, or measured calibration is included.\n\nFor record predictions, we additionally adopt the particular ideal energy-resolved monitoring rule defined in [[def-qsm-dt-monitored-chain]]. It is one chosen instrument for the model; a one-time channel family alone does not select this record law. Full AC is retained as the formal set-theoretic premise in the monitored-chain supplier's construction of the joint path law; this is not a physical postulate about nature.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-monitored-transport",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice and the connected finite Gibbs jump data of [[thm-qsm-dt-gibbs-jump]]. Use the energy-resolved record path supplied by [[def-qsm-dt-monitored-chain]], initialized with law $\\pi$. Let $v:E\\to\\mathbb R$ be a real velocity observable with units metres per second and $\\pi(v):=\\sum_a\\pi_av_a=0$. Define the record displacement\n\n$$Y_T:=\\int_0^T v_{a(s)}\\,ds,\\qquad C_v(s):=\\langle v,e^{sW}v\\rangle_\\pi,$$\n\nwhere $Wf(a)=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$, $\\langle f,g\\rangle_\\pi=\\sum_a\\pi_a f_ag_a$, and $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$. Then for every $T\\geq0$,\n\n$$\\mathbb E_\\pi[Y_T]=0,\\qquad \\operatorname{Var}_\\pi(Y_T)=2\\int_0^T(T-s)C_v(s)\\,ds.$$\n\nIf $\\gamma_{\\rm cl}>0$ is the reversible spectral gap of $W$ on $\\pi$-centered functions, then $|C_v(s)|\\leq e^{-\\gamma_{\\rm cl}s}\\sum_a\\pi_av_a^2$, and\n\n$$D_{\\rm rec}:=\\lim_{T\\to\\infty}\\frac{\\operatorname{Var}_\\pi(Y_T)}{2T}=\\int_0^\\infty C_v(s)\\,ds=\\langle(-W|_{\\pi^\\perp})^{-1}v,v\\rangle_\\pi\\geq0.$$\n\nThe units of $D_{\\rm rec}$ are square metres per second. This proves a variance coefficient for the selected finite record model; it does not prove a central-limit theorem or a generic quantum transport law.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The assumptions [A1]\u2013[A2] identify the selected, ideal energy-resolved instrument and its Gibbs initial law; the velocity labels are stipulated model observables. They introduce no empirical premise.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F1] with these exact rates, initial law, and centered velocities yields the displayed finite-time variance, resolvent formula, nonnegativity, and limit. The conclusion remains conditional on the adopted model and instrument.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The physics-theorem statement supplies no empty case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If every pointer velocity is zero, centeredness holds and the displacement and coefficient vanish by F1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: The connected Gibbs jump model has d\u22652, as in the finite transport theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Repeated energy levels are not needed or excluded by the finite rate-chain variance argument."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: At T=0 the record integral and variance are zero by the formula in F1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Full AC is explicit in A1 as a formal premise of the selected path construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The physics-theorem statement supplies no iff forward case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The physics-theorem statement supplies no iff reverse case or biconditional in this item; its stated hypotheses exclude that case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-state record",
+          "result": "C_v(s)=v0^2(1-z_eq^2)e^(-(a+b)s); integrating 2(T-s)C_v(s) gives the stated exact variance and limit.",
+          "evidence": "items/ex-qsm-dt-qubit-record-diffusion.md, steps 1.1 and 2.1"
+        }
+      ]
+    },
+    "ex-qsm-dt-thermal-qubit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-gibbs-jump",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq2$, let $E=\\{1,\\ldots,d\\}$, let $E_a\\in\\mathbb R$ be finite energies in joules, and let $\\beta>0$ have units joule$^{-1}$. Define\n\n$$Z_\\beta:=\\sum_{a\\in E}e^{-\\beta E_a},\\qquad \\pi_a:=Z_\\beta^{-1}e^{-\\beta E_a}.$$\n\nFor each $a\\ne b$, let $w_{ab}\\geq0$ be a rate in seconds$^{-1}$ satisfying Gibbs detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$, and assume the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ is connected. On $\\mathcal H=\\mathbb C^d$, fix an orthonormal energy basis $(|a\\rangle)$, set $H_{\\rm s}=\\sum_aE_a|a\\rangle\\langle a|$, and define $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ for $a\\ne b$. Fix $\\hbar>0$ in joule-seconds. For real functions $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_a\\pi_af_ag_a$, and define the row-generator action on column observables by $(Wf)_a:=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$. Let\n\n$$\\sigma:=\\sum_a\\pi_a|a\\rangle\\langle a|,\\qquad r_a:=\\sum_{b\\ne a}w_{ab}.$$\n\nUse the finite GKSL generator with Hamiltonian $H_{\\rm s}$ and the jump matrices $L_{ab}$. Its observable dissipator $D$ is self-adjoint for the $\\sigma$-GNS inner product of [[def-qsm-dt-gns-detailed-balance]], $H_{\\rm s}$ commutes with $\\sigma$, and $\\ker D=\\mathbb C I$. On diagonal observables, $W$ is self-adjoint on $L^2(E,\\pi)$ with constants as its kernel; for $d\\geq2$ its restriction to $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$ has a positive spectral gap $\\gamma_{\\rm cl}$. Thus the generator satisfies the specified finite GNS detailed-balance convention and the generic gap conclusion of [[thm-qsm-dt-detailed-balance-gap]] applies. This claim does not assert a microscopic bath limit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-open-correlation-integral",
+          "source_section": "Statement",
+          "quote": "Assume the finite GNS detailed-balance hypotheses, $d>1$, and the positive gap $\\gamma$ of [[thm-qsm-dt-detailed-balance-gap]]. For centered $A,B\\in\\mathcal M_0$, define $C_{A,B}(t):=\\langle e^{tG}A,B\\rangle_\\sigma$. Then\n\n$$|C_{A,B}(t)|\\leq e^{-\\gamma t}\\|A\\|_\\sigma\\|B\\|_\\sigma,\\qquad t\\geq0,$$\n\nso the correlation is absolutely integrable and\n\n$$\\int_0^\\infty C_{A,B}(t)\\,dt=\\left\\langle(-G|_{\\mathcal M_0})^{-1}A,B\\right\\rangle_\\sigma.$$\n\nFor centered $A$, the real coefficient\n\n$$\\Gamma(A):=\\operatorname{Re}\\int_0^\\infty\\langle e^{tG}A,A\\rangle_\\sigma\\,dt$$\n\nis nonnegative. Its real polarization on any finite list of Hermitian centered observables is a positive-semidefinite real symmetric correlation-integral matrix. No mixing, central-limit theorem, or infinite-volume transport claim follows.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-dt-open-kubo",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal L_0$ be the finite Schr\u00f6dinger generator trace-dual to $G$ in [[def-qsm-dt-gns-detailed-balance]], and assume the gap hypotheses of [[thm-qsm-dt-detailed-balance-gap]] with $d>1$. Let $A\\in M_d(\\mathbb C)$, $B=B^*\\in M_d(\\mathbb C)$ be dimensionless observables, and let $h:[0,T]\\to\\mathbb R$ be continuous with units joules. For dimensionless $\\epsilon\\in\\mathbb R$, perturb only the Hamiltonian by $H_\\epsilon(t)=H_{\\rm s}-\\epsilon h(t)B$; hold the dissipator fixed. Let $\\rho^\\epsilon_t$ be the unique state solution with $\\rho^\\epsilon_0=\\sigma$, supplied by [[thm-qsm-dt-time-dependent-gksl]].\n\nDefine $A_0:=A-\\operatorname{Tr}(\\sigma A)I$ and, for $\\tau\\geq0$,\n\n$$R_{AB}(\\tau):=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\sigma[e^{\\tau G}A_0,B]\\right).$$\n\nThen, on every finite interval $[0,T]$, the derivative at $\\epsilon=0$ exists and\n\n$$\\left.\\frac{d}{d\\epsilon}\\operatorname{Tr}(\\rho^\\epsilon_tA)\\right|_{\\epsilon=0}=\\int_0^t h(s)R_{AB}(t-s)\\,ds.$$\n\nThe kernel is absolutely integrable on $[0,\\infty)$. If $\\mu$ is the smallest eigenvalue of $\\sigma$, then\n\n$$|R_{AB}(\\tau)|\\leq\\frac{2\\|B\\|_\\infty}{\\hbar\\sqrt{\\mu}}\\,e^{-\\gamma\\tau}\\|A_0\\|_\\sigma.$$\n\nThis is an open-system model response with a fixed dissipator. It does not assert that the driven stationary state is the Gibbs state of $H_{\\rm s}-\\epsilon hB$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-matrix-exponential-response",
+          "source_section": "Statement",
+          "quote": "Let $M(s)$ be a continuously differentiable path of Hermitian $D\\times D$ matrices, $D\\geq1$. Then\n$\n\\frac{d}{ds}e^{M(s)}=\\int_0^1 e^{(1-u)M(s)}M'(s)e^{uM(s)}\\,du,\\qquad\n\\frac{d}{ds}\\log\\operatorname{Tr}e^{M(s)}=\\operatorname{Tr}(\\rho_sM'(s)),\n$\nwhere $\\rho_s=e^{M(s)}/\\operatorname{Tr}e^{M(s)}$. For real controls $M(\\theta)=M_0+\\sum_a\\theta_aX_a$ with Hermitian $X_a$,\n$\n\\partial_a\\log Z=\\operatorname{Tr}(\\rho X_a),\\qquad\n\\partial_a\\partial_b\\log Z=\\int_0^1\\operatorname{Tr}(\\rho^{1-u}\\delta X_a\\rho^u\\delta X_b)\\,du,\n$\nwhere $Z=\\operatorname{Tr}e^M$, $\\delta X_a=X_a-\\operatorname{Tr}(\\rho X_a)I$. The diagonal quadratic form of this Hessian is nonnegative. It equals the ordinary variance when $X_a$ commutes with $\\rho$, and in general is bounded above by that variance. For $H(h)=H_0-hB$, $\\beta>0$, and Hermitian $B$, the static susceptibility satisfies $\\partial_h\\operatorname{Tr}(\\rho_hB)=\\beta\\,\\operatorname{Cov}_{KM,\\rho_h}(B,B)\\geq0$. No infinite-dimensional or dynamical response is asserted.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qsm-dt-gns-detailed-balance",
+          "source_section": "Definition",
+          "quote": "Let $d\\geq1$ be finite, let $\\mathcal H=\\mathbb C^d$ with its standard inner product, and write $M_d(\\mathbb C)$ for its matrices. Let $H_{\\rm s}=H_{\\rm s}^*\\in M_d(\\mathbb C)$ be a Hamiltonian in joules, let $\\hbar>0$ have units joule-seconds, and let $m\\geq0$ be an integer with $L_1,\\ldots,L_m\\in M_d(\\mathbb C)$ a finite family of jump matrices in seconds$^{-1/2}$. Matrices on which the generators act are dimensionless. The Schr\u00f6dinger generator $\\mathcal L$ is the finite GKSL generator of [[def-qsm-dt-gksl-definition]].\n\nIts trace-dual observable generator is\n\n$$G(A)=\\frac{i}{\\hbar}[H_{\\rm s},A]+D(A),\\qquad D(A)=\\sum_{j=1}^{m}\\left(L_j^*AL_j-\\frac12\\{L_j^*L_j,A\\}\\right).$$\n\nHere $[U,V]=UV-VU$, $\\{U,V\\}=UV+VU$, and $A^*$ is the conjugate transpose. The units of $G$, $D$, and $\\mathcal L$ are seconds$^{-1}$. The generator preserves the identity, $D(I)=0$, so $e^{tD}(I)=I$.\n\nLet $\\sigma=\\sigma^*>0$ be a dimensionless density matrix on $\\mathcal H$, so $\\operatorname{Tr}\\sigma=1$. Define\n\n$$\\langle A,B\\rangle_\\sigma:=\\operatorname{Tr}(\\sigma B^*A),\\qquad \\|A\\|_\\sigma:=\\langle A,A\\rangle_\\sigma^{1/2}.$$\n\nThis inner product is linear in its first variable. It is positive definite because $\\sigma>0$. The data satisfy **the specified finite GNS detailed-balance convention** when $[H_{\\rm s},\\sigma]=0$ and $D$ is self-adjoint for this inner product, meaning $\\langle D(A),B\\rangle_\\sigma=\\langle A,D(B)\\rangle_\\sigma$ for all $A,B\\in M_d(\\mathbb C)$. The Hamiltonian part of $G$ is kept separate and is anti-self-adjoint. Quantum detailed-balance conventions vary; in particular, this definition does not identify GNS symmetry with KMS or Kubo\u2013Mori symmetry.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The two-state population equation is $\\dot z=-\\gamma_1(z-z_{\\rm eq})$, while the off-diagonal equation is $\\dot\\rho_{01}=-(\\gamma_2+i\\omega)\\rho_{01}$, by direct multiplication of the two jump matrices and the dephaser. The dual observables satisfy $G(X)=-\\gamma_2X-\\omega Y$ and $G(Y)=\\omega X-\\gamma_2Y$, so $e^{tG}X=e^{-\\gamma_2t}(X\\cos\\omega t-Y\\sin\\omega t)$; also $e^{tG}(Z-z_{\\rm eq}I)=e^{-\\gamma_1t}(Z-z_{\\rm eq}I)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Applying [F3] with $A=B=X$, the commutator identity $[Y,X]=-2iZ$ and $z_{\\rm eq}=-\\tanh(\\beta\\Delta/2)$ give $R_{XX}(t)=2\\tanh(\\beta\\Delta/2)e^{-\\gamma_2t}\\sin(\\omega t)/\\hbar$. Since $\\int_0^\\infty e^{-\\gamma_2t}\\sin(\\omega t)\\,dt=\\omega/(\\gamma_2^2+\\omega^2)$, the displayed $\\chi_{\\rm open}(0)$ follows.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $q\\in\\mathbb R$, $H(q)=\\Delta Z/2-qX$ satisfies $H(q)^2=((\\Delta/2)^2+q^2)I$. Put $\\lambda(q)=\\sqrt{(\\Delta/2)^2+q^2}$. The finite spectral calculus gives $e^{-\\beta H(q)}=\\cosh(\\beta\\lambda(q))I-\\frac{\\sinh(\\beta\\lambda(q))}{\\lambda(q)}H(q)$, hence the partition function $\\mathcal Z(q):=\\operatorname{Tr}(e^{-\\beta H(q)})=2\\cosh(\\beta\\lambda(q))$ and $\\operatorname{Tr}(e^{-\\beta H(q)}X)/\\mathcal Z(q)=q\\,\\tanh(\\beta\\lambda(q))/\\lambda(q)$. Differentiating at $q=0$ gives $2\\tanh(\\beta\\Delta/2)/\\Delta=2\\tanh(\\beta\\Delta/2)/(\\hbar\\omega)$; [F4] identifies this derivative as the static Gibbs susceptibility.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using $X^2=Y^2=Z^2=I$, $YX=-iZ$, $\\operatorname{Tr}(\\sigma Z)=z_{\\rm eq}$, and $\\operatorname{Tr}(\\sigma X)=\\operatorname{Tr}(\\sigma Y)=0$ in step 1.1 gives the stated $C_{XX}$ and $C_{ZZ}$. Integrating their real parts yields $\\Gamma_X=\\int_0^\\infty e^{-\\gamma_2t}\\cos(\\omega t)\\,dt=\\gamma_2/(\\gamma_2^2+\\omega^2)$ and $\\Gamma_Z=(1-z_{\\rm eq}^2)\\int_0^\\infty e^{-\\gamma_1t}dt=(1-z_{\\rm eq}^2)/\\gamma_1$, consistent with [F2].",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two susceptibilities differ because their denominators are respectively $\\gamma_2^2+\\omega^2$ and $\\omega^2$, with $\\gamma_2>0$. The dynamic formula used [F3]'s fixed-dissipator perturbation, whereas the static formula differentiates a Gibbs state whose Hamiltonian changes with $q$. Therefore no equilibrium identity equating them is asserted for this model.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no empty case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0 both displayed correlations equal their equal-time values; step 1.2 verifies them from X\u00b2=Z\u00b2=I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example has exactly two levels, so the one-dimensional case is not in its scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Delta>0 excludes equal qubit energy levels; gamma_phi=0 remains allowed and leaves gamma_2>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The correlation integrals converge since gamma_1,gamma_2>0; steps 1.2 and 2.1 evaluate the improper integrals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no nonempty choice case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no iff forward case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no iff reverse case or biconditional in this item; its stated hypotheses exclude that case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "thermal qubit",
+          "result": "gamma_1=a+b; gamma_2=(a+b)/2+gamma_phi; z_eq=(b-a)/(a+b); the displayed correlation and response integrals reduce by integrating decaying sine/cosine terms.",
+          "evidence": "items/ex-qsm-dt-thermal-qubit.md, steps 1.1\u20133.1"
+        }
+      ]
+    },
+    "ex-qsm-dt-qubit-record-diffusion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-dt-monitored-transport",
+          "source_section": "Statement",
+          "quote": "Assume the full Axiom of Choice and the connected finite Gibbs jump data of [[thm-qsm-dt-gibbs-jump]]. Use the energy-resolved record path supplied by [[def-qsm-dt-monitored-chain]], initialized with law $\\pi$. Let $v:E\\to\\mathbb R$ be a real velocity observable with units metres per second and $\\pi(v):=\\sum_a\\pi_av_a=0$. Define the record displacement\n\n$$Y_T:=\\int_0^T v_{a(s)}\\,ds,\\qquad C_v(s):=\\langle v,e^{sW}v\\rangle_\\pi,$$\n\nwhere $Wf(a)=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$, $\\langle f,g\\rangle_\\pi=\\sum_a\\pi_a f_ag_a$, and $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$. Then for every $T\\geq0$,\n\n$$\\mathbb E_\\pi[Y_T]=0,\\qquad \\operatorname{Var}_\\pi(Y_T)=2\\int_0^T(T-s)C_v(s)\\,ds.$$\n\nIf $\\gamma_{\\rm cl}>0$ is the reversible spectral gap of $W$ on $\\pi$-centered functions, then $|C_v(s)|\\leq e^{-\\gamma_{\\rm cl}s}\\sum_a\\pi_av_a^2$, and\n\n$$D_{\\rm rec}:=\\lim_{T\\to\\infty}\\frac{\\operatorname{Var}_\\pi(Y_T)}{2T}=\\int_0^\\infty C_v(s)\\,ds=\\langle(-W|_{\\pi^\\perp})^{-1}v,v\\rangle_\\pi\\geq0.$$\n\nThe units of $D_{\\rm rec}$ are square metres per second. This proves a variance coefficient for the selected finite record model; it does not prove a central-limit theorem or a generic quantum transport law.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-dt-gibbs-jump",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq2$, let $E=\\{1,\\ldots,d\\}$, let $E_a\\in\\mathbb R$ be finite energies in joules, and let $\\beta>0$ have units joule$^{-1}$. Define\n\n$$Z_\\beta:=\\sum_{a\\in E}e^{-\\beta E_a},\\qquad \\pi_a:=Z_\\beta^{-1}e^{-\\beta E_a}.$$\n\nFor each $a\\ne b$, let $w_{ab}\\geq0$ be a rate in seconds$^{-1}$ satisfying Gibbs detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$, and assume the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ is connected. On $\\mathcal H=\\mathbb C^d$, fix an orthonormal energy basis $(|a\\rangle)$, set $H_{\\rm s}=\\sum_aE_a|a\\rangle\\langle a|$, and define $L_{ab}=\\sqrt{w_{ab}}|b\\rangle\\langle a|$ for $a\\ne b$. Fix $\\hbar>0$ in joule-seconds. For real functions $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_a\\pi_af_ag_a$, and define the row-generator action on column observables by $(Wf)_a:=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$. Let\n\n$$\\sigma:=\\sum_a\\pi_a|a\\rangle\\langle a|,\\qquad r_a:=\\sum_{b\\ne a}w_{ab}.$$\n\nUse the finite GKSL generator with Hamiltonian $H_{\\rm s}$ and the jump matrices $L_{ab}$. Its observable dissipator $D$ is self-adjoint for the $\\sigma$-GNS inner product of [[def-qsm-dt-gns-detailed-balance]], $H_{\\rm s}$ commutes with $\\sigma$, and $\\ker D=\\mathbb C I$. On diagonal observables, $W$ is self-adjoint on $L^2(E,\\pi)$ with constants as its kernel; for $d\\geq2$ its restriction to $\\pi^\\perp:=\\{f:E\\to\\mathbb R:\\sum_a\\pi_af_a=0\\}$ has a positive spectral gap $\\gamma_{\\rm cl}$. Thus the generator satisfies the specified finite GNS detailed-balance convention and the generic gap conclusion of [[thm-qsm-dt-detailed-balance-gap]] applies. This claim does not assert a microscopic bath limit.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The Gibbs weights are $\\pi_0=b/(a+b)$ and $\\pi_1=a/(a+b)$: their ratio is $b/a=e^{-\\beta\\Delta}=e^{-\\beta(E_0-E_1)}$, and they sum to one. Thus $\\pi_0a=\\pi_1b$ and $\\pi(v)=0$. The two-state generator has centered eigenvector $Z-z_{\\rm eq}I$ with eigenvalue $-(a+b)$; therefore $e^{sW}v=e^{-(a+b)s}v$ and $\\langle v,v\\rangle_\\pi=v_0^2(1-z_{\\rm eq}^2)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting this covariance into [F1] gives\n$$\n\\operatorname{Var}(Y_T)=2v_0^2(1-z_{\\rm eq}^2)\\int_0^T(T-s)e^{-(a+b)s}\\,ds.\n$$\nEvaluating the integral gives the displayed finite-time formula. Dividing by $2T$ and letting $T\\to\\infty$ gives $v_0^2(1-z_{\\rm eq}^2)/(a+b)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no empty case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For v_0=0 the velocity labels, covariance and displacement vanish by step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example explicitly uses a two-state chain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The condition a,b>0 excludes a disconnected or zero-rate chain; equality of rates is permitted and gives z_eq=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At T=0 the variance formula in step 2.1 is zero, and the large-T coefficient is evaluated there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Full AC is explicitly assumed in A1 for the record path."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no iff forward case or biconditional in this item; its stated hypotheses exclude that case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example statement supplies no iff reverse case or biconditional in this item; its stated hypotheses exclude that case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "two-state record",
+          "result": "C_v(s)=v0^2(1-z_eq^2)e^(-(a+b)s); integrating 2(T-s)C_v(s) gives the stated exact variance and limit.",
+          "evidence": "items/ex-qsm-dt-qubit-record-diffusion.md, steps 1.1 and 2.1"
+        }
+      ]
+    }
+  }
+}

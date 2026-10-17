@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `emg-cp01` · order **447** · `einstein-maxwell-models-mathematics` |
 | B page | `emg-cp01-examples` |
 | title | Electrovacuum tensor Cauchy system |
-| requires | `orthonormal-bases-parseval-and-fourier-series`, `relations-functions-and-quotients` |
+| requires | `orthonormal-bases-parseval-and-fourier-series`, `relations-functions-and-quotients`, `emg-mg01`, `gr-gr14-full-high-regularity-symmetric-hyperbolic-proof`, `gr-causal-and-initial-value-boundaries` |
 | design | `research/plan-einstein-maxwell-models-track.md` L236 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.

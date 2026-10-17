@@ -1,0 +1,20 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+const id = 'lem-emg-fixed-smooth-background-harmonic-data';
+const path = 'research/physics-remaining-80-2026-10-17-batch-6.pages.json';
+// Reread the current owning manifest only after the shared-write guard launches us.
+const pages = JSON.parse(readFileSync(path, 'utf8'));
+const item = readFileSync(`items/${id}.md`, 'utf8');
+const deps = item.match(/^deps: \[(.*)\]$/m)[1].split(',').map(x => x.trim());
+const statement = item.split('## Statement\n')[1].split('\n## ')[0].trim();
+const rows = pages.flatMap(page => [...(page.items ?? []), ...(page.examples ?? [])]).filter(row => row.id === id);
+assert.equal(rows.length, 1);
+assert.equal(rows[0].dependency_level, 3);
+rows[0].deps = deps;
+rows[0].dependency_roles = Object.fromEntries(deps.map(dep => [dep, 'mathematical-premise']));
+rows[0].statement = statement;
+writeFileSync(path, JSON.stringify(pages, null, 2) + '\n');
+const after = JSON.parse(readFileSync(path, 'utf8')).flatMap(page => page.items ?? []).find(row => row.id === id);
+assert.deepEqual(after.deps, deps);
+assert.equal(after.statement, statement);
+console.log(JSON.stringify({id, manifest:path, deps:deps.length, statement_synchronized:true}));

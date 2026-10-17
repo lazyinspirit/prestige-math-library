@@ -1,0 +1,694 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17-batch-63",
+  "scope": [
+    "thm-tgr-finite-entropy-exchange-equilibrium",
+    "lem-tgr-charged-liouville-preserves-mass-shell",
+    "lem-tgr-gauge-killing-energy",
+    "thm-tgr-electrochemical-stationarity",
+    "ex-tgr-electric-circulation-obstruction"
+  ],
+  "contracts": {
+    "thm-tgr-finite-entropy-exchange-equilibrium": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Order coordinates as $(E_1,n_1,\\ldots,E_r,n_r)$. The first row of $A$ has $E_i$ coefficient $N_i>0$, while the second row has every $E_i$ coefficient zero and every $n_i$ coefficient one. Hence the two rows are linearly independent and $\\operatorname{rank}A=2$. Therefore $\\dim(\\ker A)^\\perp=2$. The range of $A^\\mathsf T$ is contained in $(\\ker A)^\\perp$ because $A^\\mathsf Ty\\cdot h=y\\cdot Ah=0$ whenever $h\\in\\ker A$; $A^\\mathsf T$ is injective since $A$ has rank two. Its range also has dimension two, so $\\operatorname{range}(A^\\mathsf T)=(\\ker A)^\\perp$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Under the forward hypothesis [A3], $\\nabla S_{\\rm tot}(x^*)$ is orthogonal to $\\ker A$, hence lies in $\\operatorname{range}(A^\\mathsf T)$ by step 1.1. Thus there are unique multipliers $\\lambda,\\nu\\in\\mathbb R$ with, for each $i$,\n$$\\partial_{E_i}S_i(x_i^*)=\\lambda N_i,\\qquad \\partial_{n_i}S_i(x_i^*)=\\lambda q\\Phi_i+\\nu.$$\nSince $\\partial_{E_i}S_i(x_i^*)>0$ and $N_i>0$, $\\lambda>0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "A3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under [A3], set $T_K:=1/\\lambda>0$ and $\\mu_K:=-\\nu/\\lambda$ using the multipliers of step 2.1. The first multiplier equation gives $1/T_i=\\lambda N_i$, so $N_iT_i=T_K$. The second gives $-\\mu_i/T_i=\\lambda q\\Phi_i+\\nu$. Multiplying by $-N_iT_i$ and using $N_iT_i=1/\\lambda$ yields $N_i\\mu_i+q\\Phi_i=-\\nu/\\lambda=\\mu_K$. Conversely, assume [A4] and set $\\lambda:=1/T_K$ and $\\nu:=-\\mu_K/T_K$. Then $\\partial_{E_i}S_i(x_i^*)=1/T_i=N_i/T_K=\\lambda N_i$, and $\\partial_{n_i}S_i(x_i^*)=-\\mu_i/T_i=-N_i\\mu_i/T_K=(q\\Phi_i-\\mu_K)/T_K=\\lambda q\\Phi_i+\\nu$. Thus $\\nabla S_{\\rm tot}(x^*)=A^\\mathsf T(\\lambda,\\nu)$. For every $h\\in\\ker A$, $DS_{\\rm tot}(x^*)[h]=(\\lambda,\\nu)\\cdot Ah=0$; feasibility is [A2], so $x^*$ is stationary. This proves the reverse implication without using the forward stationarity hypothesis.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "A4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For the concavity conclusion assume [A3]. For any other feasible $y\\in U$, $A(y-x^*)=0$. By step 2.1, $\\nabla S_{\\rm tot}(x^*)=A^\\mathsf T(\\lambda,\\nu)$, hence $DS_{\\rm tot}(x^*)[y-x^*]=0$. Put $\\varphi(t):=S_{\\rm tot}(x^*+t(y-x^*))$ for $0\\le t\\le1$. For $0<s<t\\le1$, concavity gives $\\varphi(s)\\ge(1-s/t)\\varphi(0)+(s/t)\\varphi(t)$, so $(\\varphi(s)-\\varphi(0))/s\\ge(\\varphi(t)-\\varphi(0))/t$. Letting $s\\downarrow0$ and using differentiability shows $\\varphi(t)-\\varphi(0)\\le t\\varphi'(0)=0$, so $S_{\\rm tot}(y)\\le S_{\\rm tot}(x^*)$. If every $S_i$ is strictly concave and $y\\ne x^*$, at least one cell coordinate differs; its entropy is strictly concave along the segment, while every other cell entropy is concave, so their sum $\\varphi$ is strictly concave. If $y$ were also a maximizer, strict concavity would give $\\varphi(t)>(1-t)\\varphi(0)+t\\varphi(1)=\\varphi(0)$ for $0<t<1$, contradicting the tangent bound. Thus no distinct feasible $y$ is also a maximizer. This proves the conditional maximum and uniqueness claims without asserting that any stationary point exists.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a finite integer r\u22651, so an empty cell family is outside the theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles q=0 without division by q, giving N_iT_i=T_K and N_i\u03bc_i=\u03bc_K."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 with r=1 gives A=[[N_1,q\u03a6_1],[0,1]], determinant N_1>0, so rank two and ker A={0}; steps 2.1\u20133.1 still define the two multipliers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves row independence for all q and \u03a6_i because N_i>0 and the second row has zero energy coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 uses y\u2208U and convexity so the closed segment [x*,y] lies in U; no boundary point outside U or boundary attainment is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite index set {1,\u2026,r} and every cell are supplied data; steps 1.1\u20134.1 make no choice from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 derive the redshift constants from stationarity and the positive energy derivatives."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 substitutes the two redshift equations into the multiplier identities and proves stationarity."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-cell-rank",
+          "step": "1.1",
+          "method": "exact finite matrix calculation",
+          "calculation": "For r=1, A=[[N_1,q\u03a6_1],[0,1]] and det(A)=N_1.",
+          "result": "Since N_1>0, rank(A)=2 and ker(A)={0}."
+        },
+        {
+          "name": "neutral-charge-limit",
+          "step": "3.1",
+          "method": "exact substitution",
+          "calculation": "Set q=0 in \u2212\u03bc_i/T_i=\u03bbq\u03a6_i+\u03bd and in N_i\u03bc_i+q\u03a6_i=\u03bc_K.",
+          "result": "The equations reduce to \u2212\u03bc_i/T_i=\u03bd and N_i\u03bc_i=\u03bc_K; no division by q occurs."
+        }
+      ]
+    },
+    "lem-tgr-charged-liouville-preserves-mass-shell": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nFor a smooth real one-form $A$ on $O$, define the electromagnetic two-form by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nHere $A_a$ has units tesla metres and $F_{ab}$ has units tesla. A global gauge\ncompensator is a smooth real function $\\Lambda_\\xi$ on $O$ satisfying\n$$(\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b =\\partial_a\\Lambda_\\xi.$$\nThe units of $\\Lambda_\\xi$ are tesla metres. Define contraction by\n$(\\iota_\\xi F)_a:=\\xi^bF_{ba}$ and set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, the corresponding compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "In ZF, let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be smooth, and let $a\\in U$. If $Df(a)$ is invertible, then there are open neighbourhoods $a\\in V\\subseteq U$ and $f(a)\\in W$ such that $f|_V:V\\to W$ is a diffeomorphism. Writing $g=(f|_V)^{-1}$,\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\nNo choice axiom is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $(x_0,P_0)$ with $C(x_0,P_0)=0$. Since $M>0$, $P_0\\ne0$; by\nnondegeneracy of $g_{x_0}$ there is a tangent vector $V$ with\n$g_{x_0}(P_0,V)\\ne0$. In any bundle chart around $(x_0,P_0)$, choose a fiber\ncoordinate direction $P^j$ on which this nonzero covector has a nonzero\ncomponent. The map from the eight chart coordinates to the four base\ncoordinates, $C$, and the other three fiber coordinates has Jacobian\ndeterminant equal, up to sign, to $\\partial C/\\partial P^j=2g_{jb}P^b\\ne0$.\nBy [F2] it is a local diffeomorphism, so $C=0$ is locally a smooth\ncodimension-one coordinate slice. The future timelike sheet is an open\ncomponent of this level set. The supplied tangent-bundle structure carries\n[A2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The differential of $C$ along $\\mathcal L_{F,q}$ is computed using the\ncovariant horizontal derivative and $\\nabla g=0$:\n$$dC(\\mathcal L_{F,q})=2g(P,cqF^\\sharp(P))=2cqP^aF_{ab}P^b=0.$$\nThe last contraction vanishes because $P^aP^b$ is symmetric in $a,b$ while\n$F_{ab}$ is antisymmetric. Thus $\\mathcal L_{F,q}$ lies in the kernel of\n$dC$, which is the tangent space to the regular level set from step 1.1; the\nfuture sheet is open in that set, so the vector field is tangent there as\nwell. Its restriction is therefore well defined.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement uses a nonempty domain O and M>0; at every x\u2208O a Lorentz frame has future vectors of norm \u2212M\u00b2, so the shell fiber is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid when q=0 or F=0; the electromagnetic contribution vanishes and dC of the geodesic transport field is still zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is pointwise at an arbitrary shell point and needs only one nonzero fiber coordinate derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses M>0 to exclude P=0 and nondegeneracy of g to get d_PC\u22600; the massless M=0 degenerate level is outside the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The result concerns a vector field tangent to a shell, not a trajectory with endpoint conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 makes one pointwise existential choice of a vector V and a nonzero coordinate direction; it does not select from a countable family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct regularity and tangency implication, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a direct regularity and tangency implication, not an iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "antisymmetric-force-contraction",
+          "step": "2.1",
+          "method": "exact finite component cancellation",
+          "calculation": "P^aF_abP^b=\u03a3_{a<b}(P^aF_abP^b+P^bF_baP^a).",
+          "result": "Each paired term cancels because F_ba=\u2212F_ab, so dC(L_F,q)=0."
+        }
+      ]
+    },
+    "lem-tgr-gauge-killing-energy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nFor a smooth real one-form $A$ on $O$, define the electromagnetic two-form by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nHere $A_a$ has units tesla metres and $F_{ab}$ has units tesla. A global gauge\ncompensator is a smooth real function $\\Lambda_\\xi$ on $O$ satisfying\n$$(\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b =\\partial_a\\Lambda_\\xi.$$\nThe units of $\\Lambda_\\xi$ are tesla metres. Define contraction by\n$(\\iota_\\xi F)_a:=\\xi^bF_{ba}$ and set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, the corresponding compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.\n\nConsequently, if $f, g : I \\to \\mathbb{R}$ are both continuous on $I$ and both\ndifferentiable at every interior point of $I$, with $f'(x) = g'(x)$ at every\ninterior point $x$, then there is a real $k$ with\n\n$$f(x) \\;=\\; g(x) + k \\qquad \\text{for every } x \\in I .$$\n\n**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.\n\n**The hypothesis is imposed only at interior points.** At an endpoint of $I$\nnothing is asked at all: $f$ need not be differentiable there, and the proof\nnever evaluates a difference quotient at an endpoint, since it applies the mean\nvalue theorem on a segment $[u,v] \\subseteq I$ and uses the derivative only at\npoints of $(u,v)$, all of which are interior to $I$. What is *not* meant is that\nthe derivative at an endpoint is free to be nonzero: once $f$ is known to be\nconstant its difference quotient at an endpoint is constantly $0$, so wherever\n$f'$ exists at an endpoint it is $0$ too. That is a consequence of the theorem,\nnot a hypothesis of it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In any coordinate chart, $(\\iota_\\xi F)_a=\\xi^b(\\partial_bA_a-\\partial_aA_b)$ and $d(\\iota_\\xi A)_a=\\partial_a(\\xi^bA_b)$. Adding these identities gives $(\\iota_\\xi F)_a+d(\\iota_\\xi A)_a=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b=(\\mathcal L_\\xi A)_a$. Using $\\mathcal L_\\xi A=d\\Lambda_\\xi$ and [F1], this yields $\\iota_\\xi F=d\\Lambda_\\xi-d(\\iota_\\xi A)=-d\\Psi_\\xi$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Metric compatibility and $P=Mw$ yield\n$$\\frac{d}{ds_m}g(P,\\xi) =cq\\,g(F^\\sharp(w),\\xi)+M w^a w^b\\nabla_b\\xi_a =cq\\,(\\iota_\\xi F)(w) =-cq\\,w(\\Psi_\\xi).$$\nThe middle Killing term vanishes because $w^aw^b$ is symmetric and\n$\\nabla_{(a}\\xi_{b)}=0$; the force contraction has the displayed sign since\n$g(F^\\sharp(w),\\xi)=\\xi^cF_{cb}w^b$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $d\\Psi_\\xi/ds_m=w(\\Psi_\\xi)$ and $q\\Phi_\\xi=-cq\\Psi_\\xi$,\n$$\\frac{dH_\\xi}{ds_m} =-\\frac{d}{ds_m}g(P,\\xi)-cq\\,w(\\Psi_\\xi) =0.$$\nThe curve is $C^2$ and the fields are smooth, so $H_\\xi$ is $C^1$ and hence\ncontinuous on $J$. Its derivative is zero by step 2.1; since the open interval\n$J$ is order-convex, [F3] makes $H_\\xi$ constant there.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Under $A'=A+d\\chi$, $dA'=F$ because the coordinate mixed partials of the smooth scalar $\\chi$ commute. Also $(\\mathcal L_\\xi d\\chi)_a=\\xi^b\\partial_b\\partial_a\\chi+(\\partial_a\\xi^b)\\partial_b\\chi=\\partial_a(\\xi^b\\partial_b\\chi)$, so $\\Lambda'_\\xi:=\\Lambda_\\xi+\\xi(\\chi)$ satisfies $\\mathcal L_\\xi A'=d\\Lambda'_\\xi$. Since $(\\iota_\\xi d\\chi)=\\xi(\\chi)$, $\\Psi'_\\xi=\\Psi_\\xi$ and $H'_\\xi=H_\\xi$. Replacing $\\Lambda_\\xi$ by $\\Lambda_\\xi+C_0/c$ leaves $d\\Lambda_\\xi$ fixed and sends $\\Phi_\\xi$ to $\\Phi_\\xi+C_0$, so $H_\\xi$ changes by $qC_0$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is conditional on a trajectory interval; with no such curve there is no conservation assertion to check."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives H\u03be=\u2212g(P,\u03be) when q=0, and step 2.1 makes its derivative zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement concerns one charged trajectory and holds for every real q; no multi-species sum is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 includes q=0 and constant potential-reference shifts; the gauge-invariance calculation also permits d\u03c7=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The curve is defined on an open interval J; steps 2.1\u20133.1 prove constancy on J and make no extension claim to endpoints outside J."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The trajectory and fields are supplied; the proof makes no familywise selection, and step 2.1 only differentiates the given curve."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts conservation and gauge behavior, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement asserts conservation and gauge behavior, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "neutral-energy-limit",
+          "step": "3.1",
+          "method": "exact substitution",
+          "calculation": "Set q=0 in H\u03be=\u2212g(P,\u03be)\u2212cq\u03a8\u03be and its derivative.",
+          "result": "H\u03be=\u2212g(P,\u03be) and dH\u03be/ds_m=0."
+        },
+        {
+          "name": "gauge-compensator-cancellation",
+          "step": "4.1",
+          "method": "exact differential identity",
+          "calculation": "A\u2032=A+d\u03c7 and \u039b\u2032\u03be=\u039b\u03be+\u03be(\u03c7) give \u03a8\u2032\u03be=\u03be\u231fA+\u03be\u231fd\u03c7\u2212\u039b\u03be\u2212\u03be(\u03c7)=\u03a8\u03be.",
+          "result": "H\u2032\u03be=H\u03be for every smooth single-valued \u03c7."
+        }
+      ]
+    },
+    "thm-tgr-electrochemical-stationarity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nFor a smooth real one-form $A$ on $O$, define the electromagnetic two-form by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nHere $A_a$ has units tesla metres and $F_{ab}$ has units tesla. A global gauge\ncompensator is a smooth real function $\\Lambda_\\xi$ on $O$ satisfying\n$$(\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b =\\partial_a\\Lambda_\\xi.$$\nThe units of $\\Lambda_\\xi$ are tesla metres. Define contraction by\n$(\\iota_\\xi F)_a:=\\xi^bF_{ba}$ and set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, the corresponding compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-charged-liouville-preserves-mass-shell",
+          "source_section": "Statement",
+          "quote": "For the smooth Lorentzian data, $m>0$, $q\\in\\mathbb R$, $F=dA$, and charged\ntransport vector field defined in [[def-tgr-charged-liouville-data]], the set\n$\\mathcal P_M^+(O)$ is a smooth hypersurface of $TO$, and $\\mathcal L_{F,q}$\nis tangent to it. Hence its restriction to the future massive shell is a\nwell-defined smooth vector field. No mass-shell measure or particle\nnormalization is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tgr-gauge-killing-energy",
+          "source_section": "Statement",
+          "quote": "Use the Lorentzian geometry, units, charge sign, potential $A$, field $F=dA$,\ncompensator $\\Lambda_\\xi$, and $C^2$ charged trajectory $x(s_m)$ of\n[[def-tgr-charged-liouville-data]]. Assume the global potential symmetry\n$\\mathcal L_\\xi A=d\\Lambda_\\xi$. Define\n$$H_\\xi:=-g(P,\\xi)+q\\Phi_\\xi=-g(P,\\xi)-cq\\Psi_\\xi.$$\nThen $\\iota_\\xi F=-d\\Psi_\\xi$, and $H_\\xi$ is constant along every interval\non which the trajectory obeys the stated Lorentz equation. It is invariant under\n$A\\mapsto A+d\\chi$, $\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. Replacing the\npotential reference by $\\Phi_\\xi+C_0$ changes $H_\\xi$ by $qC_0$.\n\nThis is a conditional mathematical statement about curves satisfying the\ndisplayed equation. It asserts neither existence of such curves for arbitrary\ninitial data nor that the model describes nature.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tgr-killing-thermal-normalization",
+          "source_section": "Statement",
+          "quote": "Let $O$ and the smooth fields $(g,\\nabla,\\xi,T,u,N_\\xi,\\beta)$ be as in\n[[def-tgr-stationary-thermal-carriers]]. Then\n$$\\beta\\text{ is Killing}\\quad\\Longleftrightarrow\\quad N_\\xi T=T_K\\text{ for a constant }T_K>0.$$\nWhen this holds, $\\beta=\\xi/(k_BT_K)$, and the Killing congruence has\n$$\\xi(N_\\xi)=0,\\qquad a=\\nabla\\log N_\\xi,\\qquad \\theta=0,\\qquad \\sigma_{ab}=0.$$\nIf $\\xi$ is replaced by $b\\xi$ with a constant $b>0$, then\n$N_\\xi$ and $T_K$ scale by $b$, while $u$ and $\\beta$ are unchanged.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tgr-mass-shell-polynomial-rigidity",
+          "source_section": "Statement",
+          "quote": "Let $(V,g,C^+)$ be a four-dimensional time-oriented Lorentz vector space of\nsignature $(-,+,+,+)$, with future cone $C^+$ as in\n[[def-time-orientation-and-future-causal-sets]]. Let $M>0$ and let $A$ be a\nsymmetric bilinear form on $V$ and $b$ a covector. If\n$$A(P,P)+b(P)=0\\qquad\\text{for every }P\\in C^+\\text{ with }g(P,P)=-M^2,$$\nthen $A=0$ and $b=0$. If instead this identity holds for every nonzero future\nnull vector $P\\in\\overline{C^+}$, then $b=0$ and $A=\\lambda g$ for some\n$\\lambda\\in\\mathbb R$. The second clause is the exact massless conformal\nexception.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-zero-total-derivative-on-a-convex-open-set-is-constant",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open. If $f:U\\to\\mathbb R^n$ is totally differentiable at every point and $Df(z)=0$ for every $z\\in U$, then $f$ is constant on $U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $f>0$, $\\mathcal L_{F,q}f=0$ is equivalent to\n$\\mathcal L_{F,q}(\\zeta+g(\\beta,P))=0$. In a chart, the connection term in the\nvertical part of $\\mathcal L_{F,q}$ combines with\n$P^a\\partial_a\\beta_b$ to give $P^aP^b\\nabla_a\\beta_b$; its electromagnetic\npart gives $cq\\beta^aF_{ab}P^b$. Thus on the future shell\n$$\\frac{\\mathcal L_{F,q}f}{f} =P^aP^b\\nabla_{(a}\\beta_{b)} +P^b\\bigl(\\nabla_b\\zeta+cq\\beta^aF_{ab}\\bigr).$$\nThe stationarity equation sets this quadratic-plus-linear expression to zero\nfor every future massive shell vector.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A1",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\mathcal L_{F,q}f=0$, apply [F5] pointwise to\n$A_{ab}:=\\nabla_{(a}\\beta_{b)}$ and\n$b_b:=\\nabla_b\\zeta+cq\\beta^aF_{ab}$. It gives\n$\\nabla_{(a}\\beta_{b)}=0$ and\n$d\\zeta=-cq\\,\\iota_\\beta F$. Conversely these equations make both terms in\nthe expression of step 1.1 vanish for every shell vector, so\n$\\mathcal L_{F,q}f=0$. This proves the first equivalence using the exact massive-shell clause of [F5].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Now impose the additional global condition [A2]. In the stationary setting\n$\\beta=u/(k_BT)$ is collinear with $\\xi$.\nWhen the first condition holds, the thermal-normalization interface [F4] gives a\nconstant $T_K>0$ with\n$NT=T_K$ and $\\beta=\\xi/(k_BT_K)$. By [F3],\n$\\iota_\\xi F=-d\\Psi_\\xi$ and $\\Phi_\\xi=-c\\Psi_\\xi$, hence\n$\\iota_\\xi F=d\\Phi_\\xi/c$. Substitution into the second condition gives\n$$d\\zeta=-cq\\,\\iota_\\beta F =-\\frac{cq}{k_BT_K}\\,\\iota_\\xi F =-\\frac{q}{k_BT_K}\\,d\\Phi_\\xi.$$\nTherefore $d(\\zeta+q\\Phi_\\xi/(k_BT_K))=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Conversely, under [A2], suppose the three displayed redshift equations\nhold. Then\n$\\beta=\\xi/(k_BT_K)$ is Killing since $T_K$ is constant and $\\xi$ is Killing.\nAlso $\\zeta+q\\Phi_\\xi/(k_BT_K)=\\mu_K/(k_BT_K)$ is constant, so\n$d\\zeta=-q\\,d\\Phi_\\xi/(k_BT_K)=-cq\\,\\iota_\\beta F$ by [F3]. Step 2.1 then\ngives $\\mathcal L_{F,q}f=0$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Around every point choose a chart whose image contains a convex open ball.\nThe chain rule and\n$d(\\zeta+q\\Phi_\\xi/(k_BT_K))=0$ give zero total derivative for the coordinate\nrepresentative on that ball, so [F6] makes it\nconstant there. It is therefore locally constant on $O$. The level set of\nthis function through any chosen point is nonempty and open, and its\ncomplement is also open because the function is locally constant. Connectedness\nof $O$ forces that level set to be all of $O$. Write its constant value as\n$\\mu_K/(k_BT_K)$. Multiplying\n$\\zeta+q\\Phi_\\xi/(k_BT_K)=\\mu_K/(k_BT_K)$ by $k_BT_K=k_BNT$ yields\n$N\\mu+q\\Phi_\\xi=\\mu_K$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Finally [F3] gives $H_\\xi=-g(P,\\xi)+q\\Phi_\\xi$. Since\n$\\xi=Nu$ and $E_{\\rm loc}=-g(P,u)$, $-g(P,\\xi)=NE_{\\rm loc}$. Using\n$NT=T_K$ and $N\\mu+q\\Phi_\\xi=\\mu_K$,\n$$-\\frac{H_\\xi-\\mu_K}{k_BT_K} =-\\frac{NE_{\\rm loc}+q\\Phi_\\xi-\\mu_K}{k_BNT} =-\\frac{E_{\\rm loc}-\\mu}{k_BT} =\\zeta+g(\\beta,P).$$\nThis is an algebraic equality of dimensionless exponents; it asserts no\nstatistical preparation or normalization.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F3",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a connected stationary domain with the supplied geometric fields; the empty-domain case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 remain valid for q=0 and reduce the local criterion to \u03b2 Killing and d\u03b6=0; steps 2.1\u20135.1 give N\u03bc=\u03bc_K."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem is for one species of fixed mass m and charge q; steps 1.1\u20135.1 require no particle-count family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof requires M=mc\u00b2>0 for the massive-shell rigidity interface [F5]; massless shells are explicitly outside the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20134.1 integrate the closed differential equation locally and use connectedness of O; no boundary regularity or boundary value is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The smooth geometric and tangent-bundle carriers are supplied under the inherited AC\u03c9 premise [F7]; steps 1.1\u20135.1 do not make additional familywise selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 prove the forward implication from whole-shell Liouville stationarity, conditionally on the current draft [F5] interface; steps 3.1\u20134.1 derive the global redshift constants."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 3.2\u20135.1 recover Liouville stationarity and match the local and Killing-energy exponents from the global redshift equations."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "neutral-electrochemical-limit",
+          "step": "3.1",
+          "method": "exact substitution",
+          "calculation": "Set q=0 in d\u03b6=\u2212cq i_\u03b2F and N\u03bc+q\u03a6\u03be=\u03bc_K.",
+          "result": "d\u03b6=0 and N\u03bc=\u03bc_K, conditionally on the stated normalization interface."
+        }
+      ]
+    },
+    "ex-tgr-electric-circulation-obstruction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-charged-liouville-data",
+          "source_section": "Definition",
+          "quote": "Use SI dimensions and the signature $(-,+,+,+)$. Take the geometric data of\n[[def-tgr-stationary-thermal-carriers]]: $O$ is a nonempty connected open domain in a\nsmooth oriented, time-oriented Lorentzian four-manifold $(M,g)$, $\\nabla$ is the\nLevi\u2013Civita connection, and $\\xi$ is a smooth future-directed timelike Killing\nfield with dimensionless components in physical length coordinates $x^0=ct$\nand $x^i$ measured in metres. Put $N:=\\sqrt{-g(\\xi,\\xi)}>0$ and\n$u:=\\xi/N$, so $g(u,u)=-1$. Its smooth\ntangent-bundle data carry the supplier's explicit foundational assumption\n[[def-countable-choice]] ($\\mathrm{AC}_\\omega$); no stronger choice principle\nis added here.\n\nFor a smooth real one-form $A$ on $O$, define the electromagnetic two-form by\n$$F_{ab}:=(dA)_{ab}:=\\partial_aA_b-\\partial_bA_a.$$\nHere $A_a$ has units tesla metres and $F_{ab}$ has units tesla. A global gauge\ncompensator is a smooth real function $\\Lambda_\\xi$ on $O$ satisfying\n$$(\\mathcal L_\\xi A)_a:=\\xi^b\\partial_bA_a+A_b\\partial_a\\xi^b =\\partial_a\\Lambda_\\xi.$$\nThe units of $\\Lambda_\\xi$ are tesla metres. Define contraction by\n$(\\iota_\\xi F)_a:=\\xi^bF_{ba}$ and set\n$$\\Psi_\\xi:=\\xi^aA_a-\\Lambda_\\xi,\\qquad \\Phi_\\xi:=-c\\Psi_\\xi.$$\nThus $\\Psi_\\xi$ has units tesla metres and $\\Phi_\\xi$ has units volts.\n\nLet $c>0$ be the speed of light, let $m>0$ be a particle rest mass in\nkilograms, let $q\\in\\mathbb R$ be its charge in coulombs, and put\n$M:=mc^2>0$ joules. A charged massive Lorentz trajectory is a $C^2$ curve\n$x:J\\to O$, where $J$ is an open real interval, parametrized by physical\nlength $s_m=c\\tau$ in metres, with future unit tangent\n$w:=dx/ds_m$, $g(w,w)=-1$, energy four-vector $P:=Mw$, and equation\n$$\\nabla_wP^a=cqF^a{}_bw^b,\\qquad F^a{}_b:=g^{ac}F_{cb}.$$\nIn particular $g(P,P)=-M^2$ and $P$ is future directed. This is a conditional\ndefinition of curves satisfying the equation; it makes no existence claim.\n\nThe future massive shell for this definition is the subset\n$$\\mathcal P_M^+(O):=\\{(x,P)\\in TO:g_x(P,P)=-M^2,\\ P\\text{ future directed}\\}.$$\nOn the full tangent bundle $TO$, define charged transport as the vector field\nwhose integral curves, with parameter $\\lambda=s_m/M$, satisfy\n$$\\frac{dx^a}{d\\lambda}=P^a,\\qquad \\nabla_{dx/d\\lambda}P^a=cqF^a{}_bP^b.$$\nIn a smooth chart its expression is\n$$\\mathcal L_{F,q}:=P^a\\partial_{x^a}+\\left(-\\Gamma^a{}_{bc}P^bP^c+cqF^a{}_bP^b\\right)\\partial_{P^a}.$$\nThe restriction of this field to $\\mathcal P_M^+(O)$ is justified by\n[[lem-tgr-charged-liouville-preserves-mass-shell]]. For any smooth real scalar\n$\\zeta$ and smooth vector field $\\beta$ with components in inverse joules,\ndefine the dimensionless charged exponential ansatz on the shell by\n$$f(x,P):=\\exp\\!\\left(\\zeta(x)+g_x(\\beta(x),P)\\right),\\qquad \\beta_b:=g_{bc}\\beta^c.$$\nThe equation $\\mathcal L_{F,q}f=0$ means that the derivative of this function\nalong the restricted charged transport vector field vanishes.\n\nUnder a smooth gauge change $A\\mapsto A+d\\chi$, with $\\chi$ in tesla square\nmetres, the corresponding compensator changes by\n$\\Lambda_\\xi\\mapsto\\Lambda_\\xi+\\xi(\\chi)$. These definitions fix the sign\nconvention for $F$, the Lorentz force, and the potential terms used on this\npage.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tgr-electrochemical-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $O$ be a connected domain with the stationary Lorentzian data, potential\n$A$, field $F=dA$, Killing field $\\xi$, lapse $N=\\sqrt{-g(\\xi,\\xi)}$, future\nunit stationary observer $u=\\xi/N$, and charged transport on the future mass\nshell from [[def-tgr-charged-liouville-data]]. Let $m>0$, $q\\in\\mathbb R$,\n$\\beta:=u/(k_BT)$ for a smooth proper-temperature scalar $T:O\\to(0,\\infty)$,\nand $\\zeta:=\\mu/(k_BT)$ for a smooth chemical-potential scalar\n$\\mu:O\\to\\mathbb R$. Define $f(x,P)=\\exp(\\zeta+g(\\beta,P))$. Without any global\npotential-symmetry assumption,\n$$\\mathcal L_{F,q}f=0\\quad\\Longleftrightarrow\\quad \\beta\\text{ is Killing and }d\\zeta=-cq\\,\\iota_\\beta F.$$\n\nIf, in addition, a global smooth compensator satisfies\n$\\mathcal L_\\xi A=d\\Lambda_\\xi$, define $\\Phi_\\xi=-c(\\iota_\\xi A-\\Lambda_\\xi)$.\nThen the stationarity conditions above are equivalent to the existence of\nconstants $T_K>0$ and $\\mu_K\\in\\mathbb R$ such that\n$$NT=T_K,\\qquad \\beta=\\frac{\\xi}{k_BT_K},\\qquad N\\mu+q\\Phi_\\xi=\\mu_K.$$\nWith $E_{\\rm loc}:=-g(P,u)$ and\n$H_\\xi:=-g(P,\\xi)+q\\Phi_\\xi$, the same exponent then has both forms\n$$\\zeta+g(\\beta,P)=-\\frac{E_{\\rm loc}-\\mu}{k_BT} =-\\frac{H_\\xi-\\mu_K}{k_BT_K}.$$\nHere $N$ is dimensionless, $T,T_K$ are kelvins, $\\mu,\\mu_K,E_{\\rm loc},H_\\xi$\nare joules per particle, $\\Phi_\\xi$ is volts, $q$ is coulombs, and\n$\\beta\\cdot P$ and $\\zeta$ are dimensionless. All claims are mathematical\nconditional deductions from the displayed smooth data; no equilibrium state,\nparticle ensemble, or physical realization is asserted to exist.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The product metric is smooth, has signature $(-,+,+,+)$, and is invariant under translations of $x^0$; hence $\\xi=\\partial_{x^0}$ is a future timelike Killing field and $N=\\sqrt{-g(\\xi,\\xi)}=1$. The form $\\vartheta$ is globally defined, closed, and independent of $x^0$, so $A=E_0x^0\\vartheta$ is a global one-form and differentiation gives $F=dA=E_0dx^0\\wedge\\vartheta$. Since $\\mathcal L_\\xi dx^0=d(\\xi(x^0))=d1=0$ and $\\mathcal L_\\xi\\vartheta=0$, the product rule gives $\\mathcal L_\\xi F=0$; direct contraction gives $\\iota_\\xi F=E_0\\vartheta$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The product rule gives $\\mathcal L_\\xi A=E_0\\xi(x^0)\\vartheta+E_0x^0\\mathcal L_\\xi\\vartheta=E_0\\vartheta$, whose period around the circle is $E_0L\\ne0$. Every exact one-form $d\\Lambda$ for a global smooth real $\\Lambda$ has zero integral around this closed circle, since its line integral is the endpoint difference of $\\Lambda$. Thus no global $\\Lambda_\\xi$ satisfies $\\mathcal L_\\xi A=d\\Lambda_\\xi$. Under a gauge change $A\\mapsto A+d\\chi$, the coordinate formula gives $(\\mathcal L_\\xi d\\chi)_a=\\xi^b\\partial_b\\partial_a\\chi+(\\partial_a\\xi^b)\\partial_b\\chi=\\partial_a(\\xi^b\\partial_b\\chi)$; this is exact and has zero circle period. Hence the nonzero period cannot be removed by a single-valued gauge.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here $\\beta=\\xi/(k_BT_K)$ is Killing. If a global smooth $\\zeta$ made $f$ from [F1] stationary, [F2] would give\n$$d\\zeta=-cq\\,\\iota_\\beta F =-\\frac{cqE_0}{k_BT_K}\\vartheta.$$\nIntegrating around the positive circle gives $0=\\oint d\\zeta=-cqE_0L/(k_BT_K)$, which contradicts $qE_0\\ne0$ and $T_K>0$. Hence no single-valued global $\\zeta$ exists.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes L>0 and the nonempty connected product domain R\u00d7S\u00b9_L\u00d7R\u00b2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example assumes qE\u2080\u22600; if q=0 or E\u2080=0 the period obstruction vanishes, as recorded in Remarks."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats one charged species and one smooth scalar \u03b6; no family of species is involved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2\u20132.1 require the nonzero period E\u2080L and q\u22600; the zero-period degeneracy is excluded explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 integrates an exact differential around a closed loop, whose initial and final point agree; the zero period follows from single-valuedness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The product manifold, circle form and constants are explicit supplied data; step 1.1 makes no familywise choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only the forward implication of the theorem: stationarity would force d\u03b6=\u2212cq i_\u03b2F."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example refutes existence of \u03b6 in the nonzero-period sector and does not assert the reverse direction of the theorem\u2019s iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "closed-loop-period",
+          "step": "1.2",
+          "method": "exact symbolic line integration",
+          "calculation": "\u222e_{S\u00b9_L} L_\u03beA=\u222e_{S\u00b9_L}E\u2080\u03d1=E\u2080L, while \u222ed\u039b=0 for a global single-valued \u039b.",
+          "result": "E\u2080L\u22600 rules out a global compensator; step 1.3 similarly gives \u222ed\u03b6=\u2212cqE\u2080L/(k_BT_K)\u22600, impossible."
+        }
+      ]
+    }
+  }
+}

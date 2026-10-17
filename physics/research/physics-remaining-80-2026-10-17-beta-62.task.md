@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `tgr-et01` · order **621** · `thermodynamics-and-general-relativity-mathematics` |
 | B page | `tgr-et01-examples` |
 | title | Stationary thermal geometric data |
-| requires | `countability-and-uncountability`, `gr-connections-and-free-fall` |
+| requires | `countability-and-uncountability`, `gr-connections-and-free-fall`, `sr-observer-measurements`, `product-measures-and-the-fubini-tonelli-theorems`, `euclidean-surface-measure-divergence-and-green-identities`, `measures-and-their-basic-properties` |
 | design | `research/plan-thermodynamics-and-general-relativity-track.md` L358 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.

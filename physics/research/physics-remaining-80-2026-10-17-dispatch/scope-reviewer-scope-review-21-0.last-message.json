@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "21",
+  "round": 0,
+  "reviewed_items": [
+    "alg-emg-rational-electrovac-verification",
+    "lem-emg-rational-electrovac-verification-correctness",
+    "lem-emg-rational-electrovac-verification-termination-resources",
+    "def-emg-xs-geometric-electrovac",
+    "def-emg-xs-rn-data",
+    "def-emg-xs-kn-data",
+    "lem-emg-xs-rn-tensor-identities",
+    "def-emg-xs-kn-full-sphere-exterior",
+    "lem-emg-xs-kn-rational-calculus",
+    "thm-emg-xs-rn-verification",
+    "thm-emg-xs-kn-verification",
+    "lem-emg-xs-duality",
+    "prop-emg-xs-rn-curvature",
+    "prop-emg-xs-kn-invariants",
+    "prop-emg-xs-kn-dyonic-flux",
+    "ex-emg-xs-zero-rotation",
+    "ex-emg-xs-rn-charge-sign",
+    "cex-emg-xs-scalar-trace"
+  ],
+  "reviewed_pages": [
+    "emg-ms01",
+    "emg-ms01-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch review found defects that can be repaired locally on the assigned page. The inspected supplier claims, including the draft Maxwell sign and finite-chain results, do not require owner escalation.",
+  "findings": [
+    {
+      "id": "alg-emg-rational-electrovac-verification",
+      "type": "prerequisite",
+      "reason": "Definition Instruction 1 and correctness proof steps 1.1 and 2.1 identify formal monomial differentiation with the chart partial derivatives, but the listed derivative-algebra supplier gives sum, product and quotient rules, not the integer-power rule. The published supplier lem-derivative-of-a-power supplies it. Add and cite that prerequisite, or prove the rule locally. The same gap reaches lem-emg-xs-kn-rational-calculus steps 1.2 and 2.1 and thm-emg-xs-kn-verification steps 1.2 and 1.3."
+    },
+    {
+      "id": "lem-emg-xs-kn-rational-calculus",
+      "type": "local",
+      "reason": "Proof steps 2.1 and 3.1 assert the Ricci table and zero Maxwell and Einstein residuals from the separate SymPy run. The record says that script is an independent implementation, not an execution of alg-emg-rational-electrovac-verification, and it does not audit SymPy. The algorithm correctness result proves the specified procedure, not these run outputs. Supply a complete locally checkable exact derivation or output certificate. thm-emg-xs-kn-verification and prop-emg-xs-kn-invariants consume these values; the dyonic flux result consumes the verification theorem."
+    },
+    {
+      "id": "def-emg-xs-rn-data",
+      "type": "prerequisite",
+      "reason": "The Definition uses S², its unit round metric and positively oriented area form, and asserts pole smoothness of local potentials without identifying the exact sphere, orientation or area-form supplier. The available sphere and round-metric items define S² and the induced metric, but are absent from this item's dependencies; state the outward orientation and establish smoothness in pole charts. The flux consumers ex-emg-xs-rn-charge-sign step 2.1 and prop-emg-xs-kn-dyonic-flux step 1.2 also use the total area 4π without deriving that integral."
+    },
+    {
+      "id": "thm-emg-xs-kn-verification",
+      "type": "prerequisite",
+      "reason": "The pole-free branch claims a geometric electrovac datum and uses the Hodge star, whose definition requires an orientation and whose datum requires a time orientation. def-emg-xs-kn-data supplies neither; the full-sphere extension supplies them only on its exterior domain. Add the coordinate orientation and an explicit smooth future timelike field on the full pole-free scope, separately on Δ>0 and Δ<0 components, without narrowing the claim."
+    },
+    {
+      "id": "prop-emg-xs-rn-curvature",
+      "type": "prerequisite",
+      "reason": "This proposition's step 3.1 and prop-emg-xs-kn-invariants step 1.2 use an approached C² nondegenerate metric extension, but neither cites or lists the exact supplier def-emg-causal-solution-and-horizon-vocabulary, Definition (e), which is available through the emg-cp01 page. Add it as an item prerequisite and state the matching isometric embedding and sequence approach; the supplier's definition and continuity argument fit both claims."
+    },
+    {
+      "id": "prop-emg-xs-dyonic-flux",
+      "type": "local",
+      "reason": "The example R0=4|M|+1 adds a dimensionless 1 to a length parameter M, although the consumed full-sphere definition assigns lengths to R0 and M. Use an explicit positive length scale, such as R0=4|M|+ℓ*, or omit the example and retain R0>4|M|."
+    },
+    {
+      "id": "def-emg-xs-geometric-electrovac",
+      "type": "local",
+      "reason": "Several direct mathematical-premise edges have no use in the assigned Definitions or proofs: notably finite-real-supremum, real-metric/nonnegativity and boundaryless-completeness suppliers. The same bundle is copied across the RN/KN data, verification, curvature and example items. Other unsupported edges include lem-emg-xs-duality to lem-emg-maxwell-observer-stress, lem-emg-xs-kn-rational-calculus to thm-gr-curvature-algebraic-symmetries, prop-emg-xs-rn-curvature to thm-emg-xs-rn-verification and the extended-product/Lp definitions, and prop-emg-xs-kn-invariants to thm-emg-xs-kn-verification. Remove edges that are not used as prerequisites or state their exact consuming steps."
+    }
+  ],
+  "consumer_checks": []
+}

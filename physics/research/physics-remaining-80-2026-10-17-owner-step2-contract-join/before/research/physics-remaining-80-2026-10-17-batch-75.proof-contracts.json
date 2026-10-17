@@ -1,0 +1,657 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "75",
+  "level": 1,
+  "scope": [
+    "lem-tgr-timelike-scalar-acceleration",
+    "lem-tgr-spectral-thermometer",
+    "ex-tgr-finite-switch-inertial-rate"
+  ],
+  "contracts": {
+    "lem-tgr-timelike-scalar-acceleration": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qft-scalar-mass-shell",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Here\n$\\mathscr S(\\mathbb R^4)$ is the Schwartz space of smooth complex functions\nwhose coordinate-weighted derivatives are all bounded, as defined in\n[[def-schwartz-space-and-its-seminorms]].\nFix an oriented, time-oriented affine Minkowski space and an inertial coordinate\nchart as in [[def-sr-affine-minkowski-model]] and\n[[def-inertial-frame-and-inertial-chart]]. Use coordinates\n$x=(x^0,\\mathbf x)$ and metric $\\eta=\\mathrm{diag}(-1,1,1,1)$, matching the\n$(-+++)$ convention of the SR suppliers. Some QFT sources use its negative\n$(+---)$; the Lorentz group is unchanged, and the phase is fixed explicitly\nbelow.\nCoordinates $x$ have length units, momenta have inverse-length units, and the\nFourier phase below is dimensionless. A parameter $\\mu\\ge0$ has inverse-length\nunits and is only a mathematical shell parameter; it is not identified with a\nphysical rest mass. For $\\mathbf k\\in\\mathbb R^3$, set\n$$\\omega_\\mu(\\mathbf k)=\\sqrt{|\\mathbf k|^2+\\mu^2},\\qquad p_\\mu(\\mathbf k)=(\\omega_\\mu(\\mathbf k),\\mathbf k).$$\nThe future mass shell is\n$$H_\\mu^+=\\{(p^0,\\mathbf p): (p^0)^2-|\\mathbf p|^2=\\mu^2,\\ p^0>0\\}.$$\nWhen $\\mu=0$, its apex is omitted; thus $\\mathbf k\\ne0$ in the massless\nparameterization. The scalar shell pairing is\n$$p\\circ x:=p^0x^0-\\mathbf p\\cdot\\mathbf x=-\\eta(p,x).$$\nDefine the measure and one-particle Hilbert space by\n$$d\\nu_\\mu(p_\\mu(\\mathbf k))= \\frac{d^3\\mathbf k}{(2\\pi)^3\\,2\\omega_\\mu(\\mathbf k)},\\qquad H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu;\\mathbb C),$$\nwhere the omitted massless apex has measure zero. For $f\\in\\mathscr S(\\mathbb\nR^4)$ define its pointwise shell Fourier restriction by\n$$K_\\mu f(p)=\\int_{\\mathbb R^4}f(x)e^{ip\\circ x}\\,d^4x.$$\nThe Fourier convention is exactly the displayed integral, with no prefactor.\nIf $\\widehat f(\\xi^0,\\boldsymbol\\xi)=\n\\int f(x)e^{-2\\pi i(x^0\\xi^0+\\mathbf x\\cdot\\boldsymbol\\xi)}\\,d^4x$ denotes\nthe standard transform in\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]],\nthen\n$$\\mathcal F_+f(p^0,\\mathbf p):=\\int f(x)e^{i(p^0x^0-\\mathbf p\\cdot\\mathbf x)}\\,d^4x =\\widehat f\\!\\left(-\\frac{p^0}{2\\pi},\\frac{\\mathbf p}{2\\pi}\\right).$$\nIts inverse is\n$$f(x)=(2\\pi)^{-4}\\int_{\\mathbb R^4} \\mathcal F_+f(p^0,\\mathbf p)e^{-i(p^0x^0-\\mathbf p\\cdot\\mathbf x)} \\,dp^0\\,d^3\\mathbf p.$$\nThus this convention is a time reflection and rescaling of the cited\nSchwartz automorphism and has the stated reciprocal normalization.\nThe proper orthochronous Lorentz group consists of linear maps preserving\n$\\eta$, orientation and the chosen future cone. A Poincare map is\n$x\\mapsto a+\\Lambda x$ with $a\\in\\mathbb R^4$ and $\\Lambda$ in that group.\n\nThis is a mathematical free scalar one-particle construction. It adopts the\nchosen coordinates, measure and Fourier convention; it asserts no experimental\nobservation, physical mass identification or measurement outcome.\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, with $n\\ge1$. A complex-valued function is smooth if its real and imaginary parts are $C^k$ for every finite $k$, in the sense of [[def-ck-and-multi-index-notation-in-several-variables]]. Coordinate derivatives act on these two parts separately. We write $\\partial^\\alpha$ for the multi-index convention there, and $\\partial^0\\varphi=\\varphi$.\n\nThe **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$: its members are smooth functions whose support, the closure in $\\Omega$ of their nonzero set, is a compact subset of $\\Omega$. Equivalently, the zero extension to $\\mathbb R^n$ is smooth with compact support contained in $\\Omega$: compactness gives a neighborhood of every boundary point disjoint from the support, where that extension vanishes. Functions are actual functions, not equivalence classes.\n\nPointwise addition and scalar multiplication make this a complex vector space; the support of a sum lies in the union of the two compact supports. The zero function has empty support. If $\\Omega=\\varnothing$ there is just the empty function, which is the zero vector. The topology is specified in subsequent definitions. Distribution pairings throughout this page are complex bilinear, with no conjugation on test functions. One may restrict all constructions to real scalars.\n",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$.  A **tempered distribution** on $\\mathbb R^n$ is a\ncontinuous complex-linear functional\n\n$$u:\\mathcal S(\\mathbb R^n)\\longrightarrow\\mathbb C,$$\n\nwhere Schwartz space and its locally convex topology are those of\n[[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]].  The space of all such functionals\nis denoted $\\mathcal S'(\\mathbb R^n)$.\n\nWe write $\\langle u,\\varphi\\rangle=u(\\varphi)$.  This pairing is bilinear:\nthe test variable is not conjugated.  Thus $u(a\\varphi+b\\psi)=\na\\langle u,\\varphi\\rangle+b\\langle u,\\psi\\rangle$ for $a,b\\in\\mathbb C$.\nThe zero functional is tempered.  Continuity is topological continuity, and,\nbecause the Schwartz topology is generated by a countable cofinal family of\nseminorms, it is equivalently continuity on every convergent sequence.  No\nchoice principle is used in this definition.\n",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qft-smeared-free-scalar",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]], let $\\mu\\ge0$, let\n$H_\\mu$ and $K_\\mu$ be as in [[def-qft-scalar-mass-shell]], and form\n$\\mathcal F_s(H_\\mu)$ with vacuum $\\Omega$ and finite-particle domain\n$\\mathcal D_{\\rm fin}$. For $f\\in\\mathscr S(\\mathbb R^4)$ define on\n$\\mathcal D_{\\rm fin}$\n$$\\Phi_\\mu(f)=a(K_\\mu\\overline f)+a^\\dagger(K_\\mu f).$$\nThis is a complex-linear map of test functions into operators\n$\\mathcal D_{\\rm fin}\\to\\mathcal D_{\\rm fin}$. For real $f$ it is symmetric\nand equals $\\sqrt2\\,\\Phi_{\\rm Segal}(K_\\mu f)|_{\\mathcal D_{\\rm fin}}$, where the Segal field of\n[[lem-qft-segal-weyl-domain]] is\n$\\Phi_{\\rm Segal}(h)=\\overline{(a^\\dagger(h)+a(h))/\\sqrt2}$.\nThus its Weyl unitary is\n$W_\\mu(f):=W_{\\rm Segal}(\\sqrt2 K_\\mu f)$ and, for real $f,g$,\n$$W_\\mu(f)W_\\mu(g)= e^{-i\\,\\operatorname{Im}\\langle K_\\mu f,K_\\mu g\\rangle_2}W_\\mu(f+g).$$\nFor every real $f$ the vacuum Weyl expectation is\n$$\\langle\\Omega,W_\\mu(f)\\Omega\\rangle_2 =e^{-\\|K_\\mu f\\|_2^2/2}.$$\nHere the inner product is second-variable-linear as fixed in\n[[def-qft-fock-and-test-spaces]]. The vacuum has zero one-point function and\ntwo-point function\n$$\\langle\\Omega,\\Phi_\\mu(f)\\Phi_\\mu(g)\\Omega\\rangle_2 =\\langle K_\\mu\\overline f,K_\\mu g\\rangle_2,$$\nwhich obeys $\\langle\\Omega,\\Phi_\\mu(\\overline f)\\Phi_\\mu(f)\\Omega\\rangle_2=\\|K_\\mu f\\|_2^2\\ge0$ for every complex test $f$ (ordinary diagonal positivity holds for real tests); higher vacuum moments of ordered real smeared\nfields obey the CCR pairing recursion and hence the free-field Wick pairing\nrule. The field is a weak operator-valued tempered distribution on $\\mathcal D_{\\rm fin}$: every matrix coefficient $f\\mapsto\\langle\\Psi,\\Phi_\\mu(f)\\Theta\\rangle_2$ for $\\Psi,\\Theta\\in\\mathcal D_{\\rm fin}$ is a continuous complex-linear functional on Schwartz space. Its adjoint satisfies $\\Phi_\\mu(f)^*|_{\\mathcal D_{\\rm fin}}=\\Phi_\\mu(\\overline f)$, and its normalized vacuum defines a positive state on the finite polynomial $*$-algebra generated by these fields.\n\nThe relative-coordinate two-point tempered distribution is\n$$W_\\mu(z)=\\int_{H_\\mu^+}e^{-ip\\circ z}\\,d\\nu_\\mu(p),$$\nunderstood by pairing with Schwartz tests. Its translation-invariant bidistribution is the shell integral of $e^{-ip\\circ x}e^{ip\\circ y}$; on product tests it is the displayed vacuum covariance.\n\nFor $g=(a,\\Lambda)$, let $f_g$ and $U_\\mu(g)$ be the affine test pullback\nand one-particle action of [[lem-qft-scalar-poincare-action]]. Their Fock\nlifts implement the same covariance for $\\Phi_\\mu$ on $\\mathcal D_{\\rm fin}$\nand for the bounded Weyl operators.\n\nFor translations, the joint spectral measure on Fock space is the\nsecond-quantized multiplier measure with one-particle vector\n$(\\omega_\\mu(\\mathbf k),-\\mathbf k)$. Its support is contained in the closed\nfuture cone $\\{(E,\\mathbf P):E\\ge|\\mathbf P|\\}$; the vacuum is an eigenvector\nat $(0,\\mathbf0)$. These are conditional mathematical model deductions.\nNo point field, empirical observation or measurement claim is made.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qft-segal-weyl-domain",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Let $H$ be a separable\ncomplex Hilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]], and let $\\mathcal F_s(H)$ and\n$\\mathcal D_{\\rm fin}$ be its bosonic Fock space and finite-particle domain.\nFor $h\\in H$ define on $\\mathcal D_{\\rm fin}$ the Segal field\n$$\\phi_0(h):=2^{-1/2}\\bigl(a^\\dagger(h)+a(h)\\bigr).$$\nFor $h\\ne0$, this symmetric operator is essentially self-adjoint; write\n$\\Phi(h)=\\overline{\\phi_0(h)}$. If $r=\\|h\\|$, $e=h/r$, $K=e^\\perp$,\n$G=\\mathcal F_s(K)$, choose a countable orthonormal basis $(u_j)$ of $G$\nwhose vectors are finite-particle, and use the one-mode splitting of\n[[lem-qft-fock-one-mode-splitting]] followed by the Hermite unitary\n$|n\\rangle\\mapsto g_n$ into $L^2(\\mathbb R,dx;\\mathbb C)$ with pairing\n$\\langle f,g\\rangle_2=\\int\\overline f g$ to write a vector as\n$(f_j)_{j\\in J}\\in\\ell^2(J;L^2(\\mathbb R,dx;\\mathbb C))$. Then the exact domain and\naction are\n$$D(\\Phi(h))=\\left\\{(f_j):\\sum_{j\\in J}\\int_{\\mathbb R}(1+r^2x^2)|f_j(x)|^2\\,dx<\\infty\\right\\},\\qquad (\\Phi(h)f)_j(x)=rx f_j(x).$$\nFor $h=0$, $\\phi_0(0)$ closes to the zero operator on all of $\\mathcal F_s(H)$.\n\nDefine $\\epsilon(z)=\\bigoplus_{n\\ge0}z^{\\otimes n}/\\sqrt{n!}$ for $z\\in H$.\nThere are unitaries $W(h)$ determined on these total exponential vectors by\n$$W(h)\\epsilon(z)=\\exp\\!\\left(-\\frac{\\|h\\|^2}{4} +\\frac{i}{\\sqrt2}\\langle h,z\\rangle_2\\right) \\epsilon\\!\\left(z+\\frac{i h}{\\sqrt2}\\right).$$\nThey obey\n$$W(h)W(k)=\\exp\\!\\left(-\\frac{i}{2}\\operatorname{Im}\\langle h,k\\rangle_2\\right)W(h+k),\\qquad \\langle\\Omega,W(h)\\Omega\\rangle_2=e^{-\\|h\\|^2/4},$$\nand $h\\mapsto W(h)$ is strongly continuous. For every $h$, the one-parameter\ngroup $t\\mapsto W(th)$ has norm derivative at zero exactly on\n$D(\\Phi(h))$, with derivative $i\\Phi(h)$ (for $h=0$ this is the zero\ngenerator). Thus the displayed bounded Weyl operators have precisely the\nclosed Segal fields as their generators; no point-field or measurement claim\nis included.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qft-mass-shell-test-range-dense",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. For every $\\mu\\ge0$, the\nspace $H_\\mu=L^2(H_\\mu^+,d\\nu_\\mu)$ of\n[[def-qft-scalar-mass-shell]] is separable (has a countable norm-dense subset), and\n$$\\{K_\\mu f:f\\in\\mathscr S(\\mathbb R^4)\\}$$\nis dense in $H_\\mu$. If $\\mu>0$, the range contains every function in\n$C_c^\\infty(\\mathbb R^3)$; if $\\mu=0$, it contains every function in\n$C_c^\\infty(\\mathbb R^3\\setminus\\{0\\})$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$\n\n",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-fourier-transform-of-a-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Assume [[def-countable-choice|Countable Choice]], exactly as required by the\npublished Schwartz Fourier theorem.  For $\\varphi\\in\\mathcal S(\\mathbb R^n)$\nput\n\n$$\\widehat\\varphi(\\xi)=\\mathcal F\\varphi(\\xi) =\\int_{\\mathbb R^n}\\varphi(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\n\nFor $u\\in\\mathcal S'(\\mathbb R^n)$ define its **Fourier transform** by\n\n$$\\langle\\mathcal Fu,\\varphi\\rangle =\\langle u,\\mathcal F\\varphi\\rangle \\qquad(\\varphi\\in\\mathcal S(\\mathbb R^n)).$$\n\nThe published automorphism\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]\nsends Schwartz tests continuously to Schwartz tests, so composition with the\ncontinuous functional of [[def-tempered-distribution]] is again a continuous\ncomplex-linear functional.  Hence $\\mathcal Fu\\in\\mathcal S'$.  The pairing\nis bilinear: there is no conjugation and no inverse transform on the\nright-hand side.  Countable Choice is used only through the cited published\nFourier construction; transposition itself uses no additional choice.\n",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-fourier-transform-on-tempered-distributions-is-well-defined-and-continuous",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  The Fourier transform\n$\\mathcal F:\\mathcal S'(\\mathbb R^n)\\to\\mathcal S'(\\mathbb R^n)$ is\nwell-defined and complex-linear.  It is continuous for both the weak topology\n$\\sigma(\\mathcal S',\\mathcal S)$ and the strong topology\n$\\beta(\\mathcal S',\\mathcal S)$.\n\n",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$\n\n",
+          "uses": [
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-qft-fock-and-test-spaces",
+          "source_section": "Definition",
+          "quote": "For an integer $d\\ge1$, let $\\mathcal S(\\mathbb R^d)$ be the complex Schwartz space with seminorms\n$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^d}|x^\\alpha\\partial^\\beta f(x)|$\nfor all multi-indices $\\alpha,\\beta$; this is exactly\n[[def-schwartz-space-and-its-seminorms]]. Let\n$\\mathcal D(\\mathbb R^d)=C_c^\\infty(\\mathbb R^d;\\mathbb C)$ with the support convention of\n[[def-test-function-space-d-of-an-open-set]] and the locally convex LF topology of\n[[def-test-function-topology]]. The tempered-distribution space $\\mathcal S'(\\mathbb R^d)$\nis the space of continuous complex-linear functionals on this topological\n$\\mathcal S(\\mathbb R^d)$, paired bilinearly with test functions, as in\n[[def-tempered-distribution]].\n\nFor every complex Hilbert space $H$, use the second-variable-linear pairing\n$\\langle u,v\\rangle_2:=(v,u)_1$, where $(\\cdot,\\cdot)_1$ is the first-variable-linear\nHilbert pairing of [[def-real-and-complex-inner-product-space]]. Thus\n$\\langle u,v\\rangle_2$ is linear in $v$ and conjugate-linear in $u$.\nFor each tensor product, use the same norm completion as\n[[lem-nrqm-composites-hilbert-tensor-construction]], but equip it with the\nsecond-variable-linear pairing obtained by conjugating that supplier's\nfirst-variable-linear pairing. This leaves the norm and completion unchanged;\non elementary tensors it gives the product of the second-variable pairings.\nLet $H^{\\widehat\\otimes n}$ be the iterated Hilbert tensor completion, with\n$H^{\\widehat\\otimes0}:=\\mathbb C$; the tensor inner product is the product of\nthe factor pairings. Identify parenthesizations by the isometry fixing\nelementary tensors: the product pairing is the same on their dense span,\nso the map and its inverse extend to the completions. For $n\\ge1$, let\n$P_{s,n}=n!^{-1}\\sum_{\\pi\\in S_n}U_\\pi$ and\n$P_{a,n}=n!^{-1}\\sum_{\\pi\\in S_n}\\operatorname{sgn}(\\pi)U_\\pi$, using the\npermutation action and the orthogonal projections of\n[[lem-nrqm-composites-permutation-sector-projections]]. Define\n$H_s^{(n)}=\\operatorname{ran}P_{s,n}$ and\n$H_a^{(n)}=\\operatorname{ran}P_{a,n}$, with\n$H_s^{(0)}=H_a^{(0)}=\\mathbb C$. These are the symmetric and antisymmetric\n$n$-particle sectors.\n\nThe bosonic and fermionic Fock Hilbert spaces are the square-summable direct\nsums\n$\\mathcal F_s(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_s^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$ and\n$\\mathcal F_a(H)=\\{(\\Psi_n)_{n\\ge0}:\\Psi_n\\in H_a^{(n)},\\\n\\sum_n\\|\\Psi_n\\|^2<\\infty\\}$, with the componentwise inner product.\nTheir vacuum is $\\Omega=(1,0,0,\\ldots)$. The finite-particle subspace\n$\\mathcal D_{\\rm fin}$ consists of sequences with only finitely many nonzero\ncomponents.\n\nFor $h\\in H$, the map $C_h:H\\to\\mathbb C$, $C_h(v)=\\langle h,v\\rangle_2$, is linear and bounded:\n$|C_h(v)|=|(v,h)_1|\\le\\|h\\|\\,\\|v\\|$ by\n[[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]].\nFor any Hilbert space $K$, identify $\\mathbb C\\widehat\\otimes K$ with $K$\nby $J_K(z\\otimes v)=zv$. Every algebraic tensor is $1\\otimes w$;\nthe tensor norm is then $\\|w\\|$, so $J_K$ extends to a surjective isometry\non the completion (with inverse $w\\mapsto1\\otimes w$).\nThroughout the following formulas, $C_h\\otimes I^{\\otimes(n-1)}$ means\n$J_{H^{\\widehat\\otimes(n-1)}}\\circ(C_h\\widehat\\otimes I)$, with\n$I$ the identity on $H^{\\widehat\\otimes(n-1)}$.\nThe bounded tensor-map supplier therefore applies and gives norm at most\n$\\|h\\|$. This includes $n=1$, where $H^{\\widehat\\otimes0}=\\mathbb C$.\nContraction commutes with permutations of the remaining $n-1$ factors,\nso it takes symmetric or antisymmetric tensors to the corresponding\n$(n-1)$-particle sector (and to $\\mathbb C$ for $n=1$).\n\nFor $n\\ge0$, bosonic creation on sector $n$ is\n$a_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{s,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nbosonic annihilation is\n$a_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, where\n$C_h$ is the bounded functional above, its tensor extension is supplied by\n[[lem-nrqm-composites-bounded-tensor-maps]], and $a(h)\\Omega=0$. Define fermionic creation\nby $c_n^\\dagger(h)\\Psi_n=\\sqrt{n+1}P_{a,n+1}(h\\otimes\\Psi_n)$; for $n\\ge1$,\nfermionic annihilation is the corresponding first-factor contraction\n$c_n(h)\\Psi_n=\\sqrt n(C_h\\otimes I^{\\otimes(n-1)})\\Psi_n$, and\n$c(h)\\Omega=0$. The annihilation maps are conjugate-linear in $h$; the\ncreation maps are linear in $h$. These formulas define sector maps on the\nfinite-particle subspace; their maximal closed domains and operator relations are proved in\n[[lem-qft-fock-ccr-car]]. No physical statistics assignment or spin–statistics\ntheorem is part of these mathematical definitions.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qft-fock-ccr-car",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]] and let $H$ be a complex\nHilbert space with the second-variable-linear convention of\n[[def-qft-fock-and-test-spaces]]. On $\\mathcal D_{\\rm fin}$ define the bosonic\ncreation and annihilation maps $a^\\dagger(h)$ and $a(h)$ and the fermionic maps\n$c^\\dagger(h)$ and $c(h)$ as in\n[[def-qft-fock-and-test-spaces]]. Write $a_n(h)$ and $a_n^\\dagger(h)$ for\ntheir restrictions to the $n$th bosonic sector. For bosons set\n\n$$D(a(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge1}\\|a_n(h)\\Psi_n\\|^2<\\infty\\},\\qquad D(a^\\dagger(h))=\\{\\Psi\\in\\mathcal F_s(H):\\sum_{n\\ge0}\\|a_n^\\dagger(h)\\Psi_n\\|^2<\\infty\\}.$$\n\nThen $\\mathcal F_s(H)$ and $\\mathcal F_a(H)$ are Hilbert spaces,\n$\\mathcal D_{\\rm fin}$ is dense, and it is a graph core for both maximal\nbosonic sector maps. The bosonic operators on their displayed domains are\nclosed and mutually adjoint, and on $\\mathcal D_{\\rm fin}$ satisfy\n\n$$[a(h),a^\\dagger(k)]=\\langle h,k\\rangle_2I,\\qquad [a(h),a(k)]=[a^\\dagger(h),a^\\dagger(k)]=0.$$\n\nThe fermionic $c(h)$ and $c^\\dagger(h)$ extend to bounded operators on the\nwhole Fock space, with norms $\\|h\\|$, and satisfy on the whole space\n\n$$\\{c(h),c^\\dagger(k)\\}=\\langle h,k\\rangle_2I,\\qquad \\{c(h),c(k)\\}=\\{c^\\dagger(h),c^\\dagger(k)\\}=0.$$\n\nThis is a mathematical construction of the two Fock representations; it does\nnot assign particle statistics to a physical species.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.\n\n",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space,\n\n$$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$\n\nEquality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.\n\n",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-tgr-thermal-contour-spectrum",
+          "source_section": "Statement",
+          "quote": "In particular, for $\\kappa>0$ in inverse length, take $A=\\kappa^2/(16\\pi)$ and $b=\\kappa/2$. Then $L=1/(4\\pi)$, $\\beta=2\\pi/\\kappa$, and $C_{A,b}$ is precisely the tested chiral covariance $C_\\kappa$ of [[lem-tgr-exponential-current]]. Its spectrum and detailed balance are\n$$S_\\kappa(\\omega)=\\frac{\\omega}{2(e^{2\\pi\\omega/\\kappa}-1)},\\qquad S_\\kappa(0)=\\frac{\\kappa}{4\\pi},\\qquad S_\\kappa(-\\omega)=e^{2\\pi\\omega/\\kappa}S_\\kappa(\\omega)\\quad(\\omega>0).$$\nHere $C_\\kappa$ has units of inverse length squared and $S_\\kappa$ inverse length. This is a two-point strip and detailed-balance statement, including the specified chiral current as a specialization. It does not assert a norm-continuous $C^*$-algebra KMS dynamics or an exact detector transition probability.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-tgr-exponential-current",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let\n$$\\mathcal H=L^2((0,\\infty),dk;\\mathbb C),\\qquad\n\\langle h,q\\rangle_2=\\int_0^\\infty\\overline{h(k)}q(k)\\,dk,$$\nusing the second-variable-linear convention. For\n$f\\in\\mathcal D(\\mathbb R;\\mathbb C)=C_c^\\infty(\\mathbb R;\\mathbb C)$ define\n$$h_f(k)=\\sqrt{\\frac{k}{4\\pi}}\\int_{\\mathbb R}f(U)e^{ikU}\\,dU\\quad(k>0).$$\nThen $h_f,h_{\\bar f}\\in\\mathcal H$, and $f\\mapsto h_f$ is continuous on each fixed-compact-support test space. With the bosonic Fock conventions of [[def-qft-fock-and-test-spaces]], define on its finite-particle domain\n$$J(f)=a(h_{\\bar f})+a^\\dagger(h_f).$$\nThis is a complex-linear operator-valued distribution on that invariant domain. For real $f$, its closure is $\\overline{J(f)}=\\sqrt2\\,\\Phi(h_f)$, where $\\Phi(h_f)$ is the closed Segal field of [[lem-qft-segal-weyl-domain]]; the corresponding Weyl one-parameter group has generator $i\\Phi(h_f)$. The vacuum two-point form is positive type and has boundary kernel\n$$C(s)=-\\frac{1}{4\\pi(s-i0)^2},$$\nwhere $s-i0$ means the distributional limit from $s-i\\epsilon$, $\\epsilon\\downarrow0$.\n\nFor $\\kappa>0$ with units of inverse length, let $u,U$ have units of length and set\n$$U_\\kappa(u)=-\\kappa^{-1}e^{-\\kappa u},\\qquad\nu_\\kappa(U)=-\\kappa^{-1}\\log(-\\kappa U)\\quad(U<0).$$\nFor $g\\in\\mathcal D(\\mathbb R;\\mathbb C)$ put $f_g(U)=g(u_\\kappa(U))$ for $U<0$ and $f_g(U)=0$ for $U\\ge0$, and define $j_\\kappa(g)=J(f_g)$. The zero extension is smooth and compactly supported. Its vacuum covariance is the positive-type distribution\n$$C_\\kappa(s)=-\\frac{\\kappa^2}{16\\pi}\\,\\operatorname{csch}^2\\!\\left(\\frac{\\kappa}{2}(s-i0)\\right).$$\nHere the notation is fixed as follows: for $b=\\kappa/2$, set $Y_b(s)=\\sinh(bs)/b$. Since $Y_b'(s)=\\cosh(bs)>0$ and $Y_b(s)\\to\\pm\\infty$ as $s\\to\\pm\\infty$, it is a smooth increasing diffeomorphism. Define $\\operatorname{csch}^2(b(s-i0)):=b^{-2}Y_b^*((y-i0)^{-2})$, where\n$$\\langle Y_b^*T,\\varphi\\rangle:=\\left\\langle T,\\varphi(Y_b^{-1}(y))(Y_b^{-1})'(y)\\right\\rangle.$$\nThis is a one-dimensional chiral test-coordinate model. It asserts no restriction of a four-dimensional field to a null curve.\n\n",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-test-function-topology",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open. For the fixed-support spaces of [[def-fixed-support-test-function-frechet-space]], let $\\mathcal P$ be the set of all seminorms $q:\\mathcal D(\\Omega)\\to[0,\\infty)$ such that $q|_{\\mathcal D_K}$ is continuous for every compact $K\\subseteq\\Omega$. A seminorm means $q(av)=|a|q(v)$ and $q(v+w)\\le q(v)+q(w)$.\n\nThe **test-function topology** is the topology generated by translated finite intersections of sets $\\{\\varphi:q(\\varphi)<\\varepsilon\\}$, where $q\\in\\mathcal P$ and $\\varepsilon>0$. Equivalently it is the finest locally convex topology making every inclusion $\\mathcal D_K\\hookrightarrow\\mathcal D(\\Omega)$ continuous; the universal-property lemma below proves this equivalence and the topology assertions. This is the locally convex inductive-limit or **LF topology**, not the unrestricted final topology of arbitrary spaces.\n\nFor precision, a locally convex topology here is a vector topology generated by a family of seminorms, and boundedness means absorption by every zero-neighborhood: for each such neighborhood $U$ there is $t>0$ with $B\\subseteq tU$. Finite intersections may be empty, giving the whole space. When $\\Omega$ is empty there is only the zero vector and its unique topology. No convergence criterion for sequences is used in the definition; that criterion will be a theorem.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "lem-test-function-lf-topology-universal-property",
+          "source_section": "Statement",
+          "quote": "The test-function topology exists as a Hausdorff locally convex vector topology, induces the prescribed topology on each $\\mathcal D_K$, and is the finest locally convex topology making all inclusions $\\mathcal D_K\\to\\mathcal D(\\Omega)$ continuous. A linear map $L:\\mathcal D(\\Omega)\\to E$ to a locally convex space is continuous if and only if each restriction $L|_{\\mathcal D_K}$ is continuous. An increasing compact exhaustion whose interiors cover $\\Omega$ gives the same topology, independently of the exhaustion. Thus this is an LF topology of the complete metrizable fixed-support spaces. All these claims hold in ZF.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ],
+          "claim": "Fix a compact set $K\\Subset I$ containing $\\operatorname{supp}f$ and let $d=\\min_{\\tau\\in K}(\\dot\\gamma^0-|\\dot{\\boldsymbol\\gamma}|)>0$. For $\\mathbf k=r\\mathbf n$, $r>0$, $|\\mathbf n|=1$, the phase is $r\\phi_{\\mathbf n}(\\tau)$ with $\\phi'_{\\mathbf n}=\\dot\\gamma^0-\\mathbf n\\cdot\\dot{\\boldsymbol\\gamma}\\ge d$. All derivatives of $1/\\phi'_{\\mathbf n}$ are uniformly bounded on $K\\times S^2$. Since $e^{ir\\phi}=(ir\\phi')^{-1}\\partial_\\tau e^{ir\\phi}$, repeated integration by parts gives $|K_\\gamma f(r\\mathbf n)|\\le C_N r^{-N}$ for every $N$ and $r\\ge1$, with $C_N$ bounded by finitely many test-function seminorms on $K$. Boundary terms vanish because $f$ is compactly supported. For $0<r\\le1$, $|K_\\gamma f(r\\mathbf n)|\\le\\|f\\|_{L^1(K)}$."
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ],
+          "claim": "Put $\\kappa=a/c$ and $\\ell=c^2/a$. Direct differentiation gives $\\dot\\gamma_a=(c\\cosh(\\kappa\\tau),c\\sinh(\\kappa\\tau),0,0)$, $\\eta(\\dot\\gamma_a,\\dot\\gamma_a)=-c^2$, and $\\ddot\\gamma_a=(a\\sinh(\\kappa\\tau),a\\cosh(\\kappa\\tau),0,0)$, $\\eta(\\ddot\\gamma_a,\\ddot\\gamma_a)=a^2$. Hence the curve is future unit timelike and its proper acceleration magnitude is $a$. With $s=\\tau-\\tau'$ and $v=(\\tau+\\tau')/2$, the differences satisfy $$X+Y=2\\ell e^{\\kappa v}\\sinh(\\kappa s/2),\\qquad X-Y=2\\ell e^{-\\kappa v}\\sinh(\\kappa s/2),$$ where $Y=\\Delta x^1$. Therefore $Y^2-X^2=-4\\ell^2\\sinh^2(\\kappa s/2)$, and the regulated denominator factors exactly as $$Y^2+(\\epsilon+iX)^2=(Y-X+i\\epsilon)(Y+X-i\\epsilon).$$"
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F13",
+            "step 1.1",
+            "algebra"
+          ],
+          "claim": "In polar coordinates $d\\nu_0=r\\,dr\\,d\\Omega/(2(2\\pi)^3)$. The low-frequency bound makes $\\int_0^1r|K_\\gamma f|^2dr$ finite; the estimate of 1.1 with, for example, $N=2$ makes $\\int_1^\\infty r|K_\\gamma f|^2dr$ finite, uniformly in $\\mathbf n$. The same estimates bound the norm by finitely many seminorms of $f$ on $K$, so $K_\\gamma|_{\\mathcal D_K(I)}$ is continuous for each compact $K\\Subset I$ and $K_\\gamma f\\in\\mathcal H_0$. Since $K_\\gamma$ is complex-linear, [F13] gives its continuity from the LF test-function topology on $\\mathcal D(I)$ to the norm topology of $\\mathcal H_0$. The Hilbert-space vector is therefore defined before it is used in a field expression."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F10",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "The creation and annihilation formulas in [F2] define $\\Phi_\\gamma(f)$ on the finite-particle domain because $K_\\gamma f\\in\\mathcal H_0$. For real $f$, it equals $\\sqrt2$ times the Segal field with vector $K_\\gamma f$ on that domain. Separability [F6] meets the hypothesis of [F5], which gives its self-adjoint closure. Mutual adjointness [F10] makes the finite-domain field symmetric. The vacuum is annihilated by $a(K_\\gamma f)$ by [F10]. Therefore $\\Phi_\\gamma(g)\\Omega=a^\\dagger(K_\\gamma g)\\Omega$ and symmetry of $\\Phi_\\gamma(f)$ gives $\\langle\\Omega,\\Phi_\\gamma(f)\\Phi_\\gamma(g)\\Omega\\rangle_2 =\\langle K_\\gamma f,K_\\gamma g\\rangle_2$. This defines only the tested field and makes no point-field assumption."
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "F9",
+            "F12",
+            "step 2.1",
+            "given"
+          ],
+          "claim": "For $\\epsilon>0$ insert $e^{-\\epsilon r}$ in the shell integral. With $X=\\Delta x^0$ and $R=|\\Delta\\mathbf x|$, absolute convergence permits angular integration and Fubini [F9]: $$W_\\epsilon(X,R)=\\frac{1}{4\\pi^2R}\\int_0^\\infty e^{-(\\epsilon+iX)r}\\sin(rR)\\,dr =\\frac{1}{4\\pi^2\\bigl(R^2+(\\epsilon+iX)^2\\bigr)}.$$ The value at $R=0$ is the continuous limit. The integral identity follows by writing the sine as two exponentials and integrating each, since $\\operatorname{Re}(\\epsilon+iX)>0$. For compact real tests $f,g$, the shell-paired expression converges to $\\langle K_\\gamma f,K_\\gamma g\\rangle_2$: $e^{-\\epsilon r/2}K_\\gamma f\\to K_\\gamma f$ in $\\mathcal H_0$ by [F7], and Cauchy–Schwarz [F12] passes the inner products to the limit. Thus the damped kernel is an actual regulator for the constructed covariance, not a formal substitution of a worldline into a point field."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.2",
+            "step 1.2",
+            "algebra"
+          ],
+          "claim": "For compact real tests $f,g$, the linear change $v=(\\tau+\\tau')/2$, $s=\\tau-\\tau'$ has Jacobian of absolute value one and takes $f(\\tau)g(\\tau')$ to a compact smooth test $\\varphi(v,s)$. On the compact average-time projection of its support, write $A(v)=2\\ell e^{-\\kappa v}>0$ and $B(v)=2\\ell e^{\\kappa v}>0$. The factors $Y-X+i\\epsilon$ and $Y+X-i\\epsilon$ are respectively $-A(v)(x-i\\epsilon/A(v))$ and $B(v)(x-i\\epsilon/B(v))$, where $x=\\sinh(\\kappa s/2)$. For positive $\\alpha,\\beta$ the identity $$\\frac{1}{(x-i\\alpha\\epsilon)(x-i\\beta\\epsilon)} =\\int_0^1\\frac{dt}{(x-i((1-t)\\alpha+t\\beta)\\epsilon)^2}$$ follows by integrating the derivative of $[x-i((1-t)\\alpha+t\\beta)\\epsilon]^{-1}$ in $t$ and dividing by $i(\\beta-\\alpha)\\epsilon$ when $\\alpha\\ne\\beta$; for $\\alpha=\\beta$ both sides agree directly. It shows that both dampings have the same boundary. To justify that boundary, for a compact smooth test $\\psi$ choose an even compact smooth $\\chi$ equal to one near zero and write $\\psi(x)=\\psi(0)\\chi(x)+x\\rho(x)$, where $\\rho$ is smooth and compactly supported. The constant term satisfies $$\\int\\frac{\\chi(x)}{x-i\\lambda\\epsilon}\\,dx =i\\lambda\\epsilon\\int\\frac{\\chi(x)}{x^2+(\\lambda\\epsilon)^2}\\,dx\\longrightarrow i\\pi$$ for each $\\lambda>0$, since its odd real part integrates to zero. The other term is $x\\rho(x)/(x-i\\lambda\\epsilon)=\\rho(x)+ i\\lambda\\epsilon\\rho(x)/(x-i\\lambda\\epsilon)$; the last integral is $O(\\epsilon|\\log\\epsilon|)$ uniformly for $\\lambda$ in a compact positive interval. Thus $(x-i0)^{-1}=\\operatorname{PV}(1/x)+i\\pi\\delta_0$, where $\\operatorname{PV}(1/x)$ acts by $\\lim_{\\delta\\downarrow0}\\int_{|x|>\\delta}\\psi(x)/x\\,dx$. Differentiating this distributional identity gives $(x-i0)^{-2}=\\operatorname{Pf}(1/x^2)-i\\pi\\delta_0'$, where $\\langle\\delta_0',\\psi\\rangle=-\\psi'(0)$ and $$\\left\\langle\\operatorname{Pf}(1/x^2),\\psi\\right\\rangle =\\lim_{\\delta\\downarrow0}\\left(\\int_{|x|>\\delta}\\frac{\\psi(x)}{x^2}\\,dx-\\frac{2\\psi(0)}{\\delta}\\right).$$ Integration by parts on $|x|>\\delta$ identifies this finite part with $-(\\operatorname{PV}(1/x))'$. The bounds are uniform when the positive damping coefficient ranges in a compact subinterval of $(0,\\infty)$, as it does for $v$ in a compact set. To identify the pullback with the usual $s-i0$ boundary, note that $\\sinh(bs-i\\epsilon b)=\\sinh(bs)-i\\epsilon b\\cosh(bs)+O(\\epsilon^2)$. More generally, for a positive smooth regulator $\\lambda(v,x)$, Taylor expand $\\lambda=\\lambda_0(v)+\\lambda_1(v)x+x^2r(v,x)$. The linear part factors as $$x-i\\epsilon(\\lambda_0+\\lambda_1x) =(1-i\\epsilon\\lambda_1)\\left(x-\\frac{i\\epsilon\\lambda_0}{1-i\\epsilon\\lambda_1}\\right).$$ Its pole has positive imaginary part comparable to $\\epsilon$ and real displacement $O(\\epsilon^2)$, so the preceding test-subtraction calculation gives the same boundary. The quadratic remainder changes the inverse square by at most $C\\epsilon x^2/(x^2+\\epsilon^2)^{3/2}$ on a small interval; its integral is $O(\\epsilon|\\log\\epsilon|)$. Thus the smooth positive regulator, including the one induced by $\\sinh(b(s-i\\epsilon))$, has the same boundary as the constant positive regulator. The change $x=\\sinh(\\kappa s/2)$ is orientation-preserving with positive derivative. Consequently the test-paired limit of step 3.2 is $$C_a(s)=-\\frac{1}{16\\pi^2\\ell^2}\\operatorname{csch}^2\\!\\left(\\frac{\\kappa(s-i0)}{2}\\right) =-\\frac{a^2}{16\\pi^2c^4}\\operatorname{csch}^2\\!\\left(\\frac{a(s-i0)}{2c}\\right).$$ Thus $\\langle K_{\\gamma_a}f,K_{\\gamma_a}g\\rangle_2$ equals $\\left\\langle C_a(s),\\int f(t)g(t-s)\\,dt\\right\\rangle$. This proves stationarity and the stated covariance boundary from ordinary regulated shell pairings. To verify temperedness explicitly, set $q=\\lim_{\\epsilon\\downarrow0}\\coth(\\kappa(s-i\\epsilon)/2)$ in the distribution sense and $r(s)=\\coth(\\kappa s/2)-2/(\\kappa s)$ for $s\\ne0$. The Taylor expansion of $\\coth$ at zero extends $r$ smoothly there, and $r'(s)=-(\\kappa/2)\\operatorname{csch}^2(\\kappa s/2)+2/(\\kappa s^2)$ is bounded: its apparent singularity cancels at zero, and both terms are bounded at infinity. Since $1/(s-i0)=\\operatorname{PV}(1/s)+i\\pi\\delta_0$, the decomposition is $q=(2/\\kappa)\\operatorname{PV}(1/s)+r+(2\\pi i/\\kappa)\\delta_0$. Distributional differentiation of $q_\\epsilon(s)=\\coth(\\kappa(s-i\\epsilon)/2)$ gives $C_a=(a^2/(8\\pi^2c^4\\kappa))q'$. For $m,n\\ge0$ set $p_{m,n}(\\varphi)=\\sup_s(1+s^2)^{m/2}|\\varphi^{(n)}(s)|$, a Schwartz seminorm. For $\\varphi\\in\\mathcal S(\\mathbb R)$, the symmetric principal-value formula gives $\\left|\\left\\langle\\operatorname{PV}(1/s),\\varphi'\\right\\rangle\\right|\\le 2p_{0,2}(\\varphi)+C p_{2,1}(\\varphi),$ because subtracting $\\varphi'(0)$ on $|s|<1$ bounds the local integral by $2\\sup|\\varphi''|$, while the $|s|\\ge1$ integral is bounded by $p_{2,1}\\int_{|s|\\ge1}[|s|(1+s^2)]^{-1}ds$. Also $|\\int r'(s)\\varphi(s)ds|\\le C p_{2,0}(\\varphi)$ and $|\\langle\\delta_0',\\varphi\\rangle|\\le p_{0,1}(\\varphi)$. Hence $|\\langle C_a,\\varphi\\rangle|\\le C_{a,c}\\bigl(p_{0,2}(\\varphi)+p_{2,1}(\\varphi)+p_{2,0}(\\varphi)+p_{0,1}(\\varphi)\\bigr),$ a finite Schwartz-seminorm bound. By [F2], $C_a\\in\\mathcal S'(\\mathbb R)$, as required for its subsequent Fourier transform."
+        },
+        {
+          "id": "derive-4-2",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "F11",
+            "step 3.2",
+            "algebra"
+          ],
+          "claim": "On the inertial curve, direct radial integration gives $$W_{0,\\epsilon}(s)=\\frac{1}{4\\pi^2}\\int_0^\\infty r e^{-(\\epsilon+ics)r}\\,dr =\\frac{1}{4\\pi^2(\\epsilon+ics)^2}.$$ Its boundary is $C_0(s)=-1/(4\\pi^2c^2(s-i0)^2)$. Reparameterizing the massless shell by $\\omega=cr$ gives $C_0(s)=(4\\pi^2c^2)^{-1}\\int_0^\\infty\\omega e^{-i\\omega s}d\\omega$ as a tempered boundary distribution. Fourier transformation with $e^{-i\\nu s}$ then yields $S_0(\\nu)=\\max(-\\nu,0)/(2\\pi c^2)$, including continuous value zero at $\\nu=0$. Specifically, the inverse-Fourier identity from [F11], after $\\nu=2\\pi\\xi$, gives $\\mathcal F_-(e^{-i\\omega s})(\\nu)=2\\pi\\delta_0(\\nu+\\omega)$; integrating this identity against $\\omega\\mathbf1_{\\omega>0}/(4\\pi^2c^2)$ yields the displayed regular density. Pairing first with a Schwartz test makes the $\\omega$ integral absolutely convergent by rapid decay, so the interchange with the shell integral is justified."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "inputs": [
+            "F8",
+            "L1",
+            "step 4.1",
+            "algebra"
+          ],
+          "claim": "Let $\\alpha=a/c^2>0$, which has units of inverse length, and use the supplier's length coordinate $u=cs$. The supplier boundary definition in [L1] and the covariance in step 4.1 give $C_a(s)=\\pi^{-1}C_\\alpha(cs)$ as tempered distributions: their smooth kernels have the same hyperbolic argument and their coefficients differ by exactly $1/\\pi$; the scaling is positive, so it preserves the lower-boundary orientation. By the bilinear transposed Fourier convention [F8], for each $\\varphi\\in\\mathcal S(\\mathbb R)$ the dual pairing gives $\\langle\\mathcal F_{-,s}[C_\\alpha(c\\,\\cdot)],\\varphi\\rangle=\\langle S_\\alpha(\\omega),\\varphi(c\\omega)\\rangle=\\langle c^{-1}S_\\alpha(\\nu/c),\\varphi\\rangle$: indeed, $\\widehat\\varphi(u/c)=c\\,\\widehat{\\varphi(c\\,\\cdot)}(u)$ and the distribution pullback contributes $c^{-1}$ under $u=cs$. Including the covariance factor $\\pi^{-1}$ therefore gives $\\mathcal F_{-,s}[\\pi^{-1}C_\\alpha(c\\,\\cdot)](\\nu)=\\pi^{-1}c^{-1}S_\\alpha(\\nu/c)$. Now apply the exact conditional formula of draft supplier [L1]: $$S_a(\\nu)=\\frac1{\\pi c}\\frac{\\nu/c}{2(e^{2\\pi(\\nu/c)/\\alpha}-1)}=\\frac{\\nu}{2\\pi c^2(e^{2\\pi c\\nu/a}-1)}.$$ Its zero limit is $\\alpha/(4\\pi^2c)=a/(4\\pi^2c^3)$, and its detailed-balance relation gives $S_a(-\\nu)=e^{2\\pi c\\nu/a}S_a(\\nu)$ for $\\nu>0$. The spectral conclusion remains conditional until the two batch-74 draft suppliers are accepted; the covariance construction and inertial transform above are local arguments."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain I is explicitly a nonempty open interval; the claim does not vary an empty spacetime or shell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 controls the shell near r=0; steps 4.2 and 5.1 give the inertial and conditional accelerated zero-frequency extensions."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element set or cardinality boundary is part of the curve, shell, or Fourier claims."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The shell omits the measure-zero apex [F1]; step 1.1 controls the low-frequency end, step 1.2 assumes a>0, and step 4.2 handles the separate inertial curve."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses compact support strictly inside the open proper-time interval; the hyperbola has domain R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the explicitly stated Countable Choice strength through the published separability and Segal suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No necessary-and-sufficient characterization is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No necessary-and-sufficient characterization is claimed."
+        }
+      ]
+    },
+    "lem-tgr-spectral-thermometer": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-timelike-scalar-acceleration",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Use the affine Minkowski\nspace, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, shell pairing\n$p\\circ x=p^0x^0-\\mathbf p\\cdot\\mathbf x$, and massless one-particle space\nof [[def-qft-scalar-mass-shell]]. Thus $x^0,\\mathbf x$ have length units,\n$\\mathbf k$ has inverse-length units, the omitted shell apex $\\mathbf k=0$\nhas measure zero, and\n$$d\\nu_0(\\mathbf k)=\\frac{d^3\\mathbf k}{(2\\pi)^3 2|\\mathbf k|},\\qquad \\mathcal H_0=L^2(\\mathbb R^3\\setminus\\{0\\},d\\nu_0;\\mathbb C).$$\nLet $I\\subseteq\\mathbb R$ be a nonempty open proper-time interval, with $\\tau$ in\nseconds, and let $\\gamma=(\\gamma^0,\\boldsymbol\\gamma)\\in\nC^\\infty(I,\\mathbb R^4)$ satisfy\n$$\\eta(\\dot\\gamma(\\tau),\\dot\\gamma(\\tau))=-c^2,\\qquad \\dot\\gamma^0(\\tau)>|\\dot{\\boldsymbol\\gamma}(\\tau)|$$\nfor all $\\tau\\in I$, where $c>0$ is in metres per second. This defines a\nfuture-directed timelike curve parametrized by proper seconds. For\n$f\\in C_c^\\infty(I;\\mathbb C)$ define its curve-smearing amplitude by\n$$K_\\gamma f(\\mathbf k)=\\int_I f(\\tau) e^{i(|\\mathbf k|\\gamma^0(\\tau)-\\mathbf k\\cdot\\boldsymbol\\gamma(\\tau))}\\,d\\tau.$$\nThen $K_\\gamma f\\in\\mathcal H_0$, and on every fixed compact support set the\nmap $f\\mapsto K_\\gamma f$ is continuous in the test-function topology. If\n$f$ has units metres per second, then $K_\\gamma f$ has units metres and its\n$\\mathcal H_0$ norm is dimensionless. For real $f$, define the actual\nfinite-particle-domain field\n$$\\Phi_\\gamma(f)=a(K_\\gamma f)+a^\\dagger(K_\\gamma f)$$\nusing the bosonic Fock space and creation/annihilation conventions of\n[[def-qft-fock-and-test-spaces]]. It is symmetric on the finite-particle\ndomain and has the self-adjoint Segal closure supplied by\n[[lem-qft-segal-weyl-domain]]. Its vacuum covariance on real compact tests is\nthe well-defined pairing $\\langle K_\\gamma f,K_\\gamma g\\rangle_2$. This\nconstruction is an additional temporal smearing of the massless shell; it\ndoes not define a point field or an interaction.\n\nFor $a>0$ in metres per second squared, put $\\ell=c^2/a$ and define the\nuniformly accelerated curve on $I=\\mathbb R$ by\n$$\\gamma_a(\\tau)=\\bigl(\\ell\\sinh(a\\tau/c),\\ell\\cosh(a\\tau/c),0,0\\bigr).$$\nIt has proper acceleration magnitude $a$. The restriction of the massless\nMinkowski-vacuum covariance constructed above is stationary and, in the\ndistributional boundary-value sense on the real line, is\n$$C_a(s)=-\\frac{a^2}{16\\pi^2c^4}\\,\\operatorname{csch}^2\\!\\left(\\frac{a(s-i0)}{2c}\\right).$$\nHere $\\operatorname{csch}z=1/\\sinh z$, and the displayed expression means\nthe limit of the smooth damped shell pairings against compact smooth tests;\nno product or pullback of point-field distributions is assumed. With the\nangular-frequency convention\n$$S_a(\\nu)=\\mathcal F_{-}C_a(\\nu),\\qquad \\mathcal F_{-}C(\\nu)=\\int_{\\mathbb R}e^{-i\\nu s}C(s)\\,ds$$\ninterpreted distributionally, the local conclusion about the spectrum is conditional on the current\nbatch-74 draft suppliers [[lem-tgr-thermal-contour-spectrum]] and its\nprerequisite [[lem-tgr-exponential-current]]. Their carriers exist in the\nbatch-74 manifest, and both items have status `draft`. The current run's\nStep-1 records report `ready` for both items; this is authoring-readiness\nevidence, not proof acceptance. The contour item's actual statement uses a length\ncoordinate and an inverse-length parameter (renamed from its $\\kappa$ to\n$\\alpha$ here); the proof below uses\n$\\alpha=a/c^2$ and $u=cs$, for which the covariance obeys\n$C_a(s)=\\pi^{-1}C_\\alpha(cs)$. Under the contour item's exact conditional\nFourier formula and this rescaling,\n$$S_a(\\nu)=\\frac{\\nu}{2\\pi c^2\\bigl(e^{2\\pi c\\nu/a}-1\\bigr)},\\qquad S_a(0)=\\frac{a}{4\\pi^2c^3},\\qquad S_a(-\\nu)=e^{2\\pi c\\nu/a}S_a(\\nu)\\quad(\\nu>0).$$\nThe continuous value at zero is the removable limit. $\\nu$ has units\nseconds$^{-1}$ and $S_a$ has units seconds per square metre; the spectral\nclaim remains conditional until both draft suppliers are accepted.\n\nFor comparison, on the inertial curve $\\gamma_0(\\tau)=(c\\tau,0,0,0)$ the\nsame construction gives\n$$C_0(s)=-\\frac{1}{4\\pi^2c^2(s-i0)^2},\\qquad S_0(\\nu)=\\frac{\\max(-\\nu,0)}{2\\pi c^2}.$$\nThese are mathematical covariance and Fourier-transform statements in the\nspecified representation. They do not assert a measured spectrum or a\ndetector transition probability.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-tgr-thermal-contour-spectrum",
+          "source_section": "Statement",
+          "quote": "In particular, for $\\kappa>0$ in inverse length, take $A=\\kappa^2/(16\\pi)$ and $b=\\kappa/2$. Then $L=1/(4\\pi)$, $\\beta=2\\pi/\\kappa$, and $C_{A,b}$ is precisely the tested chiral covariance $C_\\kappa$ of [[lem-tgr-exponential-current]]. Its spectrum and detailed balance are\n$$S_\\kappa(\\omega)=\\frac{\\omega}{2(e^{2\\pi\\omega/\\kappa}-1)},\\qquad S_\\kappa(0)=\\frac{\\kappa}{4\\pi},\\qquad S_\\kappa(-\\omega)=e^{2\\pi\\omega/\\kappa}S_\\kappa(\\omega)\\quad(\\omega>0).$$\nHere $C_\\kappa$ has units of inverse length squared and $S_\\kappa$ inverse length. This is a two-point strip and detailed-balance statement, including the specified chiral current as a specialization. It does not assert a norm-continuous $C^*$-algebra KMS dynamics or an exact detector transition probability.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-tgr-exponential-current",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let\n$$\\mathcal H=L^2((0,\\infty),dk;\\mathbb C),\\qquad\n\\langle h,q\\rangle_2=\\int_0^\\infty\\overline{h(k)}q(k)\\,dk,$$\nusing the second-variable-linear convention. For\n$f\\in\\mathcal D(\\mathbb R;\\mathbb C)=C_c^\\infty(\\mathbb R;\\mathbb C)$ define\n$$h_f(k)=\\sqrt{\\frac{k}{4\\pi}}\\int_{\\mathbb R}f(U)e^{ikU}\\,dU\\quad(k>0).$$\nThen $h_f,h_{\\bar f}\\in\\mathcal H$, and $f\\mapsto h_f$ is continuous on each fixed-compact-support test space. With the bosonic Fock conventions of [[def-qft-fock-and-test-spaces]], define on its finite-particle domain\n$$J(f)=a(h_{\\bar f})+a^\\dagger(h_f).$$\nThis is a complex-linear operator-valued distribution on that invariant domain. For real $f$, its closure is $\\overline{J(f)}=\\sqrt2\\,\\Phi(h_f)$, where $\\Phi(h_f)$ is the closed Segal field of [[lem-qft-segal-weyl-domain]]; the corresponding Weyl one-parameter group has generator $i\\Phi(h_f)$. The vacuum two-point form is positive type and has boundary kernel\n$$C(s)=-\\frac{1}{4\\pi(s-i0)^2},$$\nwhere $s-i0$ means the distributional limit from $s-i\\epsilon$, $\\epsilon\\downarrow0$.\n\nFor $\\kappa>0$ with units of inverse length, let $u,U$ have units of length and set\n$$U_\\kappa(u)=-\\kappa^{-1}e^{-\\kappa u},\\qquad\nu_\\kappa(U)=-\\kappa^{-1}\\log(-\\kappa U)\\quad(U<0).$$\nFor $g\\in\\mathcal D(\\mathbb R;\\mathbb C)$ put $f_g(U)=g(u_\\kappa(U))$ for $U<0$ and $f_g(U)=0$ for $U\\ge0$, and define $j_\\kappa(g)=J(f_g)$. The zero extension is smooth and compactly supported. Its vacuum covariance is the positive-type distribution\n$$C_\\kappa(s)=-\\frac{\\kappa^2}{16\\pi}\\,\\operatorname{csch}^2\\!\\left(\\frac{\\kappa}{2}(s-i0)\\right).$$\nHere the notation is fixed as follows: for $b=\\kappa/2$, set $Y_b(s)=\\sinh(bs)/b$. Since $Y_b'(s)=\\cosh(bs)>0$ and $Y_b(s)\\to\\pm\\infty$ as $s\\to\\pm\\infty$, it is a smooth increasing diffeomorphism. Define $\\operatorname{csch}^2(b(s-i0)):=b^{-2}Y_b^*((y-i0)^{-2})$, where\n$$\\langle Y_b^*T,\\varphi\\rangle:=\\left\\langle T,\\varphi(Y_b^{-1}(y))(Y_b^{-1})'(y)\\right\\rangle.$$\nThis is a one-dimensional chiral test-coordinate model. It asserts no restriction of a four-dimensional field to a null curve.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\geq1$.  A **tempered distribution** on $\\mathbb R^n$ is a\ncontinuous complex-linear functional\n\n$$u:\\mathcal S(\\mathbb R^n)\\longrightarrow\\mathbb C,$$\n\nwhere Schwartz space and its locally convex topology are those of\n[[def-schwartz-space-and-its-seminorms]] and\n[[def-schwartz-topology-and-convergence]].  The space of all such functionals\nis denoted $\\mathcal S'(\\mathbb R^n)$.\n\nWe write $\\langle u,\\varphi\\rangle=u(\\varphi)$.  This pairing is bilinear:\nthe test variable is not conjugated.  Thus $u(a\\varphi+b\\psi)=\na\\langle u,\\varphi\\rangle+b\\langle u,\\psi\\rangle$ for $a,b\\in\\mathbb C$.\nThe zero functional is tempered.  Continuity is topological continuity, and,\nbecause the Schwartz topology is generated by a countable cofinal family of\nseminorms, it is equivalently continuity on every convergent sequence.  No\nchoice principle is used in this definition.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-fourier-transform-of-a-tempered-distribution",
+          "source_section": "Definition",
+          "quote": "Assume [[def-countable-choice|Countable Choice]], exactly as required by the\npublished Schwartz Fourier theorem.  For $\\varphi\\in\\mathcal S(\\mathbb R^n)$\nput\n\n$$\\widehat\\varphi(\\xi)=\\mathcal F\\varphi(\\xi) =\\int_{\\mathbb R^n}\\varphi(x)e^{-2\\pi i x\\cdot\\xi}\\,dx.$$\n\nFor $u\\in\\mathcal S'(\\mathbb R^n)$ define its **Fourier transform** by\n\n$$\\langle\\mathcal Fu,\\varphi\\rangle =\\langle u,\\mathcal F\\varphi\\rangle \\qquad(\\varphi\\in\\mathcal S(\\mathbb R^n)).$$\n\nThe published automorphism\n[[cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space]]\nsends Schwartz tests continuously to Schwartz tests, so composition with the\ncontinuous functional of [[def-tempered-distribution]] is again a continuous\ncomplex-linear functional.  Hence $\\mathcal Fu\\in\\mathcal S'$.  The pairing\nis bilinear: there is no conjugation and no inverse transform on the\nright-hand side.  Countable Choice is used only through the cited published\nFourier construction; transposition itself uses no additional choice.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fourier-transform-on-tempered-distributions-is-well-defined-and-continuous",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  The Fourier transform\n$\\mathcal F:\\mathcal S'(\\mathbb R^n)\\to\\mathcal S'(\\mathbb R^n)$ is\nwell-defined and complex-linear.  It is continuous for both the weak topology\n$\\sigma(\\mathcal S',\\mathcal S)$ and the strong topology\n$\\beta(\\mathcal S',\\mathcal S)$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.  Fourier transformation is a topological\nautomorphism of $\\mathcal S'(\\mathbb R^n)$ for both the weak and strong dual\ntopologies.  If\n\n$$\\langle Ru,\\varphi\\rangle=\\langle u,\\varphi(-\\,\\cdot)\\rangle,$$\n\nthen $\\mathcal F^2u=Ru$ and $\\mathcal F^{-1}=R\\mathcal F=\\mathcal FR$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and use the negative-sign $2\\pi$ normalization.  If\n$f\\in L^1(\\mathbb R^n;\\mathbb C)$, then\n\n$$\\mathcal F u_f=u_{\\widehat f},$$\n\nwhere $\\widehat f$ is the integral Fourier transform.  If\n$f\\in L^2(\\mathbb R^n;\\mathbb C)$, then\n\n$$\\mathcal F u_f=u_{\\mathcal F_2f},$$\n\nwhere $\\mathcal F_2$ is the Plancherel extension.  These equalities are in\n$\\mathcal S'(\\mathbb R^n)$ and therefore depend only on the corresponding\nalmost-everywhere classes.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$. It preserves the first-variable-linear inner product, and hence is unitary.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to \\mathbb C$ belong to\n$L^1(\\mu \\times \\nu)$. Then:\n\n1. for $\\mu$-almost every $x$, the section $f_x$ belongs to $L^1(\\nu)$;\n2. for $\\nu$-almost every $y$, the section $f^y$ belongs to $L^1(\\mu)$;\n3. after assigning the value $0$ on the exceptional parameter sets, the\n   section-integral functions are integrable; and\n4. the three integrals agree:\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-test-function-space-d-of-an-open-set",
+          "source_section": "Definition",
+          "quote": "Let $\\Omega\\subseteq\\mathbb R^n$ be open, with $n\\ge1$. A complex-valued function is smooth if its real and imaginary parts are $C^k$ for every finite $k$, in the sense of [[def-ck-and-multi-index-notation-in-several-variables]]. Coordinate derivatives act on these two parts separately. We write $\\partial^\\alpha$ for the multi-index convention there, and $\\partial^0\\varphi=\\varphi$.\n\nThe **test-function space** is $\\mathcal D(\\Omega)=C_c^\\infty(\\Omega;\\mathbb C)$: its members are smooth functions whose support, the closure in $\\Omega$ of their nonzero set, is a compact subset of $\\Omega$. Equivalently, the zero extension to $\\mathbb R^n$ is smooth with compact support contained in $\\Omega$: compactness gives a neighborhood of every boundary point disjoint from the support, where that extension vanishes. Functions are actual functions, not equivalence classes.\n\nPointwise addition and scalar multiplication make this a complex vector space; the support of a sum lies in the union of the two compact supports. The zero function has empty support. If $\\Omega=\\varnothing$ there is just the empty function, which is the zero vector. The topology is specified in subsequent definitions. Distribution pairings throughout this page are complex bilinear, with no conjugation on test functions. One may restrict all constructions to real scalars.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "algebra"
+          ],
+          "claim": "Put $g_{\\mathsf T}(t)=h(t/\\mathsf T)$ and $A_{\\mathsf T}(s)=\\int g_{\\mathsf T}(t)g_{\\mathsf T}(t-s)\\,dt$. Compact support [F6] and [F5] permit the change of variables and interchange of the two ordinary integrals. Setting $u=t$ and $v=t-s$, and using the reality of $h$, gives the negative-sign angular transform $$\\widehat{A_{\\mathsf T}}(\\lambda) =\\int_{\\mathbb R^2}g_{\\mathsf T}(u)g_{\\mathsf T}(v)e^{-i\\lambda(u-v)}\\,du\\,dv =\\widehat{g_{\\mathsf T}}(\\lambda)\\widehat{g_{\\mathsf T}}(-\\lambda) =|\\widehat{g_{\\mathsf T}}(\\lambda)|^2 =\\mathsf T^2|\\widehat h(\\mathsf T\\lambda)|^2.$$ By [F2] and [F3], the inverse angular-frequency relation is $C(s)=(2\\pi)^{-1}\\int S(\\omega)e^{i\\omega s}\\,d\\omega$ in the distributional sense: it is the negative-sign $2\\pi$ inverse after the change $\\xi=\\omega/(2\\pi)$. Pairing with $e^{-i\\nu s}A_{\\mathsf T}(s)$ gives the absolutely convergent formula $$R_{\\mathsf T}^{(C)}(\\nu)=\\frac{\\mathsf T^2}{2\\pi} \\int_{\\mathbb R}S(\\omega)|\\widehat h(\\mathsf T(\\nu-\\omega))|^2\\,d\\omega.$$ Here $S$ has at most linear growth and $\\widehat h$ is rapidly decreasing, so the integral is finite."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "F6",
+            "step 1.1",
+            "given",
+            "algebra"
+          ],
+          "claim": "Since $h\\in C_c^\\infty$ by [F6], each derivative of $\\widehat h$ is obtained by transforming a compactly supported smooth function $(-iu)^j h(u)$; repeated integration by parts shows every such derivative decreases faster than any inverse power. Hence $\\int|z||\\widehat h(z)|^2dz<\\infty$. Plancherel in [F4], followed by $z=2\\pi\\xi$, yields $$\\int_{\\mathbb R}|\\widehat h(z)|^2dz=2\\pi\\|h\\|_2^2.$$ Changing variables $z=\\mathsf T(\\nu-\\omega)$ in 1.1 therefore gives $$\\frac{R_{\\mathsf T}^{(C)}(\\nu)}{\\mathsf T\\|h\\|_2^2} =\\frac{1}{2\\pi\\|h\\|_2^2}\\int_{\\mathbb R} S(\\nu-z/\\mathsf T)|\\widehat h(z)|^2\\,dz.$$"
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "L1",
+            "step 2.1",
+            "algebra"
+          ],
+          "claim": "For $C=C_0$, [F1] gives $S_0(\\nu)=\\max(-\\nu,0)/(2\\pi c^2)$. On $\\nu\\le0$ this is linear with slope $-1/(2\\pi c^2)$, on $\\nu\\ge0$ it is zero, and for $x\\le0\\le y$, $|S_0(x)-S_0(y)|=-x/(2\\pi c^2)\\le(y-x)/(2\\pi c^2)$. Thus its global Lipschitz constant is $1/(2\\pi c^2)$. For $C=C_a$, the conditional formula in [F1] is smooth at zero by its Taylor expansion, has bounded derivative on every compact interval, has bounded derivative as $\\nu\\to+\\infty$ by exponential decay. Its derivative is $$S_a'(\\nu)=\\frac{1}{2\\pi c^2} \\frac{e^{b\\nu}-1-b\\nu e^{b\\nu}}{(e^{b\\nu}-1)^2},\\qquad b=2\\pi c/a.$$ The Taylor expansion at zero makes this derivative finite there; as $\\nu\\to+\\infty$ it decays exponentially times a polynomial, and as $\\nu\\to-\\infty$ it tends $-1/(2\\pi c^2)$. Thus it is bounded on both tails and on compact intervals, so both spectra are globally Lipschitz (the accelerated assertion is conditional on [L1]). Subtract $S(\\nu)$ in step 2.1 and use $|S(\\nu-z/\\mathsf T)-S(\\nu)|\\le\\operatorname{Lip}(S)|z|/\\mathsf T$. The definition of $K_h$ gives the stated error bound and its $1/\\mathsf T$ limit."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "L1",
+            "algebra"
+          ],
+          "claim": "The accelerated spectrum is positive: for $\\nu>0$ numerator and denominator in [F1] are positive, for $\\nu<0$ they are both negative, and the zero limit is positive. Thus $r_+,r_->0$. By [A2], the second component of $\\pi'=\\pi Q$ gives $p'(t)=r_+(1-p(t))-r_-p(t)=r_+-(r_++r_-)p(t)$. Solving this scalar linear ODE gives $p(t)=p_*+(p(0)-p_*)e^{-(r_++r_-)t}$ with $p_*=r_+/(r_++r_-)$. For $t\\ge0$, this is a convex combination of $p(0)$ and $p_*\\in(0,1)$, so it remains a probability. Apply [L1] at $\\nu=E/\\hbar>0$ to get $r_-/r_+=S_a(-\\nu)/S_a(\\nu)=e^{2\\pi c\\nu/a}$, so $p_*=1/(1+e^{2\\pi cE/(a\\hbar)})$. The ratio $p_*/(1-p_*)$ is therefore $e^{-2\\pi cE/(a\\hbar)}$. Comparing with its defining Boltzmann form gives $T_{\\rm eff}=\\hbar a/(2\\pi c k_B)$. This calculation concerns only the specified Markov model and its adopted rates."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The switch is explicitly nonzero and the two spectral pairs are specified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the continuous extension of S_a at zero; E>0 is explicit in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element set or cardinality boundary is involved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The switch h=0, duration T=0, acceleration a=0, and Markov energy E=0 are excluded by the statement; the inertial spectrum is a separate defined comparison."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1–3.1 give the estimate for every strict duration T>0 and every real frequency; the large-T limit is stated separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No free vector or family is selected; [A1] states the Countable Choice premise and step 1.1 uses the specified test and Fourier data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is claimed."
+        }
+      ]
+    },
+    "ex-tgr-finite-switch-inertial-rate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tgr-spectral-thermometer",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice [[def-countable-choice]]. Use the massless accelerated\ncovariance $C_a$ and its conditional spectrum $S_a$ from\n[[lem-tgr-timelike-scalar-acceleration]], with $a>0$ in metres per second\nsquared, $c>0$ in metres per second, and angular frequency in seconds$^{-1}$.\nThe conditional detailed-balance input is the actual Statement of the\ncurrent batch-74 draft [[lem-tgr-thermal-contour-spectrum]], reproduced in\n[L1] below. Its declared prerequisite [[lem-tgr-exponential-current]] is also\na draft. The current run's Step-1 records report `ready` for both items;\nthese are authoring-readiness records, not proof acceptance. The inertial\npair $(C_0,S_0)$ is the unconditioned comparison from\n[[lem-tgr-timelike-scalar-acceleration]]. Both spectra are continuous and\nglobally Lipschitz. The conventions are $S=\\mathcal F_-C$ with kernel\n$e^{-i\\nu s}$ and $C$ paired bilinearly with Schwartz tests.\n\nLet $h\\in C_c^\\infty(\\mathbb R;\\mathbb R)$ be nonzero, let the switching\nduration $\\mathsf T>0$ be measured in seconds, and put\n$$\\widehat h(z)=\\int_{\\mathbb R}h(u)e^{-izu}\\,du,\\qquad K_h=\\frac{1}{2\\pi\\|h\\|_2^2}\\int_{\\mathbb R}|z|\\,|\\widehat h(z)|^2\\,dz.$$\nFor either stationary pair $(C,S)=(C_a,S_a)$ or $(C_0,S_0)$ define the\nswitched coefficient\n$$R_{\\mathsf T}^{(C)}(\\nu)=\\left\\langle C(s),e^{-i\\nu s} \\int_{\\mathbb R}h(t/\\mathsf T)h((t-s)/\\mathsf T)\\,dt\\right\\rangle.$$\nThen $K_h<\\infty$ and, for every $\\nu\\in\\mathbb R$,\n$$R_{\\mathsf T}^{(C)}(\\nu)=\\frac{\\mathsf T^2}{2\\pi} \\int_{\\mathbb R}S(\\omega)|\\widehat h(\\mathsf T(\\nu-\\omega))|^2\\,d\\omega,$$\nso $R_{\\mathsf T}^{(C)}(\\nu)\\ge0$, and\n$$\\left|\\frac{R_{\\mathsf T}^{(C)}(\\nu)}{\\mathsf T\\|h\\|_2^2}-S(\\nu)\\right| \\le\\frac{\\operatorname{Lip}(S)K_h}{\\mathsf T},\\qquad \\operatorname{Lip}(S)=\\sup_{x\\ne y}\\frac{|S(x)-S(y)|}{|x-y|}<\\infty.$$\nThis proves the leading switched coefficient limit and its explicit error;\nit is not a convergence theorem for an all-order detector transition\nprobability or an exact infinite-time probability.\n\nThere is also the following separately defined two-state continuous-time\nMarkov model. Choose an energy $E>0$ in joules, $\\hbar>0$ in joule-seconds,\n$k_B>0$ in joules per kelvin, and a coupling $\\gamma_d>0$ in square metres\nper square second. For the accelerated spectrum set\n$$r_+=\\gamma_d S_a(E/\\hbar),\\qquad r_-=\\gamma_d S_a(-E/\\hbar).$$\nThese are positive rates in seconds$^{-1}$. Let $p(t)$ be the probability\nof the excited state in the two-state chain with ground-to-excited rate\n$r_+$ and excited-to-ground rate $r_-$. For $t\\ge0$ and any initial probability $p(0)\\in[0,1]$, then\n$$p(t)=p_*+(p(0)-p_*)e^{-(r_++r_-)t},\\qquad p_* =\\frac{1}{1+e^{2\\pi cE/(a\\hbar)}}.$$\nIf the effective thermometer temperature $T_{\\rm eff}>0$ is defined by\n$p_*/(1-p_*)=e^{-E/(k_BT_{\\rm eff})}$, then\n$$T_{\\rm eff}=\\frac{\\hbar a}{2\\pi c k_B}.$$\nThis is an exact result for the specified Markov chain. It is not a weak\ncoupling or point-detector thermalization theorem.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ],
+          "claim": "Apply the A-page estimate from [F1] to $C_a$. It gives the displayed accelerated error bound for every $\\mathsf T>0$; since the right side tends to zero, $Q_{\\mathsf T}^{(a)}(\\nu)\\to S_a(\\nu)$ conditionally on the same supplier."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ],
+          "claim": "For $C_0$, [F1] gives the same bound with $S_0$. Since $\\nu>0$, $S_0(\\nu)=0$. Its spectral integral for $R_{\\mathsf T}^{(C_0)}$ is nonnegative because $S_0\\ge0$ and the other factor is a squared modulus. The Lipschitz constant of $S_0$ is $1/(2\\pi c^2)$, so the normalized coefficient lies between zero and $K_h/(2\\pi c^2\\mathsf T)$ and tends to zero. This is an exact mathematical model comparison, not a pointwise detector or empirical claim."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The switch h is given and nonzero, with positive frequency and duration."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example restricts to nu>0; the zero-frequency endpoint is outside its claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element set or cardinality boundary is involved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example requires a>0, h nonzero, and T>0; step 2.1 treats the separate inertial comparison."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and steps 1.1–2.1 use strict nu>0 and T>0 and take the limit only as T increases without bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The nonzero switch is supplied as data; the proof selects no element from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No biconditional is claimed."
+        }
+      ]
+    }
+  }
+}

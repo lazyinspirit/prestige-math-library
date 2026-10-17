@@ -1,0 +1,57 @@
+---
+id: post-tgr-linearized-material-model
+kind: postulate
+title: "Specified small-perturbation material dynamics"
+status: draft
+origin: pipeline
+domain: physics
+library: physics
+dependency_level: 8
+deps:
+  - post-tgr-perfect-fluid-model
+  - post-tgr-bulk-relaxation-model
+  - def-tgr-framework-units
+  - lem-tgr-local-gibbs-euler
+dependency_roles:
+  post-tgr-perfect-fluid-model: physical-assumption
+  post-tgr-bulk-relaxation-model: physical-assumption
+  def-tgr-framework-units: formulation-prerequisite
+  lem-tgr-local-gibbs-euler: mathematical-premise
+physical_scope: "Two stipulated adiabatic first-variation systems about a uniform Minkowski rest state, with positive response and bulk parameters; no nonlinear remainder or lifespan bound, curved-background evolution, empirical applicability, or measurement claim."
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "Éric Gourgoulhon, An Introduction to Relativistic Hydrodynamics, arXiv:gr-qc/0603009v1 (2006), §§4.2–4.3 and 5.1–5.4"
+      url: "https://arxiv.org/pdf/gr-qc/0603009"
+      locator: "Full 37-page lecture-note PDF; PDF pp. 14–19: perfect stress, rest-frame energy and equation-of-state conventions, and local perfect-fluid balance projections."
+    - title: "Paul Romatschke, Relativistic Viscous Fluid Dynamics and Non-Equilibrium Entropy, arXiv:0906.4787v2 (2010), §§3.1 and 4.1"
+      url: "https://arxiv.org/pdf/0906.4787"
+      locator: "Full 25-page paper; PDF pp. 7–11: small perturbations of a uniform state, bulk/shear relaxation parameters in high-frequency propagation, and non-equilibrium entropy-current context. Its vanishing-charge and higher-gradient model is not the exact branch adopted here."
+    - title: "Dirk H. Rischke, Microscopic Foundations of Relativistic Fluid Dynamics, lecture notes (May 2022), §§1.4.2–1.5 and 2.5.4"
+      url: "https://itp.uni-frankfurt.de/~drischke/Skript_Hydro.pdf"
+      locator: "Full 148-page lecture-note PDF; PDF pp. 20–27 and 52–53: transient bulk relaxation, quadratic entropy-current corrections, and model-specific stability/causality conditions. The source's fuller Israel–Stewart equations are not substituted for the stipulated effective system."
+---
+
+## Postulate
+
+Use the selected local material state, perfect stress branch, bulk-only relaxation branch, and unit conventions of [[post-tgr-perfect-fluid-model]], [[post-tgr-bulk-relaxation-model]], and [[def-tgr-framework-units]]. For this effective model take prescribed Minkowski spacetime $\mathbb R^4$ with coordinates $(x^0,\mathbf x)=(ct,\mathbf x)$, $t\in\mathbb R$, $\mathbf x\in\mathbb R^3$ measured in metres, and metric $\operatorname{diag}(-1,1,1,1)$. The reference material is a constant state $(v_0,\sigma_{p0})$ in the supplier's open state domain, with supplied $e\in C^2$, $u_0=(1,0,0,0)$, $\Pi_0=0$, $n_0=1/v_0>0$, $\varepsilon_0=n_0e(v_0,\sigma_{p0})$, $p_0=-e_v(v_0,\sigma_{p0})$, $T_0=e_{\sigma_p}(v_0,\sigma_{p0})>0$, and enthalpy density $h_0=\varepsilon_0+p_0>0$. The local Gibbs supplier [[lem-tgr-local-gibbs-euler]] gives the dimensionless adiabatic response
+
+$$a_s:=\left(\frac{\partial p}{\partial\varepsilon}\right)_{\sigma_p}=\frac{e_{vv}(v_0,\sigma_{p0})}{n_0h_0};$$
+
+restrict this pair of effective branches to $a_s>0$. Here $e_{vv}$ is the second derivative of the supplied $C^2$ state function with respect to $v$ at fixed $\sigma_p$. The equality between the derivative and the state-function ratio is the exact interface stated by [[lem-tgr-local-gibbs-euler]] under the reference-state hypotheses above. The derivative is the local fixed-composition response at the reference state; the equation does not assign a universal value to $a_s$.
+
+For this postulate, a first variation means the derivative at $\lambda=0$ of a smooth one-parameter family of field configurations through the reference state, with dimensionless $\lambda$; no member with $\lambda\ne0$ is required to solve a nonlinear equation. The fields $r,\widehat\Pi:\mathbb R\times\mathbb R^3\to\mathbb R$ and $w:\mathbb R\times\mathbb R^3\to\mathbb R^3$ are smooth. Write $r=\delta\varepsilon$, $w=(\delta u^1,\delta u^2,\delta u^3)$, and, in the bulk branch, $\widehat\Pi=\delta\Pi$. The adiabatic sector means $\delta\sigma_p=0$. These first variations have $r$ and $\widehat\Pi$ in Pa and $w$ and $a_s$ dimensionless. Let $\zeta_0>0$ and $\tau_0>0$ be the bulk viscosity and relaxation time evaluated at the reference state, with units Pa s and s. Spatial derivatives have units $\mathrm{m^{-1}}$ and $c$ has units $\mathrm{m\,s^{-1}}$.
+
+Adopt the following two constant-coefficient effective systems on the stated background:
+
+$$r_t+c h_0\operatorname{div}w=0,\qquad w_t+\frac{c a_s}{h_0}\nabla r=0$$
+
+for the perfect branch, and
+
+$$r_t+c h_0\operatorname{div}w=0,\qquad w_t+\frac{c}{h_0}\nabla(a_s r+\widehat\Pi)=0,\qquad \tau_0\widehat\Pi_t+\widehat\Pi=-\zeta_0c\operatorname{div}w$$
+
+for the bulk-only branch. Derivatives $\nabla$ and $\operatorname{div}$ act on $\mathbf x$; $t$ is physical time and $c$ is the speed parameter in [[def-tgr-framework-units]]. The equations define the effective linear models. No uniform nonlinear error estimate, nonlinear solution lifespan, curved-spacetime evolution result, or existence claim for the nonlinear constitutive equations is postulated. The parameters and systems are adopted model inputs; they are not measurements or claims of universal material behavior.
+
+For later solution claims, $\mathbb T_L^3:=(\mathbb R/L\mathbb Z)^3$ is the flat three-torus for $L>0$, and smooth periodic data mean $C^\infty$ maps on that quotient. A multi-index is a triple in $\mathbb N^3$. A Schwartz map $U_0:\mathbb R^3\to\mathbb R^m$ means a $C^\infty$ map such that $x^\alpha\partial^\beta U_0(x)$ is bounded for every pair of multi-indices $\alpha,\beta$. The systems have $m=4$ and $m=5$ components, respectively.

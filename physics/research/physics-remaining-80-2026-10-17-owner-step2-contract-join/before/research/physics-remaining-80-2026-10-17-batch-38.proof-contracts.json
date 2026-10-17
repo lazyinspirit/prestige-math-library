@@ -1,0 +1,1608 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "batch": "38",
+  "scope": [
+    "lem-qsm-integer-lattice-countable",
+    "lem-qsm-local-spin-inclusions-isometric",
+    "lem-qsm-quasilocal-completion",
+    "lem-qsm-consistent-local-states",
+    "lem-qsm-spin-state-compactness",
+    "lem-qsm-state-gns-construction",
+    "ex-qsm-quasilocal-two-site-locality",
+    "ex-qsm-quasilocal-infinite-tail-observable",
+    "ex-qsm-maximally-mixed-consistent-product-state"
+  ],
+  "contracts": {
+    "lem-qsm-integer-lattice-countable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "Recall that a natural number is a von Neumann natural\n([[def-natural-numbers]]): $0 = \\varnothing$ and $\\sigma(n) = n \\cup \\{n\\}$, so\nthat\n\n$$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\} = \\{0, 1, \\dots, n-1\\}$$\n\nis itself the set of its predecessors. Here $<$ is the order of\n[[def-nat-order]], which is defined additively, so the displayed identity is a\ntheorem and not a convention: it is [[lem-nat-order-is-membership]], proved\nimmediately above. Let $A$ be a set, and let $\\approx$ be equinumerosity\n([[def-equinumerous]]).\n\n- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.\n- $A$ is **countably infinite** if $A \\approx \\mathbb{N}$.\n- $A$ is **at most countable** if it is finite or countably infinite.\n- $A$ is **uncountable** if it is not at most countable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-powers-of-countable-sets-are-countable",
+          "source_section": "Statement",
+          "quote": "If $C$ is at most countable and $m\\in\\mathbb N$, then the finite product $C^m=\\prod_{i<m}C$ is at most countable.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $e:\\mathbb{N}\\to\\mathbb{Z}$ by $e(2n)=n$ and $e(2n+1)=-(n+1)$. Every natural number is uniquely even or odd, and every integer is either a natural number or the negative of a positive natural number; these two descriptions show that every integer is a value of $e$. Thus $e$ is a surjection.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\mathbb{Z}$ is nonempty, [F2] applied to $e$ shows that $\\mathbb{Z}$ is at most countable in the sense of [F1].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $d$ is finite and positive, [F3] with $C=\\mathbb{Z}$ and $m=d$ gives that $\\Gamma=\\mathbb{Z}^d$ is at most countable.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty finite set is the range of the unique zero-tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: $e(0)=0$ in the explicit parity enumeration."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: $d=1$ gives the ordinary lattice $mathbb Z$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes positive lattice dimension $dge1$; dimension zero is outside its domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter in the countability statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the countability criterion is applied to the explicitly nonempty set $mathbb Z$ and its displayed surjection; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way countability claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way countability claim, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "parity-enumeration",
+          "calculation": "e(0)=0, e(1)=-1, e(2)=1, e(3)=-2; each integer occurs exactly once."
+        }
+      ]
+    },
+    "lem-qsm-local-spin-inclusions-isometric": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under [F1], $T\\mapsto T\\otimes I$ preserves products and adjoints because $(T\\otimes I)(S\\otimes I)=TS\\otimes I$ and $(T\\otimes I)^*=T^*\\otimes I$; it sends $I_\\Lambda$ to $I_{\\Lambda'}$. The configuration-basis factorization is associative, so for nested regions the two successive inclusions and the direct inclusion act identically on every configuration basis vector and hence are equal operators.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $K=\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, and choose its finite orthonormal configuration basis $e_1,\\ldots,e_s$. Every $\\xi\\in\\mathcal H_\\Lambda\\otimes K$ has a unique expansion $\\xi=\\sum_{j=1}^s \\xi_j\\otimes e_j$, with $\\|\\xi\\|^2=\\sum_j\\|\\xi_j\\|^2$. Therefore $\\|(T\\otimes I)\\xi\\|^2=\\sum_j\\|T\\xi_j\\|^2\\le\\|T\\|^2\\|\\xi\\|^2$, so $\\|T\\otimes I\\|\\le\\|T\\|$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "If $T=0$, both norms are zero. Otherwise, for every $\\varepsilon>0$ the supremum definition in [F2] gives a unit vector $u\\in\\mathcal H_\\Lambda$ with $\\|Tu\\|>\\|T\\|-\\varepsilon$. Since $q\\ge1$, $K$ is nonzero; choose a unit configuration vector $v\\in K$. Then $\\|(T\\otimes I)(u\\otimes v)\\|=\\|Tu\\|\\|v\\|>\\|T\\|-\\varepsilon$, so $\\|T\\otimes I\\|\\ge\\|T\\|-\\varepsilon$ for every $\\varepsilon>0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Letting $\\varepsilon\\downarrow0$ in step 1.3 and combining with step 1.2 gives $\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|$. Step 1.1 supplies the unital $*$-homomorphism and composition identities, completing the claim.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2: $Lambda=Lambdaprime$ makes the added tensor factor one-dimensional, and the basis expansion still gives equality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3: the zero operator has zero norm before and after inclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the local identity maps to the larger identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3: $qge1$ guarantees a nonzero configuration vector in the complementary factor, including $q=1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint parameter in the inclusion statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3: a near-norming unit vector is obtained from the supremum definition and the complementary configuration vector exists because its finite basis is nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts an isometry, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts an isometry, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-dimensional-complement",
+          "calculation": "When the added region is empty, the complement basis has one vector and T tensor I has norm ||T||."
+        },
+        {
+          "case": "zero-map",
+          "calculation": "T=0 gives ||T tensor I||=||T||=0."
+        }
+      ]
+    },
+    "lem-qsm-quasilocal-completion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-local-spin-inclusions-isometric",
+          "source_section": "Statement",
+          "quote": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-completion-of-a-normed-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a normed space. A **completion of $X$** is a pair\n$\\bigl(\\widehat X,\\iota\\bigr)$ such that\n\n- $\\widehat X$ is a Banach space ([[def-banach-space]]);\n- $\\iota:X\\to \\widehat X$ is a linear isometry\n  ([[def-linear-isometry-and-isometric-isomorphism]]);\n- $\\iota[X]$ is dense in $\\widehat X$\n  ([[def-metric-interior-closure-boundary]]).\n\nEquivalently, a completion of a normed space is a completion of its norm metric\n([[def-metric-completion]]) together with compatible linear structure on the\ncomplete space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a\nnormed space. The published metric completion of the norm metric on $X$ admits\na unique vector-space structure and norm whose induced metric is the\npublished completion metric and such that the constant sequence embedding\n$i:X\\to \\widehat X$ is a dense linear isometry. With this structure,\n$\\widehat X$ is a Banach space.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-completion-operations-are-well-defined",
+          "source_section": "Statement",
+          "quote": "In the published Cauchy-sequence model of the metric completion of a normed\nspace, if $[x_n]$ and $[y_n]$ denote equivalence classes of Cauchy sequences,\nthen\n\n$$[x_n]+[y_n]:=[x_n+y_n],\\qquad \\lambda[x_n]:=[\\lambda x_n],\\qquad \\|[x_n]\\|:=\\lim_n \\|x_n\\|$$\n\nare well defined.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-c-star-algebra",
+          "source_section": "Definition",
+          "quote": "A **possibly nonunital complex Banach algebra** is a complex vector space $A$\nequipped with an associative complex-bilinear multiplication\n$A \\times A \\to A$ ([[def-bounded-bilinear-map]] for the bilinearity convention)\nand a norm under which $A$ is a Banach space ([[def-banach-space]],\n[[def-complex-norm-and-complex-normed-space]]), such that the norm is\n**submultiplicative**:\n\n$$\\|ab\\| \\le \\|a\\|\\,\\|b\\| \\qquad (a,b \\in A).$$\n\nNo multiplicative identity is assumed, and no real-algebra or unital\nconvention is imported from elsewhere.\n\nA **complex C\\*-algebra** is a possibly nonunital complex Banach algebra $A$\nequipped with an **involution** $A \\to A$, $a \\mapsto a^*$, which is\nconjugate-linear ([[def-complex-conjugate-real-imaginary-part-and-modulus]]) and\nsatisfies\n\n$$(a^*)^* = a, \\qquad (ab)^* = b^*a^*, \\qquad \\|a^*a\\| = \\|a\\|^2 \\qquad (a,b \\in A).$$\n\nThe last identity is the **C\\*-identity**. Two immediate consequences are worth\nrecording, and both are proved from the displayed axioms alone:\n\n- **the involution is isometric**: $\\|a^*\\| = \\|a\\|$. Indeed $\\|a\\|^2 = \\|a^*a\\| \\le \\|a^*\\|\\,\\|a\\|$ gives $\\|a\\| \\le \\|a^*\\|$ when $a \\ne 0$, and applying this inequality to $a^*$ and using $(a^*)^* = a$ gives $\\|a^*\\| \\le \\|a\\|$; the case $a = 0$ is trivial;\n- **no norm-uniqueness assertion is part of this definition**: such a theorem\n  needs additional hypotheses and proof, and does not follow merely by naming\n  the displayed C\\*-identity.\n\nLet $A$ and $B$ be complex C\\*-algebras. A **bounded star-homomorphism**, or\nbounded $*$-homomorphism, is a bounded complex-linear map\n$\\varphi : A \\to B$ ([[def-bounded-linear-operator]]) satisfying\n\n$$\\varphi(ab) = \\varphi(a)\\varphi(b), \\qquad \\varphi(a^*) = \\varphi(a)^* \\qquad (a,b \\in A).$$\n\nA star-homomorphism is **not** required to be unital, and it is not required\nthat a unit be present or preserved; when $A$ and $B$ both happen to be unital,\n$\\varphi$ is called **unital** if $\\varphi(1_A) = 1_B$. The bounded nonunital\nstar-homomorphisms are the arrows of the locally compact duality theorem on this\npage ([[thm-locally-compact-gelfand-duality]]), with properness imposed there\nthrough [[def-approximate-unit-and-proper-c-star-morphism]].",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$, both embed into $\\mathcal A_{\\Lambda\\cup\\Delta}$ by [F1]. Thus their sum, product and adjoint are defined in a common finite matrix algebra, so $\\mathcal A_{\\mathrm{loc}}$ is a unital $*$-algebra. If $A$ has two localization regions, embedding into their union and isometry [F1] show that both assigned norms equal its norm in that common algebra; hence the local norm is well defined.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F3] and [F4], the norm completion is a Banach space and sums, scalar multiples and the limit norm are well defined on Cauchy-sequence classes; the constant sequence at the local unit is its candidate unit, and the local algebra is dense by the definition of completion.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In any common finite matrix algebra, the operator norm is submultiplicative, the adjoint preserves norm, and [F2] supplies the C*-identity $\\|A^*A\\|=\\|A\\|^2$. Isometric inclusions [F1] transfer these identities to $\\mathcal A_{\\mathrm{loc}}$, so it is a normed $*$-algebra with the C*-identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $(A_n)$ and $(B_n)$ be Cauchy sequences in $\\mathcal A_{\\mathrm{loc}}$. Each is bounded: after some index its terms lie within one unit of a fixed term, and the finitely many earlier terms have a finite maximum norm. Then\n$$\\|A_nB_n-A_mB_m\\|\\le\\|A_n\\|\\,\\|B_n-B_m\\|+\\|A_n-A_m\\|\\,\\|B_m\\|$$\nshows that $(A_nB_n)$ is Cauchy. If either sequence is replaced by an equivalent one, the same estimate makes the product sequences equivalent. Thus multiplication $[A_n][B_n]:=[A_nB_n]$ is well defined on the completion and obeys $\\|xy\\|\\le\\|x\\|\\,\\|y\\|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\|A_n^*-A_m^*\\|=\\|A_n-A_m\\|$ in the local algebra by step 2.1, $[A_n]^*:=[A_n^*]$ is a well-defined involution on the completion. The Cauchy-sequence identities for product and adjoint show $(xy)^*=y^*x^*$ and associativity; continuity of multiplication and the limit norm pass $\\|x^*x\\|=\\|x\\|^2$ from [F2] to every $x$ in the completion. The unit class $[I_{\\mathrm{loc}}]$ acts as an identity by termwise multiplication and has norm one by isometry, so $\\mathcal A$ satisfies the C*-algebra definition in [F5].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1",
+            "step 1.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ with $\\Lambda\\cap\\Delta=\\varnothing$, in $\\mathcal A_{\\Lambda\\cup\\Delta}$ they have forms $A_\\Lambda\\otimes I_\\Delta$ and $I_\\Lambda\\otimes B_\\Delta$. Both products equal $A_\\Lambda\\otimes B_\\Delta$, so $AB=BA$. This proves locality for disjoint finite local factors.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty-family limiting operation is asserted; the unit is inherited from the local algebra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the product estimate applies to zero elements and gives a zero product class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: the constant local identity class is shown to act as the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1: the conditional C*-identity transfers to every completion class, including the zero class."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint variable occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: Countable Choice is stated in the completion input [F3] and used by the metric-completion theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a construction and locality claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a construction and locality claim, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scalar-local-algebra",
+          "calculation": "For a one-site q=1 local algebra C, product and adjoint extend as scalar multiplication and conjugation."
+        },
+        {
+          "case": "disjoint-scalars",
+          "calculation": "Two scalar local operators commute in their common finite algebra."
+        }
+      ]
+    },
+    "lem-qsm-consistent-local-states": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-local-spin-inclusions-isometric",
+          "source_section": "Statement",
+          "quote": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** \u201cQuasi-local\u201d means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, the local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$, with partial trace characterized by its pairing against every $A\\otimes I_{\\Lambda'\\setminus\\Lambda}$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $A\\in\\mathcal A_\\Lambda$, define $\\omega_0(A):=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)$. This is independent of the chosen localization region: if $A$ is also viewed in $\\mathcal A_\\Delta$, embed both representatives into $\\mathcal A_{\\Lambda\\cup\\Delta}$; the two partial-trace consistency equations make both pairings equal to the one computed using $\\rho_{\\Lambda\\cup\\Delta}$. Thus $\\omega_0$ is a well-defined functional on $\\mathcal A_{\\mathrm{loc}}$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Linearity follows by placing any two local arguments and their sum in one common finite region. The identity has value $\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda I)=1$, and for local $A$, [F2] gives $\\omega_0(A^*A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A^*A)\\ge0$. Therefore $\\omega_0$ is normalized and positive on $\\mathcal A_{\\mathrm{loc}}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For local $A$, its restriction is the normalized finite-matrix state from [F2], whose functional norm is one. Hence $|\\omega_0(A)|\\le\\|A\\|$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The bound of step 3.1 makes $\\omega_0$ continuous and uniquely extendible from the dense subalgebra $\\mathcal A_{\\mathrm{loc}}$ to a bounded linear functional $\\omega$ on $\\mathcal A$, with $\\|\\omega\\|\\le1$. It remains normalized because $I\\in\\mathcal A_{\\mathrm{loc}}$ and $\\omega_0(I)=1$; since $\\|I\\|=1$, this also gives $\\|\\omega\\|\\ge1$, hence $\\|\\omega\\|=1$. For any $X\\in\\mathcal A$, choose local $X_n\\to X$; then $X_n^*X_n\\to X^*X$ by continuity of multiplication and adjoint, and $\\omega(X^*X)=\\lim_n\\omega_0(X_n^*X_n)\\ge0$. Thus $\\omega$ is an infinite algebraic state.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Any state with the prescribed local restrictions agrees with $\\omega_0$ on $\\mathcal A_{\\mathrm{loc}}$ and hence agrees with $\\omega$ on its norm closure, since both are continuous and $\\mathcal A_{\\mathrm{loc}}$ is dense. The extension is unique.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1: the unit has trace one in every finite region, so the empty-region restriction is normalized."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: positivity applies to $A^*A=0$ and gives value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: the prescribed trace-one density gives $omega_0(I)=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: when $Lambda=Delta$ the common-region identification leaves the pairing unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the consistency equations apply to every inclusion, including equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1: Countable Choice is an explicit hypothesis for the norm completion; local extension itself uses density and the norm bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is existence and uniqueness, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is existence and uniqueness, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-site-density",
+          "calculation": "For rho=diag(p,1-p), 0<=p<=1, the restriction A -> Tr(rho A) is normalized and positive."
+        }
+      ]
+    },
+    "lem-qsm-spin-state-compactness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-integer-lattice-countable",
+          "source_section": "Statement",
+          "quote": "For every positive integer $d$, the integer lattice $\\Gamma=\\mathbb{Z}^d$ is at most countable. Countability here means finite or in bijection with $\\mathbb{N}$, as in [[def-countable]].",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-powers-of-countable-sets-are-countable",
+          "source_section": "Statement",
+          "quote": "If $C$ is at most countable and $m\\in\\mathbb N$, then the finite product $C^m=\\prod_{i<m}C$ is at most countable.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-countable-union-of-countable",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let\n$(A_n)_{n \\in \\mathbb{N}}$ be a family of at most countable sets\n([[def-countable]]) indexed by $\\mathbb{N}$. Then\n\n$$U = \\bigcup_{n \\in \\mathbb{N}} A_n$$\n\nis at most countable.\n\n**The role of $\\mathrm{AC}_\\omega$.** It is spent at exactly one step, step 3.1 below, where a surjection $\\mathbb N\\to A_n$ is selected simultaneously for each nonempty $A_n$. The individual countability hypotheses assert that these sets of surjections are nonempty; they specify no simultaneous selection.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-powers-of-countable-sets-are-countable",
+          "source_section": "Statement",
+          "quote": "If $C$ is at most countable and $m\\in\\mathbb N$, then the finite product $C^m=\\prod_{i<m}C$ is at most countable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are\ncountably infinite ([[def-countable]]).\n\n**No choice principle is used.** The one place where a reader expects a choice,\n\"pick a representative $a/b$ of each rational\", is exactly where\n[[lem-rat-positive-denominator]] applies: every rational *has* a representative\nwith positive denominator, so the map $(a,b) \\mapsto [(a,b)]$ defined on\n$\\mathbb{Z} \\times \\mathbb{Z}_{>0}$ is already **surjective** onto $\\mathbb{Q}$,\nand countability follows from a surjection without ever selecting a\nrepresentative. The same device handles $\\mathbb{Z}$, which is a surjective image\nof $\\mathbb{N} \\times \\mathbb{N}$ by construction ([[def-integers]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-countable-union-of-countable",
+          "source_section": "Statement",
+          "quote": "**Assume the Axiom of Countable Choice** ([[def-countable-choice]]). Let\n$(A_n)_{n \\in \\mathbb{N}}$ be a family of at most countable sets\n([[def-countable]]) indexed by $\\mathbb{N}$. Then\n\n$$U = \\bigcup_{n \\in \\mathbb{N}} A_n$$\n\nis at most countable.\n\n**The role of $\\mathrm{AC}_\\omega$.** It is spent at exactly one step, step 3.1 below, where a surjection $\\mathbb N\\to A_n$ is selected simultaneously for each nonempty $A_n$. The individual countability hypotheses assert that these sets of surjections are nonempty; they specify no simultaneous selection.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a nonempty set. Then $A$ is at most countable ([[def-countable]]) if\nand only if there is a surjection $s : \\mathbb{N} \\to A$\n([[def-injection-surjection-bijection]]).\n\nMoreover, from any such surjection an injection $A \\to \\mathbb{N}$ is obtained\nexplicitly, without any choice, by\n\n$$j(a) := \\min\\{\\, k \\in \\mathbb{N} : s(k) = a \\,\\}.$$\n\nThis is the working form of countability used everywhere below: to prove a\nnonempty set countable it suffices to list its elements, repetitions and all.\n\n**No choice principle is used.** The backward direction is where an appeal to\nchoice would be natural (\"for each $a$ pick some $k$ with $s(k) = a$\") and it is\navoided outright, because $\\min$ is canonical: every nonempty set of naturals has\na *least* element ([[thm-well-ordering-principle]]), so $j(a)$ is determined by\n$a$ and $s$ alone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nested-interval-property",
+          "source_section": "Statement",
+          "quote": "For each $k \\in \\mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval\nwith $a_k \\le b_k$ ([[def-interval]]), and suppose the family is **nested**:\n\n$$I_{k+1} \\subseteq I_k \\qquad (k \\in \\mathbb{N}).$$\n\nWrite $\\ell_k = b_k - a_k \\ge 0$ for the length of $I_k$. Then:\n\n1. $\\displaystyle\\bigcap_{k \\in \\mathbb{N}} I_k$ is **nonempty**. More precisely,\n   with $a = \\sup\\{a_k : k \\in \\mathbb{N}\\}$ and\n   $b = \\inf\\{b_k : k \\in \\mathbb{N}\\}$, both of which exist, one has $a \\le b$\n   and $$\\bigcap_{k \\in \\mathbb{N}} I_k = [a, b].$$\n2. $\\displaystyle\\bigcap_{k \\in \\mathbb{N}} I_k$ is a **single point** if and only\n   if $\\ell_k \\to 0$ ([[def-real-limit]]).\n\nEvery hypothesis is load bearing. Dropping closedness makes the intersection\nempty; dropping boundedness does the same; and dropping nonemptiness of the\nindividual intervals is vacuously fatal.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, the local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$, with partial trace characterized by its pairing against every $A\\otimes I_{\\Lambda'\\setminus\\Lambda}$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positive trace-one matrices, one on each finite-region algebra $\\mathcal A_\\Lambda$ of [[def-qsm-local-spin-algebras]], such that for every $\\Lambda\\subseteq\\Lambda'$ their partial traces agree: $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. There is a unique infinite algebraic state $\\omega$ on $\\mathcal A$ whose restriction to each $\\mathcal A_\\Lambda$ is $A\\mapsto\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $m\\in\\mathbb N$, let $R_m$ be the set of ranges of all $m$-tuples in $\\Gamma^m$, including tuples with repeated entries. Since $\\Gamma^m$ is at most countable by [F1], a surjection $\\mathbb N\\to\\Gamma^m$ composed with the range map shows $R_m$ is at most countable by [F2]. Every finite region is the range of a tuple of its cardinality, with the empty region the range of the unique $0$-tuple. Thus all finite regions form the countable union $\\bigcup_m R_m$, which is at most countable by [F1] and [A1]. For each region $\\Lambda$, rational real and imaginary matrix entries give a countable subset of $\\mathcal A_\\Lambda$: it is a finite Cartesian power of $\\mathbb Q$, so [F1]\u2013[F2] apply. These matrices are norm dense: for a $D_\\Lambda\\times D_\\Lambda$ error matrix $E$ whose entries have modulus at most $\\delta$, Cauchy\u2013Schwarz gives $\\|Ev\\|_2^2\\le\\sum_{i,j}|E_{ij}|^2\\|v\\|_2^2\\le D_\\Lambda^2\\delta^2\\|v\\|_2^2$, so $\\|E\\|_{\\mathrm{op}}\\le D_\\Lambda\\delta$. A second countable union, using [A1], therefore gives a countable norm-dense set $D$ in $\\mathcal A_{\\mathrm{loc}}$, hence in its completion $\\mathcal A$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F2], choose a surjection $s:\\mathbb N\\to D$ and enumerate its values as $D_1,D_2,\\ldots$. For each fixed $j\\ge1$, the scalar sequence $z_n^{(j)}:=\\omega_n(D_j)$ is bounded: $D_j$ is local, and the finite-dimensional state/density interface [F3] gives $|\\omega_n(D_j)|\\le\\|D_j\\|$. The same estimate extends each $\\omega_n$ from the dense local algebra to all of $\\mathcal A$, so $\\|\\omega_n\\|=1$ by normalization.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "We specify a deterministic convergent-subsequence rule for any bounded complex sequence $z_n$. Choose $M>0$ with $z_n\\in[-M,M]^2$ under $\\mathbb C\\cong\\mathbb R^2$. Subdivide the current closed square into its four closed equal subsquares in fixed lexicographic order; at least one contains infinitely many terms, and the rule takes the first such square. At the first stage choose the least index whose term lies in that square; at every later stage choose the least index exceeding the previous one whose term lies in the selected square. Writing the nested squares as $I_j\\times J_j$, their closed coordinate intervals are nested and have lengths tending to zero. [F5] gives unique $x\\in\\bigcap_j I_j$ and $y\\in\\bigcap_j J_j$, so $(x,y)$ is the unique common point of the squares. The subsequence terms after stage $j$ lie in the $j$th square, whose diameter tends to zero, hence converge to $(x,y)$. Every choice in this rule is determined by a finite ordering or a least natural index; it uses no additional choice axiom.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the deterministic rule of step 1.3 recursively to the coordinate sequences $z_n^{(j)}$ along nested subsequences for $j\\ge1$. More precisely, start with $i_0(n)=n$; at stage $j$, write the resulting subsequence as $i_j(n)=i_{j-1}(s_j(n))$ with $s_j$ strictly increasing, so $s_j(j)\\ge j$. By [F5] and recursion, these maps are defined for every positive $j$. Put $r_j=i_j(j)$ for $j\\ge1$. For $j\\ge2$, $r_j=i_{j-1}(s_j(j))\\ge i_{j-1}(j)>i_{j-1}(j-1)=r_{j-1}$, so $(r_j)_{j\\ge1}$ is increasing. For fixed $m\\ge1$ and $j\\ge m$, nestedness gives $r_j=i_m(t_{m,j})$ where $t_{m,j}\\ge j$; hence these are tails of the convergent coordinate subsequence selected at stage $m$, and $\\omega_{r_j}(D_m)$ converges.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For any $A\\in\\mathcal A_{\\mathrm{loc}}$ and $\\varepsilon>0$, choose $D_m$ with $\\|A-D_m\\|<\\varepsilon/4$ by density. Since each $\\omega_{r_j}$ has norm one,\n$$|\\omega_{r_j}(A)-\\omega_{r_k}(A)|\\le2\\|A-D_m\\|+|\\omega_{r_j}(D_m)-\\omega_{r_k}(D_m)|.$$\nThe last term tends to zero as $j,k\\to\\infty$ by step 2.1. Thus $\\omega_{r_j}(A)$ is Cauchy and converges for every local $A$. Define $\\omega_0(A):=\\lim_j\\omega_{r_j}(A)$ on $\\mathcal A_{\\mathrm{loc}}$. For local $A,B$ and $\\lambda\\in\\mathbb C$, the equalities $\\omega_{r_j}(A+\\lambda B)=\\omega_{r_j}(A)+\\lambda\\omega_{r_j}(B)$ pass to the limit, and $\\omega_0(I)=1$. For every local $X$, $\\omega_0(X^*X)=\\lim_j\\omega_{r_j}(X^*X)\\ge0$. Finally $|\\omega_0(A)|=\\lim_j|\\omega_{r_j}(A)|\\le\\|A\\|$. Thus $\\omega_0$ is a bounded normalized positive functional on $\\mathcal A_{\\mathrm{loc}}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On each finite region $\\Lambda$, write $\\rho_\\Lambda^{(j)}$ for the density of $\\omega_{r_j}|_{\\mathcal A_\\Lambda}$. For each matrix unit $E_{ab}$, its entries are rational, so $E_{ba}\\in D$; the trace-pairing formula gives $(\\rho_\\Lambda^{(j)})_{ab}=\\omega_{r_j}(E_{ba})$. Thus every matrix coefficient converges by step 2.1. The entrywise limit $\\rho_\\Lambda$ is Hermitian and trace one because these are finite linear equalities; for every vector $v$, $\\langle\\rho_\\Lambda v,v\\rangle=\\lim_j\\langle\\rho_\\Lambda^{(j)}v,v\\rangle\\ge0$, so it is positive. Every partial-trace consistency equation is a finite linear equation in these entries and therefore passes to the limit. Hence $\\{\\rho_\\Lambda\\}$ is a consistent family.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F6], the consistent family of step 4.1 extends to a unique state $\\omega$ on $\\mathcal A$, and $\\omega|_{\\mathcal A_{\\mathrm{loc}}}=\\omega_0$. For any $A\\in\\mathcal A$ and $\\varepsilon>0$, choose local $B$ with $\\|A-B\\|<\\varepsilon/4$. Then\n$$|\\omega_{r_j}(A)-\\omega(A)|\\le2\\|A-B\\|+|\\omega_{r_j}(B)-\\omega(B)|,$$\nwhose right side is eventually less than $\\varepsilon$ by step 3.1. Therefore $\\omega_{r_j}(A)\\to\\omega(A)$ for every $A\\in\\mathcal A$, proving sequential compactness in the pointwise topology.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty support is included as the range of the unique zero-tuple."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: the norm-one estimate controls the zero observable and its functional values are all zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: a constant sequence of states is covered by the diagonal subsequence construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty-region and $q=1$ local matrix algebras still have rational countable dense subsets."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.3: the nested closed squares include their boundary points; their diameters tend to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: Countable Choice is explicit in [A1] for the countable unions used to enumerate finite regions and rational local matrices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is subsequence compactness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is subsequence compactness, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "constant-state-sequence",
+          "calculation": "If every omega_n equals omega_0, the full sequence is a pointwise convergent subsequence."
+        },
+        {
+          "case": "zero-observable",
+          "calculation": "For A=0, every coordinate omega_n(A) is zero."
+        }
+      ]
+    },
+    "lem-qsm-state-gns-construction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product space and let $(\\widehat X,\\kappa)$ be its norm completion ([[def-completion-of-a-normed-space]]). Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm; with it $\\widehat X$ is a Hilbert space, and the extension is unique among inner products that extend the given pairing and induce the completion norm.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** \u201cQuasi-local\u201d means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** \u201cQuasi-local\u201d means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. Every Hermitian endomorphism $M$ has an orthonormal eigenbasis with real eigenvalues. For a real function $f$ on its finite spectrum, define $f(M)$ by its spectral projections; this definition is independent of the choice of eigenbasis. In particular positive square roots, exponentials, and logarithms on positive supports are well defined.\n\nFor a density matrix $\\rho$ on $H$, meaning a Hermitian positive semidefinite operator with $\\operatorname{Tr}\\rho=1$, $\\operatorname{Tr}(\\rho A)=\\sum_jp_j\\langle Au_j,u_j\\rangle$ for bounded $A$, where $\\rho=\\sum_jp_j|u_j\\rangle\\langle u_j|$. The weighted form $(X,Y)_\\rho=\\operatorname{Tr}(\\rho X^*Y)$ satisfies Cauchy\u2013Schwarz, $|(X,Y)_\\rho|^2\\leq(X,X)_\\rho(Y,Y)_\\rho$. Finally, $\\operatorname{Tr}(\\rho^2)\\leq1$, with equality exactly for rank-one densities, and those are exactly the extreme points of the finite density-matrix set.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positive trace-one matrices, one on each finite-region algebra $\\mathcal A_\\Lambda$ of [[def-qsm-local-spin-algebras]], such that for every $\\Lambda\\subseteq\\Lambda'$ their partial traces agree: $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. There is a unique infinite algebraic state $\\omega$ on $\\mathcal A$ whose restriction to each $\\mathcal A_\\Lambda$ is $A\\mapsto\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-completion-of-an-inner-product-space-is-hilbert",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ be a real or complex inner-product space and let $(\\widehat X,\\kappa)$ be its norm completion ([[def-completion-of-a-normed-space]]). Then $\\widehat X$ carries a unique inner product that extends the given one along $\\kappa$ and whose induced length is the completion norm; with it $\\widehat X$ is a Hilbert space, and the extension is unique among inner products that extend the given pairing and induce the completion norm.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-space-of-bounded-linear-operators",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field. Write\n\n$$\\mathcal B(X,Y) := \\{T:X\\to Y : T \\text{ is a bounded linear operator}\\}.$$\n\nThis is a subspace of the vector space $\\mathcal L(X,Y)$ of\n[[def-vector-space-of-linear-maps]], with the same pointwise operations:\n\n$$(S+T)(x) := Sx+Tx,\\qquad (\\lambda T)(x) := \\lambda\\,Tx.$$\n\nIf $X=Y$, write\n\n$$\\mathcal B(X) := \\mathcal B(X,X).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $a,b\\in\\mathcal A_{\\mathrm{loc}}$, positivity makes $Q(z):=\\omega((a+zb)^*(a+zb))\\ge0$ for every $z\\in\\mathbb C$. Expanding gives $Q(z)=\\omega(a^*a)+z u+\\overline z\\,v+|z|^2c$, where $u=\\omega(a^*b)$, $v=\\omega(b^*a)$, and $c=\\omega(b^*b)\\ge0$. Taking real $z=t$ and purely imaginary $z=it$ shows respectively that $u+v$ is real and $i(u-v)$ is real, so $v=\\overline u$. If $c>0$, take $z=-v/c$ to obtain $Q(z)=\\omega(a^*a)-|v|^2/c\\ge0$. If $c=0$ and $v\\ne0$, taking $z=-t v$ for sufficiently large real $t>0$ gives $Q(z)=\\omega(a^*a)-2t|v|^2<0$, a contradiction; hence $v=0$. Therefore $|\\omega(b^*a)|^2\\le\\omega(a^*a)\\omega(b^*b)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $N:=\\{a\\in\\mathcal A_{\\mathrm{loc}}:\\omega(a^*a)=0\\}$. If $a,b\\in N$, step 1.1 makes both mixed terms $\\omega(a^*b)$ and $\\omega(b^*a)$ zero, so $\\omega((a+b)^*(a+b))=0$; scalar multiples stay in $N$ by homogeneity. Thus $N$ is a vector subspace. The same inequality makes $\\langle[a],[b]\\rangle:=\\omega(b^*a)$ independent of representatives in $\\mathcal A_{\\mathrm{loc}}/N$. This form is linear in its first argument, conjugate-linear in the second, conjugate symmetric, and positive definite on the quotient: $\\langle[a],[a]\\rangle=0$ implies $a\\in N$ and hence $[a]=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $a,b\\in\\mathcal A_{\\mathrm{loc}}$ and choose one finite region containing both. In its matrix representation, $c:=\\|a\\|^2I-a^*a$ is Hermitian and positive, since $\\langle c\\xi,\\xi\\rangle=\\|a\\|^2\\|\\xi\\|^2-\\|a\\xi\\|^2\\ge0$ for every vector $\\xi$. By [F2], $c^{1/2}$ exists in that same finite matrix algebra. Therefore $b^*cb=(c^{1/2}b)^*(c^{1/2}b)$ and positivity of $\\omega$ gives $\\omega(b^*a^*ab)\\le\\|a\\|^2\\omega(b^*b)$. In particular, the null space $N$ of step 2.1 is a left ideal under multiplication by local $a$: if $b\\in N$, the inequality gives $\\omega((ab)^*(ab))=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Define $\\pi_0(a)[b]:=[ab]$ for $a,b\\in\\mathcal A_{\\mathrm{loc}}$. Step 3.1 shows this is well defined on the quotient. The bound there gives $\\|\\pi_0(a)[b]\\|^2\\le\\|a\\|^2\\|[b]\\|^2$, so $\\pi_0(a)$ extends uniquely to a bounded operator on the Hilbert completion $\\mathcal H_\\omega$, with $\\|\\pi_0(a)\\|\\le\\|a\\|$. On quotient vectors, multiplication gives $\\pi_0(a)\\pi_0(d)[b]=\\pi_0(ad)[b]$, and $\\langle\\pi_0(a)[b],[c]\\rangle=\\omega(c^*ab)=\\langle[b],\\pi_0(a^*)[c]\\rangle$; continuity extends these identities to $\\mathcal H_\\omega$.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "For $A\\in\\mathcal A$, represent it by a Cauchy sequence $(a_n)$ in $\\mathcal A_{\\mathrm{loc}}$, as in the norm-completion construction. The estimate $\\|\\pi_0(a_n)-\\pi_0(a_m)\\|\\le\\|a_n-a_m\\|$ makes the operators operator-norm Cauchy. For each $\\xi\\in\\mathcal H_\\omega$, completeness gives $T\\xi:=\\lim_n\\pi_0(a_n)\\xi$; this is linear and bounded because $(a_n)$ is norm bounded and $\\|\\pi_0(a_n)\\xi\\|\\le\\|a_n\\|\\|\\xi\\|$. Given $\\varepsilon>0$, for all sufficiently large $n,m$ the operator difference has norm at most $\\varepsilon$; fixing such $n$ and passing $m\\to\\infty$ gives $\\|(\\pi_0(a_n)-T)\\xi\\|\\le\\varepsilon\\|\\xi\\|$, hence $\\|\\pi_0(a_n)-T\\|\\le\\varepsilon$. Thus $T\\in\\mathcal B(\\mathcal H_\\omega)$ is the operator-norm limit. Equivalent representatives give the same limit by the same estimate, defining $\\pi_\\omega(A):=T$. Linearity follows because local approximants to $A,B$ and $\\lambda\\in\\mathbb C$ give approximants $a_n+\\lambda b_n$ to $A+\\lambda B$, and each $\\pi_0$ is linear. Passing $\\|\\pi_0(a_n)\\|\\le\\|a_n\\|$ to the limit also gives $\\|\\pi_\\omega(A)\\|\\le\\|A\\|$, so $\\pi_\\omega$ is bounded and contractive. If $(b_n)$ represents $B$, then $(a_nb_n)$ represents $AB$ by continuity of multiplication in $\\mathcal A$, and $\\pi_0(a_nb_n)=\\pi_0(a_n)\\pi_0(b_n)$; taking operator-norm limits gives multiplicativity. For any $x$ in a C*-algebra, $\\|x^*\\|^2=\\|xx^*\\|\\le\\|x\\|\\|x^*\\|$ by the C*-identity and submultiplicativity; this gives $\\|x^*\\|\\le\\|x\\|$, and applying it to $x^*$ yields equality. Hence $(a_n^*)$ represents $A^*$; the adjoint identity from step 4.1 and norm continuity of Hilbert adjoints [F6] give $\\pi_\\omega(A^*)=\\pi_\\omega(A)^*$. The constant sequence at $I$ gives $\\pi_\\omega(I)=I$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Put $\\Omega_\\omega:=[I]$. Its squared norm is $\\omega(I)=1$. For every local $a$, $\\pi_\\omega(a)\\Omega_\\omega=[a]$; these classes are dense by the definition of $\\mathcal H_\\omega$, so $\\Omega_\\omega$ is cyclic. For local $a$, $\\langle\\pi_\\omega(a)\\Omega_\\omega,\\Omega_\\omega\\rangle=\\omega(a)$ by the quotient inner product. Both sides are continuous in $a$ and $\\mathcal A_{\\mathrm{loc}}$ is dense in $\\mathcal A$, so the identity holds for every $A\\in\\mathcal A$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 6.1: the algebra unit defines the cyclic vector $[I]$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the null space is quotiented out so zero seminorm classes become the zero vector."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.1: normalization gives $|[I]|^2=omega(I)=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: the finite scalar algebra case has the same positive-square-root and norm inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1: the constant sequence at the unit yields $pi(I)=I$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1: Countable Choice is assumed for both the algebra and inner-product completions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts existence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts existence, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "scalar-state",
+          "calculation": "For A=C and omega(z)=z, N={0}, H=C, pi(z)w=zw and Omega=1."
+        }
+      ]
+    },
+    "ex-qsm-quasilocal-two-site-locality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-local-spin-inclusions-isometric",
+          "source_section": "Statement",
+          "quote": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct matrix multiplication gives $X^*=X$, $Z^*=Z$, $X^2=Z^2=I$, and $\\|X\\|=\\|Z\\|=1$ because each preserves the Euclidean norm and is nonzero. By [F2], the embedded $X_x$ and $Z_y$ have the same adjoint, square and norm properties.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $x<y$, lexicographic factor order gives $X_x=X\\otimes I$ and $Z_y=I\\otimes Z$, so $(X\\otimes I)(I\\otimes Z)=X\\otimes Z=(I\\otimes Z)(X\\otimes I)$. If $y<x$, the factors are interchanged and both products are $Z\\otimes X$. Thus in either ordering $X_xZ_y=Z_yX_x$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The supports $\\{x\\}$ and $\\{y\\}$ are disjoint; the computed commutation is therefore the stated instance of the general disjoint-locality clause.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes two distinct sites and no empty support is used."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example concerns the two nonzero Pauli matrices, not the zero operator."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the explicit matrices are self-adjoint unitaries of norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes spin dimension $q=2$ and distinct sites."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Only explicit finite matrices and the two given sites are used; no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a direct calculation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a direct calculation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "pauli-products",
+          "calculation": "X^2=Z^2=I and (X tensor I)(I tensor Z)=X tensor Z=(I tensor Z)(X tensor I); both norms equal 1."
+        }
+      ]
+    },
+    "ex-qsm-quasilocal-infinite-tail-observable": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-int-operations",
+          "source_section": "Definition",
+          "quote": "On $\\mathbb{Z}$ ([[def-integers]]) define, on representatives,\n\n$$[(a,b)] + [(c,d)] := [(a+c,\\; b+d)],$$\n$$[(a,b)] \\cdot [(c,d)] := [(ac+bd,\\; ad+bc)],$$\n$$-[(a,b)] := [(b,a)], \\qquad 0 := [(0,0)], \\qquad 1 := [(1,0)].$$\n\nThese do not depend on the chosen representatives\n([[lem-int-add-well-defined]], [[lem-int-mul-well-defined]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-int-order",
+          "source_section": "Definition",
+          "quote": "For integers $x = [(a,b)]$ and $y = [(c,d)]$ ([[def-integers]]) define\n\n$$x \\le y \\iff a + d \\le b + c \\quad \\text{in } \\mathbb{N}.$$\n\nWrite $x < y$ when $x \\le y$ and $x \\ne y$. An integer $x$ is **positive**\nwhen $0 < x$; on representatives, $0 < [(a,b)]$ exactly when $b < a$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-int-ordered-ring",
+          "source_section": "Statement",
+          "quote": "The relation of [[def-int-order]] is well defined and is a total order on\n$\\mathbb{Z}$; it is compatible with addition ($x \\le y$ implies\n$x + z \\le y + z$) and positives are closed under multiplication\n($0 < x$ and $0 < y$ imply $0 < xy$). Thus $\\mathbb{Z}$ is a totally\nordered commutative ring.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-int-order",
+          "source_section": "Definition",
+          "quote": "For integers $x = [(a,b)]$ and $y = [(c,d)]$ ([[def-integers]]) define\n\n$$x \\le y \\iff a + d \\le b + c \\quad \\text{in } \\mathbb{N}.$$\n\nWrite $x < y$ when $x \\le y$ and $x \\ne y$. An integer $x$ is **positive**\nwhen $0 < x$; on representatives, $0 < [(a,b)]$ exactly when $b < a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-int-operations",
+          "source_section": "Definition",
+          "quote": "On $\\mathbb{Z}$ ([[def-integers]]) define, on representatives,\n\n$$[(a,b)] + [(c,d)] := [(a+c,\\; b+d)],$$\n$$[(a,b)] \\cdot [(c,d)] := [(ac+bd,\\; ad+bc)],$$\n$$-[(a,b)] := [(b,a)], \\qquad 0 := [(0,0)], \\qquad 1 := [(1,0)].$$\n\nThese do not depend on the chosen representatives\n([[lem-int-add-well-defined]], [[lem-int-mul-well-defined]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-integers",
+          "source_section": "Definition",
+          "quote": "On the set $\\mathbb{N} \\times \\mathbb{N}$ of pairs of natural numbers, define\n\n$$(a,b) \\sim (c,d) \\iff a + d = b + c.$$\n\nThis is an equivalence relation ([[lem-int-equivalence]]). The **integers** are\nthe quotient\n\n$$\\mathbb{Z} := (\\mathbb{N} \\times \\mathbb{N}) / \\sim,$$\n\nand we write $[(a,b)]$ for the equivalence class of $(a,b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nat-order-is-membership",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{N} = \\omega$ be the von Neumann naturals, with $0 = \\varnothing$ and\n$\\sigma(n) = n \\cup \\{n\\}$ ([[def-natural-numbers]]), and let $\\le$ and $<$ be\nthe order defined additively by $m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n)$\nand $m < n \\iff (m \\le n$ and $m \\ne n)$ ([[def-nat-order]]). Then $\\mathbb{N}$ is\na **transitive set**: every element of a natural number is itself a natural\nnumber. Moreover, for all $m, n \\in \\mathbb{N}$:\n\n1. $m < n \\iff m \\in n$;\n2. $m \\le n \\iff m \\subseteq n$;\n3. $n < \\sigma(n)$, and $m < \\sigma(n) \\iff m \\le n$;\n4. $0 \\le n$, and $0 \\in n$ whenever $n \\ne 0$.\n\nConsequently $n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ for every $n$: a natural\nnumber is exactly the set of the naturals below it.\n\n**Why this is proved here.** [[def-nat-order]] defines the order additively and\nrecords the identification with membership only as an orienting remark, without\nproof. The countability arguments on this page use that identification as a\nworking fact, so it is established here, from the additive order and induction\nalone. Nothing below uses ordinals or any later material.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-local-spin-inclusions-isometric",
+          "source_section": "Statement",
+          "quote": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** \u201cQuasi-local\u201d means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-positive-site-outside-region",
+          "claim": "Fix any finite region $\\Lambda\\subseteq\\mathbb Z$. Enumerate the finite set $F:=\\Lambda\\cap\\{n\\in\\mathbb Z:0<n\\}$ as $n_1,\\ldots,n_r$, and put $S:=\\sum_{j=1}^{r}n_j$, taking $S=0$ when $r=0$. By induction on the number of terms, every finite sum of positive integers is nonnegative: the empty sum is $0$, and if a partial sum $R\\ge0$ then adding a positive integer $n$ gives $R+n>R\\ge0$, since $0<n$ translates to $R+0\\le R+n$ by [F1], and equality would cancel $R$ in the additive group $\\mathbb Z$ to give $0=n$. If $k\\in F$, write $S=k+R$, where $R$ is the sum of the remaining positive terms; the same induction gives $R\\ge0$, and order-compatibility yields $S\\ge k$. Set $m:=S+1$. Since $1>0$ by [F2] and $S\\ge0$, order-compatibility gives $m>S\\ge0$, so $m>0$. If $m\\in\\Lambda$, then $m\\in F$ and the preceding bound gives $S\\ge m$, contradicting $m>S$. Thus every finite region omits a positive integer site.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-1",
+          "claim": "If $M>N$, the triangle inequality and isometric inclusions give $\\|H_M-H_N\\|\\le\\sum_{n=N+1}^{M}2^{-n}<2^{-N}$. Thus $(H_N)$ is Cauchy in $\\mathcal A_{\\mathrm{loc}}$ and converges to some $H\\in\\mathcal A$ by completion. Since each $H_N$ is self-adjoint and the adjoint extends continuously, $H^*=H$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $k\\ge1$ and let $X_k$ be the Pauli $X$ at site $k$. For $N\\ge k$, every $Z_n$ with $n\\ne k$ commutes with $X_k$ by disjoint locality, while direct multiplication gives $[Z,X]=ZX-XZ=2iY$, where $Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix}$ and $Y^*Y=I$. Hence $[H_N,X_k]=2^{-k}(2iY)_k$ for all $N\\ge k$. By continuity of multiplication and norm convergence, $[H,X_k]=2^{1-k}iY_k$, whose norm is $2^{1-k}>0$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $H$ had a finite localization region $\\Lambda$, step 1.1 supplies $k\\ge1$ outside $\\Lambda$. Then [F4] would give $[H,X_k]=0$, contradicting step 2.1. Therefore $H$ has no finite localization region.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement fixes d=1,q=2 and positive sites n\u22651. Step 1.1 permits an empty finite region or no positive sites in it: r=0 gives S=0 and the omitted site m=1."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Every coefficient is positive and each Pauli term is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement gives H_1=2^{-1}Z_1; step 1.2 proves the geometric-tail estimate for the sequence beginning at this one-site approximant."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes $q=2$ and infinitely many one-dimensional lattice sites."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves [H_N,X_k]=2^{-k}(2iY)_k for every N\u2265k, including N=k, and passes to the norm limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs an omitted positive site m=1+sum_{n in Lambda,n>0}n, including empty sum zero. Step 3.1 uses it to contradict finite localization; no unprovided infinitude supplier or arbitrary choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves nonlocality by contradiction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves nonlocality by contradiction, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "first-commutator",
+          "calculation": "At k=1, ||[H,X_1]||=1."
+        },
+        {
+          "case": "geometric-tail",
+          "calculation": "After N terms, the remaining norm is at most sum_{n>N}2^-n=2^-N."
+        }
+      ]
+    },
+    "ex-qsm-maximally-mixed-consistent-product-state": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, the local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$, with partial trace characterized by its pairing against every $A\\otimes I_{\\Lambda'\\setminus\\Lambda}$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positive trace-one matrices, one on each finite-region algebra $\\mathcal A_\\Lambda$ of [[def-qsm-local-spin-algebras]], such that for every $\\Lambda\\subseteq\\Lambda'$ their partial traces agree: $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. There is a unique infinite algebraic state $\\omega$ on $\\mathcal A$ whose restriction to each $\\mathcal A_\\Lambda$ is $A\\mapsto\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $\\rho_\\Lambda$ is positive because it is a positive scalar multiple of the identity. Its trace is $q^{-|\\Lambda|}\\operatorname{Tr}_\\Lambda(I_\\Lambda)=1$ by [F1], including $\\Lambda=\\varnothing$ where $q^0=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $\\Delta=\\Lambda'\\setminus\\Lambda$ and $r=|\\Delta|$. For every $A\\in\\mathcal A_\\Lambda$, the defining partial-trace pairing gives\n$$\\operatorname{Tr}_\\Lambda\\!\\left(A\\operatorname{Tr}_\\Delta(I_\\Lambda\\otimes I_\\Delta)\\right)=\\operatorname{Tr}_{\\Lambda'}((A\\otimes I_\\Delta)(I_\\Lambda\\otimes I_\\Delta))=q^r\\operatorname{Tr}_\\Lambda(A),$$\nwhere the last equality follows by summing the diagonal matrix coefficients over a configuration basis of $\\mathcal H_\\Delta$, which has $q^r$ elements. The trace pairing is nondegenerate: if $\\operatorname{Tr}(AT)=0$ for every matrix $A$, taking $A=E_{ji}$ makes each entry $T_{ij}$ zero. Hence $\\operatorname{Tr}_\\Delta(I_\\Lambda\\otimes I_\\Delta)=q^rI_\\Lambda$. Since $|\\Lambda'|=|\\Lambda|+r$,\n$$\\operatorname{Tr}_\\Delta(\\rho_{\\Lambda'})=q^{-|\\Lambda'|}q^rI_\\Lambda=q^{-|\\Lambda|}I_\\Lambda=\\rho_\\Lambda.$$\nThus the family is consistent for every inclusion, including equality of regions ($r=0$).",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], this family extends to a unique algebraic state $\\omega$ on $\\mathcal A$, and its local restriction is $\\omega(A)=\\operatorname{Tr}_\\Lambda(\\rho_\\Lambda A)=q^{-|\\Lambda|}\\operatorname{Tr}_\\Lambda(A)$ for $A\\in\\mathcal A_\\Lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions, choose orthonormal configuration bases $(e_i)$ and $(f_j)$ for their local Hilbert spaces. The tensor basis gives\n$$\\operatorname{Tr}_{\\Lambda\\cup\\Delta}(A\\otimes B)=\\sum_{i,j}\\langle Ae_i,e_i\\rangle\\langle Bf_j,f_j\\rangle=\\operatorname{Tr}_\\Lambda(A)\\operatorname{Tr}_\\Delta(B).$$\nSubstitution into step 2.1 gives $\\omega(AB)=\\omega(A)\\omega(B)$ on these disjoint local factors; this product formula follows from the displayed density family and is not an assumption about arbitrary states.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: the empty-region density is $q^0I=I$ on the one-dimensional local space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The displayed density matrices have trace one and are never zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the identity density is trace one when $q=1$ or the region is empty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: an equal-region inclusion has $r=0$ and the same density on both sides."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2: the partial-trace consistency calculation includes the boundary case $Lambda=Lambdaprime$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: the state extension has Countable Choice among its explicit hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves consistency and an extension, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves consistency and an extension, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "empty-and-one-site",
+          "calculation": "For q=2, rho_empty=1 and rho_{0}=I_2/2 with trace 1."
+        },
+        {
+          "case": "one-to-two-sites",
+          "calculation": "Tr_2(I_2 tensor I_2/4)=I_2/2."
+        }
+      ]
+    }
+  }
+}

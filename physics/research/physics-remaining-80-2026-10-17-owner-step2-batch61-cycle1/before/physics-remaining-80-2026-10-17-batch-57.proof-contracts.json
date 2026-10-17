@@ -1,0 +1,529 @@
+{
+  "version": 1,
+  "scope": [
+    "def-tgr-entropy-only-radiation-state",
+    "lem-tgr-radiation-state-balance",
+    "lem-tgr-cattaneo-stability-causality",
+    "ex-tgrmath-cattaneo-damped-mode"
+  ],
+  "contracts": {
+    "def-tgr-entropy-only-radiation-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition introduces explicit scalar maps on positive real intervals and asserts no spacetime or global solution."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition has domains T>0 and s>0, so neither zero coordinate is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the Definition interior point T=1, the maps give epsilon=a_R, p=a_R/3, and s=4a_R/3 with finite values."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Definition assumes a_R>0 and makes no assertion at the degenerate value a_R=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition uses open positive intervals and makes no endpoint extension claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit formulas in the Definition use positive real powers and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-57",
+        "notes": "The positive parameter a_R is not assigned a quantum-statistical or empirical value. No number coordinate/current is introduced; the inverse and differential claims are proved in the consuming lemma."
+      }
+    },
+    "lem-tgr-radiation-state-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-entropy-only-radiation-state",
+          "source_section": "Definition",
+          "quote": "Fix a real parameter $a_R>0$ and let the temperature coordinate range over the open interval $T\\in(0,\\infty)$. Define the entropy-only radiation state maps\n\n$$\\varepsilon_T(T):=a_RT^4,\\qquad p_T(T):=\\frac13a_RT^4,\\qquad s_T(T):=\\frac43a_RT^3.$$\n\nHere $\\varepsilon_T$ and $p_T$ are scalar-valued maps on $(0,\\infty)$, and $s_T$ is the entropy coordinate as a scalar-valued map on the same interval. Put $h_T(T):=\\varepsilon_T(T)+p_T(T)$. No particle-number coordinate, particle-number current, or chemical-potential coordinate is part of this state space.\n\nAlso define maps on the positive entropy-coordinate interval by\n\n$$\\tau(s):=\\left(\\frac{3s}{4a_R}\\right)^{1/3},\\qquad \\varepsilon_s(s):=a_R\\tau(s)^4,\\qquad p_s(s):=\\frac13\\varepsilon_s(s),\\qquad s\\in(0,\\infty).$$\n\nThe displayed formulas define functions on the stated domains. In the conventional SI physical reading, $T$ is measured in K, $a_R$ in J m$^{-3}$ K$^{-4}$, $\\varepsilon_T,p_T$ in J m$^{-3}$, and $s_T$ in J m$^{-3}$ K$^{-1}$. These units do not assign an empirical value to $a_R$. In particular, this definition does not derive a quantum blackbody coefficient or assert that any physical system realizes these maps.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-tgr-constant-linear-energy-causality",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $m\\ge1$, let $U:\\mathbb R\\times\\mathbb R^3\\to\\mathbb R^m$, and let $A_1,A_2,A_3,B,M\\in\\mathbb R^{m\\times m}$ be constant matrices. Assume $M=M^{\\mathsf T}$ is positive definite, each $MA_j$ is symmetric, and $S:=(MB+B^{\\mathsf T}M)/2$ is positive semidefinite. Consider\n\n$$\\partial_tU+\\sum_{j=1}^3A_j\\partial_{x_j}U+BU=0.$$\n\nFor $U_0\\in\\mathcal S(\\mathbb R^3;\\mathbb R^m)$ there is a unique global smooth solution, Schwartz in $x$ at each time and continuous in every Schwartz seminorm on compact time intervals. With the negative-sign, $2\\pi$-normalized Fourier transform, put $\\widehat U(\\xi)=\\int_{\\mathbb R^3}e^{-2\\pi i x\\cdot\\xi}U(x)\\,dx$ and define, for $s\\ge0$,\n\n$$\\|U\\|_{H^s_M}^2:=\\int_{\\mathbb R^3}(1+|\\xi|^2)^s\\widehat U(\\xi)^*M\\widehat U(\\xi)\\,d\\xi.$$\n\nFor $t\\ge0$, $\\|U(t)\\|_{H^s_M}\\le\\|U_0\\|_{H^s_M}$ for every $s\\ge0$; hence the solution depends continuously on the data in each such norm. The same conclusions hold for smooth periodic data on the flat torus $\\mathbb T_L^3:=(\\mathbb R/L\\mathbb Z)^3$, $L>0$, with Fourier coefficients $\\widehat U_k=L^{-3}\\int_{[0,L]^3}U(x)e^{-2\\pi i k\\cdot x/L}\\,dx$ and\n\n$$\\|U\\|_{H^s_M(\\mathbb T_L^3)}^2:=\\sum_{k\\in\\mathbb Z^3}(1+|k/L|^2)^s\\widehat U_k^*M\\widehat U_k.$$\n\nFor periodic data, $\\|U(t)\\|_\\infty\\le C_{s,L,M}\\|U_0\\|_{H^s_M(\\mathbb T_L^3)}$ for each integer $s>3/2$.\n\nFor a unit vector $\\nu\\in\\mathbb R^3$, write $A(\\nu)=\\sum_j\\nu_jA_j$ and $\\widetilde A(\\nu)=M^{1/2}A(\\nu)M^{-1/2}$. The finite speed\n\n$$v_*:=\\sup_{|\\nu|=1}\\max\\{|\\lambda|:\\lambda\\in\\operatorname{spec}(\\widetilde A(\\nu))\\}$$\n\nis finite. If $v_*>0$, $R>v_*t$, and $U_0$ vanishes on $B_R(x_0)$, then $U(t)$ vanishes on $B_{R-v_*t}(x_0)$ for $0\\le t<R/v_*$. The same assertion holds on $\\mathbb T_L^3$ using its geodesic distance. If $v_*=0$, every $A_j=0$ and the system is a pointwise linear ODE, so spatial support does not move. These are conclusions for the displayed linear systems; no variable-coefficient or nonlinear existence claim is included.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiate the state maps, prove the positive entropy derivative and d epsilon equals T ds, and verify both coordinate compositions.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Differentiate the normalized velocity, expand the stress divergence using the metric connection, and obtain the energy projection.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Compute h=Ts and dp/d epsilon=1/3, including positivity of h for T>0.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Substitute the state identities into the energy projection and conclude zero divergence of the entropy current.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Linearize the stress components about the uniform rest state and derive the frozen acoustic system.",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Check the explicit radiation symmetrizer, verify the symmetric products, compute directional eigenvalues, identify them with the symmetrized supplier spectrum by similarity, and match every supplier hypothesis.",
+          "inputs": [
+            "given",
+            "step 3.2",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Conditionally apply the current draft evolution supplier to the verified matrices and state the resulting propagation speed.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 3.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "radiation symmetrizer",
+          "status": "checked",
+          "evidence": "Step 4.1 multiplies each M_*A_j explicitly; the longitudinal block has eigenvalues plus/minus c/sqrt(3) and the two transverse eigenvalues are zero."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The geometric claim is conditional on a supplied four-manifold, fields, and tensor equation; it asserts no existence of such fields."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives h_T>0 from a_R>0 and T>0; Step 3.2 uses only the positive-temperature state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At c=1, Step 4.1 gives characteristic speeds 0 and plus/minus 1/sqrt(3), with a positive symmetrizer."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes a_R>0; at a_R=0 the positive state-map derivative and symmetrizer are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use only T>0 and s>0; no boundary value is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 carries only AC_omega, as required by the exact current suppliers; no full choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-57",
+        "notes": "The current constant-linear carrier exists with a matching Step 1 ready record; its exact hypotheses and complete proof were inspected, and the local matrices match. Its status remains draft, so the evolution clauses are conditional on that exact result and do not claim independent approval. The separate tgr-mc03-to-tgr-mc02 page hold remains open in the page dependency record; no MC02 item conclusion is used here."
+      }
+    },
+    "lem-tgr-cattaneo-stability-causality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tgr-constant-linear-energy-causality",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $m\\ge1$, let $U:\\mathbb R\\times\\mathbb R^3\\to\\mathbb R^m$, and let $A_1,A_2,A_3,B,M\\in\\mathbb R^{m\\times m}$ be constant matrices. Assume $M=M^{\\mathsf T}$ is positive definite, each $MA_j$ is symmetric, and $S:=(MB+B^{\\mathsf T}M)/2$ is positive semidefinite. Consider\n\n$$\\partial_tU+\\sum_{j=1}^3A_j\\partial_{x_j}U+BU=0.$$\n\nFor $U_0\\in\\mathcal S(\\mathbb R^3;\\mathbb R^m)$ there is a unique global smooth solution, Schwartz in $x$ at each time and continuous in every Schwartz seminorm on compact time intervals. With the negative-sign, $2\\pi$-normalized Fourier transform, put $\\widehat U(\\xi)=\\int_{\\mathbb R^3}e^{-2\\pi i x\\cdot\\xi}U(x)\\,dx$ and define, for $s\\ge0$,\n\n$$\\|U\\|_{H^s_M}^2:=\\int_{\\mathbb R^3}(1+|\\xi|^2)^s\\widehat U(\\xi)^*M\\widehat U(\\xi)\\,d\\xi.$$\n\nFor $t\\ge0$, $\\|U(t)\\|_{H^s_M}\\le\\|U_0\\|_{H^s_M}$ for every $s\\ge0$; hence the solution depends continuously on the data in each such norm. The same conclusions hold for smooth periodic data on the flat torus $\\mathbb T_L^3:=(\\mathbb R/L\\mathbb Z)^3$, $L>0$, with Fourier coefficients $\\widehat U_k=L^{-3}\\int_{[0,L]^3}U(x)e^{-2\\pi i k\\cdot x/L}\\,dx$ and\n\n$$\\|U\\|_{H^s_M(\\mathbb T_L^3)}^2:=\\sum_{k\\in\\mathbb Z^3}(1+|k/L|^2)^s\\widehat U_k^*M\\widehat U_k.$$\n\nFor periodic data, $\\|U(t)\\|_\\infty\\le C_{s,L,M}\\|U_0\\|_{H^s_M(\\mathbb T_L^3)}$ for each integer $s>3/2$.\n\nFor a unit vector $\\nu\\in\\mathbb R^3$, write $A(\\nu)=\\sum_j\\nu_jA_j$ and $\\widetilde A(\\nu)=M^{1/2}A(\\nu)M^{-1/2}$. The finite speed\n\n$$v_*:=\\sup_{|\\nu|=1}\\max\\{|\\lambda|:\\lambda\\in\\operatorname{spec}(\\widetilde A(\\nu))\\}$$\n\nis finite. If $v_*>0$, $R>v_*t$, and $U_0$ vanishes on $B_R(x_0)$, then $U(t)$ vanishes on $B_{R-v_*t}(x_0)$ for $0\\le t<R/v_*$. The same assertion holds on $\\mathbb T_L^3$ using its geodesic distance. If $v_*=0$, every $A_j=0$ and the system is a pointwise linear ODE, so spatial support does not move. These are conclusions for the displayed linear systems; no variable-coefficient or nonlinear existence claim is included.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-schwartz-space-and-its-seminorms",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge1$. With the complex smooth-function convention of [[def-complex-lp-and-euclidean-test-function-conventions]] and multi-indices of [[def-ck-and-multi-index-notation-in-several-variables]], define\n$$p_{\\alpha\\beta}(f)=\\sup_{x\\in\\mathbb R^n}|x^\\alpha\\partial^\\beta f(x)|,\\qquad \\mathcal S(\\mathbb R^n)=\\{f\\in C^\\infty(\\mathbb R^n;\\mathbb C):p_{\\alpha\\beta}(f)<\\infty\\text{ for all }\\alpha,\\beta\\}.$$\nThe zero multi-index gives $x^0=1$ and $\\partial^0f=f$. These are actual smooth functions, not equivalence classes. The notation $C_c^\\infty$ uses the support convention in [[def-c-c-and-c-c-infinity-on-rn]].\n\nPointwise differentiation is linear; thus $p_{\\alpha\\beta}(f+g)\\le p_{\\alpha\\beta}(f)+p_{\\alpha\\beta}(g)$ and $p_{\\alpha\\beta}(cf)=|c|p_{\\alpha\\beta}(f)$. In particular this set is a complex vector space and each $p_{\\alpha\\beta}$ is a seminorm. The zero function belongs to it. Since $p_{00}(f)=0$ forces $f(x)=0$ for every $x$, the family separates functions. No choice principle is needed.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Differentiate the balance and take the divergence of the relaxation equation to obtain the telegrapher equation.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Expand the effective-entropy divergence, cancel the balance terms, and substitute the relaxation equation to obtain the exact nonnegative production.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Differentiate the quadratic Lyapunov density, add its flux divergence, and prove dissipation and positivity.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "Construct the Cattaneo matrices, verify positive symmetrization and damping, compute the directional spectrum and its similarity to the supplier spectrum, and prove the flux bound.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Prove rapid decay of periodic Fourier coefficients, convergence of the smooth Fourier series, and recovery of the periodic function by product Fejer means.",
+          "inputs": [
+            "F1",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Check the exact current supplier hypotheses and data class for the Cattaneo matrices and conditionally obtain global evolution, norm contraction, and finite propagation at the computed speed.",
+          "inputs": [
+            "F1",
+            "A1",
+            "F2",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Use the prior shell count to prove finiteness of the weighted lattice sum, derive the weighted finite Cauchy inequality by square completion and monotone limits, and conclude local small-data temperature positivity from supplier contraction.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Show both directions of the comparison-speed inequality by reversible squaring of positive quantities.",
+          "inputs": [
+            "given",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "Cattaneo symmetrizer and speed",
+          "status": "checked",
+          "evidence": "Step 1.4 gives positive diagonal M, symmetric MA_j, S=diag(0,(1/kappa)I_3), and v_*=v_h because the supplier symbol is similar to A(nu)."
+        },
+        {
+          "case": "periodic Fourier bound",
+          "status": "checked",
+          "evidence": "Step 2.1 proves Fourier-series recovery; step 3.1 proves convergence of the r-weighted lattice sum for r>3/2 and derives the componentwise temperature constant K_{r,L,C}."
+        },
+        {
+          "case": "causal threshold",
+          "status": "checked",
+          "evidence": "Step 4.1 squares positive quantities reversibly, so v_h<=c_* is equivalent to kappa<=C tau c_*^2, including equality."
+        },
+        {
+          "case": "quadratic flux bound",
+          "status": "checked",
+          "evidence": "Step 1.4 applies the squared-difference inequality to show |theta q dot nu|<=v_h e_L for every unit direction."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement has four field components and positive C,κ,τ,T0,L. The lattice sum defining K includes k=0 with value one; Proof 3.1 passes finite-box inequalities to the full series, and an empty finite box contributes zero on both sides."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero entropy production at q=0 while the exact identity remains valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes equality v_h=c_*, equivalent to kappa=C tau c_*^2 for positive parameters."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement assumes C, kappa, and tau are positive and makes no claim for a singular zero-coefficient system."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 3.1 require the strict bound K_{r,L,C}||U_0||<T_0 and t>=0; no positivity claim is made for unrestricted data or negative times."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only the supplier AC_omega hypothesis; the local identities, matrix checks, and Fourier estimate use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 squares positive quantities to derive kappa<=C tau c_*^2 from v_h<=c_*."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 reverses the same equivalence because C, kappa, tau, and c_* are positive."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-57",
+        "notes": "The entropy, Lyapunov, quadratic flux, and matrix calculations are proved directly. The supplier Statement gives a generic periodic supremum bound with unspecified C_{s,L,M}; step 2.1 proves Fourier-series recovery and step 3.1 derives the explicit componentwise K_{r,L,C} temperature bound from the temperature Fourier coefficients and the C|theta_hat|^2 component of the stated norm. Similarity of the directional symbol makes the computed speed the supplier speed. Global evolution, contraction, and propagation remain conditional on the draft supplier, whose current Step 1 readiness and exact interface were checked; this is not independent proof approval."
+      }
+    },
+    "ex-tgrmath-cattaneo-damped-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-tgr-cattaneo-stability-causality",
+          "source_section": "Statement",
+          "quote": "Let $C,\\kappa,\\tau,T_0,L>0$. Let $\\Omega$ be either $\\mathbb R^3$ or the flat torus $\\mathbb T_L^3:=(\\mathbb R/L\\mathbb Z)^3$, and let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Consider real smooth fields $\\theta:I\\times\\Omega\\to\\mathbb R$ and $q:I\\times\\Omega\\to\\mathbb R^3$ satisfying\n\n$$C\\theta_t+\\operatorname{div}q=0,\\qquad \\tau q_t+q=-\\kappa\\nabla\\theta.$$\n\nThe derivatives are ordinary derivatives of the Euclidean spatial coordinates; on the torus they are defined using periodic lifts. Write $U=(\\theta,q)$ and let $e_j$ be the $j$th standard basis vector of $\\mathbb R^3$. Define\n\n$$A_j:=\\begin{pmatrix}0&e_j^{\\mathsf T}/C\\\\(\\kappa/\\tau)e_j&0_{3\\times3}\\end{pmatrix},\\qquad B:=\\operatorname{diag}(0,(1/\\tau)I_3),\\qquad M:=\\operatorname{diag}(C,(\\tau/\\kappa)I_3).$$\n\nThen the displayed system is $U_t+\\sum_{j=1}^3A_j\\partial_jU+BU=0$. The matrix $M$ is a positive symmetrizer, meaning $M=M^{\\mathsf T}$ is positive definite and $MA_j$ is symmetric for each $j$. For a unit direction $\\nu\\in\\mathbb R^3$, define the principal matrix $A(\\nu):=\\sum_{j=1}^3\\nu_jA_j$; its eigenvalues are $0$ (multiplicity two) and $\\pm v_h$, where $v_h:=\\sqrt{\\kappa/(C\\tau)}>0$. For a fixed comparison speed $c_*>0$, $v_h\\le c_*$ if and only if $\\kappa\\le C\\tau c_*^2$.\n\nFor every such solution and every $s_0\\in\\mathbb R$, define the specified quadratic effective entropy density and flux by\n\n$$s_{\\rm eff}:=s_0+\\frac{C\\theta}{T_0}-\\frac{C\\theta^2}{2T_0^2}-\\frac{\\tau|q|^2}{2\\kappa T_0^2},\\qquad j_s:=\\frac{q}{T_0}-\\frac{\\theta q}{T_0^2}.$$\n\nEvery smooth solution satisfies the exact identities\n\n$$\\partial_t s_{\\rm eff}+\\operatorname{div}j_s=\\frac{|q|^2}{\\kappa T_0^2}\\ge0,\\qquad \\partial_t e_L+\\operatorname{div}(\\theta q)=-\\frac{|q|^2}{\\kappa},\\qquad e_L:=\\frac12\\left(C\\theta^2+\\frac{\\tau}{\\kappa}|q|^2\\right).$$\n\nFor every unit direction $\\nu$, its quadratic flux satisfies $|\\theta q\\cdot\\nu|\\le v_h e_L$. The density $e_L$ is a positive quadratic Lyapunov density, not a physical energy density. The entropy identity asserts nonnegative production for this specified quadratic effective current; it does not assert positivity of $s_{\\rm eff}$ for arbitrary data or a nonlinear material entropy law. These equations define the mathematical subsystem considered here; the sources give model context and do not establish a material-specific realization.\n\nUse the exact global-solution, Fourier-coefficient, and weighted-norm conventions in [F1]. For initial data $U_0=(\\theta_0,q_0)\\in\\mathcal S(\\mathbb R^3;\\mathbb R^4)$ or $C^\\infty(\\mathbb T_L^3;\\mathbb R^4)$, the unique global smooth evolution, its weighted Sobolev contraction, and finite propagation at speed $v_h$ follow conditionally from [F1] after checking the matrices below. On $\\mathbb T_L^3$, for every integer $r>3/2$, set\n\n$$K_{r,L,C}:=C^{-1/2}\\left(\\sum_{k\\in\\mathbb Z^3}(1+|k/L|^2)^{-r}\\right)^{1/2}<\\infty,$$\n\nwhere $C>0$ is the heat-capacity coefficient and $\\|\\cdot\\|_{H^r_M(\\mathbb T_L^3)}$ is the norm in [F1]. The periodic global solution supplied conditionally by [F1] obeys $T_0+\\theta(t,x)>0$ for all $t\\ge0$ whenever $K_{r,L,C}\\|U_0\\|_{H^r_M(\\mathbb T_L^3)}<T_0$. The constant uses only the temperature component $C|\\widehat\\theta_k|^2$ of the supplied quadratic norm, so it does not compare heat-flux and temperature coordinates by a least eigenvalue. Although [F1] states a generic periodic supremum bound with unspecified constant $C_{s,L,M}$, the explicit $K_{r,L,C}$ bound here is derived directly from Fourier reconstruction and the stated norm contraction.\n\nIf the symbols receive their conventional SI thermal interpretation, take $\\theta,T_0$ in K, $C$ in J m$^{-3}$ K$^{-1}$, $\\kappa$ in W m$^{-1}$ K$^{-1}$, $\\tau$ in s, $L$ in m, $q$ in W m$^{-2}$, and the comparison speed $c_*$ in m s$^{-1}$. Use the spatial coordinates in the inherited Fourier norms as their numerical values in metres, so the unit-frequency term in $1+|k/L|^2$ uses the reference length $1$ m. Then $s_0$ and $s_{\\rm eff}$ have entropy-density units J m$^{-3}$ K$^{-1}$, $j_s$ has entropy-flux units J m$^{-2}$ s$^{-1}$ K$^{-1}$, and $e_L$ has units J K m$^{-3}$ rather than energy-density units. The norm $\\|U\\|_{H^r_M}$ has units $\\sqrt{\\mathrm{J\\,K\\,m^{-3}}}$ and $K_{r,L,C}$ has units $\\sqrt{\\mathrm{m^3\\,K/J}}$, so their product has temperature units. These unit labels do not assert a physical realization of the linear subsystem.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The strict underdamping inequality makes omega positive and the scalar modal roots have real part minus one over two tau.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Differentiate the explicit fields; the first equation cancels and the second reduces to the scalar modal ODE.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Check smooth periodicity, nonzero amplitude, forward temperature positivity, and apply the exact local identities from F1.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "underdamping inequality",
+          "status": "checked",
+          "evidence": "Step 1.1 uses k^2>C/(4 tau kappa), equivalently kappa k^2/(C tau)-1/(4 tau^2)>0, so omega is strictly positive."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies a nonzero periodic mode and has no empty-domain case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks Theta is nonzero; n>=1 gives k>0 and excludes the zero spatial mode."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 whenever the stated strict frequency condition holds, k=2 pi/L>0 and Step 3.1 confirms the mode is nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example excludes zero amplitude and critical damping; it asserts no solution at either degenerate boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 establishes positive temperature for t>=0 only; no positive-temperature interpretation is asserted for negative times."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use an explicit scalar trigonometric construction and finite substitution, with no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example states no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-57",
+        "notes": "Direct substitution verifies the exact real-valued periodic mode and the forward-time positivity of the mathematical proxy field. The entropy and Lyapunov identities follow from the exact local A-page result; the example uses no conditional global-existence claim and reports no observation or material-specific behavior."
+      }
+    }
+  }
+}

@@ -1,0 +1,1277 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-emg-potential-maxwell-wave-identity",
+    "lem-emg-controlled-maxwell-wkb",
+    "lem-emg-source-and-test-scaling",
+    "thm-emg-weak-slow-test-lorentz-limit",
+    "ex-emgmath-ml-b07",
+    "ex-emgmath-ml-b08"
+  ],
+  "contracts": {
+    "lem-emg-potential-maxwell-wave-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-lorentzian-forms",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a smooth, Hausdorff, second-countable four-manifold without boundary, with smooth Lorentzian metric $g$ of signature $(-,+,+,+)$ and smooth time-orientation field $N$, as in [[def-gr-smooth-lorentzian-objects]]. Supply an independent orientation $o$ of $M$ in the sense of [[def-oriented-smooth-manifold-and-oriented-chart]]. The metric and time orientation do not select $o$. Write $\\mathrm{vol}_g$ for the oriented metric volume form of [[def-gr-metric-volume-form-and-current-flux]]; in any positively oriented chart it has components $\\sqrt{|\\det(g_{ab})|}\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$.\n\nA smooth real $k$-form is a smooth section of $\\bigwedge^kT^*M$, and its space is denoted $\\Omega^k(M)$, as in [[def-smooth-differential-k-form]]. In this page, $F\\in\\Omega^2(M)$ means an arbitrary smooth real two-form. No equation such as $dF=0$, no global potential, and no physical field law is included in this definition.\n\nAn **observer at $p\\in M$** is a vector $n\\in T_pM$ with $g_p(n,n)=-1$ and $g_p(n,N_p)<0$; its **rest space** is $n^\\perp=\\{v:g_p(v,n)=0\\}$, as in [[def-gr-observer-and-rest-space]]. A smooth **observer congruence** on an open set $U\\subseteq M$ is a smooth vector field whose value at every point is an observer. Its observer curves are the maximal integral curves, and a chart is adapted to it when its three spatial coordinate functions are constant along those curves, as in [[def-gr-observer-congruence-and-adapted-charts]]. Such a congruence need not be hypersurface-orthogonal.\n\nA **local frame field** on $U$ is an ordered smooth basis field of $TM|_U$. A **coordinate frame** is the basis of coordinate vector fields supplied by a chart. A **tetrad field** is a local frame $(E_0,E_1,E_2,E_3)$ with $g(E_A,E_B)=\\operatorname{diag}(-1,1,1,1)_{AB}$; it is future-directed when $E_0$ is future-directed, as in [[def-gr-local-frame-and-tetrad-fields]]. These are distinct objects: an observer congruence is a vector field, an adapted chart is a coordinate chart, and a tetrad is a basis field. A tetrad field is not presumed to be a coordinate frame. For every observer congruence $n$, each point has a neighborhood carrying an $n$-adapted tetrad; this is a local assertion only.\n\nA **worldline** on this Lorentzian manifold means a $C^1$ or piecewise-$C^1$ regular curve with future-timelike tangent and specified interval domain, as defined precisely in [[def-gr-timelike-worldline-and-proper-time]]. Its parameter is arbitrary; the proper-time and four-velocity constructions of that definition apply under their stated hypotheses. A worldline is a mathematical curve here and does not assert the existence or motion of a physical body.\n\nFor coordinate bookkeeping only, when a chart is chosen with all four coordinate values assigned the metre, write $x^0=ct$, where $t$ is assigned seconds and $c>0$ is the corresponding scale in $\\mathrm m\\,\\mathrm s^{-1}$. Then $g_{ab}$ is recorded as dimensionless. This is a unit convention on a chart, not a claim that the chart is inertial, orthonormal, global, or physically realized; $c$ in this mathematical convention has no asserted measured value.\n\nUse the unique torsion-free metric-compatible connection $\\nabla^g$ and the curvature convention of [[def-gr-metric-selected-connection]] and [[thm-gr-curvature-tensoriality-and-coordinate-formula]]. In a length-coordinate chart, the displayed Christoffel formula differentiates dimensionless metric components once, so $\\Gamma^a{}_{bc}$ is recorded in $\\mathrm m^{-1}$. The curvature coordinate formula contains one derivative of $\\Gamma$ or a product of two $\\Gamma$ components, so $R^a{}_{bcd}$ and its Ricci and scalar contractions are recorded in $\\mathrm m^{-2}$. These component assignments apply only in length-coordinate charts; other coordinate units transform by their Jacobians.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection\n$\\nabla$ ([[def-gr-metric-selected-connection]]), whose existence and\nuniqueness are supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; that theorem also\nextends $\\nabla$ to a derivative on tensor fields commuting with contractions\nand annihilating $g$ and $g^{-1}$. Let $U\\subseteq M$ be open and let\n$X,Y,Z$ be smooth vector fields on $U$; brackets are those of\n[[def-lie-bracket-of-smooth-vector-fields]], and contractions those of\n[[def-contraction-of-a-mixed-tensor]].\n\n**(a) The curvature operator.** The **curvature operator** of $\\nabla$ is the\nassignment\n\n$$R(X,Y)Z:=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z .$$\n\nThe right-hand side is a smooth vector field on $U$: $\\nabla_YZ$ is smooth\nbecause $\\nabla$ is an affine connection\n([[def-affine-connection-on-a-smooth-manifold]]), $[X,Y]$ is smooth, and\n$\\nabla_X(\\cdot)$ and $\\nabla_{[X,Y]}(\\cdot)$ preserve smoothness. The\nassignment is defined for the given smooth fields; that its value at a point\ndepends only on the values of $X,Y,Z$ at that point, so that $R$ is a smooth\ntensor field of type $(1,3)$, is the content of\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a), and\nlikewise the algebraic symmetries used below are proved in\n[[thm-gr-curvature-algebraic-symmetries]].\n\n**(b) Component functions.** Let $(V,x)$ be a smooth chart of $M$ and let\n$\\Gamma^a{}_{bc}$ be the Christoffel symbols of $\\nabla$ in this chart,\ncharacterized by $\\nabla_{\\partial_b}\\partial_c=\\sum_a\\Gamma^a{}_{bc}\\partial_a$\n([[def-christoffel-symbols-of-an-affine-connection]]); the coordinate fields\ncommute, so $\\nabla_{\\partial_c}\\partial_d$ and $\\nabla_{\\partial_d}\\partial_c$\nare obtained from the same symbols. The **components** of the curvature in the\nchart are the smooth functions $R^a{}_{bcd}$ on $V$ defined by\n\n$$R(\\partial_c,\\partial_d)\\partial_b=\\sum_a R^a{}_{bcd}\\,\\partial_a .$$\n\nThe first index is the output slot, the second is the differentiated slot and\nthe last two are the two directions of the loop; indices are $a,b,c,d=0,1,2,3$\nand the Einstein summation convention of\n[[def-gr-smooth-lorentzian-objects]] applies.\n\n**(c) Lowered tensor, Ricci tensor, scalar curvature, Einstein tensor.** On\nthe chart domain define, using the inverse metric\n$g^{ab}$ of [[def-gr-inverse-metric-and-musical-isomorphisms]],\n\n$$R_{abcd}:=\\sum_e g_{ae}R^e{}_{bcd},\\qquad \\operatorname{Ric}_{bd}:=\\sum_{a,c}g^{ac}R_{abcd},\\qquad S:=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd},\\qquad G_{ab}:=\\operatorname{Ric}_{ab}-\\tfrac12 S\\,g_{ab}.$$\n\nThe fields $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called\nthe **Riemann tensor with lowered indices**, the **Ricci tensor**, the\n**scalar curvature** and the **Einstein tensor** of the metric-selected\nconnection. Tensoriality of $R$ is proved in\n[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a).\nLowering its output slot with the smooth metric and contracting with the\nsmooth inverse metric are intrinsic tensor operations\n([[def-gr-tensor-fields-and-components]] clauses (b)-(c),\n[[def-contraction-of-a-mixed-tensor]]). Thus these formulas give smooth\nfields of types $(0,4)$, $(0,2)$, $(0,0)$ and $(0,2)$, respectively,\nindependent of the chart. Symmetry of $\\operatorname{Ric}$ and $G$ is proved\nseparately in [[thm-gr-curvature-algebraic-symmetries]] clause (d).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-curvature-algebraic-symmetries",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$\n([[def-gr-smooth-lorentzian-objects]],\n[[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), and let\n$R$, $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ be as in\n[[def-gr-curvature-tensor-and-derived-tensors]]. Then the following\nidentities hold for all indices $a,b,c,d\\in\\{0,1,2,3\\}$ and at every point of\nevery smooth chart:\n\n**(a) Skew-symmetries.** $R_{abcd}=-R_{bacd}$ and $R_{abcd}=-R_{abdc}$.\nEquivalently, for smooth vector fields,\n$$g\\bigl(R(X,Y)Z,W\\bigr)=-g\\bigl(R(X,Y)W,Z\\bigr) \\quad\\text{and}\\quad g\\bigl(R(X,Y)Z,W\\bigr)=-g\\bigl(R(Y,X)Z,W\\bigr).$$\n\n**(b) Exchange of the index pairs.** $R_{abcd}=R_{cdab}$, equivalently\n$g\\bigl(R(X,Y)Z,W\\bigr)=g\\bigl(R(Z,W)X,Y\\bigr)$.\n\n**(c) First Bianchi identity.** $R_{a[bcd]}=0$, that is,\n$$R_{abcd}+R_{acdb}+R_{adbc}=0 .$$\n\n**(d) Ricci symmetry.** $\\operatorname{Ric}_{ab}=\\operatorname{Ric}_{ba}$;\nconsequently the Einstein tensor is symmetric, $G_{ab}=G_{ba}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dual-connection",
+          "source_section": "Definition",
+          "quote": "The **dual connection** on the smooth bundle $E^*$ of [[def-connection-on-a-smooth-vector-bundle]] is characterized by\n$$ (\\nabla^*_X\\alpha)(s)=X(\\alpha(s))-\\alpha(\\nabla_Xs).$$\nThe right side is function-linear in $s$: replacing $s$ by $fs$ introduces $X(f)\\alpha(s)$ once with each sign, so those terms cancel.\n\nHere is the construction, including well-definedness. In a frame $e$ write $s=eu$ and write $\\alpha$ with dual coefficient column $a$, so $\\alpha(s)=a^Tu$. The coordinate formula [[prop-local-coordinate-formula-for-a-bundle-connection]] gives\n$$X(a^Tu)-a^T(X(u)+\\omega(X)u)=(X(a)-\\omega(X)^Ta)^Tu.$$\nThus the required coefficients are $X(a)-\\omega(X)^Ta$, and the local connection matrix in the dual frame is $-\\omega^T$. These local rules are smooth, real-linear and obey the section Leibniz rule by the scalar product rule. On an overlap both give the intrinsic displayed pairing formula; agreement against every local frame section forces equality of the dual covectors. They therefore glue to a connection, equivalently by [[thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law]]. Testing against a basis also proves uniqueness. This verifies the implicit characterization rather than assuming that it defines an operator.\n\nThe derivative on scalar functions is $X(f)$; duality preserves the evaluation pairing with that scalar connection. For rank one the matrix changes sign; for rank zero evaluation and all coefficients are empty. Zero sections give zero derivatives, while empty bases give the unique operator. This construction is local and canonical from the given connection and requires no choice axiom.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-emg-potential-maxwell-wave-identity-step-1-1",
+          "step": "1.1",
+          "claim": "In any chart, $(dA)_{ab}=\\partial_aA_b-\\partial_bA_a$ by [F5], whereas $\\nabla_aA_b=\\partial_aA_b-\\Gamma^c{}_{ab}A_c$. Torsion freedom gives $\\Gamma^c{}_{ab}=\\Gamma^c{}_{ba}$, so the connection terms cancel in the antisymmetric difference and $(dA)_{ab}=\\nabla_aA_b-\\nabla_bA_a$. Therefore $\\nabla^a(dA)_{ab}=\\Box A_b-\\nabla^a\\nabla_bA_a$.",
+          "inputs": [
+            "F5",
+            "F1"
+          ]
+        },
+        {
+          "id": "lem-emg-potential-maxwell-wave-identity-step-1-2",
+          "step": "1.2",
+          "claim": "For vector fields $X,Y,Z$, expand the dual-connection rule [F4] twice. The scalar-derivative terms cancel by $X(Yf)-Y(Xf)=[X,Y]f$, leaving $([\\nabla_X,\\nabla_Y]\\omega-\\nabla_{[X,Y]}\\omega)(Z)=-\\omega(R(X,Y)Z)$ for every one-form $\\omega$. Since coordinate fields commute, $[\\nabla_c,\\nabla_b]A_a=-R^d{}_{acb}A_d$.",
+          "inputs": [
+            "F4",
+            "F2"
+          ]
+        },
+        {
+          "id": "lem-emg-potential-maxwell-wave-identity-step-2-1",
+          "step": "2.1",
+          "claim": "Contract the last identity with $g^{ac}$. By metric compatibility, $g^{ac}[\\nabla_c,\\nabla_b]A_a=\\nabla^a\\nabla_bA_a-\\nabla_b\\nabla^aA_a$. By [F3] and the Ricci definition in [F2], $g^{ac}R^d{}_{acb}=g^{de}g^{ac}R_{eacb}=g^{de}g^{ac}R_{bcae}=-g^{de}g^{ac}R_{aecb}=-\\operatorname{Ric}_b{}^d$; thus $\\nabla^a\\nabla_bA_a=\\nabla_b(\\nabla^aA_a)+\\operatorname{Ric}_b{}^dA_d$.",
+          "inputs": [
+            "F3",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "lem-emg-potential-maxwell-wave-identity-step-3-1",
+          "step": "3.1",
+          "claim": "Substituting step 2.1 into step 1.1 gives $\\nabla^a(dA)_{ab}=\\Box A_b-\\nabla_b(\\nabla^aA_a)-\\operatorname{Ric}_b{}^dA_d=(PA)_b-\\nabla_b(\\operatorname{div}A)$ by the definition of $P$. All identities are pointwise tensor identities, so they hold in every chart; complex-linear extension follows by applying the real identity to the real and imaginary parts separately.",
+          "inputs": [
+            "step 2.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity is pointwise on U and is vacuous when U is empty (Statement, step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The formula allows A=0; curvature and commutator identities remain defined (Statement, steps 1.1 and 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The manifold dimension is fixed at four; no one-element count or finite-cardinality case occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The metric is required nondegenerate/Lorentzian, so the inverse metric and Levi-Civita connection are defined (Statement)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a pointwise tensor identity on an open manifold domain and makes no endpoint assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses local chart calculations and pointwise tensor contractions; it selects no family of elements (steps 1.1–3.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a direct identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a direct identity, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the proof is established analytically in its numbered steps."
+    },
+    "lem-emg-controlled-maxwell-wkb": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-matter-formal-systems",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold with signature $(-,+,+,+)$. Here $N$ is the supplied smooth timelike field selecting the future cone, and $o$ is an independent orientation. Let $\\nabla$ be the unique torsion-free, $g$-compatible connection of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use the curvature sign and contractions of [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$. The geometric and observer conventions are those of [[def-gr-smooth-lorentzian-objects]] and [[def-emg-lorentzian-forms]]. The tangent-bundle smooth structure inherits only the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ from [[def-countable-choice]].\n\nFix formal parameters $c>0$, $\\mu_0>0$, $G_N>0$ and $\\Lambda\\in\\mathbb R$, with $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$. In length coordinates $x^0=ct$, all four coordinates have units metres and $g_{ab}$ is dimensionless. These are mathematical parameters with the displayed SI bookkeeping; they assert no measured value, exactness of $\\mu_0$, or physical law.\n\nA field strength $F$ is a real $C^2$ antisymmetric covariant two-tensor field. Its metric-raised components are $F^{ab}=g^{ac}g^{bd}F_{cd}$. For a future unit observer $n$ ($g(n,n)=-1$), the rest space is $n^\\perp$ and the projection is $h_n(v)=v+g(n,v)n$. The observer electric and magnetic covectors are $E_{n,a}=cF_{ab}n^b$ and $B_{n,a}=-({\\star_gF})_{ab}n^b$, with the oriented Lorentzian Hodge convention of [[lem-emg-observer-field-decomposition]]. They annihilate $n$ and use the positive metric induced on the rest covector space. In a positively oriented orthonormal tetrad with time vector $n$, $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$.\n\nFor such an $F$, define\n\n$$T_{\\mathrm{EM}}^{ab}:=\\frac1{\\mu_0}\\left(F^{ac}F^b{}_c-\\frac14g^{ab}F_{cd}F^{cd}\\right),\\qquad T^{\\mathrm{EM}}_{ab}:=g_{ac}g_{bd}T_{\\mathrm{EM}}^{cd}.$$\n\nFor any symmetric covariant tensor $S_{ab}$ and unit observer $n$, its observer energy density is $S_{ab}n^an^b$. Its observer energy-current vector is $-S^a{}_bn^b$; the spatial energy flux measured by $n$ is the projection $h_n(-S^a{}_bn^b)$ into $n^\\perp$. A nonzero causal vector is future-directed when it has negative inner product with $N$; future timelike means $g(v,v)<0$, and future null means the vector is nonzero and $g(v,v)=0$.\n\nIn four dimensions, define the **weak energy condition** (WEC) for $S$ by $S_{ab}v^av^b\\ge0$ for every future timelike $v$; the **null energy condition** (NEC) by $S_{ab}\\ell^a\\ell^b\\ge0$ for every nonzero future null $\\ell$; and the **dominant energy condition** (DEC) by requiring $-S^a{}_bv^b$ to be future causal or zero for every future timelike $v$. Define the **strong energy condition** (SEC) by the WEC for $S_{ab}-\\tfrac12(g^{cd}S_{cd})g_{ab}$. These are definitions of tensor inequalities only; no general matter positivity premise is included.\n\nA matter tensor $T_m^{ab}$ is a $C^1$ symmetric contravariant two-tensor field; a current $j^a$ is a $C^1$ vector field. The **formal sourced Maxwell equations** are $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$. The **matter exchange equation** is $\\nabla_aT_m^{ab}=F^b{}_cj^c$. The **formal Einstein equation** is\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa\\bigl(T_{m,ab}+T^{\\mathrm{EM}}_{ab}\\bigr).$$\n\nHere $T_{m,ab}$ is obtained by lowering both indices with $g$. Each displayed equation is a pointwise mathematical condition on the supplied fields with the regularities stated above. A formal Einstein–Maxwell–matter solution is a tuple satisfying whichever of these equations are explicitly assumed on the stated open domain; no existence or uniqueness of such a tuple is asserted.\n\nTwo matter forms used below are defined as follows. A **charged-dust form** has $T_m^{ab}=\\rho U^aU^b$ and $j^a=\\sigma U^a$, where $\\rho,\\sigma\\in C^1$, $\\rho\\ge0$, and $U\\in C^2$ is future timelike with $g(U,U)=-c^2$. On $\\{\\rho>0\\}$ its charge-to-mass ratio is $\\alpha=\\sigma/\\rho$; it is not defined by division on $\\{\\rho=0\\}$. A **perfect-fluid form** has\n\n$$T_m^{ab}=\\frac{\\epsilon+p}{c^2}U^aU^b+pg^{ab},$$\n\nwhere $\\epsilon,p\\in C^1$ and $U$ has the same timelike normalization. No equation of state, conductivity law, entropy law, or matter evolution theorem is part of this definition. A current may additionally be written $j^a=\\sigma U^a+q^a$ with $q^aU_a=0$; an Ohmic relation $q^a=\\chi E_U^a$, $\\chi\\ge0$, is a separately imposed constitutive hypothesis, where $E_U^a=F^a{}_bU^b$.\n\nOn an open set $V$, a **local potential** for $F$ is a supplied smooth one-form $A$ with $dA=F$. Such a potential need not exist globally. A local gauge change is $A\\mapsto A+d\\lambda$ for a supplied smooth scalar $\\lambda$; this leaves $F$ unchanged. No global bundle, potential, or point-source construction is asserted.\n\nIn the stated length-coordinate SI interpretation, $[F_{ab}]=\\mathrm T$, $[A_a]=\\mathrm{T\\,m}$, $[j^a]=\\mathrm{A\\,m^{-2}}$, $[T_m]=[T_{\\mathrm{EM}}]=\\mathrm{J\\,m^{-3}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[\\sigma]=\\mathrm{C\\,m^{-3}}$, $[\\alpha]=\\mathrm{C\\,kg^{-1}}$, $[\\epsilon]=[p]=\\mathrm{J\\,m^{-3}}$, and $[\\chi]=\\mathrm{S\\,m^{-1}}$. The equalities $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$ make the displayed tensor equations dimensionally consistent. No distributional product or stress tensor for a singular point source is defined.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-potential-maxwell-wave-identity",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be an oriented, time-oriented smooth Lorentzian four-manifold of signature $(-,+,+,+)$ with the metric-selected connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use the curvature operator, Ricci contraction, and sign convention of [[def-gr-curvature-tensor-and-derived-tensors]]. For a real $C^3$ one-form $A$, define $(\\Box A)_b:=g^{ac}\\nabla_a\\nabla_c A_b$, $(\\operatorname{div}A):=\\nabla^aA_a$, and $(PA)_b:=\\Box A_b-\\operatorname{Ric}_b{}^cA_c$. Then\n\n$$ \\nabla^a(dA)_{ab}=(PA)_b-\\nabla_b(\\operatorname{div}A). $$\n\nThe same identity holds for a complex one-form after complex-linear extension. The identity is local and uses no field equation, gauge condition, boundary condition, or physical assumption.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "Let $\\iota_{\\mathbb R}\\colon\\mathbb N\\to\\mathbb R$ be the canonical-natural map\nof [[def-canonical-natural]], and let $j\\colon\\mathbb R\\to\\mathbb C$ be the real\nembedding $j(x)=x+i0$ from [[def-complex-numbers-and-arithmetic]]. For every\n$n\\in\\mathbb N$, the factorial $n!$ is nonzero by\n[[def-factorial-and-falling-factorial]], so\n$\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently\n$j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field\n[[thm-complex-numbers-form-a-field]].\n\nFor $z\\in\\mathbb C$, define\n$$ \\exp z:=\\sum_{n=0}^{\\infty}\\frac{z^n}{j(\\iota_{\\mathbb R}(n!))}. $$\nwhenever this complex series converges. Inside a complex expression we\nabbreviate the embedded denominator $j(\\iota_{\\mathbb R}(n!))$ by $n!$, so the\nsame definition may be written $\\exp z=\\sum z^n/n!$ without identifying a\nnatural number with a complex number. Powers and series are those of\n[[def-complex-integer-powers]] and\n[[def-complex-series-power-series-and-absolute-convergence]]. The convergence\nfor every $z\\in\\mathbb C$ is discharged by\n[[lem-complex-exponential-series-converges-everywhere]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and write $f=u+iv:U\\to\\mathbb C$. The following are equivalent:\n\n1. $f$ is complex differentiable at $a$.\n2. Under $\\mathbb C\\cong\\mathbb R^2$, the map $f$ is real totally differentiable at $a$ and $Df(a)$ is multiplication by a complex number.\n3. The map $f$ is real totally differentiable at $a$ and $\\partial_{\\bar z}f(a)=0$.\n4. The map $f$ is real totally differentiable at $a$ and satisfies the Cauchy–Riemann equations\n\n$$ u_x(a)=v_y(a),\\qquad u_y(a)=-v_x(a). $$\n\nWhen these conditions hold,\n\n$$ f'(a)=u_x(a)+iv_x(a)=v_y(a)-iu_y(a)=\\partial_zf(a). $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-1-1",
+          "step": "1.1",
+          "claim": "For any complex $C^2$ one-form $a$, write $\\varphi=e^{i\\theta/\\epsilon}$. By [F3], $\\nabla_c\\varphi=(i/\\epsilon)k_c\\varphi$. Applying the product rule twice gives $ \\Box(\\varphi a_b)=\\varphi\\left(\\Box a_b+\\frac{2i}{\\epsilon}k^c\\nabla_c a_b+ \\frac{i}{\\epsilon}(\\nabla_c k^c)a_b-\\frac1{\\epsilon^2}g^{-1}(k,k)a_b\\right). $ Indeed, the two cross terms are each $(i/\\epsilon)k^c\\nabla_c a_b$, differentiating $k_c$ contributes $(i/\\epsilon)(\\nabla_c k^c)a_b$, and differentiating the phase twice contributes $-\\epsilon^{-2}k^ck_c a_b$. The Ricci term in $P$ multiplies by the same scalar $\\varphi$. Therefore $ P(\\varphi a)=\\varphi\\left(Pa+\\frac{i}{\\epsilon}La- \\frac1{\\epsilon^2}g^{-1}(k,k)a\\right). $",
+          "inputs": [
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-1-2",
+          "step": "1.2",
+          "claim": "The first-order product rule gives $ \\nabla^a(A_\\epsilon)_a=e^{i\\theta/\\epsilon} \\left[ik^a(a_0)_a+\\epsilon\\left(ik^a(a_1)_a+\\nabla^a(a_0)_a\\right) +\\epsilon^2d_1\\right]. $ The first two brackets vanish by [A1], so $\\nabla^a(A_\\epsilon)_a=\\epsilon^2e^{i\\theta/\\epsilon}d_1$.",
+          "inputs": [
+            "A1",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-1-3",
+          "step": "1.3",
+          "claim": "The first-order product rule gives $ dA_\\epsilon=e^{i\\theta/\\epsilon}\\left[ik\\wedge a_0+ \\epsilon(da_0+ik\\wedge a_1)+\\epsilon^2da_1\\right], $ which is the stated exact field expansion.",
+          "inputs": [
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-1-4",
+          "step": "1.4",
+          "claim": "Torsion freedom and $k=d\\theta$ give $\\nabla_a k_b=\\nabla_bk_a$. Hence $ k^a\\nabla_a k_b=k^a\\nabla_bk_a=\\tfrac12\\nabla_b(g^{-1}(k,k))=0. $ The vector field $k^\\sharp$ is nonzero because $k$ is nowhere zero and $g$ is nondegenerate. By [F6] it has local integral curves $\\gamma$; along such a curve the displayed identity is $\\nabla_{\\dot\\gamma}\\dot\\gamma=0$, while $g(\\dot\\gamma,\\dot\\gamma)=g^{-1}(k,k)=0$. Its parameter is therefore affine and its tangent is null. Also $(\\theta\\circ\\gamma)'=d\\theta(k^\\sharp)=g^{-1}(k,k)=0$, so $\\theta$ is constant along it.",
+          "inputs": [
+            "F6",
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-1-5",
+          "step": "1.5",
+          "claim": "At a point, choose $v$ with $g^{-1}(k,v)=-1$ and put $\\ell=v+\\tfrac12g^{-1}(v,v)k$. Then $g^{-1}(\\ell,\\ell)=0$ and $g^{-1}(k,\\ell)=-1$ by direct expansion. Thus $\\operatorname{span}_{\\mathbb R}\\{k,\\ell\\}$ has one positive and one negative direction. Since the full metric has signature $(-,+,+,+)$, its orthogonal complement $S$ is a positive two-plane. It follows that $k^\\perp=\\operatorname{span}_{\\mathbb C}\\{k\\}\\oplus S_{\\mathbb C}$, so the quotient has complex dimension two and the induced Hermitian form from $g^{-1}(a,\\overline b)$ is positive definite. Finally, $k\\wedge(a_0+\\beta k)=k\\wedge a_0$; in a basis beginning with $k$, $k\\wedge a_0=0$ exactly when $a_0$ is proportional to $k$.",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-2-1",
+          "step": "2.1",
+          "claim": "Apply step 1.1 to $a=a_0+\\epsilon a_1$ and multiply by $\\epsilon$. The $g^{-1}(k,k)$ term vanishes by [A1], the $La_0$ term vanishes by [A1], and the remaining coefficient $\\epsilon(Pa_0+iLa_1)$ vanishes by [A1]. Thus $PA_\\epsilon=\\epsilon^2e^{i\\theta/\\epsilon}Pa_1$.",
+          "inputs": [
+            "step 1.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-2-2",
+          "step": "2.2",
+          "claim": "Along a ray, $La_0=0$ gives $\\nabla_{k^\\sharp}a_0=-(\\nabla_c k^c)a_0/2$. The integrand in $\\mathcal A$ is continuous on each compact ray segment, so [F7] gives $k^\\sharp(\\mathcal A)=-(\\nabla_c k^c)\\mathcal A/2$; the exponential never vanishes. The quotient rule now gives $\\nabla_{k^\\sharp}(a_0/\\mathcal A)=0$, and [A1] gives $g^{-1}(k,a_0/\\mathcal A)=0$.",
+          "inputs": [
+            "F7",
+            "A1",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-3-1",
+          "step": "3.1",
+          "claim": "Apply [F2] to $A_\\epsilon$ using steps 2.1 and 1.2. Differentiating $\\epsilon^2e^{i\\theta/\\epsilon}d_1$ gives $e^{i\\theta/\\epsilon}(i\\epsilon k_b d_1+\\epsilon^2\\nabla_b d_1)$. Subtraction therefore gives the stated exact residual. Since $F_\\epsilon=dA_\\epsilon$, [F5] gives $dF_\\epsilon=d^2A_\\epsilon=0$.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "step 1.2",
+            "F5",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-emg-controlled-maxwell-wkb-step-4-1",
+          "step": "4.1",
+          "claim": "If $K=\\varnothing$, both defined norms are zero. Suppose $K\\ne\\varnothing$. For each finite component, continuity of the component and of its complex modulus makes its absolute-value function continuous; [F8] therefore supplies its finite maximum, and a maximum over the finite component set also exists. From the exact residual of step 3.1, the componentwise product bound $|k_bd_1|\\le K_0D_0$, the triangle inequality [F4], and $|e^{i\\theta/\\epsilon}|=1$ give $ \\|\\nabla^a(F_\\epsilon)_{ab}\\|_{\\infty,K}\\le\\epsilon K_0D_0+\\epsilon^2C_0. $ Step 1.3 gives the field bound in the same way, using $B_0,B_1$. For any $z=a+ib$, $|a|^2\\le a^2+b^2=|z|^2$, so $|\\operatorname{Re}z|\\le|z|$; the real connection and exterior derivative commute with real part componentwise. Therefore the same estimates hold for the real potentials and fields.",
+          "inputs": [
+            "F8",
+            "step 3.1",
+            "F4",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "When K is empty both defined component norms equal zero; the nonempty case is handled separately (Statement, step 4.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The parameter satisfies epsilon>0 and a0 may vanish; the exact identities remain valid and the leading field then vanishes (Statement, steps 2.1 and 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The ansatz has a fixed two-amplitude truncation; no one-term cardinality case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a0 proportional to k the class is zero and k wedge a0 vanishes; the quotient is positive definite on its two transverse dimensions (step 1.5)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The scalar transport amplitude is defined on each compact ray subinterval by its integral formula, including its endpoints (step 2.2)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only local integral curves and a pointwise auxiliary null vector are used; no global ray or family of choices is asserted (steps 1.4–1.5 and 2.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the four amplitude constraints imply exact finite-epsilon residual formulas, estimates and null-ray transport; no converse characterization is asserted by this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the four amplitude constraints imply exact finite-epsilon residual formulas, estimates and null-ray transport; no converse characterization is asserted by this item."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No separate finite or computational check applies; the proof is established analytically in its numbered steps."
+    },
+    "lem-emg-source-and-test-scaling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-matter-formal-systems",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold with signature $(-,+,+,+)$. Here $N$ is the supplied smooth timelike field selecting the future cone, and $o$ is an independent orientation. Let $\\nabla$ be the unique torsion-free, $g$-compatible connection of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use the curvature sign and contractions of [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$. The geometric and observer conventions are those of [[def-gr-smooth-lorentzian-objects]] and [[def-emg-lorentzian-forms]]. The tangent-bundle smooth structure inherits only the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ from [[def-countable-choice]].\n\nFix formal parameters $c>0$, $\\mu_0>0$, $G_N>0$ and $\\Lambda\\in\\mathbb R$, with $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$. In length coordinates $x^0=ct$, all four coordinates have units metres and $g_{ab}$ is dimensionless. These are mathematical parameters with the displayed SI bookkeeping; they assert no measured value, exactness of $\\mu_0$, or physical law.\n\nA field strength $F$ is a real $C^2$ antisymmetric covariant two-tensor field. Its metric-raised components are $F^{ab}=g^{ac}g^{bd}F_{cd}$. For a future unit observer $n$ ($g(n,n)=-1$), the rest space is $n^\\perp$ and the projection is $h_n(v)=v+g(n,v)n$. The observer electric and magnetic covectors are $E_{n,a}=cF_{ab}n^b$ and $B_{n,a}=-({\\star_gF})_{ab}n^b$, with the oriented Lorentzian Hodge convention of [[lem-emg-observer-field-decomposition]]. They annihilate $n$ and use the positive metric induced on the rest covector space. In a positively oriented orthonormal tetrad with time vector $n$, $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$.\n\nFor such an $F$, define\n\n$$T_{\\mathrm{EM}}^{ab}:=\\frac1{\\mu_0}\\left(F^{ac}F^b{}_c-\\frac14g^{ab}F_{cd}F^{cd}\\right),\\qquad T^{\\mathrm{EM}}_{ab}:=g_{ac}g_{bd}T_{\\mathrm{EM}}^{cd}.$$\n\nFor any symmetric covariant tensor $S_{ab}$ and unit observer $n$, its observer energy density is $S_{ab}n^an^b$. Its observer energy-current vector is $-S^a{}_bn^b$; the spatial energy flux measured by $n$ is the projection $h_n(-S^a{}_bn^b)$ into $n^\\perp$. A nonzero causal vector is future-directed when it has negative inner product with $N$; future timelike means $g(v,v)<0$, and future null means the vector is nonzero and $g(v,v)=0$.\n\nIn four dimensions, define the **weak energy condition** (WEC) for $S$ by $S_{ab}v^av^b\\ge0$ for every future timelike $v$; the **null energy condition** (NEC) by $S_{ab}\\ell^a\\ell^b\\ge0$ for every nonzero future null $\\ell$; and the **dominant energy condition** (DEC) by requiring $-S^a{}_bv^b$ to be future causal or zero for every future timelike $v$. Define the **strong energy condition** (SEC) by the WEC for $S_{ab}-\\tfrac12(g^{cd}S_{cd})g_{ab}$. These are definitions of tensor inequalities only; no general matter positivity premise is included.\n\nA matter tensor $T_m^{ab}$ is a $C^1$ symmetric contravariant two-tensor field; a current $j^a$ is a $C^1$ vector field. The **formal sourced Maxwell equations** are $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$. The **matter exchange equation** is $\\nabla_aT_m^{ab}=F^b{}_cj^c$. The **formal Einstein equation** is\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa\\bigl(T_{m,ab}+T^{\\mathrm{EM}}_{ab}\\bigr).$$\n\nHere $T_{m,ab}$ is obtained by lowering both indices with $g$. Each displayed equation is a pointwise mathematical condition on the supplied fields with the regularities stated above. A formal Einstein–Maxwell–matter solution is a tuple satisfying whichever of these equations are explicitly assumed on the stated open domain; no existence or uniqueness of such a tuple is asserted.\n\nTwo matter forms used below are defined as follows. A **charged-dust form** has $T_m^{ab}=\\rho U^aU^b$ and $j^a=\\sigma U^a$, where $\\rho,\\sigma\\in C^1$, $\\rho\\ge0$, and $U\\in C^2$ is future timelike with $g(U,U)=-c^2$. On $\\{\\rho>0\\}$ its charge-to-mass ratio is $\\alpha=\\sigma/\\rho$; it is not defined by division on $\\{\\rho=0\\}$. A **perfect-fluid form** has\n\n$$T_m^{ab}=\\frac{\\epsilon+p}{c^2}U^aU^b+pg^{ab},$$\n\nwhere $\\epsilon,p\\in C^1$ and $U$ has the same timelike normalization. No equation of state, conductivity law, entropy law, or matter evolution theorem is part of this definition. A current may additionally be written $j^a=\\sigma U^a+q^a$ with $q^aU_a=0$; an Ohmic relation $q^a=\\chi E_U^a$, $\\chi\\ge0$, is a separately imposed constitutive hypothesis, where $E_U^a=F^a{}_bU^b$.\n\nOn an open set $V$, a **local potential** for $F$ is a supplied smooth one-form $A$ with $dA=F$. Such a potential need not exist globally. A local gauge change is $A\\mapsto A+d\\lambda$ for a supplied smooth scalar $\\lambda$; this leaves $F$ unchanged. No global bundle, potential, or point-source construction is asserted.\n\nIn the stated length-coordinate SI interpretation, $[F_{ab}]=\\mathrm T$, $[A_a]=\\mathrm{T\\,m}$, $[j^a]=\\mathrm{A\\,m^{-2}}$, $[T_m]=[T_{\\mathrm{EM}}]=\\mathrm{J\\,m^{-3}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[\\sigma]=\\mathrm{C\\,m^{-3}}$, $[\\alpha]=\\mathrm{C\\,kg^{-1}}$, $[\\epsilon]=[p]=\\mathrm{J\\,m^{-3}}$, and $[\\chi]=\\mathrm{S\\,m^{-1}}$. The equalities $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$ make the displayed tensor equations dimensionally consistent. No distributional product or stress tensor for a singular point source is defined.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emg-selected-matter-energy-conditions",
+          "source_section": "Statement",
+          "quote": "Use the energy-condition definitions of [[def-emg-pointwise-energy-conditions]] and the matter and Maxwell tensor definitions of [[def-emg-matter-formal-systems]]. At every point of an oriented time-oriented Lorentzian domain, the Maxwell tensor $T_{\\mathrm{EM}}$ of that definition is symmetric, trace-free, and satisfies WEC, NEC, SEC and DEC. Its observer energy density and energy flux in a positively oriented orthonormal rest frame are\n\n$$u=\\frac{|E|^2/c^2+|B|^2}{2\\mu_0},\\qquad \\frac{E\\times B}{\\mu_0c},$$\n\nand the DEC flux is future causal or zero. A charged-dust tensor with $\\rho\\ge0$ satisfies all four conditions. For a perfect-fluid tensor with rest energy density $\\epsilon$ and pressure $p$, the exact pointwise conditions are\n\n$$\\mathrm{WEC}\\iff \\epsilon\\ge0\\text{ and }\\epsilon+p\\ge0,\\quad \\mathrm{NEC}\\iff\\epsilon+p\\ge0,$$\n\n$$\\mathrm{SEC}\\iff\\epsilon+p\\ge0\\text{ and }\\epsilon+3p\\ge0,\\quad \\mathrm{DEC}\\iff\\epsilon\\ge|p|.$$\n\nAt a point, finite sums of tensors satisfying any one of these conditions still satisfy that condition; in particular $T_{\\mathrm{EM}}+T_m$ satisfies all four for nonnegative dust. No general matter positivity assumption is made, and adding $T_{\\mathrm{EM}}$ to an arbitrary fluid need not repair a violated fluid inequality.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-emg-charged-dust-projection",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be an open subset of the oriented, time-oriented Lorentzian domain of [[def-emg-matter-formal-systems]]. Let $\\rho,\\sigma\\in C^1(\\Omega,\\mathbb R)$ with $\\rho>0$, and let $U\\in C^2(\\Omega,T\\Omega)$ be future timelike with $g(U,U)=-c^2$. Set $T_m^{ab}=\\rho U^aU^b$, $j^a=\\sigma U^a$, and $a^b=U^a\\nabla_aU^b$. Assume the formal matter-exchange equation $\\nabla_aT_m^{ab}=F^b{}_cj^c$. Then this equation is equivalent on $\\Omega$ to\n\n$$\\nabla_a(\\rho U^a)=0,\\qquad \\rho a^b=\\sigma F^b{}_cU^c.$$\n\nOn $\\Omega$, define $\\alpha=\\sigma/\\rho$. Under the continuity equation, charge-current conservation $\\nabla_aj^a=0$ is equivalent to $U^a\\nabla_a\\alpha=0$. Thus the equation constrains the derivative of $\\alpha$ along the dust flow; it does not impose spatial constancy of $\\alpha$. The claim is a pointwise conditional identity and supplies no coupled-field existence theorem or Maxwell equation.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-emg-test-field-residual-order",
+          "source_section": "Statement",
+          "quote": "Let $U$ be a smooth Lorentzian four-dimensional chart domain with metric $g$ as in [[def-emg-lorentzian-forms]], and let $\\Lambda\\in\\mathbb R$ be constant. Write $\\Omega^k(U)$ for the smooth real $k$-forms on $U$. Here $d:\\Omega^k(U)\\to\\Omega^{k+1}(U)$, $0\\le k\\le3$, is the exterior derivative with coordinate formula $(d\\beta)_{a_0\\ldots a_k}=(k+1)\\partial_{[a_0}\\beta_{a_1\\ldots a_k]}$, and $\\star_g:\\Omega^2(U)\\to\\Omega^2(U)$ is the Lorentzian Hodge map characterized by $\\alpha\\wedge\\star_g\\beta=\\frac12\\alpha_{ab}\\beta^{ab}\\,\\operatorname{vol}_g$ for $\\alpha,\\beta\\in\\Omega^2(U)$, as in [[lem-emg-lorentz-hodge-calculus]]. Both operators are real-linear. Suppose $G_{ab}(g)+\\Lambda g_{ab}=0$. Let $F_1\\in\\Omega^2(U)$ satisfy $dF_1=0$ and $d(\\star_gF_1)=0$. For any real dimensionless $\\varepsilon$, put $F_\\varepsilon:=\\varepsilon F_1$ and define\n\n$$T^{(1)}_{ab}:=\\mu_0^{-1}\\mathcal Q_{ab}(g,F_1),\\qquad \\mathscr R_{ab}(g,F;\\Lambda):=G_{ab}(g)+\\Lambda g_{ab}-\\frac{\\kappa}{\\mu_0}\\mathcal Q_{ab}(g,F),$$\n\nusing $\\kappa,\\mu_0,\\mathcal Q$ of [[def-emg-geometric-scaling]] and [[thm-emg-field-normalization-equivalence]]. Then $F_\\varepsilon$ remains an exact source-free Maxwell field on the fixed metric and\n\n$$\\mathscr R_{ab}(g,F_\\varepsilon;\\Lambda)=-\\kappa\\varepsilon^2T^{(1)}_{ab}.$$\n\nFor a smooth covariant two-tensor $S$ and compact $K\\subset U$, define the chart component norm of its restriction by $\\|S\\|_{K}:=\\max_{0\\le a,b\\le3}\\sup_{p\\in K}|S_{ab}(p)|$ when $K\\ne\\varnothing$. In this estimate and its applications, use $\\sup_{p\\in\\varnothing}f(p):=0$ for nonnegative component functions $f$; equivalently, the empty restriction has $\\|S\\|_{\\varnothing}:=0$. It is finite for smooth $S$ and satisfies\n\n$$\\|\\mathscr R(g,F_\\varepsilon;\\Lambda)\\|_K=\\kappa\\varepsilon^2\\|T^{(1)}\\|_K.$$\n\nIf $\\varepsilon\\ne0$ and $T^{(1)}$ is not identically zero on $K$, the fixed pair $(g,F_\\varepsilon)$ is not an exact coupled Einstein–Maxwell solution on $K$. This is a residual estimate only; it gives no nearby metric, solution-distance bound, point-source solution or backreaction limit.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $n \\ge 1$,\nlet $S^{n-1} \\subseteq \\mathbb R^n$ be the unit sphere, and let $\\sigma$ be the\nset function of [[def-polar-surface-measure-on-the-unit-sphere]]. Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-emg-source-and-test-scaling-step-1-1",
+          "step": "1.1",
+          "claim": "Exterior differentiation is real-linear and the Hodge star is real-linear by [F5], so $dF_\\delta=\\delta\\,dF_0=0$ and $d(\\star_gF_\\delta)=\\delta\\,d(\\star_gF_0)=0$. Each term in the Maxwell tensor of [F1] is quadratic in $F$, hence $T_{\\mathrm{EM}}(g,F_\\delta)=\\delta^2T_{\\mathrm{EM}}(g,F_0)$.",
+          "inputs": [
+            "F5",
+            "F1"
+          ]
+        },
+        {
+          "id": "lem-emg-source-and-test-scaling-step-1-2",
+          "step": "1.2",
+          "claim": "The definitions in [F1] give $T_m(\\eta\\rho,U)=\\eta T_m(\\rho,U)$ and $j(\\eta\\sigma,U)=\\eta j(\\sigma,U)$. On $\\{\\rho>0\\}$, $(\\eta\\sigma)/(\\eta\\rho)=\\sigma/\\rho$. The force equation in [F3] therefore has both sides multiplied by $\\eta$ if $F$ and $U$ are held fixed.",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-emg-source-and-test-scaling-step-1-3",
+          "step": "1.3",
+          "claim": "At any point where $F_0\\ne0$, choose a future unit observer and its positively oriented orthonormal rest frame. Then $E$ and $B$ cannot both vanish, since the field components are $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$ by [F1]. With $\\mu_0>0$, the density formula [F2] gives $u>0$. Minkowski space has $G_{ab}=0$; with $\\Lambda=0$ and $T_m=0$, the Einstein equation would require $0=\\kappa T^{\\mathrm{EM}}_{ab}$, contradicted by this positive observer contraction and $\\kappa>0$ from [F1].",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "lem-emg-source-and-test-scaling-step-1-4",
+          "step": "1.4",
+          "claim": "The Coulomb energy density on $\\mathcal A_\\ell$ is $\\frac{\\varepsilon_0}{2}|\\mathbf E|^2=\\frac{Q^2}{32\\pi^2\\varepsilon_0 r^4}$ by [F2] and $\\varepsilon_0=(\\mu_0c^2)^{-1}$ from [F1], where $r=|\\mathbf x|$. Apply [F6] to this nonnegative radial Borel function, restricted to $\\ell<r<2\\ell$, to obtain $ \\mathcal E_\\ell=4\\pi\\int_\\ell^{2\\ell}\\frac{Q^2}{32\\pi^2\\varepsilon_0r^4}r^2\\,dr =\\frac{Q^2}{8\\pi\\varepsilon_0}\\int_\\ell^{2\\ell}r^{-2}\\,dr. $ The polar-coordinate measure and the field profile are only used on the finite annulus.",
+          "inputs": [
+            "F2",
+            "F1",
+            "F6",
+            "A2",
+            "F5"
+          ]
+        },
+        {
+          "id": "lem-emg-source-and-test-scaling-step-2-1",
+          "step": "2.1",
+          "claim": "The hypotheses of [F4] are exactly the fixed vacuum metric and smooth source-free $F_0$ in [A1]. Applying [F4] with the specified real scalar $\\delta$ gives $\\mathscr R(g,F_\\delta;\\Lambda)=-\\kappa\\delta^2T_{\\mathrm{EM}}(g,F_0)$; step 1.1 also verifies directly that the scaled field remains source-free and that its stress has this quadratic scaling.",
+          "inputs": [
+            "F4",
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "lem-emg-source-and-test-scaling-step-2-2",
+          "step": "2.2",
+          "claim": "The sourced Maxwell equation is $\\nabla_aF^{ab}=-\\mu_0j^b$ by [F1]; replacing $j$ by $\\eta j$ while leaving $F$ fixed changes its right-hand side to $-\\eta\\mu_0j^b$, so it remains the same equation only when $(\\eta-1)j=0$. If instead $(F,j)\\mapsto(\\eta F,\\eta j)$, the Maxwell equation is preserved by linearity, but step 1.1 scales $T_{\\mathrm{EM}}$ quadratically while step 1.2 scales $T_m$ linearly; the dust force equation then also has its left side scale by $\\eta$ and its right side by $\\eta^2$. These unequal degrees show why this scaling is not a general coupled-solution construction, while leaving special cancellations open.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "F3"
+          ]
+        },
+        {
+          "id": "lem-emg-source-and-test-scaling-step-3-1",
+          "step": "3.1",
+          "claim": "The primitive $-r^{-1}$ has derivative $r^{-2}$ on $(0,\\infty)$ by [F7], so $\\int_\\ell^{2\\ell}r^{-2}\\,dr=\\ell^{-1}-(2\\ell)^{-1}=(2\\ell)^{-1}$. Hence $\\mathcal E_\\ell=Q^2/(16\\pi\\varepsilon_0\\ell)$. For every $M>0$, choosing $0<\\ell<Q^2/(16\\pi\\varepsilon_0M)$ gives $\\mathcal E_\\ell>M$; therefore the shell energies diverge as $\\ell\\downarrow0$ at fixed $Q\\ne0$.",
+          "inputs": [
+            "F7",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The source-free tensor identities are pointwise and vacuous on an empty U; the Coulomb clause fixes ell>0 and a nonempty annulus (Statement, steps 1.1 and 1.4)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "delta=0 gives zero residual; sigma=0 is allowed in the dust scaling, while rho=0 is excluded wherever sigma/rho is used (Statement, steps 1.2 and 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No finite number of particles, sources, or field components is varied."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The ratio sigma/rho is defined only under rho>0, and the Coulomb shell uses Q nonzero and ell positive (Statement, steps 1.2 and 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The radial integral is over ell<r<2ell with ell>0; the primitive is evaluated at both positive endpoints (steps 1.4 and 3.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The polar-coordinate supplier uses the explicitly stated AC_omega convention; the proof makes no additional pointwise selections (F6, step 1.4)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: prescribed constant rescalings imply the stated quadratic field residual, linear dust scaling and finite-annulus energy formula; no converse characterization is asserted by this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: prescribed constant rescalings imply the stated quadratic field residual, linear dust scaling and finite-annulus energy formula; no converse characterization is asserted by this item."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "delta=0",
+          "status": "checked",
+          "evidence": "Substitution into the exact fixed-metric residual gives zero, as in steps 1.1 and 2.1."
+        },
+        {
+          "case": "Coulomb shell integral",
+          "status": "checked",
+          "evidence": "The exact primitive evaluation in steps 1.4 and 3.1 gives Q^2/(16 pi epsilon_0 ell)."
+        }
+      ],
+      "finite_checks_disposition": "Applicable edge substitutions are recorded as analytic checks; the proof remains the complete justification."
+    },
+    "thm-emg-weak-slow-test-lorentz-limit": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-matter-formal-systems",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold with signature $(-,+,+,+)$. Here $N$ is the supplied smooth timelike field selecting the future cone, and $o$ is an independent orientation. Let $\\nabla$ be the unique torsion-free, $g$-compatible connection of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use the curvature sign and contractions of [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$. The geometric and observer conventions are those of [[def-gr-smooth-lorentzian-objects]] and [[def-emg-lorentzian-forms]]. The tangent-bundle smooth structure inherits only the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ from [[def-countable-choice]].\n\nFix formal parameters $c>0$, $\\mu_0>0$, $G_N>0$ and $\\Lambda\\in\\mathbb R$, with $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$. In length coordinates $x^0=ct$, all four coordinates have units metres and $g_{ab}$ is dimensionless. These are mathematical parameters with the displayed SI bookkeeping; they assert no measured value, exactness of $\\mu_0$, or physical law.\n\nA field strength $F$ is a real $C^2$ antisymmetric covariant two-tensor field. Its metric-raised components are $F^{ab}=g^{ac}g^{bd}F_{cd}$. For a future unit observer $n$ ($g(n,n)=-1$), the rest space is $n^\\perp$ and the projection is $h_n(v)=v+g(n,v)n$. The observer electric and magnetic covectors are $E_{n,a}=cF_{ab}n^b$ and $B_{n,a}=-({\\star_gF})_{ab}n^b$, with the oriented Lorentzian Hodge convention of [[lem-emg-observer-field-decomposition]]. They annihilate $n$ and use the positive metric induced on the rest covector space. In a positively oriented orthonormal tetrad with time vector $n$, $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$.\n\nFor such an $F$, define\n\n$$T_{\\mathrm{EM}}^{ab}:=\\frac1{\\mu_0}\\left(F^{ac}F^b{}_c-\\frac14g^{ab}F_{cd}F^{cd}\\right),\\qquad T^{\\mathrm{EM}}_{ab}:=g_{ac}g_{bd}T_{\\mathrm{EM}}^{cd}.$$\n\nFor any symmetric covariant tensor $S_{ab}$ and unit observer $n$, its observer energy density is $S_{ab}n^an^b$. Its observer energy-current vector is $-S^a{}_bn^b$; the spatial energy flux measured by $n$ is the projection $h_n(-S^a{}_bn^b)$ into $n^\\perp$. A nonzero causal vector is future-directed when it has negative inner product with $N$; future timelike means $g(v,v)<0$, and future null means the vector is nonzero and $g(v,v)=0$.\n\nIn four dimensions, define the **weak energy condition** (WEC) for $S$ by $S_{ab}v^av^b\\ge0$ for every future timelike $v$; the **null energy condition** (NEC) by $S_{ab}\\ell^a\\ell^b\\ge0$ for every nonzero future null $\\ell$; and the **dominant energy condition** (DEC) by requiring $-S^a{}_bv^b$ to be future causal or zero for every future timelike $v$. Define the **strong energy condition** (SEC) by the WEC for $S_{ab}-\\tfrac12(g^{cd}S_{cd})g_{ab}$. These are definitions of tensor inequalities only; no general matter positivity premise is included.\n\nA matter tensor $T_m^{ab}$ is a $C^1$ symmetric contravariant two-tensor field; a current $j^a$ is a $C^1$ vector field. The **formal sourced Maxwell equations** are $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$. The **matter exchange equation** is $\\nabla_aT_m^{ab}=F^b{}_cj^c$. The **formal Einstein equation** is\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa\\bigl(T_{m,ab}+T^{\\mathrm{EM}}_{ab}\\bigr).$$\n\nHere $T_{m,ab}$ is obtained by lowering both indices with $g$. Each displayed equation is a pointwise mathematical condition on the supplied fields with the regularities stated above. A formal Einstein–Maxwell–matter solution is a tuple satisfying whichever of these equations are explicitly assumed on the stated open domain; no existence or uniqueness of such a tuple is asserted.\n\nTwo matter forms used below are defined as follows. A **charged-dust form** has $T_m^{ab}=\\rho U^aU^b$ and $j^a=\\sigma U^a$, where $\\rho,\\sigma\\in C^1$, $\\rho\\ge0$, and $U\\in C^2$ is future timelike with $g(U,U)=-c^2$. On $\\{\\rho>0\\}$ its charge-to-mass ratio is $\\alpha=\\sigma/\\rho$; it is not defined by division on $\\{\\rho=0\\}$. A **perfect-fluid form** has\n\n$$T_m^{ab}=\\frac{\\epsilon+p}{c^2}U^aU^b+pg^{ab},$$\n\nwhere $\\epsilon,p\\in C^1$ and $U$ has the same timelike normalization. No equation of state, conductivity law, entropy law, or matter evolution theorem is part of this definition. A current may additionally be written $j^a=\\sigma U^a+q^a$ with $q^aU_a=0$; an Ohmic relation $q^a=\\chi E_U^a$, $\\chi\\ge0$, is a separately imposed constitutive hypothesis, where $E_U^a=F^a{}_bU^b$.\n\nOn an open set $V$, a **local potential** for $F$ is a supplied smooth one-form $A$ with $dA=F$. Such a potential need not exist globally. A local gauge change is $A\\mapsto A+d\\lambda$ for a supplied smooth scalar $\\lambda$; this leaves $F$ unchanged. No global bundle, potential, or point-source construction is asserted.\n\nIn the stated length-coordinate SI interpretation, $[F_{ab}]=\\mathrm T$, $[A_a]=\\mathrm{T\\,m}$, $[j^a]=\\mathrm{A\\,m^{-2}}$, $[T_m]=[T_{\\mathrm{EM}}]=\\mathrm{J\\,m^{-3}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[\\sigma]=\\mathrm{C\\,m^{-3}}$, $[\\alpha]=\\mathrm{C\\,kg^{-1}}$, $[\\epsilon]=[p]=\\mathrm{J\\,m^{-3}}$, and $[\\chi]=\\mathrm{S\\,m^{-1}}$. The equalities $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$ make the displayed tensor equations dimensionally consistent. No distributional product or stress tensor for a singular point source is defined.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-rpm-external-charge-local-ivp",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a smooth, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$; assume $\\mathrm{AC}_\\omega$ for its canonical tangent-bundle smooth structure, so the metric-selected Levi–Civita connection $\\nabla$ exists by [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Let $O\\subseteq M$ be open and let $F$ be a $C^1$ alternating covariant two-tensor field on $O$ (a two-form); define $F^\\sharp$ by $g(F^\\sharp(v),w)=F(w,v)$. Fix $m,c>0$, $q\\in\\mathbb R$, an event $x_0\\in O$, and $U_0\\in T_{x_0}M$ with $g(U_0,U_0)=-c^2$ future directed. Then the initial-value problem\n\n$$\\dot x=U,\\qquad \\nabla_UU=(q/m)F^\\sharp(U),\\qquad (x(\\tau_0),U(\\tau_0))=(x_0,U_0)$$\n\nhas a unique local $C^2$ solution on an open proper-time interval containing $\\tau_0$. Any two solutions with these initial data agree on every connected part of their common domain containing $\\tau_0$. Along the solution, $g(U,U)=-c^2$ and $U$ remains future directed. The result is local; it asserts no completeness or global existence for arbitrary external fields.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-timelike-worldline-and-proper-time",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $c>0$ be a fixed real constant.\nAll curves below take values in $M$; the physical reading of $c$, of a\nworldline as the history of a clock or body, and of the parameter values as\ntimes is not part of this definition and is adopted separately in the\npostulates of the framework.\n\n**(a) Regularity classes.** Let $I\\subseteq\\mathbb R$ be an interval with\nnonempty interior ([[def-interval]]) and let $\\gamma:I\\to M$ be a map. A\n**chart representative** of $\\gamma$ is the map $x\\circ\\gamma$ for a smooth\nchart $(U,x)$ of $M$ ([[def-smooth-manifold]]).\n\n- For $k\\in\\mathbb N_0\\cup\\{\\infty\\}$ and an interior point $t_0\\in I$, the map\n  $\\gamma$ is **$C^k$ at $t_0$** when there is a chart representative\n  $x\\circ\\gamma$ defined near $t_0$ that is $C^k$ there in the componentwise\n  Euclidean sense. This condition is independent of the chart: on the overlap\n  of two chart representatives the transition map is smooth and the chain rule\n  applies ([[thm-chain-rule-for-total-derivatives]],\n  [[def-c-r-and-smooth-maps-between-smooth-manifolds]]). If $t_0\\in I$ is an\n  included endpoint of $I$, the coordinate representative and its derivatives through order $k$\n  are continuous up to $t_0$ on the relative interval\n  $I\\cap(t_0-\\delta,t_0+\\delta)$ for some $\\delta>0$, with derivatives at\n  $t_0$ taken one-sided. For $k=\\infty$ this holds at every finite order.\n  Merely possessing a one-sided secant tangent, as defined next, does not\n  by itself make a curve $C^1$ at the endpoint. The map $\\gamma$ is **$C^k$ on $I$** when it is $C^k$ at\n  every point of $I$.\n\n- Let $b\\in\\mathbb R$ and $\\varepsilon>0$. A curve\n  $\\gamma:(b-\\varepsilon,b]\\to M$ has **left tangent** $v\\in T_{\\gamma(b)}M$\n  at $b$ when for one — equivalently every — chart $(U,x)$ around\n  $\\gamma(b)$, writing $v=\\sum_{a=0}^{3}v^a\\partial_a|_{\\gamma(b)}$\n  ([[thm-coordinate-derivations-form-a-basis-of-the-tangent-space]]), the\n  difference quotients satisfy\n  $\\bigl(x^a(\\gamma(t))-x^a(\\gamma(b))\\bigr)/(t-b)\\to v^a$ as $t\\uparrow b$ for\n  $a=0,1,2,3$. A **right tangent** at the left end of a curve is defined\n  analogously with $t\\downarrow b$. Chart independence is the one-sided\n  chain-rule computation for the smooth transition maps\n  ([[thm-chain-rule-for-total-derivatives]]).\n\n- A curve $\\gamma:[a,b]\\to M$ with $a<b$ is **piecewise $C^1$** when there is a\n  finite partition $a=s_0<s_1<\\cdots<s_m=b$ such that for every $i$ the\n  restriction of $\\gamma$ to $[s_{i-1},s_i]$ is $C^1$ up to its included\n  endpoints in the one-sided sense above: in every endpoint chart its\n  component derivatives on the open piece have continuous one-sided limits,\n  agreeing with its endpoint derivatives. Equivalently each piece has a\n  $C^1$ extension to its closed parameter piece. In particular its right\n  tangent at $s_{i-1}$ and left tangent at $s_i$ exist. Such a\n  partition is called **admissible** for $\\gamma$. The piece extensions give continuity at the\n  corners; no agreement of the\n  two one-sided tangents at a corner is required.\n\n**(b) Velocity.** If $\\gamma$ is $C^1$ at an interior point $t$, its\n**velocity** $\\gamma'(t)\\in T_{\\gamma(t)}M$ is the derivation\n$[f]\\mapsto(f\\circ\\gamma)'(t)$ on smooth germs at $\\gamma(t)$, extending\n[[def-velocity-derivation-of-a-smooth-curve]] from smooth to $C^1$ curves.\nEqual germ representatives agree along the curve near $t$, and the\none-variable product rule proves the derivation identity. In a chart around\n$\\gamma(t)$ the velocity has the component\nexpression\n\n$$\\gamma'(t)=\\sum_{a=0}^{3}\\frac{d}{dt}\\bigl(x^a\\circ\\gamma\\bigr)(t)\\,\\partial_a|_{\\gamma(t)},$$\n\nthe coordinate expression of the derivation\n([[thm-coordinate-derivations-form-a-basis-of-the-tangent-space]]). At an\nincluded endpoint of the domain, $\\gamma'$ means the corresponding one-sided\ntangent of clause (a).\n\n**(c) Timelike worldlines.** For $k\\in\\{1,2,3,\\ldots\\}\\cup\\{\\infty\\}$,\na **$C^k$ future timelike worldline** is a $C^k$\ncurve $\\gamma:I\\to M$ whose velocity $\\gamma'(t)$ is future timelike at every\n$t\\in I$, in the sense of [[def-causal-classification-of-lorentz-vectors]]\nand [[def-gr-smooth-lorentzian-objects]]: $g_{\\gamma(t)}(\\gamma'(t),\\gamma'(t))<0$\nand $g_{\\gamma(t)}(\\gamma'(t),N_{\\gamma(t)})<0$. A **piecewise-$C^1$ future\ntimelike worldline** is a piecewise-$C^1$ curve $\\gamma:[a,b]\\to M$ whose\nvelocity at every point of each open piece and whose one-sided tangents at the\ntwo ends of each piece are future timelike; the definition is applied to a map\non an arbitrary interval $I$ with nonempty interior by requiring it on every\ncompact subinterval of $I$. A future timelike velocity is in particular\nnonzero, so every future timelike worldline is regular.\n\n**(d) Proper time and length.** Let $\\gamma:[a,b]\\to M$ be a piecewise-$C^1$\nfuture timelike worldline and let $a=s_0<s_1<\\cdots<s_m=b$ be an admissible\npartition. On each open piece $(s_{i-1},s_i)$ the function\n\n$$h_i(s):=\\sqrt{-g_{\\gamma(s)}\\bigl(\\gamma'(s),\\gamma'(s)\\bigr)}$$\n\nis continuous and strictly positive: it is a finite sum of products of\ncontinuous real functions in any chart around a point of the piece, as\n$g_{ab}\\circ\\gamma$ and the components of $\\gamma'$ are continuous\n([[thm-componentwise-limits-and-continuity]],\n[[thm-algebra-of-continuous-functions]], [[def-continuity-real]]), and the\nsquare root is continuous on $(0,\\infty)$ ([[def-rational-power]],\n[[thm-real-power-continuity-and-derivatives]]). The continuous one-sided limits of the component derivatives, required\nby the $C^1$ extension of each piece, and continuity of $g$ imply that\n$h_i$ tends to the norm of the corresponding endpoint tangent. The future\ntimelike hypothesis on those tangents makes these limits strictly positive, and $h_i$ extends to a continuous function on\n$[s_{i-1},s_i]$; hence it is Darboux integrable there\n([[def-darboux-integral]], [[thm-continuous-implies-integrable]]). The\n**proper-time increment** of $\\gamma$ over $[a,b]$ is\n\n$$\\tau(b)-\\tau(a):=\\frac{1}{c}\\sum_{i=1}^{m}\\int_{s_{i-1}}^{s_i}h_i(s)\\,ds,$$\n\nand the **Lorentzian length** of $\\gamma$ over $[a,b]$ is\n$L_g(\\gamma):=c\\,(\\tau(b)-\\tau(a))$. For a base point $s_0\\in I$ the\n**proper-time function** $\\tau:I\\to\\mathbb R$ of a future timelike worldline is\nthe function with $\\tau(s_0)=0$ and $\\tau(s)$ equal to the increment\nfrom $s_0$ to $s$ when $s>s_0$, and minus the increment from $s$ to $s_0$\nwhen $s<s_0$. That the increment is independent of the admissible\npartition, so that $\\tau$ is well defined, and that it is invariant under\nincreasing $C^1$ reparametrization with strictly positive derivative\n(including one-sided endpoint derivatives), comparing the increment over the\nactual image interval, are proved in\n[[lem-gr-proper-time-reparametrization-and-four-velocity]]; the display is the\nvalue for any admissible partition.\n\n**(e) Four-velocity.** Let $\\gamma$ be a piecewise-$C^1$ future timelike\nworldline and let $t$ be a parameter value at which $\\gamma$ is differentiable\n(interior point of a piece, or an included endpoint with its one-sided\ntangent). The **four-velocity** of $\\gamma$ at $t$ is\n\n$$U(t):=\\frac{c\\,\\gamma'(t)}{\\sqrt{-g_{\\gamma(t)}\\bigl(\\gamma'(t),\\gamma'(t)\\bigr)}}\\in T_{\\gamma(t)}M .$$\n\nBy construction $g_{\\gamma(t)}(U(t),U(t))=-c^2$, and\n$\\gamma'(t)=\\bigl(\\sqrt{-g(\\gamma',\\gamma')}/c\\bigr)U(t)$ with a strictly\npositive scalar factor. If $U$ is written as the derivative of $\\gamma$ with\nrespect to proper time, $U=d\\gamma/d\\tau$, this is a statement proved in\n[[lem-gr-proper-time-reparametrization-and-four-velocity]], not part of the\npresent definition.\n\n**(f) Scope.** Proper time, length and four-velocity are defined only for\nfuture timelike worldlines. A null or spacelike curve receives no proper time\nand no four-velocity from this definition, and no limiting or distributional\nextension of the square-root integrand to such curves is asserted. The\nparametrization of a worldline is part of the data and is arbitrary in this\ndefinition: no affine parameter, no geodesic equation, no completeness or\nextendability of the domain, and no measurement or clock reading is assumed.\nNull and spacelike regularity classes are not defined here beyond the general\n$C^k$ and piecewise-$C^1$ notions of clause (a), which make no causal\nrequirement.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-first-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $F$ be its integral function\n([[def-the-integral-function]]), and let $c \\in [a,b]$ be a point at which $f$ is\ncontinuous ([[def-continuity-real]]). Then $F$ is differentiable at $c$ as a\nfunction on $[a,b]$ ([[def-derivative]]) and\n\n$$F'(c) \\;=\\; f(c) .$$\n\nAt $c = a$ and $c = b$ this is the one-sided statement, which is what\n[[def-derivative]] means at those points: every point of a nondegenerate interval\nis a limit point of it, so $F'(c)$ is a meaningful symbol at every $c \\in [a,b]$,\nand the difference quotient is taken over $[a,b] \\setminus \\{c\\}$.\n\n**Consequently, if $f$ is continuous on the whole of $[a,b]$, then $F$ is a\nprimitive of $f$ there**: $F' = f$ at every point of $[a,b]$.\n\n**Continuity at $c$ is a hypothesis and it cannot be dropped.** For an integrable\n$f$ that is discontinuous at $c$, $F'(c)$ may fail to exist, and it may exist and\ndiffer from $f(c)$; both are exhibited on the companion page, by\nan integrable function with no primitive and by a false\nstatement about the integral function.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-1-1",
+          "step": "1.1",
+          "claim": "The external ODE supplier [F2] applies at each fixed $\\epsilon$ because $g^{(\\epsilon)}$ is smooth Lorentzian and $F^{(\\epsilon)}$ is a prescribed smooth two-form; it gives local uniqueness from future timelike proper-time data. The comparison vector field is smooth on an open set, so its derivative is bounded on a sufficiently small closed coordinate box about each initial state; the one-variable mean-value theorem [F6] along segments makes it locally Lipschitz, and [F3] gives local existence and uniqueness. The existence and common containment through $S_*$ are retained as [A1], rather than inferred from either local theorem.",
+          "inputs": [
+            "F2",
+            "F6",
+            "F3",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-1-2",
+          "step": "1.2",
+          "claim": "Write the spatial metric block as $H=(g_{ij})$, the off-diagonal row as $b=(g_{0i})$, and $a=g_{00}$. The stated bounds give $H=dI+R$, where $d=1-2\\epsilon\\phi$ and $R=O(\\epsilon^2)$, while $b=O(\\epsilon^{3/2})$ and $a=-1-2\\epsilon\\phi+O(\\epsilon^2)$ uniformly. For sufficiently small $\\epsilon$, $d$ stays bounded away from zero. The determinant is polynomial in the entries, so $\\det H=d^3+O(\\epsilon^2)$ is bounded away from zero; its adjugate is bounded, hence $H^{-1}$ is bounded. The identity $H^{-1}-d^{-1}I=-d^{-1}H^{-1}R$ gives $H^{-1}=d^{-1}I+O(\\epsilon^2)$, and, with $u:=2\\epsilon\\phi$, $(1-u)^{-1}=1+u+u^2/(1-u)$ gives $d^{-1}=1+2\\epsilon\\phi+O(\\epsilon^2)$. Its Schur complement $s=a-bH^{-1}b^T=-1-2\\epsilon\\phi+O(\\epsilon^2)$ is bounded away from zero. Direct multiplication verifies the block-inverse entries $g^{00}=s^{-1}$, $g^{0i}=-s^{-1}(bH^{-1})_i$, and $g^{ij}=(H^{-1})_{ij}+(H^{-1}b^T)_i s^{-1}(bH^{-1})_j$: multiplying these entries by the blocks $a,b,H$ gives the identity matrix, using $s=a-bH^{-1}b^T$. $ g^{00}=-1+2\\epsilon\\phi+O(\\epsilon^2),\\qquad g^{0i}=O(\\epsilon^{3/2}),\\qquad g^{ij}=(1+2\\epsilon\\phi)\\delta_{ij}+O(\\epsilon^2). $ All constants in these estimates depend only on the supplied bounds, not on $\\epsilon$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-1-3",
+          "step": "1.3",
+          "claim": "Put $K^\\mu=dx^\\mu/dt=(c,w^i)$ and $\\lambda=d\\tau/dt>0$. Proper time gives $\\lambda^2=-g(K,K)/c^2=1+O(\\epsilon)$, since $|w|/c=O(\\sqrt\\epsilon)$ and $g_{0i}=O(\\epsilon^{3/2})$. Shrinking $\\epsilon_*$ makes $1/2\\le\\lambda\\le3/2$, and $(\\lambda-1)=(\\lambda^2-1)/(\\lambda+1)$ gives $\\lambda=1+O(\\epsilon)$. The exact covariant equation with $U=K/\\lambda$ yields $ \\frac{dw^i}{dt} =-\\Gamma^i{}_{\\mu\\nu}K^\\mu K^\\nu +\\frac{w^i}{c}\\Gamma^0{}_{\\mu\\nu}K^\\mu K^\\nu +\\alpha\\lambda\\left(F^i{}_\\nu K^\\nu-\\frac{w^i}{c}F^0{}_\\nu K^\\nu\\right). $ Indeed, subtracting $w^i/c$ times the time component of the proper-time equation from its $i$th component cancels the derivative of $\\lambda$; multiplying the result by $\\lambda^2$ gives the display.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-2-1",
+          "step": "2.1",
+          "claim": "In the Christoffel formula of [F5], time derivatives vanish by stationarity and each spatial derivative contributes $L^{-1}\\partial_X$. Substitution of the metric and inverse estimates of step 1.2, together with the first-derivative remainder bounds, gives $ \\Gamma^i{}_{00}=\\frac{\\epsilon}{L}\\partial_{X^i}\\phi+O(\\epsilon^2/L),\\quad \\Gamma^i{}_{0j}=O(\\epsilon^{3/2}/L),\\quad \\Gamma^i{}_{jk}=O(\\epsilon/L), $ $ \\Gamma^0{}_{00}=O(\\epsilon^{5/2}/L),\\quad \\Gamma^0{}_{0j}=O(\\epsilon/L),\\quad \\Gamma^0{}_{jk}=O(\\epsilon^{3/2}/L). $ For example, $\\Gamma^i{}_{00}=-\\tfrac12g^{ij}\\partial_jg_{00}$, so its leading term is $+\\epsilon L^{-1}\\partial_{X^i}\\phi$; every other displayed order follows by multiplying the corresponding inverse-metric order by the first derivatives of $g_{00}$, $g_{0i}$ or $g_{ij}$.",
+          "inputs": [
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-2-2",
+          "step": "2.2",
+          "claim": "Raising the first index of $F$ with step 1.2 and using $F_{0i}=-E_i/c$, $F_{ij}=\\epsilon_{ijk}B_k$ gives $ \\alpha F^i{}_\\nu K^\\nu=\\alpha(E+w\\times B)^i+O(\\epsilon^2c^2/L),\\qquad \\alpha F^0{}_\\nu K^\\nu=O(\\epsilon^{3/2}c^2/L). $ For the first equality, the diagonal inverse-metric corrections are $O(\\epsilon)$ times the leading electric and magnetic accelerations, each $O(\\epsilon c^2/L)$; the off-diagonal term $g^{i0}$ is $O(\\epsilon^{3/2})$ and multiplies $\\alpha F_{0j}w^j=O(\\epsilon^{3/2}c^2/L)$. In the second equality the leading time contraction is $\\alpha E\\cdot w/c=O(\\epsilon^{3/2}c^2/L)$, and the inverse-metric off-diagonal terms are no larger. Thus $(w^i/c)\\alpha F^0{}_\\nu K^\\nu=O(\\epsilon^2c^2/L)$. Multiplication by $\\lambda=1+O(\\epsilon)$ preserves the leading force and changes it by at most $O(\\epsilon^2c^2/L)$.",
+          "inputs": [
+            "step 1.2",
+            "A1",
+            "F1",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-3-1",
+          "step": "3.1",
+          "claim": "With $K^i=O(\\sqrt\\epsilon\\,c)$, the first three Christoffel orders in step 2.1 give $ -\\Gamma^i{}_{\\mu\\nu}K^\\mu K^\\nu +\\frac{w^i}{c}\\Gamma^0{}_{\\mu\\nu}K^\\mu K^\\nu =-\\frac{\\epsilon c^2}{L}\\partial_{X^i}\\phi+O(\\epsilon^2c^2/L). $ The leading term is $-\\Gamma^i{}_{00}c^2$. The $\\Gamma^i{}_{0j}$ and $\\Gamma^i{}_{jk}$ terms are respectively $O(\\epsilon^2c^2/L)$ and $O(\\epsilon^2c^2/L)$; the displayed $\\Gamma^0$ terms, after multiplication by $w^i/c$, are also at most $O(\\epsilon^2c^2/L)$. Since $\\Phi_\\epsilon:=\\epsilon c^2\\phi$, the leading term is $-\\nabla_x\\Phi_\\epsilon$.",
+          "inputs": [
+            "step 2.1",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-4-1",
+          "step": "4.1",
+          "claim": "Combining steps 1.3, 3.1, and 2.2 in the exact coordinate equation gives $ \\frac{d\\mathbf w}{dt}=-\\nabla_x\\Phi_\\epsilon+ \\alpha(\\mathbf E+\\mathbf w\\times\\mathbf B)+\\mathbf R_\\epsilon, \\qquad \\|\\mathbf R_\\epsilon\\|_1\\le C_r\\epsilon^2c^2/L $ for a finite $C_r$ depending only on the stated uniform bounds. The definitions of $X,W,S$ give $dX/dS=W$ and $dW/dS=L(\\epsilon c^2)^{-1}dw/dt$. Since $\\nabla_x=L^{-1}\\nabla_X$, $\\alpha E=\\epsilon c^2L^{-1}e$, $\\alpha B=\\sqrt\\epsilon\\,cL^{-1}b$, and $w=\\sqrt\\epsilon\\,cW$, the equation becomes the claimed comparison system with residual $r_\\epsilon$ bounded by $C_r\\epsilon$.",
+          "inputs": [
+            "step 1.3",
+            "step 3.1",
+            "step 2.2",
+            "A1"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-5-1",
+          "step": "5.1",
+          "claim": "Let $Z_\\epsilon=(X_\\epsilon,W_\\epsilon)$, $Z_N=(X_N,W_N)$, and $D(S)=\\|Z_\\epsilon(S)-Z_N(S)\\|_1$. Their integral equations, matched initial data, the residual bound from step 4.1, and the derivative bound for $f$ on the convex set $\\mathcal Q$ give $ D(S)\\le C_r\\epsilon S+L_f\\int_0^S D(s)\\,ds \\le C_r\\epsilon S_*+L_f\\int_0^S D(s)\\,ds. $ The Lipschitz estimate follows by applying the chain rule to $u\\mapsto f(Z_N+u(Z_\\epsilon-Z_N))$ and integrating its derivative on $[0,1]$; the componentwise norm inequality follows from the scalar absolute-value triangle inequality [F7].",
+          "inputs": [
+            "step 4.1",
+            "F7",
+            "A1",
+            "F6"
+          ]
+        },
+        {
+          "id": "thm-emg-weak-slow-test-lorentz-limit-step-6-1",
+          "step": "6.1",
+          "claim": "Define $H(S)=C_r\\epsilon S_*+L_f\\int_0^S D(s)\\,ds$. Then $D\\le H$, $H(0)=C_r\\epsilon S_*$ and $H'=L_fD\\le L_fH$. By [F6], $(e^{-L_fS}H(S))'=e^{-L_fS}(H'-L_fH)\\le0$; the mean value theorem in [F6] therefore makes this function nonincreasing. Hence $D(S)\\le H(S)\\le C_r\\epsilon S_*e^{L_fS}$ for $0\\le S\\le S_*$, proving the stated uniform estimate.",
+          "inputs": [
+            "F6",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The assumed trajectories in Q make Q and K nonempty; if the assumptions cannot be met the conditional implication is vacuous (Statement, step 1.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "epsilon is strictly positive because the scaled variables contain epsilon^{-1/2}; no epsilon=0 assertion is made (Statement)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result compares one relativistic trajectory with one comparison trajectory; no finite-cardinality family is counted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The metric is Lorentzian, alpha is nonzero, and the proper-time factor lambda remains positive in the chosen range (Statement, step 1.3)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Matched initial data give zero error at S=0, and the estimate is uniform through the finite endpoint S_* (steps 5.1–6.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both trajectory existence and compact containment are explicit hypotheses; the local ODE results do not infer global existence (Statement, step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a conditional estimate, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "S=0",
+          "status": "checked",
+          "evidence": "Matched initial data make the state difference zero at S=0, satisfying the displayed estimate."
+        }
+      ],
+      "finite_checks_disposition": "Applicable edge substitutions are recorded as analytic checks; the proof remains the complete justification."
+    },
+    "ex-emgmath-ml-b07": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-matter-formal-systems",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold with signature $(-,+,+,+)$. Here $N$ is the supplied smooth timelike field selecting the future cone, and $o$ is an independent orientation. Let $\\nabla$ be the unique torsion-free, $g$-compatible connection of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use the curvature sign and contractions of [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$. The geometric and observer conventions are those of [[def-gr-smooth-lorentzian-objects]] and [[def-emg-lorentzian-forms]]. The tangent-bundle smooth structure inherits only the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ from [[def-countable-choice]].\n\nFix formal parameters $c>0$, $\\mu_0>0$, $G_N>0$ and $\\Lambda\\in\\mathbb R$, with $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$. In length coordinates $x^0=ct$, all four coordinates have units metres and $g_{ab}$ is dimensionless. These are mathematical parameters with the displayed SI bookkeeping; they assert no measured value, exactness of $\\mu_0$, or physical law.\n\nA field strength $F$ is a real $C^2$ antisymmetric covariant two-tensor field. Its metric-raised components are $F^{ab}=g^{ac}g^{bd}F_{cd}$. For a future unit observer $n$ ($g(n,n)=-1$), the rest space is $n^\\perp$ and the projection is $h_n(v)=v+g(n,v)n$. The observer electric and magnetic covectors are $E_{n,a}=cF_{ab}n^b$ and $B_{n,a}=-({\\star_gF})_{ab}n^b$, with the oriented Lorentzian Hodge convention of [[lem-emg-observer-field-decomposition]]. They annihilate $n$ and use the positive metric induced on the rest covector space. In a positively oriented orthonormal tetrad with time vector $n$, $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$.\n\nFor such an $F$, define\n\n$$T_{\\mathrm{EM}}^{ab}:=\\frac1{\\mu_0}\\left(F^{ac}F^b{}_c-\\frac14g^{ab}F_{cd}F^{cd}\\right),\\qquad T^{\\mathrm{EM}}_{ab}:=g_{ac}g_{bd}T_{\\mathrm{EM}}^{cd}.$$\n\nFor any symmetric covariant tensor $S_{ab}$ and unit observer $n$, its observer energy density is $S_{ab}n^an^b$. Its observer energy-current vector is $-S^a{}_bn^b$; the spatial energy flux measured by $n$ is the projection $h_n(-S^a{}_bn^b)$ into $n^\\perp$. A nonzero causal vector is future-directed when it has negative inner product with $N$; future timelike means $g(v,v)<0$, and future null means the vector is nonzero and $g(v,v)=0$.\n\nIn four dimensions, define the **weak energy condition** (WEC) for $S$ by $S_{ab}v^av^b\\ge0$ for every future timelike $v$; the **null energy condition** (NEC) by $S_{ab}\\ell^a\\ell^b\\ge0$ for every nonzero future null $\\ell$; and the **dominant energy condition** (DEC) by requiring $-S^a{}_bv^b$ to be future causal or zero for every future timelike $v$. Define the **strong energy condition** (SEC) by the WEC for $S_{ab}-\\tfrac12(g^{cd}S_{cd})g_{ab}$. These are definitions of tensor inequalities only; no general matter positivity premise is included.\n\nA matter tensor $T_m^{ab}$ is a $C^1$ symmetric contravariant two-tensor field; a current $j^a$ is a $C^1$ vector field. The **formal sourced Maxwell equations** are $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$. The **matter exchange equation** is $\\nabla_aT_m^{ab}=F^b{}_cj^c$. The **formal Einstein equation** is\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa\\bigl(T_{m,ab}+T^{\\mathrm{EM}}_{ab}\\bigr).$$\n\nHere $T_{m,ab}$ is obtained by lowering both indices with $g$. Each displayed equation is a pointwise mathematical condition on the supplied fields with the regularities stated above. A formal Einstein–Maxwell–matter solution is a tuple satisfying whichever of these equations are explicitly assumed on the stated open domain; no existence or uniqueness of such a tuple is asserted.\n\nTwo matter forms used below are defined as follows. A **charged-dust form** has $T_m^{ab}=\\rho U^aU^b$ and $j^a=\\sigma U^a$, where $\\rho,\\sigma\\in C^1$, $\\rho\\ge0$, and $U\\in C^2$ is future timelike with $g(U,U)=-c^2$. On $\\{\\rho>0\\}$ its charge-to-mass ratio is $\\alpha=\\sigma/\\rho$; it is not defined by division on $\\{\\rho=0\\}$. A **perfect-fluid form** has\n\n$$T_m^{ab}=\\frac{\\epsilon+p}{c^2}U^aU^b+pg^{ab},$$\n\nwhere $\\epsilon,p\\in C^1$ and $U$ has the same timelike normalization. No equation of state, conductivity law, entropy law, or matter evolution theorem is part of this definition. A current may additionally be written $j^a=\\sigma U^a+q^a$ with $q^aU_a=0$; an Ohmic relation $q^a=\\chi E_U^a$, $\\chi\\ge0$, is a separately imposed constitutive hypothesis, where $E_U^a=F^a{}_bU^b$.\n\nOn an open set $V$, a **local potential** for $F$ is a supplied smooth one-form $A$ with $dA=F$. Such a potential need not exist globally. A local gauge change is $A\\mapsto A+d\\lambda$ for a supplied smooth scalar $\\lambda$; this leaves $F$ unchanged. No global bundle, potential, or point-source construction is asserted.\n\nIn the stated length-coordinate SI interpretation, $[F_{ab}]=\\mathrm T$, $[A_a]=\\mathrm{T\\,m}$, $[j^a]=\\mathrm{A\\,m^{-2}}$, $[T_m]=[T_{\\mathrm{EM}}]=\\mathrm{J\\,m^{-3}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[\\sigma]=\\mathrm{C\\,m^{-3}}$, $[\\alpha]=\\mathrm{C\\,kg^{-1}}$, $[\\epsilon]=[p]=\\mathrm{J\\,m^{-3}}$, and $[\\chi]=\\mathrm{S\\,m^{-1}}$. The equalities $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$ make the displayed tensor equations dimensionally consistent. No distributional product or stress tensor for a singular point source is defined.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-controlled-maxwell-wkb",
+          "source_section": "Statement",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, metric, connection, curvature sign, length-coordinate SI convention and constants of [[def-emg-matter-formal-systems]]. Let $U\\subseteq M$ be open. Let $\\theta\\in C^4(U,\\mathbb R)$ be dimensionless, set $k:=d\\theta$, and assume that $k$ is nowhere zero and $g^{-1}(k,k)=0$. Let $a_0,a_1\\in C^3(U;T^*M\\otimes_{\\mathbb R}\\mathbb C)$; this means that the real and imaginary parts of their coefficients are $C^3$ in every smooth chart. Complex tensor operations and $\\nabla$ are extended componentwise and complex-linearly. Define\n\n$$ (\\Box a)_b:=g^{ac}\\nabla_a\\nabla_c a_b,\\qquad (Pa)_b:=(\\Box a)_b-\\operatorname{Ric}_b{}^c a_c,\\qquad d_1:=\\nabla^a(a_1)_a, $$\n\nand define the first-order operator\n\n$$ (La)_b:=2k^c\\nabla_c a_b+(\\nabla_c k^c)a_b. $$\n\nAssume pointwise on $U$ that\n\n$$ g^{-1}(k,a_0)=0,\\qquad La_0=0,\\qquad iLa_1+Pa_0=0,\\qquad ik^a(a_1)_a+\\nabla^a(a_0)_a=0. $$\n\nThese are finite-order ansatz constraints; they assert neither initial data nor a global solution of the transport equations. For $0<\\epsilon\\le1$, set\n\n$$ A_\\epsilon:=\\epsilon e^{i\\theta/\\epsilon}(a_0+\\epsilon a_1),\\qquad F_\\epsilon:=dA_\\epsilon. $$\n\nThen $dF_\\epsilon=0$ and the exact Maxwell divergence residual is\n\n$$ \\nabla^a(F_\\epsilon)_{ab} =e^{i\\theta/\\epsilon}\\left[-i\\epsilon k_b d_1+ \\epsilon^2\\bigl((Pa_1)_b-\\nabla_b d_1\\bigr)\\right]. $$\n\nThe field-strength expansion is also exact:\n\n$$ F_\\epsilon=e^{i\\theta/\\epsilon}\\left[ik\\wedge a_0+ \\epsilon(da_0+ik\\wedge a_1)+\\epsilon^2da_1\\right]. $$\n\nFor units, take $[k]=\\mathrm m^{-1}$, $[a_0]=[a_1]=\\mathrm{T\\,m}$, $[d_1]=\\mathrm T$, $[Pa_1]=[\\nabla d_1]=\\mathrm{T\\,m^{-1}}$, and $[\\epsilon]=[\\theta]=1$. In one chart and for a compact coordinate set $K$, define\n\n$$ \\|S\\|_{\\infty,K}:= \\begin{cases} \\max_I\\max_{x\\in K}|S_I(x)|,&K\\ne\\varnothing,\\\\ 0,&K=\\varnothing, \\end{cases} $$\n\nwhere $I$ ranges over the finitely many components of the real or complex tensor in that chart. If $K\\ne\\varnothing$ and finite constants $K_0,D_0,C_0,B_0,B_1\\ge0$ satisfy\n\n$$ \\|k\\|_{\\infty,K}\\le K_0,\\quad \\|d_1\\|_{\\infty,K}\\le D_0,\\quad \\|Pa_1-\\nabla d_1\\|_{\\infty,K}\\le C_0,\\quad \\|da_0+ik\\wedge a_1\\|_{\\infty,K}\\le B_0,\\quad \\|da_1\\|_{\\infty,K}\\le B_1, $$\n\nthen\n\n$$ \\|\\nabla^a(F_\\epsilon)_{ab}\\|_{\\infty,K} \\le\\epsilon K_0D_0+\\epsilon^2C_0,\\qquad \\|F_\\epsilon-e^{i\\theta/\\epsilon}ik\\wedge a_0\\|_{\\infty,K} \\le\\epsilon B_0+\\epsilon^2B_1. $$\n\nTaking real parts gives real potentials and fields with the same bounds. Every local integral curve of $k^\\sharp$ is an affinely parametrized null geodesic and lies in a level set of $\\theta$. Along each such ray, a nonzero scalar transport amplitude\n\n$$ \\mathcal A(\\lambda)=\\mathcal A(\\lambda_0) \\exp\\left(-\\frac12\\int_{\\lambda_0}^{\\lambda}(\\nabla_c k^c)(\\gamma(s))\\,ds\\right) $$\n\nis defined on every compact subinterval of the ray. The one-form $e:=a_0/\\mathcal A$ is transverse and parallel transported. At each point the leading polarization is the class $[a_0]\\in k^\\perp/\\operatorname{span}_{\\mathbb C}\\{k\\}$, where $k^\\perp=\\{a:g^{-1}(k,a)=0\\}$. This quotient is a two-dimensional complex vector space with a positive induced Hermitian form, and $a_0\\mapsto a_0+\\beta k$ leaves $k\\wedge a_0$ unchanged. If $a_0$ is proportional to $k$, the leading field vanishes. No convergence of a WKB series, existence of amplitudes satisfying the constraints, exact-solution error estimate, or behavior through caustics is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-source-and-test-scaling",
+          "source_section": "Statement",
+          "quote": "Use the field, stress, matter, unit and curvature conventions of [[def-emg-matter-formal-systems]]. Let $U\\subseteq M$ be open, let $\\Lambda\\in\\mathbb R$ be constant, and define the Einstein residual for the source-free field model by\n\n$$ \\mathscr R_{ab}(g,F;\\Lambda):=G_{ab}(g)+\\Lambda g_{ab}-\\kappa T^{\\mathrm{EM}}_{ab}(g,F). $$\n\nSuppose $G_{ab}(g)+\\Lambda g_{ab}=0$ on $U$, and let $F_0$ be a smooth real two-form with $dF_0=0$ and $d(\\star_gF_0)=0$. For every real dimensionless $\\delta$, the field $F_\\delta:=\\delta F_0$ obeys the same source-free Maxwell equations and\n\n$$ \\mathscr R_{ab}(g,F_\\delta;\\Lambda)=-\\kappa\\delta^2 T^{\\mathrm{EM}}_{ab}(g,F_0). $$\n\nThis is an exact residual identity on the fixed metric. If $\\delta\\ne0$ and $F_0$ is nonzero at a point, its observer energy there is positive and the residual is nonzero there; this does not estimate the distance to a different coupled solution.\n\nSeparately, let $\\rho,\\sigma\\in C^1(\\Omega)$ and a $C^2$ future timelike field $U$ with $g(U,U)=-c^2$ define charged dust on an open $\\Omega\\subseteq U$, with $\\rho>0$, $T_m^{ab}=\\rho U^aU^b$, $j^a=\\sigma U^a$, and the formal matter-exchange equation of [[def-emg-matter-formal-systems]]. For any dimensionless $\\eta>0$, replacing $(\\rho,\\sigma)$ by $(\\eta\\rho,\\eta\\sigma)$ multiplies $T_m$ and $j$ by $\\eta$, leaves $\\alpha=\\sigma/\\rho$ unchanged, and leaves the dust acceleration equation $\\rho U^a\\nabla_aU^b=\\sigma F^b{}_cU^c$ unchanged when the prescribed $F$ and $U$ are held fixed. The sourced Maxwell equation must still match the changed current. If both $F$ and $j$ are scaled by $\\eta$, Maxwell's equations remain linear but the electromagnetic stress scales by $\\eta^2$, whereas the dust stress scales by $\\eta$; no general coupled-solution family follows.\n\nFor a flat background with $\\Lambda=0$ and $T_m=0$, a nonzero source-free Maxwell field cannot solve the exact Einstein equation with the unchanged Minkowski metric, because its observer energy density is positive somewhere.\n\nFinally, in Minkowski space consider only the prescribed Coulomb profile on the finite annulus $\\mathcal A_\\ell:=\\{\\mathbf x\\in\\mathbb R^3:\\ell<|\\mathbf x|<2\\ell\\}$, where $\\ell>0$ is a length, $Q\\ne0$ is a charge, $r:=|\\mathbf x|$, $\\mathbf e_r:=\\mathbf x/r$, $\\mathbf E(\\mathbf x)=Q(4\\pi\\varepsilon_0r^2)^{-1}\\mathbf e_r$, and $\\mathbf B=0$. Its Maxwell energy on that annulus is\n\n$$ \\mathcal E_\\ell=\\int_{\\mathcal A_\\ell}\\frac{\\varepsilon_0}{2}|\\mathbf E|^2\\,d^3x =\\frac{Q^2}{16\\pi\\varepsilon_0\\ell}. $$\n\nThus this fixed-charge Coulomb cutoff family has diverging shell energy as $\\ell\\downarrow0$. This finite-annulus calculation asserts no point-source construction, self-field evaluation, or obstruction theorem for arbitrary regularizations.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-emgmath-ml-b07-step-1-1",
+          "step": "1.1",
+          "claim": "The phase gradient is $k=\\nu(dx^0-dz)$ and $g^{-1}(k,k)=\\nu^2(-1+1)=0$. The constant $a_0$ obeys $g^{-1}(k,a_0)=0$ and $La_0=0$; $a_1=0$ makes $iLa_1+Pa_0=0$ and $ik^a(a_1)_a+\\nabla^a(a_0)_a=0$. Here $\\nabla$ is the flat connection and the Ricci tensor vanishes. Thus all four hypotheses of [F2] hold.",
+          "inputs": [
+            "F2",
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b07-step-1-2",
+          "step": "1.2",
+          "claim": "Differentiating $A_\\epsilon^{\\mathbb R}$ in the displayed coordinates gives $(F_\\epsilon)_{01}=\\partial_0(A_\\epsilon^{\\mathbb R})_1=-\\nu A_*\\sin(\\theta/\\epsilon)$ and $(F_\\epsilon)_{31}=\\partial_z(A_\\epsilon^{\\mathbb R})_1=+\\nu A_*\\sin(\\theta/\\epsilon)$; no other independent component is produced. The SI component convention in [F1] therefore gives the displayed $E_1$ and $B_2$.",
+          "inputs": [
+            "F1",
+            "A1"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b07-step-2-1",
+          "step": "2.1",
+          "claim": "In [F2], this example has $a_1=0$, hence $d_1=0$ and $Pa_1-\\nabla d_1=0$. Its exact residual formula therefore gives $\\nabla^a(F_\\epsilon)_{ab}=0$, and its exact closure identity gives $dF_\\epsilon=0$. Raising the free index in the first equality gives the equivalent component equation $\\nabla_aF_\\epsilon^{ab}=0$. Thus both source-free Maxwell equations hold exactly for every fixed $\\epsilon$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b07-step-3-1",
+          "step": "3.1",
+          "claim": "Since $\\nu A_*\\ne0$, there are points with $\\sin(\\theta/\\epsilon)\\ne0$. At any such point the field is nonzero and [F3] gives positive electromagnetic observer energy. Minkowski has $G_{ab}=0$, so the source-free Einstein equation with unchanged metric and $\\Lambda=0$ fails there. This caveat concerns coupling only; the Maxwell calculation in step 2.1 remains exact.",
+          "inputs": [
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is fixed on nonempty Minkowski space R^4 and has no variable domain that can be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A_* is nonzero, but sin(theta/epsilon) may vanish on nodal hypersurfaces; the exact Maxwell equations still hold there (steps 1.2 and 2.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The construction is one plane-wave mode; no one-element family or count is involved."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At phase nodes the field vanishes; away from them A_* nu nonzero gives positive observer energy and the coupling caveat applies (step 3.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The plane wave is defined on all Minkowski space and no interval endpoints are asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The phase, amplitude and real-part operation are explicit; no element is selected from a nonempty family (steps 1.1–1.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the displayed transverse plane-wave ansatz is an exact source-free test field that fails coupling on the unchanged flat metric; no converse characterization is asserted by this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the displayed transverse plane-wave ansatz is an exact source-free test field that fails coupling on the unchanged flat metric; no converse characterization is asserted by this item."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "phase theta/epsilon=pi/2",
+          "status": "checked",
+          "evidence": "Direct substitution gives F_01=-nu A_*, F_31=+nu A_*, E_1=c nu A_*, and B_2=nu A_*, as in step 1.2."
+        }
+      ],
+      "finite_checks_disposition": "Applicable edge substitutions are recorded as analytic checks; the proof remains the complete justification."
+    },
+    "ex-emgmath-ml-b08": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-matter-formal-systems",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold with signature $(-,+,+,+)$. Here $N$ is the supplied smooth timelike field selecting the future cone, and $o$ is an independent orientation. Let $\\nabla$ be the unique torsion-free, $g$-compatible connection of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use the curvature sign and contractions of [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$. The geometric and observer conventions are those of [[def-gr-smooth-lorentzian-objects]] and [[def-emg-lorentzian-forms]]. The tangent-bundle smooth structure inherits only the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ from [[def-countable-choice]].\n\nFix formal parameters $c>0$, $\\mu_0>0$, $G_N>0$ and $\\Lambda\\in\\mathbb R$, with $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$. In length coordinates $x^0=ct$, all four coordinates have units metres and $g_{ab}$ is dimensionless. These are mathematical parameters with the displayed SI bookkeeping; they assert no measured value, exactness of $\\mu_0$, or physical law.\n\nA field strength $F$ is a real $C^2$ antisymmetric covariant two-tensor field. Its metric-raised components are $F^{ab}=g^{ac}g^{bd}F_{cd}$. For a future unit observer $n$ ($g(n,n)=-1$), the rest space is $n^\\perp$ and the projection is $h_n(v)=v+g(n,v)n$. The observer electric and magnetic covectors are $E_{n,a}=cF_{ab}n^b$ and $B_{n,a}=-({\\star_gF})_{ab}n^b$, with the oriented Lorentzian Hodge convention of [[lem-emg-observer-field-decomposition]]. They annihilate $n$ and use the positive metric induced on the rest covector space. In a positively oriented orthonormal tetrad with time vector $n$, $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$.\n\nFor such an $F$, define\n\n$$T_{\\mathrm{EM}}^{ab}:=\\frac1{\\mu_0}\\left(F^{ac}F^b{}_c-\\frac14g^{ab}F_{cd}F^{cd}\\right),\\qquad T^{\\mathrm{EM}}_{ab}:=g_{ac}g_{bd}T_{\\mathrm{EM}}^{cd}.$$\n\nFor any symmetric covariant tensor $S_{ab}$ and unit observer $n$, its observer energy density is $S_{ab}n^an^b$. Its observer energy-current vector is $-S^a{}_bn^b$; the spatial energy flux measured by $n$ is the projection $h_n(-S^a{}_bn^b)$ into $n^\\perp$. A nonzero causal vector is future-directed when it has negative inner product with $N$; future timelike means $g(v,v)<0$, and future null means the vector is nonzero and $g(v,v)=0$.\n\nIn four dimensions, define the **weak energy condition** (WEC) for $S$ by $S_{ab}v^av^b\\ge0$ for every future timelike $v$; the **null energy condition** (NEC) by $S_{ab}\\ell^a\\ell^b\\ge0$ for every nonzero future null $\\ell$; and the **dominant energy condition** (DEC) by requiring $-S^a{}_bv^b$ to be future causal or zero for every future timelike $v$. Define the **strong energy condition** (SEC) by the WEC for $S_{ab}-\\tfrac12(g^{cd}S_{cd})g_{ab}$. These are definitions of tensor inequalities only; no general matter positivity premise is included.\n\nA matter tensor $T_m^{ab}$ is a $C^1$ symmetric contravariant two-tensor field; a current $j^a$ is a $C^1$ vector field. The **formal sourced Maxwell equations** are $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$. The **matter exchange equation** is $\\nabla_aT_m^{ab}=F^b{}_cj^c$. The **formal Einstein equation** is\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa\\bigl(T_{m,ab}+T^{\\mathrm{EM}}_{ab}\\bigr).$$\n\nHere $T_{m,ab}$ is obtained by lowering both indices with $g$. Each displayed equation is a pointwise mathematical condition on the supplied fields with the regularities stated above. A formal Einstein–Maxwell–matter solution is a tuple satisfying whichever of these equations are explicitly assumed on the stated open domain; no existence or uniqueness of such a tuple is asserted.\n\nTwo matter forms used below are defined as follows. A **charged-dust form** has $T_m^{ab}=\\rho U^aU^b$ and $j^a=\\sigma U^a$, where $\\rho,\\sigma\\in C^1$, $\\rho\\ge0$, and $U\\in C^2$ is future timelike with $g(U,U)=-c^2$. On $\\{\\rho>0\\}$ its charge-to-mass ratio is $\\alpha=\\sigma/\\rho$; it is not defined by division on $\\{\\rho=0\\}$. A **perfect-fluid form** has\n\n$$T_m^{ab}=\\frac{\\epsilon+p}{c^2}U^aU^b+pg^{ab},$$\n\nwhere $\\epsilon,p\\in C^1$ and $U$ has the same timelike normalization. No equation of state, conductivity law, entropy law, or matter evolution theorem is part of this definition. A current may additionally be written $j^a=\\sigma U^a+q^a$ with $q^aU_a=0$; an Ohmic relation $q^a=\\chi E_U^a$, $\\chi\\ge0$, is a separately imposed constitutive hypothesis, where $E_U^a=F^a{}_bU^b$.\n\nOn an open set $V$, a **local potential** for $F$ is a supplied smooth one-form $A$ with $dA=F$. Such a potential need not exist globally. A local gauge change is $A\\mapsto A+d\\lambda$ for a supplied smooth scalar $\\lambda$; this leaves $F$ unchanged. No global bundle, potential, or point-source construction is asserted.\n\nIn the stated length-coordinate SI interpretation, $[F_{ab}]=\\mathrm T$, $[A_a]=\\mathrm{T\\,m}$, $[j^a]=\\mathrm{A\\,m^{-2}}$, $[T_m]=[T_{\\mathrm{EM}}]=\\mathrm{J\\,m^{-3}}$, $[\\rho]=\\mathrm{kg\\,m^{-3}}$, $[\\sigma]=\\mathrm{C\\,m^{-3}}$, $[\\alpha]=\\mathrm{C\\,kg^{-1}}$, $[\\epsilon]=[p]=\\mathrm{J\\,m^{-3}}$, and $[\\chi]=\\mathrm{S\\,m^{-1}}$. The equalities $\\varepsilon_0=(\\mu_0c^2)^{-1}$ and $\\kappa=8\\pi G_N/c^4$ make the displayed tensor equations dimensionally consistent. No distributional product or stress tensor for a singular point source is defined.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-emg-weak-slow-test-lorentz-limit",
+          "source_section": "Statement",
+          "quote": "Use the mathematical Lorentzian and SI conventions of [[def-emg-matter-formal-systems]]. Fix a length scale $L>0$, a speed $c>0$, a nonzero constant charge-to-mass parameter $\\alpha=q/m$, and choose $0<\\epsilon\\le\\epsilon_*\\le1$. Let $\\Omega\\subseteq\\mathbb R^3$ be open and let $\\mathcal K\\Subset\\Omega$ be a compact convex set. Use length coordinates $x^0=ct$ and $x^i=LX^i$, with $X\\in\\Omega$ dimensionless. Assume a smooth stationary (independent of $x^0$) Lorentzian metric $g^{(\\epsilon)}$ of signature $(-,+,+,+)$ on a neighborhood of $\\mathbb R_{x^0}\\times L\\mathcal K$, with $\\partial_0$ chosen future timelike and $t$ increasing along the considered curves, whose components have the form\n\n$$ g_{00}^{(\\epsilon)}(X)=-(1+2\\epsilon\\phi(X))+r_{00}^{(\\epsilon)}(X),\\qquad g_{ij}^{(\\epsilon)}(X)=(1-2\\epsilon\\phi(X))\\delta_{ij}+r_{ij}^{(\\epsilon)}(X),\\qquad g_{0i}^{(\\epsilon)}(X)=r_{0i}^{(\\epsilon)}(X). $$\n\nHere $\\phi$ is dimensionless and smooth. A spatial multi-index is $\\beta=(\\beta_1,\\beta_2,\\beta_3)\\in\\mathbb N_0^3$, with $|\\beta|=\\beta_1+\\beta_2+\\beta_3$ and $\\partial_X^\\beta:=\\partial_{X^1}^{\\beta_1}\\partial_{X^2}^{\\beta_2}\\partial_{X^3}^{\\beta_3}$. For each such $\\beta$ with $|\\beta|\\le2$, assume the uniform bounds\n\n$$ |\\partial_X^\\beta r_{00}^{(\\epsilon)}|+ \\max_{i,j}|\\partial_X^\\beta r_{ij}^{(\\epsilon)}| \\le C_g\\epsilon^2,\\qquad \\max_i|\\partial_X^\\beta r_{0i}^{(\\epsilon)}|\\le C_g\\epsilon^{3/2} $$\n\non $\\mathcal K$, with a fixed finite nonnegative $C_g$. Let $\\mathbf e,\\mathbf b:\\Omega\\to\\mathbb R^3$ be smooth dimensionless fields whose values and first derivatives are bounded on $\\mathcal K$. Since $\\mathcal K$ is compact, the fixed smooth function $\\phi$ and its derivatives used below are also bounded there. Prescribe a smooth stationary (independent of $x^0$) real two-form $F^{(\\epsilon)}$ by its Cartesian components\n\n$$ F_{0i}^{(\\epsilon)}=-E_i^{(\\epsilon)}/c,\\qquad F_{ij}^{(\\epsilon)}=\\epsilon_{ijk}B_k^{(\\epsilon)},\\qquad \\alpha\\mathbf E^{(\\epsilon)}(X)=\\frac{\\epsilon c^2}{L}\\mathbf e(X),\\qquad \\alpha\\mathbf B^{(\\epsilon)}(X)=\\frac{\\sqrt\\epsilon\\,c}{L}\\mathbf b(X). $$\n\nNo Maxwell or Einstein equation for this prescribed background field or metric is assumed. Define the dimensionless potential $\\phi$ comparison system on $S\\in[0,S_*]$ by\n\n$$ \\frac{d\\mathbf X_N}{dS}=\\mathbf W_N,\\qquad \\frac{d\\mathbf W_N}{dS}=-\\nabla_X\\phi(\\mathbf X_N)+\\mathbf e(\\mathbf X_N)+\\mathbf W_N\\times\\mathbf b(\\mathbf X_N), $$\n\nwhere $(\\mathbf u\\times\\mathbf v)_i:=\\sum_{j,k}\\epsilon_{ijk}u_jv_k$. Let $f(\\mathbf X,\\mathbf W)$ denote the six-component right-hand side of this system. Assume that on a compact convex state set $\\mathcal Q\\subseteq\\mathcal K\\times\\mathbb R^3$, containing both trajectories, its derivative satisfies $\\|Df\\|_{1\\to1}\\le L_f$ for a finite nonnegative $L_f$. Here $\\|(\\mathbf X,\\mathbf W)\\|_1$ is the sum of the absolute values of its six real components, and $\\|Df\\|_{1\\to1}$ is the operator norm induced by this $\\ell^1$ norm.\n\nFor each $\\epsilon$, let $z_\\epsilon$ be a $C^2$ future timelike curve, parameterized by proper time $\\tau$ as in [[def-gr-timelike-worldline-and-proper-time]], that solves the prescribed external Lorentz equation\n\n$$ \\nabla_U U=\\alpha F^{(\\epsilon)\\sharp}(U),\\qquad g^{(\\epsilon)}(U,U)=-c^2,\\qquad U=\\frac{dz_\\epsilon}{d\\tau}. $$\n\nWrite its coordinate velocity as $\\mathbf w=d\\mathbf x/dt$ and assume $|\\mathbf w|\\le C_v\\sqrt\\epsilon\\,c$ on $[0,S_*]$ for a fixed finite $C_v$. Suppose the relativistic scaled trajectory $(\\mathbf X_\\epsilon,\\mathbf W_\\epsilon)$ and the comparison trajectory $(\\mathbf X_N,\\mathbf W_N)$ exist throughout $[0,S_*]$, remain in $\\mathcal Q$, and have the same initial data, where\n\n$$ \\mathbf X:=\\mathbf x/L,\\qquad \\mathbf W:=\\mathbf w/(\\sqrt\\epsilon\\,c),\\qquad S:=\\sqrt\\epsilon\\,ct/L. $$\n\nThen, after choosing $\\epsilon_*>0$ sufficiently small in terms of the stated uniform constants, the exact relativistic trajectory satisfies\n\n$$ \\frac{d\\mathbf X_\\epsilon}{dS}=\\mathbf W_\\epsilon,\\qquad \\frac{d\\mathbf W_\\epsilon}{dS} =-\\nabla_X\\phi(\\mathbf X_\\epsilon)+\\mathbf e(\\mathbf X_\\epsilon) +\\mathbf W_\\epsilon\\times\\mathbf b(\\mathbf X_\\epsilon)+\\mathbf r_\\epsilon(S), \\qquad \\|\\mathbf r_\\epsilon(S)\\|_1\\le C_r\\epsilon, $$\n\nwhere $C_r$ depends only on the displayed uniform bounds and the fixed coefficient bounds on $\\mathcal K$, and is independent of $\\epsilon$. Consequently,\n\n$$ \\sup_{0\\le S\\le S_*}\\left(\\|\\mathbf X_\\epsilon(S)-\\mathbf X_N(S)\\|_1+ \\|\\mathbf W_\\epsilon(S)-\\mathbf W_N(S)\\|_1\\right) \\le C_r\\epsilon S_*e^{L_fS_*}. $$\n\nThe estimate is conditional on existence and common compact containment through the specified finite scaled interval. It does not construct such a long-time family, solve Maxwell's equations for the prescribed fields, or produce a coupled Einstein–Maxwell family. In particular the $\\sqrt\\epsilon$ magnetic scaling can fail a coupled Einstein stress hierarchy unless additional matter scales are supplied.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-source-and-test-scaling",
+          "source_section": "Statement",
+          "quote": "Use the field, stress, matter, unit and curvature conventions of [[def-emg-matter-formal-systems]]. Let $U\\subseteq M$ be open, let $\\Lambda\\in\\mathbb R$ be constant, and define the Einstein residual for the source-free field model by\n\n$$ \\mathscr R_{ab}(g,F;\\Lambda):=G_{ab}(g)+\\Lambda g_{ab}-\\kappa T^{\\mathrm{EM}}_{ab}(g,F). $$\n\nSuppose $G_{ab}(g)+\\Lambda g_{ab}=0$ on $U$, and let $F_0$ be a smooth real two-form with $dF_0=0$ and $d(\\star_gF_0)=0$. For every real dimensionless $\\delta$, the field $F_\\delta:=\\delta F_0$ obeys the same source-free Maxwell equations and\n\n$$ \\mathscr R_{ab}(g,F_\\delta;\\Lambda)=-\\kappa\\delta^2 T^{\\mathrm{EM}}_{ab}(g,F_0). $$\n\nThis is an exact residual identity on the fixed metric. If $\\delta\\ne0$ and $F_0$ is nonzero at a point, its observer energy there is positive and the residual is nonzero there; this does not estimate the distance to a different coupled solution.\n\nSeparately, let $\\rho,\\sigma\\in C^1(\\Omega)$ and a $C^2$ future timelike field $U$ with $g(U,U)=-c^2$ define charged dust on an open $\\Omega\\subseteq U$, with $\\rho>0$, $T_m^{ab}=\\rho U^aU^b$, $j^a=\\sigma U^a$, and the formal matter-exchange equation of [[def-emg-matter-formal-systems]]. For any dimensionless $\\eta>0$, replacing $(\\rho,\\sigma)$ by $(\\eta\\rho,\\eta\\sigma)$ multiplies $T_m$ and $j$ by $\\eta$, leaves $\\alpha=\\sigma/\\rho$ unchanged, and leaves the dust acceleration equation $\\rho U^a\\nabla_aU^b=\\sigma F^b{}_cU^c$ unchanged when the prescribed $F$ and $U$ are held fixed. The sourced Maxwell equation must still match the changed current. If both $F$ and $j$ are scaled by $\\eta$, Maxwell's equations remain linear but the electromagnetic stress scales by $\\eta^2$, whereas the dust stress scales by $\\eta$; no general coupled-solution family follows.\n\nFor a flat background with $\\Lambda=0$ and $T_m=0$, a nonzero source-free Maxwell field cannot solve the exact Einstein equation with the unchanged Minkowski metric, because its observer energy density is positive somewhere.\n\nFinally, in Minkowski space consider only the prescribed Coulomb profile on the finite annulus $\\mathcal A_\\ell:=\\{\\mathbf x\\in\\mathbb R^3:\\ell<|\\mathbf x|<2\\ell\\}$, where $\\ell>0$ is a length, $Q\\ne0$ is a charge, $r:=|\\mathbf x|$, $\\mathbf e_r:=\\mathbf x/r$, $\\mathbf E(\\mathbf x)=Q(4\\pi\\varepsilon_0r^2)^{-1}\\mathbf e_r$, and $\\mathbf B=0$. Its Maxwell energy on that annulus is\n\n$$ \\mathcal E_\\ell=\\int_{\\mathcal A_\\ell}\\frac{\\varepsilon_0}{2}|\\mathbf E|^2\\,d^3x =\\frac{Q^2}{16\\pi\\varepsilon_0\\ell}. $$\n\nThus this fixed-charge Coulomb cutoff family has diverging shell energy as $\\ell\\downarrow0$. This finite-annulus calculation asserts no point-source construction, self-field evaluation, or obstruction theorem for arbitrary regularizations.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every\n$a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$;\nwe write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the\nnonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   ([[def-norm-and-normed-space]]), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of [[lem-metrics-on-rn]] whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published [[thm-cauchy-schwarz-finite]], stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\n[[def-euclidean-inner-product]]. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. $f + g$ is integrable on $[a,b]$ and\n   $\\int_a^b (f+g) = \\int_a^b f + \\int_a^b g$;\n2. for every real $\\lambda$, $\\lambda f$ is integrable on $[a,b]$ and\n   $\\int_a^b \\lambda f = \\lambda \\int_a^b f$;\n3. consequently, for all reals $\\lambda, \\mu$ the function $\\lambda f + \\mu g$ is\n   integrable and\n   $$\\int_a^b(\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f \\;+\\; \\mu\\int_a^b g ;$$\n4. the same identity holds with oriented limits: if $u, v \\in [a,b]$ and $f, g$\n   are integrable between $u$ and $v$ ([[def-oriented-integral]]), then\n   $\\int_u^v(\\lambda f + \\mu g) = \\lambda\\int_u^v f + \\mu\\int_u^v g$.\n\n**Linearity of the integral is not linearity of the Darboux sums**, and the\nproof of claim 1 has to squeeze rather than compute. On a subinterval the\ninequality $\\sup(f+g) \\le \\sup f + \\sup g$ can be strict — take $f(x) = x$ and\n$g(x) = -x$ on $[0,1]$, where the left side is $0$ and the right side is $1$ —\nso $U(f+g,P)$ is in general strictly below $U(f,P) + U(g,P)$ and no identity\nbetween upper sums is available. Claim 2, by contrast, is an identity at the\nlevel of the sums, with the roles of $\\sup$ and $\\inf$ exchanged when\n$\\lambda < 0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotonicity-of-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f, g : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]). Then:\n\n1. **Nonnegativity.** If $f(x) \\ge 0$ for every $x \\in [a,b]$ then\n   $\\int_a^b f \\ge 0$.\n2. **Monotonicity.** If $f(x) \\le g(x)$ for every $x \\in [a,b]$ then\n   $$\\int_a^b f \\;\\le\\; \\int_a^b g .$$\n3. **Two-sided bound.** If $m \\le f(x) \\le M$ for every $x \\in [a,b]$, with\n   $m, M$ real, then\n   $$m\\,(b-a) \\;\\le\\; \\int_a^b f \\;\\le\\; M\\,(b-a) .$$\n\n**Equality in claim 1 does not force $f$ to vanish.** A nonnegative integrable\nfunction with integral $0$ may be positive at infinitely many points; that is\n[[fs-nonnegative-integrable-with-zero-integral-vanishes]] on the previous page's\ncompanion. Under the additional hypothesis of continuity the conclusion does\nhold, and that is [[thm-nonnegative-continuous-with-zero-integral-vanishes]]\nbelow.\n\n**Claim 2 is stated for $a < b$ and is not orientation-invariant.** With the\nconvention of [[def-oriented-integral]], $f \\le g$ gives\n$\\int_u^v f \\le \\int_u^v g$ when $u \\le v$ and the reverse inequality when\n$u \\ge v$, since both sides change sign together.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be continuous on $[a,b]$\n([[def-continuity-real]]). Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$ ([[def-darboux-integral]]).\n\n**The proof gives more than integrability: it gives a partition that works.** For\nevery real $\\varepsilon > 0$ the uniform partition into $N$ parts already\nsatisfies $U(f,P) - L(f,P) < \\varepsilon$, as soon as $N$ is large enough that\n$(b-a)/\\iota(N)$ is below the $\\delta$ that uniform continuity supplies for\n$\\varepsilon/\\bigl(2(b-a)\\bigr)$. Uniform continuity is exactly what makes one\n$\\delta$ serve all $N$ subintervals at once, and it is the only place where the\ncompactness of $[a,b]$ is used.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-emgmath-ml-b08-step-1-1",
+          "step": "1.1",
+          "claim": "In Minkowski coordinates $U=(\\gamma c,\\gamma\\mathbf w)$, where $\\gamma=(1-|\\mathbf w|_2^2/c^2)^{-1/2}>0$. Since $U^0=dx^0/d\\tau=c\\,dt/d\\tau=\\gamma c$, we have $d/d\\tau=\\gamma\\,d/dt$. With $\\mathbf E=0$, the time component of $\\nabla_UU=\\alpha F^\\sharp(U)$ gives $\\gamma c\\,d\\gamma/dt=0$, hence $d\\gamma/dt=0$. The spatial component gives $\\gamma\\,d(\\gamma\\mathbf w)/dt=\\alpha\\gamma\\,\\mathbf w\\times\\mathbf B$; canceling $\\gamma>0$ and then using constancy of $\\gamma$ yields $d\\mathbf w/dt=(\\alpha/\\gamma)\\mathbf w\\times\\mathbf B$. The dot product with $\\mathbf w$ is zero, so $|\\mathbf w|_2$ and $\\gamma$ stay constant. Initially, $ \\gamma=\\gamma_0=(1-\\epsilon|\\mathbf W_0|_2^2)^{-1/2},\\qquad \\gamma_0^{-1}=\\sqrt{1-\\epsilon|\\mathbf W_0|_2^2}. $ The radicand is at least $1/2$, so the positive root is defined.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b08-step-2-1",
+          "step": "2.1",
+          "claim": "Rescaling time and velocity in the exact equation gives $\\mathbf W'=(b_0/\\gamma_0)\\mathbf W\\times\\mathbf e_z$. Differentiating the planar rotation matrix with [F3] verifies the solution $ \\mathbf W(S)=R_z(-b_0S/\\gamma_0)\\mathbf W_0. $ The comparison equation in the Statement similarly has the solution $\\mathbf W_N(S)=R_z(-b_0S)\\mathbf W_0$, with $\\mathbf X'=\\mathbf W$ and $\\mathbf X_N'=\\mathbf W_N$. These rotations preserve speed, and $\\epsilon|\\mathbf W_0|_2^2\\le1/2$ keeps the exact speed strictly below $c$. Integrate $\\mathbf w(t)=\\sqrt\\epsilon c\\,\\mathbf W(S(t))$ to define $\\mathbf x(t)$ and set $\\tau=t/\\gamma_0$. The resulting curve is timelike for every finite $t$. Substitution gives $\\nabla_UU^0=0=\\alpha F^0{}_{\\nu}U^\\nu$ and $\\nabla_UU^i=\\gamma_0^2\\,dw^i/dt=\\alpha\\gamma_0(\\mathbf w\\times\\mathbf B)^i=\\alpha F^i{}_{\\nu}U^\\nu$, so it is an exact worldline. The matrix $R_z(\\theta)$ is orthogonal on the $xy$-plane by $\\sin^2\\theta+\\cos^2\\theta=1$, and the addition formulas in [F3] give $R_z(\\theta_1)R_z(\\theta_2)=R_z(\\theta_1+\\theta_2)$.",
+          "inputs": [
+            "F3",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b08-step-3-1",
+          "step": "3.1",
+          "claim": "Put $\\Delta\\theta=b_0S(1-\\gamma_0^{-1})$. Orthogonality and the rotation addition law reduce the velocity difference to $|R_z(\\Delta\\theta)\\mathbf W_0-\\mathbf W_0|_2$. Expanding its two planar components and cancelling the cross terms gives $ |R_z(\\Delta\\theta)\\mathbf W_0-\\mathbf W_0|_2^2 =2|\\mathbf W_0|_2^2(1-\\cos\\Delta\\theta) =4|\\mathbf W_0|_2^2\\sin^2(\\Delta\\theta/2). $ By [F5], its square root is at most $|\\mathbf W_0|_2|\\Delta\\theta|$. Also $ 1-\\gamma_0^{-1} =\\frac{\\epsilon|\\mathbf W_0|_2^2}{1+\\sqrt{1-\\epsilon|\\mathbf W_0|_2^2}} \\le\\epsilon|\\mathbf W_0|_2^2. $ This proves the stated velocity bound.",
+          "inputs": [
+            "F5",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b08-step-4-1",
+          "step": "4.1",
+          "claim": "The position difference is the integral of $\\mathbf W-\\mathbf W_N$. For any continuous vector function $v$ on $[0,S]$, Cauchy–Schwarz gives $|u\\cdot v(s)|\\le|u|_2|v(s)|_2$; taking $u$ to be the unit vector in the direction of $\\int_0^S v$ shows $|\\int_0^S v(s)\\,ds|_2\\le\\int_0^S|v(s)|_2\\,ds$ (the zero-integral case is immediate). Thus the velocity bound from step 3.1 gives $ |\\mathbf X(S)-\\mathbf X_N(S)|_2 \\le\\int_0^S |b_0|\\epsilon|\\mathbf W_0|_2^3s\\,ds =\\tfrac12|b_0|\\epsilon|\\mathbf W_0|_2^3S^2, $ where the integral is evaluated by [F6]. The estimates hold on every specified finite interval; no uniform-in-time bound is asserted.",
+          "inputs": [
+            "step 3.1",
+            "F6",
+            "F5"
+          ]
+        },
+        {
+          "id": "ex-emgmath-ml-b08-step-5-1",
+          "step": "5.1",
+          "claim": "The magnetic field is nonzero because $b_0\\ne0$ and $\\alpha\\ne0$. Its observer energy is positive by [F2]; hence the prescribed orbit background is not a fully coupled flat Einstein–Maxwell solution with unchanged Minkowski metric. The example establishes only the conditional trajectory calculation and its finite-time comparison.",
+          "inputs": [
+            "F2",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The construction is on nonempty Minkowski space with explicit initial data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "W0=0 is allowed and yields identical stationary trajectories and zero error; epsilon=0 is excluded (Statement, steps 3.1 and 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The result follows one charged trajectory and its comparison orbit; it does not count trajectories."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The bound epsilon|W0|^2<=1/2 keeps the Lorentz factor finite, including equality, and b0 is nonzero (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At S=0 matched data give zero position and velocity error; both bounds hold through each finite S_* (Statement, steps 3.1–4.1)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both exact and comparison rotations are explicit and their positions are obtained by integration; no global existence theorem is presumed (step 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement: the explicit magnetic trajectories satisfy the finite-time velocity and position error bounds; no converse characterization is asserted by this item."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement: the explicit magnetic trajectories satisfy the finite-time velocity and position error bounds; no converse characterization is asserted by this item."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "S=0",
+          "status": "checked",
+          "evidence": "The rotation formulas return W(0)=W_N(0)=W_0 and matched initial positions, so both error bounds vanish."
+        },
+        {
+          "case": "W_0=0",
+          "status": "checked",
+          "evidence": "Both rotation solutions and their integrated positions remain equal; the stated errors are exactly zero."
+        }
+      ],
+      "finite_checks_disposition": "Applicable edge substitutions are recorded as analytic checks; the proof remains the complete justification."
+    }
+  }
+}

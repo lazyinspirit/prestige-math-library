@@ -8,9 +8,262 @@
     "title": "Finite Bernoulli fluctuations and matching exponential rates",
     "companion": "csm-fluctuations-countermodels-examples",
     "requires": [
-      "csm-exact-models"
+      "csm-exact-models",
+      "finite-probability-and-the-probabilistic-method",
+      "analytic-majorants-and-the-cauchy-kovalevskaya-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-csm-finite-variance",
+        "reference": "research/plan-classical-statistical-mechanics-track.md#L324",
+        "design_state": "Local mathematical definition added on the A page because the inspected finite probability suppliers define expectation but not variance; sourced to Zhao, §4.1, Definition 4.1.",
+        "inventory_expansion_required": true,
+        "statement": "Let $(\\Omega,w)$ be a finite probability space: $\\Omega$ is a finite set, each weight $w(\\omega)$ is nonnegative, and $\\sum_{\\omega\\in\\Omega}w(\\omega)=1$. Let $X:\\Omega\\to\\mathbb R$ be a real random variable and let $\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)$. Its **variance** is\n\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2]=\\sum_{\\omega\\in\\Omega}(X(\\omega)-\\mathbb E[X])^2w(\\omega).$$\n\nAll sums are finite, so the definition requires no additional integrability or moment hypothesis.",
+        "strategy": "Definition only; finite expectations are the finite weighted sums supplied by its explicit dependency.",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Variance of a finite real random variable",
+        "library": "physics",
+        "dependency_level": 0,
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space"
+        ],
+        "dependency_roles": {
+          "def-finite-probability-space-and-event": "mathematical-premise",
+          "def-finite-real-random-variable-and-distribution": "mathematical-premise",
+          "def-expectation-on-a-finite-probability-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Y. Zhao, MIT 18.218 Probabilistic Method in Combinatorics, §4.1, Definition 4.1",
+              "url": "https://yufeizhao.com/pm/sp19/pmnotes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-csm-bernoulli-fluctuation-bounds",
+        "reference": "workers/examples/proofs.md#E6",
+        "design_state": "Complete conditional carrier; exact source interfaces and readiness disposition are recorded in batch-35 evidence.",
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$ be an integer, let $p\\in(0,1)$, and give $\\Omega_n=\\{0,1\\}^n$ the explicitly stipulated product probability whose singleton weights are\n$$P_p(\\{(x_1,\\ldots,x_n)\\})=\\prod_{i=1}^n p^{x_i}(1-p)^{1-x_i};$$\nfor an event $A\\subseteq\\Omega_n$, $P_p(A)$ is the sum of these weights over $x\\in A$.\nWrite $X_i(x)=x_i$, $K=\\sum_{i=1}^nX_i$, and $\\overline X=K/n$. These variables and all probabilities are dimensionless. The product law is an adopted sampling model; independence is an assumption of that law, not an inference about any apparatus or equilibrium system.\n\nFor $a\\in(0,1)$ define the Bernoulli relative-entropy rate\n$$D(a\\Vert p)=a\\log\\frac ap+(1-a)\\log\\frac{1-a}{1-p},$$\nand set $D(0\\Vert p)=-\\log(1-p)$ and $D(1\\Vert p)=-\\log p$. Then\n$$\\mathbb E K=np,\\qquad \\operatorname{Var}(K)=np(1-p),$$\nand for every dimensionless $\\varepsilon>0$,\n$$P_p\\bigl(|\\overline X-p|\\ge\\varepsilon\\bigr)\\le\\frac{p(1-p)}{n\\varepsilon^2},\\qquad P_p\\bigl(|\\overline X-p|\\ge\\varepsilon\\bigr)\\le 2e^{-2n\\varepsilon^2}.$$\nFor $p<a<1$ and $0<a<p$, respectively,\n$$P_p(K\\ge na)\\le e^{-nD(a\\Vert p)},\\qquad P_p(K\\le na)\\le e^{-nD(a\\Vert p)}.$$\nFor each integer $0\\le k\\le n$, putting $a=k/n$ gives the point-mass bounds\n$$\\frac1{n+1}e^{-nD(a\\Vert p)}\\le P_p(K=k)\\le e^{-nD(a\\Vert p)}.$$\nConsequently, for every sequence of integers $k_n\\in\\{0,\\ldots,n\\}$ with $k_n/n\\to a\\in(0,1)$,\n$$\\lim_{n\\to\\infty}\\frac1n\\log P_p(K=k_n)=-D(a\\Vert p).$$\nAll conclusions are conditional calculations for this finite product model and make no claim that physical outcomes are independent or that a small model probability is a logical contradiction.",
+        "strategy": "**Given:** The finite IID Bernoulli model and all hypotheses in the Statement.\n\n1.1 The total weight is $\\prod_{i=1}^n(p+(1-p))=1$, so the stipulated weights form a finite probability law. Summing over all coordinates except $i$ gives $P(X_i=1)=p$ and $P(X_i=0)=1-p$; the product factorization also gives independence. For $0\\le k\\le n$ put $c_{n,k}:=\\#\\{S\\subseteq\\{1,\\ldots,n\\}:|S|=k\\}$. The set of coordinates with value $1$ gives a bijection between outcomes with $K=k$ and such subsets, so $P(K=k)=c_{n,k}p^k(1-p)^{n-k}$. By [F4] and [F12], $\\mathbb E X_i=p$ and $\\operatorname{Var}(X_i)=\\mathbb E[(X_i-p)^2]=p(1-p)$. For $i\\ne j$, the product weights factor the finite sum, giving $\\mathbb E[(X_i-p)(X_j-p)]=\\mathbb E(X_i-p)\\mathbb E(X_j-p)=0$. Expanding $K$ and $(K-np)^2$ therefore yields $\\mathbb E K=np$ and $\\operatorname{Var}(K)=np(1-p)$. [given, F1, F2, F3, F4, F12, algebra]\n\n1.2 The finite-sum definition [F5] and product weights give $$M_K(s)=\\sum_{x\\in\\Omega_n}P_p(x)e^{s\\sum_i x_i}=\\prod_{i=1}^n\\bigl((1-p)+pe^s\\bigr)=(1-p+pe^s)^n.$$ This is a finite factorization, so no limiting interchange is involved. [given, F5, F6, algebra]\n\n1.3 On $0<a<1$, differentiating the displayed expression for $D$ with [F9] gives $D(p\\Vert p)=0$, $\\partial_aD(a\\Vert p)|_{a=p}=0$, and $\\partial_a^2D(a\\Vert p)=1/[a(1-a)]\\ge4$, since $a(1-a)\\le1/4$. Let $G(a)=D(a\\Vert p)-2(a-p)^2$. Then $G(p)=G'(p)=0$ and $G''\\ge0$. For $a>p$, the mean value theorem applied first to $G'$ and then to $G$ gives $G'(a)\\ge0$ and $G(a)\\ge0$; for $a<p$, the same two applications give $G'(a)\\le0$ and again $G(a)\\ge0$. Thus $D(a\\Vert p)\\ge2(a-p)^2$ for interior $a$. At $a\\downarrow0$, the only noncontinuous-looking term is $a\\log a=-\\log(1/a)/(1/a)$, which tends to zero by [F11]; at $a\\uparrow1$ the analogous term is $(1-a)\\log(1-a)$. The remaining factors are continuous, so the endpoint extensions preserve the inequality. [given, F7, F8, F9, F10, F11, algebra]\n\n2.1 Fix $1\\le k\\le n-1$ and let $a=k/n$. For $0\\le j\\le n$ put $q_j=c_{n,j}a^j(1-a)^{n-j}$. These are the count probabilities under the finite product weights with parameter $a$; their sum is $1$ by factoring the total weight as $(a+(1-a))^n$. For each $0\\le j<n$, count pairs $(S,T)$ with $S\\subset T\\subseteq\\{1,\\ldots,n\\}$, $|S|=j$, and $|T|=j+1$. Choosing $S$ first gives $c_{n,j}(n-j)$ pairs, while choosing $T$ first gives $c_{n,j+1}(j+1)$; hence $c_{n,j+1}/c_{n,j}=(n-j)/(j+1)$. Therefore $$\\frac{q_{j+1}}{q_j}=\\frac{n-j}{j+1}\\frac{a}{1-a}.$$ The factor $(n-j)/(j+1)$ decreases strictly with $j$, since $(n-j-1)(j+1)<(n-j)(j+2)$ for $j<n-1$. At $j=k-1$ the ratio is $(n-k+1)/(n-k)>1$, and at $j=k$ it is $k/(k+1)<1$. Thus the sequence increases through $q_k$ and decreases after it, so $q_k$ is the largest of its $n+1$ masses. Their sum is $1$, whence $1/(n+1)\\le q_k\\le1$. [given, step 1.1, algebra]\n\n2.2 Pointwise on $\\Omega_n$, $\\mathbf 1_{\\{|\\overline X-p|\\ge\\varepsilon\\}}\\le (\\overline X-p)^2/\\varepsilon^2$. Summing this inequality with the finite weights and using step 1.1 gives the first probability bound. [given, F4, step 1.1, algebra]\n\n2.3 Suppose first $p<a<1$ and put $s=\\log\\!\\bigl(a(1-p)/(p(1-a))\\bigr)>0$. On $\\{K\\ge na\\}$, $e^{sK}\\ge e^{sna}$, so the finite expectation of the nonnegative random variable $e^{sK}$ is at least $e^{sna}P_p(K\\ge na)$. By step 1.2, $$P_p(K\\ge na)\\le e^{-sna}(1-p+pe^s)^n=e^{-nD(a\\Vert p)},$$ where $e^s=a(1-p)/(p(1-a))$, $1-p+pe^s=(1-p)/(1-a)$, and [F7]–[F8] simplify the logarithm. If $0<a<p$, the same value of $s$ is negative; on $\\{K\\le na\\}$ one again has $e^{sK}\\ge e^{sna}$, and the same substitution yields $P_p(K\\le na)\\le e^{-nD(a\\Vert p)}$. This proves both exponential tail bounds without using a general concentration theorem as a premise. [given, F4, F5, F6, F7, F8, step 1.2, algebra]\n\n3.1 Direct division of the two point probabilities, using the same subset count $c_{n,k}$ from step 1.1, gives $$\\frac{P_p(K=k)}{q_k}=\\left(\\frac pa\\right)^k\\left(\\frac{1-p}{1-a}\\right)^{n-k}.$$ Since $k=na$ and $n-k=n(1-a)$, [F7]–[F8] give the logarithm of this ratio as $n a\\log(p/a)+n(1-a)\\log((1-p)/(1-a))=-nD(a\\Vert p)$, so the ratio is $e^{-nD(a\\Vert p)}$. Combining with step 2.1 proves the claimed bounds for $1\\le k\\le n-1$. For $k=0$ and $k=n$, direct evaluation gives $P_p(K=0)=(1-p)^n=e^{-nD(0\\Vert p)}$ and $P_p(K=n)=p^n=e^{-nD(1\\Vert p)}$, which satisfy the same inequalities. [given, F7, F8, step 1.1, step 2.1, algebra]\n\n3.2 If $0<\\varepsilon<1$, split the deviation event into the upper threshold $a_+=p+\\varepsilon$ and lower threshold $a_-=p-\\varepsilon$. For an interior threshold apply step 2.3 and then step 1.3; at $a_+=1$ or $a_-=0$ use the exact endpoint probability $p^n$ or $(1-p)^n$ and the endpoint case of step 1.3; a threshold outside $[0,1]$ gives an empty event. Each nonempty tail is at most $e^{-2n\\varepsilon^2}$, so their sum is at most $2e^{-2n\\varepsilon^2}$. If $\\varepsilon\\ge1$, the deviation event is empty because $0\\le\\overline X\\le1$ and $0<p<1$. [given, step 2.3, step 1.3, algebra]\n\n4.1 If $k_n/n\\to a\\in(0,1)$, then $D(k_n/n\\Vert p)\\to D(a\\Vert p)$ by continuity on $(0,1)$. Taking logarithms of step 3.1 and dividing by $n$ bounds $n^{-1}\\log P_p(K=k_n)$ between $-D(k_n/n\\Vert p)-\\log(n+1)/n$ and $-D(k_n/n\\Vert p)$. By [F11], $\\log(n+1)/n\\to0$, so the squeeze theorem gives the stated rate. These probabilities remain conditional on the explicitly stipulated product law; no finite sample or measurement is asserted. [given, F7, F11, step 3.1] ∎",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite Bernoulli fluctuations and matching exponential rates",
+        "library": "physics",
+        "dependency_level": 4,
+        "deps": [
+          "post-csm-examples-ensemble-preparations",
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-csm-finite-variance",
+          "def-moment-generating-function",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-logarithm-derivative-and-integral",
+          "cor-mean-value-theorem",
+          "thm-logarithm-slower-than-every-positive-power"
+        ],
+        "dependency_roles": {
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "def-finite-probability-space-and-event": "mathematical-premise",
+          "def-finite-real-random-variable-and-distribution": "mathematical-premise",
+          "def-expectation-on-a-finite-probability-space": "mathematical-premise",
+          "def-csm-finite-variance": "mathematical-premise",
+          "def-moment-generating-function": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-logarithm-slower-than-every-positive-power": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Y. Zhao, MIT 18.218 Probabilistic Method in Combinatorics, §§4.1 and 5.1 (Spring 2019 notes)",
+              "url": "https://yufeizhao.com/pm/sp19/pmnotes.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.200, Chernoff Bounds and Some Applications, Lecture Notes (Spring 2024)",
+              "url": "https://ocw.mit.edu/courses/18-200-principles-of-discrete-applied-mathematics-spring-2024/mit18_200_s24_lec_chernoff.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "Exact bounds for the explicitly adopted finite IID Bernoulli product law; no laboratory sampling, observations, calibration, or empirical inference is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-csm-nonadditive-phase-countermodel",
+        "reference": "workers/examples/proofs.md#E7",
+        "design_state": "Complete conditional carrier; exact source interfaces and readiness disposition are recorded in batch-35 evidence.",
+        "inventory_expansion_required": false,
+        "statement": "Fix $N\\ge1$ and $\\epsilon>0$ joules. Let $\\Omega_N=A_N\\sqcup B_N\\sqcup C_N$ be disjoint finite sectors with $|A_N|=1$, $|B_N|=1$, and $|C_N|=4^N$, and define the energy $H_N$ to be $0$, $N\\epsilon$, and $2N\\epsilon$ on those sectors, respectively. The model is global and size-dependent. Here *product-additive* means that one fixed finite one-site alphabet $\\Gamma$ supplies $\\Omega_N=\\Gamma^N$ for every $N$, and one fixed one-site energy function $h:\\Gamma\\to\\mathbb R$ (with values measured in joules) satisfies $H_N(\\gamma_1,\\ldots,\\gamma_N)=\\sum_{i=1}^Nh(\\gamma_i)$. The present family is non-product-additive; no local, short-range, or fluid interpretation is assumed.\n\nUse counting measure on each $\\Omega_N$ as the reference measure, so every individual state has weight one. For a real inverse-energy parameter $\\beta$ in joules$^{-1}$, define the finite exponential-tilt probability by\n$$Z_N(\\beta)=\\sum_{\\omega\\in\\Omega_N}e^{-\\beta H_N(\\omega)}=1+e^{-\\beta N\\epsilon}+4^Ne^{-2\\beta N\\epsilon},\\qquad P_{\\beta,N}(\\omega)=\\frac{e^{-\\beta H_N(\\omega)}}{Z_N(\\beta)}.$$\nFor $\\beta>0$ this is the adopted canonical preparation. For $\\beta\\le0$ it is only the same finite counting formula used algebraically; no negative-temperature reservoir is asserted. Also, for a shell half-width $\\Delta$ in joules with $0\\le\\Delta<N\\epsilon$, define $\\mathcal S_{N,\\Delta}=\\{\\omega:|H_N(\\omega)-N\\epsilon|\\le\\Delta\\}$ and give it the uniform counting probability $Q_{N,\\Delta}(\\omega)=|\\mathcal S_{N,\\Delta}|^{-1}$ for $\\omega\\in\\mathcal S_{N,\\Delta}$.\n\nFor every real $\\beta$, the finite exponential-tilt probability of $B_N$ obeys\n$$P_{\\beta,N}(B_N)\\le\\frac{1}{2^{N+1}+1},$$\nwhereas the shell probability of $B_N$ is $1$. Define the dimensionless normalized log partition function $\\psi_N(\\beta)=N^{-1}\\log Z_N(\\beta)$. Then\n$$\\psi_N(\\beta)\\longrightarrow\\psi(\\beta):=\\max\\{0,\\log4-2\\beta\\epsilon\\},\\qquad 0\\le\\psi_N(\\beta)-\\psi(\\beta)\\le\\frac{\\log3}{N}.$$\nFor $\\beta>0$, define the canonical mean energy per member by $u_N(\\beta):=N^{-1}\\mathbb E_{P_{\\beta,N}}[H_N]$ and, when the limit exists, set $u(\\beta):=\\lim_{N\\to\\infty}u_N(\\beta)$. The corner occurs at the positive inverse temperature $\\beta_c=(\\log2)/\\epsilon$. The limit $u(\\beta)$ exists for every $\\beta>0$ and equals $2\\epsilon$ for $0<\\beta<\\beta_c$, $\\epsilon$ at $\\beta=\\beta_c$, and $0$ for $\\beta>\\beta_c$. In this item, a **first-order transition point** means a positive-$\\beta$ point where $u$ has finite but unequal one-sided limits; thus the jump at $\\beta_c$ is first order under this explicit convention. Every finite-$N$ function $\\psi_N$ is real analytic. This is one explicit global finite-state countermodel, not a universal criterion for phase transitions or ensemble equivalence in short-range matter.",
+        "strategy": "**Given:** The exact model data and law in the Statement; $\\beta$ is positive for the canonical physical interpretation and may be any real number in the separate finite algebraic claims.\n\n1.1 If this family were product-additive under the definition in the Statement, its fixed alphabet would have $|\\Gamma|=|\\Omega_1|=6$, forcing $|\\Omega_2|=|\\Gamma|^2=36$. But $|\\Omega_2|=1+1+4^2=18$. Thus no such product decomposition exists. The three sector weights in the finite exponential tilt are $1$, $x$, and $4^Nx^2$, where $x=e^{-\\beta N\\epsilon}>0$; they sum to the displayed positive finite $Z_N(\\beta)$, so division by $Z_N$ gives a finite probability law as in [F10]. For $\\beta>0$, [A1] and [F1] identify this normalized counting weight with the adopted canonical branch; for $\\beta\\le0$ it remains only the stated algebraic expression. [given, A1, F1, F10, algebra]\n\n1.2 The energies of $A_N$ and $C_N$ differ from $N\\epsilon$ by exactly $N\\epsilon$. The condition $\\Delta<N\\epsilon$ excludes both sectors from $\\mathcal S_{N,\\Delta}$, while $B_N\\subseteq\\mathcal S_{N,\\Delta}$. Thus the shell is exactly the one-state set $B_N$ and its uniform counting probability assigns $B_N$ probability one. [given, A2, algebra]\n\n1.3 Put $M_N=\\max\\{1,4^Nx^2\\}$. If $x\\le1$, then $x\\le M_N$; if $x>1$, then $4^Nx^2\\ge x$ since $N\\ge1$. Hence $M_N\\le Z_N\\le3M_N$. By [F2]–[F3], $$\\frac1N\\log M_N=\\max\\{0,\\log4-2\\beta\\epsilon\\}=\\psi(\\beta),$$ so taking logarithms in $M_N\\le Z_N\\le3M_N$ gives $0\\le\\psi_N-\\psi\\le(\\log3)/N$, and consequently $\\psi_N\\to\\psi$. [given, F2, F3, algebra]\n\n1.4 By [F4], $\\exp$ is a power series converging for every real argument, so [F6] makes $\\exp$ real analytic on $\\mathbb R$. The affine polynomial $\\beta\\mapsto-\\beta N\\epsilon$ is real analytic, hence [F7] makes $\\beta\\mapsto e^{-\\beta N\\epsilon}$ real analytic as well. [given, F4, F6, F7, algebra]\n\n2.1 Since $(1-2^Nx)^2\\ge0$, $1+4^Nx^2\\ge2^{N+1}x$. Therefore $Z_N=1+x+4^Nx^2\\ge(2^{N+1}+1)x$, and division by $Z_N>0$ gives $P_{\\beta,N}(B_N)\\le(2^{N+1}+1)^{-1}$. [given, F10, step 1.1, algebra]\n\n2.2 The equality $\\log4=2\\log2$ from [F3] gives the unique corner $\\beta_c=(\\log2)/\\epsilon>0$. On $0<\\beta<\\beta_c$, the larger branch is $\\log4-2\\beta\\epsilon$ and has slope $-2\\epsilon$; on $\\beta>\\beta_c$ the larger branch is $0$ and has slope $0$. The one-sided slopes differ. [given, F2, F3, step 1.3, algebra]\n\n2.3 The exponential is positive, so $Z_N=1+e^{-\\beta N\\epsilon}+4^Ne^{-2\\beta N\\epsilon}>0$ for every real $\\beta$. Its expression as a sum and product of the analytic function in step 1.4 is real analytic by [F7]. [given, F2, F7, step 1.4, algebra]\n\n3.1 By [F12], with [F11] identifying $H_N$ as a finite real random variable, the mean energy per member is $u_N(\\beta)=\\epsilon\\bigl(x+2\\cdot4^Nx^2\\bigr)/Z_N$ for $\\beta>0$. If $0<\\beta<\\beta_c$, divide numerator and denominator by the high-sector weight $4^Nx^2$: the low-to-high ratio is $e^{-N(\\log4-2\\beta\\epsilon)}\\to0$ and the middle-to-high ratio is $e^{N(\\beta\\epsilon-\\log4)}\\le2^{-N}\\to0$, so $u_N(\\beta)\\to2\\epsilon$. If $\\beta>\\beta_c$, both non-low weights $x=e^{-\\beta N\\epsilon}$ and $4^Nx^2=e^{N(\\log4-2\\beta\\epsilon)}$ tend to zero, so $u_N(\\beta)\\to0$. At $\\beta=\\beta_c$, the three sector weights are $1$, $2^{-N}$, and $1$, so $u_N(\\beta_c)=\\epsilon(2^{-N}+2)/(2+2^{-N})\\to\\epsilon$. These limits give the stated piecewise $u$ and its unequal one-sided limits. [given, F11, F12, step 2.2, algebra]\n\n3.2 Fix $\\beta_0\\in\\mathbb R$ and put $z_0=Z_N(\\beta_0)>0$. By step 1.4, $\\exp$ is real analytic; [F9] gives $\\exp'(\\log z_0)=z_0\\ne0$, so [F8] gives a real-analytic local inverse near $z_0$. By the inverse definition [F2], that local inverse is $\\log$ on this neighborhood, hence $\\log$ is real analytic near $z_0$. [given, F2, F8, F9, step 1.4, step 2.3, algebra]\n\n4.1 By [F5] the target property is real analyticity, and [F7] makes the composition $N^{-1}\\log Z_N$ real analytic using steps 2.3 and 3.2. Hence every finite-$N$ function $\\psi_N$ is real analytic. The derivative jump in step 2.2 belongs to the limiting function, not to a finite-$N$ singularity. [given, F5, F7, step 2.2, step 2.3, step 3.2, algebra] ∎",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Explicit nonadditive transition and ensemble inequivalence",
+        "library": "physics",
+        "dependency_level": 4,
+        "deps": [
+          "post-csm-examples-ensemble-preparations",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-real-exponential-function-and-e",
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-real-analytic-function",
+          "thm-power-series-sums-are-real-analytic",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_roles": {
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-finite-probability-space-and-event": "mathematical-premise",
+          "def-finite-real-random-variable-and-distribution": "mathematical-premise",
+          "def-expectation-on-a-finite-probability-space": "mathematical-premise",
+          "def-real-analytic-function": "mathematical-premise",
+          "thm-power-series-sums-are-real-analytic": "mathematical-premise",
+          "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition": "mathematical-premise",
+          "thm-real-analytic-inverse-and-implicit-function-theorems": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, §§1.2–1.3 and §§5.1, 5.4.2",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§2.12, 4.2, and 7.6 (2013)",
+              "url": "https://www.lip.pt/~jespada/teaching/data/TEM/LectureNotes-Arovas.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "A specified finite global three-sector model with N-dependent multiplicities; its positive-temperature canonical limit has a jump in mean energy per member and a middle-sector ensemble-inequivalence witness. No volume density, short-range model, or empirical system is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-csm-walk-recurrence-and-entropy",
+        "reference": "workers/examples/proofs.md#E8",
+        "design_state": "Complete conditional carrier; exact source interfaces and readiness disposition are recorded in batch-35 evidence.",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice. The following are separate calculations for three explicitly defined models.\n\n**Diffusive-scale walk.** Let $D>0$ have units m$^2$s$^{-1}$, fix $t\\ge0$ seconds, and let $(\\delta t_j)_{j\\ge1}$ be any positive sequence tending to zero, with $\\ell_j=\\sqrt{2D\\delta t_j}$ metres and $n_j=\\lfloor t/\\delta t_j\\rfloor$. For each $j$, on the finite product space $\\Omega_j=\\{-1,1\\}^{n_j}$ with uniform probability, let $\\Xi_i$ be the coordinate increments and\n$$S_j=\\ell_j\\sum_{i=1}^{n_j}\\Xi_i.$$\nFor the dimensionless lattice index $r\\in\\mathbb Z$, define\n$$u_n(r):=2^{-n}\\#\\{(x_1,\\ldots,x_n)\\in\\{-1,1\\}^n:\\sum_{i=1}^n x_i=r\\},$$\nwith the empty sum equal to zero. Then $\\mathbb E S_j=0$, $\\operatorname{Var}(S_j)=n_j\\ell_j^2$, and the lattice probabilities satisfy $u_{n+1}(r)=\\tfrac12u_n(r-1)+\\tfrac12u_n(r+1)$ with $u_0(r)=\\mathbf1_{\\{r=0\\}}$. For every wave number $k\\in\\mathbb R$ in m$^{-1}$,\n$$\\varphi_{S_j}(k)=\\cos(\\ell_j k)^{n_j}.$$\nThe laws of $S_j$ converge weakly on $\\mathbb R$ to $N(0,2Dt)$, the normal probability law with mean zero and variance $2Dt$ (in m$^2$). The conclusion is fixed-time marginal convergence only.\n\n**Periodic rotor.** Let $\\mathbb T:=\\mathbb R/(2\\pi\\mathbb Z)$ with its quotient topology, and let the phase space $\\mathcal X=\\mathbb T\\times\\mathbb R$ have its metrizable product topology. Let $q\\in\\mathbb T$ be a dimensionless angle, $p\\in\\mathbb R$ have units kg m$^2$s$^{-1}$, and $I>0$ have units kg m$^2$. Define the model energy $H(q,p)=p^2/(2I)$ and, for time $s\\in\\mathbb R$ measured in seconds, the flow\n$$\\Phi_s(q,p)=\\bigl(q+ps/I\\ {\\rm mod}\\ 2\\pi,\\ p\\bigr).$$\nFor each $p_0\\ne0$, the orbit is periodic with period $T=2\\pi I/|p_0|$ seconds. Let $\\nu$ be normalized arc length on $\\mathbb T$, define the continuous inclusion $\\iota_{p_0}(q)=(q,p_0)$, and for each Borel $E\\subseteq\\mathcal X$ set $\\mu_0(E)=\\nu(\\iota_{p_0}^{-1}(E))$. Thus $\\mu_0$ is the uniform angle probability on the fixed-$p_0$ orbit. For this invariant probability, *mixing* means $\\mu_0(B\\cap\\Phi_s^{-1}C)\\to\\mu_0(B)\\mu_0(C)$ for all Borel $B,C\\subseteq\\mathcal X$ as $s\\to\\infty$. The rotor is not mixing: for the half-circle arc $A=\\{([q],p_0):q\\in[0,\\pi)\\}$, where $[q]=q+2\\pi\\mathbb Z\\in\\mathbb T$, the mixing correlation fails along times $s=mT$ with positive integers $m$. For any $q_0=[\\theta_0]\\in\\mathbb T$, the point-supported initial law $\\delta_{(q_0,p_0)}$ (unit mass at $(q_0,p_0)$) has no weak limit as $s\\to\\infty$; the bounded continuous witness $g([\\theta],p)=\\cos(\\theta-\\theta_0)$ is well-defined because cosine is $2\\pi$-periodic.\n\n**Finite coarse-entropy model.** Let $\\Omega=\\{0,1,2,3\\}$ with uniform reference probability and permutation $\\mathcal T(0)=1,\\mathcal T(1)=2,\\mathcal T(2)=3,\\mathcal T(3)=0$. Start from $\\pi_0=(1/2,1/2,0,0)$, and evolve by pushforward under $\\mathcal T$. For the coarse partition $\\{\\{0,1\\},\\{2,3\\}\\}$, let $(r_1,r_2)$ be any probability vector with $r_i\\ge0$ and $r_1+r_2=1$, and define its coarse Shannon entropy by $H_c(r_1,r_2)=-\\sum_{i:r_i>0}r_i\\log r_i$ in nats. Define fine entropy analogously for a probability vector on the four states, using $0\\log0=0$. The coarse entropies at times $0,1,2$ are $0,\\log2,0$, while the fine entropy is $\\log2$ at all three times. Thus deterministic invertibility and preservation of the uniform reference measure do not imply monotone coarse entropy.\n\nThe smooth-flow result [[thm-csm-examples-flow-fine-entropy]] has different hypotheses: it concerns positive $C^1$ densities on a flat torus transported by supplied jointly $C^2$ volume-preserving diffeomorphisms and preserves their dimensionless fine differential entropy. It supplies no monotonicity conclusion for coarse entropy in a finite permutation. These models report no observations and prove no diffusion limit from deterministic collisions.",
+        "strategy": "**Given:** The definitions and model assumptions in the Statement and Facts & Assumptions; assume full AC for the weak-convergence and normal-law suppliers.\n\n1.1 Under the product-preparation convention [F1], for a fixed $j$ the uniform weight on $\\{-1,1\\}^{n_j}$ is a probability law, including the singleton case $n_j=0$. Each increment has mean zero and square one by [F2]–[F4]. Independence follows from the product weights, so the cross terms in $\\mathbb E(\\sum_i\\Xi_i)^2$ vanish; hence $\\mathbb E S_j=0$ and, by [F19], $\\operatorname{Var}(S_j)=n_j\\ell_j^2$. Conditioning on the last increment gives $u_{n+1}(r)=\\tfrac12u_n(r-1)+\\tfrac12u_n(r+1)$, with the stated initial mass. [given, A1, F1, F2, F3, F4, F19, algebra]\n\n1.2 For the rotor, write $R_s(q)=q+p_0s/I$ modulo $2\\pi$. At $T=2\\pi I/|p_0|$, the angle increment is $2\\pi$ when $p_0>0$ and $-2\\pi$ when $p_0<0$, so $R_T$ is the identity. The stated full AC includes the countable-choice assumption of [F16]. For every Borel $E\\subseteq\\mathcal X$, $\\iota_{p_0}^{-1}(\\Phi_s^{-1}E)=R_s^{-1}(\\iota_{p_0}^{-1}E)$; translation invariance in [F16] therefore gives $\\mu_0(\\Phi_s^{-1}E)=\\mu_0(E)$, and in particular $\\mu_0$ is invariant under the rotor flow. [given, A2, F9, F16, algebra]\n\n1.3 Under the four-state pushforward, the first three probability vectors are $$\\pi_0=(1/2,1/2,0,0),\\quad \\pi_1=(0,1/2,1/2,0),\\quad \\pi_2=(0,0,1/2,1/2).$$ The map $\\mathcal T$ is a permutation, so it maps the uniform reference weights $1/4$ to themselves; it also leaves the multiset of the evolving fine probabilities unchanged, and each fine entropy is $-\\tfrac12\\log\\tfrac12-\\tfrac12\\log\\tfrac12=\\log2$. The coarse cell probabilities for $\\{\\{0,1\\},\\{2,3\\}\\}$ are $(1,0)$, $(1/2,1/2)$, and $(0,1)$, giving coarse entropies $0,\\log2,0$ under the zero-term convention. This proves the stated decrease. [given, A3, F11, algebra]\n\n2.1 By independence and [F5], the characteristic function is $$\\varphi_{S_j}(k)=\\prod_{i=1}^{n_j}\\mathbb E(e^{ik\\ell_j\\Xi_i})=\\cos(\\ell_j k)^{n_j}.$$ Fix $k$. Continuity of cosine and $\\cos0=1$ make $\\cos u>0$ for all sufficiently small $|u|$. For such $u$, put $f(u)=\\log\\cos u$. By the chain rule, $f'(u)=-\\sin u/\\cos u$ and $f'(0)=0$. From [F10], $\\sin u/u\\to\\sin'(0)=1$ and $\\cos u\\to1$, so the difference quotient $f'(u)/u=-\\sin u/(u\\cos u)$ tends to $-1$; hence $f''(0)=-1$. The same derivative rules make $f$ twice differentiable on a neighbourhood of zero, so [F15] gives $\\log\\cos u=-u^2/2+o(u^2)$. For $t>0$, $n_j\\delta t_j\\to t$ because $0\\le t-n_j\\delta t_j<\\delta t_j$, and therefore $$n_j\\log\\cos(\\ell_jk)=-\\frac{n_j\\ell_j^2k^2}{2}+n_j\\,o(\\ell_j^2)\\longrightarrow-Dtk^2.$$ Indeed $n_j\\ell_j^2=2D n_j\\delta t_j\\to2Dt$, so $n_j\\ell_j^2$ is bounded, while $o(\\ell_j^2)/\\ell_j^2\\to0$; their product proves the remainder tends to zero. For $t=0$, $n_j=0$ and every law is $\\delta_0$. Thus in all cases $\\varphi_{S_j}(k)\\to e^{-Dtk^2}=\\varphi_{N(0,2Dt)}(k)$ for every real $k$, using [F6]–[F7] for the target law. [given, A1, F5, F6, F7, F10, F11, F12, F13, F14, F15, step 1.1, algebra]\n\n2.2 The measure definition gives $\\mu_0(A)=\\nu([0,\\pi))=1/2$. At each $s=mT$, $\\Phi_s$ is the identity on the support of $\\mu_0$, so $\\mu_0(A\\cap\\Phi_s^{-1}A)=1/2\\ne1/4=\\mu_0(A)^2$, contradicting the mixing condition stated in the Statement. For $q_0=[\\theta_0]$, the function $g([\\theta],p)=\\cos(\\theta-\\theta_0)$ is well-defined and continuous on the quotient because cosine is continuous and $2\\pi$-periodic, and it is bounded by $1$. Its values are $1$ at times $mT$ and $-1$ at times $mT+T/2$, so its expectation has no limit. By [F18], weak convergence would force convergence of this expectation, so the evolving point laws have no weak limit. [given, F16, F18, step 1.2, algebra]\n\n2.3 The mathematical result [F17] assumes a smooth diffeomorphic flow on a flat torus, divergence-free velocity, and a positive bounded $C^1$ density. The atomic four-state law in step 1.3 is not such a density or flow; its coarse-entropy decrease neither invokes nor contradicts that fine differential-entropy result. It establishes no monotonicity law for other coarse-graining procedures. [given, F17, step 1.3]\n\n3.1 The right-hand side of step 2.1 is the characteristic function of the specified Borel probability $N(0,2Dt)$. Apply the reverse implication of [F8] to the Borel laws of $S_j$ to obtain weak convergence. The only non-finite-choice strength used here is the full AC explicitly carried by [F7]–[F9]; the finite product construction is in step 1.1 and its pointwise characteristic calculation is in step 2.1. [given, F7, F8, F9, step 1.1, step 2.1]\n\n4.1 The walk limit in steps 1.1–2.1 concerns only fixed-time marginal laws under the stated independent-increment scaling; no path-space limit, deterministic collision limit, experiment, observed frequency, or empirical inference is part of the hypotheses or conclusion. [given, A1, A2, A3, step 1.1, step 2.1, step 3.1, step 1.2, step 1.3] ∎",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Diffusion-scale walk and recurrence/coarse-entropy counterexamples",
+        "library": "physics",
+        "dependency_level": 4,
+        "deps": [
+          "post-csm-examples-ensemble-preparations",
+          "thm-csm-examples-flow-fine-entropy",
+          "cor-characteristic-function-criterion-for-weak-convergence",
+          "def-axiom-of-choice",
+          "def-finite-probability-space-and-event",
+          "def-finite-real-random-variable-and-distribution",
+          "def-expectation-on-a-finite-probability-space",
+          "def-csm-finite-variance",
+          "def-characteristic-function-of-a-real-random-variable",
+          "def-standard-normal-and-normal-laws",
+          "lem-characteristic-function-of-a-normal-law",
+          "def-natural-logarithm",
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-logarithm-derivative-and-integral",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-taylor-peano-remainder",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral"
+        ],
+        "dependency_roles": {
+          "post-csm-examples-ensemble-preparations": "physical-assumption",
+          "thm-csm-examples-flow-fine-entropy": "mathematical-premise",
+          "cor-characteristic-function-criterion-for-weak-convergence": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-finite-probability-space-and-event": "mathematical-premise",
+          "def-finite-real-random-variable-and-distribution": "mathematical-premise",
+          "def-expectation-on-a-finite-probability-space": "mathematical-premise",
+          "def-csm-finite-variance": "mathematical-premise",
+          "def-characteristic-function-of-a-real-random-variable": "mathematical-premise",
+          "def-standard-normal-and-normal-laws": "mathematical-premise",
+          "lem-characteristic-function-of-a-normal-law": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "def-weak-convergence-of-borel-probability-measures": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-taylor-peano-remainder": "mathematical-premise",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral": "mathematical-premise"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§1.2.1 and 1.4.2 (2013)",
+              "url": "https://www.lip.pt/~jespada/teaching/data/TEM/LectureNotes-Arovas.pdf"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., §3.3.2, Theorem 3.3.17",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "J. R. Norris, Probability and Measure, §§7.1 and 7.5.2",
+              "url": "https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf"
+            },
+            {
+              "title": "Michael E. Taylor, Introduction to Analysis in Several Variables (Advanced Calculus), §3.1 and Chapter 4, §4.5",
+              "url": "https://mtaylor.web.unc.edu/wp-content/uploads/sites/16915/2018/04/analmv.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, §§1.2–1.3",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "A finite IID symmetric walk under diffusive scaling, an explicitly defined periodic rotor, and a four-state measure-preserving permutation. Results are conditional model calculations; no collision-to-diffusion limit, path-space convergence, experimental observation, or universal entropy law is asserted.",
+        "empirical_premises": []
+      }
+    ]
   },
   {
     "order": 506,
@@ -23,6 +276,130 @@
     "requires": [
       "csm-fluctuations-countermodels"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-csm-bernoulli-fluctuation-bounds",
+        "reference": "workers/examples/proofs.md#E6",
+        "design_state": "Complete conditional carrier; exact source interfaces and readiness disposition are recorded in batch-35 evidence.",
+        "inventory_expansion_required": false,
+        "statement": "In the explicitly stipulated product model of [[pthm-csm-bernoulli-fluctuation-bounds]], take $n=100$ and $p=1/4$. We calculate model probabilities and bounds without supplying any observed trial results.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** The model and hypotheses in the Example and [F1].\n\n1.1 Substitution gives $\\mathbb EK=25$ and $\\operatorname{Var}(K)=100(1/4)(3/4)=75/4$. For $\\varepsilon=1/10$, the Chebyshev bound is $(3/16)/(100/100)=3/16$, while the exponential bound is $2e^{-2}$. These are upper bounds on a specified model probability, not results from 100 recorded trials. [given, F1, algebra]\n\n2.1 For $k=35$, $a=k/n=7/20$ and $$D(7/20\\Vert1/4)=\\frac7{20}\\log\\frac75+\\frac{13}{20}\\log\\frac{13}{15}.$$ The point-mass estimate in [F1] therefore reads $$\\frac1{101}e^{-100D(7/20\\Vert1/4)}\\le P_{1/4}(K=35)\\le e^{-100D(7/20\\Vert1/4)}.$$ This finite example displays the polynomial prefactor and common exponential rate without numerical fitting or empirical inference. [given, F1, algebra] ∎",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A finite Bernoulli model at n=100 and p=1/4",
+        "library": "physics",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-csm-bernoulli-fluctuation-bounds"
+        ],
+        "dependency_roles": {
+          "pthm-csm-bernoulli-fluctuation-bounds": "physical-result"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Y. Zhao, MIT 18.218 Probabilistic Method in Combinatorics, §§4.1 and 5.1 (Spring 2019 notes)",
+              "url": "https://yufeizhao.com/pm/sp19/pmnotes.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.200, Chernoff Bounds and Some Applications, Lecture Notes (Spring 2024)",
+              "url": "https://ocw.mit.edu/courses/18-200-principles-of-discrete-applied-mathematics-spring-2024/mit18_200_s24_lec_chernoff.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "Exact specialization of the finite IID Bernoulli product model at n=100 and p=1/4; it is not a measured data set.",
+        "empirical_premises": []
+      },
+      {
+        "id": "ex-csm-nonadditive-phase-countermodel",
+        "reference": "workers/examples/proofs.md#E7",
+        "design_state": "Complete conditional carrier; exact source interfaces and readiness disposition are recorded in batch-35 evidence.",
+        "inventory_expansion_required": false,
+        "statement": "Specialize the finite-sector model of [[pthm-csm-nonadditive-phase-countermodel]] to $N=4$ at its positive transition parameter.",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** $N=4$, $\\epsilon>0$, $\\beta=\\beta_c$, and $0\\le\\Delta<4\\epsilon$.\n\n1.1 Since $\\beta_cN\\epsilon=4\\log2$, the three aggregate canonical sector weights are $1$, $e^{-4\\log2}=1/16$, and $4^4e^{-8\\log2}=1$. Thus $Z_4=33/16$ and $P_{\\beta_c,4}(B_4)=(1/16)/(33/16)=1/33$. [given, F1, algebra]\n\n2.1 The shell centered at $4\\epsilon$ with half-width $\\Delta<4\\epsilon$ excludes the neighboring energy levels $0$ and $8\\epsilon$, so it contains exactly the single state in $B_4$. Its uniform probability is therefore one on $B_4$, compared with the canonical value $1/33$. [given, F1, algebra] ∎",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The middle sector at N=4 and the transition point",
+        "library": "physics",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-csm-nonadditive-phase-countermodel"
+        ],
+        "dependency_roles": {
+          "pthm-csm-nonadditive-phase-countermodel": "physical-result"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, §§1.2–1.3 and §§5.1, 5.4.2",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§2.12, 4.2, and 7.6 (2013)",
+              "url": "https://www.lip.pt/~jespada/teaching/data/TEM/LectureNotes-Arovas.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "Exact N=4 specialization of the stated global three-sector finite-state model; no short-range material system is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "ex-csm-walk-recurrence-and-entropy",
+        "reference": "workers/examples/proofs.md#E8",
+        "design_state": "Complete conditional carrier; exact source interfaces and readiness disposition are recorded in batch-35 evidence.",
+        "inventory_expansion_required": false,
+        "statement": "This example evaluates one finite walk step size, one rotor period, and the first three states of the exact finite permutation model in [[pthm-csm-walk-recurrence-and-entropy]].",
+        "strategy": "**Proof technique:** direct.\n\n**Given:** $t=1$ s, $D=1$ m$^2$s$^{-1}$, $\\delta t=1/8$ s, $I=1$ kg m$^2$, and $p_0=1$ kg m$^2$s$^{-1}$.\n\n1.1 The scaling gives $\\ell=\\sqrt{2D\\delta t}=1/2$ m and $n=\\lfloor t/\\delta t\\rfloor=8$, so $\\operatorname{Var}(S_n)=8(1/2\\ {\\rm m})^2=2$ m$^2$ and $\\varphi_{S_n}(k)=\\cos((1/2\\ {\\rm m})k)^8$. This is a finite model marginal; its Gaussian limit is the separate $\\delta t\\downarrow0$ conclusion of [F1]. [given, F1, algebra]\n\n2.1 The rotor return period is $2\\pi I/|p_0|=2\\pi$ s. The finite permutation calculation has coarse entropy $0$ at times zero and two and $\\log2$ at time one, while the fine entropy remains $\\log2$ at all three times. [given, F1, algebra] ∎",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A diffusive time step and a four-state entropy reversal",
+        "library": "physics",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-csm-walk-recurrence-and-entropy"
+        ],
+        "dependency_roles": {
+          "pthm-csm-walk-recurrence-and-entropy": "physical-result"
+        },
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, §§1.2.1 and 1.4.2 (2013)",
+              "url": "https://www.lip.pt/~jespada/teaching/data/TEM/LectureNotes-Arovas.pdf"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., §3.3.2, Theorem 3.3.17",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "Exact finite specializations of the stated walk, rotor, and permutation models; no observations or collision-derived diffusion law are asserted.",
+        "empirical_premises": []
+      }
+    ]
   }
 ]

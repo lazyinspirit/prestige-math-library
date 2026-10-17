@@ -1,0 +1,908 @@
+[
+  {
+    "order": 591,
+    "id": "qsm-dt-response",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Trace-class bounded-observable response",
+    "companion": "qsm-dt-response-examples",
+    "requires": [
+      "qsm-finite-range-spin-dynamics",
+      "relations-functions-and-quotients",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "cm-math-fluid"
+    ],
+    "items": [
+      {
+        "id": "lem-qsm-dt-banach-volterra-dyson",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Banach-space Volterra and Dyson series with a norm remainder",
+        "reference": "items/lem-qsm-dt-banach-volterra-dyson.md#statement",
+        "design_state": "A-page mathematical helper: the shared Banach/trace-norm/Dyson existence and remainder result used by the normal, finite-matrix, and algebraic response consumers.",
+        "deps": [
+          "def-c-star-algebra",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves"
+        ],
+        "dependency_roles": {
+          "def-c-star-algebra": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "Let $X$ be a complex Banach space, let $T>0$, and let $\\mathcal B(X)$ be the bounded complex-linear operators on $X$ with the operator norm. Let $K:[0,T]\\to\\mathcal B(X)$ be strongly continuous, meaning $t\\mapsto K(t)x$ is norm-continuous for every fixed $x\\in X$. Suppose a continuous function $a:[0,T]\\to[0,\\infty)$ satisfies $\\|K(t)\\|\\le a(t)$. Set $c_T=\\int_0^T a(s)\\,ds$, where the scalar integral is the Riemann integral. Define $\\Delta_0(t)=x_0$ and recursively $\\Delta_n(t)=\\int_0^t K(s)\\Delta_{n-1}(s)\\,ds$ for $n\\ge1$, using the norm-Riemann integral in $X$.\n\nFor each $\\epsilon\\in\\mathbb C$, the series $x_\\epsilon(t)=\\sum_{n=0}^\\infty\\epsilon^n\\Delta_n(t)$ converges uniformly on $[0,T]$. It is the unique continuously differentiable solution of $x_\\epsilon'(t)=\\epsilon K(t)x_\\epsilon(t)$ and $x_\\epsilon(0)=x_0$, and\n\n$$\\left\\|x_\\epsilon(t)-x_0-\\epsilon\\int_0^tK(s)x_0\\,ds\\right\\|\\le \\|x_0\\|\\frac{(|\\epsilon|c_T)^2e^{|\\epsilon|c_T}}{2}.$$\n\nIf $X$ is a unital complex $C^*$-algebra and $K(t)x=b(t)x$ for a norm-continuous curve $b:[0,T]\\to X$ of skew-adjoint elements, then for real $\\epsilon$ the solution with $x_0=1$ is unitary. If $X=\\mathcal H$ is a complex Hilbert space and each $K(t)$ is a bounded skew-adjoint operator, then for real $\\epsilon$ the solution operators $W_\\epsilon(t):x_0\\mapsto x_\\epsilon(t)$ are unitary even when $K(t)$ is only strongly continuous.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, complete lecture notes, §3.3.11–3.3.12",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.1–1.2",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "lem-qsm-dt-finite-matrix-trace-ideal",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite matrix trace-norm ideal inequalities",
+        "reference": "items/lem-qsm-dt-finite-matrix-trace-ideal.md#statement",
+        "design_state": "A-page mathematical helper: finite trace-norm ideal and trace bounds used by the exact finite-time matrix response.",
+        "deps": [
+          "lem-qsm-matrix-state-calculus"
+        ],
+        "dependency_roles": {
+          "lem-qsm-matrix-state-calculus": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 1,
+        "statement": "Let $\\mathcal H$ be a complex Hilbert space of finite dimension $d\\ge1$. For a matrix $X$ define $|X|=(X^*X)^{1/2}$ by finite Hermitian functional calculus and define its trace norm by $\\|X\\|_1=\\operatorname{Tr}|X|$. This is a complete norm on the finite-dimensional matrix space. For all matrices $X,Y$,\n$$\n\\|YX\\|_1\\le\\|Y\\|\\|X\\|_1,\\qquad \\|XY\\|_1\\le\\|Y\\|\\|X\\|_1,\\qquad |\\operatorname{Tr}X|\\le\\|X\\|_1.\n$$\nFor unitary $U$, $\\|UXU^*\\|_1=\\|X\\|_1$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John Watrous, The Theory of Quantum Information, author-hosted manuscript, Chapter 2, §§2.1–2.3",
+              "url": "https://cs.uwaterloo.ca/~watrous/TQI/TQI.2.pdf"
+            },
+            {
+              "title": "Mehran Kardar, Statistical Mechanics I, MIT OpenCourseWare, Lecture 21: Quantum Microstates and Quantum Macrostates",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/4f8defd6fcba707a0c691dd8957a43e3_MIT8_333F13_Lec21.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "lem-qsm-dt-lorentzian-distribution-limits",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Lorentzian kernels converge to delta and principal-value distributions",
+        "reference": "items/lem-qsm-dt-lorentzian-distribution-limits.md#statement",
+        "design_state": "New A-page intermediate result: the test-function proof of the Lorentzian delta and principal-value limits required by the spectral fluctuation–response theorem.",
+        "deps": [
+          "thm-dominated-convergence"
+        ],
+        "dependency_roles": {
+          "thm-dominated-convergence": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "Let $\\psi:\\mathbb R\\to\\mathbb C$ be continuously differentiable with compact support. For $\\eta>0$, define $P_\\eta(x)=\\eta/(x^2+\\eta^2)$ and $Q_\\eta(x)=x/(x^2+\\eta^2)$. Define\n$$\\operatorname{PV}\\!\\int_{\\mathbb R}\\frac{\\psi(x)}x\\,dx:=\\lim_{\\delta\\downarrow0}\\int_{|x|>\\delta}\\frac{\\psi(x)}x\\,dx$$\nwhen this symmetric limit exists. Then\n$$\\lim_{\\eta\\downarrow0}\\int_{\\mathbb R}P_\\eta(x)\\psi(x)\\,dx=\\pi\\psi(0),\\qquad\\lim_{\\eta\\downarrow0}\\int_{\\mathbb R}Q_\\eta(x)\\psi(x)\\,dx=\\operatorname{PV}\\!\\int_{\\mathbb R}\\frac{\\psi(x)}x\\,dx.$$\nThus $P_\\eta$ converges distributionally to $\\pi\\delta_0$, and $Q_\\eta$ converges distributionally to the Cauchy principal-value distribution $\\operatorname{PV}(1/x)$, with the stated test-function convention.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §1.3",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            },
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 574–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "lem-qsm-dt-stationary-variance-integral-identity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Stationary-state covariance identity for time-integrated observables",
+        "reference": "items/lem-qsm-dt-stationary-variance-integral-identity.md#statement",
+        "design_state": "New A-page intermediate result: the stationary C*-state double-integral identity and positive covariance matrix required by the Green–Kubo limit.",
+        "deps": [
+          "def-c-star-algebra",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves"
+        ],
+        "dependency_roles": {
+          "def-c-star-algebra": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "Let $\\mathcal A$ be a unital complex C$^*$-algebra, let $t\\mapsto\\alpha_t$ be a norm-continuous one-parameter group of $*$-automorphisms, and let $\\phi:\\mathcal A\\to\\mathbb C$ be a bounded linear functional with $\\phi(I)=1$, $\\phi(X^*X)\\ge0$ for every $X\\in\\mathcal A$, and $\\phi\\circ\\alpha_t=\\phi$ for every $t$. For $m\\ge1$, take self-adjoint $V_1,\\ldots,V_m\\in\\mathcal A$ with $\\phi(V_a)=0$. For $T>0$, define the norm-Riemann integrals\n$$X_{a,T}=\\int_0^T\\alpha_t(V_a)\\,dt,$$\nand for $s\\ge0$ define\n$$G_{ab}(s)=\\frac12\\left(\\operatorname{Re}\\phi(V_a\\alpha_s(V_b))+\\operatorname{Re}\\phi(V_b\\alpha_s(V_a))\\right).$$\nThen each $X_{a,T}$ is self-adjoint and\n$$\\frac{1}{2T}\\operatorname{Re}\\phi(X_{a,T}X_{b,T})=\\int_0^T\\left(1-\\frac{s}{T}\\right)G_{ab}(s)\\,ds.$$\nThe real symmetric matrix with entries on the left is positive semidefinite.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.3.12, printed pp. 69–71",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §3, printed p. 575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-normal-state-kubo",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Trace-class bounded-observable response",
+        "reference": "items/thm-qsm-dt-normal-state-kubo.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T4 with the current inspected supplier interface.",
+        "deps": [
+          "def-qsm-density-trace-state",
+          "def-axiom-of-choice",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group",
+          "thm-cyclicity-of-the-trace",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "lem-qsm-dt-banach-volterra-dyson"
+        ],
+        "dependency_roles": {
+          "def-qsm-density-trace-state": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group": "mathematical-premise",
+          "thm-cyclicity-of-the-trace": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise",
+          "lem-qsm-dt-banach-volterra-dyson": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal H\\ne\\{0\\}$ be a separable complex Hilbert space, let $H=H^*$ be a densely defined operator with domain $D(H)$, and let $\\hbar>0$. Put $U_0(t)=e^{-itH/\\hbar}$. Let $\\rho$ be a density operator, meaning a positive trace-class operator with $\\operatorname{Tr}\\rho=1$ as in [[def-qsm-density-trace-state]], and assume $\\rho U_0(t)=U_0(t)\\rho$ for every $t\\in\\mathbb R$. Let $A,B\\in\\mathcal B(\\mathcal H)$ be bounded self-adjoint operators, let $T>0$ be a finite time in s, let $h:[0,T]\\to\\mathbb R$ be continuous, and let $\\epsilon\\in\\mathbb R$ be dimensionless. Interpret $H$ in J, $\\hbar$ in J s, and $h(t)B$ in J; if $A,B$ carry units $[A],[B]$, then $R_{AB}$ has units $[A][B]/(\\mathrm J\\,\\mathrm s)$.\n\nDefine $B_s=U_0(s)^*BU_0(s)$, $\\alpha_t(A)=U_0(t)^*AU_0(t)$, and\n$$\nR_{AB}(u)=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\rho[\\alpha_u(A),B]\\right),\\qquad C_T=\\frac2{\\hbar}\\int_0^T|h(s)|\\,\\|B\\|\\,ds.\n$$\nThe trace-class interaction-picture solution of $\\rho_I'(t)=\\frac{i\\epsilon h(t)}{\\hbar}[B_t,\\rho_I(t)]$, $\\rho_I(0)=\\rho$, satisfies\n$$\n\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))=\\operatorname{Tr}(\\rho\\alpha_t(A))+\\epsilon\\int_0^t h(s)R_{AB}(t-s)\\,ds+r_\\epsilon(t),\n$$\nwhere $|r_\\epsilon(t)|\\le\\|A\\|(|\\epsilon|C_T)^2e^{|\\epsilon|C_T}/2$ for $0\\le t\\le T$. Thus the bounded-observable first variation is exact, with an explicit finite-time remainder. No energy or entropy moment of $\\rho$ is assumed, and no trace of an unbounded product such as $\\rho H A$ is used.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.1–1.2",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            },
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, complete lecture notes, §3.3.11–3.3.12",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-finite-unitary",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite unitary dynamics and stationary Gibbs states",
+        "reference": "items/thm-qsm-dt-finite-unitary.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T0 with the current inspected supplier interface.",
+        "deps": [
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-finite-gibbs-kms"
+        ],
+        "dependency_roles": {
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-finite-gibbs-kms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 2,
+        "statement": "Let $\\mathcal H$ be a complex Hilbert space of finite dimension $d\\ge1$, let $H=H^*$ be a Hamiltonian with energy unit J, and let $\\hbar>0$ have unit J s. A **finite density matrix** is a positive semidefinite matrix $\\rho$ with $\\operatorname{Tr}\\rho=1$. For time $t\\in\\mathbb R$ measured in s, set $U(t)=e^{-itH/\\hbar}$ and $\\alpha_t(A)=U(t)^*AU(t)$. Then $U(t)$ is a unitary group, $\\alpha_t$ is a group of matrix $*$-automorphisms, and for every finite density matrix $\\rho$ and matrix $A$,\n\n$$\\operatorname{Tr}(U(t)\\rho U(t)^*A)=\\operatorname{Tr}(\\rho\\alpha_t(A)).$$\n\nThe von Neumann entropy $S(\\rho)=-k_B\\operatorname{Tr}(\\rho\\log\\rho)$ is finite and unchanged by $U(t)\\rho U(t)^*$. For $\\beta>0$ with unit J$^{-1}$, let $Z_\\beta=\\operatorname{Tr}(e^{-\\beta H})$ and $\\sigma_\\beta=Z_\\beta^{-1}e^{-\\beta H}$. Then $Z_\\beta>0$, $\\sigma_\\beta$ is stationary, and the finite Gibbs correlation has the KMS strip identity\n\n$$F_{A,B}(t+i\\beta\\hbar)=\\operatorname{Tr}(\\sigma_\\beta\\alpha_t(B)A),\\qquad F_{A,B}(z)=\\operatorname{Tr}(\\sigma_\\beta A\\alpha_z(B)),$$\n\nwhere $\\alpha_z(B)=e^{izH/\\hbar}Be^{-izH/\\hbar}$. The function $F_{A,B}$ is entire and bounded on $0\\le\\operatorname{Im}z\\le\\beta\\hbar$. This finite-dimensional result asserts no approach to equilibrium.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §§2–3",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §1.1",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-cesaro-dephasing",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite Cesaro dephasing with degenerate energy blocks",
+        "reference": "items/thm-qsm-dt-cesaro-dephasing.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T0 with the current inspected supplier interface.",
+        "deps": [
+          "thm-qsm-dt-finite-unitary"
+        ],
+        "dependency_roles": {
+          "thm-qsm-dt-finite-unitary": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "Under the finite-dimensional unitary dynamics of [[thm-qsm-dt-finite-unitary]], let $P_E$ be the orthogonal spectral projection of $H$ for its distinct energy $E$. For every density matrix $\\rho$,\n\n$$\\frac1T\\int_0^T U(t)\\rho U(t)^*\\,dt\\longrightarrow\\sum_E P_E\\rho P_E$$\n\nin trace norm as $T\\to\\infty$. The diagonal energy blocks, including all blocks within degenerate eigenspaces, remain. This is Cesaro convergence of the averaged state; pointwise convergence of $U(t)\\rho U(t)^*$ is not asserted.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §§2–3",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §1.1",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-finite-kubo",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-time Kubo formula with norm remainder",
+        "reference": "items/thm-qsm-dt-finite-kubo.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T1 with the current inspected supplier interface.",
+        "deps": [
+          "thm-qsm-dt-finite-unitary",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-dt-finite-matrix-trace-ideal",
+          "lem-qsm-dt-banach-volterra-dyson"
+        ],
+        "dependency_roles": {
+          "thm-qsm-dt-finite-unitary": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-dt-finite-matrix-trace-ideal": "mathematical-premise",
+          "lem-qsm-dt-banach-volterra-dyson": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "Let $\\mathcal H$ be a complex Hilbert space of finite dimension $d\\ge1$, $H=H^*$ with energy unit J, $\\hbar>0$ with unit J s, $\\beta>0$ with unit J$^{-1}$, and let $\\sigma=Z_\\beta^{-1}e^{-\\beta H}$ be the stationary Gibbs density from [[thm-qsm-dt-finite-unitary]]. Let $A=A^*$ and $B=B^*$ be matrices, let $T>0$ be finite in s, let $h:[0,T]\\to\\mathbb R$ be continuous, and let $\\epsilon\\in\\mathbb R$ be dimensionless; $h(t)B$ has unit J. Put $U_0(t)=e^{-itH/\\hbar}$ for time $t$ in s, $\\alpha_t(A)=U_0(t)^*AU_0(t)$, and $B_t=\\alpha_t(B)$. Let $W_\\epsilon$ solve\n$$W_\\epsilon'(t)=\\frac{i\\epsilon h(t)}{\\hbar}B_tW_\\epsilon(t),\\qquad W_\\epsilon(0)=I,$$\nand set $U_\\epsilon(t)=U_0(t)W_\\epsilon(t)$ and $\\rho_I(t)=W_\\epsilon(t)\\sigma W_\\epsilon(t)^*$. Then $U_\\epsilon$ solves $i\\hbar U_\\epsilon'(t)=(H-\\epsilon h(t)B)U_\\epsilon(t)$, $U_\\epsilon(0)=I$, and $\\rho_\\epsilon(t):=U_\\epsilon(t)\\sigma U_\\epsilon(t)^*$ satisfies $\\operatorname{Tr}(\\rho_\\epsilon(t)A)=\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))$. Define\n$$R_{AB}(u)=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\sigma[\\alpha_u(A),B]\\right),\\qquad C_T=\\frac{2}{\\hbar}\\int_0^T|h(s)|\\,\\|B\\|\\,ds.$$\nThen $W_\\epsilon(t)$ is unitary and, for $0\\le t\\le T$,\n$$\\operatorname{Tr}(\\rho_I(t)\\alpha_t(A))=\\operatorname{Tr}(\\sigma\\alpha_t(A))+\\epsilon\\int_0^t h(s)R_{AB}(t-s)\\,ds+r_\\epsilon(t),\\qquad |r_\\epsilon(t)|\\le\\|A\\|\\frac{(|\\epsilon|C_T)^2e^{|\\epsilon|C_T}}2.$$\nThe initial Gibbs matrix is fixed as $\\epsilon$ varies. The result is an exact finite-time first variation with a controlled remainder, not a static derivative of a re-prepared Gibbs family. $C_T$ and $\\epsilon$ are dimensionless, and $R_{AB}$ has units $[A][B]/(\\mathrm J\\,\\mathrm s)$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.1–1.2",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            },
+            {
+              "title": "Steven H. Simon, Lecture Notes for Quantum Matter, Chapter 8 §8.2, printed pp. 118–122",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/SteveSimon/QCM2023/QuantumMatter.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-finite-recurrence",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Arbitrarily late finite phase recurrences",
+        "reference": "items/thm-qsm-dt-finite-recurrence.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T0 with the current inspected supplier interface.",
+        "deps": [
+          "thm-qsm-dt-finite-unitary"
+        ],
+        "dependency_roles": {
+          "thm-qsm-dt-finite-unitary": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "Let $H=H^*$ with energy unit J act on a finite-dimensional complex Hilbert space, let $\\hbar>0$ have unit J s, and let $U(t)=e^{-itH/\\hbar}$ for time $t$ measured in s. For every time unit $t_0>0$ measured in s, there is a sequence $t_n\\to+\\infty$ and phases $\\lambda_n\\in\\mathbb C$, $|\\lambda_n|=1$, such that $\\|U(t_n)-\\lambda_n I\\|\\to0$. Consequently, for every density matrix $\\rho$ and bounded observable $A$, the expectation $\\operatorname{Tr}(U(t_n)\\rho U(t_n)^*A)$ tends to $\\operatorname{Tr}(\\rho A)$. If $H$ has only one distinct energy, exact recurrences occur at every time.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §3",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §1.1",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-strong-domain-response",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Bounded-commutator graph-domain Schrödinger response",
+        "reference": "items/thm-qsm-dt-strong-domain-response.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T4 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group",
+          "lem-qsm-dt-banach-volterra-dyson",
+          "thm-qsm-dt-normal-state-kubo"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group": "mathematical-premise",
+          "lem-qsm-dt-banach-volterra-dyson": "mathematical-premise",
+          "thm-qsm-dt-normal-state-kubo": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal H\\ne\\{0\\}$ be separable, $H=H^*$ a densely defined Hamiltonian on $D(H)$ with unit J, $\\hbar>0$ with unit J s, $\\rho$ a positive trace-class density with $\\operatorname{Tr}\\rho=1$ and $\\rho U_0(t)=U_0(t)\\rho$, and $A=A^*\\in\\mathcal B(\\mathcal H)$. Let $B=B^*\\in\\mathcal B(\\mathcal H)$ with unit $[B]$. Assume $B(D(H))\\subseteq D(H)$ and that $[H,B]\\psi=HB\\psi-BH\\psi$ on $D(H)$ extends to a bounded operator $C$ on $\\mathcal H$. Let $h:[0,T]\\to\\mathbb R$ be continuous for finite $T>0$ with $h(t)B$ in J, and let $\\epsilon\\in\\mathbb R$ be dimensionless. Then the bounded-observable response and remainder from [[thm-qsm-dt-normal-state-kubo]] hold. In addition, with $U_0(t)=e^{-itH/\\hbar}$, $B_t=U_0(t)^*BU_0(t)$, and $W_\\epsilon'(t)=i\\epsilon h(t)B_tW_\\epsilon(t)/\\hbar$, $W_\\epsilon(0)=I$, the interaction-picture propagator maps $D(H)$ onto itself, and\n$$\\Psi(t)=U_0(t)W_\\epsilon(t)\\psi$$\nis a strong solution in $\\mathcal H$ of $i\\hbar\\Psi'(t)=(H-\\epsilon h(t)B)\\Psi(t)$ for each $\\psi\\in D(H)$. No domain-preservation claim is made for a general bounded $B$ without the stated commutator hypothesis.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven H. Simon, Lecture Notes for Quantum Matter, Chapter 8 §8.2, printed pp. 118–122",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/SteveSimon/QCM2023/QuantumMatter.pdf"
+            },
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "post-qsm-dt-isolated-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted isolated prepared unitary model",
+        "reference": "items/post-qsm-dt-isolated-model.md#postulate",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T0 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-qsm-dt-finite-unitary",
+          "post-qsm-normal-measurement-state"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-qsm-dt-finite-unitary": "formulation-prerequisite",
+          "post-qsm-normal-measurement-state": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "For a specified finite-dimensional complex Hilbert space $\\mathcal H$, $H=H^*$ in J, and adopted $\\hbar>0$ in J s, take a prepared finite density matrix $\\rho_0$ (positive semidefinite with trace one). For time $t$ measured in s, adopt isolated evolution\n$$U(t)=e^{-itH/\\hbar},\\qquad \\rho_t=U(t)\\rho_0U(t)^*,$$\nand the Born expectation $\\mathbb E_t[A]=\\operatorname{Tr}(\\rho_tA)$ for each bounded self-adjoint matrix observable $A$. This adopts the finite subsystem's preparation and unitary time evolution as a model assumption. It inherits the full Axiom of Choice convention, stated in [[def-axiom-of-choice]], of [[post-qsm-normal-measurement-state]] for the wider Hilbert-space spectral-measure framework, although this finite bounded-observable clause uses no unbounded spectral measurement. No actual apparatus, measured value, thermalization, or infinite-volume Hamiltonian is asserted.\n\nThe finite unitary and Gibbs conventions are stated in [[thm-qsm-dt-finite-unitary]] as formulation context; they do not prove that this postulate describes nature.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "Steven H. Simon, Lecture Notes for Quantum Matter, Chapter 8 §8.2, printed pp. 118–122",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/SteveSimon/QCM2023/QuantumMatter.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "A specified finite-dimensional, isolated, prepared nonrelativistic quantum subsystem with a fixed Hermitian Hamiltonian and bounded-observable Born expectations; no bath limit, relaxation claim, apparatus model, or empirical realization is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "post-qsm-dt-physical-control",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Prepared control and expectation convention",
+        "reference": "items/post-qsm-dt-physical-control.md#postulate",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T1 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "post-qsm-normal-measurement-state",
+          "thm-qsm-dt-finite-kubo"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "post-qsm-normal-measurement-state": "formulation-prerequisite",
+          "thm-qsm-dt-finite-kubo": "formulation-prerequisite"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "On a finite-dimensional subsystem with unperturbed $H=H^*$ in J, bounded self-adjoint control observable $B$, $\\hbar>0$ in J s, and finite interval $[0,T]$ with $T>0$ in s, adopt the idealized controlled Hamiltonian\n$$H_\\epsilon(t)=H-\\epsilon h(t)B,$$\nwhere $h:[0,T]\\to\\mathbb R$ is continuous, $\\epsilon\\in\\mathbb R$ is dimensionless, and $h(t)B$ has unit J. The initial prepared state is held fixed at $t=0$ as the Gibbs matrix $\\sigma=Z_\\beta^{-1}e^{-\\beta H}$, $\\beta>0$ in J$^{-1}$; the model does not re-prepare a Gibbs state for $H_\\epsilon(t)$. Expectations use the adopted normal-state Born convention of [[post-qsm-normal-measurement-state]]. The full Axiom of Choice convention, stated in [[def-axiom-of-choice]], of that wider measurement framework is retained. This is an adopted control model; it makes no claim about a particular device or data.\n\nFor the controlled propagator $U_\\epsilon$ satisfying $i\\hbar U_\\epsilon'(t)=H_\\epsilon(t)U_\\epsilon(t)$ and $U_\\epsilon(0)=I$, define $\\rho_\\epsilon(t)=U_\\epsilon(t)\\sigma U_\\epsilon(t)^*$ and $\\mathbb E_{\\epsilon,t}[A]=\\operatorname{Tr}(\\rho_\\epsilon(t)A)$ for bounded self-adjoint matrices $A$. Existence and uniqueness of this finite-dimensional propagator are supplied by [[thm-qsm-dt-finite-kubo]].\n\nThe finite-time response theorem [[thm-qsm-dt-finite-kubo]] supplies the exact mathematical response interface used to formulate this postulate. It does not establish the physical applicability of the control model.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "Steven H. Simon, Lecture Notes for Quantum Matter, Chapter 8 §8.2, printed pp. 118–122",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/SteveSimon/QCM2023/QuantumMatter.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "An idealized finite-dimensional subsystem with a prescribed continuous bounded control on a finite time interval and a fixed prepared initial state; no apparatus calibration, measured response, re-preparation during control, or universal response law is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-spectral-fdt",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite spectral balance and distributional fluctuation response",
+        "reference": "items/thm-qsm-dt-spectral-fdt.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T2 with the current inspected supplier interface.",
+        "deps": [
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-dt-lorentzian-distribution-limits",
+          "thm-qsm-dt-finite-kubo",
+          "thm-qsm-dt-finite-unitary"
+        ],
+        "dependency_roles": {
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-dt-lorentzian-distribution-limits": "mathematical-premise",
+          "thm-qsm-dt-finite-kubo": "mathematical-premise",
+          "thm-qsm-dt-finite-unitary": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "Let $\\mathcal H$ be finite-dimensional, $H=H^*$ with unit J, $\\hbar>0$ with unit J s, $\\beta>0$ with unit J$^{-1}$, and $\\sigma=Z_\\beta^{-1}e^{-\\beta H}$ as in [[thm-qsm-dt-finite-unitary]]. Let $A=A^*$ be a matrix observable, write $Hu_i=E_i u_i$ in an orthonormal eigenbasis, $r_i=e^{-\\beta E_i}/Z_\\beta$, $A_{ij}=\\langle Au_j,u_i\\rangle$, and $\\omega_{ji}=(E_j-E_i)/\\hbar$. Define the finite positive spectral measure\n$$S_{AA}=2\\pi\\sum_{i,j}r_i|A_{ij}|^2\\,\\delta_{\\omega_{ji}},$$\nwhere $\\delta_\\nu$ is unit point mass at frequency $\\nu$ and $S_{AA}(-\\cdot)$ denotes pushforward under $\\omega\\mapsto-\\omega$; $\\omega_{ji}$ has unit s$^{-1}$. With observable unit $[A]$, $S_{AA}$ has unit $[A]^2\\,\\mathrm s$. The equilibrium correlation is $C_{AA}(t)=\\operatorname{Tr}(\\sigma\\alpha_t(A)A)$, and its Fourier convention is $S_{AA}(\\omega)=\\int_{\\mathbb R}e^{i\\omega t}C_{AA}(t)\\,dt$ in the distributional sense.\n\nFor $t\\ge0$, set $R_{AA}(t)=\\frac{i}{\\hbar}\\operatorname{Tr}(\\sigma[\\alpha_t(A),A])$ and, for $\\eta>0$, define the retarded transform $\\chi_\\eta(\\omega)=\\int_0^\\infty e^{(i\\omega-\\eta)t}R_{AA}(t)\\,dt$. Then\n$$\\chi_\\eta(\\omega)=\\sum_{i,j}\\frac{(r_i-r_j)|A_{ij}|^2}{\\hbar(\\omega_{ji}-\\omega-i\\eta)}.$$\nAs $\\eta\\downarrow0$, its boundary value is the corresponding sum of principal-value real parts and Lorentzian imaginary terms weighted by $r_i-r_j$, and distributionally\n$$\\operatorname{Im}\\chi=\\frac{1}{2\\hbar}(1-e^{-\\beta\\hbar\\omega})S_{AA}(\\omega).$$\nDetailed balance is $S_{AA}(-d\\omega)=e^{-\\beta\\hbar\\omega}S_{AA}(d\\omega)$. Thus, on $\\mathbb R\\setminus\\{0\\}$,\n$$S_{\\mathrm{sym}}(d\\omega)=\\hbar\\coth\\!\\left(\\frac{\\beta\\hbar\\omega}{2}\\right)\\operatorname{Im}\\chi(d\\omega),\\qquad S_{\\mathrm{sym}}=\\tfrac12(S_{AA}+S_{AA}(-\\cdot)).$$\nAny zero-frequency mass of $S_{AA}$ is retained separately: the commutator factor vanishes there, so the formula does not determine that atom or define a value for the singular product with $\\coth$ at $\\omega=0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.3–1.5",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            },
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 573–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "Mehran Kardar, Statistical Mechanics I, Lecture 21: Quantum Microstates and Quantum Macrostates",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/4f8defd6fcba707a0c691dd8957a43e3_MIT8_333F13_Lec21.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "lem-qsm-dt-trace-gibbs-correlation-series",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Absolute convergence of trace-Gibbs bounded correlation series",
+        "reference": "items/lem-qsm-dt-trace-gibbs-correlation-series.md#statement",
+        "design_state": "New A-page intermediate result: the absolute double-series estimate and finite spectral measure needed for trace-Gibbs detailed balance.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-qsm-trace-gibbs-variational",
+          "lem-qsm-trace-state-calculus",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-hilbert-adjoint-properties",
+          "def-operator-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-qsm-trace-gibbs-variational": "mathematical-premise",
+          "lem-qsm-trace-state-calculus": "mathematical-premise",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family": "mathematical-premise",
+          "thm-hilbert-adjoint-properties": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal H\\ne\\{0\\}$ be separable, $K=K^*$ a densely defined Hamiltonian bounded below with energy unit J, and $\\beta$ lie in an open interval $I\\subset(0,\\infty)$ measured in J$^{-1}$ on which $e^{-sK}$ is trace class for every $s\\in I$. Set $Z_\\beta=\\operatorname{Tr}(e^{-\\beta K})$, $\\sigma_\\beta=Z_\\beta^{-1}e^{-\\beta K}$, and $U(t)=e^{-itK/\\hbar}$ with $\\hbar>0$ in J s and $t$ in s. By [[thm-qsm-trace-gibbs-variational]], $K$ has a complete orthonormal energy basis $(u_i)$, $Ku_i=E_i u_i$, with Gibbs weights $r_i=e^{-\\beta E_i}/Z_\\beta>0$ and $\\sum_i r_i=1$. For bounded $A,B$, put $A_{ij}=\\langle Au_j,u_i\\rangle$, $B_{ij}=\\langle Bu_j,u_i\\rangle$, and $\\omega_{ji}=(E_j-E_i)/\\hbar$. Then\n$$C_{AB}(t):=\\operatorname{Tr}(\\sigma_\\beta U(t)^*AU(t)B)=\\sum_{i,j}r_iA_{ij}B_{ji}e^{-i\\omega_{ji}t}$$\nconverges absolutely and uniformly on $\\mathbb R$, with $\\sum_{i,j}r_i|A_{ij}||B_{ji}|\\le\\|A\\|\\|B\\|$. Consequently\n$$S_{AB}:=2\\pi\\sum_{i,j}r_iA_{ij}B_{ji}\\,\\delta_{\\omega_{ji}}$$\nis a finite complex Borel measure with total variation at most $2\\pi\\|A\\|\\|B\\|$, and $C_{AB}(t)=(2\\pi)^{-1}\\int e^{-i\\omega t}\\,dS_{AB}(\\omega)$. A Dirac measure $\\delta_\\nu$ assigns mass one to the point $\\nu$. The measure $S_{AB}$ has units $[A][B]$ s when $A,B$ carry units $[A],[B]$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 573–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §1.3",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-trace-gibbs-correlation-measure",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Trace-Gibbs bounded correlation measure and balance",
+        "reference": "items/thm-qsm-dt-trace-gibbs-correlation-measure.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T2 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-qsm-trace-gibbs-variational",
+          "lem-qsm-dt-trace-gibbs-correlation-series"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-qsm-trace-gibbs-variational": "mathematical-premise",
+          "lem-qsm-dt-trace-gibbs-correlation-series": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 6,
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal H\\ne\\{0\\}$ be separable, $K=K^*$ densely defined and bounded below with energy unit J, and let $e^{-sK}$ be trace class for every $s$ in an open interval $I\\subset(0,\\infty)$ measured in J$^{-1}$. Fix $\\beta\\in I$, $Z_\\beta=\\operatorname{Tr}(e^{-\\beta K})$, $\\sigma_\\beta=Z_\\beta^{-1}e^{-\\beta K}$, and $U(t)=e^{-itK/\\hbar}$ for $\\hbar>0$ in J s and $t$ in s. For bounded $A,B$, let $C_{AB}$ and $S_{AB}$ be the correlation function and finite spectral measure defined in [[lem-qsm-dt-trace-gibbs-correlation-series]]. Write $S_{BA}(-\\cdot)$ for the pushforward under $\\omega\\mapsto-\\omega$. Then for every bounded Borel test function $f$ with compact support,\n$$\\int f(\\omega)\\,S_{BA}(-d\\omega)=\\int f(\\omega)e^{-\\beta\\hbar\\omega}\\,S_{AB}(d\\omega).$$\nThe weighted measure on the right extends to a finite complex measure: the reindexed coefficient family is absolutely summable and has the same total-variation bound as $S_{BA}$. For Hermitian $A=B$, $S_{AA}$ is a positive finite measure. This is a discrete-spectrum equilibrium correlation identity; it asserts no temporal decay, continuum limit, or ordinary zero-frequency transport coefficient.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 573–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "Steven H. Simon, Lecture Notes for Quantum Matter, Chapter 8 §8.2, printed pp. 118–122",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/SteveSimon/QCM2023/QuantumMatter.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-qsm-dt-prepared-response",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Conditional prepared finite quantum control response",
+        "reference": "items/pthm-qsm-dt-prepared-response.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T1 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "post-qsm-dt-physical-control",
+          "post-qsm-dt-isolated-model",
+          "thm-qsm-dt-finite-kubo"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "post-qsm-dt-physical-control": "physical-assumption",
+          "post-qsm-dt-isolated-model": "physical-assumption",
+          "thm-qsm-dt-finite-kubo": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "statement": "Assume the adopted finite isolated model and fixed-preparation control convention of [[post-qsm-dt-isolated-model]] and [[post-qsm-dt-physical-control]]. Let $T>0$ be finite in s, let $A=A^*$ be a bounded matrix observable, and set $\\alpha_t(A)=e^{itH/\\hbar}Ae^{-itH/\\hbar}$ for time $t$ measured in s. Define\n$$R_{AB}(u)=\\frac{i}{\\hbar}\\operatorname{Tr}\\!\\left(\\sigma[\\alpha_u(A),B]\\right),\\qquad C_T=\\frac2\\hbar\\int_0^T|h(s)|\\,\\|B\\|\\,ds.$$\nThen for $0\\le t\\le T$ the model expectation obeys\n$$\\mathbb E_{\\epsilon,t}[A]=\\operatorname{Tr}(\\sigma\\alpha_t(A))+\\epsilon\\int_0^t h(s)R_{AB}(t-s)\\,ds+r_\\epsilon(t),\\qquad |r_\\epsilon(t)|\\le\\|A\\|\\frac{(|\\epsilon|C_T)^2e^{|\\epsilon|C_T}}2.$$\nHere $H$ and $hB$ have unit J, $\\hbar$ has unit J s, $t$ has unit s, $\\beta$ has unit J$^{-1}$, and $\\epsilon,C_T$ are dimensionless. This is a conditional model prediction for the adopted preparation and dynamics, not a claim that an observed finite dataset must equal the prediction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.1–1.2",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Exact prediction of the specified finite-dimensional isolated-control model under its adopted preparation, unitary-evolution, and Born-expectation postulates; it is not an observation, an apparatus validation, or evidence that the model describes nature.",
+        "empirical_premises": [],
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-qsm-dt-algebraic-kubo",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Bounded C-star Dyson response for finite-range spin dynamics",
+        "reference": "items/thm-qsm-dt-algebraic-kubo.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T3 with the current inspected supplier interface.",
+        "deps": [
+          "def-countable-choice",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "def-qsm-bounded-finite-range-interaction",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-consistent-local-states",
+          "thm-qsm-finite-range-spin-dynamics",
+          "lem-qsm-dt-banach-volterra-dyson"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "thm-qsm-finite-range-spin-dynamics": "mathematical-premise",
+          "lem-qsm-dt-banach-volterra-dyson": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 8,
+        "statement": "Use $\\Gamma=\\mathbb Z^d$, $d\\ge1$, finite on-site dimension $q\\ge1$, and a uniformly bounded finite-range interaction $\\Phi$ with parameters $M\\ge1$, $R<\\infty$, $\\kappa<\\infty$, and $\\hbar>0$ as in [[def-qsm-bounded-finite-range-interaction]]. Assume Countable Choice and the exact finite-matrix C$^*$-identity condition supplied in [[lem-qsm-finite-matrix-cstar-and-state-duality]]. Let $\\mathcal A$ be the norm-completed quasi-local spin algebra of [[def-qsm-quasilocal-spin-algebra]], and let $\\alpha_t$ be the strongly continuous automorphism group of [[thm-qsm-finite-range-spin-dynamics]]. Let $\\{\\rho_\\Lambda\\}$ be consistent positive trace-one local density matrices; write $\\phi$ for their unique state extension supplied by [[lem-qsm-consistent-local-states]], and additionally assume $\\phi\\circ\\alpha_t=\\phi$ for every $t\\in\\mathbb R$. This is an algebraic state on $\\mathcal A$, not a trace-class density on an infinite tensor-product Hilbert space.\n\nFor $A\\in\\mathcal A$, $B=B^*\\in\\mathcal A$, continuous real $h:[0,T]\\to\\mathbb R$, finite $T>0$, and dimensionless $\\epsilon\\in\\mathbb R$, put $B_t=\\alpha_t(B)$ and let $W_\\epsilon$ solve\n$$W_\\epsilon'(t)=\\frac{i\\epsilon h(t)}{\\hbar}B_tW_\\epsilon(t),\\qquad W_\\epsilon(0)=I.$$\nThe C$^*$-algebra Dyson solution is unitary. Define $\\alpha_t^\\epsilon(A)=W_\\epsilon(t)^*\\alpha_t(A)W_\\epsilon(t)$,\n$$R_{AB}(u)=\\frac{i}{\\hbar}\\phi([\\alpha_u(A),B]),\\qquad C_T=\\frac2\\hbar\\int_0^T|h(s)|\\,\\|B\\|\\,ds.$$\nThen\n$$\\phi(\\alpha_t^\\epsilon(A))=\\phi(\\alpha_t(A))+\\epsilon\\int_0^t h(s)R_{AB}(t-s)\\,ds+r_\\epsilon(t),\\qquad |r_\\epsilon(t)|\\le\\|A\\|\\frac{(|\\epsilon|C_T)^2e^{|\\epsilon|C_T}}2.$$\nWhen energy is the interpretation of $H_\\Lambda$ and $hB$, their units are J, $t$ is s, $\\hbar$ is J s, and $C_T$ is dimensionless. No global trace Hamiltonian, spatial-to-temporal decay implication, or dc coefficient follows.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, Theorem 3.3.12 and proof, printed pp. 69–71",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.1–1.2",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-isolated-dc-obstruction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Nonzero pure-point equilibrium covariance is not integrable",
+        "reference": "items/thm-qsm-dt-isolated-dc-obstruction.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T5 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-dominated-convergence",
+          "thm-qsm-dt-trace-gibbs-correlation-measure"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-qsm-dt-trace-gibbs-correlation-measure": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 7,
+        "statement": "Assume the Axiom of Choice and the trace-class Gibbs hypotheses of [[thm-qsm-dt-trace-gibbs-correlation-measure]] for a self-adjoint Hamiltonian $K$ in J with a complete discrete energy basis and faithful Gibbs density $\\sigma_\\beta$ at $\\beta>0$ in J$^{-1}$. Let $\\hbar>0$ be in J s, $t$ in s, and let $A=A^*$ be a nonzero bounded observable with $\\operatorname{Tr}(\\sigma_\\beta A)=0$. Define\n$$C_{AA}(t)=\\operatorname{Tr}(\\sigma_\\beta U(t)^*AU(t)A),\\qquad G_{AA}(t)=\\operatorname{Re}C_{AA}(t),\\qquad U(t)=e^{-itK/\\hbar}.$$\nThen neither $C_{AA}$ nor $G_{AA}$ belongs to $L^1([0,\\infty))$. In particular, the ordinary absolutely convergent isolated-system correlation integral used in a dc Green–Kubo formula does not exist under these hypotheses. This claim concerns discrete-spectrum trace-Gibbs dynamics only; it asserts no failure of temporal decay or transport limits in an infinite-volume or open-system model.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §3, printed p. 575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §1.5",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      },
+      {
+        "id": "thm-qsm-dt-variance-green-kubo",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Integrability-qualified quantum variance Green–Kubo limit",
+        "reference": "items/thm-qsm-dt-variance-green-kubo.md#statement",
+        "design_state": "Reserved A-page item; complete local argument follows equilibrium-response.md#T5 with the current inspected supplier interface.",
+        "deps": [
+          "def-countable-choice",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "thm-dominated-convergence",
+          "thm-qsm-dt-algebraic-kubo",
+          "lem-qsm-dt-stationary-variance-integral-identity"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-qsm-dt-algebraic-kubo": "mathematical-premise",
+          "lem-qsm-dt-stationary-variance-integral-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 9,
+        "statement": "Assume Countable Choice and the finite-matrix C$^*$-identity hypothesis used by [[thm-qsm-dt-algebraic-kubo]]. Use its finite-range spin algebra $\\mathcal A$, strongly continuous automorphism group $\\alpha_t$, and invariant state $\\phi$ obtained from consistent local densities. Let $V=V^*\\in\\mathcal A$ satisfy $\\phi(V)=0$, and define\n$$X_T=\\int_0^T\\alpha_t(V)\\,dt,\\qquad G(t)=\\operatorname{Re}\\phi(V\\alpha_t(V)).$$\nIf $G\\in L^1([0,\\infty))$, then\n$$\\lim_{T\\to\\infty}\\frac{\\phi(X_T^2)}{2T}=D:=\\int_0^\\infty G(t)\\,dt\\ge0.$$\nFor a finite list of centered self-adjoint observables $V_1,\\ldots,V_m$, if each symmetrized covariance $G_{ab}(t)=\\tfrac12(\\operatorname{Re}\\phi(V_a\\alpha_t(V_b))+\\operatorname{Re}\\phi(V_b\\alpha_t(V_a)))$ is absolutely integrable on $[0,\\infty)$, then $D_{ab}=\\int_0^\\infty G_{ab}(t)dt$ is a real positive semidefinite matrix. For a velocity observable measured in m s$^{-1}$, $D$ has units m$^2$ s$^{-1}$; for general $V$, its units are $[V]^2$ s. The result is a variance of a time-integrated observable, not a joint classical trajectory or a universal transport law.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §§2–3, printed pp. 573–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            },
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, Theorem 3.3.12 and proof, printed pp. 69–71",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 592,
+    "id": "qsm-dt-response-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Trace-class bounded-observable response — Examples",
+    "companion": "qsm-dt-response",
+    "requires": [
+      "qsm-dt-response"
+    ],
+    "items": [
+      {
+        "id": "ex-qsm-dt-bounded-oscillator-response",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Projected oscillator transition response",
+        "reference": "items/ex-qsm-dt-bounded-oscillator-response.md#example",
+        "design_state": "Reserved B-page item; complete local argument follows equilibrium-response.md#T4 with the current inspected supplier interface.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-qsm-trace-gibbs-variational",
+          "thm-qsm-dt-strong-domain-response"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-qsm-trace-gibbs-variational": "mathematical-premise",
+          "thm-qsm-dt-strong-domain-response": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "statement": "Let $\\mathcal H=\\ell^2(\\mathbb N_0)$ with standard orthonormal basis $(e_n)_{n\\ge0}$. Fix $\\omega>0$ in s$^{-1}$ and $\\hbar>0$ in J s. Define the diagonal Hamiltonian\n$$He_n=\\hbar\\omega(n+\\tfrac12)e_n,\\qquad D(H)=\\{c\\in\\ell^2:\\sum_{n\\ge0}(n+\\tfrac12)^2|c_n|^2<\\infty\\}.$$\nFor real $b_0\\ne0$ in the chosen observable unit, define the bounded transition observable $B=b_0(|e_0\\rangle\\langle e_1|+|e_1\\rangle\\langle e_0|)$ and set $A=B$. Let $\\beta>0$ in J$^{-1}$, $q=e^{-\\beta\\hbar\\omega}$, and $\\Delta=\\hbar\\omega$. On a finite interval $[0,T]$ with $T>0$ in s, drive with a constant real field $h(t)=h_0$ and dimensionless $\\epsilon\\in\\mathbb R$, where $h_0B$ has unit J. This is a bounded projection between the first two oscillator levels, not the unbounded oscillator position.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Steven H. Simon, Lecture Notes for Quantum Matter, Chapter 8 §8.2, printed pp. 118–122",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/SteveSimon/QCM2023/QuantumMatter.pdf"
+            },
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": [],
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-qsm-dt-qubit-isolated-response",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Exactly computed two-level Kubo response",
+        "reference": "items/ex-qsm-dt-qubit-isolated-response.md#example",
+        "design_state": "Reserved B-page item; complete local argument follows equilibrium-response.md#T6 with the current inspected supplier interface.",
+        "deps": [
+          "lem-qsm-matrix-exponential-response",
+          "thm-qsm-dt-finite-kubo",
+          "thm-qsm-dt-spectral-fdt"
+        ],
+        "dependency_roles": {
+          "lem-qsm-matrix-exponential-response": "mathematical-premise",
+          "thm-qsm-dt-finite-kubo": "mathematical-premise",
+          "thm-qsm-dt-spectral-fdt": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "statement": "Let $\\mathcal H=\\mathbb C^2$, $\\Delta>0$ in J, and $\\hbar>0$ in J s; put $\\omega=\\Delta/\\hbar$. Set\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\quad Y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\quad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix},\\quad H=\\frac{\\Delta}{2}Z.$$\nTake $A=B=X$ (dimensionless), $\\beta>0$ in J$^{-1}$, and a finite interval $[0,T]$ with $T>0$ in s. Use dimensionless $\\epsilon\\in\\mathbb R$ and a constant real control $h(t)=h_0$ such that $h_0X$ has unit J. Write $\\sigma=e^{-\\beta H}/\\operatorname{Tr}(e^{-\\beta H})$ and $x=\\beta\\Delta/2$; the initial Gibbs matrix is fixed while the control acts.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\draw[->] (0,0) -- (0,2.8) node[above] {energy};\n  \\draw[thick] (0.6,0.7) -- (2.1,0.7) node[right] {$E_-=-\\Delta/2$};\n  \\draw[thick] (0.6,2.1) -- (2.1,2.1) node[right] {$E_+=\\Delta/2$};\n  \\draw[<->] (1.35,0.85) -- (1.35,1.95) node[midway,right] {$X,\\ \\hbar\\omega=\\Delta$};\n\\end{tikzpicture}\n```\n\nThe horizontal lines denote the two eigenvalues of $H$; the arrows mark the off-diagonal matrix elements of $X$ and their Bohr frequency $\\omega=\\Delta/\\hbar$. The drawing encodes the finite transition structure only; all response claims below follow from the explicit matrix calculation.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "MIT OpenCourseWare 8.512, Theory of Solids II, Lecture 1: Linear Response Theory, §§1.1–1.5",
+              "url": "https://ocw.mit.edu/courses/8-512-theory-of-solids-ii-spring-2009/0d1bb83b0e6471874b6c3e02aff52ad5_MIT8_512s09_lec01_rev2.pdf"
+            },
+            {
+              "title": "Ryogo Kubo, Statistical-Mechanical Theory of Irreversible Processes I, Journal of the Physical Society of Japan 12 (1957), §2, printed pp. 572–575",
+              "url": "https://staff.ulsu.ru/moliver/ref/kubo/kubo57.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "empirical_premises": [],
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

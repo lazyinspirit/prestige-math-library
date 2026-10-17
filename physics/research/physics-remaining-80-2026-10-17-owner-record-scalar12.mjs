@@ -1,0 +1,46 @@
+// Root records released scientific dispositions; no gate/independent approval.
+import {readFileSync,writeFileSync,existsSync,mkdirSync} from 'node:fs';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {readItem} from '../../tools/physics-support/physics-content.mjs';
+import {loadStep1Record,itemInputPaths} from '../../tools/physics-support/frontier-snapshot.mjs';
+import {recordStep1Batch,step1Decision} from '../../tools/physics-support/step1-decisions.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)),run='physics-remaining-80-2026-10-17';
+const out=join(root,'research',run+'-owner-scalar12-readiness-29');
+if(existsSync(join(out,'completion.json')))throw Error('Already recorded; preserve history');
+const sha=b=>createHash('sha256').update(b).digest('hex'),json=p=>JSON.parse(readFileSync(p));
+const reportPath=join(root,'research',run+'-owner-batch12-cauchy-final.json'),report=json(reportPath);
+// Explicit adapter for this scientist's dispositions shape; original report stays immutable.
+report.items=report.dispositions.map(r=>({id:r.item,source_binding:{raw_sha256:r.sha256},disposition:r.disposition,scientific_reason:r.scientific_resolution}));
+if(report.remaining_scientific_defects.length)throw Error('Remaining scientific defects');
+for(const b of [...report.bindings,...report.supplier_bindings])if(sha(readFileSync(join(root,'..',b.path)))!==b.sha256)throw Error('Changed released binding '+b.path);
+const state=json(join(root,'.physics-autopilot',run,'state.json'));
+const native=state.dispatches['1-scaffold:batch-12'];if(!native?.endedAt||native.lastExitOk!==true)throw Error('Native12notdrained');
+const snapshot=loadStep1Record(root,run),records=[];
+for(const row of report.items){
+ const id=row.id,path=join(root,'items',id+'.md'),item=readItem(path),claim=snapshot.items.get(id)?.item;
+ if(sha(readFileSync(path))!==row.source_binding.raw_sha256)throw Error('Scientific binding changed '+id);
+ if(!['ready-for-root-record'].includes(row.disposition))throw Error('Unresolved '+id);
+ if(!claim||['id','kind','title','domain','dependency_level'].some(k=>item[k]!==claim[k])||JSON.stringify([...item.deps].sort())!==JSON.stringify([...claim.deps].sort()))throw Error('Metadata mismatch '+id);
+ records.push({item:id,decision:'ready',reason:row.scientific_reason+' Current scientific-owner evidence: research/'+run+'-owner-batch12-cauchy-final.json; mechanical metadata amendment: research/'+run+'-owner-scalar12-metadata-28/completion.json. Authoring readiness only; no independent review or gate acceptance.',dependencies:[...new Set(['deps','justified_by','forward_refs','external_refs','empirical_premises'].flatMap(k=>item[k]??[]))]});
+}
+if(records.length!==3||report.items.filter(x=>x.disposition==='ready-for-root-record').length!==3)throw Error('Exact3/3scope required');
+// Retained same-owner final currency reports must exist before joining.
+const currencyPaths=['owner-batch12-residual-final-use-currency.json','owner-matrix-ode-currency-batch12-released.json'].map(suffix=>join(root,'research',run+'-'+suffix));
+for(const path of currencyPaths)if(!existsSync(path))throw Error('Await retained final currency '+path);
+const context=new Set(),pins=json(join(root,'research/math-imports.json')),byPath=new Map(pins.files.map(row=>[row.path,row]));
+for(const record of records)for(const path of itemInputPaths(snapshot,record.item,record.dependencies))context.add(path);
+for(const path of context){
+ const relative=path.slice(root.length),pin=byPath.get(relative);
+ if(pin&&(sha(readFileSync(path))!==pin.sha256||sha(readFileSync(join(pins.source_root,pin.source_path??pin.path)))!==pin.sha256))throw Error('Scoped import/root drift '+relative);
+}
+
+records.sort((a,b)=>snapshot.items.get(a.item).item.dependency_level-snapshot.items.get(b.item).item.dependency_level);
+mkdirSync(join(out,'before'),{recursive:true});
+for(const row of records){const p=join(root,'research',run+'-step1-'+row.item+'.json');writeFileSync(join(out,'before',row.item+'.json'),readFileSync(p));}
+writeFileSync(join(out,'request.json'),JSON.stringify({run,at:new Date().toISOString(),scientific_report_sha256:sha(readFileSync(reportPath)),retained_currency:currencyPaths.map(path=>({path,sha256:sha(readFileSync(path))})),context_files:context.size,records},null,2)+'\n');
+const rows=recordStep1Batch(root,{run,records,owner:true}),fresh=loadStep1Record(root,run);
+for(const row of rows)if(!step1Decision(fresh,row.item).closed)throw Error('Fresh native record open '+row.item);
+writeFileSync(join(out,'completion.json'),JSON.stringify({run,at:new Date().toISOString(),authoring_readiness_only:true,subjects:rows.length,escalations_resolved:3,all_fresh_native_records_closed:true},null,2)+'\n');
+console.log(JSON.stringify({subjects:rows.length,escalations_resolved:3,fresh_native_closed:true}));

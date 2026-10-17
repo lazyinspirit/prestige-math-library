@@ -1,0 +1,1212 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "batch": "41",
+  "scope": [
+    "lem-qsm-kms-strip-uniqueness",
+    "lem-qsm-gibbs-strip-limit",
+    "lem-qsm-kms-invariance",
+    "thm-qsm-finite-kms-gibbs-characterization",
+    "thm-qsm-infinite-spin-kms-existence",
+    "ex-qsm-kms-two-level-gibbs-boundary"
+  ],
+  "contracts": {
+    "lem-qsm-kms-strip-uniqueness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hadamard-three-lines",
+          "source_section": "Statement",
+          "quote": "For a bounded function continuous on the closed strip and holomorphic inside, the vertical-line supremum is log-convex.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative nor",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The KMS convention in [F2] uses the same closed strip when $b=\\beta\\hbar$; the following estimate only needs the stated $b>0$ strip hypotheses. Define $G(w):=F(ibw)$ on $0\\le\\operatorname{Re}w\\le1$. If $w=x+iy$, then $ibw=-by+ibx$, so the lines $\\operatorname{Re}w=0$ and $\\operatorname{Re}w=1$ map to the lower and upper edges of $S_b$. The linear map is holomorphic and maps the open strip to $S_b^\\circ$, so $G$ is bounded and continuous on the closed unit strip and holomorphic inside.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $0<s<b$, put $x=s/b\\in(0,1)$. The vertical line $\\operatorname{Re}w=x$ maps onto $\\{t+is:t\\in\\mathbb R\\}$, while the boundary suprema of $G$ are exactly $M_0$ and $M_1$. Applying [F1] gives the asserted interpolation inequality. Both exponents $1-x$ and $x$ are positive, so the zero-supremum cases use the defined positive powers and do not invoke $0^0$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $M_0,M_1\\le C$, step 2.1 gives $|F(t+is)|\\le C$ for each $0<s<b$; the same bound holds on both edges by definition of $M_0,M_1$. Hence it holds on all of $S_b$.",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Let $F$ and $H$ be two such functions with identical lower edges. Their difference $D=F-H$ is bounded, continuous on $S_b$, holomorphic inside, has lower supremum $0$, and has a finite upper supremum. For every $0<s<b$, step 2.1 applied to $D$ gives $\\sup_t|D(t+is)|\\le0^{1-s/b}M_1^{s/b}=0$. Thus $D$ vanishes in the open strip; continuity then gives zero on the upper edge as well as the lower edge.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty underlying object is quantified; the domain is the closed strip with b>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 defines 0^r=0 for every positive interpolation exponent, so M0=0 or M1=0 is covered."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no finite dimension or cardinality parameter; the scalar strip estimate is already stated for all b>0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses strictly interior s/b in (0,1), so neither interpolation exponent vanishes; step 4.1 includes zero-edge uniqueness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the edge suprema on both closed boundary lines, and step 4.1 uses continuity to recover the upper edge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a fixed linear rotation and rescaling; no choice principle or nonconstructive selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement is an interpolation estimate and zero-edge uniqueness implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 derives uniqueness from equal lower edges; the Statement asserts no converse implication."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Read all four steps and exact thm-hadamard-three-lines Statement/Proof. G(w)=F(ibw) maps the vertical unit strip onto the horizontal strip; positive exponents handle either zero edge, difference boundedness gives lower-edge uniqueness and continuity supplies both endpoints. b>0 excludes strip collapse. Naaijkens Prop 3.4.5 and Ruelle I §7 are KMS context rather than this general theorem; replaced bibliography with Tropp §7.3 Theorem 7.13, printed pp.58–59, whose statement and full proof were read. Local supplier regularization handles zero edges. No choice use or empirical assertion."
+      }
+    },
+    "lem-qsm-gibbs-strip-limit": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positi",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-spin-state-compactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the countable union of finite regions and the finite-dimensional ",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]],",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-lo",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[de",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-local-generator-domain",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-qsm-finite-range-spin-dynamics]], including its Countable Choice and finite-matrix C*-iden",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qsm-finite-gibbs-kms",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite-dimensional complex Hilbert space and let $H=H^*$ be a Hamiltonian on $\\mathcal H$ with energy unit J; let $\\hbar>0$ have unit J s. For real $t$ measured in seconds, $U(t)=e^{-itH/\\hbar}$ is unitary and $U(t+s)=U(t)U(s)$. For a trace-one density $\\rho$ on $\\mathcal H$, the Schrödinger state $U(t)\\rho U(t)^*$ and the Heisenberg observable $\\alpha_t(A)=U(t)^*AU(t)$ have the same trace expectation. Fix $k_B>0$ in J/K for the entropy convention; then the von Neumann entropy is unchanged. If $d=\\dim\\mathcal H\\geq1$, $\\beta>0$ has unit J$^{-1}$, and $\\sigma_\\beta=e^{-\\beta H}/Z_\\beta$ with $Z_\\beta=\\operatorname{Tr}e^{-\\beta H}$, then it is stationary and satisfies the finite Gibbs KMS strip identity\n$\nF_{A,B}(t+i\\beta\\hbar)=\\operatorname{Tr}(\\sigma_\\beta\\alpha_t(B)A),\\qquad\nF_{A,B}(z)=\\operatorname{Tr}(\\sigma_\\beta A\\alpha_z(B)),\n$\nwhere $\\alpha_z(B)=e^{izH/\\hbar}Be^{-izH/\\hbar}$, with complexified time $z$ measured in seconds. The function is entire and bounded on $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$ seconds. No infinite-volume KMS existence or approach to equilibrium follows.",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. ",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positi",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qsm-spin-state-compactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the countable union of finite regions and the finite-dimensional ",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-qsm-kms-strip-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}",
+          "uses": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-nested-interval-property",
+          "source_section": "Statement",
+          "quote": "For each $k \\in \\mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval with $a_k \\le b_k$ ([[def-interval]]), a",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natur",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-weierstrass-convergence-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let each $f_n:\\Omega\\to\\mathbb C$ be holomorphic, and suppose $f_n\\to f$ locally",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The finite spectral calculus [F6] defines $Z_n=\\operatorname{Tr}_{\\Lambda_n}(e^{-\\beta H_{\\Lambda_n}})>0$ and the positive trace-one matrix $\\rho_n=e^{-\\beta H_{\\Lambda_n}}/Z_n$. For any finite $X\\subseteq\\Gamma$, use the tensor factorization of [F1] on $X\\cup\\Lambda_n$ and set $\\widehat\\rho_X^{(n)}:=\\operatorname{Tr}_{(X\\cup\\Lambda_n)\\setminus X}\\!\\left(\\rho_n\\otimes q^{-|X\\setminus\\Lambda_n|}I_{X\\setminus\\Lambda_n}\\right)$, where $\\rho_n$ is placed on $\\Lambda_n$ and each added site has density $q^{-1}I$. Tensor trace factorization shows that if $X\\subseteq Y$, then tracing $\\widehat\\rho_Y^{(n)}$ over $Y\\setminus X$ gives $\\widehat\\rho_X^{(n)}$: each removed added site contributes $\\operatorname{Tr}(q^{-1}I)=1$, while any removed site in $\\Lambda_n$ is traced from the same $\\rho_n$ before or after adjoining the identity densities. By [F3], these local algebras sit in the norm-completed $\\mathcal A$; thus the consistent family [F8] gives an algebraic state $\\omega_n$ whose restriction to $\\mathcal A_{\\Lambda_n}$ is the finite Gibbs state.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F6",
+            "F8",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying [F9] to $(\\omega_n)$ gives at least one pointwise-convergent subsequence. Now fix any pointwise-convergent subsequence, write it as $(\\omega_{n_k})$, and denote its state limit by $\\omega$. The rest of the proof applies to this arbitrary convergent subsequence. This extraction is conditional on the exact interface [A2], not on the draft supplier's status label.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F9",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Fix local $A\\in\\mathcal A_X$ and $B\\in\\mathcal A_Y$. If $X=\\varnothing$ or $Y=\\varnothing$, the corresponding local algebra is $\\mathbb C I$ by [F1], so embed that scalar observable in any one-site local algebra; the identity-preserving inclusion leaves both correlation functions unchanged. We may therefore take $X,Y\\ne\\varnothing$. Since $R<\\infty$, the set $X^{+R}=\\{y:\\operatorname{dist}_\\infty(X,\\{y\\})\\le R\\}$ is finite, so for all sufficiently large $k$, $X\\cup Y\\cup X^{+R}\\subseteq\\Lambda_{n_k}$. For those $k$, define the finite-volume entire function $F_k(z):=\\omega_{n_k}\\!\\left(A\\alpha_z^{\\Lambda_{n_k}}(B)\\right)$, where $\\alpha_z^{\\Lambda}(C):=e^{izH_\\Lambda/\\hbar}Ce^{-izH_\\Lambda/\\hbar}$. Because the restrictions of $\\omega_{n_k}$ to $\\mathcal A_{\\Lambda_{n_k}}$ are the Gibbs states, [F7] gives both KMS boundary identities. On either boundary the finite trace state has norm one by [A2], so $|F_k|\\le\\|A\\|\\|B\\|$ there. For any finite $\\Lambda$, put $H=H_\\Lambda=H^*$; diagonalizing this finite matrix shows that for $C\\in\\mathcal A_\\Lambda$ and $z=t+is\\in S_b$, $0\\le s\\le b$, $\\|\\alpha_z^\\Lambda(C)\\|\\le\\|e^{izH/\\hbar}\\|\\,\\|C\\|\\,\\|e^{-izH/\\hbar}\\|\\le e^{2s\\|H\\|/\\hbar}\\|C\\|\\le e^{2\\beta\\|H\\|}\\|C\\|$. Consequently each $F_k$ is bounded on $S_b$, with the crude bound $e^{2\\beta\\|H_{\\Lambda_{n_k}}\\|}\\|A\\|\\|B\\|$, which need not be uniform in $k$. This establishes the bounded-strip hypothesis for [F10]; its three-lines estimate uses the uniform boundary bounds and gives $|F_k(z)|\\le\\|A\\|\\|B\\|$ throughout $S_b$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F7",
+            "F10",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On every compact real-time interval, [F4] gives $\\alpha_t^{\\Lambda_{n_k}}(B)\\to\\alpha_t(B)$ uniformly in norm. The orbit $K_T=\\{A\\alpha_t(B):|t|\\le T\\}$ is compact because $t\\mapsto\\alpha_t(B)$ is norm-continuous. For any $\\varepsilon>0$, cover $K_T$ by finitely many norm-balls of radius $\\varepsilon/4$, with centers $C_1,\\dots,C_m\\in K_T$. Pointwise convergence in [F9] makes $\\max_j|\\omega_{n_k}(C_j)-\\omega(C_j)|<\\varepsilon/2$ for large $k$; the norm-one bounds in [A2] make the difference at any point of $K_T$ at most this maximum plus $2(\\varepsilon/4)$. Combining this with uniform convergence of the dynamics proves $F_k(t)\\to\\omega(A\\alpha_t(B))$ uniformly for $|t|\\le T$. The same finite-net estimate applied to $\\{\\alpha_t(B)A:|t|\\le T\\}$ proves uniform convergence of the upper edges to $\\omega(\\alpha_t(B)A)$.",
+          "inputs": [
+            "A2",
+            "F4",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For $B\\in\\mathcal A_Y$, [F5] gives the local generator value $\\delta(B)$. Every interaction term meeting $Y$ is supported in the finite neighborhood $Y^{+R}$, so when $\\Lambda_{n_k}$ contains $Y^{+R}$ the finite-volume generator satisfies $\\delta_{n_k}(B)=\\frac{i}{\\hbar}[H_{\\Lambda_{n_k}},B]=\\delta(B)$. Differentiating the finite matrix exponential then gives $F_k'(z)=\\omega_{n_k}\\!\\left(A\\alpha_z^{\\Lambda_{n_k}}(\\delta(B))\\right)$. Taking $C=\\delta(B)$ in the finite-volume estimate of step 2.2 shows that for each $k$, $F_k'$ is bounded on $S_b$ by $e^{2\\beta\\|H_{\\Lambda_{n_k}}\\|}\\|A\\|\\|\\delta(B)\\|$; this crude bound is finite but need not be uniform in $k$. The same finite Gibbs boundary identity [F7] applies to the pair $A,\\delta(B)$. Its two real-time boundaries have modulus at most $\\|A\\|\\|\\delta(B)\\|$ by the finite state norm bound [A2]. Since the required boundedness is now established, [F10] gives the uniform estimate $|F_k'(z)|\\le L:=\\|A\\|\\|\\delta(B)\\|$ on $S_b$. Integrating along the straight segment from $z$ to $w$ (which stays in the convex strip) yields $|F_k(w)-F_k(z)|\\le L|w-z|$. Thus the functions are uniformly Lipschitz on the whole strip; if $L=0$, they are constant there.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F5",
+            "F7",
+            "F10",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.3",
+          "claim": "For $m\\ge1$ and $r\\ge1$, let $G_{m,r}:=\\left\\{-m+\\frac{2mj}{2^r}+i\\frac{b\\ell}{2^r}:0\\le j,\\ell\\le2^r\\right\\}\\subset[-m,m]+i[0,b]$. The union of these grids over $m,r$ is countable and dense in the closed strip: for any point in a fixed rectangle, choosing $r$ large makes each coordinate mesh $2m/2^r$ and $b/2^r$ arbitrarily small. Enumerate the grid points by increasing $m+r+j+\\ell$, breaking ties lexicographically. For a bounded complex sequence, enclose its values in a fixed square $[-M,M]^2$ with $M>0$; subdivide the current square into four closed subsquares in a fixed lexicographic order and take the first containing infinitely many terms. Choose at each stage the least natural index larger than the previous one whose value lies in that square. At least one subsquare contains infinitely many terms because there are only four. The two coordinate intervals of the nested squares are closed, nested, and have lengths tending to zero; [F11] gives their unique common coordinates, and the selected values converge to that complex point. This defines a deterministic subsequence rule $E$ for each bounded complex sequence. Starting with $i_0(n)=n$, at grid point $g_j$ apply $E$ to $F_{i_{j-1}(n)}(g_j)$, obtaining a strictly increasing index map $s_j$, and set $i_j=i_{j-1}\\circ s_j$. The deterministic recursion [F12] defines all $i_j$. The diagonal indices $k_j:=i_j(j)$ are strictly increasing; for each fixed $r$, the tail $(k_j)_{j\\ge r}$ is a subsequence of $i_r$, so $F_{k_j}(g_r)$ converges. Thus one subsequence converges at every grid point without an additional choice principle.",
+          "inputs": [
+            "F11",
+            "F12",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Fix $m$ and $\\varepsilon>0$. If $L=0$, convergence at a single grid point and constancy give uniform convergence on the rectangle $K_m=[-m,m]+i[0,b]$. If $L>0$, choose $r$ so that every point of $K_m$ is within $\\varepsilon/(8L)$ of some point of $G_{m,r}$. The grid is finite, so the diagonal subsequence is uniformly Cauchy on that grid: for sufficiently large $p,q$, the values $F_{k_p},F_{k_q}$ differ by less than $\\varepsilon/2$ at every grid point. At an arbitrary $z\\in K_m$, choose a grid point $g$ within $\\varepsilon/(8L)$; the two Lipschitz estimates from step 3.2 and the grid difference give $|F_{k_p}(z)-F_{k_q}(z)|\\le L|z-g|+|F_{k_p}(g)-F_{k_q}(g)|+L|g-z|<\\varepsilon$. Thus the subsequence is uniformly Cauchy on each $K_m$. Completeness of $\\mathbb C$ gives a limit $F_{A,B}$ locally uniformly on the closed strip; step 2.2 gives $|F_{A,B}(z)|\\le\\|A\\|\\|B\\|$.",
+          "inputs": [
+            "step 2.2",
+            "step 3.2",
+            "step 3.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Each $F_k$ is entire, and step 4.1 gives locally uniform convergence on every compact subset of $S_b^\\circ$. By [F13], $F_{A,B}$ is holomorphic there; uniform convergence on compact rectangles including their horizontal edges makes it continuous on $S_b$. Step 3.1 gives uniform convergence of the two boundary sequences on every compact real interval, so the lower and upper boundaries of $F_{A,B}$ are respectively $\\omega(A\\alpha_t(B))$ and $\\omega(\\alpha_t(B)A)$ for every real $t$. Hence the stated local-pair strip conclusion holds.",
+          "inputs": [
+            "F13",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 explicitly embeds observables in the empty local algebra C I into a one-site algebra before using dist_infty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 include L=0; a zero interaction has zero local generator and constant finite-volume correlations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 cover q=1 and d=1; scalar local matrices give L=0 and the grid argument remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 use finite Gibbs spectral calculus and require no simple spectrum or nondegenerate energy levels."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 pass both lower and upper edges, including every real t, to the closed-strip limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states the exact Countable Choice use for completion and state extraction; step 3.3 specifies the remaining diagonal selection deterministically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement is a one-way local-pair limit conclusion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1–5.1 prove only the one-way local-pair boundary conclusion; no reverse construction is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Read all eight proof paragraphs and all cited dependency interfaces. Tensor trace extension is consistent and positive; Countable Choice and finite C*-density/norm hypotheses are retained in A1–A2. Arbitrary pointwise-convergent subsequence is fixed before extracting strip functions for each local pair. Each finite function and its derivative has a finite volume-dependent strip bound before three-lines is applied; the boundary bounds then give uniform norm and Lipschitz bounds. Local delta(B) has finite support and equals the finite generator once its neighborhood is contained. Finite orbit nets give compact-time boundary convergence. Deterministic nested-square extraction and countable-grid diagonalization avoid extra dependent choice; Lipschitz finite nets give locally uniform closed-strip convergence. Weierstrass supplies interior holomorphy, and closed-rectangle convergence preserves both edges. Empty supports embed as scalars, zero derivative gives constant functions, q=1 and zero interaction are included. No full-sequence convergence, uniqueness, infinite-volume density or empirical conclusion is asserted."
+      }
+    },
+    "lem-qsm-kms-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative nor",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-morera-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "A continuous function on an open subset of $\\mathbb C$ is holomorphic if and only if its integral around the boundary of",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-liouville-bounded-entire-function",
+          "source_section": "Statement",
+          "quote": "Every bounded entire function is constant.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $F:=F_{I,B}$ be the strip function from [F1]. Since every $\\alpha_t$ is unital, its two boundary values coincide: $F(t)=\\omega(\\alpha_t(B))=F(t+ib)$ for every $t\\in\\mathbb R$. Denote this common continuous function of $t$ by $g(t)$.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each integer $k$, define $\\widetilde F(t+iy):=F(t+i(y-kb))$ when $kb\\le y\\le(k+1)b$. At a shared seam the lower and upper definitions agree by step 1.1, so the definition is single-valued. It is continuous on each closed translated strip and across every seam, is $ib$-periodic, and is bounded on $\\mathbb C$ by the bound for $F$ on $S_b$. It is holomorphic away from the horizontal seams because there it is a translate of $F$ on its open strip.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Fix a point on a seam and choose a disk about it that meets no other seam. Let $T$ be any filled triangle in this disk. If $T$ crosses the seam, cut it along that horizontal line; the resulting at most two polygons can each be triangulated by joining one vertex to the other vertices. Every resulting small triangle lies in one of the two closed half-disks. If a small triangle touches the seam, translate it a distance $\\epsilon>0$ into that half's open strip; for all sufficiently small $\\epsilon$, its translate remains inside that strip and the translated contour integral is zero by [F2]. Uniform continuity of $\\widetilde F$ on a compact neighborhood of the original contour implies the translated integrals converge to the original integral as $\\epsilon\\downarrow0$. Hence each small triangle has zero integral. Summing their boundary integrals cancels shared edges with opposite orientations and yields $\\int_{\\partial T}\\widetilde F(z)\\,dz=0$. Triangles wholly on one side also have zero integral by [F2].",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Step 3.1 applies to every triangle in the disk. The function $\\widetilde F$ is continuous there by step 2.1, so [F3] makes it holomorphic across the seam in that disk. Away from seams it was already holomorphic by step 2.1; since the point on the seam was arbitrary, $\\widetilde F$ is entire on $\\mathbb C$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Step 2.1 gives a global bound on $\\widetilde F$, so [F4] makes it constant. Its restriction to the real axis is $g(t)=\\omega(\\alpha_t(B))$ by step 1.1, and at $t=0$ this is $\\omega(B)$. Therefore $\\omega(\\alpha_t(B))=\\omega(B)$ for every real $t$. Since $B$ was arbitrary, $\\omega$ is invariant.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The algebra is unital and the statement quantifies over an arbitrary observable B; no empty domain case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits B=0; then both KMS edges and the invariant expectation are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional scalar algebra every unital automorphism is the identity, and the same proof in step 5.1 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No eigenvalue or spectrum hypothesis is imposed; steps 1.1–5.1 use only the abstract KMS strip conditions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 match both edges at every seam; continuity in step 4.1 proves holomorphy across them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 use finite triangle subdivision and local translation only; no infinite choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement proves KMS implies invariance only."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 proves KMS implies invariance; no reverse implication is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Read all five proof steps and exact Goursat, Morera and Liouville Statements. Identity-pair edges coincide. Translated strip copies agree on seams and preserve the global bound. For any triangle crossing a single seam, polygon subdivision and inward translation give zero integrals by Goursat; uniform continuity on compact contour neighborhoods passes to the seam, with internal edges cancelling. Morera proves seam holomorphy, hence entire bounded extension; Liouville gives constancy and evaluation at zero proves invariance. Arbitrary B, positive b, scalar/zero observables and degenerate dynamics are covered. No inference from stationarity to KMS or from mathematics to empirical relaxation."
+      }
+    },
+    "thm-qsm-finite-kms-gibbs-characterization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. ",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative nor",
+          "uses": [
+            "2.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-kms-strip-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-finite-gibbs-kms",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite-dimensional complex Hilbert space and let $H=H^*$ be a Hamiltonian on $\\mathcal H$ with energy unit J; let $\\hbar>0$ have unit J s. For real $t$ measured in seconds, $U(t)=e^{-itH/\\hbar}$ is unitary and $U(t+s)=U(t)U(s)$. For a trace-one density $\\rho$ on $\\mathcal H$, the Schrödinger state $U(t)\\rho U(t)^*$ and the Heisenberg observable $\\alpha_t(A)=U(t)^*AU(t)$ have the same trace expectation. Fix $k_B>0$ in J/K for the entropy convention; then the von Neumann entropy is unchanged. If $d=\\dim\\mathcal H\\geq1$, $\\beta>0$ has unit J$^{-1}$, and $\\sigma_\\beta=e^{-\\beta H}/Z_\\beta$ with $Z_\\beta=\\operatorname{Tr}e^{-\\beta H}$, then it is stationary and satisfies the finite Gibbs KMS strip identity\n$\nF_{A,B}(t+i\\beta\\hbar)=\\operatorname{Tr}(\\sigma_\\beta\\alpha_t(B)A),\\qquad\nF_{A,B}(z)=\\operatorname{Tr}(\\sigma_\\beta A\\alpha_z(B)),\n$\nwhere $\\alpha_z(B)=e^{izH/\\hbar}Be^{-izH/\\hbar}$, with complexified time $z$ measured in seconds. The function is entire and bounded on $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$ seconds. No infinite-volume KMS existence or approach to equilibrium follows.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [A1]–[A2], choose an orthonormal basis $u_1,\\dots,u_D$ with $Hu_i=E_i u_i$ and $E_i\\in\\mathbb R$; [A2] puts the finite matrix algebra in the C$^*$-dynamical setting required by [[def-qsm-kms-state]]. Let $E_{ij}$ be the matrix unit that maps $u_j$ to $u_i$ and all other basis vectors to zero. Direct multiplication gives $E_{ab}E_{cd}=\\delta_{bc}E_{ad}$, and the exponential action gives $\\alpha_z^H(E_{ij})=e^{iz(E_i-E_j)/\\hbar}E_{ij}$ for $z\\in\\mathbb C$. This formula is used only for finite matrices, where the exponentials and scalar entries are entire.",
+          "inputs": [
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $i\\ne j$ and apply [F1] to $A=E_{jj}$, $B=E_{ij}$. Since $E_{jj}E_{ij}=0$, the lower boundary of its KMS function is identically zero. By [F2] this KMS function vanishes on the whole strip. Its upper edge at $t=0$ is $\\omega(E_{ij}E_{jj})=\\omega(E_{ij})$, so $\\omega(E_{ij})=0$ for every off-diagonal matrix unit.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For arbitrary $i,j$, set $\\Delta=E_i-E_j$ and use [F1] with $A=E_{ji}$, $B=E_{ij}$. The lower edge is $e^{it\\Delta/\\hbar}\\omega(E_{jj})$. The candidate $g(z)=e^{iz\\Delta/\\hbar}\\omega(E_{jj})$ is entire and bounded on $0\\le\\operatorname{Im}z\\le\\beta\\hbar$, since $|e^{i(t+iy)\\Delta/\\hbar}|=e^{-y\\Delta/\\hbar}$ and $y$ ranges over a compact interval. It has the same lower boundary as the KMS function, so [F2] identifies them. At the upper edge and $t=0$, the KMS identity is therefore $\\omega(E_{ii})=e^{-\\beta(E_i-E_j)}\\omega(E_{jj})$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The ratios in step 2.2 show that $e^{\\beta E_i}\\omega(E_{ii})$ is a constant $c$ independent of $i$. Since $\\sum_iE_{ii}=I$ and $\\omega(I)=1$, $1=c\\sum_i e^{-\\beta E_i}$; the sum is positive and finite, so $c=Z^{-1}$ where $Z=\\operatorname{Tr}(e^{-\\beta H})>0$. Thus $\\omega(E_{ii})=e^{-\\beta E_i}/Z$. This also covers $D=1$ and degenerate eigenvalues.",
+          "inputs": [
+            "given",
+            "step 2.2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every $X\\in\\mathcal B(\\mathcal H)$ has a matrix-unit expansion $X=\\sum_{i,j}X_{ij}E_{ij}$. By linearity, step 2.1, and step 3.1, $\\omega(X)=\\sum_iX_{ii}e^{-\\beta E_i}/Z=Z^{-1}\\operatorname{Tr}(e^{-\\beta H}X)$. Therefore every finite KMS state is the Gibbs trace state.",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Conversely, [F3] supplies the entire bounded finite Gibbs correlation with the stated lower and upper edges, which is exactly [F1]'s finite-matrix KMS condition; [A2] ensures that this KMS definition applies to $\\mathcal B(\\mathcal H)$. The normalized Gibbs trace state is therefore KMS, proving the reverse implication.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes a nonzero Hilbert space and D>=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For H=0, step 2.2 gives equal diagonal weights and step 3.1 normalizes them to 1/D; the Gibbs density is I/D."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly covers D=1, where the sole diagonal weight is 1 and there are no off-diagonal units."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 handle equal-energy matrix units; equal-energy diagonal weights agree and off-diagonal coefficients still vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 evaluate the lower and upper strip edges with b=beta*hbar>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses a finite orthonormal eigenbasis; no arbitrary-index choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 prove KMS implies the Gibbs trace state."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 proves the Gibbs state is KMS."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "D=1",
+          "result": "With one eigenvalue E, Z=e^{-beta E}; step 3.1 gives omega(E11)=1, the unique state and Gibbs state.",
+          "steps": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "case": "H=0",
+          "result": "For D>=1 all E_i=0; steps 2.1–3.1 establish zero off-diagonals, equal diagonal weights 1/D, and the density I/D.",
+          "steps": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "case": "two-level transition",
+          "result": "For E0=0 and E1=epsilon>0, p1/p0=e^{-beta epsilon}; step 2.2 places this factor on the upper physical-time edge.",
+          "steps": [
+            "2.2"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Read all six proof paragraphs and exact finite spectral, C*-state, Gibbs and strip-uniqueness interfaces. In an H-eigenbasis E_jj E_ij=0 for i!=j eliminates every off-diagonal expectation even for degenerate energies. Pair E_ji,E_ij gives exp(-beta(E_i-E_j)) diagonal ratios through a bounded entire candidate; positivity and finiteness of the partition sum normalize them without dividing by an unknown state weight. Dimension one and all-equal/zero energies are included; dimension zero and beta=0 are excluded. Converse uses the exact finite Gibbs bounded-strip identity, and finite exponential conjugation is strongly continuous. The separate batch-36 supremum-citation finding is reviewed below and remains an owner referral; the consumer explicitly assumes the spectral-calculus clause A1, so this review validates its conditional deduction, not an unconditional certification of that outside supplier."
+      }
+    },
+    "thm-qsm-infinite-spin-kms-existence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positi",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-spin-state-compactness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the countable union of finite regions and the finite-dimensional ",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure us",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-lo",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[de",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its fi",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-gibbs-strip-limit",
+          "source_section": "Statement",
+          "quote": "Let $\\Gamma=\\mathbb Z^d$, $d\\ge1$, with finite on-site spin dimension $q\\ge1$, local matrix algebras $\\mathcal A_\\Lambda",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-kms-strip-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-weierstrass-convergence-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let each $f_n:\\Omega\\to\\mathbb C$ be holomorphic, and suppose $f_n\\to f$ locally",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qsm-finite-gibbs-kms",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite-dimensional complex Hilbert space and let $H=H^*$ be a Hamiltonian on $\\mathcal H$ with energy unit J; let $\\hbar>0$ have unit J s. For real $t$ measured in seconds, $U(t)=e^{-itH/\\hbar}$ is unitary and $U(t+s)=U(t)U(s)$. For a trace-one density $\\rho$ on $\\mathcal H$, the Schrödinger state $U(t)\\rho U(t)^*$ and the Heisenberg observable $\\alpha_t(A)=U(t)^*AU(t)$ have the same trace expectation. Fix $k_B>0$ in J/K for the entropy convention; then the von Neumann entropy is unchanged. If $d=\\dim\\mathcal H\\geq1$, $\\beta>0$ has unit J$^{-1}$, and $\\sigma_\\beta=e^{-\\beta H}/Z_\\beta$ with $Z_\\beta=\\operatorname{Tr}e^{-\\beta H}$, then it is stationary and satisfies the finite Gibbs KMS strip identity\n$\nF_{A,B}(t+i\\beta\\hbar)=\\operatorname{Tr}(\\sigma_\\beta\\alpha_t(B)A),\\qquad\nF_{A,B}(z)=\\operatorname{Tr}(\\sigma_\\beta A\\alpha_z(B)),\n$\nwhere $\\alpha_z(B)=e^{izH/\\hbar}Be^{-izH/\\hbar}$, with complexified time $z$ measured in seconds. The function is entire and bounded on $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$ seconds. No infinite-volume KMS existence or approach to equilibrium follows.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument. ",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The local algebra $\\mathcal A_{\\mathrm{loc}}$ is norm dense in $\\mathcal A$ by [F2]. Fix arbitrary $A,B\\in\\mathcal A$. Choose sequences $A_j,B_j\\in\\mathcal A_{\\mathrm{loc}}$ with $A_j\\to A$ and $B_j\\to B$ in norm. They are bounded sequences, so set $M_A:=\\sup_j\\|A_j\\|<\\infty$ and $M_B:=\\sup_j\\|B_j\\|<\\infty$.",
+          "inputs": [
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For each $j$, [F4] gives a bounded continuous strip function $F_j$ holomorphic in $S_b^\\circ$, $b=\\beta\\hbar$, with lower and upper boundaries $\\omega(A_j\\alpha_t(B_j))$ and $\\omega(\\alpha_t(B_j)A_j)$; the finite-volume Gibbs boundary input used by [F4] is the exact identity in [F7]. On both boundaries, the state norm and the isometry of $\\alpha_t$ from [A2]–[F3] give modulus at most $\\|A_j\\|\\|B_j\\|$. Since $F_j$ is already bounded by [F4], applying [F5] to $F_j$ gives $|F_j(z)|\\le\\|A_j\\|\\|B_j\\|\\le M_A M_B$ throughout $S_b$. For $j,k$, each boundary difference is bounded uniformly in real $t$ by $\\eta_{jk}:=\\|A_j-A_k\\|M_B+M_A\\|B_j-B_k\\|$, because $\\|\\omega\\|=1$ by [A2] and each $\\alpha_t$ is isometric by [F3]. Applying the three-lines estimate of [F5] to the bounded function $F_j-F_k$ gives $\\sup_{z\\in S_b}|F_j(z)-F_k(z)|\\le\\eta_{jk}$. Since $(A_j)$ and $(B_j)$ are norm-Cauchy, $\\eta_{jk}\\to0$ as $j,k\\to\\infty$. Thus $(F_j)$ is uniformly Cauchy on the whole closed strip.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The uniform limit $F_{A,B}:=\\lim_jF_j$ exists on $S_b$ because $\\mathbb C$ is complete. It is bounded by $M_AM_B$ and continuous on $S_b$ as a uniform limit of bounded continuous functions. The convergence is locally uniform in the open strip, so [F6] makes $F_{A,B}$ holomorphic on $S_b^\\circ$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For fixed real $t$, the lower boundaries converge to $\\omega(A\\alpha_t(B))$: indeed, $|\\omega(A_j\\alpha_t(B_j))-\\omega(A\\alpha_t(B))|\\le\\|A_j-A\\|\\,\\|B_j\\|+\\|A\\|\\,\\|B_j-B\\|$, using $\\|\\omega\\|=1$ and isometry of $\\alpha_t$. The right-hand side tends to zero. The same calculation with the order reversed shows the upper boundaries converge to $\\omega(\\alpha_t(B)A)$. Since $F_j\\to F_{A,B}$ uniformly on $S_b$, its two edge values are therefore the required KMS boundary values.",
+          "inputs": [
+            "A2",
+            "F3",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Steps 3.1 and 4.1 show that for every $A,B\\in\\mathcal A$ the bounded continuous function $F_{A,B}$ is holomorphic inside and has the two boundaries in [[def-qsm-kms-state]]. Thus $\\omega$ is a $\\beta$-KMS state for $\\alpha$ in physical time. Existence of at least one such subsequential $\\omega$ is supplied conditionally by [F4].",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 applies [F4] to all A,B; the local supplier embeds empty-region scalar observables before its local-pair argument."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement includes zero interaction; Step 5.1 applies the general local-pair limit [F4] and yields KMS in this case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows q=1 and d=1; Step 5.1 uses the local-pair limit [F4] before the norm-density extension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement imposes no nondegenerate finite-volume spectrum; Step 2.1 uses the general finite Gibbs strip identity [F7]."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 establish the two strip boundaries for every real t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the pointwise subsequence supplied by [F4] under its stated Countable Choice assumption; no full Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement proves existence of KMS subsequential limits, not a converse characterization of all KMS states."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "No reverse implication or uniqueness statement is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-41",
+        "notes": "Read all five proof steps with exact local-limit, completion, state norm, finite Gibbs, isometric dynamics, three-lines and Weierstrass interfaces. Countable Choice licenses norm approximation sequences; each local-pair function is already bounded. The two edge differences are at most eta_jk, so three-lines gives a uniform Cauchy sequence on the whole closed strip, not merely pointwise convergence. Completeness gives a bounded continuous limit, Weierstrass gives interior holomorphy and norm estimates identify both edges. The pointwise state limit exists by the local-limit supplier under the retained finite-matrix hypotheses. Arbitrary convergent subsequences, zero observables, q=1, zero interactions and empty supports are covered; no uniqueness or empirical relaxation assertion follows. Outside spectral supplier citation remains an owner referral, with conditional premises retained."
+      }
+    },
+    "ex-qsm-kms-two-level-gibbs-boundary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative nor",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-finite-gibbs-kms",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a finite-dimensional complex Hilbert space and let $H=H^*$ be a Hamiltonian on $\\mathcal H$ with energy unit J; let $\\hbar>0$ have unit J s. For real $t$ measured in seconds, $U(t)=e^{-itH/\\hbar}$ is unitary and $U(t+s)=U(t)U(s)$. For a trace-one density $\\rho$ on $\\mathcal H$, the Schrödinger state $U(t)\\rho U(t)^*$ and the Heisenberg observable $\\alpha_t(A)=U(t)^*AU(t)$ have the same trace expectation. Fix $k_B>0$ in J/K for the entropy convention; then the von Neumann entropy is unchanged. If $d=\\dim\\mathcal H\\geq1$, $\\beta>0$ has unit J$^{-1}$, and $\\sigma_\\beta=e^{-\\beta H}/Z_\\beta$ with $Z_\\beta=\\operatorname{Tr}e^{-\\beta H}$, then it is stationary and satisfies the finite Gibbs KMS strip identity\n$\nF_{A,B}(t+i\\beta\\hbar)=\\operatorname{Tr}(\\sigma_\\beta\\alpha_t(B)A),\\qquad\nF_{A,B}(z)=\\operatorname{Tr}(\\sigma_\\beta A\\alpha_z(B)),\n$\nwhere $\\alpha_z(B)=e^{izH/\\hbar}Be^{-izH/\\hbar}$, with complexified time $z$ measured in seconds. The function is entire and bounded on $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$ seconds. No infinite-volume KMS existence or approach to equilibrium follows.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-finite-kms-gibbs-characterization",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonzero finite-dimensional complex Hilbert space, let $H=H^*$ on $\\mathcal H$ with energy units J,",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $H|0\\rangle=0$ and $H|1\\rangle=\\varepsilon|1\\rangle$, direct conjugation gives $\\alpha_z(S_+)=e^{i\\varepsilon z/\\hbar}S_+$ and $\\alpha_z(S_-)=e^{-i\\varepsilon z/\\hbar}S_-$. The Gibbs density is $p_0|0\\rangle\\langle0|+p_1|1\\rangle\\langle1|$ because its two diagonal exponential entries are $1$ and $e^{-\\beta\\varepsilon}$.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Using $S_-S_+=|0\\rangle\\langle0|$ and $S_+S_-=|1\\rangle\\langle1|$, the lower correlation is $\\operatorname{Tr}(\\rho S_-\\alpha_t(S_+))=p_0e^{i\\varepsilon t/\\hbar}$. At the upper edge, $p_0e^{i\\varepsilon(t+i\\beta\\hbar)/\\hbar}=p_0e^{i\\varepsilon t/\\hbar}e^{-\\beta\\varepsilon}=p_1e^{i\\varepsilon t/\\hbar}=\\operatorname{Tr}(\\rho\\alpha_t(S_+)S_-)$. The exponents are dimensionless because $\\varepsilon t/\\hbar$ and $\\beta\\varepsilon$ are dimensionless.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F3], the same finite Gibbs state satisfies the KMS strip identity for every pair in $\\mathcal B(\\mathbb C^2)$, not only for $S_-,S_+$. The calculation in step 2.1 verifies that the chosen convention places $e^{-\\beta\\varepsilon}$ at the upper boundary for this transition.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes H=C^2 and has no empty-dimensional case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The model assumption epsilon>0 excludes a zero gap; beta is also strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes a two-dimensional Hilbert space."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two energy levels are nondegenerate because epsilon>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the upper edge at t+i beta hbar and compares it with the reversed-order expectation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses an explicit two-vector basis and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 verify one transition, and Step 3.1 applies the finite theorem for all matrix pairs; no equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 establishes the finite Gibbs KMS example; no reverse implication is part of the item."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two-level transition",
+          "result": "p0 e^{i epsilon(t+i beta hbar)/hbar}=p1 e^{i epsilon t/hbar}; both exponents are dimensionless.",
+          "steps": [
+            "2.1"
+          ]
+        }
+      ]
+    }
+  }
+}

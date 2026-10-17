@@ -1,0 +1,578 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "60",
+  "level": 4,
+  "scope": [
+    "post-tgr-linearized-material-model",
+    "pthm-tgr-perfect-causal-linear-response",
+    "pthm-tgr-bulk-causal-linear-response",
+    "ex-tgr-perfect-neutral-modes"
+  ],
+  "contracts": {
+    "post-tgr-linearized-material-model": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate defines the prescribed Minkowski background, reference rest state, first variations, adiabatic sector, dimensionless EOS response, both exact effective systems, data classes, and SI units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope limits the claims to the two constant-coefficient adiabatic branches and expressly excludes nonlinear error or lifespan claims, curved-background evolution, universal material applicability, and measurement."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Three independent full-text treatments were retrieved and inspected: Gourgoulhon §§4.2–5.4, Romatschke §§3.1 and 4.1, and Rischke §§1.4.2–1.5 and 2.5.4. Exact items, locators, limitations, dispositions, and fetch stamps are in batch-60.coverage.json."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The first-variation systems are labeled adopted effective physical models. No nonlinear derivation, existence theorem for parent constitutive equations, observation, or experimental confirmation is claimed."
+        }
+      }
+    },
+    "pthm-tgr-perfect-causal-linear-response": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgr-linearized-material-model",
+          "source_section": "Postulate",
+          "quote": "Adopt the following two constant-coefficient effective systems on the stated background:\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0$$\n\nfor the perfect branch,",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-perfect-linear-causality",
+          "source_section": "Statement",
+          "quote": "Fix $c>0$ and take $M=\\mathbb R^4$ with global length coordinates $(x^0,x^1,x^2,x^3)=(ct,\\mathbf x)$, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, and future causal cone $\\{V\\in\\mathbb R^4:V^0\\geq0,\\ \\eta_{ab}V^aV^b\\leq0\\}$. For $V^0>0$, membership in this cone is exactly the coordinate-speed condition $|d\\mathbf x/dt|\\leq c$; its boundary speed is the reference speed $c$. The constant rest observer is $\\bar u=(1,0,0,0)$.\n\nLet $X\\subset(0,\\infty)\\times\\mathbb R$ be open, let $e\\in C^2(X;\\mathbb R)$, and fix $(v_0,\\sigma_{p0})\\in X$. Define $n_0:=1/v_0$, $\\epsilon_0:=n_0e(v_0,\\sigma_{p0})$, $p_0:=-e_v(v_0,\\sigma_{p0})$, $T_0:=e_{\\sigma_p}(v_0,\\sigma_{p0})$, and $h_0:=\\epsilon_0+p_0$. Assume $n_0,T_0,h_0,e_{vv}>0$, with $e_{vv}$ evaluated at fixed $\\sigma_p$. A first variation is defined by a family of state maps $(v_\\lambda,\\sigma_{p,\\lambda}):M\\to X$ and fields $u_\\lambda:M\\to\\mathbb R^4$, jointly smooth in dimensionless $\\lambda$ near $0$ and in $x$, with the displayed reference state and $\\bar u$ as their constant $\\lambda=0$ values and with $\\eta(u_\\lambda,u_\\lambda)=-1$, $u_\\lambda^0>0$. For any such field $f_\\lambda$, write $\\delta f:=\\left.\\partial_\\lambda f_\\lambda\\right|_{\\lambda=0}$; put $r:=\\delta\\epsilon$, $w:=(\\delta u^1,\\delta u^2,\\delta u^3)$, and impose the adiabatic first-variation condition $\\delta\\sigma_p=0$. The linearized equations mean the first variations at $\\lambda=0$ of the no-force balances $\\partial_aT_\\lambda^{ab}=0$ and $\\partial_aJ_\\lambda^a=0$, with $n_\\lambda=1/v_\\lambda$, $\\epsilon_\\lambda=n_\\lambda e(v_\\lambda,\\sigma_{p,\\lambda})$, $p_\\lambda=-e_v(v_\\lambda,\\sigma_{p,\\lambda})$, $\\Delta_\\lambda^{ab}=\\eta^{ab}+u_\\lambda^au_\\lambda^b$, $T_\\lambda^{ab}=\\epsilon_\\lambda u_\\lambda^au_\\lambda^b+p_\\lambda\\Delta_\\lambda^{ab}$, and $J_\\lambda^a=n_\\lambda u_\\lambda^a$; no member with $\\lambda\\ne0$ is required to solve the nonlinear balances. Differentiating $\\eta(u_\\lambda,u_\\lambda)=-1$ gives $\\delta u^0=0$.\n\nThe local Gibbs identity of [[lem-tgr-local-gibbs-euler]] gives\n\n$$a_s:=\\left(\\frac{\\partial p}{\\partial\\epsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}(v_0,\\sigma_{p0})}{n_0h_0},$$\n\nand assume additionally $a_s\\le1$. In the adopted units, $c$ has units $\\mathrm{m\\,s^{-1}}$, $r$ and $h_0$ have units Pa, and $w$ and $a_s$ are dimensionless. Since $x^0=ct$ and $\\bar u=\\partial_{x^0}$, the first variations of the no-force perfect-fluid projection equations of [[lem-tgr-perfect-fluid-projection]] are\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0.$$\n\nFor initial data $U_0=(r_0,w_0)$ whose real components belong componentwise to $\\mathcal S(\\mathbb R^3)$ as defined by [[def-schwartz-space-and-its-seminorms]], or for smooth periodic data on $\\mathbb T_L^3$ with $L>0$, these equations have the unique global smooth solution supplied by [[lem-tgr-constant-linear-energy-causality]]. The positive quadratic energy density $\\mathcal E=\\tfrac12[(a_s/h_0)r^2+h_0|w|^2]$ has flux $c a_s r w$, and the solution is contractive in the corresponding weighted $L^2$ and Sobolev norms. Its characteristic speeds are $0$ and $\\pm c\\sqrt{a_s}$; for positive $a_s$, this propagation cone lies inside the Minkowski reference cone exactly when $a_s\\le1$. These are statements about this frozen linear system only; they do not assert a nonlinear or curved-spacetime evolution theorem.\n\nFor the formal coefficient comparison in [A3], if the same linear equations are assigned $a_s>1$, their plane-wave speed is $c\\sqrt{a_s}>c$. If they are assigned $a_s<0$, smooth periodic modes grow as $e^{c\\sqrt{-a_s}|k|t}$ at arbitrarily large wave numbers. The case $a_s=0$ is degenerate: the displayed positive energy matrix is no longer positive definite, so the stability proof above does not apply.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-perfect-effective-system",
+          "step": "1.1",
+          "claim": "Identify the adopted perfect branch with the exact constant-coefficient system of the mathematical supplier and verify the causal-branch hypotheses.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-perfect-linear-evolution",
+          "step": "2.1",
+          "claim": "Apply the supplier theorem to obtain the positive energy identity, global smooth evolution, contraction, characteristic speeds, and finite propagation for the matched model.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "A2"
+          ]
+        },
+        {
+          "id": "compare-perfect-speed-with-reference-cone",
+          "step": "3.1",
+          "claim": "Use 0<a_s<=1 and c>0 to compare the exact propagation speed with the Minkowski reference speed, including equality at a_s=1.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra",
+            "A2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Perfect-branch dimensions",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ],
+          "expected": "r_t and c h0 div(w) both have units Pa/s; w_t and (c a_s/h0) grad(r) both have units s^-1; energy density has units Pa and flux has units Pa m/s."
+        },
+        {
+          "name": "Causal endpoint",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ],
+          "expected": "At the allowed boundary a_s=1, c sqrt(a_s)=c exactly; for 0<a_s<1 the speed is strictly below c."
+        },
+        {
+          "name": "Choice-strength boundary",
+          "inputs": [
+            "A2",
+            "F2"
+          ],
+          "expected": "The result is conditional on AC_omega as used in the mathematical supplier proof; no stronger choice principle is silently introduced."
+        },
+        {
+          "name": "Zero response boundary",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "At a_s=0 the positive energy weight a_s/h0 vanishes, so the strict positive-energy theorem does not extend to that boundary."
+        },
+        {
+          "name": "Supercausal response boundary",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "For a_s>1 the exact speed c sqrt(a_s) exceeds c; this parameter case is outside the causal theorem."
+        },
+        {
+          "name": "Negative response boundary",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "For a_s<0 the positive-energy hypothesis fails and the mathematical supplier reports arbitrarily high-frequency growing periodic modes."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgr-linearized-material-model",
+          "carrier": "items/post-tgr-linearized-material-model.md",
+          "status": "Current batch-60 adopted postulate; local carrier is complete.",
+          "source_section": "Postulate",
+          "exact_statement": "Adopt the following two constant-coefficient effective systems on the stated background:\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0$$\n\nfor the perfect branch,",
+          "relevant_hypotheses_and_conventions": "Prescribed Minkowski metric diag(-1,1,1,1), x0=ct, first variations in the adiabatic sector, c>0, h0>0, and a_s defined from the selected local state.",
+          "supplier_proof_status": "Physical assumption; no Proof section is appropriate and no nonlinear existence is asserted.",
+          "consumer_use": "Step 1.1 identifies this exact perfect system with the mathematical linear system."
+        },
+        {
+          "supplier": "lem-tgr-perfect-linear-causality",
+          "carrier": "items/lem-tgr-perfect-linear-causality.md",
+          "status": "Draft mathematical supplier; exact positive-response, constant perfect-system and data-class interface checked against this consumer. Its native current record was observed ready-current.",
+          "source_section": "Statement",
+          "exact_statement": "Let $c>0$ be a fixed speed parameter, use Minkowski coordinates $x^0=ct$ with signature $(-,+,+,+)$, and consider a smooth perfect-fluid state at a uniform rest point. The local state has energy per marker $e\\in C^2(X)$ on an open domain $X\\subset(0,\\infty)\\times\\mathbb R$, with specific volume $v=1/n$ and specific entropy $\\sigma_p$; $e_{vv}$ denotes the second derivative at fixed $\\sigma_p$. At the rest point assume $n_0>0$, $T_0>0$, $h_0=\\epsilon_0+p_0>0$, and $e_{vv}>0$. Let\n\n$$a_s:=\\left(\\frac{\\partial p}{\\partial\\epsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}}{n_0h_0},$$\n\nas in [[lem-tgr-local-gibbs-euler]], and assume additionally $a_s\\le1$. For adiabatic perturbations $\\delta\\sigma_p=0$, write $r=\\delta\\epsilon$ and $w=\\delta u_{\\rm spatial}\\in\\mathbb R^3$. The linearized equations obtained from the no-force perfect stress and particle balances of [[lem-tgr-perfect-fluid-projection]] are\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0.$$\n\nFor Schwartz data on $\\mathbb R^3$ or smooth periodic data on $\\mathbb T_L^3$, these equations have the unique global smooth solution supplied by [[lem-tgr-constant-linear-energy-causality]]. The positive quadratic energy density $\\mathcal E=\\tfrac12[(a_s/h_0)r^2+h_0|w|^2]$ has flux $c a_s r w$, and the solution is contractive in the corresponding weighted $L^2$ and Sobolev norms. Its characteristic speeds are $0$ and $\\pm c\\sqrt{a_s}$; for positive $a_s$, this cone lies inside the reference cone of speed $c$ exactly when $a_s\\le1$. These are statements about this frozen linear system only; they do not assert a nonlinear or curved-spacetime evolution theorem.\n\nFor the formal coefficient comparison in [A3], if the same linear equations are assigned $a_s>1$, their plane-wave speed is $c\\sqrt{a_s}>c$. If they are assigned $a_s<0$, smooth periodic modes grow as $e^{c\\sqrt{-a_s}|k|t}$ at arbitrarily large wave numbers. The case $a_s=0$ is degenerate: the displayed positive energy matrix is no longer positive definite, so the stability proof above does not apply.",
+          "relevant_hypotheses_and_conventions": "Uniform Minkowski rest state; n0,T0,h0,e_vv>0; a_s=e_vv/(n0 h0) in (0,1]; adiabatic perturbations; negative-sign 2pi Fourier transform; Schwartz R3 or smooth periodic data.; AC_omega.",
+          "supplier_proof_status": "The complete scoped mathematical argument was reviewed in the retained TGR supplier pass. This is authoring readiness and exact-use confirmation, not independent proof acceptance or publication.",
+          "consumer_use": "Steps 2.1 and 3.1 apply its exact conditional output and speed bound."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published mathematical definition; the imported carrier is read-only.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "This is the exact countable-choice assumption AC_omega; it is not the full Axiom of Choice.",
+          "supplier_proof_status": "Published definition of an adopted axiom, not a derived theorem.",
+          "consumer_use": "Fact [A2] (or [A1] on the example) carries the sole choice assumption required by the mathematical linear-evolution result."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over the specified nonempty function spaces; it asserts no result for an empty data domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the homogeneous linear supplier; the zero initial datum gives U=0 by direct substitution, with zero energy and norms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly includes a_s=1, where the propagation speed equals c."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 require a_s>0 for the positive definite energy; the supplier states that a_s=0 degenerates the symmetrizer."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the causal endpoint a_s=1 with equality at speed c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the supplier under the exact AC_omega assumption recorded in A2; no stronger choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim, so no forward equivalence direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim, so no reverse equivalence direction is asserted."
+        }
+      ]
+    },
+    "pthm-tgr-bulk-causal-linear-response": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgr-linearized-material-model",
+          "source_section": "Postulate",
+          "quote": "$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0$$\n\nfor the perfect branch, and\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c}{h_0}\\nabla(a_s r+\\widehat\\Pi)=0,\\qquad \\tau_0\\widehat\\Pi_t+\\widehat\\Pi=-\\zeta_0c\\operatorname{div}w$$\n\nfor the bulk-only branch.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-bulk-linear-causality",
+          "source_section": "Statement",
+          "quote": "Use $\\mathcal M=\\mathbb R^4$ with global length coordinates $(x^0,x^1,x^2,x^3)=(ct,\\mathbf x)$, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, future direction $\\partial_{x^0}$, and reference causal cone $\\{V:V^0\\geq0,\\ \\eta_{ab}V^aV^b\\leq0\\}$, whose boundary speed in $(t,\\mathbf x)$ coordinates is $c$. Let $X\\subset(0,\\infty)\\times\\mathbb R$ be open, $e\\in C^2(X;\\mathbb R)$, and $(v_0,\\sigma_{p0})\\in X$. Define $n_0:=1/v_0$, $\\epsilon_0:=n_0e(v_0,\\sigma_{p0})$, $p_0:=-e_v(v_0,\\sigma_{p0})$, $T_0:=e_{\\sigma_p}(v_0,\\sigma_{p0})$, and $h_0:=\\epsilon_0+p_0$. The background fields are this constant state, $u_0=\\partial_{x^0}=(1,0,0,0)$, and $\\Pi_0=0$. Assume $n_0,T_0,h_0,e_{vv},c>0$, with $e_{vv}$ evaluated at fixed $\\sigma_p$.\n\nA first variation is defined by a family $(v_\\lambda,\\sigma_{p,\\lambda},u_\\lambda,\\Pi_\\lambda)$ jointly smooth in dimensionless $\\lambda$ near $0$ and in $x$, through the displayed background, with $u_\\lambda$ future unit, meaning $\\eta(u_\\lambda,u_\\lambda)=-1$ and $u_\\lambda^0>0$. For any such field $f_\\lambda$, set $\\delta f:=\\left.\\partial_\\lambda f_\\lambda\\right|_{\\lambda=0}$. At each $\\lambda$, set $n_\\lambda=1/v_\\lambda$, $\\epsilon_\\lambda=n_\\lambda e(v_\\lambda,\\sigma_{p,\\lambda})$, $p_\\lambda=-e_v(v_\\lambda,\\sigma_{p,\\lambda})$, $T_\\lambda=e_{\\sigma_p}(v_\\lambda,\\sigma_{p,\\lambda})$, $\\Delta_\\lambda^{ab}=\\eta^{ab}+u_\\lambda^au_\\lambda^b$, $D_\\lambda=u_\\lambda^a\\partial_a$, and $\\theta_\\lambda=\\partial_a u_\\lambda^a$. The bulk stress and current are $T_\\lambda^{ab}=\\epsilon_\\lambda u_\\lambda^au_\\lambda^b+(p_\\lambda+\\Pi_\\lambda)\\Delta_\\lambda^{ab}$ and $J_\\lambda^a=n_\\lambda u_\\lambda^a$, and the corrected law of [[lem-tgr-bulk-relaxation-entropy]] is $\\beta D_\\lambda\\Pi_\\lambda+\\Pi_\\lambda/(\\zeta c)=-\\theta_\\lambda-(T_\\lambda\\Pi_\\lambda/2)\\partial_a(\\beta u_\\lambda^a/T_\\lambda)$, where $\\beta=\\tau/\\zeta$. The linearized equations mean the first variations at $\\lambda=0$ of $\\partial_aT_\\lambda^{ab}=0$, $\\partial_aJ_\\lambda^a=0$, and this corrected law, set equal to zero; no member with $\\lambda\\ne0$ is required to solve the nonlinear system. Impose $\\delta\\sigma_p=0$, put $r:=\\delta\\epsilon$, $w:=(\\delta u^1,\\delta u^2,\\delta u^3)$, and denote $\\delta\\Pi$ by $\\Pi$ in the linearized system below. Take constant coefficients $\\zeta,\\tau>0$.\n\n$$a_s:=\\left(\\frac{\\partial p}{\\partial\\epsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}}{n_0h_0}>0$$\n\nas supplied by [[lem-tgr-local-gibbs-euler]]. The resulting linearized system is\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c}{h_0}\\nabla(a_s r+\\Pi)=0,\\qquad \\tau\\Pi_t+\\Pi=-\\zeta c\\operatorname{div}w.$$\n\nIts positive quadratic energy density\n\n$$\\mathcal E_{\\rm bulk}=\\frac12\\left[\\frac{a_s}{h_0}r^2+h_0|w|^2+\\frac{\\tau}{\\zeta}\\Pi^2\\right]$$\n\nsatisfies $\\partial_t\\mathcal E_{\\rm bulk}+\\operatorname{div}[c(a_s r+\\Pi)w]=-\\Pi^2/\\zeta$. The normal characteristic speeds are $0$ and $\\pm v_{\\rm bulk}$, where\n\n$$v_{\\rm bulk}=c\\sqrt{a_s+\\frac{\\zeta}{\\tau h_0}}.$$\n\nBy [[lem-tgr-constant-linear-energy-causality]], initial data $U_0\\in\\mathcal S(\\mathbb R^3;\\mathbb R^5)$ with the componentwise real convention of [[def-schwartz-space-and-its-seminorms]], or smooth periodic data on $\\mathbb T_L^3$ with $L>0$, have unique global smooth solutions, contractive in the corresponding energy and Sobolev norms, with finite propagation at $v_{\\rm bulk}$. The branch is inside the Minkowski reference cone exactly when $a_s+\\zeta/(\\tau h_0)\\le1$. Constant density and transverse velocity modes can persist, so contraction does not mean every mode decays. No nonlinear or variable-coefficient existence theorem is claimed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "identify-bulk-effective-system",
+          "step": "1.1",
+          "claim": "Identify the adopted bulk branch and its first-order pressure perturbation with the exact constant-coefficient system of the mathematical supplier.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-bulk-linear-evolution",
+          "step": "2.1",
+          "claim": "Apply the supplier theorem to obtain the positive quadratic energy and dissipation identity, global smooth evolution, contraction, characteristic speeds, and finite propagation.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "A2"
+          ]
+        },
+        {
+          "id": "compare-bulk-speed-with-reference-cone",
+          "step": "3.1",
+          "claim": "Take square roots of the positive causal-parameter inequality and multiply by c>0 to bound the propagation speed, including equality at the threshold.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1",
+            "algebra",
+            "A2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Bulk-branch dimensions",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ],
+          "expected": "Each term in the energy equation has units Pa/s; each term of the bulk relaxation system has matching units; zeta0/(tau0 h0) is dimensionless."
+        },
+        {
+          "name": "Causal threshold",
+          "inputs": [
+            "A1",
+            "F2",
+            "algebra"
+          ],
+          "expected": "At a_s+zeta0/(tau0 h0)=1 the speed is c; below the threshold it is less than c."
+        },
+        {
+          "name": "Choice-strength boundary",
+          "inputs": [
+            "A2",
+            "F2"
+          ],
+          "expected": "The result is conditional on AC_omega as used in the mathematical supplier proof; no stronger choice principle is silently introduced."
+        },
+        {
+          "name": "Above-threshold boundary",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "If a_s+zeta0/(tau0 h0)>1, the exact supplier speed exceeds c; that case is outside the causal theorem."
+        },
+        {
+          "name": "Nonpositive response boundary",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "a_s<=0 is excluded because the positive quadratic energy requires a_s>0."
+        },
+        {
+          "name": "Nonpositive transport boundary",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 2.1"
+          ],
+          "expected": "zeta0<=0 or tau0<=0 is excluded; positive damping and the energy weight tau0/zeta0 require both coefficients strictly positive."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-tgr-linearized-material-model",
+          "carrier": "items/post-tgr-linearized-material-model.md",
+          "status": "Current batch-60 adopted postulate; local carrier is complete.",
+          "source_section": "Postulate",
+          "exact_statement": "$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0$$\n\nfor the perfect branch, and\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c}{h_0}\\nabla(a_s r+\\widehat\\Pi)=0,\\qquad \\tau_0\\widehat\\Pi_t+\\widehat\\Pi=-\\zeta_0c\\operatorname{div}w$$\n\nfor the bulk-only branch.",
+          "relevant_hypotheses_and_conventions": "Same prescribed Minkowski and SI conventions as the perfect branch; first-order bulk perturbation about Pi0=0; positive constant reference zeta0 and tau0.",
+          "supplier_proof_status": "Physical assumption; no nonlinear solution claim is made.",
+          "consumer_use": "Step 1.1 identifies this exact bulk system with the mathematical linear system."
+        },
+        {
+          "supplier": "lem-tgr-bulk-linear-causality",
+          "carrier": "items/lem-tgr-bulk-linear-causality.md",
+          "status": "Draft mathematical supplier; exact zero-reference-bulk-pressure, positive-response, constant bulk-system and data-class interface checked against this consumer. Its native current record was observed ready-current.",
+          "source_section": "Statement",
+          "exact_statement": "Use the uniform Minkowski rest equilibrium of the bulk-only model of [[lem-tgr-bulk-relaxation-entropy]], with constant background state $(n_0,\\epsilon_0,p_0,T_0,\\sigma_{p0})$, velocity $u_0=(1,0,0,0)$, and bulk pressure $\\Pi_0=0$. Set $h_0:=\\epsilon_0+p_0$ and assume $n_0,T_0,h_0,e_{vv},c>0$. The local state has specific energy $e\\in C^2(X)$ on an open domain, with specific volume $v=1/n$ and specific entropy $\\sigma_p$; $e_{vv}$ is evaluated at fixed $\\sigma_p$. Take constant coefficients $\\zeta,\\tau>0$ and adiabatic perturbations $\\delta\\sigma_p=0$. Let\n\n$$a_s:=\\left(\\frac{\\partial p}{\\partial\\epsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}}{n_0h_0}>0$$\n\nas supplied by [[lem-tgr-local-gibbs-euler]]. Write $r=\\delta\\epsilon$, $w=\\delta u_{\\rm spatial}$, and denote the first-order perturbation $\\delta\\Pi$ by $\\Pi$ in the linearized equations. The system is\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c}{h_0}\\nabla(a_s r+\\Pi)=0,\\qquad \\tau\\Pi_t+\\Pi=-\\zeta c\\operatorname{div}w.$$\n\nIts positive quadratic energy density\n\n$$\\mathcal E_{\\rm bulk}=\\frac12\\left[\\frac{a_s}{h_0}r^2+h_0|w|^2+\\frac{\\tau}{\\zeta}\\Pi^2\\right]$$\n\nsatisfies $\\partial_t\\mathcal E_{\\rm bulk}+\\operatorname{div}[c(a_s r+\\Pi)w]=-\\Pi^2/\\zeta$. The normal characteristic speeds are $0$ and $\\pm v_{\\rm bulk}$, where\n\n$$v_{\\rm bulk}=c\\sqrt{a_s+\\frac{\\zeta}{\\tau h_0}}.$$\n\nBy [[lem-tgr-constant-linear-energy-causality]], Schwartz data on $\\mathbb R^3$ and smooth periodic data on $\\mathbb T_L^3$ have unique global smooth solutions, contractive in the corresponding energy and Sobolev norms, with finite propagation at $v_{\\rm bulk}$. The branch is inside the reference speed $c$ exactly when $a_s+\\zeta/(\\tau h_0)\\le1$. Constant density and transverse velocity modes can persist, so contraction does not mean every mode decays. No nonlinear or variable-coefficient existence theorem is claimed.",
+          "relevant_hypotheses_and_conventions": "Uniform Minkowski rest state; h0,T0,c,zeta,tau>0; a_s=e_vv/(n0 h0)>0; adiabatic perturbation; corrected bulk supplier interface; AC_omega; negative-sign 2pi Fourier convention.",
+          "supplier_proof_status": "The complete scoped mathematical argument was reviewed in the retained TGR supplier pass. This is authoring readiness and exact-use confirmation, not independent proof acceptance or publication.",
+          "consumer_use": "Steps 2.1 and 3.1 apply its exact conditional energy, speed, and propagation conclusions."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published mathematical definition; the imported carrier is read-only.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "This is the exact countable-choice assumption AC_omega; it is not the full Axiom of Choice.",
+          "supplier_proof_status": "Published definition of an adopted axiom, not a derived theorem.",
+          "consumer_use": "Fact [A2] (or [A1] on the example) carries the sole choice assumption required by the mathematical linear-evolution result."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement quantifies over the specified nonempty function spaces; it asserts no result for an empty data domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the homogeneous linear supplier; the zero initial datum gives U=0 by direct substitution, with zero energy and norms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly includes a_s+zeta_0/(tau_0 h_0)=1, where the propagation speed equals c."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 require h0,a_s,zeta0,tau0>0 for the positive definite symmetrizer and damping; zero values are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the causal threshold with equality at speed c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the supplier under the exact AC_omega assumption recorded in A2; no stronger choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim, so no forward equivalence direction is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement makes no biconditional claim, so no reverse equivalence direction is asserted."
+        }
+      ]
+    },
+    "ex-tgr-perfect-neutral-modes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-tgr-perfect-causal-linear-response",
+          "source_section": "Statement",
+          "quote": "Assume the adiabatic perfect-material linear branch of [[post-tgr-linearized-material-model]] on its prescribed Minkowski background, with $c>0$, $h_0>0$, and $0<a_s\\le1$, and assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. For every initial datum $U_0=(r_0,w_0)\\in\\mathcal S(\\mathbb R^3;\\mathbb R^4)$ or $U_0\\in C^\\infty(\\mathbb T_L^3;\\mathbb R^4)$ with $L>0$, the Cauchy problem $U(0,\\cdot)=U_0$ for the system\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-nonzero-wave-mode",
+          "step": "1.1",
+          "claim": "Differentiate the displayed sinusoidal fields and substitute them into both adopted equations, using omega squared equals c squared a_s times |k| squared.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "verify-zero-wave-neutral-mode",
+          "step": "2.1",
+          "claim": "Treat k=0 separately and check directly that constant density and velocity perturbations solve both equations.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra",
+            "A1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Nonzero wave-vector substitution",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ],
+          "expected": "For k nonzero, the first equation cancels its +/- A omega sin(phi) terms; the second reduces to omega^2-c^2 a_s |k|^2=0."
+        },
+        {
+          "name": "Zero wave vector",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ],
+          "expected": "For k=0 use constant r0,w0 directly; all derivatives vanish and the mode amplitudes remain unchanged for all t."
+        },
+        {
+          "name": "Wave units",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ],
+          "expected": "k has units m^-1, omega has units s^-1, A and r0 have units Pa, w and w0 are dimensionless, and the displayed velocity perturbation has dimensionless units."
+        },
+        {
+          "name": "Zero amplitude",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ],
+          "expected": "At A=0 the nonzero-wave formula gives the zero solution; the separate non-decay claim concerns nonzero amplitudes."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "pthm-tgr-perfect-causal-linear-response",
+          "carrier": "items/pthm-tgr-perfect-causal-linear-response.md",
+          "status": "Draft physical theorem; exact adopted perfect-system equations and positive causal parameters checked against this example. The conditional proof uses the stated model and mathematical premises.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the adiabatic perfect-material linear branch of [[post-tgr-linearized-material-model]] on its prescribed Minkowski background, with $c>0$, $h_0>0$, and $0<a_s\\le1$, and assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. For every initial datum $U_0=(r_0,w_0)\\in\\mathcal S(\\mathbb R^3;\\mathbb R^4)$ or $U_0\\in C^\\infty(\\mathbb T_L^3;\\mathbb R^4)$ with $L>0$, the Cauchy problem $U(0,\\cdot)=U_0$ for the system\n\n$$r_t+c h_0\\operatorname{div}w=0,\\qquad w_t+\\frac{c a_s}{h_0}\\nabla r=0$$",
+          "relevant_hypotheses_and_conventions": "Exact same adiabatic perfect branch, prescribed Minkowski coordinates and SI speed parameter.",
+          "supplier_proof_status": "Conditional on the exact current mathematical draft interface identified in the theorem facts.",
+          "consumer_use": "Provides the model and parameter scope; the example proves the displayed modes by direct substitution."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published mathematical definition; the imported carrier is read-only.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "This is the exact countable-choice assumption AC_omega; it is not the full Axiom of Choice.",
+          "supplier_proof_status": "Published definition of an adopted axiom, not a derived theorem.",
+          "consumer_use": "Fact [A1] carries the countable-choice assumption needed for the cited theorem’s global contraction context."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example quantifies over nonzero wave vectors and arbitrary constants on the stated domains; no empty domain case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats k=0 separately and verifies the constant fields directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to every real amplitude A, including A=1 in the stated pressure units."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The nonzero-wave formula has denominator |k|^2; step 2.1 handles the degenerate k=0 case without that formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fields are defined for all real t and the example asserts no finite time endpoint or boundary-value result."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the theorem’s contraction context under the exact AC_omega assumption in A1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves no biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves no reverse implication or classification."
+        }
+      ]
+    }
+  }
+}

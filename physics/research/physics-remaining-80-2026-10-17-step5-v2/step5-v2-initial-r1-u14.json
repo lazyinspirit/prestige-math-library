@@ -1,0 +1,123 @@
+{
+  "run": "physics-remaining-80-2026-10-17",
+  "phase": "initial",
+  "round": 1,
+  "unit": "14",
+  "input_sha256": "34da341a1db0c97e52a6a7416782ee6b88786a786457765413eee2fcfc4a3d68",
+  "decisions": [
+    {
+      "id": "ex-emg-electric-stress",
+      "model": "gpt-6-luna",
+      "context_sha256": "5a9b564bede33b920c3aeb1094bab1dedb86315ec516278b7765fa7390bebfb3",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The allowed zero amplitude makes all components vanish, so the unconditional anisotropy assertion is false. Positivity of epsilon0 and mu0 makes the two distinct diagonal values unequal exactly at nonzero amplitude; the repair retains all real amplitudes and proves both cases.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-emg-electric-stress",
+      "disposition": "repaired",
+      "post_sha256": "e06049f7aefff32f49f0f62ce66cb7aaf704a913c4b74caf7f6870de2e6fdc44",
+      "review_context_sha256": "51a24d69097c207791bd20c8ccf2f0461bfbea930d7729f253b3a9615ba5544d",
+      "reason": "Checked the current stress supplier component formulas, their signature and SI conventions, both substitutions and Lorentz traces. With epsilon0,mu0 positive, equality of the spatial diagonal entries is equivalent to the relevant amplitude being zero; the repaired verification proves this and retains the zero cases. This is review of my repair, not an independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-emg-electric-stress",
+      "status": "fixed",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "reason": "The rejected Example asserted anisotropy at zero amplitude, contradicting its own displayed zero spatial matrix. The Example now defines isotropy and states the exact nonzero criterion; Verification steps 1.1 and 2.1 prove both directions, including the isotropic zero tensors.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "Assigned item repaired and reviewed; all focused checks passed; no unresolved mathematical obligations.",
+    "claim": "In the specified positively oriented orthonormal observer tetrad with signature (-,+,+,+), the two SI component formulas and vanishing Lorentz trace hold for all real amplitudes. Spatial isotropy means T^{ij}=q delta_{ij}; electric/magnetic anisotropy holds exactly for E0/B0 nonzero.",
+    "dependencies": [
+      "lem-emg-maxwell-observer-stress",
+      "def-countable-choice"
+    ],
+    "sources_inspected": [
+      "items/lem-emg-maxwell-observer-stress.md: Statement (a)-(c), Facts and Proof 1.1-2.2",
+      "items/def-countable-choice.md: Definition",
+      "items/def-emg-lorentzian-forms.md: Definition and local tetrad construction",
+      "items/lem-emg-observer-field-decomposition.md: Statement and complete pointwise proof"
+    ],
+    "source_retrieval": "No external source consulted or retrieval claimed; the decision is elementary finite matrix algebra from the inspected local suppliers.",
+    "remaining": [],
+    "completed": [
+      {
+        "id": "ex-emg-electric-stress",
+        "sections_changed": [
+          "Example",
+          "Facts & Assumptions: F1",
+          "Verification: 1.1 and 2.1"
+        ],
+        "claim_change": "The former unconditional anisotropy sentence is replaced by a definition of isotropy and anisotropy exactly at nonzero amplitude; both zero cases remain in the example.",
+        "statement_definition_changed": false,
+        "physical_scope_changed": false,
+        "empirical_qualifications_changed": false,
+        "example_claim_changed": true,
+        "verification_judge": "No verification.judge record was present; none was added."
+      }
+    ],
+    "consumer_checks": [
+      {
+        "supplier": "ex-emg-electric-stress",
+        "consumer": "emg-g03-examples",
+        "path": "library/einstein-maxwell-models/emg-g03-examples.md",
+        "affected_use": "Page examples list places ex-emg-electric-stress; prose says this is a worked pointwise calculation for pure electric and pure magnetic observer fields, conditional on the draft SI lemma.",
+        "invalidated_claim": "None: the page makes no unconditional anisotropy assertion and no nonzero-amplitude assumption.",
+        "minimality": "The unchanged page accurately describes the retained formulas, conditional supplier status and absence of empirical or global claims. No page repair is necessary.",
+        "disposition": "unaffected"
+      }
+    ],
+    "consumer_inventory": "A scoped search of items/ and library/ for the canonical ID found no item dependency/reference consumers or aliases; only the assigned item and its home-page placement. Therefore downstream is empty.",
+    "published_ledger": "No potentially defective published consumer or supplier use was found in this scoped review; no published-ledger change is proposed.",
+    "checks": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-emg-electric-stress.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 2 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/ex-emg-electric-stress.md",
+        "exit_code": 0,
+        "output": "PASS items/ex-emg-electric-stress.md (direct); 1 checked, 0 failing \u2014 all clean"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-emg-electric-stress.md library/einstein-maxwell-models/emg-g03-examples.md",
+        "exit_code": 0,
+        "output": "OK \u2014 2 files; math parses under real KaTeX and frontmatter under renderer YAML parser."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-remaining-80-2026-10-17-batch-14.proof-contracts.json --strict --items ex-emg-electric-stress",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      }
+    ],
+    "operational_history": [
+      "First strict contract run rejected an unanchored zero-boundary evidence record; the record was anchored to steps 1.1 and 2.1 and the rerun passed.",
+      "The contract synchronization initially captured only the first source line of each proof paragraph. The guarded update was corrected to copy each complete paragraph, and the final strict scoped check passed.",
+      "A shared-lock retry returned busy (exit 2); its guarded script did not run and no separate shared write followed."
+    ]
+  },
+  "supporting_evidence": {
+    "research/physics-remaining-80-2026-10-17-batch-14-step5-context.json": "c11cd9e5989d2613f708f65eb1ea48a7b45fc2f4dda504886d05fc549b7d6abc"
+  }
+}

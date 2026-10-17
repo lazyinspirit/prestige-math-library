@@ -1,0 +1,975 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-tgr-coordinate-boxes-are-compact-jordan",
+    "lem-tgr-c1-current-density-divergence",
+    "def-tgr-spacelike-current-slab",
+    "lem-tgr-normal-flux-coordinate-density",
+    "thm-tgr-finite-current-production-balance",
+    "cex-tgr-open-region-entropy-export"
+  ],
+  "contracts": {
+    "lem-tgr-coordinate-boxes-are-compact-jordan": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multidimensional-rectangle-and-volume",
+          "source_section": "Definition",
+          "quote": "Fix a natural number $m\\ge1$. For $a,b\\in\\mathbb R^m$ with $a_j\\le b_j$ for $j<m$, define\n$$[a,b]:=\\{x\\in\\mathbb R^m:a_j\\le x_j\\le b_j\\ (j<m)\\},\\qquad \\operatorname{vol}[a,b]:=\\prod_{j<m}(b_j-a_j).$$\nThe product is the recursively defined finite product of [[def-finite-sum]]. The rectangle is **nondegenerate** when every $a_j<b_j$, and it is a **cube** when all side lengths are equal.\n\nEvery factor is nonnegative, so volume is nonnegative. For a coordinate index $r<m$, cutting at $c\\in[a_r,b_r]$ gives two rectangles whose volumes add to the original, by distributivity in that factor and [[lem-finite-sum-laws]]. Under the standard identification $\\mathbb R^1\\cong\\mathbb R$ ([[lem-metrics-on-rn]], [[def-p-norms-on-rn]]), this is the interval $[a_0,b_0]$ and its length.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-jordan-inner-and-outer-content",
+          "source_section": "Definition",
+          "quote": "For bounded $E\\subseteq\\mathbb R^m$, in the metric sense of [[def-metric-bounded-diameter]], its **Jordan outer content** is the infimum of $\\sum_{r<q}\\operatorname{vol}(R_r)$ over finite axis-parallel rectangle covers of $E$. Its **Jordan inner content** is the supremum of the same sums over finite families of rectangles contained in $E$ whose interiors are pairwise disjoint.\n\nMetric boundedness always supplies a nondegenerate bounding rectangle. For\nnonempty $E$, choose $x_0\\in\\mathbb R^m$ and $r>0$ with\n$E\\subseteq B(x_0,r)$. Since\n$|x_j-(x_0)_j|\\le d_\\infty(x,x_0)\\le d_2(x,x_0)<r$ for every coordinate\n([[lem-metrics-on-rn]], [[lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric]] clause 3, [[def-metric-ball]]), the nondegenerate box\n$\\prod_{j<m}[(x_0)_j-r,(x_0)_j+r]$ contains $E$. The empty set lies in\nany fixed nondegenerate rectangle.\n\nThus the outer family is nonempty and the same bounding rectangle bounds the\ninner sums; the empty family gives inner sum $0$. Refining all listed\nendpoints into one grid and splitting the nested finite sums shows every\ninscribed sum is at most every covering sum\n([[def-multidimensional-grid-partition]], [[lem-finite-sum-laws]]).\nCompleteness therefore supplies finite real extrema\n([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]],\n[[lem-sup-unique]]).\n\nThe set is **Jordan measurable** when the contents agree, and their common value is its **Jordan content**. The empty set and every degenerate rectangle have content $0$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-null-and-content-zero-in-rn",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$. A **closed cube** is a rectangle $\\prod_{j<m}[a_j,a_j+\\ell]$ with $\\ell\\ge0$; its volume is $\\ell^m$. A set $E\\subseteq\\mathbb R^m$ is **null** when, for every $\\varepsilon>0$, it is covered by a sequence of closed cubes whose nonnegative volume series converges with sum at most $\\varepsilon$. It has **content zero** when such a cover can be finite.\n\nThe series and finite sums are [[def-series]] and [[def-finite-sum]], and their nonnegative bounds use [[thm-nonnegative-series-bounded-partial-sums]] and [[lem-finite-sum-laws]]. Both properties pass to subsets. Padding a finite cover with degenerate zero-volume cubes proves that content zero implies null. This terminology defines only cover-nullity; it does not define a measure on arbitrary sets.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a compact Jordan measurable set $E\\subseteq\\mathbb R^m$ is Riemann integrable over $E$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-lebesgue-criterion-in-rn",
+          "source_section": "Statement",
+          "quote": "A bounded real function on a closed nondegenerate rectangle in $\\mathbb R^m$, $m\\ge1$, is Riemann integrable if and only if its discontinuity set is null.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The box $Q$ is closed and bounded because it is a finite product of closed bounded intervals; [F3] therefore makes $Q$ compact. Its boundary is the union of the $2m$ coordinate faces $F_{r,-}:=\\{x\\in Q:x_r=a_r\\}$ and $F_{r,+}:=\\{x\\in Q:x_r=b_r\\}$, since a point of $Q$ is interior exactly when all its coordinates lie strictly between the endpoints.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $C:=\\max(1,\\max_{1\\le r\\le m}\\prod_{j\\ne r}(b_j-a_j+1))$, with empty product $1$. Given $\\varepsilon>0$, choose $0<\\delta<\\min(1,\\varepsilon/(2mC))$. For each face $x_r=c$, where $c=a_r$ or $b_r$, cover every other interval by the $N_j:=\\lceil(b_j-a_j)/\\delta\\rceil$ intervals $[a_j+k\\delta,a_j+(k+1)\\delta]$, $0\\le k<N_j$, and use $[c,c+\\delta]$ in coordinate $r$. Their products are finitely many closed cubes of side $\\delta$ covering that face. By [F1], their total volume is $$\\delta^m\\prod_{j\\ne r}N_j\\le\\delta\\prod_{j\\ne r}(b_j-a_j+\\delta)\\le\\delta C.$$ For $m=1$ this is one interval of length $\\delta$ per endpoint. Joining the covers of all $2m$ faces gives total cube volume at most $2m\\delta C<\\varepsilon$. Hence $\\partial Q$ has content zero in the finite-cube sense of [F2], as well as zero Jordan outer content.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The box is bounded and has boundary of content zero by step 2.1, so [F4] makes $Q$ Jordan measurable. For any stated endpoint variant $R$, its boundary is contained in the same coordinate faces from step 1.1, hence has content zero by step 2.1; since $R$ is bounded, [F4] makes it Jordan measurable as well.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Let $f:Q\\to\\mathbb R$ be continuous. By [F5], $f$ is Riemann integrable on $Q$ and therefore bounded there. For any endpoint variant $R$, extend $f|_R$ by zero to $Q$. At every point outside $\\partial R$ this extension is either $f$ on a neighborhood in $R$ or zero on a neighborhood in $Q\\setminus \\overline R$; thus its discontinuities lie in $\\partial R$. The boundary has content zero by step 3.1, hence is null by [F2]. Then [F6] makes this zero extension integrable on $Q$, and [F7] gives the Riemann integrability of $f|_R$ over $R$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For $m\\ge2$, a closed coordinate face of $Q$ is a closed rectangle in $\\mathbb R^{m-1}$, so it is compact by [F3]. Applying steps 1.1–4.1 in dimension $m-1$ proves its Jordan measurability and the stated integrability of every endpoint variant on that face.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite explicit grid, empty product 1 when m=1, and 2m delta C<epsilon; no family of choices or limit interchange."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite explicit grid, empty product 1 when m=1, and 2m delta C<epsilon; no family of choices or limit interchange."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite explicit grid, empty product 1 when m=1, and 2m delta C<epsilon; no family of choices or limit interchange."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Every side length satisfies a_j<b_j; degenerate input boxes are outside the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement covers closed, open, and either half-open endpoint convention; steps 2.1 and 3.1 handle their boundary and zero-extension integrability."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a finite explicit grid, empty product 1 when m=1, and 2m delta C<epsilon; no family of choices or limit interchange."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the boundary-zero-to-Jordan direction of the Jordan boundary criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional and does not use the reverse direction of the Jordan boundary criterion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For each face, product ceil(length/delta) cubes of side delta; sum volume <= delta C.",
+          "result": "All 2m faces have a finite closed-cube cover with volume <=2m delta C<epsilon, also for m=1.",
+          "verifies": "Steps 2.1 and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Confirmed refuter:50:1 nonfatal: rectangles did not explicitly supply the cited closed-cube convention. Replaced thin rectangles by explicit finite delta-cube grids; checked count bound, m=1 empty product, all 2m faces, epsilon, endpoint variants and continuity of zero extension off boundary. Statements unchanged. Read exact eight suppliers and Lebl 10.5.1 complete proof; compactness/relative face dimension m-1>=1 are valid. No AC used."
+      }
+    },
+    "lem-tgr-c1-current-density-divergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gr-metric-divergence-and-density-formula",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with\nmetric-selected connection $\\nabla$\n([[def-gr-smooth-lorentzian-objects]],\n[[def-christoffel-symbols-of-an-affine-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), let $(U,x)$ be a\nsmooth chart, and define the local **metric density** by\n$w:=\\sqrt{|\\det(g_{ab})|}$ on $U$, using the matrix of metric components\nin this chart. This definition requires no orientation or volume form. Write\n$g^{ab}$ for the inverse-metric components\n([[def-gr-inverse-metric-and-musical-isomorphisms]]) and\n$\\Gamma^{a}{}_{bc}$ for the Christoffel symbols of $\\nabla$ in the chart.\n\n**(a) Derivative of the density.** At every point of $U$,\n\n$$\\partial_a w=\\tfrac12\\,w\\,g^{bc}\\,\\partial_a g_{bc}.$$\n\n**(b) Trace of the Christoffel symbols.** At every point of $U$,\n\n$$\\Gamma^{b}{}_{ba}=w^{-1}\\partial_a w .$$\n\n**(c) Divergence formula.** For every smooth vector field $J$ on $M$, at every\npoint of $U$,\n\n$$\\nabla_aJ^a=\\partial_aJ^a+\\Gamma^{a}{}_{ab}J^b=w^{-1}\\partial_a\\bigl(w\\,J^a\\bigr),$$\n\nwhere $\\nabla_aJ^a=g^{ab}\\nabla_bJ_a$ is the divergence of $J$ contracted with\nthe metric and $J^a$ are the components of $J$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]]).\n\nThe identity of (c) is a chart formula for a chart-independent scalar: the\nright-hand side is independent of the chart, as the left-hand side is.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi–Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], $w$ is smooth and positive and the Christoffel trace obeys $\\Gamma^a{}_{ab}=w^{-1}\\partial_bw$ after renaming the dummy index. The identity follows from the metric-density derivative and its trace formula, both valid for the given smooth metric.",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $J$ is $C^1$, [F2] gives $\\nabla_aJ^a=\\partial_aJ^a+\\Gamma^a{}_{ab}J^b$. Multiplying by $w$ and substituting step 1.1 yields $$w\\nabla_aJ^a=w\\partial_aJ^a+(\\partial_aw)J^a=\\partial_a(wJ^a),$$ by the product rule for $C^1$ functions. Dividing by $w>0$ proves the stated identity.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is local on a supplied smooth chart U; no empty-domain case is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to J=0 and gives zero on both sides of the density identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is a finite-index product-rule calculation and remains valid when only one component J^a is nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The metric is Lorentzian and nondegenerate, so w is strictly positive throughout U."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "U is an open chart domain and the identity is pointwise; no endpoint extension is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 record only AC_omega inherited from the smooth tangent-bundle background; the proof adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Checked every step, smooth metric and trace clauses (a)-(b), smooth connection coefficients and C1 coordinate extension, positive w, repeated-index contraction and inherited AC_omega. Product rule needs only C1 J. Reader findings 1-2 concern missing published audit metadata, recorded nonfatal for this exact use; publication maintenance remains open. No empirical premise or new choice."
+      }
+    },
+    "def-tgr-spacelike-current-slab": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition takes t0<t1 and three strictly ordered spatial pairs; their midpoints give a point of Ω and K. Every side-face rectangle retains the time factor and two spatial factors, so its finite Jordan integral is over a nonempty product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: J=0 is allowed and gives Q_J(t)=0 and Phi_J(B)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a current with only one nonzero coordinate component is permitted; the slice and face integrals remain defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition requires positive spatial block, g^{00}<0, and strictly positive interval lengths."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: both temporal endpoints are included in the compact closure and the face integrals use their one-sided values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC_omega is stated explicitly and no further choices are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition introduces the slab and flux quantities and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition introduces the slab and flux quantities and asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For eta=diag(-1,1,1,1) and J=(J^0,0,0,0), alpha=1, n=(1,0,0,0), and w=sqrt(det h)=1.",
+          "result": "The defined normal slice charge reduces to integral_Omega J^0, agreeing with the positive chart orientation.",
+          "verifies": "Definition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Read complete Definition and exact six prerequisites. Nondegenerate finite factors and compact closure inside chart guarantee bounded integrands and Jordan domains; C1 current exists on open neighborhood. h>0, g00 inverse<0 and explicit future orientation yield n_a=-alpha delta_a0, unit timelike and n0=1/alpha>0. Contraction signs combine with outward boundary signs to give upper-minus-lower wJi for each face. No side unit normal or null-face restriction; no units/entropy/empirical assertion. AC_omega explicitly inherited."
+      }
+    },
+    "lem-tgr-normal-flux-coordinate-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Use a time-oriented smooth Lorentzian four-manifold $(M,g,N)$ of signature\n$(-,+,+,+)$ and an independent orientation, with the exact meanings in\n[[def-gr-smooth-lorentzian-objects]] and\n[[def-oriented-smooth-manifold-and-oriented-chart]]. The tangent-bundle smooth\nstructure follows the stated Countable Choice convention\n[[def-countable-choice]]. Let $(U,x)$ be a positively oriented chart with\n$x=(x^0,x^1,x^2,x^3)$ and $x(U)=V\\subseteq\\mathbb R^4$. Coordinates here are\nmathematical real coordinates; no physical units are assigned.\n\nChoose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad \\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad K=[t_0,t_1]\\times\\Omega,\\qquad \\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad \\alpha:=(-g^{00})^{-1/2},\\qquad n^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3 -J^1dx^0\\wedge dx^2\\wedge dx^3 +J^2dx^0\\wedge dx^1\\wedge dx^3 -J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\wedge dx^3$; the\npullback of $\\omega_J$ to $\\Sigma_t$ is $wJ^0dx^1\\wedge dx^2\\wedge dx^3$.\nDefine its signed **slice charge** (the normal flux through the spacelike\nslice) by\n$$Q_J(t):=\\int_\\Omega -g(J,n)\\,dV_h.$$\nEvery displayed integral is the Riemann integral over the indicated bounded\nJordan set, as defined in\n[[def-riemann-integral-over-a-jordan-set]]. The current and metric extend\ncontinuously to the compact coordinate closure, and\n[[lem-tgr-coordinate-boxes-are-compact-jordan]] proves that the open spatial\nand mixed-endpoint rectangles are Jordan measurable and that these continuous\ndensities are Riemann integrable there.\n\nLet $B$ denote the union of the six side faces of $K$, with outward boundary\norientation; each face is integrated over its relative interior, a bounded\nJordan rectangle whose closure is compact. The upper $x^i$ face has induced orientation\n$(-1)^i dx^0\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^3$; the lower face\nhas its opposite. Thus the $i$th current-three-form pullback integrates to\nthe upper-minus-lower $wJ^i$ coordinate expression below. Define the\n**net outward side flux** $\\Phi_J(B)$ as the sum over\nthe three spatial coordinate directions of upper-face flux minus lower-face\nflux. More explicitly, for $i\\in\\{1,2,3\\}$ let $\\Omega_i$ be the product\nJordan rectangle in the three coordinates other than $x^i$, with endpoint\nconvention $x^0\\in[t_0,t_1]$ and $x^j\\in(a_j,b_j)$ for $j\\ne i$; then\n$$\\Phi_J(B):=\\sum_{i=1}^3\\int_{\\Omega_i} \\left. wJ^i\\right|_{x^i=b_i}-\\left. wJ^i\\right|_{x^i=a_i}\\,d^3x_{\\widehat i}.$$\nThe integrals use the standard increasing-coordinate order on each face. For\na $C^1$ current the three-form coefficients are continuous, so the displayed\nrectangular integrals exist. This extends the smooth-current flux convention\nof [[def-gr-metric-volume-form-and-current-flux]] clause (b) to the present\nfinite coordinate faces. No unit normal to a side face is part of this\ndefinition; in particular the flux form remains defined if a side face is\nnull. The term “charge” names this mathematical flux integral only; it does\nnot assert a physical conservation law or an entropy interpretation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Use a time-oriented smooth Lorentzian four-manifold $(M,g,N)$ of signature\n$(-,+,+,+)$ and an independent orientation, with the exact meanings in\n[[def-gr-smooth-lorentzian-objects]] and\n[[def-oriented-smooth-manifold-and-oriented-chart]]. The tangent-bundle smooth\nstructure follows the stated Countable Choice convention\n[[def-countable-choice]]. Let $(U,x)$ be a positively oriented chart with\n$x=(x^0,x^1,x^2,x^3)$ and $x(U)=V\\subseteq\\mathbb R^4$. Coordinates here are\nmathematical real coordinates; no physical units are assigned.\n\nChoose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad \\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad K=[t_0,t_1]\\times\\Omega,\\qquad \\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad \\alpha:=(-g^{00})^{-1/2},\\qquad n^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3 -J^1dx^0\\wedge dx^2\\wedge dx^3 +J^2dx^0\\wedge dx^1\\wedge dx^3 -J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\wedge dx^3$; the\npullback of $\\omega_J$ to $\\Sigma_t$ is $wJ^0dx^1\\wedge dx^2\\wedge dx^3$.\nDefine its signed **slice charge** (the normal flux through the spacelike\nslice) by\n$$Q_J(t):=\\int_\\Omega -g(J,n)\\,dV_h.$$\nEvery displayed integral is the Riemann integral over the indicated bounded\nJordan set, as defined in\n[[def-riemann-integral-over-a-jordan-set]]. The current and metric extend\ncontinuously to the compact coordinate closure, and\n[[lem-tgr-coordinate-boxes-are-compact-jordan]] proves that the open spatial\nand mixed-endpoint rectangles are Jordan measurable and that these continuous\ndensities are Riemann integrable there.\n\nLet $B$ denote the union of the six side faces of $K$, with outward boundary\norientation; each face is integrated over its relative interior, a bounded\nJordan rectangle whose closure is compact. The upper $x^i$ face has induced orientation\n$(-1)^i dx^0\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^3$; the lower face\nhas its opposite. Thus the $i$th current-three-form pullback integrates to\nthe upper-minus-lower $wJ^i$ coordinate expression below. Define the\n**net outward side flux** $\\Phi_J(B)$ as the sum over\nthe three spatial coordinate directions of upper-face flux minus lower-face\nflux. More explicitly, for $i\\in\\{1,2,3\\}$ let $\\Omega_i$ be the product\nJordan rectangle in the three coordinates other than $x^i$, with endpoint\nconvention $x^0\\in[t_0,t_1]$ and $x^j\\in(a_j,b_j)$ for $j\\ne i$; then\n$$\\Phi_J(B):=\\sum_{i=1}^3\\int_{\\Omega_i} \\left. wJ^i\\right|_{x^i=b_i}-\\left. wJ^i\\right|_{x^i=a_i}\\,d^3x_{\\widehat i}.$$\nThe integrals use the standard increasing-coordinate order on each face. For\na $C^1$ current the three-form coefficients are continuous, so the displayed\nrectangular integrals exist. This extends the smooth-current flux convention\nof [[def-gr-metric-volume-form-and-current-flux]] clause (b) to the present\nfinite coordinate faces. No unit normal to a side face is part of this\ndefinition; in particular the flux form remains defined if a side face is\nnull. The term “charge” names this mathematical flux integral only; it does\nnot assert a physical conservation law or an entropy interpretation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In the coordinate basis write the metric matrix as $$G=\\begin{pmatrix}g_{00}&b^{\\mathsf T}\\\\ b&h\\end{pmatrix},$$ where $b_i=g_{i0}$. Since $h$ is positive definite it is invertible. Subtract $b^{\\mathsf T}h^{-1}$ times the lower block rows from the first row; this determinant-preserving operation gives $$\\det G=\\det(h)\\,S,\\qquad S:=g_{00}-b^{\\mathsf T}h^{-1}b.$$ To identify the inverse entry, solve $Gz=e_0$: the lower equations give $z_{\\rm sp}=-h^{-1}bz_0$, and the first equation then gives $Sz_0=1$. Therefore $g^{00}=z_0=S^{-1}$, so $S<0$ by [F1].",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "From $S=(g^{00})^{-1}<0$ and the definition of $\\alpha$, $\\alpha=\\sqrt{-S}$. As $\\det h>0$, step 1.1 yields $$w=\\sqrt{|\\det G|}=\\sqrt{\\det h}\\sqrt{-S} =\\alpha\\sqrt{\\det h}.$$",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Lowering the index of $n$ gives $n_a=-\\alpha\\delta_a^0$ by [F1], hence $-g(J,n)=-J^an_a=\\alpha J^0$. Substitute step 2.1 into the defining integrand of $Q_J(t)$ to obtain $$-g(J,n)\\sqrt{\\det h}=\\alpha J^0\\sqrt{\\det h}=wJ^0.$$ Integrating over $\\Omega$ proves the statement.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied slab has t0<t1 and each spatial interval has positive length."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 remain valid for the zero current and give zero charge density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 is linear in J and in particular holds when just J^0 or one spatial component is present."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Positive definiteness of h and g^{00}<0 make h invertible and S<0; degenerate slices are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The integrand identity in step 3.1 holds pointwise on the closed slice closure, including its endpoint faces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and A1 state the inherited AC_omega convention; the finite matrix calculation uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is an equality, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "For a diagonal metric diag(-N^2,h_1,h_2,h_3) with N>0 and h_i>0, S=-N^2, alpha=N, and w=N sqrt(h_1 h_2 h_3).",
+          "result": "Step 3.1 gives -g(J,n)sqrt(det h)=wJ^0 with the stated future-normal sign.",
+          "verifies": "Steps 1.1, 2.1 and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-50",
+        "notes": "Checked the Schur complement sign from g^{00}<0, the block determinant absolute value for Lorentz signature, the future-normal sign, and the induced spatial volume factor."
+      }
+    },
+    "thm-tgr-finite-current-production-balance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Use a time-oriented smooth Lorentzian four-manifold $(M,g,N)$ of signature\n$(-,+,+,+)$ and an independent orientation, with the exact meanings in\n[[def-gr-smooth-lorentzian-objects]] and\n[[def-oriented-smooth-manifold-and-oriented-chart]]. The tangent-bundle smooth\nstructure follows the stated Countable Choice convention\n[[def-countable-choice]]. Let $(U,x)$ be a positively oriented chart with\n$x=(x^0,x^1,x^2,x^3)$ and $x(U)=V\\subseteq\\mathbb R^4$. Coordinates here are\nmathematical real coordinates; no physical units are assigned.\n\nChoose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad \\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad K=[t_0,t_1]\\times\\Omega,\\qquad \\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad \\alpha:=(-g^{00})^{-1/2},\\qquad n^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3 -J^1dx^0\\wedge dx^2\\wedge dx^3 +J^2dx^0\\wedge dx^1\\wedge dx^3 -J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\wedge dx^3$; the\npullback of $\\omega_J$ to $\\Sigma_t$ is $wJ^0dx^1\\wedge dx^2\\wedge dx^3$.\nDefine its signed **slice charge** (the normal flux through the spacelike\nslice) by\n$$Q_J(t):=\\int_\\Omega -g(J,n)\\,dV_h.$$\nEvery displayed integral is the Riemann integral over the indicated bounded\nJordan set, as defined in\n[[def-riemann-integral-over-a-jordan-set]]. The current and metric extend\ncontinuously to the compact coordinate closure, and\n[[lem-tgr-coordinate-boxes-are-compact-jordan]] proves that the open spatial\nand mixed-endpoint rectangles are Jordan measurable and that these continuous\ndensities are Riemann integrable there.\n\nLet $B$ denote the union of the six side faces of $K$, with outward boundary\norientation; each face is integrated over its relative interior, a bounded\nJordan rectangle whose closure is compact. The upper $x^i$ face has induced orientation\n$(-1)^i dx^0\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^3$; the lower face\nhas its opposite. Thus the $i$th current-three-form pullback integrates to\nthe upper-minus-lower $wJ^i$ coordinate expression below. Define the\n**net outward side flux** $\\Phi_J(B)$ as the sum over\nthe three spatial coordinate directions of upper-face flux minus lower-face\nflux. More explicitly, for $i\\in\\{1,2,3\\}$ let $\\Omega_i$ be the product\nJordan rectangle in the three coordinates other than $x^i$, with endpoint\nconvention $x^0\\in[t_0,t_1]$ and $x^j\\in(a_j,b_j)$ for $j\\ne i$; then\n$$\\Phi_J(B):=\\sum_{i=1}^3\\int_{\\Omega_i} \\left. wJ^i\\right|_{x^i=b_i}-\\left. wJ^i\\right|_{x^i=a_i}\\,d^3x_{\\widehat i}.$$\nThe integrals use the standard increasing-coordinate order on each face. For\na $C^1$ current the three-form coefficients are continuous, so the displayed\nrectangular integrals exist. This extends the smooth-current flux convention\nof [[def-gr-metric-volume-form-and-current-flux]] clause (b) to the present\nfinite coordinate faces. No unit normal to a side face is part of this\ndefinition; in particular the flux form remains defined if a side face is\nnull. The term “charge” names this mathematical flux integral only; it does\nnot assert a physical conservation law or an entropy interpretation.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-normal-flux-coordinate-density",
+          "source_section": "Statement",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ convention and the spacelike slab data of\n[[def-tgr-spacelike-current-slab]]. For every slice $\\Sigma_t$ and every\n$C^1$ current $J$ in that definition, its normal flux charge is\n$$Q_J(t)=\\int_\\Omega wJ^0\\,d^3x,$$\nwhere $w=\\sqrt{|\\det(g_{ab})|}$ is the metric density in the supplied chart.",
+          "uses": [
+            "1.2",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tgr-c1-current-density-divergence",
+          "source_section": "Statement",
+          "quote": "Assume the Countable Choice convention $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]] used by the smooth tangent-bundle structure in\n[[def-gr-smooth-lorentzian-objects]]. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with its metric-selected\nconnection $\\nabla$, and let $(U,x)$ be a smooth chart. Write\n$w=\\sqrt{|\\det(g_{ab})|}$. Let $J$ be a $C^1$ vector field on $U$; the\nconnection derivative on such a field is defined by its usual chart formula\n$$\\nabla_bJ^a:=\\partial_bJ^a+\\Gamma^a{}_{cb}J^c,$$\nwhose coefficients are continuous. Then, throughout $U$,\n$$\\nabla_aJ^a=w^{-1}\\partial_a(wJ^a).$$\nThe right-hand side is the chart expression of the scalar divergence\n$\\nabla_aJ^a$; no higher regularity of $J$ than $C^1$ is required.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tgr-coordinate-boxes-are-compact-jordan",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ be an integer. For a canonical coordinate vector\n$x:\\{0,\\ldots,m-1\\}\\to\\mathbb R$, write $x_j:=x(j-1)$ for\n$1\\le j\\le m$. Accordingly, $\\prod_{j=1}^m I_j$ denotes\n$\\{x\\in\\mathbb R^m:x(j-1)\\in I_j\\text{ for }1\\le j\\le m\\}$;\nthis is only a relabelling of the coordinates in the cited suppliers. Let\n$$Q=\\prod_{j=1}^{m}[a_j,b_j]\\subseteq\\mathbb R^m, \\qquad a_j<b_j.$$\nThen $Q$ is compact and Jordan measurable, and its boundary has Jordan\ncontent zero. For any product $R=\\prod_{j=1}^m I_j$ where each $I_j$ is one\nof $[a_j,b_j]$, $(a_j,b_j)$, $[a_j,b_j)$ or $(a_j,b_j]$, the set $R$ is a\nbounded Jordan set with closure contained in $Q$. Every continuous\n$f:Q\\to\\mathbb R$ is Riemann integrable over $R$. When $m\\ge2$, each closed\ncoordinate face of $Q$ is compact and Jordan measurable in its own\n$(m-1)$-dimensional coordinate space; the same endpoint-variant and\nintegrability conclusions hold for products in that face.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jordan-fubini-by-sections",
+          "source_section": "Statement",
+          "quote": "Let $E\\subseteq\\mathbb R^{p+q}$ be a bounded Jordan set and let $g:E\\to\\mathbb R$ be Riemann integrable. Suppose that for all $x$ outside a content-zero set $N\\subseteq\\mathbb R^p$, the section $E_x$ is Jordan measurable and $g_x$ is integrable over it. Put $h(x)=\\int_{E_x}g_x$ there and assign arbitrary bounded values to $h$ on $N$, with empty-section integral equal to $0$. Then $h$ is integrable on any rectangle containing the projection of $E$, its integral is independent of that rectangle and of the values on $N$, and\n$$\\int_Eg=\\int h(x)\\,dx.$$\nThe symmetric assertion holds for the other coordinate block.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-riemann-integral-over-a-jordan-set",
+          "source_section": "Definition",
+          "quote": "Let $E\\subseteq\\mathbb R^m$ be bounded in the metric sense of\n[[def-metric-bounded-diameter]] and Jordan measurable, and let\n$f:E\\to\\mathbb R$ be bounded. Choose a nondegenerate rectangle\n$Q\\supseteq E$, whose existence follows from\n[[def-jordan-inner-and-outer-content]], and define the zero extension\n$$\\widetilde f_Q(x):=\\begin{cases}f(x),&x\\in E,\\\\0,&x\\in Q\\setminus E.\\end{cases}$$\nThe function $f$ is **Riemann integrable over $E$** when $\\widetilde f_Q$ is integrable over $Q$, and then\n$$\\int_Ef:=\\int_Q\\widetilde f_Q.$$\nIndependence of the bounding rectangle, for both integrability and value, is proved in [[lem-jordan-set-integral-well-defined]] and recorded as the definition's forward justification. For $f=1$, the zero extension is $1_E$, so [[thm-jordan-content-and-indicator-integrability]] gives $\\int_E1=\\operatorname{cont}(E)$.",
+          "uses": [
+            "3.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multidimensional-darboux-integral",
+          "source_section": "Definition",
+          "quote": "For a bounded function $f:Q\\to\\mathbb R$ on a nondegenerate rectangle\n$Q\\subseteq\\mathbb R^m$, define\n$$\\underline{\\int_Q}f:=\\sup_P L(f,P),\\qquad \\overline{\\int_Q}f:=\\inf_P U(f,P),$$\nover all grid partitions $P$ of $Q$. The grid family is nonempty, since the endpoints in each coordinate give a one-cell grid. Every lower sum is at most every upper sum by a common refinement and [[lem-multidimensional-refinement-inequalities]], so the two sets of sums are nonempty and bounded and the extrema exist ([[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]).\n\nThe function is **Riemann integrable over $Q$** when the two values agree.\nTheir unique common real is $\\int_Q f$. No integral is defined here for a\ndegenerate rectangle, because the grid definition requires every coordinate\ninterval to have distinct endpoints. This is the multidimensional Darboux\ndefinition; its agreement with the published one-dimensional definition is\nproved separately.",
+          "uses": [
+            "3.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-multidimensional-darboux-sums",
+          "source_section": "Definition",
+          "quote": "Let $f:Q\\to\\mathbb R$ be bounded on a nondegenerate rectangle and let $P$ be a grid. For each cell $Q_i$, put\n$$m_i:=\\inf f[Q_i],\\quad M_i:=\\sup f[Q_i],\\quad L(f,P):=\\sum_i m_i\\operatorname{vol}(Q_i),\\quad U(f,P):=\\sum_i M_i\\operatorname{vol}(Q_i).$$\nThe extrema exist as finite reals because each nonempty image is bounded ([[def-bounded-set]], [[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]), and the sums use the iterated convention of [[def-multidimensional-grid-partition]].\n\nSince $m_i\\le M_i$ and cell volumes are nonnegative, $L(f,P)\\le U(f,P)$. Moreover\n$$U(f,P)-L(f,P)=\\sum_i(M_i-m_i)\\operatorname{vol}(Q_i),$$\nthe sum of cell oscillations weighted by volume ([[lem-finite-sum-laws]]).",
+          "uses": [
+            "3.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-gr-metric-volume-form-and-current-flux",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]), let $M$ carry an orientation in the\nsense of [[def-oriented-smooth-manifold-and-oriented-chart]] (so that its\ncharts that are oriented in that orientation have orientation-preserving\ntransition maps), and let $\\nabla$ be its metric-selected connection. This item\nfixes the metric volume form, the flux of a current through oriented $3$-faces\nand finite-chain charges. The orientation of $M$ is an independent datum: it is\nnot determined by the metric and not by the time orientation.\n\n**(a) Metric volume density and volume form.** Let $(U,x)$ be an oriented\nchart, with metric components $g_{ab}=g(\\partial_a,\\partial_b)$\n([[def-gr-smooth-lorentzian-objects]] clause (a)). Define the **metric volume\ndensity**\n\n$$w:=\\sqrt{|\\det(g_{ab})|}>0\\qquad\\text{on }U,$$\n\na strictly positive smooth function because $g_{ab}$ is smooth and\n$g_p$ is nondegenerate. In the chart define the local $4$-form\n\n$$\\mathrm{vol}_{g,U}:=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3,$$\n\nwith the exterior product of [[def-wedge-product-of-differential-forms]] and the\ncoordinate covector fields of\n[[prop-local-coordinate-expression-for-a-differential-form]]. That these local\nforms agree on chart overlaps and therefore define one smooth nowhere-vanishing\n$4$-form $\\mathrm{vol}_g$ on $M$ — the **metric volume form** — is proved in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (a), together\nwith the reading statement of clause (b) there: in every oriented chart\n$\\mathrm{vol}_g=w\\,dx^0\\wedge\\cdots\\wedge dx^3$, and on every positively\noriented $g_p$-orthonormal basis $(e_0,e_1,e_2,e_3)$ of $T_pM$ one has\n$\\mathrm{vol}_{g,p}(e_0,e_1,e_2,e_3)=1$.\n\n**(b) Current flux through oriented $3$-faces and chains.** Let $J$ be a\nsmooth vector field on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **current\n$3$-form** of $J$ is the contraction\n\n$$\\iota_J\\mathrm{vol}_g,$$\n\nthe interior product of the $4$-form $\\mathrm{vol}_g$ with $J$\n([[def-interior-product-of-a-form-by-a-vector-field]]).\n\nBy a **smooth singular $k$-simplex** of $M$ — the convention of the library\ndefinition `def-smooth-singular-simplex` (differential-geometry track),\nrestated here so this page is self-contained — we mean a map\n$\\sigma:\\Delta^k\\to M$ whose domain is the standard $k$-simplex\n$$\\Delta^k=\\Bigl\\{t\\in\\mathbb R^{k+1}:t_i\\ge0,\\ \\textstyle\\sum_it_i=1\\Bigr\\},$$\nfor which there exist an open set $O\\subseteq A^k=\\{t\\in\\mathbb R^{k+1}:\\sum_it_i=1\\}$\ncontaining $\\Delta^k$ and a smooth map $\\bar\\sigma:O\\to M$ with\n$\\bar\\sigma|_{\\Delta^k}=\\sigma$; the extension is not part of the simplex\ndata, and degenerate parametrizations are allowed. With the integration of\nforms over such simplices\n([[def-integral-of-a-form-over-a-smooth-singular-simplex]]), a **$3$-face** is\na smooth singular $3$-simplex $\\sigma$, and the **flux of $J$ through\n$\\sigma$** is the real number\n\n$$\\Phi_J(\\sigma):=\\int_\\sigma\\iota_J\\mathrm{vol}_g.$$\n\nA **finite smooth singular $k$-chain** — the convention of the library\ndefinition `def-smooth-singular-chain-and-cochain-complexes`, restated here —\nis a finite formal real linear combination $\\Sigma=\\sum_i c_i\\sigma_i$ of\nsmooth singular $k$-simplices. For such a $3$-chain the **flux of $J$ through\n$\\Sigma$** is defined additively,\n\n$$\\Phi_J(\\Sigma):=\\sum_i c_i\\,\\Phi_J(\\sigma_i),$$\n\na definition independent of the written expression for $\\Sigma$, because a\nfinite formal sum is evaluated by adding the finitely many coefficients and\ninserting a zero coefficient changes nothing. $\\Phi_J(\\Sigma)$ is the **charge**\nof the current $J$ assigned to $\\Sigma$ when the model reads $J$ as a conserved\ncurrent; that reading belongs to the physical postulates and is not part of\nthis definition.\n\n**(c) Non-null faces and their unit normals.** A $3$-dimensional linear subspace\n$H\\subseteq T_pM$ is **nondegenerate** for $g_p$ when the restriction of $g_p$\nto $H$ is nondegenerate, equivalently when $H\\cap H^\\perp=\\{0\\}$ in the\northogonality of [[def-lorentz-orthogonality-and-orthogonal-complement]]. A\nsmooth singular $3$-simplex $\\sigma$ is **non-null at** a parameter point $t$\nwhen the span of the three velocity vectors\n$\\sigma_*\\partial_1|_t,\\sigma_*\\partial_2|_t,\\sigma_*\\partial_3|_t$ has\ndimension $3$ and is nondegenerate at $\\sigma(t)$, and **non-null** when this holds at every\nparameter point. For a non-null face the **unit normal** $\\nu$ at that point is\nthe unique vector of $T_{\\sigma(t)}M$ with $\\nu\\in H^\\perp$,\n$g(\\nu,\\nu)\\in\\{-1,+1\\}$ and $(\\nu,\\sigma_*\\partial_1,\\sigma_*\\partial_2,\n\\sigma_*\\partial_3)$ a positively oriented basis of $T_{\\sigma(t)}M$; its\nexistence, uniqueness and its sign $\\varepsilon:=g(\\nu,\\nu)$ are proved in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (c), together\nwith the density identity of clause (c) used to read $\\iota_J\\mathrm{vol}_g$ on\nsuch a face. Rank-deficient faces and rank-three faces with degenerate induced\nmetric are not assigned a unit normal; their flux is defined\nby the $3$-form $\\iota_J\\mathrm{vol}_g$ itself, as in clause (b).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F3], $w\\Pi=\\partial_0(wJ^0)+\\sum_{i=1}^3\\partial_i(wJ^i)$ on the coordinate box. Since $g$ and $w$ are smooth and $J$ is $C^1$, this integrand and all face integrands are continuous; [F4] makes their compact-box integrals finite.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F2], $Q_J(t)=\\int_\\Omega wJ^0\\,d^3x$. Fix $(x^1,x^2,x^3)\\in\\Omega$. Apply [F6] to the function $x^0\\mapsto wJ^0(x^0,x^1,x^2,x^3)$ on $[t_0,t_1]$, then integrate over $\\Omega$ using [F5]. This gives $$\\int_K\\partial_0(wJ^0)\\,d^4x= \\int_\\Omega\\bigl(wJ^0(t_1,\\mathbf x)-wJ^0(t_0,\\mathbf x)\\bigr)\\,d^3x =Q_J(t_1)-Q_J(t_0).$$",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For each fixed $i\\in\\{1,2,3\\}$ and the other three coordinates, the section of $K$ in the $x^i$ coordinate is $(a_i,b_i)$. By [F7], its integral is defined using the zero extension to $[a_i,b_i]$. This extension differs from the continuous derivative $x^i\\mapsto \\partial_i(wJ^i)$ only at the two endpoints, which have content zero by [F4]; since the functions are bounded, covers of those points by intervals of arbitrarily small total length show from the Darboux definition that the two integrals agree. Apply [F6] on $[a_i,b_i]$, then integrate the endpoint difference over the remaining face coordinates by [F5]. This gives $$\\int_K\\partial_i(wJ^i)\\,d^4x= \\int_{\\Omega_i}\\left. wJ^i\\right|_{x^i=b_i}- \\left. wJ^i\\right|_{x^i=a_i}\\,d^3x_{\\widehat i}.$$ By [F1], summing these three terms gives exactly $\\Phi_J(B)$, with outward orientation and no choice of a unit normal on any side face.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "To verify the nonimplication by a current independent of any consuming counterexample, use $M=\\mathbb R^4$ with $g=\\operatorname{diag}(-1,1,1,1)$, future direction $\\partial_0$, the standard positive coordinate orientation, and $K=[0,1]\\times(0,1)^3$. Then $w=1$, $n=\\partial_0$ and $dV_h=d^3x$, so these are the slab data of [F1]. For real constants $a,b\\in[-1/4,1/4]$, set $J=(2+ax^0)\\partial_0+bx^1\\partial_1$. This is smooth on all of $\\mathbb R^4$; on the compact slab closure, $J^0\\ge7/4>|J^1|$ and $J^0>0$, so it is even future timelike there and on a neighborhood of the closure. Directly from [F1]–[F3] and the elementary rectangular integrals [F5]–[F6],\n$$\\Pi=a+b,\\qquad Q_J(t)=2+at,\\qquad Q_J(1)-Q_J(0)=a,\\qquad \\Phi_J(B)=b,\\qquad \\int_K\\Pi\\,\\mathrm{vol}_g=a+b.$$\nIndeed only the $x^1$ side pair contributes, and its upper-minus-lower density is $b$ on a face parameter rectangle of volume one. These evaluations do not use the balance conclusion or any later example.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Add the temporal identity of step 1.2 and the three spatial identities of step 1.3. Additivity of the finite Riemann integral and [F5] give $$\\int_K\\sum_{a=0}^3\\partial_a(wJ^a)\\,d^4x= Q_J(t_1)-Q_J(t_0)+\\Phi_J(B).$$ By step 1.1 and the coordinate expression $\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ in [F8], the left side is $\\int_K\\Pi\\,\\mathrm{vol}_g$, proving the equality.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F5",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "In the family of step 1.4 take $a=-1/4$ and $b=1/4$. Then $\\Pi=0$, $\\Phi_J(B)=1/4$ and $Q_J(1)-Q_J(0)=-1/4$. This admissible smooth current has zero production and strictly decreasing slice charge, proving that zero production alone does not imply charge constancy.",
+          "inputs": [
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\Pi\\ge0$, then $\\Pi w\\ge0$ because $w>0$. The zero extension of $\\Pi w$ from $K$ to a containing rectangle is nonnegative; each of its lower Darboux sums is nonnegative by [F7], so $\\int_K\\Pi\\,\\mathrm{vol}_g\\ge0$. The equality in step 2.1 yields $Q_J(t_1)+\\Phi_J(B)\\ge Q_J(t_0)$; setting the net side flux to zero gives the stated slice-charge inequality. If $\\Pi=0$, step 2.1 gives $Q_J(t_1)-Q_J(t_0)=-\\Phi_J(B)$.",
+          "inputs": [
+            "step 2.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Taking instead $a=b=1/4$ gives positive production $\\Pi=1/2$ whose integral $1/2$ exceeds the positive outward flux $1/4$, with positive charge change $1/4$. Thus zero side flux is sufficient under nonnegative production but is not necessary for nondecreasing charge. The choice $a=1/4$, $b=-1/4$ also gives zero production, negative net side flux and positive charge change. These explicit cases establish both possibilities without treating a later consuming counterexample as a premise.",
+          "inputs": [
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires t0<t1 and nondegenerate spatial factors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 records the exact zero-production specialization; for J=0 every term in step 2.1 also vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 isolate the temporal term and each of the three spatial terms before summing the finite family."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The metric block and every coordinate factor are nondegenerate under the slab hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 apply FTC on closed intervals and use one-sided endpoint values; edges have zero face measure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1 use only AC_omega inherited from the geometry supplier; the coordinate proof adds no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an identity and conditional inequalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an identity and conditional inequalities, not a biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "On a constant-current Minkowski box, Pi=0, Q_J(t1)=Q_J(t0), and opposing side-face terms cancel.",
+          "result": "The signed balance has zero on both sides and confirms the upper-minus-lower orientation.",
+          "verifies": "Steps 1.2, 1.3 and 2.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Amended reader repair step 1.3: zero extension must compare partial_i(wJi), the continuous integrand, not wJi. Checked C1 on neighborhood supplies continuous derivatives and FTC on closed interval; endpoint-zero modifications have equal integrals, Fubini applies to every section. Normal-density and divergence suppliers give exact charge difference + outward flux. Nonnegative zero extension gives nonnegative integral. Explicit a,b family independently verifies positive, zero and negative flux cases; no circular counterexample dependency. AC_omega carried, no physical assertion."
+      }
+    },
+    "cex-tgr-open-region-entropy-export": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-c1-current-density-divergence",
+          "source_section": "Statement",
+          "quote": "Assume the Countable Choice convention $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]] used by the smooth tangent-bundle structure in\n[[def-gr-smooth-lorentzian-objects]]. Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold of signature $(-,+,+,+)$ with its metric-selected\nconnection $\\nabla$, and let $(U,x)$ be a smooth chart. Write\n$w=\\sqrt{|\\det(g_{ab})|}$. Let $J$ be a $C^1$ vector field on $U$; the\nconnection derivative on such a field is defined by its usual chart formula\n$$\\nabla_bJ^a:=\\partial_bJ^a+\\Gamma^a{}_{cb}J^c,$$\nwhose coefficients are continuous. Then, throughout $U$,\n$$\\nabla_aJ^a=w^{-1}\\partial_a(wJ^a).$$\nThe right-hand side is the chart expression of the scalar divergence\n$\\nabla_aJ^a$; no higher regularity of $J$ than $C^1$ is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "Use a time-oriented smooth Lorentzian four-manifold $(M,g,N)$ of signature\n$(-,+,+,+)$ and an independent orientation, with the exact meanings in\n[[def-gr-smooth-lorentzian-objects]] and\n[[def-oriented-smooth-manifold-and-oriented-chart]]. The tangent-bundle smooth\nstructure follows the stated Countable Choice convention\n[[def-countable-choice]]. Let $(U,x)$ be a positively oriented chart with\n$x=(x^0,x^1,x^2,x^3)$ and $x(U)=V\\subseteq\\mathbb R^4$. Coordinates here are\nmathematical real coordinates; no physical units are assigned.\n\nChoose real numbers $t_0<t_1$ and $a_i<b_i$ for $i=1,2,3$, and let\n$$\\Omega=\\prod_{i=1}^3(a_i,b_i),\\qquad \\overline\\Omega=\\prod_{i=1}^3[a_i,b_i],\\qquad K=[t_0,t_1]\\times\\Omega,\\qquad \\overline K=[t_0,t_1]\\times\\overline\\Omega\\subset V.$$\nThe finite integration slab $K$ is a bounded Jordan set and its closure\n$\\overline K$ is a compact coordinate box. Assume $\\overline K$ has an open\nneighborhood in $V$ on which the spatial metric block\n$h_{ij}:=g_{ij}$ is positive definite and the inverse-metric component\n$g^{00}$ is negative. Thus each slice\n$\\Sigma_t=\\{x^{-1}(t,x^1,x^2,x^3):(x^1,x^2,x^3)\\in\\Omega\\}$ is spacelike.\nAssume also that the future unit normal defined below is future-directed in the\ngiven time orientation. The closure $\\overline K$, its closed coordinate\nfaces, the open spatial rectangle $\\Omega$, the mixed-endpoint slab $K$, and\nthe corresponding mixed-endpoint side-face rectangles are Jordan sets by\n[[lem-tgr-coordinate-boxes-are-compact-jordan]].\n\nWrite $g^{ab}$ for the inverse matrix to $g_{ab}$ and put\n$$w:=\\sqrt{|\\det(g_{ab})|},\\qquad \\alpha:=(-g^{00})^{-1/2},\\qquad n^a:=-\\alpha g^{a0},\\qquad n_a:=-\\alpha\\,\\delta_a^0.$$\nThen $n$ is the future unit normal to every $\\Sigma_t$; its unit and normal\nproperties follow from $g^{ab}n_an_b=-1$ and\n$g_{ab}n^b=n_a$. Let $dV_h:=\\sqrt{\\det(h_{ij})}\\,dx^1dx^2dx^3$ be the\nRiemannian volume element of the induced positive-definite slice metric.\nIn this positively oriented chart the metric volume form is\n$\\mathrm{vol}_g=w\\,dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$ by\n[[def-gr-metric-volume-form-and-current-flux]] clause (a).\n\nA **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open\nneighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$\nare $C^1$. Its current three-form is the pointwise contraction\n$\\omega_J:=\\iota_J\\mathrm{vol}_g$, where\n$(\\iota_J\\mathrm{vol}_g)(X_1,X_2,X_3):=\n\\mathrm{vol}_g(J,X_1,X_2,X_3)$. In coordinates,\n$$\\omega_J=w\\bigl(J^0dx^1\\wedge dx^2\\wedge dx^3 -J^1dx^0\\wedge dx^2\\wedge dx^3 +J^2dx^0\\wedge dx^1\\wedge dx^3 -J^3dx^0\\wedge dx^1\\wedge dx^2\\bigr).$$\nThe slice orientation is chosen so that the future unit normal precedes a\npositive slice basis. Since $n^0=1/\\alpha>0$ and the spacetime chart is\npositive, this slice orientation is $dx^1\\wedge dx^2\\wedge dx^3$; the\npullback of $\\omega_J$ to $\\Sigma_t$ is $wJ^0dx^1\\wedge dx^2\\wedge dx^3$.\nDefine its signed **slice charge** (the normal flux through the spacelike\nslice) by\n$$Q_J(t):=\\int_\\Omega -g(J,n)\\,dV_h.$$\nEvery displayed integral is the Riemann integral over the indicated bounded\nJordan set, as defined in\n[[def-riemann-integral-over-a-jordan-set]]. The current and metric extend\ncontinuously to the compact coordinate closure, and\n[[lem-tgr-coordinate-boxes-are-compact-jordan]] proves that the open spatial\nand mixed-endpoint rectangles are Jordan measurable and that these continuous\ndensities are Riemann integrable there.\n\nLet $B$ denote the union of the six side faces of $K$, with outward boundary\norientation; each face is integrated over its relative interior, a bounded\nJordan rectangle whose closure is compact. The upper $x^i$ face has induced orientation\n$(-1)^i dx^0\\wedge\\cdots\\widehat{dx^i}\\cdots\\wedge dx^3$; the lower face\nhas its opposite. Thus the $i$th current-three-form pullback integrates to\nthe upper-minus-lower $wJ^i$ coordinate expression below. Define the\n**net outward side flux** $\\Phi_J(B)$ as the sum over\nthe three spatial coordinate directions of upper-face flux minus lower-face\nflux. More explicitly, for $i\\in\\{1,2,3\\}$ let $\\Omega_i$ be the product\nJordan rectangle in the three coordinates other than $x^i$, with endpoint\nconvention $x^0\\in[t_0,t_1]$ and $x^j\\in(a_j,b_j)$ for $j\\ne i$; then\n$$\\Phi_J(B):=\\sum_{i=1}^3\\int_{\\Omega_i} \\left. wJ^i\\right|_{x^i=b_i}-\\left. wJ^i\\right|_{x^i=a_i}\\,d^3x_{\\widehat i}.$$\nThe integrals use the standard increasing-coordinate order on each face. For\na $C^1$ current the three-form coefficients are continuous, so the displayed\nrectangular integrals exist. This extends the smooth-current flux convention\nof [[def-gr-metric-volume-form-and-current-flux]] clause (b) to the present\nfinite coordinate faces. No unit normal to a side face is part of this\ndefinition; in particular the flux form remains defined if a side face is\nnull. The term “charge” names this mathematical flux integral only; it does\nnot assert a physical conservation law or an entropy interpretation.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tgr-finite-current-production-balance",
+          "source_section": "Statement",
+          "quote": "Assume the $\\mathrm{AC}_\\omega$ background of\n[[def-tgr-spacelike-current-slab]]. Let $K$, $\\Sigma_t$, the $C^1$ current\n$J$, its slice charge $Q_J(t)$ and its net outward side flux $\\Phi_J(B)$ be\nas in [[def-tgr-spacelike-current-slab]]. Use the oriented metric volume form\nof [[def-gr-metric-volume-form-and-current-flux]] clause (a). Put\n$\\Pi:=\\nabla_aJ^a$, using the $C^1$ divergence of\n[[lem-tgr-c1-current-density-divergence]]. Then the exact finite-slab balance\nis\n$$Q_J(t_1)-Q_J(t_0)+\\Phi_J(B)=\\int_K\\Pi\\,\\mathrm{vol}_g.$$\nHere the four-volume integral is the Riemann integral on the bounded Jordan\nslab $K$, whose compact closure is the supplied coordinate box. If\n$\\Pi\\ge0$ everywhere on $K$, then\n$Q_J(t_1)+\\Phi_J(B)\\ge Q_J(t_0)$. In particular, nonnegative local\nproduction implies $Q_J(t_1)\\ge Q_J(t_0)$ when the **net outward side flux**\nis zero. If $\\Pi=0$, the identity instead reads\n$Q_J(t_1)-Q_J(t_0)=-\\Phi_J(B)$, so zero production alone does not imply\nconstant slice charge.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tgr-coordinate-boxes-are-compact-jordan",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$ be an integer. For a canonical coordinate vector\n$x:\\{0,\\ldots,m-1\\}\\to\\mathbb R$, write $x_j:=x(j-1)$ for\n$1\\le j\\le m$. Accordingly, $\\prod_{j=1}^m I_j$ denotes\n$\\{x\\in\\mathbb R^m:x(j-1)\\in I_j\\text{ for }1\\le j\\le m\\}$;\nthis is only a relabelling of the coordinates in the cited suppliers. Let\n$$Q=\\prod_{j=1}^{m}[a_j,b_j]\\subseteq\\mathbb R^m, \\qquad a_j<b_j.$$\nThen $Q$ is compact and Jordan measurable, and its boundary has Jordan\ncontent zero. For any product $R=\\prod_{j=1}^m I_j$ where each $I_j$ is one\nof $[a_j,b_j]$, $(a_j,b_j)$, $[a_j,b_j)$ or $(a_j,b_j]$, the set $R$ is a\nbounded Jordan set with closure contained in $Q$. Every continuous\n$f:Q\\to\\mathbb R$ is Riemann integrable over $R$. When $m\\ge2$, each closed\ncoordinate face of $Q$ is compact and Jordan measurable in its own\n$(m-1)$-dimensional coordinate space; the same endpoint-variant and\nintegrability conclusions hold for products in that face.",
+          "uses": [
+            "2.2",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-jordan-fubini-by-sections",
+          "source_section": "Statement",
+          "quote": "Let $E\\subseteq\\mathbb R^{p+q}$ be a bounded Jordan set and let $g:E\\to\\mathbb R$ be Riemann integrable. Suppose that for all $x$ outside a content-zero set $N\\subseteq\\mathbb R^p$, the section $E_x$ is Jordan measurable and $g_x$ is integrable over it. Put $h(x)=\\int_{E_x}g_x$ there and assign arbitrary bounded values to $h$ on $N$, with empty-section integral equal to $0$. Then $h$ is integrable on any rectangle containing the projection of $E$, its integral is independent of that rectangle and of the values on $N$, and\n$$\\int_Eg=\\int h(x)\\,dx.$$\nThe symmetric assertion holds for the other coordinate block.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $G : [a,b] \\to \\mathbb{R}$ be differentiable at every\npoint of $[a,b]$ as a function on $[a,b]$ ([[def-derivative]]; at $a$ and $b$\nthis is the one-sided derivative), let $f := G'$, and suppose $f$ is integrable\non $[a,b]$ ([[def-darboux-integral]]). Then\n\n$$\\int_a^b f \\;=\\; G(b) - G(a) .$$\n\n**Both hypotheses are needed and neither is removable.** A function may be\ndifferentiable everywhere with $G'$ not integrable — then the left-hand side does\nnot exist (an everywhere differentiable function with unbounded derivative) — and an\nintegrable $f$ need not be the derivative of anything\n(the sign function); both witnesses are on the\ncompanion page.\n\n**No continuity of $f$ is assumed**, which is what makes this the working form:\nthe theorem evaluates $\\int_a^b f$ for every integrable derivative, not only for\ncontinuous integrands.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-oriented-smooth-manifold-and-oriented-chart",
+          "source_section": "Definition",
+          "quote": "An orientation of an $n$-manifold is a smooth choice of a ray in $\\det T_pM$ for every $p$. For $n>0$, a chart is oriented when its coordinate frame is in that ray. For $n=0$, the datum is a sign at each point; the unique empty frame does not encode both choices.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $M=\\mathbb R^4$ with coordinates $(x^0,x^1,x^2,x^3)$, metric $\\eta=\\operatorname{diag}(-1,1,1,1)$, orientation $dx^0\\wedge dx^1\\wedge dx^2\\wedge dx^3$, and future direction $\\partial_0$. Let $\\Omega=(0,L)\\times(0,L_2)\\times(0,L_3)$ and $K=[0,T]\\times\\Omega$, with compact closure $\\overline K=[0,T]\\times[0,L]\\times[0,L_2]\\times[0,L_3]$. Define the constant vector $u=(\\gamma,\\gamma\\beta,0,0)$ and scalar $s=s_0[1+a(x^1-\\beta x^0)]$. Since $0<\\beta<1$ and $aT<1$, $1+a(x^1-\\beta x^0)\\ge1-a\\beta T>0$ on $\\overline K$, so $s$ is positive there and extends smoothly to a neighborhood of $\\overline K$. Also $\\eta(u,u)=-\\gamma^2(1-\\beta^2)=-1$ and $u$ is future-directed.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let Q be the closed rectangular hull of either Ω or a side-face parameter rectangle Ω_i, and let R be the corresponding endpoint-variant product. For a continuous density f:Q→R, the zero-extension convention in [F3] represents ∫_R f by a Riemann integral on Q. The extension differs from f only on ∂Q, which has content zero by [F5]. If |f|≤M, finite box covers of ∂Q with arbitrarily small total volume bound the change in the upper and lower Darboux sums by 2M times that volume; hence the two integrals agree as the volume tends to zero.",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Put $J=su$, so $J^0=\\gamma s$ and $J^1=\\gamma\\beta s$. In this chart $w=1$, and [F2] gives $$\\nabla_aJ^a=\\partial_0J^0+\\partial_1J^1 =\\gamma(-s_0a\\beta)+\\gamma\\beta(s_0a)=0$$ throughout the slab; the remaining components vanish. Thus local production is zero everywhere.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "By step 1.2, [F3] and [F5], the integral of the slice density over the open rectangle equals its ordinary integral over the closed rectangular hull. Integrating the affine density gives Q_J(t)=γs_0LL_2L_3(1+aL/2−aβt), so Q_J(T)−Q_J(0)=−γs_0aβTLL_2L_3<0. The slice charge strictly decreases.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Only the x^1 side faces carry flux. Their upper-minus-lower density is J^1(t,L,x^2,x^3)−J^1(t,0,x^2,x^3)=γβs_0aL, independent of t,x^2,x^3. By step 1.2, the integral over the mixed-endpoint face parameter rectangle equals the integral over its closed rectangular hull, so the integrated net outward side flux is Φ_J(B)=γs_0aβTLL_2L_3>0. The factor T is the duration of the slab. By [F4], Q_J(T)−Q_J(0)+Φ_J(B)=0, in agreement with the zero production calculation. The example refutes the unrestricted monotonicity assertion and shows that the side-flux hypothesis is essential.",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The parameters L,L2,L3,T are strictly positive, so the example uses a nonempty finite slab."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies pointwise zero production throughout the slab."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 isolates the x^1 side pair; the other spatial directions have zero flux in this construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes positive interval lengths, aT<1 and 0<beta<1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves positivity on the entire compact closure; steps 2.2 and 3.1 integrate through t=0 and t=T."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and steps 1.1–3.1 use AC_omega and an explicit field without any choice construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way universal implication and states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a one-way universal implication and states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "Set beta=3/5, gamma=5/4, L=2, L2=3, L3=1, T=2, a=1/4, s0=1; then aT=1/2 and min_K(s/s0)=7/10.",
+          "result": "The exact charge change is -9/4 and the integrated net outward side flux is +9/4; their sum is zero.",
+          "verifies": "Steps 1.1, 2.1, 2.2 and 3.1."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-50",
+        "notes": "Accepted reader step 1.2 endpoint-zero integral comparison. Read all five current steps and nine direct suppliers. Parameters positive, beta in (0,1), aT<1 imply s>=s0(1-a beta T)>0 on compact closure; u is unit future timelike. Divergence cancels exactly; integrate affine density to Q(t)=gamma s0 L L2 L3(1+aL/2-a beta t). Outward integrated flux is gamma s0 a beta T L L2 L3, positive and equal to charge loss, including duration T. Jordan endpoint changes do not affect values. Pure mathematical counterexample, no physical solution or statistical certainty asserted."
+      }
+    }
+  }
+}

@@ -1,0 +1,553 @@
+[
+  {
+    "order": 501,
+    "id": "csm-stochastic-response",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Finite reversible stochastic rate model and thermal coupling",
+    "companion": "csm-stochastic-response-examples",
+    "requires": [
+      "csm-collision-transport",
+      "csm-mean-field-hierarchy"
+    ],
+    "items": [
+      {
+        "id": "def-csm-dk-finite-reversible-rate-model",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Finite reversible stochastic rate model",
+        "reference": "items/def-csm-dk-finite-reversible-rate-model.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "thm-ionescu-tulcea-construction-of-a-markov-chain": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+        "strategy": "Definition carrier is in items/def-csm-dk-finite-reversible-rate-model.md.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2 and Chapter 3 §§3.1–3.4: finite continuous-time rate matrices, jump-and-hold processes and reversibility."
+            },
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§§6.1–6.2 and §9.4.5: master-equation states, finite-state transition rates and local detailed balance."
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-csm-dk-selected-thermal-langevin-bath",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Adopted inertial velocity Langevin bath",
+        "reference": "items/post-csm-dk-selected-thermal-langevin-bath.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-tdmath-ornstein-uhlenbeck-equation",
+          "thm-tdmath-ornstein-uhlenbeck-model"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-tdmath-ornstein-uhlenbeck-equation": "formulation-prerequisite",
+          "thm-tdmath-ornstein-uhlenbeck-model": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]] and the filtered Brownian probability-space convention of [[def-tdmath-ornstein-uhlenbeck-equation]]. Use one Brownian motion and one process on $[0,\\infty)$; equations and the continuous-force condition are understood on each finite interval $[0,t_f]$, $t_f>0$. The one-dimensional coordinate $x\\in\\mathbb R$ is signed displacement along a fixed spatial axis in one chosen Newtonian inertial coordinate: within that coordinate, inertial means that an isolated free particle has constant coordinate velocity. Position $X_t$ is measured in metres and velocity $V_t$ in metres per second; they satisfy $X_t=X_0+\\int_0^tV_s\\,ds$, so the continuous velocity paths make $X_t$ continuously differentiable and $V_t=dX_t/dt$.\n\nTake a primitive particle mass $m>0$ in kilograms, a primitive constant bath temperature $T_b>0$ in kelvins, and the primitive SI Boltzmann constant $k_B>0$ in joules per kelvin. The positive damping rate $\\gamma$ is a primitive model parameter in seconds$^{-1}$; the positive noise amplitude $\\sigma$ is derived as the square root of $2\\gamma k_BT_b/m$ and has units metres seconds$^{-3/2}$. Let $B_t$ be standard scalar Brownian motion with $B_0=0$, variance $t$ in seconds, and future increments independent of the present filtration. Prepare $V_0\\sim N(0,k_BT_b/m)$ independently of those future increments. The force $F:[0,\\infty)\\to\\mathbb R$ is a prescribed deterministic locally continuous input in newtons. Adopt\n\n$$V_t=V_0-\\gamma\\int_0^tV_s\\,ds+\\frac1m\\int_0^tF(s)\\,ds+\\sigma B_t,\\qquad \\sigma^2=\\frac{2\\gamma k_BT_b}{m}.$$\n\nThe displayed integral equation is the definition of the stochastic differential notation $dV_t=-\\gamma V_t\\,dt+F(t)\\,dt/m+\\sigma\\,dB_t$. Brownian increments have units seconds$^{1/2}$, so every term in the equation for $V_t$ has units metres seconds$^{-1}$. When $F=0$, the preparation is the stationary OU Gaussian law because its variance is $\\sigma^2/(2\\gamma)=k_BT_b/m$; the cited mathematical supplier establishes the specified OU model properties. The thermal noise normalization, Gaussian preparation, constant damping, and deterministic force coupling are adopted assumptions. No measurement, material calibration, nonlinear response, or microscopic derivation of this bath is asserted.",
+        "strategy": "Postulate content is recorded in items/post-csm-dk-selected-thermal-langevin-bath.md.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§2.6.1, underdamped Langevin motion and its thermal noise covariance."
+            },
+            {
+              "title": "Grigorios A. Pavliotis, Stochastic Processes and Applications: Diffusion Processes, the Fokker–Planck and Langevin Equations",
+              "url": "https://www.ma.imperial.ac.uk/~pavl/PavliotisBook.pdf",
+              "locator": "Chapter 3 §3.7 and Chapter 4 §4.4: the linear OU solution, stationary Gaussian law and covariance."
+            }
+          ]
+        },
+        "physical_scope": "One scalar component of the inertial velocity of a nonrelativistic particle in one fixed Newtonian inertial coordinate, with constant positive mass, damping rate and bath temperature, additive Brownian forcing, the stated stationary Gaussian preparation, and a prescribed continuous external force. This is an adopted model, not a universal bath law or an experimental report."
+      },
+      {
+        "id": "post-csm-dk-selected-reversible-bath-rates",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Adopted finite reversible bath rates and field coupling",
+        "reference": "items/post-csm-dk-selected-reversible-bath-rates.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "post-csm-dk-selected-thermal-langevin-bath",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "formulation-prerequisite",
+          "post-csm-dk-selected-thermal-langevin-bath": "formulation-prerequisite",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the finite state set, energies $e_a$, rates $w_{ab}$, Gibbs weights $\\pi_a$, and row generator $Q$ defined in [[def-csm-dk-finite-reversible-rate-model]]. Assign the state energies the physical meaning of coarse-state energies in joules. Use the primitive SI Boltzmann constant $k_B$ in joules per kelvin from [[post-csm-dk-selected-thermal-langevin-bath]], and set $\\beta=(k_BT_b)^{-1}$ in joules$^{-1}$ for the positive bath-temperature parameter $T_b$ in kelvins. Adopt the baseline transition rates $w_{ab}$ in seconds$^{-1}$ and the initial law $p_0=\\pi$ for the equilibrium-response branch. These choices define a finite phenomenological thermal rate model; they do not say that a real material has these rates.\n\nFor a fixed state observable $B:E\\to\\mathbb R$ with units denoted $[B]$, a dimensionless control amplitude $\\epsilon$, and a continuous field $h:[0,t_f]\\to\\mathbb R$ with units joules per $[B]$, adopt the controlled rates\n\n$$w_{ab}^{\\epsilon}(t)=w_{ab}\\exp\\!\\left(\\frac{\\beta\\epsilon h(t)}2(B_b-B_a)\\right),\\qquad a\\ne b.$$\n\nTheir units remain seconds$^{-1}$ because the exponent is dimensionless. This is one explicit symmetric allocation of the field-dependent rate factor. For constant $h$, the rate ratio obeys\n\n$$\\frac{w_{ab}^{\\epsilon}}{w_{ba}^{\\epsilon}}=\\exp\\!\\left(-\\beta\\left[(e_b-\\epsilon hB_b)-(e_a-\\epsilon hB_a)\\right]\\right),$$\n\nso the Gibbs weights of the shifted energies $e_a-\\epsilon hB_a$ satisfy detailed balance by direct multiplication. A rate ratio alone leaves state-pair prefactors undetermined; the symmetric splitting above is an additional modeling choice and is the specific perturbation analyzed in the consuming theorem. No experiment or empirical rate estimate is asserted.",
+        "strategy": "Postulate content is recorded in items/post-csm-dk-selected-reversible-bath-rates.md.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§§6.1–6.2, §8.1.1, §8.2.4 and §9.4.5: master equations, equilibrium fluctuation response, local detailed balance and the freedom in rate prefactors."
+            },
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2 and Chapter 3 §§3.1–3.2: continuous-time transition rates, generators, stationarity and detailed balance."
+            }
+          ]
+        },
+        "physical_scope": "A prescribed connected finite-state rate network at one fixed positive temperature, initialized in its Gibbs stationary law for the equilibrium-response branch, with the explicitly selected symmetric exponential field coupling. No microscopic Hamiltonian reduction, rate calibration, or unique bath prefactor is asserted."
+      },
+      {
+        "id": "thm-csm-dk-nonexplosive-ctmc-and-gap",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Nonexplosive finite continuous-time chain and reversible spectral gap",
+        "reference": "items/thm-csm-dk-nonexplosive-ctmc-and-gap.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "def-axiom-of-choice",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "thm-ionescu-tulcea-construction-of-a-markov-chain": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]] and let $E,\\pi,w,Q$ be the finite model data of [[def-csm-dk-finite-reversible-rate-model]], with $|E|=r\\ge2$. For every initial probability row vector $p_0$, there exists a time-homogeneous continuous-time Markov chain $X_t$ on $E$, $t\\ge0$, with no finite accumulation of jumps, transition matrix $P_t=e^{tQ}$, and law $p_t=p_0P_t$. The detailed-balance law $\\pi$ is stationary. On the real inner-product space $L^2(E,\\pi)$, $Q$ is self-adjoint and has an orthonormal eigenbasis $\\phi_0=1,\\phi_1,\\ldots,\\phi_{r-1}$ with eigenvalues $0,-\\lambda_1,\\ldots,-\\lambda_{r-1}$, where every $\\lambda_j>0$. Thus the spectral gap $\\lambda_*:=\\min_j\\lambda_j$ is positive and $P_t$ converges exponentially to projection onto constants.\n\nHere a finite-state continuous-time Markov chain means a process with piecewise-constant paths whose conditional transition matrix over an interval of length $t$ is $P_t$, independent of the starting time. For initial law $\\pi$, the chain has a two-sided stationary extension $X_t$, $t\\in\\mathbb R$, whose finite-dimensional laws at $t_1<\\cdots<t_n$ are $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. Its sample paths are locally piecewise constant with finitely many jumps on every bounded time interval.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2; Chapter 3 §§3.1–3.4, continuous-time generator and reversible spectral representation."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-csm-dk-ou-velocity-diffusion-response",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Exact OU velocity response, diffusion and Gaussian scaling",
+        "reference": "items/thm-csm-dk-ou-velocity-diffusion-response.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 0,
+        "deps": [
+          "def-axiom-of-choice",
+          "def-tdmath-ornstein-uhlenbeck-equation",
+          "thm-tdmath-ornstein-uhlenbeck-model"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-tdmath-ornstein-uhlenbeck-equation": "mathematical-premise",
+          "thm-tdmath-ornstein-uhlenbeck-model": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]] and the Brownian probability-space hypotheses in [[def-tdmath-ornstein-uhlenbeck-equation]]. Let $\\gamma,m,\\Theta,k_B>0$, $\\sigma>0$, and $\\sigma^2=2\\gamma k_B\\Theta/m$. Here these are real mathematical parameters; a separate physics postulate assigns their physical units and interpretation. Let $V_0\\sim N(0,k_B\\Theta/m)$ be independent of future Brownian increments. For any locally continuous deterministic input $u:[0,\\infty)\\to\\mathbb R$, and every finite $t_f>0$, the equation restricted to $[0,t_f]$\n$$V_t=V_0-\\gamma\\int_0^tV_s\\,ds+\\frac1m\\int_0^tu(s)\\,ds+\\sigma B_t,\\qquad 0\\le t\\le t_f,$$\nhas a unique continuous solution; these unique finite-horizon solutions agree on overlapping intervals and define one solution for all $t\\ge0$. Its mean is\n$$\\mathbb E V_t=\\frac1m\\int_0^te^{-\\gamma(t-s)}u(s)\\,ds.$$\nFor $u=0$, $V$ is a stationary centered Gaussian process on $[0,\\infty)$ with covariance\n$$\\mathbb E[V_sV_t]=v_\\Theta e^{-\\gamma|t-s|},\\qquad v_\\Theta:=k_B\\Theta/m.$$\nDefine $Y_t:=\\int_0^tV_s\\,ds$ and $D:=v_\\Theta/\\gamma$. Then\n$$\\operatorname{Var}(Y_t)=2v_\\Theta\\left(\\frac{t}{\\gamma}-\\frac{1-e^{-\\gamma t}}{\\gamma^2}\\right),\\qquad \\lim_{t\\to\\infty}\\frac{\\operatorname{Var}(Y_t)}{2t}=D.$$\nFor every deterministic input, the centered displacement $Y_t-\\mathbb E Y_t$ is Gaussian with the variance above; consequently $(Y_t-\\mathbb E Y_t)/\\sqrt t$ converges in distribution to $N(0,2D)$. For constant input $u(s)=u_0$, $\\lim_{t\\to\\infty}\\mathbb E[V_t]/u_0=\\chi:=1/(m\\gamma)$ when $u_0\\ne0$, and $D=\\chi k_B\\Theta$.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. A. Pavliotis, Stochastic Processes and Applications",
+              "url": "https://www.ma.imperial.ac.uk/~pavl/PavliotisBook.pdf",
+              "locator": "Chapter 1 §1.2, Chapter 3 §3.7, and Chapter 4 §4.4: integrated covariance, linear SDE solution and OU stationary covariance."
+            },
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§2.6.1: underdamped Langevin dynamics with inertia and thermally normalized white noise."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-csm-dk-ou-green-kubo-einstein",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Conditional Langevin Green–Kubo and Einstein relation",
+        "reference": "items/pthm-csm-dk-ou-green-kubo-einstein.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 1,
+        "deps": [
+          "post-csm-dk-selected-thermal-langevin-bath",
+          "thm-csm-dk-ou-velocity-diffusion-response",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "post-csm-dk-selected-thermal-langevin-bath": "physical-assumption",
+          "thm-csm-dk-ou-velocity-diffusion-response": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the adopted velocity bath [[post-csm-dk-selected-thermal-langevin-bath]] on $t\\ge0$ and the Axiom of Choice [[def-axiom-of-choice]]. Let $X_t=X_0+\\int_0^tV_s\\,ds$ be the position coordinate in that model, and prepare $V_0$ in its specified stationary Gaussian law. For zero external force, define the stationary velocity covariance by\n$$C_{VV}(\\tau):=\\mathbb E[(V_s-\\mathbb EV_s)(V_{s+\\tau}-\\mathbb EV_{s+\\tau})],\\qquad s\\ge\\max(0,-\\tau).$$\nStationarity makes it independent of $s$, and the model gives\n$$C_{VV}(\\tau)=\\frac{k_BT_b}{m}e^{-\\gamma|\\tau|}.$$\nFor a deterministic force applied at time $s\\le t$, the linear response kernel is\n$$R_{VF}(t-s)=\\frac1m e^{-\\gamma(t-s)}=\\frac{1}{k_BT_b}C_{VV}(t-s).$$\nHere $R_{VF}$ is defined by the exact mean-response formula\n$$\\mathbb E[V_t]=\\int_0^tR_{VF}(t-s)F(s)\\,ds$$\nfor deterministic forcing from the stated zero-mean stationary preparation; its units are $\\mathrm{kg^{-1}}$. The constant-force mobility below is a distinct steady-response coefficient.\nThe diffusion coefficient defined by centered displacement variance is\n$$D:=\\lim_{t\\to\\infty}\\frac{\\operatorname{Var}(X_t-X_0)}{2t}=\\frac{k_BT_b}{m\\gamma}\\quad\\text{in }\\mathrm{m^2\\,s^{-1}}.$$\nand the constant-force mobility\n$$\\mu:=\\lim_{t\\to\\infty}\\frac{\\mathbb E[V_t]}{F_0}=\\frac1{m\\gamma}\\quad\\text{in }\\mathrm{s\\,kg^{-1}}$$\nfor constant $F_0\\ne0$. Hence $D=\\mu k_BT_b$. The centered displacement divided by $\\sqrt t$ converges in distribution to $N(0,2D)$. These are conditional model deductions, not observed transport data or a universal law for arbitrary systems.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grigorios A. Pavliotis, Stochastic Processes and Applications",
+              "url": "https://www.ma.imperial.ac.uk/~pavl/PavliotisBook.pdf",
+              "locator": "Chapter 1 §1.2 and Chapter 4 §4.4: Green–Kubo diffusion coefficient and stationary OU covariance."
+            },
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§§2.6.1 and 8.1.1: inertial Langevin model and equilibrium fluctuation-dissipation response."
+            }
+          ]
+        },
+        "physical_scope": "Conditional one-dimensional prediction for the specified stationary inertial velocity Langevin model with constant mass, damping, temperature and additive noise. It does not assert the Einstein relation for nonlinear dynamics, arbitrary baths, general mechanical systems, or measured material coefficients.",
+        "proof_strategy": "direct",
+        "empirical_premises": []
+      },
+      {
+        "id": "rem-csm-dk-hard-limit-dispositions",
+        "kind": "remark",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Scope of the selected finite stochastic and kinetic models",
+        "reference": "items/rem-csm-dk-hard-limit-dispositions.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-csm-dk-periodic-mean-field-model",
+          "def-csm-dk-reflection-collision-gain",
+          "def-csm-dk-finite-reversible-rate-model",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-periodic-mean-field-model": "mathematical-premise",
+          "def-csm-dk-reflection-collision-gain": "mathematical-premise",
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The selected mean-field definition [[def-csm-dk-periodic-mean-field-model]] fixes a smooth periodic pair force and $1/N$ interaction scaling. The collision definition [[def-csm-dk-reflection-collision-gain]] fixes a homogeneous finite normalized angular reflection measure. The finite-rate definition [[def-csm-dk-finite-reversible-rate-model]] fixes a connected finite state graph and reversible rates. These formulations provide the precise regimes used by the results on this page.\n\nNo result here derives the finite-state rates from deterministic particle mechanics, proves a limit from particle dynamics to continuum fluid equations, or shows that long-time averages equal invariant-measure averages for a general Hamiltonian system. Such conclusions require their own stated microscopic model, limiting assumptions and mathematical proof. The physical rate and Langevin models in this pair are adopted assumptions; their theorems are conditional predictions, and this pair contains no reported observations or empirical inference.",
+        "strategy": "Nonproof carrier; see the complete item body.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2 and Chapter 3 §§3.1–3.4: the finite reversible rate regime used by this pair."
+            }
+          ]
+        },
+        "physical_scope": "Records the boundaries of the selected smooth periodic mean-field, finite angular-reflection, and finite reversible-rate formulations. It asserts no empirical applicability, microscopic rate derivation, hydrodynamic limit, or generic Hamiltonian ergodicity."
+      },
+      {
+        "id": "thm-csm-dk-finite-rate-fluctuation-response",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Finite-rate fluctuation response and Green–Kubo inverse",
+        "reference": "items/thm-csm-dk-finite-rate-fluctuation-response.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "thm-csm-dk-integrable-covariance-green-kubo",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap": "mathematical-premise",
+          "thm-csm-dk-integrable-covariance-green-kubo": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]], countable choice [[def-countable-choice]], and the rate model $E,\\pi,w,Q$ of [[def-csm-dk-finite-reversible-rate-model]]. Let $X_t$ be the stationary two-sided chain of [[thm-csm-dk-nonexplosive-ctmc-and-gap]], with transition semigroup $P_t=e^{tQ}$. For any real observables $A,B:E\\to\\mathbb R$, write $A_c=A-\\pi(A)$ and $B_c=B-\\pi(B)$, and define\n$$C_{BA}(t):=\\langle B_c,P_tA_c\\rangle_\\pi,\\qquad t\\ge0.$$\nDefine $\\operatorname{Cov}_\\pi(A,B):=\\pi(AB)-\\pi(A)\\pi(B)$, where $AB$ is pointwise multiplication.\nFor a continuous field $h:[0,t_f]\\to\\mathbb R$ and dimensionless $\\epsilon$, prescribe rates\n$$w^\\epsilon_{ab}(t)=w_{ab}\\exp\\! \\left(\\frac{\\beta\\epsilon h(t)}2(B_b-B_a)\\right),\\quad a\\ne b,$$\nwith negative row sums on the diagonal, and let $p^\\epsilon(0)=\\pi$ evolve by the resulting finite forward equation. The derivative of the observable mean at $\\epsilon=0$ is\n$$\\left.\\frac{\\partial}{\\partial\\epsilon}\\sum_a p^\\epsilon_a(t)A_a\\right|_{\\epsilon=0}=\\int_0^t h(s)R_{AB}(t-s)\\,ds,\\qquad R_{AB}(u)=-\\beta\\,\\frac{d}{du}C_{BA}(u).$$\nFor a constant field $h$, the perturbed Gibbs vector $\\pi^\\epsilon_a\\propto\\pi_a e^{\\beta\\epsilon hB_a}$ is stationary and its static susceptibility is $\\beta h\\,\\operatorname{Cov}_\\pi(A,B)$.\n\nFor any bounded vector observable $G:E\\to\\mathbb R^d$, set $G_c=G-\\pi(G)$ and\n$$C_{ij}(s):=\\langle (G_c)_i,P_s(G_c)_j\\rangle_\\pi.$$\nThese correlations are absolutely integrable. The Green–Kubo covariance limit is\n$$\\lim_{T\\to\\infty}\\frac{\\operatorname{Cov}_\\pi(\\int_0^T G(X_s)\\,ds)}{2T}=D,\\qquad D_{ij}=\\int_0^\\infty C_{ij}(s)\\,ds=\\langle (G_c)_i,(-Q)^{-1}(G_c)_j\\rangle_\\pi,$$\nwhere $(-Q)^{-1}$ is the inverse on the mean-zero subspace and $D$ is positive semidefinite.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 3 §§3.1–3.4: detailed balance, the self-adjoint finite generator and its spectral representation."
+            },
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§8.1.1 and §§8.2.2–8.2.4: equilibrium response correlations, rate-dependent response and local detailed balance."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-csm-dk-markov-entropy-and-strong-averages",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Markov relative entropy decay and almost-sure time averages",
+        "reference": "items/thm-csm-dk-markov-entropy-and-strong-averages.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "thm-csm-dk-integrable-covariance-green-kubo",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap": "mathematical-premise",
+          "thm-csm-dk-integrable-covariance-green-kubo": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]], countable choice [[def-countable-choice]], and the model $E,\\pi,w,Q$ of [[def-csm-dk-finite-reversible-rate-model]]. For any initial probability vector $p_0$, let $p_t=p_0P_t$, where $P_t=e^{tQ}$ is supplied by [[thm-csm-dk-nonexplosive-ctmc-and-gap]], and define the dimensionless relative information\n$$\\mathcal D(p_t\\Vert\\pi):=\\sum_{a\\in E}p_a(t)\\log\\frac{p_a(t)}{\\pi_a},\\qquad 0\\log0:=0.$$\nFor every $t>0$, $p_a(t)>0$ for all states and\n$$\\frac{d}{dt}\\mathcal D(p_t\\Vert\\pi)=-\\frac12\\sum_{a\\in E}\\sum_{b\\ne a}\\pi_aw_{ab}(r_b(t)-r_a(t))(\\log r_b(t)-\\log r_a(t))\\le0,\\qquad r_a(t):=\\frac{p_a(t)}{\\pi_a}.$$\nAt a positive time the derivative vanishes exactly when $p_t=\\pi$, and $\\mathcal D(p_t\\Vert\\pi)\\to0$ as $t\\to\\infty$.\n\nFor every bounded observable $A:E\\to\\mathbb R$ and every initial law, the actual continuous-time average satisfies\n$$\\frac1T\\int_0^T A(X_s)\\,ds\\longrightarrow\\pi(A)\\quad\\text{almost surely as }T\\to\\infty.$$\nUnder stationary preparation, with $A_c=A-\\pi(A)$ and spectral gap $\\lambda_*$ from [[thm-csm-dk-nonexplosive-ctmc-and-gap]],\n$$\\operatorname{Var}_\\pi\\!\\left(\\frac1T\\int_0^T A(X_s)\\,ds\\right)\\le\\frac{2\\|A_c\\|_{L^2(\\pi)}^2}{\\lambda_*T}.$$",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2 and Chapter 3 §§3.1–3.4: finite continuous-time convergence, reversibility and spectral expansion."
+            },
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§§6.1–6.2: master-equation probabilities and stochastic entropy; the local proof derives its own finite-chain dissipation identity."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-csm-dk-strong-lumpability",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Exact all-preparations coarse Markov criterion",
+        "reference": "items/thm-csm-dk-strong-lumpability.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 2,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Choice [[def-axiom-of-choice]] and the finite rate chain of [[def-csm-dk-finite-reversible-rate-model]] with transition semigroup supplied by [[thm-csm-dk-nonexplosive-ctmc-and-gap]]. Let $\\mathcal C=\\{C_1,\\ldots,C_k\\}$ be a partition of $E$, meaning $k\\ge1$, each $C_i$ is nonempty, the blocks are pairwise disjoint, and their union is $E$. For $a\\in C_i$ and $j\\ne i$, set\n$$q(a,C_j):=\\sum_{b\\in C_j}w_{ab}.$$\nThe projected process $\\bar X_t=i$ when $X_t\\in C_i$ has one time-homogeneous Markov generator valid for every initial microscopic probability law if and only if $q(a,C_j)$ is independent of $a\\in C_i$ for every $i$ and $j\\ne i$. Under this condition, the coarse generator has off-diagonal entries $\\bar q_{ij}=q(a,C_j)$ for any $a\\in C_i$ and diagonal entries $\\bar q_{ii}=-\\sum_{j\\ne i}\\bar q_{ij}$. Its stationary weights $\\bar\\pi_i=\\sum_{a\\in C_i}\\pi_a$ satisfy detailed balance.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2 and Chapter 3 §§3.1–3.4: finite-state generators, transition semigroups and detailed balance."
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "pthm-csm-dk-finite-bath-response",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "title": "Conditional finite-bath equilibration and fluctuation response",
+        "reference": "items/pthm-csm-dk-finite-bath-response.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "post-csm-dk-selected-reversible-bath-rates",
+          "thm-csm-dk-markov-entropy-and-strong-averages",
+          "thm-csm-dk-finite-rate-fluctuation-response",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "formulation-prerequisite",
+          "post-csm-dk-selected-reversible-bath-rates": "physical-assumption",
+          "thm-csm-dk-markov-entropy-and-strong-averages": "mathematical-premise",
+          "thm-csm-dk-finite-rate-fluctuation-response": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the adopted finite thermal rate model [[post-csm-dk-selected-reversible-bath-rates]], including its finite energy states, detailed-balance rates, temperature parameter and stationary Gibbs preparation for the response branch. For any initial microscopic probability law, the model's dimensionless relative information $\\mathcal D(p_t\\Vert\\pi)$ is nonincreasing and tends to zero, and every bounded state observable has an almost-sure time average equal to its Gibbs mean. For real state observables $A,B:E\\to\\mathbb R$, the equilibrium-response branch with the postulated symmetric field-dependent rates has first-order response\n$$\\delta\\langle A(t)\\rangle=\\int_0^t h(s)\\left[-\\beta\\,\\frac{d}{du}C_{BA}(u)\\bigg|_{u=t-s}\\right]ds,$$\nwhere $\\delta\\langle A(t)\\rangle:=\\left.\\partial_\\epsilon\\sum_a p_a^\\epsilon(t)A_a\\right|_{\\epsilon=0}$, $p^\\epsilon(0)=\\pi$, and $p^\\epsilon$ solves the finite forward equation for the postulated controlled rates. The correlation is $C_{BA}(u)=\\langle(B-\\pi(B)),P_u(A-\\pi(A))\\rangle_\\pi$. For a constant field amplitude $g$ (in joules per unit of $B$), define the perturbed equilibrium vector $\\pi^g_a\\propto\\pi_a e^{\\beta gB_a}$ and its susceptibility per unit field $\\chi_{AB}:=\\left.\\partial_g\\pi^g(A)\\right|_{g=0}$. Then $\\chi_{AB}=\\beta\\,\\operatorname{Cov}_\\pi(A,B)$ and, when $g=\\epsilon h$ for constant $h$, the derivative with respect to dimensionless $\\epsilon$ is $h\\chi_{AB}$. Here $\\pi^g(A):=\\sum_a\\pi^g_aA_a$ and $\\operatorname{Cov}_\\pi(A,B):=\\pi(AB)-\\pi(A)\\pi(B)$. If physical units are assigned to $A$ and $B$, write them as $[A]$ and $[B]$: $C_{BA}$ has units $[A][B]$, while $\\beta h\\,dC_{BA}/du$ has units $[A]$ per second, so the time integral and the derivative with respect to dimensionless $\\epsilon$ have units $[A]$. These are conditional predictions of this finite stochastic model. They concern its dimensionless relative-information functional and state observables; no experimental observation, calibrated rate, material-specific claim or universal thermodynamic law is asserted.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Udo Seifert, Stochastic thermodynamics, fluctuation theorems, and molecular machines",
+              "url": "https://arxiv.org/pdf/1205.4176",
+              "locator": "§§6.1–6.2, §8.1.1, §8.2.4 and §9.4.5: finite-state master equation, equilibrium response and rate-ratio qualifications."
+            },
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2 and Chapter 3 §§3.1–3.4: finite continuous-time reversible chains and spectral convergence."
+            }
+          ]
+        },
+        "physical_scope": "Conditional predictions of the specified connected finite-state thermal rate model, including relative-information relaxation from any initial law, equilibrium linear response for its chosen field-dependent rates, and long-time averages of bounded state observables. Rate values and material applicability require separate physical calibration; no observations or empirical rate estimates are included.",
+        "proof_strategy": "direct",
+        "empirical_premises": []
+      }
+    ]
+  },
+  {
+    "order": 502,
+    "id": "csm-stochastic-response-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Finite reversible stochastic rate model and thermal coupling — Examples",
+    "companion": "csm-stochastic-response",
+    "requires": [
+      "csm-stochastic-response"
+    ],
+    "items": [
+      {
+        "id": "cex-csm-dk-hidden-state-rate-obstruction",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "library": "physics",
+        "title": "Reversible finite chain with hidden-state exit-rate obstruction",
+        "reference": "items/cex-csm-dk-hidden-state-rate-obstruction.md",
+        "design_state": "Complete draft carrier authored; scoped checks and independent review remain pending.",
+        "dependency_level": 3,
+        "deps": [
+          "def-csm-dk-finite-reversible-rate-model",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "thm-csm-dk-strong-lumpability",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "dependency_roles": {
+          "def-csm-dk-finite-reversible-rate-model": "mathematical-premise",
+          "thm-csm-dk-nonexplosive-ctmc-and-gap": "mathematical-premise",
+          "thm-csm-dk-strong-lumpability": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Every finite reversible stochastic rate model induces, for every partition of its states, one time-homogeneous Markov law for the block process that is valid for all microscopic initial preparations.",
+        "strategy": "proof_strategy: direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Aldous and James Allen Fill, Reversible Markov Chains and Random Walks on Graphs",
+              "url": "https://www.stat.berkeley.edu/~aldous/RWG/book.pdf",
+              "locator": "Chapter 2 §2.1.2: finite continuous-time transition rates and forward equations; all example rates are checked directly."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

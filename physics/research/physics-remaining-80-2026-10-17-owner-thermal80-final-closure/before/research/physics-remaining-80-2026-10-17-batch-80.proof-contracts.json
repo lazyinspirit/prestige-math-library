@@ -1,0 +1,621 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "80",
+  "level": 8,
+  "scope": [
+    "def-tgr-emitter-quasistatic-diagnostic",
+    "lem-tgr-emitter-quasistatic-bounds",
+    "post-tgr-photon-emitter-and-quasistatic-balance",
+    "pthm-tgr-ideal-photon-emission",
+    "texp-tgr-half-mass-emitter"
+  ],
+  "contracts": {
+    "def-tgr-emitter-quasistatic-diagnostic": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_checks_disposition": "No finite or computational check applies to a definition; the crossing-time scale and ratio are defined exactly.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-domain or empty-family assertion."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item makes no zero-case assertion."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no one-element counting or singleton classification claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No corresponding degenerate case occurs in this statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the crossing-time scale and diagnostic are defined only before the strictly positive cutoff; M=0 is outside the domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states AC_omega explicitly and constructs no choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "The definition is mathematical, uses only the MHS04 mathematical ODE proposition and AC_omega, and states that its crossing-time ratio is an internal diagnostic rather than a model-error estimate."
+      }
+    },
+    "lem-tgr-emitter-quasistatic-bounds": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-tgr-ideal-evaporation-accounting",
+          "source_section": "Statement",
+          "quote": "Assume the exact Planck energy and coarse entropy flux formulas of [[thm-tgr-photon-planck-flux]]. Use SI units: $G$ is in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $c$ in $\\mathrm{m\\,s^{-1}}$, $\\hbar$ in $\\mathrm{J\\,s}$, and $k_B$ in $\\mathrm{J\\,K^{-1}}$. Fix a normalization of the asymptotic time and energy reference, a dimensionless fraction $0<\\eta\\le1$, an initial mass $M_0>0$ in kilograms, and a cutoff $0<M_{\\min}<M_0$. Let $M(t)>0$ be a $C^1$ mass function on an interval containing $0$ and its first cutoff time, with $M(0)=M_0$. For each $M>0$ define the model quantities\n$$r_H=\\frac{2GM}{c^2},\\qquad A_H=4\\pi r_H^2,\\qquad \\kappa=\\frac{c^2}{4GM},\\qquad T_\\infty=\\frac{\\hbar c\\kappa}{2\\pi k_B},\\qquad S_B(M)=\\frac{k_Bc^3A_H}{4G\\hbar}+S_0.$$\nHere $r_H$ is in metres, $A_H$ in square metres, $\\kappa$ is the fixed-reference inverse-length parameter in inverse metres, $T_\\infty$ is in kelvins, and $S_0$ is a fixed entropy offset in joules per kelvin. Adopt an effective far-field emitter with area $A_{\\rm eff}=\\eta A_H$ and power $P=A_{\\rm eff}\\sigma T_\\infty^4$ in watts, where $\\sigma$ is the coefficient in [[thm-tgr-photon-planck-flux]]. Adopt the mass-balance equation $c^2M'(t)=-P(t)$, with $t$ in seconds measured by the fixed asymptotic time parameter; terminate the model at the first time $M(t)=M_{\\min}$. Then the exact solution until that cutoff is\n$$M(t)=(M_0^3-3\\alpha t)^{1/3},\\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G^2},\\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}.$$\nThe parameter $\\alpha$ has units $\\mathrm{kg^3\\,s^{-1}}$. The model exports energy $c^2(M_0-M_{\\min})$ in joules through cutoff. Define its coarse exported entropy by $S_{\\rm rad}(t)=\\int_0^t(4/3)P(t')/T_\\infty(t')\\,dt'$, in joules per kelvin. Then\n$$S_B(M_0)-S_B(M_{\\min})>0.$$\n$$S_{\\rm rad}(\\tau)=\\frac43[S_B(M_0)-S_B(M_{\\min})].$$\n$$\\Delta(S_B+S_{\\rm rad})=\\frac13[S_B(M_0)-S_B(M_{\\min})]\\ge0,$$\nwhere $\\Delta(S_B+S_{\\rm rad})=S_B(M_{\\min})+S_{\\rm rad}(\\tau)-S_B(M_0)$ and $S_{\\rm rad}(0)=0$. This is an exact conditional calculation in the fixed-reference effective-area model. It is not a theorem about a material patch of a null horizon, an exact time-dependent Einstein solution, quantum backreaction, reference-independent Stefan emission, or a universal generalized second law.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgr-emitter-quasistatic-diagnostic",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]] and use the fixed-reference mathematical emitter model of [[prop-tgr-ideal-evaporation-accounting]], with positive constants $G,c$, a positive mass function $M(t_\\infty)$, and the model horizon radius $r_H(M)=2GM/c^2$. Here $t_\\infty$ is measured in seconds, $M$ in kilograms, $r_H$ in metres, $G$ in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $c$ in $\\mathrm{m\\,s^{-1}}$. At each $t_\\infty$ before the positive-mass cutoff, define the selected crossing-time scale and dimensionless fractional-change diagnostic by\n\n$$ t_{\\mathrm{cross}}(t_\\infty):=\\frac{r_H(M(t_\\infty))}{c}, \\qquad \\epsilon_{\\mathrm{qs}}(t_\\infty):=\\frac{|M'(t_\\infty)|\\,t_{\\mathrm{cross}}(t_\\infty)}{M(t_\\infty)}. $$\n\nThus $t_{\\mathrm{cross}}$ has units of seconds and $\\epsilon_{\\mathrm{qs}}$ is dimensionless. This is a diagnostic defined from the adopted mass ODE and the chosen length scale $r_H/c$; it is not a measured crossing time, an estimate of error against a time-dependent Einstein solution, or a proof that the ideal model approximates such a solution.\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the exact solution in [F1] on $0\\leq t_\\infty\\leq\\tau$; since $M(t_\\infty)>0$, this gives $M'=-\\alpha/M^2$. Also [F1] gives $r_H=2GM/c^2$, so substituting these identities and $t_{\\mathrm{cross}}=r_H/c$ into [F2] yields\n$$\n\\epsilon_{\\mathrm{qs}}=\\frac{(\\alpha/M^2)(2GM/c^3)}{M} =\\frac{2G\\alpha}{c^3M^2}.\n$$\nAll factors are positive on the interval.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From [F1], $M(t_\\infty+\\Delta t)^3=M(t_\\infty)^3-3\\alpha\\Delta t$. Divide by the positive $M(t_\\infty)^3$ and take positive cube roots to get $M(t_\\infty+\\Delta t)/M(t_\\infty)=(1-\\delta)^{1/3}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $M(t_\\infty)\\geq M_{\\min}>0$, one has $M(t_\\infty)^{-2}\\leq M_{\\min}^{-2}$. The formula in step 1.1 gives the uniform upper bound; if $M_{\\min}^2\\geq2G\\alpha/(c^3\\epsilon_0)$, multiplying by the positive denominator yields $\\epsilon_{\\mathrm{qs}}\\leq\\epsilon_0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $\\delta=0$, step 1.2 gives a ratio of one and the bound is equality. If $0<\\delta\\leq1/2$, $h(x)=(1-x)^{1/3}$ is continuous on $[0,\\delta]$, differentiable on its interior, and satisfies $|h'(x)|=\\frac13(1-x)^{-2/3}\\leq2^{2/3}/3$. Apply [F3] on this nondegenerate interval and use $h(0)=1$ to obtain $|h(\\delta)-1|\\leq(2^{2/3}/3)\\delta$. Step 1.2 gives the claimed ratio bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "zero interval",
+          "status": "checked",
+          "evidence": "Step 3.1 treats delta=0 directly, giving ratio one and zero deviation."
+        },
+        {
+          "name": "largest admissible delta",
+          "status": "checked",
+          "evidence": "Step 3.1 uses |h'(x)| <= 2^(2/3)/3 on [0, delta] for delta <= 1/2, including the endpoint delta=1/2."
+        },
+        {
+          "name": "positive cutoff",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 retain M >= M_min > 0, so the uniform bound has no M=0 endpoint."
+        }
+      ],
+      "finite_checks_disposition": "These are exact symbolic boundary substitutions into the proved ODE formulas; no simulation or empirical data are used.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-domain or empty-family assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 treats delta=0 directly and obtains a unit mass ratio and zero deviation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no one-element counting or singleton classification claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 retain M >= M_min > 0; step 3.1 treats the degenerate interval delta=0 separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 use both finite-time endpoints and the positive cutoff."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 states AC_omega explicitly; no stronger choice principle is invoked in steps 1.1–3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "The complete proof uses only mathematical dependencies, including the exact AC_omega premise, the supplied ODE, the local diagnostic definition, and the stated mean-value theorem."
+      }
+    },
+    "post-tgr-photon-emitter-and-quasistatic-balance": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate defines the Schwarzschild family parameter M, geometric mass length m, normalized length coordinate x^0=ct_infinity, asymptotic generator, horizon radius/area/surface gravity, reference temperature, effective area, outgoing power, mass balance, positive cutoff, and coarse entropy-rate variable with units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The scope fixes the asymptotic reference and eta in (0,1], distinguishes coarse Gibbs/ray entropy from outside von Neumann entropy, and disclaims a dynamic Einstein solution, Hawking derivation, measured flux, literal horizon patch, and universal GSL."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Four independent current-run full-text treatments were inspected: Wald §2–§3, Benetti Genolini full 84-page lecture notes §§1.3 and 2.1, MIT OCW Lecture 20 photon-gas section, and the complete two-page University of Mississippi Lecture 18. Their limitations are recorded in batch-80 coverage; all four have current-run full-body fetch stamps reused and rechecked."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is an adopted physical model with provenance.proof not-applicable and no Proof section. It reports no observation, does not derive photon equilibration, and does not identify the selected reference temperature with a general Hawking state."
+        }
+      },
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "The authored model uses exact inspected PHS03 and MHS04 interfaces conditionally. The current PHS03 postulate Step 1 record is escalated. Its stated reason cites an AC_omega omission in PHS02, but the inspected current PHS02 Statement/proof carry AC_omega explicitly; the PHS02 ready record is stale. This readiness reconciliation remains open and is recorded in the item record and batch notes."
+      }
+    },
+    "pthm-tgr-ideal-photon-emission": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-tgr-photon-emitter-and-quasistatic-balance",
+          "source_section": "Postulate",
+          "quote": "Use SI constants $G_N>0$ in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $c>0$ in $\\mathrm{m\\,s^{-1}}$, $\\hbar>0$ in $\\mathrm{J\\,s}$, and $k_B>0$ in $\\mathrm{J\\,K^{-1}}$. In [[prop-tgr-ideal-evaporation-accounting]], the mathematical constant $G$ is identified with this same $G_N$.\n\nFor each fixed mass $M>0$ in kilograms, take the zero-angular-momentum, zero-charge member of the selected Kerr–Newman stationary family [[pthm-tgr-kn-family-mechanics]], with geometric mass length $m=G_NM/c^2$ in metres. In the Schwarzschild exterior use coordinates $(x^0,r,\\vartheta,\\varphi)$, $x^0=ct_\\infty$ in metres, $r>2m$, and metric\n$$\nds^2=-\\left(1-\\frac{2m}{r}\\right)(dx^0)^2+ \\left(1-\\frac{2m}{r}\\right)^{-1}dr^2+r^2d\\Omega_2^2,\n$$\nwhere $d\\Omega_2^2$ is the unit-sphere metric. The asymptotic generator is $\\xi=\\partial_{x^0}$, with $g(\\xi,\\xi)\\to-1$ at infinity. The selected stationary-family radius, area, and geometric surface gravity are\n$$\nr_H(M)=2m=\\frac{2G_NM}{c^2},\\qquad A_H(M)=4\\pi r_H(M)^2,\\qquad \\kappa_{\\rm geom}(M)=\\frac{1}{4m}=\\frac{c^2}{4G_NM}.\n$$\nThus $r_H$ is in metres, $A_H$ in $\\mathrm{m^2}$, and $\\kappa_{\\rm geom}$ in $\\mathrm{m^{-1}}$, using the length-normalized generator convention of [[def-tgr-framework-units]].\n\nAdopt the selected reduced-model reference temperature from [[post-tgr-thermodynamic-horizon-identification]] on this Schwarzschild subfamily:\n$$\nT_\\infty(M):=T_K=T_{\\rm red} =\\frac{\\hbar c\\kappa_{\\rm geom}(M)}{2\\pi k_B} =\\frac{\\hbar c^3}{8\\pi G_NMk_B}>0.\n$$\nThis is an adopted model identification for one fixed asymptotic reference. It is not a local proper-temperature field and does not assert a general Hawking state. The reversible entropy state $S_H$ is the value of the stationary-family state function on each Schwarzschild member; evaluating that family function along a changing parameter $M(t_\\infty)$ is bookkeeping in this model, not a claim that the changing family is an exact spacetime solution.\n\nAdopt the zero-mode-excluded, zero-point-subtracted, two-polarization photon Gibbs model and isotropic freely streaming ray convention of [[thm-tgr-photon-planck-flux]], under $\\mathrm{AC}_\\omega$ from [[def-countable-choice]]. Its energy density $u$, coarse diagonal-mode entropy density $s$, and one-sided fluxes are those of that theorem. This identification is an ideal reservoir assumption; no photon-wall equilibration theorem or physical preparation is asserted.\n\nFix $0<\\eta\\leq1$, a constant dimensionless active-area fraction, an initial mass $M_0>0$, and a positive cutoff $0<M_{\\min}<M_0$. Let $M(t_\\infty)>0$ be $C^1$ on an interval containing its first cutoff time $\\tau$, with $M(0)=M_0$, and let $t_\\infty$ be measured in seconds by the fixed asymptotic time parameter. Define $E_\\infty(t_\\infty)=M(t_\\infty)c^2$ in joules and the effective far-field emitting area\n$$\nA_{\\rm eff}(M):=\\eta A_H(M).\n$$\nAdopt zero incoming flux, the power law $P_\\infty=A_{\\rm eff}\\sigma T_\\infty^4$ in watts, the balance equation\n$$\n\\frac{dE_\\infty}{dt_\\infty}=c^2M'(t_\\infty)=-P_\\infty(t_\\infty),\n$$\nand the coarse exported entropy rate $S_{\\rm rad}'=(4/3)P_\\infty/T_\\infty$, with $S_{\\rm rad}(0)=0$. Here $S_{\\rm rad}$ is the entropy carried by the ideal Gibbs/ray model, not an outside von Neumann entropy. The effective area is not a material patch of the null horizon and $\\eta$ is not a frequency-independent greybody factor applied separately to entropy.\n\nThe model holds only for the fixed normalization $\\xi$. Under $\\xi\\mapsto b\\xi$, $b>0$, the model conventions scale $E_\\xi\\mapsto bE_\\xi$, $t_\\xi\\mapsto t_\\xi/b$, $\\kappa_{\\rm geom}\\mapsto b\\kappa_{\\rm geom}$, and leave $A_H$ unchanged. The Stefan closure above is therefore not stipulated as a reference-independent luminosity law. No experiment, coupled backreaction solution, physical extinction event, or universal generalized second law is adopted.\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tgr-photon-planck-flux",
+          "source_section": "Statement",
+          "quote": "Fix $L,T,\\hbar,c,k_B>0$ with SI units respectively metre, kelvin, joule-second, metre per second, and joule per kelvin. Let $\\beta=(k_BT)^{-1}$ in inverse joules. The mathematical periodic-box mode set is $I=(\\mathbb Z^3\\setminus\\{0\\})\\times\\{1,2\\}$, with two polarization labels and the enumeration by increasing max-norm shells and then lexicographic order; within each shell use lexicographic order on $(n,s)$. For $i=(n,s)$ set $\\epsilon_i=\\hbar c(2\\pi/L)|n|$ in joules and $\\omega_n=2\\pi c|n|/L$ in inverse seconds. The zero wavevector is excluded and no zero-point energy is included.\n\nLet $\\Omega_B$ be the finite-support maps $m:I\\to\\mathbb N_0$, set $E(m)=\\sum_{i\\in I}\\epsilon_i m_i$, and let $\\mathcal H_B=\\ell^2(\\Omega_B,\\mathbb C)$ with its occupation basis. Define the nonnegative diagonal multiplier $H$ by $(Ha)_m=E(m)a_m$ on $D(H)=\\{a\\in\\ell^2(\\Omega_B,\\mathbb C):\\sum_m E(m)^2|a_m|^2<\\infty\\}$, so $H|m\\rangle=E(m)|m\\rangle$. For each $\\gamma>0$ in inverse joules define the bounded positive diagonal multiplier $e^{-\\gamma H}$ by $e^{-\\gamma H}|m\\rangle=e^{-\\gamma E(m)}|m\\rangle$, and set $Z_L(\\gamma)=\\sum_{m\\in\\Omega_B}e^{-\\gamma E(m)}$; the proof shows this sum is finite and equals the operator trace $\\operatorname{Tr}(e^{-\\gamma H})$. Set $q_n=e^{-\\beta\\epsilon_{(n,1)}}$, $Z_L=Z_L(\\beta)$, $\\rho_L=Z_L^{-1}e^{-\\beta H}$, and $p_m=e^{-\\beta E(m)}/Z_L$. Define the diagonal-state entropy by $S_L=-k_B\\sum_{m\\in\\Omega_B}p_m\\log p_m$, where $\\log$ is the natural logarithm.\n\nThe finite-box trace, energy and entropy are actual diagonal sums, not continuum mode integrals. The partition function $Z_L$ and occupations $q_n$ are dimensionless, $\\rho_L$ has trace one, energy and $U_L$ have units joules, and $S_L$ has units joules per kelvin. The sums satisfy $Z_L=\\prod_{n\\ne0}(1-q_n)^{-2}<\\infty$, $\\rho_L$ is a positive trace-one trace-class operator, and every nonnegative integer energy moment under $\\rho_L$ is finite. Moreover,\n$$U_L=\\operatorname{Tr}(\\rho_LH)=2\\sum_{n\\ne0}\\frac{\\epsilon_{(n,1)}}{e^{\\beta\\epsilon_{(n,1)}}-1}<\\infty.$$\nThe entropy is\n$$S_L=k_B(\\log Z_L+\\beta U_L)=2k_B\\sum_{n\\ne0}\\left[-\\log(1-q_n)+\\frac{\\beta\\epsilon_{(n,1)}q_n}{1-q_n}\\right]<\\infty.$$\n\nWith $u_L=U_L/L^3$ and $s_L=S_L/L^3$ in joules per cubic metre and joules per kelvin per cubic metre, respectively, their thermodynamic-volume limits at fixed $T$ exist. For every continuous compactly supported $\\psi:[0,\\infty)\\to\\mathbb R$, the limiting spectral energy measure is\n$$\\lim_{L\\to\\infty}\\frac{2}{L^3}\\sum_{n\\ne0}\\frac{\\hbar\\omega_n}{e^{\\beta\\hbar\\omega_n}-1}\\psi(\\omega_n)=\\frac{\\hbar}{\\pi^2c^3}\\int_0^\\infty\\frac{\\omega^3\\psi(\\omega)}{e^{\\beta\\hbar\\omega}-1}\\,d\\omega.$$\nThe integrated limits are\n$$u=\\lim_{L\\to\\infty}u_L=\\frac{\\pi^2k_B^4T^4}{15\\hbar^3c^3},\\qquad s=\\lim_{L\\to\\infty}s_L=\\frac{4u}{3T}.$$\n\nIn a separately specified isotropic freely streaming ray model, directions have uniform angular density $u/(4\\pi)$ for energy and $s/(4\\pi)$ for this coarse mode entropy on the unit sphere; each ray has velocity $c\\hat n$. Define one-sided flux through a plane by integrating the outward normal velocity component over the outward hemisphere. Then $F=cu/4=\\sigma T^4$ and $F_S=cs/4=(4/3)F/T$, where $F$ is in watts per square metre, $F_S$ in joules per kelvin per square metre per second, and $\\sigma=\\pi^2k_B^4/(60\\hbar^3c^2)$ in watts per square metre per kelvin to the fourth power. This is a mathematical model deduction; it does not assert an observed blackbody, an equilibration mechanism, or a horizon-emission law.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-tgr-ideal-evaporation-accounting",
+          "source_section": "Statement",
+          "quote": "Assume the exact Planck energy and coarse entropy flux formulas of [[thm-tgr-photon-planck-flux]]. Use SI units: $G$ is in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $c$ in $\\mathrm{m\\,s^{-1}}$, $\\hbar$ in $\\mathrm{J\\,s}$, and $k_B$ in $\\mathrm{J\\,K^{-1}}$. Fix a normalization of the asymptotic time and energy reference, a dimensionless fraction $0<\\eta\\le1$, an initial mass $M_0>0$ in kilograms, and a cutoff $0<M_{\\min}<M_0$. Let $M(t)>0$ be a $C^1$ mass function on an interval containing $0$ and its first cutoff time, with $M(0)=M_0$. For each $M>0$ define the model quantities\n$$r_H=\\frac{2GM}{c^2},\\qquad A_H=4\\pi r_H^2,\\qquad \\kappa=\\frac{c^2}{4GM},\\qquad T_\\infty=\\frac{\\hbar c\\kappa}{2\\pi k_B},\\qquad S_B(M)=\\frac{k_Bc^3A_H}{4G\\hbar}+S_0.$$\nHere $r_H$ is in metres, $A_H$ in square metres, $\\kappa$ is the fixed-reference inverse-length parameter in inverse metres, $T_\\infty$ is in kelvins, and $S_0$ is a fixed entropy offset in joules per kelvin. Adopt an effective far-field emitter with area $A_{\\rm eff}=\\eta A_H$ and power $P=A_{\\rm eff}\\sigma T_\\infty^4$ in watts, where $\\sigma$ is the coefficient in [[thm-tgr-photon-planck-flux]]. Adopt the mass-balance equation $c^2M'(t)=-P(t)$, with $t$ in seconds measured by the fixed asymptotic time parameter; terminate the model at the first time $M(t)=M_{\\min}$. Then the exact solution until that cutoff is\n$$M(t)=(M_0^3-3\\alpha t)^{1/3},\\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G^2},\\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}.$$\nThe parameter $\\alpha$ has units $\\mathrm{kg^3\\,s^{-1}}$. The model exports energy $c^2(M_0-M_{\\min})$ in joules through cutoff. Define its coarse exported entropy by $S_{\\rm rad}(t)=\\int_0^t(4/3)P(t')/T_\\infty(t')\\,dt'$, in joules per kelvin. Then\n$$S_B(M_0)-S_B(M_{\\min})>0.$$\n$$S_{\\rm rad}(\\tau)=\\frac43[S_B(M_0)-S_B(M_{\\min})].$$\n$$\\Delta(S_B+S_{\\rm rad})=\\frac13[S_B(M_0)-S_B(M_{\\min})]\\ge0,$$\nwhere $\\Delta(S_B+S_{\\rm rad})=S_B(M_{\\min})+S_{\\rm rad}(\\tau)-S_B(M_0)$ and $S_{\\rm rad}(0)=0$. This is an exact conditional calculation in the fixed-reference effective-area model. It is not a theorem about a material patch of a null horizon, an exact time-dependent Einstein solution, quantum backreaction, reference-independent Stefan emission, or a universal generalized second law.\n\n",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-tgr-emitter-quasistatic-diagnostic",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]] and use the fixed-reference mathematical emitter model of [[prop-tgr-ideal-evaporation-accounting]], with positive constants $G,c$, a positive mass function $M(t_\\infty)$, and the model horizon radius $r_H(M)=2GM/c^2$. Here $t_\\infty$ is measured in seconds, $M$ in kilograms, $r_H$ in metres, $G$ in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $c$ in $\\mathrm{m\\,s^{-1}}$. At each $t_\\infty$ before the positive-mass cutoff, define the selected crossing-time scale and dimensionless fractional-change diagnostic by\n\n$$ t_{\\mathrm{cross}}(t_\\infty):=\\frac{r_H(M(t_\\infty))}{c}, \\qquad \\epsilon_{\\mathrm{qs}}(t_\\infty):=\\frac{|M'(t_\\infty)|\\,t_{\\mathrm{cross}}(t_\\infty)}{M(t_\\infty)}. $$\n\nThus $t_{\\mathrm{cross}}$ has units of seconds and $\\epsilon_{\\mathrm{qs}}$ is dimensionless. This is a diagnostic defined from the adopted mass ODE and the chosen length scale $r_H/c$; it is not a measured crossing time, an estimate of error against a time-dependent Einstein solution, or a proof that the ideal model approximates such a solution.\n",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tgr-emitter-quasistatic-bounds",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]]. Let $G,c,\\hbar,\\eta,M_0,M_{\\min}>0$ be the relevant constants and initial/cutoff data of [[prop-tgr-ideal-evaporation-accounting]], with $0<\\eta\\leq1$ and $0<M_{\\min}<M_0$. Let\n$$\nM(t_\\infty)=(M_0^3-3\\alpha t_\\infty)^{1/3}, \\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G^2}, \\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}\n$$\nbe the positive solution and cutoff supplied by that proposition.\nUse the diagnostic of [[def-tgr-emitter-quasistatic-diagnostic]]. Then\n$$\n\\epsilon_{\\mathrm{qs}}(t_\\infty)=\\frac{2G\\alpha}{c^3M(t_\\infty)^2} \\leq\\frac{2G\\alpha}{c^3M_{\\min}^2}.\n$$\nFor any $\\epsilon_0>0$, the condition $M_{\\min}^2\\geq2G\\alpha/(c^3\\epsilon_0)$ therefore implies $\\epsilon_{\\mathrm{qs}}(t_\\infty)\\leq\\epsilon_0$ throughout $[0,\\tau]$.\n\nThere is also an exact finite-interval bound. If $0\\leq t_\\infty\\leq t_\\infty+\\Delta t\\leq\\tau$ and\n$$\n\\delta:=\\frac{3\\alpha\\Delta t}{M(t_\\infty)^3}\\leq\\frac12,\n$$\nthen\n$$\n\\frac{M(t_\\infty+\\Delta t)}{M(t_\\infty)}=(1-\\delta)^{1/3}, \\qquad \\left|\\frac{M(t_\\infty+\\Delta t)}{M(t_\\infty)}-1\\right| \\leq\\frac{2^{2/3}}{3}\\,\\delta.\n$$\nBoth bounds are exact internal consequences of the adopted ODE. They give no error bound between that ODE and an unconstructed Einstein–quantum backreaction solution.\n\n",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-tgr-area-entropy-calibration",
+          "source_section": "Statement",
+          "quote": "Use the physical Kerr–Newman family parameterized by the connected strict subextremal domain\n$$\\mathcal P:=\\{(m,a,q)\\in\\mathbb R^3:m>0,\\ m^2>a^2+q^2\\},$$\nwith its current SI parameter map and selected horizon conventions from [[pthm-tgr-kn-family-mechanics]]. Assume $\\mathrm{AC}_\\omega$ as defined in [[def-countable-choice]], the mathematical premise used by the current Kerr–Newman and reduced spectral supplier proofs. Let $S_H:\\mathcal P\\to\\mathbb R$ be the $C^1$ entropy state function adopted in [[post-tgr-thermodynamic-horizon-identification]], measured in $\\mathrm{J\\,K^{-1}}$. Assume the selected reduced exponential-current reference temperature is identified with the same generator's positive $\\kappa_{\\rm geom}$, exactly as in that postulate. Then there is a constant $s_*\\in\\mathbb R$, with units $\\mathrm{J\\,K^{-1}}$, such that throughout $\\mathcal P$\n$$S_H=\\frac{k_B}{4\\ell_P^2}A_H+s_*=\\frac{k_Bc^3}{4G_N\\hbar}A_H+s_*,\\qquad \\ell_P^2:=\\frac{G_N\\hbar}{c^3}.$$\nThe deduction determines the area coefficient within this adopted model and leaves the entropy zero unselected. It does not identify $S_H$ with a statistical microstate count or an outside-state entropy.\n\n",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The outgoing one-sided flux in [F2] and the adopted area/temperature in [F1] give $P_\\infty=\\eta A_H\\sigma T_\\infty^4$. Substituting $A_H=16\\pi G_N^2M^2/c^4$, $T_\\infty=\\hbar c^3/(8\\pi G_NMk_B)$, and $\\sigma=\\pi^2k_B^4/(60\\hbar^3c^2)$ yields $P_\\infty=\\eta\\hbar c^6/(15360\\pi G_N^2M^2)$. The adopted balance equation is therefore $M'=-\\alpha M^{-2}$ with $\\alpha=\\eta\\hbar c^4/(15360\\pi G_N^2)>0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The hypotheses of [F3] match the fixed-reference area, temperature, outgoing flux, mass-balance law, and strictly positive cutoff in [F1]. Its exact solution gives the displayed $M(t_\\infty)$, $\\tau$, and energy export. No continuation to $M=0$ is used.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "A2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $m=G_NM/c^2$, $a=q=0$. Since $m>0$, this point lies in the strict subextremal domain of [L1]; the selected Schwarzschild horizon area is the same $A_H=16\\pi G_N^2M^2/c^4$ used by [F1] and [F3]. Therefore [L1] gives $S_H(M)=k_Bc^3A_H(M)/(4G_N\\hbar)+s_*$, while [F3] gives $S_B(M)=k_Bc^3A_H(M)/(4G_N\\hbar)+S_0$. Their constant offsets may differ, but subtracting the values at $M_0$ and $M_{\\min}$ cancels each offset and gives $S_H(M_0)-S_H(M_{\\min})=S_B(M_0)-S_B(M_{\\min})>0$, because $M_0>M_{\\min}>0$. The $\\mathrm{AC}_\\omega$ assumption [A2] is carried for the reduced-spectrum input in [L1].",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "L1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The definition [F4] and ODE of [F3] give $\\epsilon_{\\rm qs}=|M'|(2G_NM/c^3)/M=2G_N\\alpha/(c^3M^2)$. Since $M\\geq M_{\\min}$, the supremum is the displayed positive-cutoff value; the threshold follows by multiplying by $M_{\\min}^2>0$. The exact finite-interval ratio and bound are [F5]. These are internal properties of the stipulated ODE.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F3], $S_{\\rm rad}(\\tau)=(4/3)[S_B(M_0)-S_B(M_{\\min})]$. Step 1.3 replaces this difference by $\\Delta S_H$. Thus $S_{\\rm rad}(\\tau)=(4/3)\\Delta S_H$, and $S_H(M_{\\min})+S_{\\rm rad}(\\tau)-S_H(M_0)=-(\\Delta S_H)+(4/3)\\Delta S_H=(1/3)\\Delta S_H>0$. This is the stated coarse model entropy accounting only.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.3",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the rescaling $\\xi_b=b\\xi$, the energy $E_\\xi=-c\\,p_a\\xi^a$ scales by $b$, the normalized time parameter scales as $t_b=t_\\infty/b$, and the geometric surface gravity scales as $\\kappa_b=b\\kappa_{\\rm geom}$. Hence $P_b=dE_b/dt_b=b^2P_\\infty$, while $T_b=\\hbar c\\kappa_b/(2\\pi k_B)=bT_\\infty$, so $A_{\\rm eff}\\sigma T_b^4=b^4A_{\\rm eff}\\sigma T_\\infty^4$ with unchanged area and coefficient. The equality stipulated in [F1] therefore belongs to its fixed normalization and cannot be reused unchanged for arbitrary $b$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Schwarzschild family restriction",
+          "status": "checked",
+          "evidence": "Step 1.3 maps every M>0 to m=G_N M/c^2>0 and a=q=0, strictly inside the supplied stationary family."
+        },
+        {
+          "name": "positive cutoff",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the exact solution only until M_min>0 and makes no continuation to M=0."
+        },
+        {
+          "name": "entropy-offset cancellation",
+          "status": "checked",
+          "evidence": "Step 1.3 keeps s_* and S_0 separate and subtracts the endpoint values before identifying their differences."
+        },
+        {
+          "name": "reference rescaling",
+          "status": "checked",
+          "evidence": "Step 3.1 compares b^2 power scaling with b^4 Stefan scaling at unchanged area."
+        }
+      ],
+      "finite_checks_disposition": "The checks are exact symbolic substitutions and boundary comparisons within the conditional model; no numeric simulation, experimental value, or precision is introduced.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-domain or empty-family assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero-mode-excluded photon-flux statement F2; step 1.2 terminates at M_min>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no one-element counting or singleton classification claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 keep a strictly positive cutoff and map the Schwarzschild member to the strict subextremal family domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 evaluate the exact positive-cutoff time and the initial/final entropy differences."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A2 states AC_omega explicitly and the conditional steps 1.1–2.1 carry that exact assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "The proof is complete only conditionally on the exact displayed MHS04 and PHS03 interfaces and explicit AC_omega. The current PHS03 area-calibration Step 1 record is escalated. The current PHS02 temperature Statement/proof carry AC_omega, while its prior ready record is stale and the PHS03 escalation cites the contrary omission claim. Owner reconciliation remains open. No independent acceptance is asserted."
+      }
+    },
+    "texp-tgr-half-mass-emitter": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-tgr-ideal-photon-emission",
+          "source_section": "Statement",
+          "quote": "Assume the ideal model and fixed asymptotic normalization of [[post-tgr-photon-emitter-and-quasistatic-balance]], and explicitly assume $\\mathrm{AC}_\\omega$ as defined by [[def-countable-choice]]. Use $G=G_N$ between the mathematical ODE input and the physical Schwarzschild family. Also assume the conditional family-entropy interface stated by [[pthm-tgr-area-entropy-calibration]] with its actual hypotheses. Let $S_H(M)$ denote that state-function value at the stationary Schwarzschild member of mass $M$, and put\n$$\n\\Delta S_H:=S_H(M_0)-S_H(M_{\\min}).\n$$\nFor the fixed-reference effective-area model,\n$$\nP_\\infty(M)=\\frac{\\eta\\hbar c^6}{15360\\pi G_N^2M^2}, \\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G_N^2}, \\qquad M(t_\\infty)=(M_0^3-3\\alpha t_\\infty)^{1/3}, \\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}.\n$$\nThe model exports energy $c^2(M_0-M_{\\min})$ joules, and its coarse photon entropy satisfies\n$$\nS_H(M)=\\frac{4\\pi k_BG_NM^2}{\\hbar c}+s_*, \\qquad s_*\\in\\mathbb R\\ \\text{constant on the stationary family},\n$$\n$$\nS_{\\rm rad}(\\tau)=\\frac43\\Delta S_H>0, \\qquad \\Delta(S_H+S_{\\rm rad})=\\frac13\\Delta S_H>0.\n$$\nThe absolute entropy offsets in the mathematical ODE model and the stationary-family state function need not be identified; their differences agree because both have the same area coefficient on this branch.\n\nFor the diagnostic of [[def-tgr-emitter-quasistatic-diagnostic]],\n$$\n\\epsilon_{\\rm qs}(t_\\infty)=\\frac{2G_N\\alpha}{c^3M(t_\\infty)^2}, \\qquad \\sup_{0\\leq t_\\infty\\leq\\tau}\\epsilon_{\\rm qs} =\\frac{2G_N\\alpha}{c^3M_{\\min}^2}.\n$$\nThus $M_{\\min}^2\\geq2G_N\\alpha/(c^3\\epsilon_0)$ implies $\\epsilon_{\\rm qs}\\leq\\epsilon_0$ for any $\\epsilon_0>0$. The finite-interval bound in [[lem-tgr-emitter-quasistatic-bounds]] also applies whenever its stated $\\delta\\leq1/2$ condition holds.\n\nThe Stefan closure is tied to the fixed reference: under $\\xi\\mapsto b\\xi$, power scales as $b^2$, while $T_\\xi^4$ scales as $b^4$ and area is unchanged. This is an exact conditional model calculation, not a Hawking-radiation theorem, a time-dependent Einstein solution, a backreaction error estimate, an observed evaporation history, or a universal generalized second law.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $\\eta=1$, [F1] gives $\\alpha=\\hbar c^4/(15360\\pi G_N^2)$. Hence $t_*=M_0^3/(3\\alpha)=5120\\pi G_N^2M_0^3/(\\hbar c^4)$, and\n$$\n\\tau=\\frac{M_0^3-(M_0/2)^3}{3\\alpha} =\\left(1-\\frac18\\right)t_*=\\frac78t_*.\n$$\nThe cutoff remains positive, $M(\\tau)=M_0/2$, so the model does not reach its algebraic zero-mass time.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The energy export in [F1] is $c^2(M_0-M_{\\min})$. Substituting [A1] gives $c^2M_0/2$ joules.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F1], $S_H(M)=4\\pi k_BG_NM^2/(\\hbar c)+s_*$ on the selected branch, with an unfixed constant $s_*$. Subtracting its values at $M_0$ and $M_0/2$ cancels $s_*$ and gives $\\Delta S_H=4\\pi k_BG_N(3M_0^2/4)/(\\hbar c)=3\\pi k_BG_NM_0^2/(\\hbar c)$. The entropy export is $4\\Delta S_H/3=4\\pi k_BG_NM_0^2/(\\hbar c)$, and the total gain is $\\Delta S_H/3=\\pi k_BG_NM_0^2/(\\hbar c)$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The maximum diagnostic occurs at $M=M_{\\min}=M_0/2$, so [F1] gives\n$$\n\\epsilon_{\\rm qs,max}=\\frac{2G_N\\alpha}{c^3(M_0/2)^2} =\\frac{8G_N\\alpha}{c^3M_0^2} =\\frac{\\hbar c}{1920\\pi G_NM_0^2}.\n$$\nThe displayed lower bound on $M_0^2$ is equivalent, after multiplication by the positive $1920\\pi G_NM_0^2\\epsilon_0/(\\hbar c)$, to $\\epsilon_{\\rm qs,max}\\leq\\epsilon_0$. This remains an internal diagnostic for the stipulated ODE, not a comparison with a coupled spacetime solution.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "half-mass cutoff time",
+          "status": "checked",
+          "evidence": "Step 1.1 substitutes M_min=M_0/2 and obtains tau=7t_*/8 while M(tau)=M_0/2>0."
+        },
+        {
+          "name": "exported energy",
+          "status": "checked",
+          "evidence": "Step 1.2 substitutes the half-mass cutoff into c^2(M_0-M_min)."
+        },
+        {
+          "name": "coarse entropy",
+          "status": "checked",
+          "evidence": "Step 1.3 cancels the constant offset and evaluates the entropy drop, export, and total gain."
+        },
+        {
+          "name": "diagnostic threshold",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the maximum at M_min and rearranges the positive threshold inequality."
+        }
+      ],
+      "finite_checks_disposition": "All values are exact substitutions into the conditional model; no measured mass, time, or precision is introduced.",
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-domain or empty-family assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 stops at M_0/2>0; the algebraic zero-mass time is not reached."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item makes no one-element counting or singleton classification claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the strictly positive half-mass cutoff for M_0>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.3, and 2.1 evaluate the initial mass and positive half-mass endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and A2 carry AC_omega; no stronger choice principle is used in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root",
+        "notes": "The thought experiment is a complete conditional consequence of PHS09 and explicitly carries AC_omega. Its PHS03 dependency remains escalated, so the example is not marked ready."
+      }
+    }
+  }
+}

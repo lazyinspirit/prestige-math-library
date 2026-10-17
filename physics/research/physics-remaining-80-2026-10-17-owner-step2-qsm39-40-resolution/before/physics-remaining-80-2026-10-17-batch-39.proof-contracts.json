@@ -1,0 +1,694 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "batch": "39",
+  "scope": [
+    "lem-qsm-finite-range-commutator-path-bound",
+    "lem-qsm-boundary-dynamics-cauchy",
+    "thm-qsm-finite-range-spin-dynamics",
+    "lem-qsm-local-generator-domain",
+    "ex-qsm-finite-range-nearest-neighbor-ising"
+  ],
+  "contracts": {
+    "lem-qsm-finite-range-commutator-path-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "A **uniformly bounded finite-range interaction** is a family",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "The **local spin matrix algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-local-spin-inclusions-isometric",
+          "source_section": "Statement",
+          "quote": "is an isometric unital $*$-homomorphism",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Derive the finite-volume interaction-picture commutator equation and its norm variation inequality.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Iterate the integral inequality; bound each interaction-path weight and show the factorial remainder tends to zero.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Use the path-distance inequality and sum the exponential series, treating overlapping and disjoint supports.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires nonempty X and Y."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: when kappa=0, disjoint-support path terms vanish; for overlapping supports the trivial commutator bound is covered by |X|>=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: q=1 makes all local algebras scalar, so the commutator vanishes; the displayed bound remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: R=0 permits only singleton interactions, so no path joins disjoint supports; the overlap case is covered by the zero-length term."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: t=0 gives the local commutator bound; negative t uses the absolute-time variation estimate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1: every path has finite length and its intersections are finite nonempty sets; no infinite choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives an upper estimate for a finite-volume commutator under finite-range assumptions; it claims no necessity of those assumptions from such an estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 3.1 sums interaction paths to bound the commutator; it does not recover an interaction or its range from a proposed bound."
+        }
+      ]
+    },
+    "lem-qsm-boundary-dynamics-cauchy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-finite-range-commutator-path-bound",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]] with parameters $M,R,\\kappa,\\hbar$. Let $\\mu>0$, let $\\Lambda\\subset\\mathbb Z^d$ be finite, let $X\\subseteq\\Lambda$ be finite and nonempty, and let $Y\\subset\\mathbb Z^d$ be any finite nonempty set. Take $A\\in\\mathcal A_X$ and $B\\in\\mathcal A_Y$, with both embedded in the common finite algebra $\\mathcal A_{\\Lambda\\cup Y}$. Then for every $t\\in\\mathbb R$,\n\n$$\\bigl\\|[\\alpha_t^\\Lambda(A),B]\\bigr\\|\\le 2\\|A\\|\\,\\|B\\|\\,|X|\\exp\\!\\left(\\frac{2\\kappa M e^{\\mu R}}{\\hbar}|t|-\\mu\\operatorname{dist}_\\infty(X,Y)\\right).$$\n\nHere the finite-volume dynamics is extended by the identity on sites outside $\\Lambda$, as in [[def-qsm-bounded-finite-range-interaction]]. The parameter $\\mu$ is measured per lattice step in the dimensionless max-coordinate metric. The bound is uniform over finite volumes containing $X$; it is an operator-norm estimate for the stipulated spin model, not a relativistic light cone.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $t=0$, both sides of the stated estimate vanish. For $t\\ne0$, put $\\sigma=\\operatorname{sign}(t)\\in\\{-1,1\\}$, and for $s$ between $0$ and $t$, set $G(s)=\\alpha_s^{\\Lambda'}(\\alpha_{t-s}^{\\Lambda}(A))$. Differentiating the finite matrix exponentials gives\n$$G'(s)=\\frac{i}{\\hbar}\\alpha_s^{\\Lambda'}\\!\\left([H_{\\Lambda'}-H_\\Lambda,\\alpha_{t-s}^{\\Lambda}(A)]\\right).$$\nIndeed, the derivative of $\\alpha_s^{\\Lambda'}$ contributes $(i/\\hbar)[H_{\\Lambda'},\\cdot]$, while differentiating $\\alpha_{t-s}^{\\Lambda}$ contributes $-(i/\\hbar)[H_\\Lambda,\\cdot]$; the outer map $\\alpha_s^{\\Lambda'}$ is unitary conjugation and hence isometric. Integrating from $0$ to $t$, reversing the orientation for $t<0$, and using $u=|t-s|$ gives intermediate evolution time $t-s=\\sigma u$. Expanding $H_{\\Lambda'}-H_\\Lambda$ therefore yields\n$$\\|\\alpha_t^{\\Lambda'}(A)-\\alpha_t^\\Lambda(A)\\|\\le\\frac1{\\hbar}\\int_0^{|t|}\\sum_{\\substack{Z\\subseteq\\Lambda'\\\\Z\\not\\subseteq\\Lambda}}\\|[\\Phi(Z),\\alpha_{\\sigma u}^\\Lambda(A)]\\|\\,du.$$\nTerms with $Z\\cap\\Lambda=\\varnothing$ commute with $\\alpha_{\\sigma u}^\\Lambda(A)\\in\\mathcal A_\\Lambda$ and contribute zero; only interaction sets crossing the boundary of $\\Lambda$ remain.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each crossing $Z$, apply [F2] to $A$ and $\\Phi(Z)$ at the signed time $\\sigma u$. Its bound depends on $|\\sigma u|=u$, so the same positive integrand estimate holds for either sign of $t$. For any $y\\in Z\\setminus\\Lambda$, choose $z\\in Z$ minimizing the distance from $X$ to $Z$. Since $\\operatorname{diam}_\\infty Z\\le R$, the triangle inequality gives $\\operatorname{dist}_\\infty(X,\\{y\\})\\le\\operatorname{dist}_\\infty(X,Z)+R$, so\n$$e^{-\\mu\\operatorname{dist}_\\infty(X,Z)}\\le e^{\\mu R}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}.$$\nSumming over every exterior $y$ overcounts each crossing interaction and therefore gives an upper bound. By the definition of $\\kappa$,\n$$\\sum_{\\substack{Z\\subseteq\\Lambda'\\\\Z\\not\\subseteq\\Lambda\\\\Z\\cap\\Lambda\\ne\\varnothing}}\\|\\Phi(Z)\\|e^{-\\mu\\operatorname{dist}_\\infty(X,Z)}\\le\\kappa e^{\\mu R}\\sum_{y\\notin\\Lambda}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}.$$\nThe displayed inequality is independent of $\\Lambda'$; integrating the time factor in [F2] over an interval of length $|t|$ proves the claimed estimate.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each $r\\ge1$, the max-metric shell around one lattice site has $(2r+1)^d-(2r-1)^d$ sites. A finite union bound over $x\\in X$ shows that $\\sum_{y\\in\\mathbb Z^d}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}<\\infty$, since a polynomial shell count is summable against $e^{-\\mu r}$. Given $\\varepsilon>0$, choose a finite set of sites whose omitted tail is below $\\varepsilon$; every sufficiently large exhausting $\\Lambda$ contains that finite set. Thus the exterior tail tends to zero, uniformly for $|t|\\le T$ after replacing $|t|$ by $T$ in the prefactor.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement requires X nonempty, but the exterior aggregate is real: Proof 3.1 proves its convergence and tail vanishing. If there are no crossing interaction terms, the finite sum in 1.1 is0 and the dynamics difference is0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: if kappa=0, no boundary interaction contributes and both finite-volume evolutions agree on the local observable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: for d=1 the max-metric shell has two sites at every positive radius, so the exponential tail is summable."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1: for R=0 only onsite terms occur, and a crossing term disjoint from the inner volume commutes with its local dynamics."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: t=0 gives zero difference; both signs of t are covered by reversing the integration endpoints and using |t|."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 sums over every exterior site, so it does not choose one site from each crossing interaction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The nested-volume norm estimate implies compact-time Cauchy convergence as the exterior tail vanishes; the claim is not an equivalence with a tail condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate in 2.1 is a sufficient bound derived from the interaction norm sum; convergence is not claimed to force that particular bound."
+        }
+      ]
+    },
+    "thm-qsm-finite-range-spin-dynamics": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-boundary-dynamics-cauchy",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]], fix $\\mu>0$, and let $X\\subseteq\\Lambda\\subseteq\\Lambda'$ be finite regions with $X\\ne\\varnothing$. For every $A\\in\\mathcal A_X$ and $t\\in\\mathbb R$,\n\n$$\\|\\alpha_t^{\\Lambda'}(A)-\\alpha_t^\\Lambda(A)\\|\\le\\frac{2\\kappa |X|\\|A\\||t|}{\\hbar}e^{(2\\kappa M e^{\\mu R}/\\hbar)|t|+\\mu R}\\sum_{y\\notin\\Lambda}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}.$$\n\nThe infinite sum is finite. It tends to zero as $\\Lambda$ exhausts $\\mathbb Z^d$, so the estimate gives compact-time norm Cauchy convergence of free-boundary finite-volume dynamics on each local observable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix local $A\\in\\mathcal A_X$; if its displayed localization is empty, embed the scalar $A\\in\\mathbb C I$ into any one-site algebra, so take $X\\ne\\varnothing$. Let $C_n=\\{x\\in\\mathbb Z^d:d_\\infty(x,0)\\le n\\}$. For all sufficiently large $n$, $C_n\\supseteq X$, and for $m\\ge n$ the boundary estimate [F3] bounds $\\|\\alpha_t^{C_m}(A)-\\alpha_t^{C_n}(A)\\|$ by its right side with $\\Lambda=C_n$. That exterior exponential tail tends to zero as $n\\to\\infty$, uniformly for $|t|\\le T$ because its time factor is bounded there. Hence $\\alpha_t^{C_n}(A)$ is Cauchy uniformly on compact time intervals; completeness in [A1], [A2], [F1], and [F2] gives a limit $\\alpha_t(A)\\in\\mathcal A$. Given any other increasing finite exhaustion $\\Lambda_j$, choose $n$ so large that both the canonical limit error and the [F3] bound for $C_n$ are below $\\varepsilon/2$. Since $C_n$ is finite and $\\Lambda_j\\uparrow\\mathbb Z^d$, eventually $C_n\\subseteq\\Lambda_j$; applying [F3] to this nested pair proves $\\alpha_t^{\\Lambda_j}(A)\\to\\alpha_t(A)$ uniformly on $[-T,T]$. Thus the limit is independent of the exhaustion. The finite-matrix premise [A1] is supplied by [[lem-qsm-finite-matrix-cstar-and-state-duality]]; this proof uses that earlier result rather than reproving it.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Every finite-volume map is an isometric unital $*$-automorphism by conjugation with the unitary matrix exponential in [F4]. Therefore the limits preserve the unit, adjoints, products on local observables, and norm. For products, if local sequences $A_n\\to A$ and $B_n\\to B$ are used, submultiplicativity gives $\\|A_nB_n-AB\\|\\le\\|A_n\\|\\|B_n-B\\|+\\|A_n-A\\|\\|B\\|$, so multiplication passes continuously to the completion; the adjoint is norm-continuous as well. By density of $\\mathcal A_{\\mathrm{loc}}$ and the isometry bound, each $\\alpha_t$ extends uniquely to an isometric unital $*$-homomorphism of $\\mathcal A$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For local $A$ and fixed $s,t$, choose local $C$ with $\\|C-\\alpha_t(A)\\|<\\varepsilon$. For large $\\Lambda$, both $\\alpha_t^\\Lambda(A)$ is within $\\varepsilon$ of $\\alpha_t(A)$ and $\\alpha_s^\\Lambda(C)$ is within $\\varepsilon$ of $\\alpha_s(C)$. By isometry, replacing $\\alpha_t^\\Lambda(A)$ with $C$ in $\\alpha_s^\\Lambda\\alpha_t^\\Lambda(A)$ costs at most $2\\varepsilon$, and replacing $\\alpha_s^\\Lambda(C)$ by $\\alpha_s(C)$ costs at most $\\varepsilon$. The finite-volume group law $\\alpha_s^\\Lambda\\alpha_t^\\Lambda(A)=\\alpha_{s+t}^\\Lambda(A)$ therefore gives $\\|\\alpha_s\\alpha_t(A)-\\alpha_{s+t}(A)\\|\\le4\\varepsilon$ after taking limits. Letting $\\varepsilon\\downarrow0$ proves the group law on local $A$; density extends it to every $A\\in\\mathcal A$. In particular, $\\alpha_{-t}$ is the inverse of $\\alpha_t$, so each is an automorphism.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $A\\in\\mathcal A_X$ is local, finite-volume differentiation gives\n$$\\|\\alpha_t^\\Lambda(A)-A\\|\\le\\frac{|t|}{\\hbar}\\|[H_\\Lambda,A]\\|\\le\\frac{2\\kappa |X|\\|A\\|}{\\hbar}|t|,$$\nbecause only terms meeting $X$ contribute and $\\sum_{Z\\cap X\\ne\\varnothing}\\|\\Phi(Z)\\|\\le\\kappa|X|$. Passing to the limit gives continuity at $t=0$ for local $A$. For general $A\\in\\mathcal A$, choose local $C$ close to $A$ and use $\\|\\alpha_t(A)-A\\|\\le2\\|A-C\\|+\\|\\alpha_t(C)-C\\|$. The group law gives continuity at every time.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: a scalar observable in the empty local algebra embeds into any one-site algebra, so the nonempty-localization proof covers it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: if kappa=0 the finite-volume dynamics are identity maps and the limiting group is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1: q=1 gives scalar local algebras and the identity group, consistent with the norm-continuity estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: for R=0 the interactions are onsite and the boundary tail estimate still gives convergence; no cross-site propagation is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: the group law includes t=0 and the increment estimate tends to zero from both signs of t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries Countable Choice explicitly as A2 for the completion; the finite-volume exhaustion argument itself uses only finite unions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This theorem constructs an exhaustion-independent automorphism group from bounded finite-range data; it does not characterize which groups arise from such interactions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 establishes the group law for the constructed limit, without a converse extracting interaction coefficients from a group."
+        }
+      ]
+    },
+    "lem-qsm-local-generator-domain": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$, the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of $*$-automorphisms of $\\mathcal A$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument. With composition, Hilbert adjoint, identity and the induced operator norm, $\\mathcal B(H)$ is a nonzero unital complex C*-algebra in the sense of [[def-c-star-algebra]]. In particular it is complete, $\\|AB\\|\\le\\|A\\|\\|B\\|$, $\\|A^*A\\|=\\|A\\|^2$, $\\|A^*\\|=\\|A\\|$ and $\\|I\\|=1$. The matrix $\\|A\\|^2I-A^*A$ is positive semidefinite and has a positive square root in $\\mathcal B(H)$.\n\nEvery complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$. It is bounded and satisfies\n\n$$|\\omega(A)|\\le\\operatorname{Tr}(\\rho)\\|A\\|\\quad(A\\in\\mathcal B(H)),\\qquad \\|\\omega\\|=\\operatorname{Tr}(\\rho)=\\omega(I).$$\n\nConsequently the canonical states of [[def-state-on-a-c-star-algebra]] are exactly the trace pairings of density operators of [[def-qc-density-operator]]; for a positive functional, normalization $\\omega(I)=1$ is equivalent to norm one. The result includes zero positive functionals, nonfaithful densities and $D=1$; it makes no infinite-dimensional density representation assertion.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$, the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of $*$-automorphisms of $\\mathcal A$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $\\Lambda_n\\uparrow\\mathbb Z^d$, the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of $*$-automorphisms of $\\mathcal A$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-boundary-dynamics-cauchy",
+          "source_section": "Statement",
+          "quote": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]], fix $\\mu>0$, and let $X\\subseteq\\Lambda\\subseteq\\Lambda'$ be finite regions with $X\\ne\\varnothing$. For every $A\\in\\mathcal A_X$ and $t\\in\\mathbb R$,\n\n$$\\|\\alpha_t^{\\Lambda'}(A)-\\alpha_t^\\Lambda(A)\\|\\le\\frac{2\\kappa |X|\\|A\\||t|}{\\hbar}e^{(2\\kappa M e^{\\mu R}/\\hbar)|t|+\\mu R}\\sum_{y\\notin\\Lambda}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}.$$\n\nThe infinite sum is finite. It tends to zero as $\\Lambda$ exhausts $\\mathbb Z^d$, so the estimate gives compact-time norm Cauchy convergence of free-boundary finite-volume dynamics on each local observable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every nonzero term $\\Phi(Z)$ meeting $X$ has $Z\\subseteq X^{+R}:=\\{y\\in\\mathbb Z^d:\\operatorname{dist}_\\infty(X,\\{y\\})\\le R\\}$, a finite set. There are finitely many subsets of $X^{+R}$, so\n$$D_0(A):=\\frac{i}{\\hbar}\\sum_{Z:\\,Z\\cap X\\ne\\varnothing}[\\Phi(Z),A]$$\nis a finite local sum. If $X\\subseteq X'$, each term present in the sum for $X'$ but not for $X$ has support disjoint from $X$ and therefore commutes with $A\\in\\mathcal A_X$; hence both sums agree. For any two localization regions, compare each with their union to obtain the same conclusion. Thus $D_0(A)$ is independent of the chosen region. For every finite $\\Lambda$ containing $X^{+R}$, finite-volume differentiation gives $\\delta_\\Lambda(A)=\\frac{i}{\\hbar}[H_\\Lambda,A]=D_0(A)$ and\n$$\\alpha_t^\\Lambda(A)-A=\\int_0^t\\alpha_s^\\Lambda(D_0(A))\\,ds.$$\nHere the finite-dimensional integral is the coordinatewise Riemann integral; differentiating the finite exponential gives the integrand.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F2], $\\alpha_s^\\Lambda(A)$ and $\\alpha_s^\\Lambda(D_0(A))$ converge in norm uniformly on compact time intervals as $\\Lambda$ exhausts the lattice. A continuous Banach-valued function has a Riemann integral because uniform continuity makes its Riemann sums Cauchy in the complete algebra; uniform convergence of the finite-volume integrands lets their integrals pass to the limit. This gives\n$$\\alpha_t(A)-A=\\int_0^t\\alpha_s(D_0(A))\\,ds.$$\nBy [F1], $s\\mapsto\\alpha_s(D_0(A))$ is norm-continuous at $0$; the difference between its average over $[0,t]$ and its value at $0$ is at most $\\sup_{|s|\\le|t|}\\|\\alpha_s(D_0(A))-D_0(A)\\|$, which tends to zero. Therefore $A\\in D(\\delta)$ and $\\delta(A)=D_0(A)$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $A_n\\in D(\\delta)$ with $A_n\\to A$ and $\\delta(A_n)\\to B$ in norm. For $h=t/N$, the group law gives the exact telescope\n$$\\alpha_t(A_n)-A_n=\\sum_{k=0}^{N-1}\\alpha_{kh}(\\alpha_h(A_n)-A_n)=h\\sum_{k=0}^{N-1}\\alpha_{kh}(\\delta(A_n))+h\\sum_{k=0}^{N-1}\\alpha_{kh}\\!\\left(\\frac{\\alpha_h(A_n)-A_n}{h}-\\delta(A_n)\\right).$$\nAs $N\\to\\infty$, the second sum has norm at most $|t|\\|(\\alpha_h(A_n)-A_n)/h-\\delta(A_n)\\|$, which tends to zero by the definition of $\\delta(A_n)$. The first sum is a Riemann sum for the continuous function $s\\mapsto\\alpha_s(\\delta(A_n))$; its integral exists because the algebra is complete and the function is uniformly continuous on compact intervals. Hence $\\alpha_t(A_n)-A_n=\\int_0^t\\alpha_s(\\delta(A_n))\\,ds$. Isometry bounds the integral of $\\alpha_s(\\delta(A_n)-B)$ by $|t|\\|\\delta(A_n)-B\\|$, allowing the identity to pass to $\\alpha_t(A)-A=\\int_0^t\\alpha_s(B)\\,ds$. Strong continuity bounds the difference between the quotient of this integral and $B$ by $\\sup_{|s|\\le|t|}\\|\\alpha_s(B)-B\\|$, which tends to zero. Thus $A\\in D(\\delta)$ and $\\delta(A)=B$, proving that the graph of $\\delta$ is closed.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: for a scalar observable with empty localization, the interaction commutator sum is empty and the generator is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: when kappa=0 every local commutator term vanishes and the generator formula gives zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: q=1 makes all local observables scalar, so the local generator is zero and lies in the domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: R=0 leaves only onsite commutators, a finite sum over the sites in X."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1: the derivative is a two-sided norm limit at t=0 and the integral estimates use |t|."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1: A1 and A2 carry the same finite-matrix condition and Countable Choice used by the conditional automorphism supplier; no additional choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The local inclusion A in D(delta) and closedness are asserted from the finite-range group hypotheses; the displayed derivative-domain definition is not a separate theorem characterizing locality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 proves the local generator formula; belonging to D(delta) is not claimed to imply that an observable is local."
+        }
+      ]
+    },
+    "ex-qsm-finite-range-nearest-neighbor-ising": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "The **local spin matrix algebra** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "A **uniformly bounded finite-range interaction** is a family",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Verify self-adjointness and the local operator norm of each two-site interaction term.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Count support size, diameter, and the two interaction edges incident to each site.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every nonzero support in the example is a two-site edge."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: when J=0 all interaction terms and kappa vanish, and M=2, R=1 remain valid bounds."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example fixes q=2 and uses two-site supports."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the model fixes d=1, and each site has exactly two nearest-neighbor edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no time or interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use an explicit formula and the two enumerated edges at each site; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Verification 2.1 checks M=2,R=1,kappa=2|J| for the specified nearest-neighbor example; it does not characterize all interactions with those constants."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The support and norm calculations certify this explicit Pauli family, without inferring a Pauli family from boundedness or range."
+        }
+      ]
+    }
+  }
+}

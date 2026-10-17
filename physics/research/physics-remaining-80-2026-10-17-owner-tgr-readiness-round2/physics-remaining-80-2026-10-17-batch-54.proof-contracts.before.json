@@ -1,0 +1,327 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "54",
+  "level": 2,
+  "scope": [
+    "def-tgr-framework-units",
+    "post-tgr-local-material-thermodynamics",
+    "post-tgr-local-entropy-admissibility",
+    "pthm-tgr-finite-entropy-balance",
+    "texp-tgr-insulated-entropy-region"
+  ],
+  "contracts": {
+    "def-tgr-framework-units": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition introduces local objects on their stated domains and asserts no global nonempty-spacetime result."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition permits vanishing currents; the unit formulas do not divide by current density."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-marker or one-coordinate combinatorial claim is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No response derivative, inverse chart, or degenerate constitutive parameter is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition makes no endpoint or boundary-state assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54",
+        "notes": "The definition reuses exact local-fluid, SR congruence/Frobenius and MI03 charge interfaces. It preserves SI types and restricts temperature and surface gravity to their stated domains. MI03 and its transitive MI01 inputs remain draft, so readiness is escalated."
+      }
+    },
+    "post-tgr-local-material-thermodynamics": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate selects a fixed-composition local-equilibrium branch, an open state domain, a supplied C2 state function, and positive derivative temperature."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope excludes a universal equation of state, microscopic derivation, spacetime conservation, global gravitating additivity, and an unrestricted thermodynamic limit."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Gourgoulhon §§4.1–4.3 and Borghini §I.1.3/§IX.2 are recorded in batch-54.coverage.json with full-text locators and limitations; neither is treated as evidence for a particular real material."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item is an adopted premise with provenance.proof not-applicable and no Proof section; it makes no measured or deductive claim that a selected equation of state describes nature."
+        }
+      }
+    },
+    "post-tgr-local-entropy-admissibility": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate requires a separately supplied C1 entropy-current field on an open region and explicitly adopts nabla_a S^a >= 0 pointwise."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The statement excludes geometric derivation, universal microscopic validity, statistical thermalization, entropy-area identification, and a generalized second law."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Romatschke §4.1 is recorded with its conformal-model restriction and explicit no-known-experimental-verification limitation; Gourgoulhon is context only. The item reports no observation."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The inequality is explicitly adopted, uses provenance.proof not-applicable, and has no Proof section or claim that geometry or experiment proves it."
+        }
+      }
+    },
+    "pthm-tgr-finite-entropy-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-framework-units",
+          "source_section": "Definition",
+          "quote": "For physical unit assignments use length coordinates $x^0=ct_{\\rm phys}$ and spatial coordinates in metres, where $c>0$ has units $\\mathrm{m\\,s^{-1}}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-tgr-local-entropy-admissibility",
+          "source_section": "Postulate",
+          "quote": "Adopt the local admissibility condition",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-tgr-spacelike-current-slab",
+          "source_section": "Definition",
+          "quote": "A **current** here is a $C^1$ vector field $J=J^a\\partial_a$ on an open neighborhood of $x^{-1}(\\overline K)$; equivalently, its coordinate components $J^a$ are $C^1$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tgr-finite-current-production-balance",
+          "source_section": "Statement",
+          "quote": "Then the exact finite-slab balance is $$Q_J(t_1)-Q_J(t_0)+\\Phi_J(B)=\\int_K\\Pi\\,\\mathrm{vol}_g.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnegative-integrated-production",
+          "claim": "Integrate the pointwise adopted nonnegative divergence over the positively oriented compact slab.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "conditional-finite-entropy-balance",
+          "claim": "Apply the current draft finite-slab theorem to S and identify its charge and side flux with Q_S and Phi_S.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "impermeable-boundary-monotonicity",
+          "claim": "Set the net outward flux to zero and deduce nondecreasing slice entropy; zero integrated production gives equality.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement uses the finite slab hypotheses of the supplier, with x0_- < x0_+ and nonempty spatial factors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-production, zero-side-flux case is handled in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-marker or one-coordinate combinatorial case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No response derivative or degenerate constitutive parameter is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and step 3.1 address the distinct endpoint slices x0_- and x0_+."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The conditional proof invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54",
+        "notes": "The proof is conditional on the exact current MI01 interface. Its proof approval and manifest/input reconciliation remain open; no source or local argument substitutes for acceptance. No empirical premise is used."
+      }
+    },
+    "texp-tgr-insulated-entropy-region": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-tgr-finite-entropy-balance",
+          "source_section": "Statement",
+          "quote": "If the net outward side flux is zero, the proper slice entropy is nondecreasing.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "impermeable-side-flux",
+          "claim": "Pointwise vanishing of the pulled-back side flux gives zero net side flux.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "L1"
+          ]
+        },
+        {
+          "id": "insulated-entropy-increase",
+          "claim": "Substitute zero side flux into the conditional finite-entropy balance.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "zero-production-equality",
+          "claim": "Under identically zero production, the integrated production and endpoint entropy change are zero.",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement inherits a nonempty finite slab with distinct caps from the conditional theorem."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero production and zero side flux give endpoint equality in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-marker or one-coordinate combinatorial case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No response derivative or degenerate constitutive parameter is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite slab has distinct endpoint slices by its Statement hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The conditional argument invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-54",
+        "notes": "The conclusion remains conditional on the draft mathematical balance chain and adopted physical inequality. The thought experiment reports no measurement and makes no horizon or generalized-entropy identification."
+      }
+    }
+  }
+}

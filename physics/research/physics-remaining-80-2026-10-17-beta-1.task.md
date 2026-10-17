@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `emg-g01` · order **437** · `einstein-maxwell-models` |
 | B page | `emg-g01-examples` |
 | title | Einstein–Maxwell primitive quantities and SI conventions |
-| requires | `emg-mg01` |
+| requires | `emg-mg01`, `em-primitives-and-postulates`, `em-lorentz-covariant-formulation` |
 | design | `research/plan-einstein-maxwell-models-track.md` L80 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.

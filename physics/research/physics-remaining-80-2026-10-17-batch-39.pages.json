@@ -10,7 +10,215 @@
     "requires": [
       "qsm-quasilocal-states"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-qsm-bounded-finite-range-interaction",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Uniformly bounded finite-range quantum spin interaction",
+        "reference": "items/def-qsm-bounded-finite-range-interaction.md#definition",
+        "design_state": "reserved A-page item; finite-range interaction and free-boundary finite-volume convention explicitly defined",
+        "deps": [
+          "def-qsm-local-spin-algebras"
+        ],
+        "dependency_roles": {
+          "def-qsm-local-spin-algebras": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "Use the lattice $\\Gamma=\\mathbb Z^d$, $d\\ge1$, the finite spin dimension $q\\ge1$, the local matrix algebras $\\mathcal A_\\Lambda$, and the max-coordinate metric $d_\\infty$ of [[def-qsm-local-spin-algebras]]. For finite nonempty $Z\\subset\\Gamma$, write $\\operatorname{diam}_\\infty Z=\\max_{x,y\\in Z}d_\\infty(x,y)$; for finite nonempty $X,Y\\subset\\Gamma$, write $\\operatorname{dist}_\\infty(X,Y)=\\min_{x\\in X,y\\in Y}d_\\infty(x,y)$.\n\nA **uniformly bounded finite-range interaction** is a family $\\Phi(Z)\\in\\mathcal A_Z$, indexed by finite nonempty $Z\\subset\\Gamma$, such that $\\Phi(Z)^*=\\Phi(Z)$ and there are an integer $M\\ge1$, a finite $R\\ge0$, and $\\kappa<\\infty$ satisfying\n\n$$\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.$$\n\nThe norm in this sum is the operator norm in the local matrix algebra $\\mathcal A_Z$. If a model lists several terms with the same support, first add them in that local algebra; the resulting single operator is $\\Phi(Z)$, and $\\kappa$ uses its norm. Thus no multiplicity is implicit.\n\nFor a finite region $\\Lambda\\subset\\Gamma$, define the **free-boundary finite-volume Hamiltonian** by summing only terms whose complete support lies inside $\\Lambda$; terms meeting $\\Lambda$ but extending outside it are omitted:\n\n$$H_\\Lambda:=\\sum_{\\varnothing\\ne Z\\subseteq\\Lambda}\\Phi(Z)\\in\\mathcal A_\\Lambda.$$\n\nIt is a finite sum of self-adjoint matrices. For a fixed scale $\\hbar>0$ and any finite $\\Omega\\supseteq\\Lambda$, embed $H_\\Lambda$ in $\\mathcal A_\\Omega$ by the canonical factor inclusion and define\n\n$$\\alpha_t^\\Lambda(A):=e^{itH_\\Lambda/\\hbar}Ae^{-itH_\\Lambda/\\hbar}\\qquad(A\\in\\mathcal A_\\Omega,\\ t\\in\\mathbb R).$$\n\nThese actions are compatible as $\\Omega$ increases, because the extra tensor factors carry the identity. On $\\mathcal A_\\Lambda$ this is the ordinary finite matrix Heisenberg dynamics.\n\nIn physical SI bookkeeping, when $\\Phi(Z)$ is interpreted as an energy, $\\Phi(Z)$, $\\kappa$, and $H_\\Lambda$ have units J, $t$ has units s, and $\\hbar$ is the adopted reduced Planck constant with units J s. The mathematics below uses only $\\hbar>0$ and asserts no measured parameter value.",
+        "strategy": "Define the local self-adjoint interaction family, finite range, per-site norm bound, finite-volume Hamiltonian, and time-scaled Heisenberg maps.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.3.7–3.3.8, pp. 66–68",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Bruno Nachtergaele and Robert Sims, Lieb-Robinson Bounds in Quantum Many-Body Physics, §3.1, pp. 18–20",
+              "url": "https://arxiv.org/pdf/1004.2086"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsm-finite-range-commutator-path-bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Volume-independent finite-range commutator path bound",
+        "reference": "items/lem-qsm-finite-range-commutator-path-bound.md#statement",
+        "design_state": "reserved A-page item; complete finite-volume path argument with explicit nonsharp constants",
+        "deps": [
+          "def-qsm-bounded-finite-range-interaction",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric"
+        ],
+        "dependency_roles": {
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]] with parameters $M,R,\\kappa,\\hbar$. Let $\\mu>0$, let $\\Lambda\\subset\\mathbb Z^d$ be finite, let $X\\subseteq\\Lambda$ be finite and nonempty, and let $Y\\subset\\mathbb Z^d$ be any finite nonempty set. Take $A\\in\\mathcal A_X$ and $B\\in\\mathcal A_Y$, with both embedded in the common finite algebra $\\mathcal A_{\\Lambda\\cup Y}$. Then for every $t\\in\\mathbb R$,\n\n$$\\bigl\\|[\\alpha_t^\\Lambda(A),B]\\bigr\\|\\le 2\\|A\\|\\,\\|B\\|\\,|X|\\exp\\!\\left(\\frac{2\\kappa M e^{\\mu R}}{\\hbar}|t|-\\mu\\operatorname{dist}_\\infty(X,Y)\\right).$$\n\nHere the finite-volume dynamics is extended by the identity on sites outside $\\Lambda$, as in [[def-qsm-bounded-finite-range-interaction]]. The parameter $\\mu$ is measured per lattice step in the dimensionless max-coordinate metric. The bound is uniform over finite volumes containing $X$; it is an operator-norm estimate for the stipulated spin model, not a relativistic light cone.",
+        "strategy": "Differentiate the interaction-picture commutator, solve the homogeneous equation by unitary conjugation, count finite-range support paths, and sum the factorial bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, Theorem 4.1.2 and proof, pp. 96–101",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Bruno Nachtergaele and Robert Sims, Lieb-Robinson Bounds in Quantum Many-Body Physics, Theorem 2.3 and proof, pp. 4–7",
+              "url": "https://arxiv.org/pdf/1004.2086"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsm-boundary-dynamics-cauchy",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Boundary Duhamel estimate for thermodynamic spin dynamics",
+        "reference": "items/lem-qsm-boundary-dynamics-cauchy.md#statement",
+        "design_state": "reserved A-page item; complete Duhamel boundary estimate and exterior-tail argument",
+        "deps": [
+          "def-qsm-bounded-finite-range-interaction",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-finite-range-commutator-path-bound"
+        ],
+        "dependency_roles": {
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-finite-range-commutator-path-bound": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "statement": "Let $\\Phi$ be an interaction of [[def-qsm-bounded-finite-range-interaction]], fix $\\mu>0$, and let $X\\subseteq\\Lambda\\subseteq\\Lambda'$ be finite regions with $X\\ne\\varnothing$. An **increasing finite exhaustion** of $\\mathbb Z^d$ means a sequence of finite regions $(\\Lambda_n)_{n\\ge1}$ such that $\\Lambda_n\\subseteq\\Lambda_{n+1}$ for every $n$ and $\\bigcup_{n\\ge1}\\Lambda_n=\\mathbb Z^d$. For every $A\\in\\mathcal A_X$ and $t\\in\\mathbb R$,\n\n$$\\|\\alpha_t^{\\Lambda'}(A)-\\alpha_t^\\Lambda(A)\\|\\le\\frac{2\\kappa |X|\\|A\\||t|}{\\hbar}e^{(2\\kappa M e^{\\mu R}/\\hbar)|t|+\\mu R}\\sum_{y\\notin\\Lambda}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}.$$\n\nThe infinite sum is finite. Along every increasing finite exhaustion $(\\Lambda_n)$ as defined above, $\\sum_{y\\notin\\Lambda_n}e^{-\\mu\\operatorname{dist}_\\infty(X,\\{y\\})}\\to0$, so the estimate gives compact-time norm Cauchy convergence of free-boundary finite-volume dynamics on each local observable.",
+        "strategy": "Compare nested finite volumes by Duhamel, control boundary-crossing terms with the commutator estimate, and sum the exterior exponential tail.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, Theorem 4.2.1 and proof, pp. 101–102",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Bruno Nachtergaele and Robert Sims, Lieb-Robinson Bounds in Quantum Many-Body Physics, Theorem 3.1 and proof, pp. 18–20",
+              "url": "https://arxiv.org/pdf/1004.2086"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsm-finite-range-spin-dynamics",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Strongly continuous thermodynamic spin automorphism group",
+        "reference": "items/thm-qsm-finite-range-spin-dynamics.md#statement",
+        "design_state": "reserved A-page item; complete conditional norm-limit proof using the owner-added exact C*-identity interface, now page-placed but awaiting current readiness",
+        "deps": [
+          "def-qsm-bounded-finite-range-interaction",
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "lem-qsm-boundary-dynamics-cauchy"
+        ],
+        "dependency_roles": {
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "lem-qsm-boundary-dynamics-cauchy": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 6,
+        "statement": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below. Let $\\mathcal A_{\\mathrm{loc}}=\\bigcup_{\\Lambda\\subset\\mathbb Z^d,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$ and let $\\mathcal A$ be its norm completion as in [[def-qsm-quasilocal-spin-algebra]]. These assumptions give the conditional unital C*-algebra structure supplied by [[lem-qsm-quasilocal-completion]]. Let $\\Phi$ be a uniformly bounded finite-range interaction of [[def-qsm-bounded-finite-range-interaction]].\n\nFor any increasing finite exhaustion $(\\Lambda_n)_{n\\ge1}$ in the convention of [[lem-qsm-boundary-dynamics-cauchy]]—that is, each $\\Lambda_n$ is finite, $\\Lambda_n\\subseteq\\Lambda_{n+1}$, and $\\bigcup_{n\\ge1}\\Lambda_n=\\mathbb Z^d$—the free-boundary finite-volume maps $\\alpha_t^{\\Lambda_n}$ converge in norm on every local observable, uniformly for $t$ in compact intervals. Their limit is independent of the exhaustion and extends uniquely to a strongly continuous one-parameter group $\\alpha_t$ of maps $\\alpha_t:\\mathcal A\\to\\mathcal A$. Here “one-parameter group” means $\\alpha_0=\\operatorname{id}_{\\mathcal A}$ and $\\alpha_{s+t}=\\alpha_s\\circ\\alpha_t$ for all $s,t\\in\\mathbb R$. Each $\\alpha_t$ is a bijective complex-linear unital $*$-homomorphism (a $*$-automorphism), with inverse $\\alpha_{-t}$. Strong continuity means $t\\mapsto\\alpha_t(A)$ is norm-continuous for every fixed $A\\in\\mathcal A$. This result does not assert that an infinite-volume Hamiltonian is an element of $\\mathcal A$ or a bounded operator on a preselected infinite tensor-product Hilbert space.",
+        "strategy": "Use the boundary-tail Cauchy estimate on the local algebra, extend the isometric limit, prove the group law, and establish strong continuity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, Theorems 3.3.12 and 4.2.1, pp. 69–71 and 101–102",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Bruno Nachtergaele and Robert Sims, Lieb-Robinson Bounds in Quantum Many-Body Physics, Theorem 3.1 and proof, pp. 18–20",
+              "url": "https://arxiv.org/pdf/1004.2086"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsm-local-generator-domain",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Local observables lie in the closed generator domain",
+        "reference": "items/lem-qsm-local-generator-domain.md#statement",
+        "design_state": "reserved A-page item; complete local commutator and closed-graph arguments, conditional on the dynamics theorem and page-placed C*-identity supplier awaiting current readiness",
+        "deps": [
+          "def-qsm-bounded-finite-range-interaction",
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-boundary-dynamics-cauchy",
+          "thm-qsm-finite-range-spin-dynamics"
+        ],
+        "dependency_roles": {
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-boundary-dynamics-cauchy": "mathematical-premise",
+          "thm-qsm-finite-range-spin-dynamics": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 7,
+        "statement": "Under the hypotheses of [[thm-qsm-finite-range-spin-dynamics]], including its Countable Choice and finite-matrix C*-identity conditions, let $\\alpha_t$ be the strongly continuous automorphism group. Define its generator by\n\n$$D(\\delta)=\\left\\{A\\in\\mathcal A:\\lim_{t\\to0}\\frac{\\alpha_t(A)-A}{t}\\text{ exists in norm}\\right\\},\\qquad\\delta(A)=\\lim_{t\\to0}\\frac{\\alpha_t(A)-A}{t}.$$\n\nThen $\\delta$ is closed. For every local $A\\in\\mathcal A_X$,\n\n$$A\\in D(\\delta),\\qquad\\delta(A)=\\frac{i}{\\hbar}\\sum_{Z:\\,Z\\cap X\\ne\\varnothing}[\\Phi(Z),A].$$\n\nThe sum is finite by the finite-range and finite-size hypotheses; its value is independent of the chosen localization region $X$.",
+        "strategy": "Stabilize the finite local commutator, pass its integral identity to the norm limit, and prove graph closedness.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.3, pp. 64–71",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Bruno Nachtergaele and Robert Sims, Lieb-Robinson Bounds in Quantum Many-Body Physics, Theorem 3.1 and proof, pp. 18–20",
+              "url": "https://arxiv.org/pdf/1004.2086"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
   },
   {
     "order": 576,
@@ -23,6 +231,44 @@
     "requires": [
       "qsm-finite-range-spin-dynamics"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-qsm-finite-range-nearest-neighbor-ising",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Nearest-neighbor Ising interaction satisfies the finite-range bounds",
+        "reference": "items/ex-qsm-finite-range-nearest-neighbor-ising.md#example",
+        "design_state": "B-page example added because Step-1 readiness recording rejects an empty page inventory; the example is proved directly from the assigned interaction definition",
+        "deps": [
+          "def-qsm-bounded-finite-range-interaction",
+          "def-qsm-local-spin-algebras"
+        ],
+        "dependency_roles": {
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 4,
+        "statement": "Take $d=1$, $q=2$, $\\Gamma=\\mathbb Z$, and let\n$$\\sigma^z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\nFor every $n\\in\\mathbb Z$, let $E_n=\\{n,n+1\\}$ and set $\\Phi(E_n)=J\\,\\sigma^z\\otimes\\sigma^z\\in\\mathcal A_{E_n}$ for a fixed $J\\in\\mathbb R$; set $\\Phi(S)=0$ for every other finite nonempty support $S$. If interpreted as an energy coefficient, $J$ has units J, but no value or measurement is assumed. This is a nearest-neighbor diagonal spin interaction of the kind described by [[def-qsm-bounded-finite-range-interaction]].",
+        "strategy": "Compute the two-site operator norm, support diameter, support size, and per-site edge count.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, Example 3.3.9, pp. 67–68",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "Bruno Nachtergaele and Robert Sims, Lieb-Robinson Bounds in Quantum Many-Body Physics, §2.1, pp. 4–5",
+              "url": "https://arxiv.org/pdf/1004.2086"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
   }
 ]

@@ -1,0 +1,79 @@
+# Step 5 adjudicate: initial, round 1, unit 31
+
+- Read briefs/step5-adjudicator.md.
+
+- Frozen inputs: /home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-remaining-80-2026-10-17-step5-v2/initial-1.json.
+
+- Read this batch's rejection-blind Step-4 review digest first: /home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-remaining-80-2026-10-17-batch-31-step5-context.json. Its findings are evidence, not authority; verify relevant concerns against the current item files and the assigned judge tuples.
+
+- Write only your assigned frontier item files, their necessary owning contracts/metadata, and /home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-remaining-80-2026-10-17-step5-v2/step5-v2-initial-r1-u31.json.
+
+- Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.
+
+- SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.
+
+- You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.
+
+- Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.
+
+- Use logical validity as ground truth. Never pretend to understand something you do not; escalate any uncertainty and potentially defective published consumers to the owner. Consult authoritative sources when uncertain, check their hypotheses and reasoning, and check for errors in sources.
+
+- Make repairs mathematically sound and cite dependencies accurately. State important caveats when appropriate; write concisely without compromising correctness or completeness; do not repeat arguments or add unnecessary filler.
+
+- Repair confirmed defects fully. Only a public-interface change triggers direct-consumer examination: Statement/Definition for mathematics; also Postulate, experimental setup/procedure/observations/uncertainty/interpretation, physical_scope, or empirical qualifications for physics, whether the supplier is published or not. Compare sections directly. Proof-only, citation, dependency and metadata changes with unchanged statements do not propagate. Identify direct consumers and exact affected uses; never pre-expand through unchanged consumer statements.
+
+- Return a decision for every exact rejected tuple; decisions use outcome confirmed_fatal, confirmed_nonfatal, or false_positive. Each confirmed_fatal decision requires defect_type: logic, dependency_citation, or other, based on the actual finding. Both confirmed fatal and confirmed nonfatal findings require completed repairs. Do not edit false-positive items.
+
+- Return JSON {run:"physics-remaining-80-2026-10-17",phase:"initial",round:1,unit:"31",input_sha256:"34da341a1db0c97e52a6a7416782ee6b88786a786457765413eee2fcfc4a3d68",decisions:[],reviews:[],created_items:[],downstream:[]}. Copy these exact identity values; a phase such as impact-repeat is not repeat. Each decision includes id,model,context_sha256,outcome,reason,uncertain:false,source_urls:[...],familiar:boolean. Each review includes id,disposition:"repaired"|"unaffected"|"authored",post_sha256,review_context_sha256,reason,uncertain:false,source_urls,familiar. Disposition describes the item carrier: if its itemHashGuard is unchanged from the assignment before hash, use unaffected even when you repaired a contract or page; retain those metadata repairs explicitly in the reason and metadata_repair_only:true. Never claim an item repair without an item change. All assigned and created items require a review; only a newly created item uses authored. Each created_items row includes id,kind,home_page,batch,consumers:[direct consumer IDs],reason,uncertain:false,source_urls,familiar. Reasons must explain actual logical checks (at least 40 characters). familiar:false requires authoritative source URLs actually consulted; never switch it to true merely to pass validation. Unresolved uncertainty blocks completion.
+
+- Immediately after completing each mathematical review, before editing another supplier, run node tools/physics-support/step5-workflow.mjs review-contexts --run physics-remaining-80-2026-10-17 --items ID and copy its post_sha256 and review_context_sha256 into that review. You may batch ids reviewed on the same stable state. Never recompute an old review's context after a supplier edit without actually reviewing its effects again. The controller will schedule unresolved effects before certification.
+
+- The assigned tuples below are ordered by increasing in-run dependency level. Adjudicate and repair lower-level items before higher-level items within this batch; keep multiple tuples for the same item together.
+
+- Assigned item order: 2:def-csm-dk-phase-space-wasserstein-one, 3:thm-csm-dk-exact-bbgky, 4:thm-csm-dk-global-lipschitz-vlasov, 5:thm-csm-dk-dobrushin-and-particle-limit.
+
+- Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.
+
+- For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.
+
+- Empty assignments return empty arrays. For every changed public interface (including physical scope and empirical qualifications), put every direct dependency/reference consumer in downstream, including consumers whose examined uses remain sound and consumers already covered by an assigned review. The array is an examination inventory, not a list of items to edit. Record each exact affected use and disposition in the report; proof-only intermediate repairs do not restart propagation. For a consumer absent from the dependency/reference graph, include downstream_uses:{ID:"exact affected mathematical use, at least 40 characters"}. Outside consumers go to separate maintenance.
+
+- Assigned input:
+  [
+    {
+      "id": "def-csm-dk-phase-space-wasserstein-one",
+      "model": "gpt-6-luna",
+      "keep": false,
+      "reason": "Fatal dependency defect: this mathematics item cites the physical mean-field model to define Z, but library rules forbid mathematical items from depending on physics items. Define Z from mathematical prerequisites instead.",
+      "context_sha256": "47f665744f67ab8cd454589199aebd336ddafa9c4eb13c1bfdb065a1c4db08bd",
+      "item_sha256": "71e76924f9488ce93d86515a52ac15caeba5eff83b644fa6e928d347f9a77ad0",
+      "at": "2026-10-17T08:01:56.234Z"
+    },
+    {
+      "id": "thm-csm-dk-exact-bbgky",
+      "model": "gpt-6-luna",
+      "keep": false,
+      "reason": "Step 1 derives the explicit force law and oddness of K from [F1], but the supplied flow interface gives no equations or definition of K. It therefore does not license the force terms used to obtain the hierarchy.",
+      "context_sha256": "41c0dbb32d015fc5d90f0810ecd9a640a09293b4d13ed9ea44cb7150c2da280e",
+      "item_sha256": "493129de98589de4fec82756a8da6b33aecc672411a4e5e9b7e79766e13099d4",
+      "at": "2026-10-17T08:02:27.777Z"
+    },
+    {
+      "id": "thm-csm-dk-global-lipschitz-vlasov",
+      "model": "gpt-6-luna",
+      "keep": false,
+      "reason": "F5 overstates its dependency: the supplied cutoff lemma gives existence, support properties, and scaling derivatives, but no explicit radial construction or radial monotonicity.",
+      "context_sha256": "1a4f9b8117d4828c48a95e92355e2898548da86f2b0f3be642c3bd2ee1eea002",
+      "item_sha256": "41fabd15f60665b2d71326f7250e5d856222a5754a170c0d30c598e4da7120a6",
+      "at": "2026-10-17T08:02:12.736Z"
+    },
+    {
+      "id": "thm-csm-dk-dobrushin-and-particle-limit",
+      "model": "gpt-6-luna",
+      "keep": false,
+      "reason": "The particle clause is ill-typed: [F3] supplies a physical-time flow on (T* T_L^d)^N, but the statement feeds it dimensionless Z=(x,v) data and s. Step 3.1 constructs a conjugated flow, but the statement never defines that as the trajectory.",
+      "context_sha256": "4b9521cfc267393c09bd77da435c9d74fa6f43ee468ac06597e7a2e65cc77fdb",
+      "item_sha256": "94ad92ac3b4f162e50970f5b61461597eff653edbe8769fafd309fc07a5fdf43",
+      "at": "2026-10-17T08:02:44.507Z"
+    }
+  ]

@@ -1,0 +1,116 @@
+---
+id: lem-tgr-positive-damping-boundary
+kind: lemma
+title: Positive smooth damping preserves the double-pole boundary
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+physical_scope: null
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets
+  - thm-integration-by-parts
+  - thm-ftc-second-part
+  - thm-complex-exponential-is-entire-with-derivative-itself
+  - thm-chain-rule-for-total-derivatives
+  - cor-complex-exponential-cartesian-form-modulus-and-eulers-identity
+  - cor-exponential-reciprocal-and-positivity
+  - thm-exponential-beats-every-polynomial
+  - thm-dominated-convergence
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets: mathematical-premise
+  thm-integration-by-parts: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
+  thm-complex-exponential-is-entire-with-derivative-itself: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  cor-complex-exponential-cartesian-form-modulus-and-eulers-identity: mathematical-premise
+  cor-exponential-reciprocal-and-positivity: mathematical-premise
+  thm-exponential-beats-every-polynomial: mathematical-premise
+  thm-dominated-convergence: mathematical-premise
+  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Gerd Grubb, Distributions. Examples and rules of calculus, §§3.1–3.2"
+      url: https://www.math.ku.dk/~grubb/dist3.pdf
+      locator: "PDF pp. 1–3 and 4–5: distributions as continuous functionals on compactly supported smooth tests and the test-function calculus for multiplication and differentiation. The variable-damping estimate is proved locally here."
+    - title: "Jan Kristensen, B4.3 Distribution Theory and Fourier Analysis: An Introduction, Lecture 3 §3.2 and Lecture 14 Corollary 14.2"
+      url: https://www.maths.ox.ac.uk/system/files/attachments/Lecture%20Notes.pdf
+      locator: "Lecture 3 §3.2, PDF p. 10 (distributions as continuous functionals on D(Ω)); Lecture 14 Corollary 14.2, PDF pp. 51–52 (distributional Cauchy–Riemann equations imply holomorphy). The variable-damping estimate is proved locally here."
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Assume Countable Choice and use Euclidean Lebesgue measure. Let $m\ge0$. For $m=0$ take $\mathbb R^0$ to be a singleton with measure $1$. For each sufficiently small $\epsilon>0$ let $d_\epsilon:\mathbb R^m\times\mathbb R\to(0,\infty)$ be smooth and real-valued. Assume that for every compact $V\subseteq\mathbb R^m$ and every $R>0$ there are constants $c,C,M,\epsilon_0>0$ such that, on $V\times[-R,R]$ and for $0<\epsilon<\epsilon_0$,
+$$c\le d_\epsilon(v,s)\le C,\qquad |\partial_s d_\epsilon(v,s)|+|\partial_s^2d_\epsilon(v,s)|\le M.$$
+For $\varphi\in C_c^\infty(\mathbb R;\mathbb C)$ set $\widehat\varphi(k)=\int_{\mathbb R}\varphi(s)e^{-iks}\,ds$ and define $B$ by
+$$\langle B,\varphi\rangle:=\int_0^\infty k\widehat\varphi(k)\,dk.$$
+For $\psi\in C_c^\infty(\mathbb R^m\times\mathbb R;\mathbb C)$ write $\widehat\psi(v,k)=\int_{\mathbb R}\psi(v,s)e^{-iks}\,ds$ and define $K$ by
+$$\langle K,\psi\rangle:=\int_{\mathbb R^m}\int_0^\infty k\widehat\psi(v,k)\,dk\,dv.$$
+Then $B$ and $K$ are distributions, $B$ is the lower boundary denoted $-(s-i0)^{-2}$, and $K=1\otimes B$ in the explicitly defined pairing above. The smooth kernels
+$$K_\epsilon(v,s):=-\bigl(s-i\epsilon d_\epsilon(v,s)\bigr)^{-2}$$
+converge to $K$ in the distributional sense: $\int K_\epsilon(v,s)\psi(v,s)\,dv\,ds\to\langle K,\psi\rangle$ for every such $\psi$. When $s$ and $\epsilon$ carry units of length, $d_\epsilon$ is dimensionless.
+
+## Facts & Assumptions
+
+**Given:** Countable Choice; Lebesgue measure on $\mathbb R^m$ and $\mathbb R$; the stated positive damping family; and compactly supported smooth complex tests.
+
+[A1] Countable Choice is assumed for the stated Lebesgue-measure and product-measure constructions. [[def-countable-choice]]
+
+[F1] Integration by parts applies on bounded intervals to continuously differentiable real functions; apply it separately to real and imaginary parts for complex functions. [[thm-integration-by-parts]]
+
+[F2] The complex exponential is entire with derivative itself, and the chain rule gives derivatives of its compositions. [[thm-complex-exponential-is-entire-with-derivative-itself]] [[thm-chain-rule-for-total-derivatives]]
+
+[F3] For real $x,y$, $|e^{x+iy}|=e^x$. [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]
+
+[F4] For real $x$, $e^{-x}=1/e^x>0$, and $x/e^{ax}\to0$ as $x\to+\infty$ for every $a>0$. [[cor-exponential-reciprocal-and-positivity]] [[thm-exponential-beats-every-polynomial]]
+
+[F5] Dominated convergence passes limits through integrals under one integrable majorant. [[thm-dominated-convergence]]
+
+[F6] Fubini permits changing integration order for an $L^1$ function on a sigma-finite product measure. [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]
+
+[F7] Under Countable Choice, Euclidean Lebesgue measure on $\mathbb R^r$ is sigma-finite and every bounded measurable set has finite measure for $r\ge1$; for $r=0$ the parameter space is a singleton of measure $1$. Thus every compact parameter support $V$ has finite measure. [[prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]]
+
+[F8] If $G$ is differentiable on a bounded interval and $G'$ is integrable, then $\int G'=G(b)-G(a)$. Smooth functions on compact intervals meet these hypotheses. [[thm-ftc-second-part]]
+
+## Proof
+
+1.1 Three integrations by parts give $|\widehat\varphi(k)|\le\|\varphi\|_1$ for $0\le k\le1$ and $|\widehat\varphi(k)|\le k^{-3}\|\varphi^{(3)}\|_1$ for $k\ge1$. Hence $\int_0^\infty k|\widehat\varphi(k)|\,dk\le\frac12\|\varphi\|_1+\|\varphi^{(3)}\|_1$, so $B$ is a continuous linear functional on each fixed-support test space. Applying the same bound to $\psi(v,\cdot)$ and integrating over the compact $v$-projection bounds $|\langle K,\psi\rangle|$ by a constant times the suprema of $|\psi|$ and $|\partial_s^3\psi|$ on its compact support; thus $K$ is also a distribution and its displayed pairing is absolutely convergent. [A1, F1, F7, algebra]
+
+1.2 If $q=\eta+ix$ with $\eta>0$, an antiderivative of $e^{-qk}$ is $-q^{-1}e^{-qk}$ by [F2]. Applying integration by parts to its real and imaginary parts gives
+$$\int_0^R e^{-qk}\,dk=\frac{1-e^{-qR}}q,\qquad \int_0^R ke^{-qk}\,dk=-\frac{R e^{-qR}}q+\frac{1-e^{-qR}}{q^2}.$$
+By [F3]–[F4], $|e^{-qR}|=e^{-\eta R}$ and $R e^{-\eta R}\to0$; therefore $\int_0^\infty ke^{-qk}\,dk=q^{-2}$. For $a=x_0+i\eta$, take $q=\eta+i(s-x_0)=i(s-a)$ to obtain
+$$-\frac1{(s-a)^2}=\int_0^\infty k e^{-k\operatorname{Im}a}e^{-ik(s-\operatorname{Re}a)}\,dk.$$
+In particular this represents every constant positive damping $-(s-i\epsilon)^{-2}$. [F1, F2, F3, F4, algebra]
+
+1.3 Fix a compact parameter set $V$ and a compact interval $[-R,R]$ containing the $s$-support of a test $\psi$. Taylor's formula with integral remainder, obtained by applying [F8] twice, gives
+$$d_\epsilon(v,s)=d_{0,\epsilon}(v)+d_{1,\epsilon}(v)s+s^2r_\epsilon(v,s),$$
+where $d_{0,\epsilon}=d_\epsilon(v,0)$, $d_{1,\epsilon}=\partial_s d_\epsilon(v,0)$, and $r_\epsilon$ is uniformly bounded on $V\times[-R,R]$. Put $q_\epsilon=1-i\epsilon d_{1,\epsilon}$ and $a_\epsilon=i\epsilon d_{0,\epsilon}/q_\epsilon$. Direct multiplication gives
+$$s-i\epsilon d_\epsilon(v,s)=q_\epsilon(s-a_\epsilon)-i\epsilon s^2r_\epsilon.$$
+Moreover
+$$\operatorname{Im}a_\epsilon=\frac{\epsilon d_{0,\epsilon}}{1+\epsilon^2d_{1,\epsilon}^2}\asymp\epsilon,\qquad \operatorname{Re}a_\epsilon=\frac{-\epsilon^2d_{0,\epsilon}d_{1,\epsilon}}{1+\epsilon^2d_{1,\epsilon}^2}=O(\epsilon^2),$$
+uniformly on $V$. [A1, F8, algebra]
+
+2.1 The linearized kernel $-q_\epsilon^{-2}(s-a_\epsilon)^{-2}$ has the representation of step 1.2. Pairing it with $\psi(v,s)$ and using Fubini gives the $v,k$ integrand
+$$q_\epsilon(v)^{-2}k e^{-k\operatorname{Im}a_\epsilon(v)}e^{ik\operatorname{Re}a_\epsilon(v)}\widehat\psi(v,k).$$
+Three integrations by parts in $s$ show that $k|\widehat\psi(v,k)|$ is integrable over $V\times(0,\infty)$; sigma-finiteness follows from [F7] and [F6] justifies the order change. The integrand converges pointwise to $k\widehat\psi(v,k)$ and is bounded by an integrable constant multiple of it. Dominated convergence [F5] therefore gives the limit $\langle K,\psi\rangle$. [A1, F1, F2, F5, F6, F7, step 1.1, step 1.2, algebra]
+
+2.2 Let $D_\epsilon=s-i\epsilon d_\epsilon(v,s)$ and $L_\epsilon=q_\epsilon(s-a_\epsilon)$. On the compact set, [A1] gives $|D_\epsilon|\ge c'\sqrt{s^2+\epsilon^2}$ and $|D_\epsilon|\le C'\sqrt{s^2+\epsilon^2}$. step 1.3 gives $\operatorname{Im}a_\epsilon\ge c\epsilon$ and $|\operatorname{Re}a_\epsilon|\le C\epsilon^2$. If $|s|\ge2C\epsilon^2$, then $|s-\operatorname{Re}a_\epsilon|\ge|s|/2$; otherwise $|s|=O(\epsilon^2)$ and $|\operatorname{Im}a_\epsilon|\ge c\epsilon$. Thus $|L_\epsilon|\ge c'\sqrt{s^2+\epsilon^2}$ for small $\epsilon$, while the upper bound follows from bounded $q_\epsilon$ and $a_\epsilon=O(\epsilon)$. The factorization in step 1.3 gives $|D_\epsilon-L_\epsilon|\le C'\epsilon s^2$. Therefore
+$$|D_\epsilon^{-2}-L_\epsilon^{-2}|=\frac{|D_\epsilon-L_\epsilon|\,|D_\epsilon+L_\epsilon|}{|D_\epsilon|^2|L_\epsilon|^2}\le C'\frac{\epsilon s^2}{(s^2+\epsilon^2)^{3/2}}.$$
+The integral of this bound over $|s|\le\epsilon$ is $O(\epsilon)$, and over $\epsilon<|s|\le R$ is $O(\epsilon\log(R/\epsilon))$; both tend to zero. Since $\psi$ is bounded and $V$ has finite measure by [F7], the pairing difference tends to zero. [A1, F7, step 1.3, algebra]
+
+3.1 step 2.2 shows that replacing the variable-damping kernel by the linearized kernel changes every compact-test pairing by a quantity tending to zero; step 2.1 gives the latter's limit as $\langle K,\psi\rangle$. Hence $K_\epsilon\to K=1\otimes B$ in distributions. [step 2.1, step 2.2] ∎
+## Remarks
+
+The cited notes develop the distribution framework and its calculus; they are not used as a substitute for the local estimate. The positive smooth damping result and its uniform error bound are proved in full above.

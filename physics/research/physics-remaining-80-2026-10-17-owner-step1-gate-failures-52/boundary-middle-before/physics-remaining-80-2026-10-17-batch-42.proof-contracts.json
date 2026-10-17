@@ -1,0 +1,1394 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "batch": "42",
+  "scope": [
+    "lem-qsm-diagonal-ising-specification-consistency",
+    "lem-qsm-commuting-local-dynamics",
+    "lem-qsm-kms-diagonal-reduction",
+    "thm-qsm-diagonal-kms-dlr-bijection",
+    "thm-qsm-chain-kms-uniqueness",
+    "thm-qsm-ising-high-temperature-kms-uniqueness",
+    "thm-qsm-ising-kms-coexistence",
+    "cex-qsm-finite-gibbs-unique-infinite-not"
+  ],
+  "contracts": {
+    "lem-qsm-diagonal-ising-specification-consistency": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-diagonal-ising-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq1$, the lattice $\\Gamma=\\mathbb Z^d$, and at each site the two-dimensional complex Hilbert space $\\mathcal H_i=\\mathbb C^2$ with an orthonormal basis $e_{+1},e_{-1}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csm-lattice-gibbs-specification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the product-measure extension framework of [[def-countable-choice]] and [[lem-csm-lattice-product-and-measure-compactness]].",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-finite-range-lattice-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\geq1$ and a finite nonempty alphabet $A$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-csm-lattice-specification-consistency",
+          "source_section": "Statement",
+          "quote": "Assume the finite-alphabet product-measure convention and conditional Gibbs formula of [[def-csm-lattice-gibbs-specification]], a finite-range interaction, and $\\beta>0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $\\Delta$ is finite and every site couples only to sites within the fixed finite range $R$, the boundary $C_\\Delta$ and the set of pairs meeting $\\Delta$ are finite. Every $E_\\Delta(\\sigma_\\Delta\\mid\\eta)$ is therefore real and finite. The configuration set $\\{-1,+1\\}^\\Delta$ is nonempty and finite, so $Z_\\Delta^\\eta$ is a finite sum of strictly positive real numbers. When $\\Delta=\\varnothing$, that set has its single empty configuration, $E_\\Delta=0$, $Z_\\Delta^\\eta=1$, and $\\gamma_\\Delta$ is the identity kernel. In every case, $\\gamma_\\Delta(\\cdot\\mid\\eta)$ is a normalized probability distribution.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a bounded measurable $f$ on $X$, each replacement map $\\eta\\mapsto\\sigma_\\Delta\\eta_{\\Delta^c}$ is measurable and each weight in [F1] depends on only the finite boundary $C_\\Delta$. The finite weighted sum defining $\\gamma_\\Delta(f\\mid\\eta)$ is measurable. If $B$ is exterior-measurable, replacement leaves every exterior coordinate unchanged, so $\\gamma_\\Delta(\\mathbf1_B\\mid\\eta)=\\mathbf1_B(\\eta)$; the kernel is proper. Its cylinder probabilities depend only on $C_\\Delta$ and the finitely many coordinates named by the cylinder, so it has finite range.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Let $\\Delta\\subseteq\\Lambda$ be finite. Split all interaction terms meeting $\\Lambda$ into terms meeting $\\Delta$ and terms disjoint from $\\Delta$. For fixed spins $s_{\\Lambda\\setminus\\Delta}$ and exterior $\\eta$, the second group is independent of the spins $s_\\Delta$. Hence $$E_\\Lambda(s_\\Lambda\\mid\\eta)=E_\\Delta(s_\\Delta\\mid s_{\\Lambda\\setminus\\Delta}\\eta)+C(s_{\\Lambda\\setminus\\Delta},\\eta)$$ for a finite real $C$ independent of $s_\\Delta$. In the finite sum for $\\gamma_\\Lambda\\gamma_\\Delta(f\\mid\\eta)$, the factor $e^{-\\beta C}$ occurs in both numerator and normalizer and cancels after summing first over $s_\\Delta$; the remaining normalized sum is exactly $\\gamma_\\Lambda(f\\mid\\eta)$. Thus $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Steps 1.1 and 2.2 prove that the general position-dependent kernels satisfy the specification axioms of [F2]. Now assume the translation-invariant subcase in the Statement. Choose a finite set $D$ containing exactly one of $v,-v$ for each nonzero displacement pair with $J(v)\\ne0$. Use the shape $\\{0\\}$ with potential $-h s_0$ and, for each $v\\in D$, shape $\\{0,v\\}$ with potential $-J(v)s_0s_v$. Every field site is counted once, and every unordered interacting pair is counted once because $D$ contains one orientation per pair. The CSM finite-volume and conditional energies in [F3] are therefore exactly $H_\\Lambda$ and $E_\\Lambda$ in [F1], so the kernels coincide. Applying [F4] confirms that this same kernel is a valid CSM finite-range specification under the matching hypotheses.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or analytic boundary parameter occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "empty region",
+          "result": "For Δ=∅ the unique spin assignment has E=0, Z=1 and γΔ is the identity kernel, explicitly checked at step 1.1.",
+          "steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "one-site region",
+          "result": "For Δ={i}, the kernel has two positive weights normalized by Z; step 1.1 checks normalization and step 2.2 the nested consistency cancellation.",
+          "steps": [
+            "1.1",
+            "2.2"
+          ]
+        }
+      ]
+    },
+    "lem-qsm-commuting-local-dynamics": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-diagonal-ising-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq1$, the lattice $\\Gamma=\\mathbb Z^d$, and at each site the two-dimensional complex Hilbert space $\\mathcal H_i=\\mathbb C^2$ with an orthonormal basis $e_{+1},e_{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Only finitely many singleton and pair supports meet the finite set $X$, because the interaction range is finite and each site has finitely many neighbors. Hence $K_X$ is a finite self-adjoint diagonal matrix. Choose any increasing finite exhaustion $\\Lambda_n$ that eventually contains every support $S$ meeting $X$. For all sufficiently large $n$, decompose $H_{\\Lambda_n}=K_X+L_n$, where $L_n$ is the sum of the remaining terms contained in $\\Lambda_n$. Every support in $L_n$ is disjoint from $X$, so $[L_n,A]=0$; every term is diagonal, so $[L_n,K_X]=0$. Therefore $e^{itH_{\\Lambda_n}/\\hbar}Ae^{-itH_{\\Lambda_n}/\\hbar}=e^{itK_X/\\hbar}Ae^{-itK_X/\\hbar}$ for all real $t$.",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The right side of step 1.1 is independent of $n$. Passing to the norm limit supplied by [F2] gives the claimed exact formula for $\\alpha_t(A)$. If $A$ is diagonal, it commutes with the diagonal matrix $K_X$, so the formula reduces to $\\alpha_t(A)=A$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or analytic boundary parameter occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "single-site support",
+          "result": "For X={i}, K_X consists of the field at i and the finitely many pair terms incident to i; all other diagonal terms commute with local A.",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    },
+    "lem-qsm-kms-diagonal-reduction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-commuting-local-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity for the local spin algebras.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative norm, and a conjugate-linear involution satisfying $\\|A^*A\\|=\\|A\\|^2$; **unital** means that it has a nonzero identity $I$ ([[def-c-star-algebra]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-kms-strip-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $P$ be any local rank-one diagonal projection and $A$ any local observable. By [F1], $\\alpha_t(P)=P$, so the lower boundary of the KMS function for the pair $(A,P)$ is the constant $\\omega(AP)$. The constant function with that value is bounded, continuous, holomorphic, and has the same lower boundary. By [F3] it equals the KMS function. Evaluating the upper boundary in [F2] at $t=0$ gives $\\omega(PA)=\\omega(AP)$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix a finite $\\Lambda$ and a product-basis matrix unit $E_{\\sigma,\\tau}$ with $\\sigma\\ne\\tau$. Take $P=P_\\tau$, the diagonal rank-one projection onto the basis vector $e_\\tau$. Matrix-unit multiplication gives $E_{\\sigma,\\tau}P_\\tau=E_{\\sigma,\\tau}$ and $P_\\tau E_{\\sigma,\\tau}=0$. Applying step 1.1 with $A=E_{\\sigma,\\tau}$ yields $\\omega(E_{\\sigma,\\tau})=0$. By [A2], the restricted positive functional has a unique density matrix whose off-diagonal entries are precisely these matrix-unit expectations, so the finite local density matrix is diagonal.",
+          "inputs": [
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 compares the lower and upper KMS boundary values at t=0 on the closed strip."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "distinct basis states",
+          "result": "For σ≠τ, EστPτ=Eστ and PτEστ=0; the KMS boundary equality forces ω(Eστ)=0.",
+          "steps": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "thm-qsm-diagonal-kms-dlr-bijection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.2",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-diagonal-ising-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq1$, the lattice $\\Gamma=\\mathbb Z^d$, and at each site the two-dimensional complex Hilbert space $\\mathcal H_i=\\mathbb C^2$ with an orthonormal basis $e_{+1},e_{-1}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-diagonal-ising-specification-consistency",
+          "source_section": "Statement",
+          "quote": "For the model of [[def-qsm-diagonal-ising-interaction]] and every finite $\\Delta\\subset\\mathbb Z^d$, the displayed $\\gamma_\\Delta$ is a finite-range proper probability kernel, and the family $(\\gamma_\\Delta)_{\\Delta\\text{ finite}}$ satisfies $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever $\\Delta\\subseteq\\Lambda$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-commuting-local-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity for the local spin algebras.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-kms-diagonal-reduction",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity for the local spin algebras.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qsm-kms-state",
+          "source_section": "Definition",
+          "quote": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative norm, and a conjugate-linear involution satisfying $\\|A^*A\\|=\\|A\\|^2$; **unital** means that it has a nonzero identity $I$ ([[def-c-star-algebra]]).",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-kms-strip-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}$.",
+          "uses": [
+            "2.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-qsm-finite-kms-gibbs-characterization",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonzero finite-dimensional complex Hilbert space, let $H=H^*$ on $\\mathcal H$ with energy units J, let $\\hbar>0$ have units J s, and let $\\beta>0$ have units J$^{-1}$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qsm-quasilocal-spin-algebra",
+          "source_section": "Definition",
+          "quote": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]].",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-csm-lattice-product-and-measure-compactness",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-weierstrass-convergence-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega\\subseteq\\mathbb C$ be open, let each $f_n:\\Omega\\to\\mathbb C$ be holomorphic, and suppose $f_n\\to f$ locally uniformly on $\\Omega$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion.",
+          "uses": [
+            "1.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-csm-lattice-gibbs-specification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice for the product-measure extension framework of [[def-countable-choice]] and [[lem-csm-lattice-product-and-measure-compactness]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-qsm-finite-range-spin-dynamics",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and the finite-matrix C*-identity condition [A1] below.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For each finite cylinder assignment $\\sigma$ on $\\Lambda$, put $\\mu_\\omega(\\sigma|_\\Lambda)=\\omega(P_\\sigma)$, where $P_\\sigma$ is the product-basis rank-one projection. Positivity of $\\omega$ gives nonnegative weights, $\\sum_\\sigma P_\\sigma=I_\\Lambda$ gives normalization, and for $\\Lambda\\subset\\Lambda'$ the identity $P_\\sigma=\\sum_{\\tau|_\\Lambda=\\sigma}P_\\tau$ gives consistency. By [A1] and [F9], these cylinder weights extend uniquely to a Borel probability measure $\\mu_\\omega$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F9",
+            "F13",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Fix a finite $\\Delta$, configurations $\\sigma,\\tau$ on $\\Delta$, an assignment $\\eta$ on $C_\\Delta$, and a cylinder projection $Q_\\zeta$ on finitely many sites outside $\\Delta\\cup C_\\Delta$. Let $Q_\\eta$ be the product projection for $\\eta$ and let $E_{\\sigma,\\tau}$ be the local matrix unit sending $e_\\tau$ to $e_\\sigma$. Since every interaction term that meets $\\Delta$ has all its exterior sites in $C_\\Delta$, changing the $\\Delta$ configuration from $\\tau$ to $\\sigma$ while keeping $\\eta$ fixed changes the finite diagonal Hamiltonian by exactly $\\Delta E:=E_\\Delta(\\sigma\\mid\\eta)-E_\\Delta(\\tau\\mid\\eta)$. Terms not meeting $\\Delta$ commute with $E_{\\sigma,\\tau}Q_\\eta$, so [F3] yields $\\alpha_t(E_{\\sigma,\\tau}Q_\\eta)=e^{it\\Delta E/\\hbar}E_{\\sigma,\\tau}Q_\\eta$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For a complex-valued cylinder function, define its integral as the real integral of its real part plus $i$ times the real integral of its imaginary part. For a DLR measure $\\mu$, define $\\omega_\\mu(A)=\\int\\langle A e_{\\sigma|_\\Lambda},e_{\\sigma|_\\Lambda}\\rangle\\,d\\mu(\\sigma)$ for $A\\in\\mathcal A_\\Lambda$, using the inner product linear in its first argument from [F13]. The value is independent of enlarging $\\Lambda$ because the added factors are identities. It is linear, equals $1$ on the identity, and $\\omega_\\mu(A^*A)=\\int\\|Ae_{\\sigma|_\\Lambda}\\|^2d\\mu(\\sigma)\\geq0$; Cauchy–Schwarz gives $|\\omega_\\mu(A)|\\leq\\|A\\|$. Hence it defines a bounded positive normalized functional on $\\mathcal A_{\\mathrm{loc}}$. If local $A_n\\to A$ in the completion, continuity of product and adjoint from [F12] gives $A_n^*A_n\\to A^*A$, while each $\\omega_\\mu(A_n^*A_n)\\geq0$; the continuous extension is therefore positive and normalized and is a state.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F8",
+            "F12",
+            "F13",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F5] to $A=E_{\\tau,\\sigma}Q_\\eta Q_\\zeta$ and $B=E_{\\sigma,\\tau}Q_\\eta$. The lower edge is $e^{it\\Delta E/\\hbar}\\omega(P_\\tau Q_\\eta Q_\\zeta)$. The function $g(z)=e^{iz\\Delta E/\\hbar}\\omega(P_\\tau Q_\\eta Q_\\zeta)$ is entire and bounded on the closed strip because $\\Delta E$ is real and $0\\leq\\operatorname{Im}z\\leq\\beta\\hbar$; it has the same lower edge. By [F6], $g$ is the KMS function, and its upper edge equals the reversed product boundary from [F5]. At $t=0$ this gives $$\\mu_\\omega(P_\\sigma Q_\\eta Q_\\zeta)=e^{-\\beta\\Delta E}\\mu_\\omega(P_\\tau Q_\\eta Q_\\zeta).$$",
+          "inputs": [
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Keep the general DLR fixed-point identity and exterior properness inside the integral. For the factoring identity, restrict f to a bounded cylinder depending only on Delta union C_Delta; then the fixed exterior assignment eta makes its conditional average constant on Q_eta. The actual chosen finite-matrix diagonal function has this support because A,B lie in Delta and H_Delta^eta depends only on the fixed boundary eta. Apply that justified finite mixture to identify local dynamics correlations with weighted finite Gibbs trace correlations; sum over the finite boundary assignments. No general far-exterior measurable f is factored out.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F13",
+            "F14",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For fixed $\\Delta,\\eta,\\zeta$, step 2.1 implies $e^{\\beta E_\\Delta(\\sigma\\mid\\eta)}\\mu_\\omega(P_\\sigma Q_\\eta Q_\\zeta)$ is constant as $\\sigma$ varies. Summing over $\\sigma$ and using $\\sum_\\sigma P_\\sigma=I_\\Delta$ shows that the constant is $\\mu_\\omega(Q_\\eta Q_\\zeta)/Z_\\Delta^\\eta$, including when this numerator is zero. Therefore $$\\mu_\\omega(P_\\sigma Q_\\eta Q_\\zeta)=\\gamma_\\Delta(\\sigma\\mid\\eta)\\,\\mu_\\omega(Q_\\eta Q_\\zeta).$$",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "For each $\\eta$, define $F^\\eta_{A,B}(z)=\\operatorname{Tr}_\\Delta(\\rho_\\Delta^\\eta A e^{izH_\\Delta^\\eta/\\hbar}Be^{-izH_\\Delta^\\eta/\\hbar})$. By [F7] under [A2]–[A3], this is the finite Gibbs KMS strip function for $H_\\Delta^\\eta$ and the pair $A,B$; it is bounded and continuous on the closed strip, holomorphic inside, and has lower and upper boundaries given by the finite Gibbs traces in their indicated orders. The finite sum $\\sum_\\eta\\mu(Q_\\eta)F^\\eta_{A,B}(z)$ has the same regularity and is bounded because the weights are nonnegative and sum to one. Step 2.2 identifies its boundaries with $\\omega_\\mu(A\\alpha_t(B))$ and $\\omega_\\mu(\\alpha_t(B)A)$, proving the KMS condition for local pairs.",
+          "inputs": [
+            "A2",
+            "A3",
+            "F5",
+            "F7",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every exterior cylinder event is a finite disjoint union of events $Q_\\eta Q_\\zeta$ after refining it to specify all spins in $C_\\Delta$. Summing step 3.1 gives the conditional identity for each interior assignment and every exterior cylinder. Every full cylinder is a finite disjoint union of events $P_\\sigma D_\\sigma$ with $D_\\sigma$ an exterior cylinder; properness in [F2] then gives $(\\mu_\\omega\\gamma_\\Delta)(P_\\sigma D_\\sigma)=\\mu_\\omega(P_\\sigma D_\\sigma)$, so the two probability measures agree on all full cylinders. The class of Borel sets on which they agree contains the whole space, is closed under relative complements of nested members, and under disjoint countable unions, so it is a lambda-system. Full cylinders together with $\\varnothing$ and $X$ form a pi-system generating the Borel sigma-algebra. [F10] states that every lambda-system containing a pi-system contains its generated sigma-algebra, hence the two measures agree on that sigma-algebra. Thus $\\mu_\\omega\\gamma_\\Delta=\\mu_\\omega$ and $\\mu_\\omega\\in\\mathcal D_\\beta$.",
+          "inputs": [
+            "F2",
+            "F10",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "step": "4.2",
+          "claim": "For arbitrary $A,B\\in\\mathcal A$, choose local $A_n\\to A$ and $B_n\\to B$ using [F12], and let $F_n$ be their local-pair KMS functions from step 3.2. On each strip boundary, the difference $F_n-F_m$ is bounded by the state norm and the isometric automorphism property [F15] by quantities tending to zero, for example on the lower edge by $\\|A_n-A_m\\|\\|B_n\\|+\\|A_m\\|\\|B_n-B_m\\|$; the analogous upper-edge bound has the factors reversed. The three-lines bound [F6] makes $F_n$ uniformly Cauchy on the entire closed strip. Its uniform limit is bounded and continuous there, has the required two boundary values by norm continuity, and is holomorphic inside by [F11]. Thus $\\omega_\\mu\\in\\mathcal K_\\beta$.",
+          "inputs": [
+            "A2",
+            "F6",
+            "F11",
+            "F12",
+            "F15",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "For a KMS state $\\omega$, [F4] and [A2] make every local density matrix diagonal, so for local $A$ its value is $\\sum_{\\sigma|_\\Lambda}\\omega(P_\\sigma)\\langle A e_{\\sigma|_\\Lambda},e_{\\sigma|_\\Lambda}\\rangle=\\omega_{\\mu_\\omega}(A)$; density gives equality on $\\mathcal A$. Conversely, $\\omega_\\mu(P_\\sigma)=\\mu(P_\\sigma)$ for every cylinder, so uniqueness in [F9] makes $\\mu\\mapsto\\omega_\\mu$ injective. Steps 4.1 and 4.2 prove that the two maps take values in $\\mathcal D_\\beta$ and $\\mathcal K_\\beta$, and these identities show they are inverse affine maps.",
+          "inputs": [
+            "A2",
+            "F4",
+            "F9",
+            "step 4.1",
+            "step 1.3",
+            "step 4.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both KMS strip edges are used in steps 2.1 and 3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 maps every KMS state to a DLR measure, and steps 1.3–4.2 map every DLR measure to a full-algebra KMS state."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.3–4.2 prove the DLR-to-KMS direction; step 5.1 proves the maps are inverse."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "one-spin block",
+          "result": "For Δ={i}, the conditional matrix has diagonal Gibbs weights proportional to e^{-βE(±|η)}; step 2.2 gives its trace formula and step 3.2 its KMS strip function.",
+          "steps": [
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "case": "empty conditional region",
+          "result": "The empty region has one configuration and unit weight, so the conditional Gibbs trace is scalar and the finite-block argument remains defined.",
+          "steps": [
+            "2.2",
+            "3.2"
+          ]
+        }
+      ]
+    },
+    "thm-qsm-chain-kms-uniqueness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-csm-chain-dlr-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, finite $\\beta>0$, finite $J,h\\in\\mathbb R$, and the one-dimensional nearest-neighbor Ising specification from [[def-csm-lattice-gibbs-specification]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-diagonal-kms-dlr-bijection",
+          "source_section": "Statement",
+          "quote": "Fix $d\\geq1$, the inhomogeneous bounded finite-range diagonal spin-$\\tfrac12$ Ising interaction of [[def-qsm-diagonal-ising-interaction]], $\\beta>0$, $\\hbar>0$, Countable Choice, and the finite-matrix C*-identity supplied by [[lem-qsm-finite-matrix-cstar-and-state-duality]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under these parameters, the conditional energy in [[def-qsm-diagonal-ising-interaction]] is the one-dimensional nearest-neighbor Ising energy used by [F1]: each unordered edge is counted once and the same constant field term is included at every site. Thus the DLR sets in [F1] and [F2] are identical.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], that DLR set has exactly one measure. The bijection [F2] is both injective and surjective, so it sends this singleton to exactly one full-algebra $\\beta$-KMS state. This is a model deduction conditional on [A1]–[A2], [F1], and [F2].",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or analytic boundary parameter occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "J=0",
+          "result": "The CSM uniqueness supplier covers J=0 and finite h, giving the unique product DLR law; the KMS–DLR bijection transfers it.",
+          "steps": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "thm-qsm-ising-high-temperature-kms-uniqueness": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-csm-ising-high-temperature-state",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, spins $s_i\\in\\{-1,+1\\}$, inverse temperature $\\beta>0$, a constant finite field $h\\in\\mathbb R$, and symmetric pair couplings satisfying $J_{ij}=J_{ji}$, $J_{i+k,j+k}=J_{ij}$ for all $i,j,k\\in\\mathbb Z^d$, and $J_{ij}=0$ when $\\|i-j\\|_\\infty>R$ for some finite $R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-diagonal-kms-dlr-bijection",
+          "source_section": "Statement",
+          "quote": "Fix $d\\geq1$, the inhomogeneous bounded finite-range diagonal spin-$\\tfrac12$ Ising interaction of [[def-qsm-diagonal-ising-interaction]], $\\beta>0$, $\\hbar>0$, Countable Choice, and the finite-matrix C*-identity supplied by [[lem-qsm-finite-matrix-cstar-and-state-duality]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-diagonal-ising-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq1$, the lattice $\\Gamma=\\mathbb Z^d$, and at each site the two-dimensional complex Hilbert space $\\mathcal H_i=\\mathbb C^2$ with an orthonormal basis $e_{+1},e_{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The energy formula in [F3] agrees term by term with the pair Hamiltonian in [F1], including the unordered-pair convention, finite range, translation symmetry, constant field, and the zero transverse component. Hence the DLR specifications addressed by [F1] and [F2] coincide.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], the common DLR set contains exactly one measure. The affine bijection [F2] transfers this singleton to exactly one full-algebra $\\beta$-KMS state. In the homogeneous nearest-neighbor case there are $2d$ nonzero neighboring couplings at each site, so the displayed row sum is $2d\\tanh(\\beta|J|)$; the strict bound remains only a sufficient criterion.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or analytic boundary parameter occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "all pair couplings zero",
+          "result": "The influence row sum is 0<1, including constant finite field; the sufficient CSM uniqueness criterion and bijection apply.",
+          "steps": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ]
+    },
+    "thm-qsm-ising-kms-coexistence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-csm-ising-low-temperature-coexistence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-diagonal-kms-dlr-bijection",
+          "source_section": "Statement",
+          "quote": "Fix $d\\geq1$, the inhomogeneous bounded finite-range diagonal spin-$\\tfrac12$ Ising interaction of [[def-qsm-diagonal-ising-interaction]], $\\beta>0$, $\\hbar>0$, Countable Choice, and the finite-matrix C*-identity supplied by [[lem-qsm-finite-matrix-cstar-and-state-duality]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-diagonal-ising-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq1$, the lattice $\\Gamma=\\mathbb Z^d$, and at each site the two-dimensional complex Hilbert space $\\mathcal H_i=\\mathbb C^2$ with an orthonormal basis $e_{+1},e_{-1}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-csm-finite-range-lattice-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\geq1$ and a finite nonempty alphabet $A$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-csm-lattice-van-hove-pressure",
+          "source_section": "Statement",
+          "quote": "Let $d\\geq1$, $A$ be finite nonempty, and let a bounded translation-invariant finite-range interaction on $A^{\\mathbb Z^d}$ be as in [[def-csm-finite-range-lattice-interaction]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-csm-ising-coexistence-pressure-cusp",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qsm-translation-invariant-spin-interaction",
+          "source_section": "Definition",
+          "quote": "Use the lattice $\\Gamma=\\mathbb Z^d$, the finite-site Hilbert spaces, local matrix algebras, factor inclusions, and norm-completed local algebra $\\mathcal A$ of [[def-qsm-local-spin-algebras]] and [[def-qsm-quasilocal-spin-algebra]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-qsm-diagonal-ising-specification-consistency",
+          "source_section": "Statement",
+          "quote": "For the model of [[def-qsm-diagonal-ising-interaction]] and every finite $\\Delta\\subset\\mathbb Z^d$, the displayed $\\gamma_\\Delta$ is a finite-range proper probability kernel, and the family $(\\gamma_\\Delta)_{\\Delta\\text{ finite}}$ satisfies $\\gamma_\\Lambda\\gamma_\\Delta=\\gamma_\\Lambda$ whenever $\\Delta\\subseteq\\Lambda$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $\\mu_+,\\mu_-$ be the translation-stationary DLR measures from [F1]. By the bijection [F2], each has a unique associated full-algebra $\\beta$-KMS state $\\omega_{\\mu_\\pm}$. Since $Z_i e_\\sigma=\\sigma_i e_\\sigma$, the diagonal lift gives $\\omega_{\\mu_\\pm}(Z_i)=\\int \\sigma_i\\,d\\mu_\\pm=\\mu_\\pm(\\sigma_i)$, so the magnetization bounds hold and the states are distinct. For local $A\\in\\mathcal A_\\Lambda$, the basis relabeling in [F8] gives $\\operatorname{diag}(\\tau_k(A))(\\sigma)=\\operatorname{diag}(A)(T_k\\sigma)$, where $(T_k\\sigma)_i=\\sigma_{i+k}$. Stationarity means $(T_k)_*\\mu_\\pm=\\mu_\\pm$, so the lift formula gives $\\omega_{\\mu_\\pm}(\\tau_k(A))=\\omega_{\\mu_\\pm}(A)$. Density of local observables and continuity of both the state and $\\tau_k$ extend the equality to all $A\\in\\mathcal A$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F8",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For a uniform field parameter $h$, the finite matrix $H_{\\Lambda_n}(h)$ is diagonal in the joint $Z_i$ eigenbasis. Its eigenvalue on each spin configuration $\\sigma_{\\Lambda_n}$ is exactly the CSM free-boundary energy $H_{\\Lambda_n}^{\\rm free}(\\sigma_{\\Lambda_n})$: [F9] identifies the translation-invariant pair energy with one CSM shape per unordered displacement pair, and [F3] counts each internal pair and site field once, matching [F5]. The ordinary trace is the sum over this product basis by [F4]. Therefore $$\\operatorname{Tr}_{\\Lambda_n}(e^{-\\beta H_{\\Lambda_n}(h)})=\\sum_{\\sigma_{\\Lambda_n}\\in\\{-1,+1\\}^{\\Lambda_n}}e^{-\\beta H_{\\Lambda_n}^{\\rm free}(\\sigma_{\\Lambda_n})}$$ for every $n$ and real $h$. By [F6], the limit defining $p_Q(h)$ exists and equals the CSM pressure $p(h)$.",
+          "inputs": [
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying [F7] to the pressure equality from step 1.2 gives the asserted secant-slope bounds and nondifferentiability at $h=0$. The coexistence threshold remains the sufficient $\\beta J\\geq2$ from [F1]; no critical-point or extremality claim is used.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F7",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or analytic boundary parameter occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "two-site free volume",
+          "result": "For Λ={i,j}, the diagonal trace is the sum of four Boltzmann weights, equal term-by-term to the CSM free-boundary partition function.",
+          "steps": [
+            "1.2"
+          ]
+        }
+      ]
+    },
+    "cex-qsm-finite-gibbs-unique-infinite-not": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-diagonal-ising-interaction",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\geq1$, the lattice $\\Gamma=\\mathbb Z^d$, and at each site the two-dimensional complex Hilbert space $\\mathcal H_i=\\mathbb C^2$ with an orthonormal basis $e_{+1},e_{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a nonzero finite-dimensional complex inner-product space, $D=\\dim H\\ge1$, with inner product linear in its first argument.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "lem-qsm-matrix-state-calculus",
+          "source_section": "Statement",
+          "quote": "Let $H$ be a complex inner-product space of finite dimension $D\\geq1$, with inner product linear in its first argument.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qsm-finite-kms-gibbs-characterization",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal H$ be a nonzero finite-dimensional complex Hilbert space, let $H=H^*$ on $\\mathcal H$ with energy units J, let $\\hbar>0$ have units J s, and let $\\beta>0$ have units J$^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-ising-kms-coexistence",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice, the finite-matrix C*-identity, $d=2$, uniform nearest-neighbor coupling $J>0$, zero field, $\\beta J\\geq2$, and $\\hbar>0$, in the diagonal spin-$\\tfrac12$ model of [[def-qsm-diagonal-ising-interaction]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix any finite $\\Lambda\\subset\\mathbb Z^2$. Its Hilbert space $\\mathcal H_\\Lambda=(\\mathbb C^2)^{\\otimes|\\Lambda|}$ is nonzero and finite-dimensional, and $H_\\Lambda=H_\\Lambda^*$ by [F1]. The finite characterization [F2] gives exactly one finite-volume $\\beta$-KMS state, namely $\\rho_\\Lambda=e^{-\\beta H_\\Lambda}/\\operatorname{Tr}(e^{-\\beta H_\\Lambda})$. This holds for every finite $\\Lambda$, regardless of finite-volume energy degeneracies.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The same coefficients and $\\beta J\\geq2$ satisfy the hypotheses of [F3], so the infinite quasi-local system has at least two distinct $\\beta$-KMS states. Together, the finite-volume conclusion and this infinite-volume conclusion provide a counterexample to the refuted implication: every finite-volume Gibbs state is unique, while the infinite-volume KMS state is not unique. The distinction is between a fixed finite matrix Hamiltonian and the thermodynamic-limit KMS problem.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite-domain formulas include the empty assignment; its kernel is explicitly evaluated at step 1.1 of the local specification lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-coupling/zero-field specialization is covered by the displayed formulas at step 1.1; positivity and normalization still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-site or one-dimensional local case is included in the finite sums and state formulas at step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Equal local energies or repeated finite eigenvalues do not invalidate the exact finite sums or matrix-unit identities at step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or analytic boundary parameter occurs in this item."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice [A1] is the only nonconstructive selection; finite configurations and boundary assignments are nonempty by the finite-spin definitions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves a one-directional assertion or counterexample, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "empty finite region",
+          "result": "The local Hilbert space is C, nonzero and one-dimensional; the finite Gibbs/KMS state is the unique scalar state, covered by the supplier in step 1.1.",
+          "steps": [
+            "1.1"
+          ]
+        },
+        {
+          "case": "degenerate finite Hamiltonian",
+          "result": "The finite uniqueness supplier covers every self-adjoint Hamiltonian including degeneracies, as stated explicitly in step 1.1.",
+          "steps": [
+            "1.1"
+          ]
+        }
+      ]
+    }
+  }
+}

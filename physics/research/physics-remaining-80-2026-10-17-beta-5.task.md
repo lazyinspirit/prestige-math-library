@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `emg-g04` · order **445** · `einstein-maxwell-models` |
 | B page | `emg-g04-examples` |
 | title | Independent equation-based Einstein–Maxwell coupling |
-| requires | `emg-g01`, `emg-mg04`, `rpm-external-charge` |
+| requires | `emg-g01`, `emg-mg04`, `rpm-external-charge`, `em-action-and-variational-formulation` |
 | design | `research/plan-einstein-maxwell-models-track.md` L199 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.

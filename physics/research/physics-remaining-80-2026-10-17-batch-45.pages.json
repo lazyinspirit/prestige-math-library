@@ -9,9 +9,520 @@
     "companion": "qsm-bose-fermi-gases-examples",
     "requires": [
       "csm-exact-models",
-      "qm-math-oscillator"
+      "qm-math-oscillator",
+      "qm-framework-and-quantities"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-qsm-identical-particle-fock-sectors",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Symmetric and antisymmetric identical-particle Fock spaces",
+        "reference": "workers/models-examples/fock-and-occupation.md#F0",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 0,
+        "deps": [
+          "def-countable-choice",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-permutation-sector-projections"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-permutation-sector-projections": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice, written $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $I$ be a specified finite or countably infinite\nmode set with a fixed enumeration, and let $\\mathfrak h=\\ell^2(I)$ have its\ncoordinate orthonormal basis $(e_j)_{j\\in I}$. Put\n$\\mathfrak h^{\\otimes 0}=\\mathbb C$, $\\mathfrak h^{\\otimes 1}=\\mathfrak h$,\nand define each completed tensor power recursively by\n$\\mathfrak h^{\\otimes(n+1)}=\\mathfrak h^{\\otimes n}\\widehat\\otimes\\mathfrak h$,\nusing the first-variable-linear product inner product of\n[[lem-nrqm-composites-hilbert-tensor-construction]]. For $n\\ge1$, let\n$U_\\pi$ permute the tensor factors for $\\pi\\in S_n$, and let\n$$\nP_\\pm^{(n)}=\\frac1{n!}\\sum_{\\pi\\in S_n}\\chi_\\pm(\\pi)U_\\pi, \\qquad \\chi_+(\\pi)=1,\\quad \\chi_-(\\pi)=\\operatorname{sgn}(\\pi),\n$$\nwith $P_\\pm^{(0)}=I_{\\mathbb C}$. The permutation-sector theorem\n[[lem-nrqm-composites-permutation-sector-projections]] makes these orthogonal\nprojections. Define the symmetric and antisymmetric sectors\n$\\mathcal H_\\pm^{(n)}:=\\operatorname{ran}P_\\pm^{(n)}$. Define\n$$\n\\mathcal F_\\pm(\\mathfrak h):=\\left\\{\\psi=(\\psi_n)_{n\\ge0}:\\psi_n\\in\\mathcal H_\\pm^{(n)},\\ \\sum_{n\\ge0}\\|\\psi_n\\|^2<\\infty\\right\\}, \\qquad \\langle\\psi,\\varphi\\rangle:=\\sum_{n\\ge0}\\langle\\psi_n,\\varphi_n\\rangle.\n$$\nThe vector $\\Omega=(1,0,0,\\ldots)$ is the vacuum, and the finite-particle\nsubspace consists of vectors with only finitely many nonzero components.\n\nThis is a mathematical construction for a specified mode basis. Choosing its\nsymmetric or antisymmetric sector for a physical species is a separate model\npostulate. No spin-statistics theorem or physical species assignment is part of\nthe definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lecture 22, Hilbert Space of Identical Particles",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/7f26f530bdda5d69c399057bd4b1bd28_MIT8_333F13_Lec22.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.5.1 and 3.6.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 The tensor factors and product pairing in the Definition are supplied by [F1]. For every $n\\ge1$, [F2] makes $P_\\pm^{(n)}$ an orthogonal projection. The range of an orthogonal projection is closed: if $P x_k=x_k$ and $x_k\\to x$, boundedness of $P$ gives $P x=\\lim_k P x_k=\\lim_k x_k=x$. Therefore each $\\mathcal H_\\pm^{(n)}$ is a closed subspace of the complete tensor Hilbert space and is itself complete. [given, A1, F1, F2, algebra]\n\n1.2 For $\\psi,\\varphi\\in\\mathcal F_\\pm(\\mathfrak h)$, Cauchy\u2013Schwarz for the square-summable nonnegative sequences $(\\|\\psi_n\\|)_n$ and $(\\|\\varphi_n\\|)_n$ gives\n$\\sum_n|\\langle\\psi_n,\\varphi_n\\rangle|\\le(\\sum_n\\|\\psi_n\\|^2)^{1/2}(\\sum_n\\|\\varphi_n\\|^2)^{1/2}<\\infty$. Hence the displayed pairing converges absolutely, is sesquilinear, and is positive definite because $\\langle\\psi,\\psi\\rangle=\\sum_n\\|\\psi_n\\|^2=0$ forces every coordinate to vanish. [given, F1, F3, algebra]\n\n2.1 Let $(\\psi^{(k)})_k$ be Cauchy in this norm. For each fixed $n$, $(\\psi_n^{(k)})_k$ is Cauchy in the complete sector $\\mathcal H_\\pm^{(n)}$, so it converges to some $\\psi_n\\in\\mathcal H_\\pm^{(n)}$. If $k\\ge K$ and $\\|\\psi^{(k)}-\\psi^{(m)}\\|\\le\\varepsilon$ for all $m\\ge K$, then for every finite $N$, passing $m\\to\\infty$ in the finite sum yields $\\sum_{n\\le N}\\|\\psi_n-\\psi_n^{(k)}\\|^2\\le\\varepsilon^2$. Also $\\sum_{n\\le N}\\|\\psi_n\\|^2\\le2\\|\\psi^{(k)}\\|^2+2\\varepsilon^2$. Taking suprema over finite $N$ proves $\\sum_n\\|\\psi_n\\|^2<\\infty$, so $\\psi\\in\\mathcal F_\\pm(\\mathfrak h)$, and then $\\|\\psi^{(k)}-\\psi\\|\\le\\varepsilon$ for all $k\\ge K$. Thus the direct sum is complete. [step 1.1, step 1.2, algebra]\n\n3.1 For $\\psi\\in\\mathcal F_\\pm(\\mathfrak h)$, truncating after sector $N$ changes its squared norm by $\\sum_{n>N}\\|\\psi_n\\|^2\\to0$. Therefore the finite-particle subspace is dense and $\\Omega$ is a unit vector. [step 1.2, algebra] \u220e",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-qsm-fock-occupation-basis-and-car-relations",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Occupation bases and actual CCR/CAR domains",
+        "reference": "workers/models-examples/fock-and-occupation.md#F1",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 1,
+        "deps": [
+          "def-qsm-identical-particle-fock-sectors",
+          "lem-nrqm-composites-permutation-sector-projections",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-densely-defined-closed-and-closable-operator",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_roles": {
+          "def-qsm-identical-particle-fock-sectors": "mathematical-premise",
+          "lem-nrqm-composites-permutation-sector-projections": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-densely-defined-closed-and-closable-operator": "mathematical-premise",
+          "def-unbounded-linear-operator-domain-and-graph": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I$ and $\\mathcal F_\\pm(\\ell^2(I))$ be as in\n[[def-qsm-identical-particle-fock-sectors]]. Define\n$$\n\\Omega_B:=\\{m:I\\to\\mathbb N_0:m\\text{ has finite support}\\},\\qquad \\Omega_F:=\\{m:I\\to\\{0,1\\}:m\\text{ has finite support}\\}.\n$$\nFor either statistics choice, write $|m|=\\sum_jm_j$. If $m\\in\\Omega_B$, choose the elementary tensor $x_m$ containing $m_j$ copies of each mode $j$ in the fixed order and set\n$$\n|m\\rangle_B:=\\sqrt{\\frac{|m|!}{\\prod_jm_j!}}\\,P_+^{(|m|)}x_m.\n$$\nIf $m\\in\\Omega_F$, list its occupied modes increasingly in the fixed enumeration, let $x_m$ be their elementary tensor and set\n$$\n|m\\rangle_F:=\\sqrt{|m|!}\\,P_-^{(|m|)}x_m.\n$$\nFor $|m|=0$, both vectors are the vacuum. These vectors form orthonormal bases and define unitary identifications $\\mathcal F_+(\\ell^2(I))\\cong\\ell^2(\\Omega_B)$ and $\\mathcal F_-(\\ell^2(I))\\cong\\ell^2(\\Omega_F)$.\n\nOn the finite-support span $\\mathcal D_{\\rm fin}$ of the bosonic basis, define\n$$\na_j|m\\rangle_B=\\sqrt{m_j}|m-\\mathbf1_j\\rangle_B,\\qquad a_j^\\dagger|m\\rangle_B=\\sqrt{m_j+1}|m+\\mathbf1_j\\rangle_B,\n$$\nwhere the annihilation term is zero when $m_j=0$. Their maximal closed extensions have domains\n$$\nD(a_j)=\\left\\{c:\\sum_{m\\in\\Omega_B}m_j|c_m|^2<\\infty\\right\\},\\qquad D(a_j^\\dagger)=\\left\\{c:\\sum_{m\\in\\Omega_B}(m_j+1)|c_m|^2<\\infty\\right\\},\n$$\nand $a_j^\\dagger=a_j^*$. On $\\mathcal D_{\\rm fin}$, they satisfy\n$[a_i,a_j^\\dagger]=\\delta_{ij}I$, $[a_i,a_j]=0$, and $[a_i^\\dagger,a_j^\\dagger]=0$.\n\nOn the fermionic basis define\n$$\nc_j|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}m_j|m-\\mathbf1_j\\rangle_F,\\qquad c_j^\\dagger|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}(1-m_j)|m+\\mathbf1_j\\rangle_F.\n$$\nThese operators are bounded on the full fermionic Fock space and satisfy\n$\\{c_i,c_j^\\dagger\\}=\\delta_{ij}I$ and $\\{c_i,c_j\\}=\\{c_i^\\dagger,c_j^\\dagger\\}=0$. These are mathematical sector relations; they do not select a physical species or imply a spin-statistics theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lecture 22, Hilbert Space of Identical Particles",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/7f26f530bdda5d69c399057bd4b1bd28_MIT8_333F13_Lec22.pdf"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.5.1 and 3.6.1",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 Let $n=|m|$. In the bosonic permutation average $P_+^{(n)}x_m$, each distinct product word with occupation profile $m$ occurs $\\prod_jm_j!$ times out of $n!$ permutations. Therefore $$ P_+^{(n)}x_m=\\frac{\\prod_jm_j!}{n!}\\sum_{w\\in\\mathcal W(m)}w, \\qquad |\\mathcal W(m)|=\\frac{n!}{\\prod_jm_j!}. $$ The product words are orthonormal by [F1], so the squared norm of this average is $\\prod_jm_j!/n!$; the prefactor in $|m\\rangle_B$ makes its norm one. Distinct occupation profiles have disjoint word supports, hence their vectors are orthogonal. [given, F1, algebra]\n\n1.2 If a fermionic list repeats a mode, [F2] makes its antisymmetrization zero; $\\Omega_F$ excludes these profiles. For distinct occupied modes, the $n!$ permuted product words are distinct orthonormal vectors with coefficients $\\pm1/n!$, so $\\|P_-^{(n)}x_m\\|^2=1/n!$. The prefactor $\\sqrt{n!}$ normalizes the vector. Distinct occupied subsets have disjoint product-word support and are orthogonal. [given, F1, F2, algebra]\n\n1.3 The fixed enumeration identifies a finite-support configuration with a finite sequence of natural indices and finitely many nonnegative integer labels (or bits); the union over all finite sequence lengths is countable. Thus $\\Omega_B$ and $\\Omega_F$ are countable and their $\\ell^2$ coordinate descriptions are well defined. [given, algebra]\n\n1.4 On the bosonic basis, shifting the coordinate index gives $\\|a_jc\\|^2=\\sum_m m_j|c_m|^2$ and $\\|a_j^\\dagger c\\|^2=\\sum_m(m_j+1)|c_m|^2$. Hence the stated weighted domains are exactly the domains on which the shifted coefficient sequences lie in $\\ell^2$. If $c^{(r)}\\to c$ and either shifted sequence converges in $\\ell^2$, coordinate convergence shows the limiting output has the same weighted-shift coordinates; its square summability puts $c$ in the displayed domain. Thus both maximal shifts are closed. Testing the adjoint identity against each basis vector forces the reverse weighted shift [F3], while Cauchy--Schwarz gives the converse pairing bound [F4]. Truncating to finite initial sets of configurations makes the weighted tails tend to zero in graph norm, so $\\mathcal D_{\\rm fin}$ is a core for both shifts under the graph definition in [F3]. [given, F3, F4, algebra]\n\n2.1 Product words span a dense subspace of each tensor power by [F1]. Applying the bounded projections $P_\\pm^{(n)}$ to that dense span gives a dense subspace of each projected sector. Every projected product word is either zero or a scalar multiple of the corresponding occupation vector from steps 1.1\u20131.2. Thus the occupation vectors are complete in each sector and, after taking the direct sum over $n$, form orthonormal bases of the Fock spaces. [step 1.1, step 1.2, F1, algebra]\n\n2.2 For $i=j$, direct action on $|m\\rangle_B$ gives $a_ja_j^\\dagger|m\\rangle_B=(m_j+1)|m\\rangle_B$ and $a_j^\\dagger a_j|m\\rangle_B=m_j|m\\rangle_B$. For $i\\ne j$, both orders of distinct coordinate shifts give the same coefficient and same occupation vector, so the shifts commute; the same direct coordinate calculation applies to two annihilators and two creators. This proves the CCR on $\\mathcal D_{\\rm fin}$, without asserting that unbounded commutators are defined on all Fock space. [step 1.4, algebra]\n\n3.1 Each fermionic shift maps a subset of an orthonormal basis into another orthonormal subset with coefficients of modulus at most one, so it is a contraction on the finite span and extends boundedly. For distinct $i,j$, the two orders in any CAR anticommutator are either both zero or have equal magnitudes and opposite signs: toggling the earlier mode changes by one the number of occupied modes preceding the later index. For $i=j$, if $m_j=0$ then $c_jc_j^\\dagger|m\\rangle_F=|m\\rangle_F$ and $c_j^\\dagger c_j|m\\rangle_F=0$; if $m_j=1$ the roles reverse. The other same-mode anticommutators vanish. Thus all CAR identities hold on the basis span and extend by boundedness to the whole Fock space. [given, step 1.2, algebra] \u220e",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-qsm-models-diagonal-occupation-trace",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Explicit diagonal Fock domains and occupation trace",
+        "reference": "workers/models-examples/fock-and-occupation.md#F2",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 2,
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-unbounded-linear-operator-domain-and-graph",
+          "def-densely-defined-closed-and-closable-operator",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "lem-positive-square-root-of-a-compact-positive-operator",
+          "lem-qsm-fock-occupation-basis-and-car-relations",
+          "def-tdmath-countable-canonical-model",
+          "thm-tdmath-summable-canonical-differentiation",
+          "lem-tdmath-bose-fermi-mode-fluctuations",
+          "thm-tdmath-grand-response-covariance",
+          "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma",
+          "thm-nrqm-oscillator-hermite-completeness",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-unbounded-linear-operator-domain-and-graph": "mathematical-premise",
+          "def-densely-defined-closed-and-closable-operator": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "lem-finite-rank-operators-are-compact": "mathematical-premise",
+          "thm-norm-limit-of-compact-operators-is-compact": "mathematical-premise",
+          "def-absolute-value-and-singular-values-of-a-compact-operator": "mathematical-premise",
+          "lem-positive-square-root-of-a-compact-positive-operator": "mathematical-premise",
+          "lem-qsm-fock-occupation-basis-and-car-relations": "mathematical-premise",
+          "def-tdmath-countable-canonical-model": "mathematical-premise",
+          "thm-tdmath-summable-canonical-differentiation": "mathematical-premise",
+          "lem-tdmath-bose-fermi-mode-fluctuations": "mathematical-premise",
+          "thm-tdmath-grand-response-covariance": "mathematical-premise",
+          "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma": "mathematical-premise",
+          "thm-nrqm-oscillator-hermite-completeness": "mathematical-premise",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume [[def-countable-choice]]. Let $I$ be finite or countably infinite with a specified enumeration, let $m\\in\\Omega_\\pm$ be the occupation configurations of [[lem-qsm-fock-occupation-basis-and-car-relations]], and let $\\epsilon_j\\in\\mathbb R$ be finite mode energies. For each finite-support configuration put\n$$\nE(m):=\\sum_j\\epsilon_jm_j,\\qquad N(m):=|m|=\\sum_jm_j.\n$$\nThese are finite sums. On $\\ell^2(\\Omega_\\pm)$, define the real diagonal multipliers\n$$\nD(H)=\\left\\{c:\\sum_mE(m)^2|c_m|^2<\\infty\\right\\},\\quad (Hc)_m=E(m)c_m,\n$$\n$$\nD(N)=\\left\\{c:\\sum_m|m|^2|c_m|^2<\\infty\\right\\},\\quad (Nc)_m=|m|c_m,\n$$\nand, for $\\mu\\in\\mathbb R$,\n$$\nD(K_\\mu)=\\left\\{c:\\sum_m|E(m)-\\mu|m||^2|c_m|^2<\\infty\\right\\},\\quad (K_\\mu c)_m=(E(m)-\\mu|m|)c_m.\n$$\nEach is self-adjoint on its displayed domain. No equality between $D(K_\\mu)$ and $D(H)\\cap D(N)$ is asserted.\n\nFor $\\beta>0$, set $q_j=e^{-\\beta(\\epsilon_j-\\mu)}$. In the bosonic case assume\n$$\n0<q_j<1,\\qquad q_*:=\\sup_jq_j<1,\\qquad \\sum_jq_j<\\infty;\n$$\nHere $q_*=0$ by convention when $I$ is empty; for nonempty $I$ the displayed supremum is unchanged. In the fermionic case assume $q_j>0$, $\\sum_jq_j<\\infty$, and only finitely many gaps $\\epsilon_j-\\mu$ are negative. Define the positive diagonal multiplier $G_{\\beta,\\mu}$ by $G_{\\beta,\\mu}|m\\rangle=e^{-\\beta(E(m)-\\mu|m|)}|m\\rangle$. Then $G_{\\beta,\\mu}$ is trace class, with\n$$\n\\Xi_B=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1-q_j)^{-1}<\\infty,\\qquad \\Xi_F=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1+q_j)<\\infty.\n$$\nThus $\\rho_{\\beta,\\mu}=\\Xi^{-1}G_{\\beta,\\mu}$ is a positive trace-class operator of trace one. Its finite-mode marginals are independent: bosonic occupation $n_j\\in\\mathbb N_0$ has law $(1-q_j)q_j^{n_j}$, and fermionic occupation $n_j\\in\\{0,1\\}$ has probabilities $(1+q_j)^{-1}$ and $q_j(1+q_j)^{-1}$. In particular\n$$\n\\mathbb E_BN_j=\\frac{q_j}{1-q_j},\\quad \\operatorname{Var}_B(N_j)=\\frac{q_j}{(1-q_j)^2},\\qquad \\mathbb E_FN_j=\\frac{q_j}{1+q_j},\\quad \\operatorname{Var}_F(N_j)=\\frac{q_j}{(1+q_j)^2}.\n$$\nThe total number has finite mean and variance under the stated mode conditions. The trace hypotheses alone do not imply finite energy moments or differentiability in $\\beta,\\mu$.\n\nFor an additional compact-parameter envelope, the corresponding response identities hold. For fixed $\\mu$, if for every compact $B\\subset J\\subset(0,\\infty)$ a summable $(a_m)$ satisfies $(1+|E(m)-\\mu|m||^2)e^{-\\beta(E(m)-\\mu|m|)}\\le a_m$ for all $m$ and $\\beta\\in B$, then $-\\partial_\\beta\\log\\Xi=\\mathbb E(K_\\mu)$ and $\\partial_\\beta^2\\log\\Xi=\\operatorname{Var}(K_\\mu)$. If $(\\beta,\\mu)$ varies over an open set and a summable compact-parameter envelope dominates $e^{-\\beta(E(m)-\\mu|m|)}(1+|E(m)|^2+|m|^2)$, then at fixed $\\beta$, $\\partial_\\mu\\mathbb E(N)=\\beta\\operatorname{Var}(N)$ and $\\partial_\\mu\\mathbb E(E)=\\beta\\operatorname{Cov}(E,N)$. These stronger moment envelopes are additional hypotheses, not consequences of trace-class normalization.\n\nFor a finite mode set $J$, the canonical fixed-number coefficients are defined by\n$$\n\\prod_{j\\in J}(1-ze^{-\\beta\\epsilon_j})^{-1}=\\sum_{N\\ge0}Z_{B,N}(J)z^N,\\qquad \\prod_{j\\in J}(1+ze^{-\\beta\\epsilon_j})=\\sum_{N=0}^{|J|}Z_{F,N}(J)z^N.\n$$\nEach coefficient is the sum of the Boltzmann weights over the corresponding number sector; for a countable mode set it is the increasing limit over finite mode sets and is finite under the stated grand-trace hypotheses. A fixed-number law is the grand law conditioned on total number, so its occupations are generally coupled. The oscillator specialization uses the actual one-particle Hermite basis and diagonal domain of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], not a formal differential eigenfunction list.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.4\u20133.6.2",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lectures 22\u201325",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/97bfdfb93240e2f48984629ad0c037de_MIT8_333F13_Lec23.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 The configuration set $\\Omega_\\pm$ is countable by [F1]. Every $m$ has finite support, so the sums defining $E(m)$ and $|m|$ are finite real sums. The finite-support vectors form a dense subspace of $\\ell^2(\\Omega_\\pm)$. [given, F1, A1]\n\n1.2 If $I$ is empty, its only occupation configuration is the vacuum: $E=N=K_\\mu=0$, $G=I$ on $\\mathbb C$, $\\Xi=1$ and $\\rho=1$. The empty products are one, the total number has mean and variance zero, and every stated parameter derivative is zero; the convention $q_*=0$ makes the bosonic hypotheses valid. For a finite mode set $J$, summing the positive diagonal weights independently over each bosonic coordinate gives $\\prod_{j\\in J}\\sum_{n\\ge0}q_j^n=\\prod_{j\\in J}(1-q_j)^{-1}$. In the fermionic case each coordinate has only two values and contributes $1+q_j$. This proves the finite-mode trace products. [given, A1, algebra]\n\n1.3 For a fixed $\\mu$, the countable configuration model has weights $e^{-\\beta(E(m)-\\mu|m|)}$ and degeneracies one. Under the compact $\\beta$-envelope in the Statement, [F2]\u2013[F3] apply to this exact countable index set and energy $K_\\mu(m)$, giving the displayed beta-derivative identities and finite moments. The envelope is stronger than trace finiteness and is stated separately. [F2, F3, A1]\n\n1.4 For joint $(\\beta,\\mu)$ response, put $X_1(m)=E(m)$, $X_2(m)=|m|$, and natural parameter $\\theta=(-\\beta,\\beta\\mu)$. The map $(\\beta,\\mu)\\mapsto\\theta$ is a smooth bijection onto its open image for $\\beta>0$, with nonzero Jacobian. The stated joint envelope is exactly the required second-moment envelope for [F5]; differentiating at fixed $\\beta$ gives $\\partial_\\mu\\mathbb E(N)=\\beta\\operatorname{Var}(N)$ and $\\partial_\\mu\\mathbb E(E)=\\beta\\operatorname{Cov}(E,N)$. [F5, A1, algebra]\n\n2.1 Let $D_\\lambda$ multiply the coordinate $c_m$ by a real number $\\lambda_m$, on the domain $\\sum_m\\lambda_m^2|c_m|^2<\\infty$. Testing the adjoint identity on each coordinate vector forces the adjoint coordinates to be $\\lambda_m c_m$, so $D(D_\\lambda^*)$ is exactly this weighted $\\ell^2$ domain by [F8]. Conversely, on that domain Cauchy\u2013Schwarz makes the coordinate pairing bounded and identifies the adjoint action with the same multiplier. Apply this argument to $\\lambda_m=E(m)$, $|m|$, and $E(m)-\\mu|m|$; all three displayed operators are self-adjoint. [step 1.1, A1, F8, algebra]\n\n2.2 Enumerate a countable mode set by increasing finite initial sets $J_M$. Their finite-support configuration sets increase to $\\Omega_\\pm$, so the full nonnegative trace sum is the increasing limit of the finite-mode sums. For bosons, $-\\log(1-q_j)=\\int_0^{q_j}(1-u)^{-1}du\\le q_j/(1-q_*)$, hence $\\sum_j-\\log(1-q_j)<\\infty$. For fermions, $\\log(1+q_j)\\le q_j$, hence $\\sum_j\\log(1+q_j)<\\infty$. The products therefore have finite positive limits and equal the full diagonal trace sums; the negative fermionic gaps are finite by hypothesis, and each has finite weight. [step 1.2, A1, algebra]\n\n3.1 If $\\Omega_\\pm$ is infinite, enumerate it as $m_1,m_2,\\ldots$ and let $G_M$ retain the first $M$ diagonal entries of $G_{\\beta,\\mu}$; in the finite case take the full finite sum. Each $G_M$ has finite rank and hence is compact. Since the omitted entries are nonnegative and summable, their supremum is bounded by their sum, so $\\|G_{\\beta,\\mu}-G_M\\|\\le\\sum_{r>M}e^{-\\beta(E(m_r)-\\mu|m_r|)}\\to0$. The norm-limit theorem therefore makes $G_{\\beta,\\mu}$ compact. It is positive diagonal and satisfies $G_{\\beta,\\mu}^*G_{\\beta,\\mu}=G_{\\beta,\\mu}^2$; uniqueness of its compact positive square root gives $|G_{\\beta,\\mu}|=G_{\\beta,\\mu}$. Its singular values are the nonnegative diagonal entries with multiplicity, whose sum is $\\Xi<\\infty$. Thus [F7] and the trace-class definition make it trace class and give $\\operatorname{Tr}G_{\\beta,\\mu}=\\Xi$. Dividing by $\\Xi>0$ gives a positive trace-class operator of trace one. [step 2.2, F1, F7, A1, algebra]\n\n3.2 Fix one mode $j$, and take increasing finite mode sets $J_M$ containing it. For bosons, the trace weight of configurations in $J_M$ with occupation $n$ at $j$ is $q_j^n\\prod_{i\\in J_M\\setminus\\{j\\}}(1-q_i)^{-1}$; division by the total finite trace gives $(1-q_j)q_j^n$. For fermions the same calculation gives probability $q_j^n/(1+q_j)$, for $n\\in\\{0,1\\}$. Taking increasing limits of the nonnegative configuration sums preserves these factorizations, because every finite-support configuration is eventually included and the finite products converge by step 2.2. Factoring over any fixed finite list of modes gives the product joint law, hence independence of finite collections in this diagonal grand state. [step 1.2, step 2.2, A1, algebra]\n\n3.3 For finite $J$, multiplying the geometric series in each bosonic coordinate gives the coefficient identity for $Z_{B,N}(J)$; multiplying the two-term polynomials in each fermionic coordinate gives the identity for $Z_{F,N}(J)$. Each coefficient sums exactly the finite canonical Boltzmann weights with total occupation $N$. For countable $I$, increasing finite mode sets increase each coefficient to its sum over all finite-support configurations; for any admissible fugacity $z=e^{\\beta\\mu}>0$, nonnegativity gives $z^N Z_{\\pm,N}\\le\\Xi$, hence $Z_{\\pm,N}\\le z^{-N}\\Xi<\\infty$, and a canonical density exists exactly when the coefficient is positive. Conditioning the grand law on $|m|=N$ multiplies by the indicator of that constraint and generally couples the mode occupations. [step 2.2, A1, algebra]\n\n4.1 If $0<q_j<1$, [F4] gives the stated Bose and Fermi means and variances. For a fermionic mode with $q_j\\ge1$, direct summation of its two probabilities gives $\\mathbb E N_j=q_j/(1+q_j)$ and $\\operatorname{Var}(N_j)=q_j/(1+q_j)^2$; no geometric-series claim is used there. The bosonic bounds $\\mathbb E N_j\\le q_j/(1-q_*)$ and $\\operatorname{Var}(N_j)\\le q_j/(1-q_*)^2$, and the fermionic bounds $\\mathbb E N_j\\le q_j$ and $\\operatorname{Var}(N_j)\\le q_j$, are summable. For finite initial mode sets, independence from step 3.2 gives $\\mathbb E N_M=\\sum_{j\\in J_M}\\mathbb E N_j$ and $\\mathbb E N_M^2=\\sum_{j\\in J_M}\\operatorname{Var}(N_j)+(\\sum_{j\\in J_M}\\mathbb E N_j)^2$. Each configuration has finite support, so $N_M\\uparrow N$; passing to the increasing limits of the defining nonnegative countable sums yields finite $\\mathbb E N$ and $\\mathbb E N^2$, with $\\operatorname{Var}(N)=\\sum_j\\operatorname{Var}(N_j)<\\infty$. [F4, step 3.2, A1, algebra]\n\n5.1 In the one-dimensional oscillator specialization, [F6] supplies the Hermite eigenbasis, energy list and exact diagonal domain; substitution of those eigenvalues into the Fock multiplier gives the stated occupation construction. This uses the actual self-adjoint oscillator carrier rather than a formal differential eigenfunction list. [F6, A1] \u220e",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-qsm-models-lattice-riemann-bose-bound",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Lattice Gaussian Riemann limits and the singular Bose endpoint",
+        "reference": "workers/models-examples/proofs.md#M1",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 1,
+        "deps": [
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-nonnegative-lebesgue-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "lem-csm-examples-gamma-gaussian-tools",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "lem-csm-examples-gamma-gaussian-tools": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]).\nLet $d\\ge1$ be an integer, $\\alpha,\\beta>0$, and $h>0$. Define\n$F_B(p)=(e^{\\beta\\alpha|p|^2}-1)^{-1}$ for $p\\ne0$ and\n$F_F(p)=(e^{\\beta(\\alpha|p|^2-\\mu)}+1)^{-1}$ for finite $\\mu\\in\\mathbb R$.\nFor each $\\mu<0$, both $F_B(\\cdot;\\mu)=(e^{\\beta(\\alpha|p|^2-\\mu)}-1)^{-1}$ and $F_F$ are continuous, and for every fixed integer $s\\ge0$ their polynomially weighted lattice sums converge with\n$$h^d\\sum_{k\\in\\mathbb Z^d}|hk|^sF(hk)\\longrightarrow\\int_{\\mathbb R^d}|p|^sF(p)\\,dp\\quad(h\\downarrow0).$$\nThe convergence is uniform when $(\\beta,\\mu)$ ranges over a compact subset of $\\{\\beta>0,\\mu<0\\}$ for bosons or $\\{\\beta>0,\\mu\\in\\mathbb R\\}$ for fermions. At the Bose endpoint $\\mu=0$, define $F_B(p;0)=(e^{\\beta\\alpha|p|^2}-1)^{-1}$ for $p\\ne0$. For every fixed $\\beta,\\alpha>0$ and $d\\ge1$, monotone convergence gives $\\int F_B(p;\\mu)\\,dp\\uparrow\\int F_B(p;0)\\,dp$ as $\\mu\\uparrow0$, where the extended endpoint value is\n$$\\int_{\\mathbb R^d}F_B(p;0)\\,dp=(\\pi/(\\beta\\alpha))^{d/2}\\sum_{\\ell=1}^\\infty\\ell^{-d/2}\\in(0,+\\infty].$$\nIt is finite exactly when $d>2$. In that case the missing-origin lattice sums satisfy\n$$h^d\\sum_{k\\in\\mathbb Z^d\\setminus\\{0\\}}F_B(hk;0)\\longrightarrow\\int_{\\mathbb R^d}F_B(p;0)\\,dp\\qquad(h\\downarrow0).$$\nNo value is assigned to $F_B(0;0)$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.5\u20133.6, thermodynamic momentum integrals and Bose/Fermi occupations",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lectures 23\u201325, quantum gases and Bose condensation",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/85cd383f3ca4573c3d578db435257c5a_MIT8_333F13_Lec25.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 For $\\mu<0$, the Bose denominator is bounded below by $e^{\\beta(-\\mu)}-1>0$ on compact sets; for finite $\\mu$, the Fermi denominator is at least $1$. At large $|p|$, each occupation is bounded by $C e^{-c|p|^2}$ for positive constants $C,c$ depending on a compact parameter neighborhood. A polynomial factor $|p|^s$ is absorbed by a slower Gaussian because $r^s e^{-c r^2/2}$ is bounded on $[0,\\infty)$. Thus the continuum integrands and their polynomially weighted tails are integrable by comparison with products of one dimensional Gaussians and Tonelli [F3,F1]. For each fixed $h>0$, the max-norm shell $|k|_\\infty=n$ has at most $C_dn^{d-1}$ points, and its summand is bounded by a fixed polynomial in $n$ times $e^{-c h^2n^2}$; the ratio of successive polynomial-Gaussian terms is eventually below a constant less than one, proving every lattice sum is finite. [given, F1, F3, algebra]\n\n1.2 At $\\mu=0$ and $p\\ne0$, $e^x-1\\ge x$ gives $F_B(p)\\le(\\beta\\alpha|p|^2)^{-1}$. If $|k|_\\infty=n$, the number of integer lattice points in that shell is $(2n+1)^d-(2n-1)^d\\le C_dn^{d-1}$, while $|k|\\ge n$. Hence for $0<h\\le\\delta$, $h^d\\sum_{0<|hk|\\le\\delta}F_B(hk)\\le C h^{d-2}\\sum_{n\\le\\delta/h}n^{d-3}\\le C'\\delta^{d-2}$ when $d>2$; the last estimate follows by comparison on each unit interval with the integral of $x^{d-3}$ (and for $d=3$ the sum is bounded by a constant times $\\delta/h$). The continuum small-ball integral has the same bound by decomposing into dyadic annuli, each with volume at most a constant times its radius to power $d$. [given, F2, F5, algebra]\n\n2.1 On a fixed compact cube, uniform continuity of $|p|^sF(p)$ implies that replacing its value on each mesh cube by its value at the lattice corner changes the integral by at most the cube volume times the common modulus of continuity; summing finitely many cubes makes this error tend to zero. The measure of each mesh cube is $h^d$ by [F5]. This proves convergence on compact cubes. [step 1.1, F5, algebra]\n\n3.1 To control tails uniformly for $0<h\\le1$, let $Q_{k,h}=hk+[-h/2,h/2]^d$. For $p\\in Q_{k,h}$, $|hk|^2\\ge |p|^2/2-dh^2/4$. The Gaussian bound from step 1.1 therefore bounds each weighted lattice summand times $h^d$ by a fixed constant times the integral of a slower Gaussian over $Q_{k,h}$; the polynomial weight is absorbed by reducing its exponent once more. Cubes whose centers satisfy $|hk|>R$ lie outside the ball of radius $R-\\sqrt d/2$. The integral of the slower Gaussian on that exterior tends to zero as $R\\to\\infty$, by [F1,F3]. Compact convergence from step 2.1 and this uniform tail bound prove the stated full-space limit and finiteness of every lattice sum. [step 1.1, step 2.1, F1, F3, algebra]\n\n4.1 Outside any fixed ball around zero, $F_B$ is continuous and has Gaussian tails, so the compact-annulus and tail argument in steps 2.1 and 3.1 applies. Split both the sum and integral into $0<|p|\\le\\delta$, $\\delta<|p|\\le R$, and $|p|>R$. First take $h\\downarrow0$ on the annulus, then $R\\to\\infty$ using Gaussian tails, and finally $\\delta\\downarrow0$ using step 1.2. This proves convergence of the missing-origin Bose sums without assigning an origin value. [step 2.1, step 3.1, step 1.2, algebra]\n\n5.1 For $p\\ne0$, the positive geometric series gives $F_B(p;0)=\\sum_{\\ell\\ge1}e^{-\\ell\\beta\\alpha|p|^2}$. Its partial sums increase pointwise, so [F4] and Tonelli [F3] give the equality as extended nonnegative integrals $\\int F_B=\\sum_{\\ell\\ge1}\\int e^{-\\ell\\beta\\alpha|p|^2}dp$. The product Gaussian integral [F1] evaluates each term as $(\\pi/(\\ell\\beta\\alpha))^{d/2}$. The resulting positive series converges exactly when $d/2>1$, by comparison of $\\sum\\ell^{-d/2}$ with $\\int_1^\\infty x^{-d/2}dx$, and diverges otherwise. For $\\mu<0$, $F_B(p;\\mu)$ increases pointwise to $F_B(p;0)$ as $\\mu\\uparrow0$, so [F4] also gives convergence of the corresponding integrals to this endpoint value. This proves the extended endpoint formula, its divergence for $d\\le2$, and the integral limit used by the Bose condensation theorem. [F1, F3, F4, algebra] \u220e",
+        "proof_strategy": "direct",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "post-qsm-models-statistics-and-preparation",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Quantum statistics and model equilibrium preparation",
+        "reference": "workers/models-examples/proofs.md#P0",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 3,
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "def-qsm-identical-particle-fock-sectors",
+          "lem-qsm-fock-occupation-basis-and-car-relations",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "def-qsm-identical-particle-fock-sectors": "formulation-prerequisite",
+          "lem-qsm-fock-occupation-basis-and-car-relations": "mathematical-premise",
+          "lem-qsm-models-diagonal-occupation-trace": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For a declared QSM model, let $I$ be a specified finite or countably infinite mode set with a fixed enumeration and let $\\mathfrak h=\\ell^2(I)$. The model assigns a nonzero separable complex Hilbert space $\\mathcal H$ and declares whether it is a fixed-particle-number sector or the Fock space $\\mathcal F_\\pm(\\mathfrak h)$ of [[def-qsm-identical-particle-fock-sectors]]. By that definition, $\\mathcal F_\\pm(\\mathfrak h)$ is the Hilbert direct sum of the symmetric or antisymmetric $n$-particle tensor sectors for $n\\ge0$, including the vacuum sector $\\mathbb C$. The assignment is a physical model assumption. The symmetric or antisymmetric sector is selected independently for bosons or fermions; this selection is not derived from the Fock construction or from a nonrelativistic spin-statistics theorem.\n\nThe words **pure preparation** and **state** have the exact meanings in clauses (i)\u2013(iii) of [[post-nrqm-framework-state-and-composition]]: a pure preparation is a unit ray in $\\mathcal H$, and a general state is a self-adjoint positive trace-class operator $\\rho$ with $\\operatorname{tr}\\rho=1$. These mathematical state definitions are used for the QSM Hilbert spaces declared above; the reference does not extend that NRQM postulate's fixed-particle-number physical scope to a variable-number grand-canonical system. The countable-choice hypothesis is [[def-countable-choice]].\n\nA **sharp measurement** is specified by a densely defined self-adjoint operator $A:D(A)\\subseteq\\mathcal H\\to\\mathcal H$, its declared physical unit, and its spectral projection-valued measure $E_A$ on the Borel sets of $\\mathbb R$, as in clauses (i)\u2013(iii) of [[post-nrqm-framework-observable-and-probability]]. Here a projection-valued measure is a map from Borel sets to orthogonal projections with $E_A(\\varnothing)=0$, $E_A(\\mathbb R)=I$, $E_A(B\\cap C)=E_A(B)E_A(C)$, and strong countable additivity. The adopted Born law is $\\mu^A_\\rho(B):=\\operatorname{tr}(\\rho E_A(B))$ for Borel $B\\subseteq\\mathbb R$; clauses (a)\u2013(b) of [[lem-nrqm-composites-density-and-scalar-spectral-probability]] give a probability measure under $\\mathrm{AC}_\\omega$. For a finite unsharp measurement, a specified finite family of bounded effects $0\\le F_a\\le I$ with $\\sum_aF_a=I$ has outcome probabilities $\\operatorname{tr}(\\rho F_a)$, as in clause (iv) of [[post-nrqm-framework-observable-and-probability]]. The arbitrary self-adjoint spectral construction in that postulate also assumes the Axiom of Choice; any use inherits that exact mathematical premise.\n\nAn Axiom of Choice hypothesis [[def-axiom-of-choice]] accompanies the general self-adjoint spectral construction in P2. A model Hamiltonian is a densely defined self-adjoint operator $H:D(H)\\subseteq\\mathcal H\\to\\mathcal H$ representing energy, with its domain and energy unit declared. For a canonical preparation, write $H_N$ for the Hamiltonian on the declared fixed-number sector and adopt $\\rho=Z^{-1}e^{-\\beta H_N}$ only when the spectral-calculus exponential has $0<Z=\\operatorname{tr}(e^{-\\beta H_N})<\\infty$. For a grand-canonical preparation on the declared Fock space, let $|n|:=\\sum_jn_j$ for a finite-support occupation configuration $n$ of [[lem-qsm-fock-occupation-basis-and-car-relations]] and define the particle-number operator by $N|n\\rangle=|n||n\\rangle$ on $D(N)=\\{c\\in\\ell^2(\\Omega_\\pm):\\sum_n|n|^2|c_n|^2<\\infty\\}$, as in [[lem-qsm-models-diagonal-occupation-trace]]. Require $K_\\mu$ to be a specified self-adjoint realization of $H-\\mu N$ on a stated domain; self-adjointness of $H$ and $N$ separately does not by itself specify a self-adjoint domain for their difference. For $T>0$ in K, $k_B>0$ in J K$^{-1}$, $\\beta=(k_BT)^{-1}$ in J$^{-1}$, and chemical potential $\\mu$ in J, adopt $\\rho=\\Xi^{-1}e^{-\\beta K_\\mu}$ only when $0<\\Xi=\\operatorname{tr}(e^{-\\beta K_\\mu})<\\infty$.\n\nFor the additive diagonal Fock model, the trace and occupation statements of [[lem-qsm-models-diagonal-occupation-trace]] hold only under that lemma's mode-summability hypotheses and $\\mathrm{AC}_\\omega$. Under those hypotheses its finite collections of grand-canonical mode occupations are independent. This independence is not asserted for interacting Hamiltonians; conditioning a product grand law on a fixed total number generally couples the modes.\n\nIf the spectral law $\\mu^H_\\rho$ has finite first absolute moment, define the model mean energy by $U(\\rho;H):=\\int_{\\mathbb R}\\lambda\\,d\\mu^H_\\rho(\\lambda)$. If the nonzero eigenvalues $r_j$ of $\\rho$, repeated with multiplicity, satisfy $\\sum_j-r_j\\log r_j<\\infty$, define its von Neumann entropy by $S(\\rho):=-k_B\\sum_jr_j\\log r_j$, with $0\\log0:=0$; where finite, this is $-k_B\\operatorname{tr}(\\rho\\log\\rho)$. This postulate does not define Helmholtz free energy, grand potential, or other thermodynamic potentials; model-specific items define them with their own hypotheses. Identifying these quantities with measured macroscopic thermodynamic variables requires a separate physical bridge. No thermalization mechanism, empirical value, or law for a particular material is postulated here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.1 and 3.5\u20133.6",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lectures 22\u201325",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/97bfdfb93240e2f48984629ad0c037de_MIT8_333F13_Lec23.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "physical_scope": "Adoption of NRQM state and Born-measurement terminology on declared QSM Hilbert spaces, a specified self-adjoint Hamiltonian with domain, a chosen symmetric boson or antisymmetric fermion sector, and a canonical or grand-canonical Gibbs preparation only when its trace is positive and finite. General self-adjoint spectral measurements inherit the Axiom of Choice hypothesis of their NRQM supplier; countable diagonal Fock traces inherit AC_omega. P1's fixed-particle-number physical scope is not extended to variable-number grand models. This formulation asserts no spin-statistics theorem, thermalization dynamics, universal equilibrium, empirical observation, or applicability to a particular species."
+      },
+      {
+        "id": "pthm-qsm-dilute-occupation-limit",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Controlled dilute Bose/Fermi occupation limit",
+        "reference": "workers/models-examples/proofs.md#E7",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "post-qsm-models-statistics-and-preparation",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-qsm-models-statistics-and-preparation": "physical-assumption",
+          "lem-qsm-models-diagonal-occupation-trace": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), the preparation postulate [[post-qsm-models-statistics-and-preparation]], and the diagonal grand-trace hypotheses of [[lem-qsm-models-diagonal-occupation-trace]]. Let the mode set be finite or countable, with $0<q_j\\le r<1$ and $\\sum_jq_j^2<\\infty$. Write $\\bar n_j^B=q_j/(1-q_j)$ and $\\bar n_j^F=q_j/(1+q_j)$. Then\n$$|\\bar n_j^B-q_j|\\le\\frac{q_j^2}{1-r},\\qquad |\\bar n_j^F-q_j|\\le q_j^2.$$\nThe total mean occupations satisfy\n$$\\left|\\sum_j\\bar n_j^B-\\sum_jq_j\\right|\\le\\frac1{1-r}\\sum_jq_j^2,\\qquad \\left|\\sum_j\\bar n_j^F-\\sum_jq_j\\right|\\le\\sum_jq_j^2.$$\nThe grand log partition factors, with $\\Xi_B,\\Xi_F$ as defined in [[lem-qsm-models-diagonal-occupation-trace]], obey\n$$0\\le -\\log(1-q_j)-q_j\\le\\frac{q_j^2}{2(1-r)},\\qquad 0\\le q_j-\\log(1+q_j)\\le\\frac{q_j^2}{2}.$$\nConsequently,\n$$\\left|\\log\\Xi_B-\\sum_jq_j\\right|\\le\\frac1{2(1-r)}\\sum_jq_j^2,\\qquad \\left|\\log\\Xi_F-\\sum_jq_j\\right|\\le\\frac12\\sum_jq_j^2.$$\nThus the displayed linear fugacity terms approximate both total mean occupation and log partition with a controlled aggregate error under the stated squared-summability hypothesis.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.5.1\u20133.5.2, Bose and Fermi occupation factors",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lecture 23, quantum ideal gases",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/97bfdfb93240e2f48984629ad0c037de_MIT8_333F13_Lec23.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 For bosons, direct subtraction gives $\\bar n^B-q=q^2/(1-q)$; because $q\\le r$, this is nonnegative and at most $q^2/(1-r)$. For fermions, $q-\\bar n^F=q^2/(1+q)$, which lies between zero and $q^2$. [given, F1, algebra]\n\n1.2 The identity $-\\log(1-q)-q=\\int_0^q x/(1-x)\\,dx$ follows by integrating the derivative of $-\\log(1-x)-x$ from zero. Since $1/(1-x)\\le1/(1-r)$ on $[0,q]$, the integral is between zero and $q^2/[2(1-r)]$. Also $q-\\log(1+q)=\\int_0^q x/(1+x)\\,dx$, whose integrand lies between zero and $x$, giving the Fermi bound $q^2/2$. [given, algebra]\n\n2.1 Summing the nonnegative mode errors over any finite subset preserves these bounds. Taking the increasing limit over finite subsets gives the same inequalities for the total error because $\\sum_jq_j^2<\\infty$. [step 1.1, A1, algebra]\n\n3.1 By [F1], the log partition function is the sum of the corresponding mode log factors. Sum the nonnegative factor remainders from step 1.2 over finite subsets and pass to the countable limit; squared summability makes each aggregate error finite and proves the claimed controlled first-order approximation. [step 1.2, F1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional mode-by-mode approximation for a trace-class ideal Bose or Fermi grand state with dimensionless fugacities 0<q_j\u2264r<1 and summable squared fugacities. The occupation and log-partition errors are bounded explicitly. This is a controlled dilute or low-fugacity limit, not a high-temperature criterion, universality statement, interacting-gas result, or empirical observation.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-qsm-oscillator-spin-ensembles",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Exact quantum oscillator and spin ensembles",
+        "reference": "workers/models-examples/proofs.md#E1",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "post-qsm-models-statistics-and-preparation",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma",
+          "thm-nrqm-oscillator-hermite-completeness",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-qsm-models-statistics-and-preparation": "physical-assumption",
+          "lem-qsm-models-diagonal-occupation-trace": "mathematical-premise",
+          "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma": "mathematical-premise",
+          "thm-nrqm-oscillator-hermite-completeness": "mathematical-premise",
+          "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and the preparation postulate [[post-qsm-models-statistics-and-preparation]]. Let $\\omega>0$ in s$^{-1}$, $m>0$ in kg, $\\hbar>0$ in J s, $k_B>0$ in J K$^{-1}$, and $T>0$ in K; set $\\epsilon=\\hbar\\omega$ in joules and $\\beta=(k_BT)^{-1}$ in J$^{-1}$. Take the self-adjoint one-dimensional realization $H_{\\rm osc}$ of $-\\hbar^2(2m)^{-1}d^2/dx^2+m\\omega^2x^2/2$ on $L^2(\\mathbb R,dx)$ with Hermite eigenvectors $\\phi_n$, eigenvalues $\\epsilon(n+1/2)$, and domain $D(H_{\\rm osc})=\\{\\sum_nc_n\\phi_n:\\sum_n\\epsilon^2(n+1/2)^2|c_n|^2<\\infty\\}$, as proved in [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]].\n$$Z=e^{-\\beta\\epsilon/2}(1-e^{-\\beta\\epsilon})^{-1},\\quad U=\\epsilon(\\tfrac12+\\bar n),\\quad \\bar n=(e^{\\beta\\epsilon}-1)^{-1},\\quad C_V=k_B(\\beta\\epsilon)^2\\frac{e^{\\beta\\epsilon}}{(e^{\\beta\\epsilon}-1)^2}.$$\nIts entropy is $S=k_B[(1+\\bar n)\\log(1+\\bar n)-\\bar n\\log\\bar n]$; as $T\\downarrow0$, $U\\to\\epsilon/2$, $S,C_V\\to0$. As $\\beta\\epsilon\\downarrow0$, $U=\\beta^{-1}+O(\\beta\\epsilon^2)$.\n\nFor a separate two-level spin model, let $\\mathcal H_s=\\mathbb C^2$ with its standard orthonormal basis, define $\\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$ on its full domain $D(\\sigma_z)=\\mathbb C^2$, and set $H_s=-h\\sigma_z$ for $h\\in\\mathbb R$ in joules. Then $Z_s=2\\cosh(\\beta h)$, $U_s=-h\\tanh(\\beta h)$, $C_{V,s}=k_B(\\beta h)^2\\operatorname{sech}^2(\\beta h)$, and $S_s\\to0$ as $T\\downarrow0$ when $h\\ne0$, whereas $S_s=k_B\\log2$ when $h=0$. These results make no generic third-law claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a73.4, vibrational harmonic-oscillator partition function",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S3.html"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a71.2.3 and 1.3.1\u20131.3.2, two-state spin system and canonical partition function",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 The oscillator eigenvalues from [F1] give levels $\\epsilon(n+1/2)$ for the declared Hamiltonian. Since $x=e^{-\\beta\\epsilon}\\in(0,1)$, summing the geometric series yields $Z=\\sum_{n\\ge0}e^{-\\beta\\epsilon(n+1/2)}=e^{-\\beta\\epsilon/2}/(1-x)$, finite and positive; the domain and spectral realization are those of [F1], so this sum is the trace of the declared Gibbs multiplier. [given, F1, A1, algebra]\n\n2.1 The normalized probabilities are $(1-x)x^n$. Differentiating the convergent geometric series, or multiplying its absolutely convergent power series by $1-x$, gives $\\mathbb E n=x/(1-x)$ and $\\operatorname{Var}n=x/(1-x)^2$. Therefore $U=\\epsilon(1/2+\\bar n)$ and differentiating with respect to $T$ using $d\\beta/dT=-1/(k_BT^2)$ gives the displayed $C_V$. [step 1.1, F2, algebra]\n\n3.1 Since $-\\log p_n=-\\log(1-x)-n\\log x$, $S=-k_B\\sum_np_n\\log p_n=k_B[-\\log(1-x)-\\bar n\\log x]$. Substituting $x=\\bar n/(1+\\bar n)$ gives the stated entropy. As $\\beta\\epsilon\\to\\infty$, $x\\to0$, so $U\\to\\epsilon/2$, $C_V\\to0$, and both $-\\log(1-x)$ and $\\bar n|\\log x|$ tend to zero; hence $S\\to0$. [step 2.1, algebra]\n\n3.2 Set $y=\\beta\\epsilon$. Taylor's formula for $e^y$ at zero gives $e^y-1=y+y^2/2+O(y^3)$, so $\\bar n=1/y-1/2+O(y)$ as $y\\downarrow0$. Multiplying by $\\epsilon$ in $U=\\epsilon(1/2+\\bar n)$ cancels the constant halves and yields $U=\\beta^{-1}+O(\\beta\\epsilon^2)$. [step 2.1, algebra]\n\n4.1 The spin eigenvalues are $-h$ and $h$, so its normalized Gibbs probabilities are $e^{\\beta h}/(2\\cosh\\beta h)$ and $e^{-\\beta h}/(2\\cosh\\beta h)$. Their sum gives $Z_s$; their energy mean is $-h\\tanh(\\beta h)$ and variance $h^2\\operatorname{sech}^2(\\beta h)$. Multiplying the variance by $1/(k_BT^2)=k_B\\beta^2$ gives the displayed heat capacity. If $h\\ne0$, one probability tends one and the other zero, so the two-state entropy tends zero; if $h=0$, both probabilities equal $1/2$ at all temperatures and $S_s=k_B\\log2$. [given, A1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "Exact canonical calculations for the one-dimensional harmonic oscillator with its proved Hermite spectral realization and for a declared independent two-level spin Hamiltonian. The low- and high-temperature limits retain the model's zero-point and ground-degeneracy qualifications. No generic third-law claim, species magnetic moment, material prediction, or measurement is asserted.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-qsm-periodic-ideal-occupation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Finite spectral periodic Bose/Fermi gas",
+        "reference": "workers/models-examples/proofs.md#E4",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "post-qsm-models-statistics-and-preparation",
+          "lem-qsm-fock-occupation-basis-and-car-relations",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "thm-qsm-models-lattice-riemann-bose-bound",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-qsm-models-statistics-and-preparation": "physical-assumption",
+          "lem-qsm-fock-occupation-basis-and-car-relations": "mathematical-premise",
+          "lem-qsm-models-diagonal-occupation-trace": "mathematical-premise",
+          "thm-qsm-models-lattice-riemann-bose-bound": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and adopt the model preparation of [[post-qsm-models-statistics-and-preparation]]. Let $d\\ge1$, $L>0$ in m, $m>0$ in kg, $\\hbar>0$ in J s, $k_B>0$ in J K$^{-1}$, and $T>0$ in K. Put $V=L^d$, $\\alpha=\\hbar^2/(2m)$, $\\beta=(k_BT)^{-1}$, and let $g\\in\\mathbb N$ count distinct internal modes. Put $\\Lambda=\\mathbb Z^d\\times\\{1,\\ldots,g\\}$, enumerated by increasing $\\|k\\|_\\infty:=\\max_{1\\le j\\le d}|k_j|$, then lexicographically in $k$ and increasingly in $s$. Define the one-particle Hilbert space $\\mathfrak h=\\ell^2(\\Lambda)$ with coordinate basis $e_{k,s}$. Its spectral energy multiplier is $h_1e_{k,s}=\\epsilon_ke_{k,s}$ for $\\epsilon_k=\\alpha|2\\pi k/L|^2$, on the maximal domain $D(h_1)=\\{c\\in\\ell^2(\\Lambda):\\sum_{k,s}\\epsilon_k^2|c_{k,s}|^2<\\infty\\}$; the real diagonal multiplier is self-adjoint on this domain by the coordinate adjoint calculation in Step 2.1 of [[lem-qsm-models-diagonal-occupation-trace]].\n\nLet $\\Omega_B$ be the finite-support maps $n:\\Lambda\\to\\mathbb N_0$, and let $\\Omega_F$ be the finite-support maps $n:\\Lambda\\to\\{0,1\\}$, with occupation bases $|n\\rangle$ of the Bose or Fermi Fock space as in [[lem-qsm-fock-occupation-basis-and-car-relations]]. Use $\\Omega_\\pm=\\Omega_B$ for bosons and $\\Omega_\\pm=\\Omega_F$ for fermions. Define the finite sums $E(n):=\\sum_{(k,s)\\in\\Lambda}\\epsilon_kn_{k,s}$ and $|n|:=\\sum_{(k,s)\\in\\Lambda}n_{k,s}$, and the mode occupation random variables $N_{k,s}(n):=n_{k,s}$. The diagonal many-body Hamiltonian and total number operators act by $H|n\\rangle=E(n)|n\\rangle$ and $N|n\\rangle=|n||n\\rangle$ on their maximal domains\n$$D(H)=\\left\\{c\\in\\ell^2(\\Omega_\\pm):\\sum_{n\\in\\Omega_\\pm}E(n)^2|c_n|^2<\\infty\\right\\},\\qquad D(N)=\\left\\{c\\in\\ell^2(\\Omega_\\pm):\\sum_{n\\in\\Omega_\\pm}|n|^2|c_n|^2<\\infty\\right\\},$$\nas self-adjoint operators on those domains by [[lem-qsm-models-diagonal-occupation-trace]].\n\nFor bosons take $\\mu<0$; for fermions take any finite $\\mu\\in\\mathbb R$. In either case the grand trace\n$$\\Xi_{\\beta,\\mu,L}:=\\sum_{n\\in\\Omega_\\pm}e^{-\\beta(E(n)-\\mu|n|)}$$\nis finite and positive, and its normalized occupation law is $P_{\\beta,\\mu,L}(n):=\\Xi_{\\beta,\\mu,L}^{-1}e^{-\\beta(E(n)-\\mu|n|)}$. For a $P_{\\beta,\\mu,L}$-integrable real random variable $X$, write $\\mathbb E_{\\beta,\\mu,L}X:=\\sum_{n\\in\\Omega_\\pm}P_{\\beta,\\mu,L}(n)X(n)$; if $X$ has finite second moment, set $\\operatorname{Var}_{\\beta,\\mu,L}(X):=\\mathbb E_{\\beta,\\mu,L}[(X-\\mathbb E_{\\beta,\\mu,L}X)^2]$. In particular, $\\mathbb E_{\\beta,\\mu,L}N=\\sum_nP_{\\beta,\\mu,L}(n)|n|$ and $\\mathbb E_{\\beta,\\mu,L}H=\\sum_nP_{\\beta,\\mu,L}(n)E(n)$. Under this additive diagonal Hamiltonian its mode occupations are independent, and\n$$\\bar n_{k,s}:=\\mathbb E_{\\beta,\\mu,L}N_{k,s}=\\frac1{e^{\\beta(\\epsilon_k-\\mu)}\\mp1},\\qquad \\operatorname{Var}_{\\beta,\\mu,L}(N_{k,s})=\\bar n_{k,s}(1\\pm\\bar n_{k,s}),$$\nwith the upper sign choice in the denominator interpreted as $-$ for bosons and $+$ for fermions (equivalently the variance is $\\bar n(1+\\bar n)$ for bosons and $\\bar n(1-\\bar n)$ for fermions). For fixed $\\beta,\\mu$ in these regimes, as $L\\to\\infty$,\n$$\\frac{\\mathbb E_{\\beta,\\mu,L}N}{V}\\to\\frac{g}{(2\\pi)^d}\\int_{\\mathbb R^d}\\frac{dp}{e^{\\beta(\\alpha|p|^2-\\mu)}\\mp1},\\qquad \\frac{\\mathbb E_{\\beta,\\mu,L}H}{V}\\to\\frac{g}{(2\\pi)^d}\\int_{\\mathbb R^d}\\frac{\\alpha|p|^2\\,dp}{e^{\\beta(\\alpha|p|^2-\\mu)}\\mp1},$$\nThe continuum limits are conditional model deductions; they assert no thermalization or measured density.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.5\u20133.6, ideal Bose/Fermi gases",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lectures 23\u201325",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/97bfdfb93240e2f48984629ad0c037de_MIT8_333F13_Lec23.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 Set $h=2\\pi/L$ and $q_k=e^{\\beta\\mu}e^{-\\beta\\alpha h^2|k|^2}$. The Gaussian lattice bound from [F2] gives $\\sum_{k,s}q_k<\\infty$. For bosons, $q_k\\le e^{\\beta\\mu}<1$, so the uniform gap and summability hypotheses in [F1] hold. For fermions they hold with $q_k>0$; only finitely many modes have $\\epsilon_k<\\mu$, since that inequality confines $k$ to a bounded ball in the discrete lattice. The one-particle real diagonal multiplier has the stated weighted-square domain by the coefficient and adjoint test in [F1]. [given, F1, F2, algebra]\n\n2.1 Apply [F1] to these exact mode weights. Its finite positive product is the trace of $e^{-\\beta(H-\\mu N)}$; normalization yields the stated independent geometric or Bernoulli mode laws. The means and variances are those displayed in the Statement. [step 1.1, F1, A1]\n\n3.1 With $p=hk$, one has $V^{-1}=(h/2\\pi)^d$. Therefore $V^{-1}\\sum_{k,s}\\bar n_k=g(2\\pi)^{-d}h^d\\sum_k f(p)$ and $V^{-1}\\sum_{k,s}\\epsilon_k\\bar n_k=g(2\\pi)^{-d}h^d\\sum_k\\alpha|p|^2f(p)$. Both limits follow from [F2], using weights $s=0$ and $s=2$. The polynomial tail bound also makes these number and energy densities finite. [step 2.1, F2, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "A finite-volume ideal gas defined spectrally on the integer momentum labels of a periodic box, with dispersion alpha|2pi k/L|^2 and a finite internal degeneracy g. It proves finite grand trace, exact mode means and continuum density/energy limits for fixed mu<0 in the Bose case or finite mu in the Fermi case. It does not identify this spectral definition with a differential operator domain, claim a finite-volume phase transition, or establish an empirical gas model.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-qsm-fermi-zero-temperature",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Ideal Fermi continuum and zero-temperature endpoint",
+        "reference": "workers/models-examples/proofs.md#E6",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "post-qsm-models-statistics-and-preparation",
+          "pthm-qsm-periodic-ideal-occupation",
+          "thm-qsm-models-lattice-riemann-bose-bound",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-qsm-models-statistics-and-preparation": "physical-assumption",
+          "pthm-qsm-periodic-ideal-occupation": "physical-result",
+          "thm-qsm-models-lattice-riemann-bose-bound": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and use the ideal spectral gas model of [[pthm-qsm-periodic-ideal-occupation]], specializing to $d=3$, a positive integer internal degeneracy $g\\ge1$, and $\\alpha=\\hbar^2/(2m)>0$. For finite $\\mu$ and $\\beta>0$, the continuum number and energy densities are\n$$\\rho(\\mu,\\beta)=\\frac{g}{(2\\pi)^3}\\int_{\\mathbb R^3}\\frac{d^3k}{e^{\\beta(\\alpha|k|^2-\\mu)}+1},\\quad u(\\mu,\\beta)=\\frac{g}{(2\\pi)^3}\\int_{\\mathbb R^3}\\frac{\\alpha|k|^2d^3k}{e^{\\beta(\\alpha|k|^2-\\mu)}+1}.$$\nFor each $\\rho>0$ and $\\beta>0$ there is a unique $\\mu(\\rho,\\beta)$ giving that density. As $\\beta\\to\\infty$, $\\mu(\\rho,\\beta)\\to E_F$ and $u\\to(3/5)\\rho E_F$, where\n$$k_F=(6\\pi^2\\rho/g)^{1/3},\\qquad E_F=\\alpha k_F^2.$$\nThe ideal grand thermodynamic pressure $p$ defined by\n$$p=\\frac{g}{\\beta(2\\pi)^3}\\int_{\\mathbb R^3}\\log(1+e^{-\\beta(\\alpha|k|^2-\\mu)})d^3k$$\nsatisfies $p=2u/3$; hence its zero-temperature endpoint is $2\\rho E_F/5$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a73.6, Fermi gases and degeneracy pressure",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lecture 24, Fermi gas and zero-temperature limit",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/9d5207eef23c4d6e18ef3afbca5d9d81_MIT8_333F13_Lec24.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 Under the adopted preparation [A1] and the exact periodic continuum state [F1], for fixed $\\beta>0$, the integrand is continuous in $(k,\\mu)$ and strictly increases at every $k$ with $\\mu$. The Gaussian tail bound from [F2] is uniform when $\\mu$ ranges over a compact interval, so the integral is continuous in $\\mu$. As $\\mu\\to-\\infty$, the pointwise bound $f_F\\le e^{\\beta\\mu}e^{-\\beta\\alpha|k|^2}$ makes $\\rho\\to0$. As $\\mu\\to+\\infty$, on the ball $\\alpha|k|^2\\le\\mu$ the occupation is at least $1/2$; the ball volume tends infinity, so $\\rho\\to\\infty$. Strict monotonicity and the intermediate value theorem give a unique chemical potential for every positive $\\rho$. [given, A1, F1, F2, algebra]\n\n1.2 Fix $\\mu>0$ and let $k_\\mu=\\sqrt{\\mu/\\alpha}$. Off any annulus $||k|-k_\\mu|<\\delta$, the Fermi occupation converges uniformly on bounded sets to the indicator of $|k|<k_\\mu$, since the exponent has a positive gap from zero there. The annulus volume tends zero with $\\delta$ and the occupation is bounded by one, so its number and bounded-energy contributions vanish as $\\delta\\downarrow0$. For $|k|$ sufficiently large, $\\alpha|k|^2\\ge2\\mu$ and $f_F\\le e^{-\\beta\\alpha|k|^2/2}$ for $\\beta\\ge1$; multiplying by $1+\\alpha|k|^2$ still gives an integrable Gaussian tail uniformly for $\\beta\\ge1$. Splitting into the bounded region and this tail proves convergence of both integrals to their filled-ball integrals. [given, F2, algebra]\n\n2.1 Spherical integration of the limiting indicator gives $\\rho_0(\\mu)=g(2\\pi)^{-3}(4\\pi k_\\mu^3/3)=gk_\\mu^3/(6\\pi^2)$ and $u_0(\\mu)=g(2\\pi)^{-3}4\\pi\\alpha k_\\mu^5/5=g\\alpha k_\\mu^5/(10\\pi^2)=(3/5)\\rho_0(\\mu)\\mu$. Solving $\\rho_0(E_F)=\\rho$ gives the displayed $k_F,E_F$. For any $0<\\delta<E_F$, the zero-temperature limits at $E_F-\\delta$ and $E_F+\\delta$ strictly bracket $\\rho$; for sufficiently large $\\beta$ the finite-temperature densities at these endpoints still bracket $\\rho$, so step 1.1 traps $\\mu(\\rho,\\beta)$ between them. The energy density is increasing in $\\mu$ pointwise; therefore $u_\\beta(E_F-\\delta)\\le u_\\beta(\\mu(\\rho,\\beta))\\le u_\\beta(E_F+\\delta)$. Step 1.2 gives the limits of both bounds, and continuity of $u_0(\\mu)$ as $\\delta\\downarrow0$ proves $u\\to(3/5)\\rho E_F$. [step 1.1, step 1.2, algebra]\n\n3.1 Let $L(r)=\\log(1+e^{-\\beta(\\alpha r^2-\\mu)})$. Then $L'(r)=-2\\beta\\alpha r f_F(r)$. The boundary term $r^3L(r)$ vanishes at $r=0$ and at infinity, the latter because $L(r)\\le e^{-\\beta(\\alpha r^2-\\mu)}$. Integration by parts on $[0,R]$ followed by $R\\to\\infty$ gives $\\int_0^\\infty r^2L(r)dr=(2\\beta\\alpha/3)\\int_0^\\infty r^4f_F(r)dr$. Substitution into the radial definitions of $p$ and $u$ gives $p=2u/3$. Passing to the limit in step 2.1 yields $p\\to2\\rho E_F/5$. These are ideal-model predictions; no material pressure is inferred. [step 2.1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "The continuum grand-state density and energy and its fixed-density zero-temperature endpoint for a three-dimensional homogeneous ideal Fermi dispersion alpha|k|^2 with finite internal degeneracy g. The zero-temperature results are conditional ideal-gas predictions, with no Sommerfeld expansion, material-specific model, or reported observation.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "pthm-qsm-homogeneous-bose-condensation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Dimension-restricted fixed-mean-density Bose condensation",
+        "reference": "workers/models-examples/proofs.md#E5",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "post-qsm-models-statistics-and-preparation",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "pthm-qsm-periodic-ideal-occupation",
+          "thm-qsm-models-lattice-riemann-bose-bound",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-qsm-models-statistics-and-preparation": "physical-assumption",
+          "lem-qsm-models-diagonal-occupation-trace": "mathematical-premise",
+          "pthm-qsm-periodic-ideal-occupation": "physical-result",
+          "thm-qsm-models-lattice-riemann-bose-bound": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and adopt the homogeneous periodic Bose model of [[pthm-qsm-periodic-ideal-occupation]] with one internal mode ($g=1$), dimension $d\\ge1$, $\\alpha=\\hbar^2/(2m)>0$, fixed $\\beta>0$ in J$^{-1}$ and target mean number density $\\rho>0$ in m$^{-d}$. Let $T=(k_B\\beta)^{-1}$ in K, with $k_B>0$ in J K$^{-1}$. For each side length $L>0$ in m, put $V:=L^d$ in m$^d$ and choose the unique $\\mu_L<0$ solving\n$$L^{-d}\\sum_{k\\in\\mathbb Z^d}(e^{\\beta(\\alpha|2\\pi k/L|^2-\\mu_L)}-1)^{-1}=\\rho.$$\nLet $\\Omega_B:=\\{n:\\mathbb Z^d\\to\\mathbb N_0:\\{k:n(k)\\ne0\\}\\text{ is finite}\\}$ be the Bose occupation configuration set and define the grand probability law\n$$P_L(n):=\\Xi_L^{-1}\\exp\\left(-\\beta\\sum_{k\\in\\mathbb Z^d}(\\alpha|2\\pi k/L|^2-\\mu_L)n(k)\\right),\\qquad \\Xi_L:=\\sum_{n\\in\\Omega_B}\\exp\\left(-\\beta\\sum_{k\\in\\mathbb Z^d}(\\alpha|2\\pi k/L|^2-\\mu_L)n(k)\\right),$$\nwhich is finite and positive by [[lem-qsm-models-diagonal-occupation-trace]] under $\\mathrm{AC}_\\omega$ and its stated mode hypotheses. The zero-mode occupation random variable is $N_0(n):=n(0)$. For a $P_L$-integrable real random variable $X$ write $\\mathbb E_LX:=\\sum_nP_L(n)X(n)$; when its second moment is finite write $\\operatorname{Var}_L(X):=\\mathbb E_L[(X-\\mathbb E_LX)^2]$. Say this model has mean zero-mode condensation when $\\lim_{L\\to\\infty}\\mathbb E_L N_0/V>0$; this limit, when it exists, is the mean condensate density. Define the mean condensed fraction by $f_0:=\\lim_{L\\to\\infty}\\mathbb E_L N_0/(\\rho V)$ when the limit exists. Define $\\zeta(s):=\\sum_{\\ell=1}^{\\infty}\\ell^{-s}$ for $s>1$ and $(x)_+:=\\max(x,0)$. The critical density $\\rho_c=(2\\pi)^{-d}\\int_{\\mathbb R^d}(e^{\\beta\\alpha|p|^2}-1)^{-1}dp$ is an extended nonnegative number, with $\\rho_c=(4\\pi\\beta\\alpha)^{-d/2}\\sum_{\\ell=1}^{\\infty}\\ell^{-d/2}$; this series diverges and $\\rho_c=+\\infty$ for $d\\le2$, while for $d>2$ it equals $(4\\pi\\beta\\alpha)^{-d/2}\\zeta(d/2)$. For $d\\le2$, $\\mathbb E_L N_0/V\\to0$ for every finite $\\rho$. For $d>2$, $\\mathbb E_L N_0/V\\to(\\rho-\\rho_c)_+$, so mean zero-mode condensation occurs exactly when $\\rho>\\rho_c$. When $d=3$, $\\rho_c=\\lambda_T^{-3}\\zeta(3/2)$, $\\lambda_T=(2\\pi\\hbar^2\\beta/m)^{1/2}$ in m, and for $\\rho>\\rho_c$ the mean condensed fraction is $f_0=1-\\rho_c/\\rho$. At fixed $\\rho$, this holds for $T<T_c=[2\\pi\\hbar^2/(mk_B)](\\rho/\\zeta(3/2))^{2/3}$ and $f_0=1-(T/T_c)^{3/2}$.\n\nIf $d>2$ and $\\rho_0=\\rho-\\rho_c>0$, for every $x>0$ in m$^{-d}$ the grand-state ground occupation satisfies\n$$\\operatorname{Var}_L(N_0/V)\\to\\rho_0^2,\\qquad P_L(N_0/V\\ge x)\\to e^{-x/\\rho_0}\\quad(x>0).$$\nFor a real random-variable family $X_L:\\Omega_B\\to\\mathbb R$ with laws $P_L$, convergence in probability to a constant $a$ means $P_L(|X_L-a|>\\varepsilon)\\to0$ as $L\\to\\infty$ for every $\\varepsilon>0$ (in the same units as $X_L$). In particular $X_L=N_0/V$ does not converge in probability to its mean limit $\\rho_0$ in this grand ensemble.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a73.5.3, Bose condensation",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lecture 25, Bose-Einstein condensation",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/85cd383f3ca4573c3d578db435257c5a_MIT8_333F13_Lec25.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "1.1 Under the adopted grand preparation [A1] and periodic mode trace [F1], the finite-volume density as a function of $\\mu<0$ is continuous: on each compact subinterval of $(-\\infty,0)$, the Gaussian trace bound gives a uniform summable majorant for its mode series. It is strictly increasing because every summand is. As $\\mu\\to-\\infty$ it tends zero by that same Gaussian bound; as $\\mu\\uparrow0$, the $k=0$ term diverges. The intermediate value theorem therefore gives exactly one $\\mu_L<0$ for each $\\rho>0$. [given, A1, F1, algebra]\n\n1.2 At fixed $\\mu<0$, the continuum density is $\\rho(\\mu)=(2\\pi)^{-d}\\int(e^{\\beta(\\alpha|p|^2-\\mu)}-1)^{-1}dp$ by [F1]. It is continuous and strictly increasing in $\\mu$ by a compact-parameter Gaussian bound and pointwise strict increase. It tends zero as $\\mu\\to-\\infty$ by $f_B\\le e^{\\beta\\mu}e^{-\\beta\\alpha|p|^2}/(1-e^{\\beta\\mu})$, and increases to $\\rho_c$ as $\\mu\\uparrow0$ by monotone convergence [F2]. Thus when $d\\le2$, $\\rho(\\mu)$ runs continuously from zero to infinity; when $d>2$ it runs from zero to $\\rho_c$. [given, F1, F2, algebra]\n\n2.1 If $\\rho<\\rho_c$ (which covers every finite $\\rho$ for $d\\le2$), choose the unique $\\mu_*<0$ with $\\rho(\\mu_*)=\\rho$. For any $\\mu_-<\\mu_*<\\mu_+<0$, fixed-$\\mu$ convergence from [F1] implies that for all sufficiently large $L$, the finite-volume densities at $\\mu_-$ and $\\mu_+$ bracket $\\rho$. Strict monotonicity then traps $\\mu_L$ between them. Shrinking the bracket proves $\\mu_L\\to\\mu_*$. The ground occupation is $(e^{-\\beta\\mu_L}-1)^{-1}$, which stays bounded as $\\mu_L\\to\\mu_*<0$; dividing by $L^d$ gives zero. [step 1.1, step 1.2, F1, algebra]\n\n2.2 Suppose $d>2$ and $\\rho\\ge\\rho_c$. For any $\\delta>0$, if $\\mu_L\\le-\\delta$ along arbitrarily large $L$, monotonicity bounds the finite-volume density by its value at $-\\delta$; fixed-chemical-potential convergence would then give $\\rho\\le\\rho(-\\delta)<\\rho_c$, contradiction. Thus $\\mu_L\\to0$. Let $\\rho_{\\mathrm{ex},L}$ be the density excluding $k=0$. Since $\\mu_L<0$, each excited occupation is at most its value at zero chemical potential, and [F2] gives $\\limsup_L\\rho_{\\mathrm{ex},L}\\le\\rho_c$. For any fixed $\\mu'<0$, eventually $\\mu_L\\ge\\mu'$, so monotonicity and [F1] give $\\liminf_L\\rho_{\\mathrm{ex},L}\\ge\\rho(\\mu')$. Let $\\mu'\\uparrow0$ and use step 1.2 to get the matching lower bound $\\rho_c$. Hence $\\rho_{\\mathrm{ex},L}\\to\\rho_c$ and $\\mathbb E N_0/L^d=\\rho-\\rho_{\\mathrm{ex},L}\\to\\rho-\\rho_c$. At equality this limit is zero. [step 1.1, step 1.2, F1, F2, algebra]\n\n3.1 In $d=3$, evaluate $\\rho_c$ by the series in [F2]: $(4\\pi\\beta\\alpha)^{-3/2}\\sum_{\\ell\\ge1}\\ell^{-3/2}$. Substituting $\\alpha=\\hbar^2/(2m)$ gives $\\lambda_T^{-3}\\zeta(3/2)$. Solving $\\rho=\\rho_c(T_c)$ and using $\\beta=(k_BT)^{-1}$ gives the stated $T_c$; for $T<T_c$, division of $\\rho-\\rho_c(T)$ by $\\rho$ gives $1-(T/T_c)^{3/2}$. [step 2.2, F2, algebra]\n\n4.1 For $\\rho_0>0$, step 2.2 gives $\\mathbb E_LN_0/V\\to\\rho_0$. Write $\\bar n_{0,L}:=\\mathbb E_LN_0$. The geometric ground-mode law from [F1] has $\\operatorname{Var}_L(N_0)=\\bar n_{0,L}(1+\\bar n_{0,L})$, so $\\operatorname{Var}_L(N_0/V)\\to\\rho_0^2$. Its parameter is $q_{0,L}=\\bar n_{0,L}/(1+\\bar n_{0,L})$, and the geometric tail is $P_L(N_0/V\\ge x)=q_{0,L}^{\\lceil xV\\rceil}$. Since $V\\log q_{0,L}=-V\\log(1+1/\\bar n_{0,L})\\to-1/\\rho_0$, this tail tends $e^{-x/\\rho_0}$. Taking $x=2\\rho_0$ gives $P_L(|N_0/V-\\rho_0|>\\rho_0/2)\\ge P_L(N_0/V\\ge2\\rho_0)\\to e^{-2}>0$, which rules out convergence in probability to $\\rho_0$. This concerns only the ideal grand ensemble; the proof supplies no canonical equivalence or superfluidity claim. [step 2.2, F1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "A sequence of three-dimensional or dimension-d ideal, homogeneous, quadratic-dispersion grand states on periodic boxes whose chemical potentials are chosen to hold the mean particle density fixed. It proves the critical density, dimension restriction, and grand-ensemble zero-mode nonconcentration. It does not assert canonical-ensemble equivalence, trapping, interactions, superfluidity, a finite-volume phase transition, or empirical condensation.",
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
   },
   {
     "order": 588,
@@ -19,11 +530,210 @@
     "kind": "B",
     "category": "quantum-statistical-mechanics",
     "library": "physics",
-    "title": "Explicit diagonal Fock domains and occupation trace — Examples",
+    "title": "Explicit diagonal Fock domains and occupation trace \u2014 Examples",
     "companion": "qsm-bose-fermi-gases",
     "requires": [
       "qsm-bose-fermi-gases"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-qsm-dilute-occupation-limit",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Quantum occupation fluctuations and the classical approximation boundary",
+        "reference": "workers/models-examples/proofs.md#E7",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-qsm-dilute-occupation-limit",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-qsm-dilute-occupation-limit": "physical-result",
+          "lem-qsm-models-diagonal-occupation-trace": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take one dimensionless mode with fugacity $q=1/2$. The first-order dilute term for the mean occupation is $q=1/2$. As an explicit comparison, define the Poisson law by $P_q(n)=e^{-q}q^n/n!$ for $n\\in\\mathbb N_0$; its mean and variance are both $q$. The exact Bose law is geometric and the exact Fermi law is Bernoulli. This declared calculation illustrates the distinct occupation statistics and why a small-error conclusion needs a small-fugacity condition; the Poisson comparison is not asserted to follow from the linked theorem's mean and log-partition bounds.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a73.5\u20133.6, Bose and Fermi occupations",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "**Given:** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $q=1/2$, and the exact occupation and variance formulas of [[pthm-qsm-dilute-occupation-limit]] and [[lem-qsm-models-diagonal-occupation-trace]].\n\n[F1] [[pthm-qsm-dilute-occupation-limit]], Statement: Bose and Fermi mode means are $q/(1-q)$ and $q/(1+q)$, with explicit errors relative to $q$.\n\n[F2] [[lem-qsm-models-diagonal-occupation-trace]], Statement: the one-mode Bose and Fermi variances are $q/(1-q)^2$ and $q/(1+q)^2$.\n\n1.1 Substitution of $q=1/2$ gives $\\bar n_B=1$, $\\bar n_F=1/3$, while the first-order value is $1/2$. Thus the Bose error is $1/2$ and the Fermi error magnitude is $1/6$. [given, F1, algebra]\n\n2.1 For the comparison law, $\\mathbb E N=e^{-q}\\sum_{n\\ge1}nq^n/n!=q$ and $\\mathbb E[N(N-1)]=e^{-q}\\sum_{n\\ge2}n(n-1)q^n/n!=q^2$, so $\\operatorname{Var}(N)=q^2+q-q^2=q=1/2$. The exact variances from [F2] are $q/(1-q)^2=2$ for bosons and $q/(1+q)^2=2/9$ for fermions. These are finite exact model values; since $q$ is not near zero, no small-error claim follows from this example. [given, F2, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "A one-mode exact comparison of Bose, Fermi, and first-order classical occupations at q=1/2, with no empirical interpretation.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-qsm-oscillator-spin-ensembles",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Zero-point energy and ground-degeneracy entropy",
+        "reference": "workers/models-examples/proofs.md#E1",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-qsm-oscillator-spin-ensembles",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-qsm-oscillator-spin-ensembles": "physical-result",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For an oscillator with gap $\\epsilon=\\hbar\\omega>0$, the $T\\downarrow0$ canonical state approaches the nondegenerate ground level, with energy $\\epsilon/2$ and entropy zero. For the separate spin Hamiltonian $H_s=-h\\sigma_z$, choosing $h=0$ leaves two exactly degenerate states equally occupied at every temperature, with entropy $k_B\\log2$. These model calculations show why ground degeneracy must be included when stating a low-temperature entropy limit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a73.4, vibrational harmonic-oscillator partition function",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S3.html"
+            },
+            {
+              "title": "David Tong, Statistical Physics, \u00a7\u00a71.2.3 and 1.3.1\u20131.3.2, two-state spin system and canonical partition function",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/statphys/statmechhtml/S1.html"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "**Given:** $\\epsilon>0$, the oscillator and spin models in [[pthm-qsm-oscillator-spin-ensembles]], and $k_B>0$.\n\n[F1] [[pthm-qsm-oscillator-spin-ensembles]], Statement: oscillator energy tends to $\\epsilon/2$ and entropy to zero; the spin entropy is $k_B\\log2$ when $h=0$.\n\n1.1 Since $e^{-\\beta\\epsilon}\\to0$ as $T\\downarrow0$, the oscillator formulas give $\\bar n\\to0$, $U=\\epsilon(1/2+\\bar n)\\to\\epsilon/2$, and the entropy function in [F1] tends zero. [given, F1, algebra]\n\n2.1 With $h=0$, the spin Gibbs weights are both $1/2$, so $S=-k_B(2)(1/2)\\log(1/2)=k_B\\log2$ independently of $T$. Both conclusions are exact consequences of these declared Hamiltonians. [given, F1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "A direct low-temperature comparison of the one-dimensional harmonic oscillator and the zero-field two-state spin model covered by the linked theorem. It records a model result, not a universal third-law statement or observation.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-qsm-periodic-ideal-occupation",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A fixed-number constraint removes independent occupations",
+        "reference": "workers/models-examples/proofs.md#E4",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "pthm-qsm-periodic-ideal-occupation",
+          "post-qsm-models-statistics-and-preparation",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-qsm-periodic-ideal-occupation": "physical-result",
+          "post-qsm-models-statistics-and-preparation": "physical-assumption",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Consider two bosonic modes with energies $\\epsilon_1,\\epsilon_2\\in\\mathbb R$ in J and inverse temperature $\\beta>0$ in J$^{-1}$. Represent occupation outcomes by $(n_1,n_2)\\in\\mathbb N_0^2$ and define $N_i(n_1,n_2):=n_i$. Under a canonical preparation restricted to total number $N=N_1+N_2=1$, put $w_i=e^{-\\beta\\epsilon_i}$ and $p_i=w_i/(w_1+w_2)$; then the occupations satisfy $N_1+N_2=1$. For a grand-canonical comparison on these same two modes, choose chemical potential $\\mu<\\min(\\epsilon_1,\\epsilon_2)$ in J and put $q_i=e^{-\\beta(\\epsilon_i-\\mu)}\\in(0,1)$. The grand law has independent mode occupations, by factorization of its two geometric weights. This is the same product-law mechanism as in the linked periodic ideal model under its trace hypotheses.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a73.5, canonical and grand-canonical occupation sums",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "**Given:** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), $\\beta>0$, two finite energies, and the adopted canonical and grand preparations.\n\n[A1] [[post-qsm-models-statistics-and-preparation]]: fixed-number canonical preparation is the Gibbs state restricted to the selected number sector; grand preparation is a separate trace state.\n\n[F1] [[pthm-qsm-periodic-ideal-occupation]], Statement: occupations are independent in the diagonal grand state under its trace hypotheses.\n\n1.1 The one-particle sector has exactly the two basis states $|1,0\\rangle$ and $|0,1\\rangle$, with weights $w_1,w_2$. Normalization gives probabilities $p_1,p_2$ with $p_1+p_2=1$, so $\\mathbb E N_i=p_i$ and $N_1N_2=0$ in every canonical state outcome. [given, A1, algebra]\n\n2.1 For the same two modes, the grand weights are $q_1^{n_1}q_2^{n_2}$, so $\\Xi=(1-q_1)^{-1}(1-q_2)^{-1}$ and the normalized joint law is $\\prod_{i=1}^2(1-q_i)q_i^{n_i}$ on $\\mathbb N_0^2$; it is independent. The linked periodic theorem [F1] gives the same product law for its own modes under its trace hypotheses. By step 1.1, the fixed-number covariance is $\\operatorname{Cov}(N_1,N_2)=\\mathbb E(N_1N_2)-\\mathbb E N_1\\mathbb E N_2=-p_1p_2<0$. Thus the total-number constraint changes the joint law in this two-mode model, without implying any general finite-volume ensemble-equivalence failure. [step 1.1, F1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "An exact two-mode, one-particle canonical calculation compared with the distinct grand-canonical independent-mode preparation; no ensemble-equivalence claim is made.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-qsm-fermi-zero-temperature",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Fermi sea energy and ideal degeneracy pressure",
+        "reference": "workers/models-examples/proofs.md#E6",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-qsm-fermi-zero-temperature",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-qsm-fermi-zero-temperature": "physical-result",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For degeneracy $g=2$ and number density $\\rho>0$ in the declared homogeneous ideal model, the zero-temperature occupied region is the ball $|k|<k_F$, where $k_F=(3\\pi^2\\rho)^{1/3}$. The mean kinetic energy per particle is $3E_F/5$ and the ideal grand thermodynamic pressure is $2\\rho E_F/5$, with $E_F=\\hbar^2k_F^2/(2m)$. These values are model predictions under the ideal-gas assumptions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333, Lecture 24, degenerate Fermi gas",
+              "url": "https://live.ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/9d5207eef23c4d6e18ef3afbca5d9d81_MIT8_333F13_Lec24.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "**Given:** $g=2$, $\\rho>0$, $\\alpha=\\hbar^2/(2m)$, and the zero-temperature formulas of [[pthm-qsm-fermi-zero-temperature]].\n\n[F1] [[pthm-qsm-fermi-zero-temperature]], Statement: $k_F=(6\\pi^2\\rho/g)^{1/3}$, $u=(3/5)\\rho E_F$, and $p=2u/3$.\n\n1.1 Setting $g=2$ in [F1] gives $k_F=(3\\pi^2\\rho)^{1/3}$ and $E_F=\\alpha k_F^2=\\hbar^2k_F^2/(2m)$. Dividing the energy density $u$ by the number density $\\rho$ gives mean energy per particle $3E_F/5$. [given, F1, algebra]\n\n2.1 The pressure identity in [F1] yields $p=(2/3)(3/5)\\rho E_F=2\\rho E_F/5$. The result applies to the ideal continuum model and supplies no material-specific or empirical pressure. [step 1.1, F1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "A three-dimensional ideal Fermi sea at fixed density, calculating its Fermi wave number, mean energy per particle, and grand thermodynamic pressure from the linked zero-temperature theorem. It is not a material equation of state or measured pressure.",
+        "verification": {
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-qsm-homogeneous-bose-condensation",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Grand condensate variance remains macroscopic",
+        "reference": "workers/models-examples/proofs.md#E5",
+        "design_state": "Batch 45 authoring draft; current prerequisite availability and Step 1 disposition are recorded in batch evidence.",
+        "dependency_level": 6,
+        "deps": [
+          "pthm-qsm-homogeneous-bose-condensation",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "pthm-qsm-homogeneous-bose-condensation": "physical-result",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the three-dimensional ideal Bose grand ensemble at fixed density $\\rho>\\rho_c$, put $\\rho_0=\\rho-\\rho_c>0$. The ground-mode mean is asymptotic to $\\rho_0V$, but $\\operatorname{Var}_L(N_0/V)\\to\\rho_0^2$, and for every $x>0$ in m$^{-3}$ its density tail satisfies $P_L(N_0/V\\ge x)\\to e^{-x/\\rho_0}$. Thus the condensate density does not concentrate at its mean limit in this grand ensemble.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, \u00a73.5.3, Bose condensation and grand-canonical fluctuations",
+              "url": "https://davidtong.org/pdfs/teaching/statistical-physics/statphys.pdf"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "**Given:** $V=L^3$, $\\rho_0>0$, and the grand geometric ground-mode law in [[pthm-qsm-homogeneous-bose-condensation]].\n\n[F1] [[pthm-qsm-homogeneous-bose-condensation]], Statement: $\\mathbb E N_0/V\\to\\rho_0$, $\\operatorname{Var}(N_0/V)\\to\\rho_0^2$, and $\\mathbb P(N_0/V\\ge x)\\to e^{-x/\\rho_0}$.\n\n1.1 The linked theorem gives $\\mathbb E N_0=\\rho_0V+o(V)$. Substitution into the geometric variance $\\bar n_0(1+\\bar n_0)$ and division by $V^2$ gives limit $\\rho_0^2$. [given, F1, algebra]\n\n2.1 At $x=2\\rho_0$, the probability of a density at least $2\\rho_0$ tends $e^{-2}>0$. Every such event differs from the limiting mean density $\\rho_0$ by at least $\\rho_0$, so convergence in probability to $\\rho_0$ is impossible. This conclusion is specific to the grand preparation; a fixed-number state has $N_0$ constrained by total number. [given, F1, algebra] \u220e",
+        "proof_strategy": "direct",
+        "physical_scope": "The grand-ensemble ground-mode variance and tail at a fixed positive excess density above the ideal critical density, as a direct instance of the linked theorem. It makes no canonical or interacting-gas claim.",
+        "verification": {
+          "precheck": "pass"
+        }
+      }
+    ]
   }
 ]

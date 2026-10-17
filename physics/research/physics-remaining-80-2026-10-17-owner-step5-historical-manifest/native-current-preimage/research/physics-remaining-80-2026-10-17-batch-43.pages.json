@@ -1,0 +1,348 @@
+[
+  {
+    "order": 583,
+    "id": "qsm-nonnormal-thermal-states",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Finite-excitation vacuum spin representation and normality",
+    "companion": "qsm-nonnormal-thermal-states-examples",
+    "requires": [
+      "qsm-kms-equilibrium"
+    ],
+    "items": [
+      {
+        "id": "def-qsm-vacuum-spin-representation",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite-excitation vacuum spin representation and normality",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i8",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "def-qsm-quasilocal-spin-algebra"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume Countable Choice, written $\\mathrm{AC}_\\omega$, as in [[def-countable-choice]]. Let $d\\ge1$, $\\Gamma=\\mathbb Z^d$, and let the finite on-site spin dimension be $q\\ge1$, with the local matrix algebras and factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Fix a reference basis label $0$ at each site. This is a relabeling of the local basis $\\{1,\\ldots,q\\}$ used in [[def-qsm-local-spin-algebras]]; it changes no matrix algebra.\n\nDefine the **finite-excitation configuration set**\n$$S_{\\mathrm{fin}}:=\\{s:\\Gamma\\to\\{0,\\ldots,q-1\\}:\\{x\\in\\Gamma:s_x\\ne0\\}\\text{ is finite}\\}.$$\nThis set is countable: every finite support is contained in a box $[-n,n]^d$, and each box has finitely many configurations that vanish outside it. The boxes form an explicit countable exhaustion, so the union of these finite configuration sets is countable. Thus its coordinate Hilbert space is separable.\nFor $s\\in S_{\\mathrm{fin}}$, let $e_s$ be the corresponding coordinate vector. The **vacuum spin Hilbert space** is\n$$\\mathcal H_{\\mathrm{vac}}:=\\ell^2(S_{\\mathrm{fin}}),\\qquad \\langle\\psi,\\varphi\\rangle:=\\sum_{s\\in S_{\\mathrm{fin}}}\\psi_s\\overline{\\varphi_s},$$\nwhere the inner product is linear in its first variable. The vectors $(e_s)_{s\\in S_{\\mathrm{fin}}}$ form its specified orthonormal basis, and $\\Omega:=e_{s^0}$, with $s^0_x=0$ for all $x$, is the reference vacuum vector.\n\nFor a finite region $\\Lambda$, write\n$$S_{\\mathrm{fin}}(\\Gamma\\setminus\\Lambda):=\\{u:\\Gamma\\setminus\\Lambda\\to\\{0,\\ldots,q-1\\}:\\{x:u_x\\ne0\\}\\text{ is finite}\\}.$$\nRestriction to $\\Lambda$ and its complement gives the configuration bijection\n$$S_{\\mathrm{fin}}\\cong\\{0,\\ldots,q-1\\}^{\\Lambda}\\times S_{\\mathrm{fin}}(\\Gamma\\setminus\\Lambda)$$\ninduces a unitary\n$$U_\\Lambda:\\mathcal H_{\\mathrm{vac}}\\to\\mathcal H_\\Lambda\\otimes\\ell^2(S_{\\mathrm{fin}}(\\Gamma\\setminus\\Lambda)).$$\nFor $T\\in\\mathcal A_\\Lambda$, define\n$$\\pi_\\Lambda(T):=U_\\Lambda^{-1}\\bigl(T\\otimes I\\bigr)U_\\Lambda.$$\nUnder the direct-sum decomposition over outside configurations, $\\pi_\\Lambda(T)$ is a copy of $T$ on each block. The outside configuration set contains the all-zero configuration, so it is nonempty; the norm of this direct sum is therefore the supremum of nonempty identical block norms, namely $\\|\\pi_\\Lambda(T)\\|=\\|T\\|$. If $\\Lambda\\subseteq\\Lambda'$, associativity of the configuration factorization gives $\\pi_{\\Lambda'}(T\\otimes I)=\\pi_\\Lambda(T)$ on every basis vector. Thus the local maps define a unital isometric $*$-representation $\\pi_{\\mathrm{loc}}$ on the strictly local algebra. For a Cauchy sequence $A_n$ in that algebra, $\\pi_{\\mathrm{loc}}(A_n)$ is Cauchy in operator norm; its limit is independent of the chosen representative because $\\|\\pi_{\\mathrm{loc}}(A_n-A'_n)\\|=\\|A_n-A'_n\\|$. Completeness of $\\mathcal B(\\mathcal H_{\\mathrm{vac}})$ follows directly: an operator-norm Cauchy sequence is pointwise Cauchy on every vector, its pointwise limits define a bounded linear operator, and the same Cauchy estimates give operator-norm convergence. The limits therefore define a unique continuous extension $\\pi$ to the norm completion $\\mathcal A$. Continuity of product and adjoint and the norm identity show that the extension remains an isometric $*$-representation, hence is faithful. This construction selects a particular representation; it does not identify $\\mathcal A$ with all of $\\mathcal B(\\mathcal H_{\\mathrm{vac}})$.\n\nFor a set $\\mathcal S\\subseteq\\mathcal B(\\mathcal H_{\\mathrm{vac}})$, its **commutant** is\n$$\\mathcal S':=\\{T\\in\\mathcal B(\\mathcal H_{\\mathrm{vac}}):TS=ST\\text{ for every }S\\in\\mathcal S\\},$$\nand its **bicommutant** is $\\mathcal S'':=(\\mathcal S')'$. A **normal state** on the represented von Neumann algebra $\\pi(\\mathcal A)''$ means a positive normalized functional $\\varphi$ that preserves suprema of bounded increasing nets of positive operators: if $0\\le X_i\\uparrow X$ in $\\pi(\\mathcal A)''$, then $\\varphi(X)=\\sup_i\\varphi(X_i)$. Here $\\pi(\\mathcal A)''$ is the bicommutant in $\\mathcal B(\\mathcal H_{\\mathrm{vac}})$; $\\pi(\\mathcal A)$ is a unital $*$-algebra and its bicommutant is strongly closed. The term normal is representation-dependent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.1, printed pp. 50–53 (finite-excitation spin-chain representation)",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §5, printed p. 10 (normal states); Chapter 2 §1, pp. 17–18 (quasi-local spin algebra); Chapter 2 §5, pp. 42–44 (commutant and irreducibility)",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsm-vacuum-representation-irreducible",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Faithful irreducible finite-excitation representation",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i8",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 6,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-vacuum-spin-representation"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-vacuum-spin-representation": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume Countable Choice, $\\Gamma=\\mathbb Z^d$ with $d\\ge1$, and finite on-site dimension $q\\ge1$. Let $\\mathcal H_{\\mathrm{vac}}$ and $\\pi:\\mathcal A\\to\\mathcal B(\\mathcal H_{\\mathrm{vac}})$ be the finite-excitation representation of [[def-qsm-vacuum-spin-representation]]. Then $\\pi$ is faithful and irreducible:\n$$\\pi(\\mathcal A)'=\\mathbb C I,\\qquad \\pi(\\mathcal A)''=\\mathcal B(\\mathcal H_{\\mathrm{vac}}).$$\n\nHere irreducible means precisely that the commutant consists only of scalar multiples of the identity. No classification of other representations is claimed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.1, printed pp. 50–53 (finite-excitation spin-chain representation and irreducibility)",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 2 §5, printed pp. 42–44 (commutant and irreducibility criteria)",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsm-onsite-product-kms",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Unique onsite product Gibbs KMS state",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i8",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 10,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-bounded-finite-range-interaction",
+          "def-qsm-kms-state",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-consistent-local-states",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "lem-qsm-gibbs-strip-limit",
+          "lem-qsm-kms-strip-uniqueness",
+          "lem-qsm-matrix-state-calculus",
+          "thm-qsm-finite-kms-gibbs-characterization",
+          "thm-qsm-finite-range-spin-dynamics",
+          "thm-weierstrass-convergence-holomorphic-functions"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-qsm-kms-state": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "lem-qsm-gibbs-strip-limit": "mathematical-premise",
+          "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "thm-qsm-finite-kms-gibbs-characterization": "mathematical-premise",
+          "thm-qsm-finite-range-spin-dynamics": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume Countable Choice $\\mathrm{AC}_\\omega$ and the exact finite-matrix C*-identity and positive-functional/density interfaces in [A2] below. Let $\\Gamma=\\mathbb Z^d$, $d\\ge1$, and let $q\\ge1$ be a finite on-site dimension as in [[def-qsm-local-spin-algebras]]. Let $h=h^*$ be a $q\\times q$ on-site Hamiltonian, with energy unit J, and set\n$$Z:=\\operatorname{Tr}(e^{-\\beta h}),\\qquad r:=Z^{-1}e^{-\\beta h},$$\nwhere $h$ has unit J and $\\beta>0$ has unit J$^{-1}$. Let $\\hbar>0$ have unit J s. The consistent local densities $r^{\\otimes\\Lambda}$ have a unique state extension $\\omega_r$ to the norm-completed quasi-local algebra $\\mathcal A$ by [[lem-qsm-consistent-local-states]], with local restrictions\n$$\\omega_r(A)=\\operatorname{Tr}_{\\Lambda}(r^{\\otimes\\Lambda}A)\\qquad(A\\in\\mathcal A_\\Lambda).$$\nDefine the onsite interaction by $\\Phi(\\{x\\})=h_x$, the copy of $h$ at site $x$, and $\\Phi(Z)=0$ for all other finite nonempty $Z$. Let $\\alpha_t$ be its thermodynamic dynamics under [[thm-qsm-finite-range-spin-dynamics]]. Then $\\omega_r$ is the unique $\\beta$-KMS state for $\\alpha$ in the physical-time strip convention of [[def-qsm-kms-state]], whose width is $\\beta\\hbar$ seconds. The conclusion is mathematical; it does not assert relaxation or select a physical preparation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, Definition 3.4.4 and finite Gibbs/KMS characterization, printed pp. 74–77",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7, printed pp. 13–14; Chapter 2 §6, pp. 24–25",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "thm-qsm-product-thermal-state-nonnormal",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Thermal product state has no normal vacuum extension",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i8",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 11,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-vacuum-spin-representation",
+          "def-qsm-density-trace-state",
+          "lem-qsm-vacuum-representation-irreducible",
+          "thm-qsm-onsite-product-kms"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-vacuum-spin-representation": "mathematical-premise",
+          "def-qsm-density-trace-state": "mathematical-premise",
+          "lem-qsm-vacuum-representation-irreducible": "mathematical-premise",
+          "thm-qsm-onsite-product-kms": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Assume $\\mathrm{AC}_\\omega$, let $\\Gamma=\\mathbb Z^d$ with $d\\ge1$, and let $q\\ge2$. Let $h=h^*$ be a finite on-site Hamiltonian, $\\beta>0$, and\n$$r:=\\frac{e^{-\\beta h}}{\\operatorname{Tr}(e^{-\\beta h})}.$$\nLet $\\omega_r$ be the unique onsite product $\\beta$-KMS state from [[thm-qsm-onsite-product-kms]], and let $\\pi$ be the finite-excitation vacuum representation on $\\mathcal H_{\\mathrm{vac}}$ from [[def-qsm-vacuum-spin-representation]]. Then $\\omega_r$ has no normal extension to\n$$\\pi(\\mathcal A)''=\\mathcal B(\\mathcal H_{\\mathrm{vac}}).$$\nBy an extension we mean a state $\\widetilde\\omega$ on $\\mathcal B(\\mathcal H_{\\mathrm{vac}})$ satisfying $\\widetilde\\omega(\\pi(A))=\\omega_r(A)$ for every $A\\in\\mathcal A$. In particular, no positive trace-class density operator $\\rho$ on $\\mathcal H_{\\mathrm{vac}}$ satisfies $\\omega_r(A)=\\operatorname{Tr}(\\rho\\,\\pi(A))$ for every $A\\in\\mathcal A$. Normality is representation-dependent; the statement does not rule out a normal extension in another representation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.1, printed pp. 50–53 (finite-excitation spin-chain representation); §3.4, pp. 76–77 (finite Gibbs/KMS state)",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §5, printed p. 10 (normal states); Chapter 2 §5, pp. 42–44 (irreducibility)",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  },
+  {
+    "order": 584,
+    "id": "qsm-nonnormal-thermal-states-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Finite-excitation vacuum spin representation and normality — Examples",
+    "companion": "qsm-nonnormal-thermal-states",
+    "requires": [
+      "qsm-nonnormal-thermal-states"
+    ],
+    "items": [
+      {
+        "id": "cex-qsm-invariant-not-kms",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Stationarity alone does not give quantum thermal equilibrium",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i9",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 11,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-kms-state",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-vacuum-spin-representation",
+          "lem-qsm-kms-strip-uniqueness",
+          "thm-qsm-onsite-product-kms"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-kms-state": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-vacuum-spin-representation": "mathematical-premise",
+          "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+          "thm-qsm-onsite-product-kms": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "For every $\\beta>0$, every stationary state of an infinite quantum spin system is a $\\beta$-KMS state for its dynamics. Stationary means $\\omega\\circ\\alpha_t=\\omega$ for every real $t$; KMS means the bounded-strip condition of [[def-qsm-kms-state]].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, printed pp. 74–77 (KMS strip and finite Gibbs states)",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7, printed pp. 13–14 (KMS strip condition)",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "cex-qsm-global-spin-thermal-trace-diverges",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Infinite spin thermal trace diverges despite a unique KMS state",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i8",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 12,
+        "deps": [
+          "def-countable-choice",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-vacuum-spin-representation",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "thm-qsm-onsite-product-kms",
+          "thm-qsm-product-thermal-state-nonnormal"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-vacuum-spin-representation": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "thm-qsm-onsite-product-kms": "mathematical-premise",
+          "thm-qsm-product-thermal-state-nonnormal": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "For an infinite spin lattice, a unique onsite $\\beta$-KMS state implies that the global onsite Gibbs operator in the finite-excitation vacuum representation has finite trace. The statement is false even for one-dimensional two-level spins.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.1, printed pp. 50–53 (finite-excitation spin-chain representation); §3.4, pp. 76–77 (finite Gibbs/KMS state)",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §5, printed p. 10 (normal states); Chapter 2 §6, pp. 24–25 (Gibbs/KMS framework)",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "ex-qsm-nonnormal-tracial-spin-state",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Unique tracial KMS state is not vacuum normal",
+        "reference": "workers/infinite-equilibrium/proof-modules.md#i8",
+        "design_state": "Current assigned draft; exact supplier interfaces, proof status, and dispositions are recorded in batch-43 evidence.",
+        "dependency_level": 12,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-quasilocal-spin-algebra",
+          "thm-qsm-onsite-product-kms",
+          "thm-qsm-product-thermal-state-nonnormal"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "thm-qsm-onsite-product-kms": "mathematical-premise",
+          "thm-qsm-product-thermal-state-nonnormal": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "statement": "Let $q\\ge2$, $\\Gamma=\\mathbb Z^d$ with $d\\ge1$, and take the zero Hermitian onsite Hamiltonian $h=0\\in M_q(\\mathbb C)$ in joules. Fix any $\\hbar>0$ in joule-seconds and let $\\beta>0$ have units inverse joules. The onsite dynamics is $\\alpha_t(A)=A$ for $t\\in\\mathbb R$ in seconds, and the KMS strip has width $\\beta\\hbar$ seconds, with the convention of [[thm-qsm-onsite-product-kms]]. For every such $\\beta$, the unique quasi-local KMS state has local densities\n$$\\rho_\\Lambda=q^{-|\\Lambda|}I_\\Lambda.$$\nIt is tracial on the full quasi-local algebra, but has no normal extension to the finite-excitation vacuum representation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, printed pp. 74–77 (KMS strip and finite Gibbs states)",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §5, printed p. 10 (normal states); Chapter 2 §1, pp. 17–18 (quasi-local spin algebras)",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      }
+    ]
+  }
+]

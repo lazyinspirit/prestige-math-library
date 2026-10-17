@@ -1,0 +1,955 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "40",
+  "level": 0,
+  "scope": [
+    "thm-qsm-quantum-lattice-pressure",
+    "lem-qsm-energy-density-concentration",
+    "lem-qsm-stationary-spin-entropy-density",
+    "thm-qsm-spin-pressure-variational-principle",
+    "ex-qsm-uniform-onsite-pressure"
+  ],
+  "contracts": {
+    "thm-qsm-quantum-lattice-pressure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-translation-invariant-spin-interaction",
+          "source_section": "Definition",
+          "quote": "It is translation invariant when $\\tau_x(\\Phi(Z))=\\Phi(Z+x)$ for every finite nonempty support $Z$ and every $x\\in\\Gamma$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-spin-algebras",
+          "source_section": "Definition",
+          "quote": "The **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-exponential-response",
+          "source_section": "Statement",
+          "quote": "\\frac{d}{ds}\\log\\operatorname{Tr}e^{M(s)}=\\operatorname{Tr}(\\rho_sM'(s))",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$ be linear. Then $T$ is normal if and only if $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $\\mathscr S_\\Phi$ for the finite anchored-shape list and $J_\\Phi=\\sum_{S\\in\\mathscr S_\\Phi}\\|\\Phi(S)\\|$. For each shape there are at most $|\\Lambda|$ translates contained in $\\Lambda$, so $\\|H_\\Lambda\\|\\le J_\\Phi|\\Lambda|$. By [F3], $H_\\Lambda$ has real eigenvalues in $[-J_\\Phi|\\Lambda|,J_\\Phi|\\Lambda|]$. Therefore $q^{|\\Lambda|}e^{-\\beta J_\\Phi|\\Lambda|}\\le Z_\\Lambda(\\beta)\\le q^{|\\Lambda|}e^{\\beta J_\\Phi|\\Lambda|}$, and $p_\\Lambda(\\beta)$ is real and uniformly bounded.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For self-adjoint matrices $K,L$ on the same finite spin space, put $M_s=L+s(K-L)$. Apply [F2] to obtain $\\frac{d}{ds}\\log\\operatorname{Tr}(e^{M_s})=\\operatorname{Tr}(\\rho_s(K-L))$. The matrix $\\rho_s$ is positive with trace one by [F3]; diagonalizing $\\rho_s$ gives $|\\operatorname{Tr}(\\rho_s(K-L))|\\le\\|K-L\\|$, since each unit eigenvector $v$ obeys $|\\langle(K-L)v,v\\rangle|\\le\\|K-L\\|$. Integrating over $0\\le s\\le1$ proves $|\\log\\operatorname{Tr}(e^K)-\\log\\operatorname{Tr}(e^L)|\\le\\|K-L\\|$. In particular, for self-adjoint Hamiltonians $H,H'$ on that same space, $|\\log\\operatorname{Tr}(e^{-\\beta H})-\\log\\operatorname{Tr}(e^{-\\beta H'})|\\le\\beta\\|H-H'\\|$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix an integer block side $\\ell\\ge1$ and tile $Q_L$ by $N=\\lfloor L/\\ell\\rfloor^d$ disjoint full $\\ell$-cubes, leaving $E_L$ as the residual sites. The strips in the $d$ coordinate directions give $|E_L|\\le d\\ell L^{d-1}$ when $L\\ge\\ell$. Let $H_L^{\\rm cut}$ be the sum of the free-boundary Hamiltonians of the full blocks, embedded into $\\mathcal A_{Q_L}$, and zero on residual sites. An interaction term omitted from this cut either meets $E_L$ or crosses an internal grid plane. For each anchored shape, at most $M|E_L|$ translates meet $E_L$, because choosing a site of the shape and a residual site determines its anchor. For a fixed coordinate grid plane, at most $(r+1)L^{d-1}$ anchors can have a support crossing it, where $r=\\lceil R\\rceil$: the support's coordinate span is at most $r$, the anchor must lie in an interval of at most $r+1$ lattice sites, and each of the other $d-1$ anchor coordinates has at most $L$ choices. There are at most $dL/\\ell$ internal planes. Thus $\\|H_{Q_L}-H_L^{\\rm cut}\\|\\le J_\\Phi\\bigl(M|E_L|+d(r+1)L^d/\\ell\\bigr)$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The block Hamiltonians act on separate tensor factors. Diagonalize each block Hamiltonian using [F3]; tensor products of their eigenvectors and residual-site basis vectors form an orthonormal eigenbasis of $H_L^{\\rm cut}$. Hence $\\operatorname{Tr}(e^{-\\beta H_L^{\\rm cut}})=Z_{Q_\\ell}(\\beta)^Nq^{|E_L|}$. Step 1.2 and the residual-volume bound imply $\\limsup_{L\\to\\infty}|p_{Q_L}(\\beta)-p_{Q_\\ell}(\\beta)|\\le\\beta J_\\Phi d(r+1)/\\ell$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For any $\\epsilon>0$, choose $\\ell$ so large that $2\\beta J_\\Phi d(r+1)/\\ell<\\epsilon/2$. The estimate in step 3.1 then makes $|p_{Q_L}(\\beta)-p_{Q_{L'}}(\\beta)|<\\epsilon$ for all sufficiently large $L,L'$. The sequence is Cauchy in $\\mathbb R$ and converges to a finite $p_\\Phi(\\beta)$ by step 1.1. The estimate also gives $|p_\\Phi(\\beta)-p_{Q_\\ell}(\\beta)|\\le\\beta J_\\Phi d(r+1)/\\ell$.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Let $(\\Lambda_n)$ be van Hove and fix $\\ell\\ge1$. Use any fixed offset to tile $\\mathbb Z^d$ by $\\ell$-cubes, retain only cubes fully contained in $\\Lambda_n$, and let $N_n$ be their number. Every residual site $x\\in E_n:=\\Lambda_n\\setminus\\bigcup B$ lies in a grid cube that also contains some $y\\notin\\Lambda_n$, so $\\operatorname{dist}_\\infty(x,\\mathbb Z^d\\setminus\\Lambda_n)\\le\\ell-1$ and $E_n\\subseteq\\partial_\\ell\\Lambda_n$. Thus $|E_n|/|\\Lambda_n|\\to0$ and $N_n\\ell^d=|\\Lambda_n|-|E_n|$. Define $H_n^{\\rm cut}$ to be the sum of the free-boundary Hamiltonians on the retained full cubes, embedded in $\\mathcal A_{\\Lambda_n}$, and zero on the residual sites. Any omitted interaction term either meets $E_n$, in which case its anchor lies in $\\partial_{\\ell+r}\\Lambda_n$, or crosses a face between two retained cubes. For each retained cube, at most $2d(r+1)\\ell^{d-1}$ anchor sites lie in its face layers wide enough for a support of range $r=\\lceil R\\rceil$ to cross a face; hence all internal-cut anchors number at most $2d(r+1)\\ell^{d-1}N_n\\le2d(r+1)|\\Lambda_n|/\\ell$. Since the norm sum over shapes at one anchor is $J_\\Phi$, $\\|H_{\\Lambda_n}-H_n^{\\rm cut}\\|\\le J_\\Phi\\bigl(|\\partial_{\\ell+r}\\Lambda_n|+2d(r+1)|\\Lambda_n|/\\ell\\bigr)$. Translation invariance makes every full-block partition function equal to $Z_{Q_\\ell}$, and the zero residual Hamiltonian contributes $q^{|E_n|}$, so $\\operatorname{Tr}_{\\Lambda_n}(e^{-\\beta H_n^{\\rm cut}})=Z_{Q_\\ell}^{N_n}q^{|E_n|}$. Divide the comparison from step 1.2 by $|\\Lambda_n|$; the van Hove condition sends the fixed-width boundary term and $|E_n|/|\\Lambda_n|$ to zero, while $N_n/|\\Lambda_n|\\to\\ell^{-d}$. Therefore $\\limsup_n|p_{\\Lambda_n}(\\beta)-p_{Q_\\ell}(\\beta)|\\le2\\beta J_\\Phi d(r+1)/\\ell$. Letting $\\ell\\to\\infty$ and using step 4.1 proves $p_{\\Lambda_n}(\\beta)\\to p_\\Phi(\\beta)$.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Put $\\widetilde p_n:=|\\Lambda_n|^{-1}\\log\\operatorname{Tr}_{\\Lambda_n}(e^{-\\beta(H_{\\Lambda_n}+B_n)})$. Applying step 1.2 to the self-adjoint matrices $-\\beta(H_{\\Lambda_n}+B_n)$ and $-\\beta H_{\\Lambda_n}$ shows that $|\\widetilde p_n-p_{\\Lambda_n}(\\beta)|\\le\\beta\\|B_n\\|/|\\Lambda_n|$. This tends to zero by hypothesis, so step 5.1 gives $\\widetilde p_n\\to p_\\Phi(\\beta)$.",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement restricts finite volumes to nonempty sets. Step 3.1 also covers an empty residual set because q^{|E_L|}=1 when E_L is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 remain valid for J_Phi=0; all interaction terms vanish and the finite-volume trace factorization has no boundary correction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 allow q=1: each finite spin space is one-dimensional and the residual trace factor q^{|E_L|} equals one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 use r=ceil(R); for R=0 all supports are singletons and the internal-cut estimate remains an overestimate."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem fixes beta>0 and states no beta=0 limit or time-interval endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 uses any fixed grid offset and finite block counts; no offset is selected from a distribution over the van Hove set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way pressure-limit theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way pressure-limit theorem, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "uniform onsite interaction",
+          "status": "checked",
+          "evidence": "The independent B-page trace calculation gives H_Lambda=c|Lambda|I, Z_Lambda=q^{|Lambda|}e^{-beta c|Lambda|}, and p_Lambda=log(q)-beta c for every finite nonempty Lambda, consistent with the pressure limit and its units."
+        }
+      ],
+      "finite_checks_disposition": "The onsite model is an exact analytic consistency check; the general cube and van Hove limits follow from the displayed block estimates, and step 6.1 proves stability for every self-adjoint finite-volume perturbation sequence with norm o(|Lambda_n|), without a spatial support assumption.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Independently checked all seven proof steps and direct suppliers. Finite Hermitian spectral bounds and the first Duhamel trace derivative give the trace-log norm Lipschitz bound; no Hessian assertion is used. Anchored shapes contain zero and are finite, so anchor counts apply even when some coordinates of a shape are negative. Cube residual terms are bounded by M times residual size; grid crossings by d(r+1)L^d/ell. On arbitrary van Hove sets, anchors of residual-meeting supports lie in the ell+r inner boundary, and retained-block face layers give the stated 2d(r+1)/ell bound. Limits are taken first at fixed ell, then ell tends to infinity. The self-adjoint perturbation bound is beta times norm per site and requires no spatial support restriction. Checked zero interaction, q=1, d=1, R=0 and ell=1; no empty normalized volume is allowed. Sources: Naaijkens pp.79–82 distinguish finite entropy and limiting quantities; Lanford–Robinson Theorem 3.1 supplies pressure context, while the complete boundary proof is local. No additional choice or empirical premise is introduced."
+      }
+    },
+    "lem-qsm-energy-density-concentration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qsm-quantum-lattice-pressure",
+          "source_section": "Statement",
+          "quote": "Then $p_{\\Lambda_n}(\\beta)$ converges to the same finite value $p_\\Phi(\\beta)$ for every van Hove sequence",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-matrix-exponential-response",
+          "source_section": "Statement",
+          "quote": "\\frac{d}{ds}\\log\\operatorname{Tr}e^{M(s)}=\\operatorname{Tr}(\\rho_sM'(s))",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$ be linear. Then $T$ is normal if and only if $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For nonempty finite $\\Lambda$, diagonalize $H_\\Lambda$ using [F3], with eigenvalues $E_j$ and Gibbs weights $w_j=e^{-\\beta E_j}/Z_\\Lambda(\\beta)$. Then $p_\\Lambda(\\beta)=|\\Lambda|^{-1}\\log\\sum_j e^{-\\beta E_j}$ is convex because $p_\\Lambda''(\\beta)=|\\Lambda|^{-1}\\bigl(\\sum_jw_jE_j^2-(\\sum_jw_jE_j)^2\\bigr)=|\\Lambda|^{-1}\\sum_jw_j(E_j-\\sum_kw_kE_k)^2\\ge0$. Applying [F2] to $M(\\beta)=-\\beta H_\\Lambda$ also gives $p_\\Lambda'(\\beta)=-\\operatorname{Tr}(\\rho_{\\Lambda,\\beta}H_\\Lambda)/|\\Lambda|$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For nonempty finite $\\Lambda$, the measure $\\mu_{\\Lambda,\\beta}$ assigns weight $w_j$ to each eigenvalue, combining weights when eigenvalues coincide, and is a probability measure because $\\sum_jw_j=1$. For $t\\in(0,\\beta)$ and $e=e_\\Phi(\\beta)$, each eigenvalue $E\\ge|\\Lambda|(e+\\epsilon)$ satisfies $e^{tE}\\ge e^{t|\\Lambda|(e+\\epsilon)}$. Summing the corresponding weights gives $$ \\mu_{\\Lambda,\\beta}\\{E/|\\Lambda|\\ge e+\\epsilon\\}\\le\\exp\\!\\left(|\\Lambda|\\,[p_\\Lambda(\\beta-t)-p_\\Lambda(\\beta)-t(e+\\epsilon)]\\right). $$ The identity $\\sum_jw_je^{tE_j}=Z_\\Lambda(\\beta-t)/Z_\\Lambda(\\beta)$ gives the displayed exponent.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $h\\in(0,\\beta)$. Convexity in step 1.1 gives $(p_\\Lambda(\\beta)-p_\\Lambda(\\beta-h))/h\\le p_\\Lambda'(\\beta)\\le(p_\\Lambda(\\beta+h)-p_\\Lambda(\\beta))/h$. Along $\\Lambda_n$, [F1] makes the two secants converge for fixed $h$ to the corresponding secants of $p_\\Phi$. Letting $h\\downarrow0$ and using differentiability at $\\beta$ squeezes $p_{\\Lambda_n}'(\\beta)\\to p_\\Phi'(\\beta)$; step 1.1 therefore proves $\\operatorname{Tr}(\\rho_{\\Lambda_n,\\beta}H_{\\Lambda_n})/|\\Lambda_n|\\to e_\\Phi(\\beta)$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Differentiability and $e=-p_\\Phi'(\\beta)$ give $p_\\Phi(\\beta-t)-p_\\Phi(\\beta)=te+o(t)$ as $t\\downarrow0$. Choose $t\\in(0,\\beta)$ so the remainder has magnitude at most $t\\epsilon/2$. For all sufficiently large $n$, convergence in [F1] at $\\beta-t$ and $\\beta$ makes the exponent bracket in step 1.2 at most $-t\\epsilon/4$. Thus the upper-tail probability is at most $e^{-t\\epsilon|\\Lambda_n|/4}$.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For the lower tail, if $E\\le|\\Lambda|(e-\\epsilon)$ then $e^{-tE}\\ge e^{-t|\\Lambda|(e-\\epsilon)}$. The same finite spectral sum gives $$ \\mu_{\\Lambda,\\beta}\\{E/|\\Lambda|\\le e-\\epsilon\\}\\le\\exp\\!\\left(|\\Lambda|\\,[p_\\Lambda(\\beta+t)-p_\\Lambda(\\beta)+t(e-\\epsilon)]\\right). $$ Since $p_\\Phi(\\beta+t)-p_\\Phi(\\beta)=-te+o(t)$, choose a possibly smaller fixed $t>0$ so the limiting bracket is at most $-t\\epsilon/2$; for large $n$ the bracket is at most $-t\\epsilon/4$. Let $t_+$ be the choice in step 2.2, let $t_-$ be this lower-tail choice, and set $c_0=\\min(t_+,t_-)\\epsilon/4>0$. Once $|\\Lambda_n|\\ge4\\log2/c_0$, the sum of the two tail bounds $2e^{-c_0|\\Lambda_n|}$ is at most $e^{-c_0|\\Lambda_n|/2}$; hence $c_\\epsilon=c_0/2$ works after increasing $n_0$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement and the Gibbs density are defined only for finite nonempty volumes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 cover the zero Hamiltonian; its energy law is a point mass at zero, so both tails outside epsilon have probability zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 apply when q=1; the finite Hilbert space is one-dimensional and the spectral law is still a probability measure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 require only finite-dimensional self-adjoint Hamiltonians and the pressure limit, so d=1 and R=0 are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is made at a fixed beta>0 differentiability point; beta=0 is outside the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite spectral sums, scalar secants, and fixed positive t values; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way convergence and concentration result, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way convergence and concentration result, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "uniform onsite energy",
+          "status": "checked",
+          "evidence": "For Phi({x})=cI, the B-page proof gives E=c|Lambda|, p_Phi(beta)=log(q)-beta c, e_Phi=c, and a point-mass Gibbs energy law; the finite-volume mean is exactly c and both epsilon tails vanish."
+        }
+      ],
+      "finite_checks_disposition": "The onsite model is an exact finite spectral consistency check; the general exponential concentration estimate follows from the finite spectral moment bounds in the numbered proof.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Checked all five current proof steps with pressure, interaction, Duhamel first derivative and finite spectral suppliers. Convexity is proved directly as the spectral variance, so derivative convergence uses fixed positive secants beta±h followed by h decreasing to zero and only differentiability at the specified beta. The upper moment is Z(beta-t)/Z(beta), the lower moment is Z(beta+t)/Z(beta); both signs and thresholds give negative limiting exponents. Fixed t is chosen before the volume limit and upper-tail t<beta keeps all pressures in the supplier domain. The two-tail factor 2 is absorbed by increasing n0 since volumes diverge. Zero interaction, q=1 and degenerate eigenvalues are harmless; epsilon is strictly positive, beta=0 is excluded and no claim is made at a nondifferentiable pressure point. The conclusion is a spectral Gibbs law rather than observations or guaranteed finite outcomes. Reader/refuter findings are empty. Cited source sections supply pressure context, not this locally proved concentration estimate."
+      }
+    },
+    "lem-qsm-stationary-spin-entropy-density": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-quasilocal-completion",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-translation-invariant-spin-interaction",
+          "source_section": "Definition",
+          "quote": "It is translation invariant when $\\tau_x(\\Phi(Z))=\\Phi(Z+x)$ for every finite nonempty support $Z$ and every $x\\in\\Gamma$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-infinite-algebraic-state",
+          "source_section": "Definition",
+          "quote": "An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$ be linear. Then $T$ is normal if and only if $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Every complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-qsm-finite-entropy-composition",
+          "source_section": "Statement",
+          "quote": "For the positive entropy scale $k_B>0$ fixed in [[def-qsm-relative-entropy-domain]] (in SI units J/K), entropy is concave under finite mixing and additive on product states for finite-dimensional density matrices.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-qsm-spin-state-compactness",
+          "source_section": "Statement",
+          "quote": "For every sequence of algebraic states $\\omega_n$ on the quasi-local spin algebra $\\mathcal A$, there is a subsequence $\\omega_{n_k}$ and an algebraic state $\\omega$ such that $\\omega_{n_k}(A)\\to\\omega(A)$ for every $A\\in\\mathcal A$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Diagonalize a local density matrix $\\rho$ on a region of $m$ sites using [F3], with eigenvalues $\\lambda_j\\ge0$ summing to one and matrix dimension $D=q^m$, as supplied by [F4]. Then $S(\\rho)=-\\sum_{\\lambda_j>0}\\lambda_j\\log\\lambda_j\\ge0$. For each positive $\\lambda_j$, the scalar inequality $-\\log x\\ge1-x$ at $x=(D\\lambda_j)^{-1}$ gives $\\lambda_j\\log(D\\lambda_j)\\ge\\lambda_j-D^{-1}$. Summing over the positive eigenvalues yields $\\log D-S(\\rho)\\ge1-r/D\\ge0$, where $r$ is the rank. Thus $0\\le S(\\rho)\\le m\\log q$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For each $S\\in\\mathscr S_\\Phi$, let $N_S(L)$ count translations $x$ with $S+x\\subseteq Q_L$. With $r=\\lceil R\\rceil$, $(L-2r)^d\\le N_S(L)\\le L^d$ for $L>2r$: every anchor at least $r$ sites from each face contains the whole support, and the anchor of every included term lies in $Q_L$. Translation invariance gives $\\omega(\\Phi(S+x))=\\omega(\\Phi(S))$. Therefore $\\omega(H_{Q_L})/L^d=\\sum_{S\\in\\mathscr S_\\Phi}(N_S(L)/L^d)\\omega(\\Phi(S))\\to\\sum_{S\\in\\mathscr S_\\Phi}\\omega(\\Phi(S))=u_\\Phi(\\omega)$.",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $\\ell\\ge1$ and tile $Q_L$ by $N=\\lfloor L/\\ell\\rfloor^d$ disjoint $\\ell$-cubes and residual sites $E_L$, where $|E_L|\\le d\\ell L^{d-1}$. Repeated use of [L1] subadditivity gives $S_{Q_L}(\\omega)\\le N S_{Q_\\ell}(\\omega)+S_{E_L}(\\omega)$. By step 1.1 the last term is at most $|E_L|\\log q$; if $E_L=\\varnothing$, its scalar local density has entropy zero. Dividing by $L^d$ and taking the upper limit gives $\\limsup_L S_{Q_L}(\\omega)/L^d\\le S_{Q_\\ell}(\\omega)/\\ell^d$. Every ratio is at least their infimum over $\\ell$, so the limit exists and equals that infimum.",
+          "inputs": [
+            "A2",
+            "F1",
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "On a fixed finite region, pointwise convergence of algebraic states gives convergence of all matrix coefficients of their density matrices by [F2] and [F4], hence convergence in operator norm. Ordered eigenvalues are continuous in that norm: the finite-dimensional min-max formula follows from an ordered orthonormal eigenbasis, since any $k$-dimensional subspace meets the span of the last $D-k+1$ eigenvectors, while the span of the first $k$ realizes the reverse bound; each Rayleigh quotient changes by at most the operator norm of the matrix difference. The function $-x\\log x$, extended by $0$ at $x=0$, is continuous on $[0,1]$, so each $S_{Q_\\ell}(\\omega)$ is continuous under pointwise convergence. By step 2.1, $s(\\omega)$ is the infimum of these continuous normalized local entropies and is upper semicontinuous. The energy density is a finite sum of local state evaluations by [F1], so it is continuous.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If a sequence of translation-invariant algebraic states converges pointwise to $\\omega$, then for each fixed $x,A$ the equalities $\\omega_n(\\tau_x(A))=\\omega_n(A)$ pass to the limit, so the invariant state set is closed. By [L2] every sequence in the full state space has a pointwise-convergent subsequence; the closed invariant subset is therefore sequentially compact.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers m=0 with D=q^0=1 and S=0; step 2.1 uses S_empty=0 when the residual set is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero entropy for a pure local density; the cube limit proof in step 2.1 permits these zero values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 yields 0<=S<=m log(q)=0 for q=1; the subsequent block and compactness arguments remain valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 remain valid in d=1; finite-range counting in step 1.2 uses only r=ceil(R)."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The item is a lattice-volume limit and makes no claim about a real parameter endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the Axiom of Choice in A2 and step 4.1 uses the Countable Choice inputs in A1; no stronger local selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way limit and regularity conclusions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives one-way limit and regularity conclusions, not an equivalence."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite/computational check is applicable; the finite entropy inequalities, cube tiling, local eigenvalue continuity, and state compactness are established analytically in the cited proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Independently checked steps 1.1–4.1 and all ten direct suppliers. The Given explicitly fixes a translation-invariant state. Finite density eigenvalues give 0<=S<=m log(q), including rank deficiency, the scalar algebra and the empty residual region. Finite cube tiling plus subadditivity proves the entropy limit equals its cube infimum; translation invariance makes translated-block entropies equal. Anchored finite shapes count each energy term once and their contained-translate ratios tend to one. Pointwise convergence determines all finite density entries; the eigenbasis min-max argument yields eigenvalue norm continuity and hence entropy continuity including eigenvalue zero. Infima of continuous local entropies are upper semicontinuous; energy is a finite local sum. The invariant set is closed under pointwise limits and inherits the proved sequential compactness supplier. Countable Choice is retained for completion/compactness; full AC is carried for the finite-entropy chain. Reviewed that chain at its finite support/partial-trace scope, not any unneeded infinite-dimensional assertion. Naaijkens Propositions 3.4.14–15 are contextual sources; local steps prove the actual cube claims. Reader/refuter findings are empty; no new defect identified."
+      }
+    },
+    "thm-qsm-spin-pressure-variational-principle": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-quantum-lattice-pressure",
+          "source_section": "Statement",
+          "quote": "Then $p_{\\Lambda_n}(\\beta)$ converges to the same finite value $p_\\Phi(\\beta)$ for every van Hove sequence",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-stationary-spin-entropy-density",
+          "source_section": "Statement",
+          "quote": "The translation-invariant state space is sequentially compact for pointwise convergence, $s$ is upper semicontinuous there, and $u_\\Phi$ is continuous there.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-qsm-finite-gibbs-variational",
+          "source_section": "Statement",
+          "quote": "Then every density matrix $\\rho$, including rank-deficient matrices, satisfies",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-qsm-finite-entropy-composition",
+          "source_section": "Statement",
+          "quote": "For the positive entropy scale $k_B>0$ fixed in [[def-qsm-relative-entropy-domain]] (in SI units J/K), entropy is concave under finite mixing and additive on product states for finite-dimensional density matrices.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-qsm-consistent-local-states",
+          "source_section": "Statement",
+          "quote": "There is a unique infinite algebraic state",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+          "source_section": "Statement",
+          "quote": "the partial trace $\\operatorname{Tr}_B:\\operatorname{End}(H_A\\otimes H_B)\\to \\operatorname{End}(H_A)$ is the unique linear map satisfying",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-partial-trace-positive-and-trace-preserving",
+          "source_section": "Statement",
+          "quote": "For finite-dimensional complex inner-product spaces $H_A,H_B$ and a non-negative operator $R\\in\\operatorname{End}(H_A\\otimes H_B)",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex inner product space and let $T:V\\to V$ be linear. Then $T$ is normal if and only if $V$ has an orthonormal basis consisting of eigenvectors of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "source_section": "Statement",
+          "quote": "Every complex-linear functional $\\omega:\\mathcal B(H)\\to\\mathbb C$ that is positive, meaning $\\omega(B^*B)\\ge0$ for all $B$, has a unique positive semidefinite matrix $\\rho$ such that $\\omega(A)=\\operatorname{Tr}(\\rho A)$ for all $A$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-qsm-translation-invariant-spin-interaction",
+          "source_section": "Definition",
+          "quote": "Consequently $\\tau_0$ is the identity and $\\tau_{x+y}=\\tau_x\\circ\\tau_y$ on local observables;",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-qsm-translation-invariant-spin-interaction",
+          "source_section": "Definition",
+          "quote": "It is translation invariant when $\\tau_x(\\Phi(Z))=\\Phi(Z+x)$ for every finite nonempty support $Z$ and every $x\\in\\Gamma$.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qsm-translation-invariant-spin-interaction",
+          "source_section": "Definition",
+          "quote": "The least site exists because each support is finite and nonempty; every representative contains $0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-qsm-bounded-finite-range-interaction",
+          "source_section": "Definition",
+          "quote": "\\Phi(Z)=0\\quad\\text{if }|Z|>M\\text{ or }\\operatorname{diam}_\\infty Z>R,\\qquad\\kappa:=\\sup_{x\\in\\Gamma}\\sum_{Z\\ni x}\\|\\Phi(Z)\\|<\\infty.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For any $\\omega\\in\\mathcal S_{\\mathrm{inv}}$, [F5] represents its restriction to $Q_L$ by a trace-one density matrix, and [L1] applies to that density. Writing $S_{Q_L}=-\\operatorname{Tr}(\\rho_{Q_L}\\log\\rho_{Q_L})$ (dimensionless), the supplier's physical entropy is $k_{\\mathrm B}S_{Q_L}$ and $T=(k_{\\mathrm B}\\beta)^{-1}$, so its inequality rearranges to $S_{Q_L}-\\beta\\omega(H_{Q_L})\\le\\log Z_{Q_L}(\\beta)$. Divide by $L^d$ and use [F1]–[F2] to obtain $s(\\omega)-\\beta u_\\Phi(\\omega)\\le p_\\Phi(\\beta)$. This is conditional on the stated finite-dimensional inequality [L1].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For each positive integer $\\ell$, let $Q_\\ell$ be one block, $H_\\ell=H_{Q_\\ell}$, and $\\rho_\\ell=e^{-\\beta H_\\ell}/Z_{Q_\\ell}(\\beta)$. Tile $\\mathbb Z^d$ by blocks $B_k=\\ell k+\\{0,\\ldots,\\ell-1\\}^d$, $k\\in\\mathbb Z^d$. For a finite region $\\Lambda$, set $\\rho_\\Lambda=\\bigotimes_{k:B_k\\cap\\Lambda\\ne\\varnothing}\\operatorname{Tr}_{B_k\\setminus\\Lambda}(\\rho_\\ell^{(k)})$, where $\\rho_\\ell^{(k)}$ is the translated copy on $B_k$. This is a finite product; for $\\Lambda=\\varnothing$ the empty tensor product is the scalar unit density. Each nonempty block marginal is positive trace-one by [F3]–[F5].",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $\\Lambda\\subseteq\\Lambda'$, then within each block the partial trace of $\\operatorname{Tr}_{B_k\\setminus\\Lambda'}\\rho_\\ell^{(k)}$ over $(B_k\\cap\\Lambda')\\setminus\\Lambda$ equals $\\operatorname{Tr}_{B_k\\setminus\\Lambda}\\rho_\\ell^{(k)}$: the coordinate formula in [F3] sums the same finite indices in either order. A block meeting $\\Lambda'$ but not $\\Lambda$ is traced over completely and contributes $\\operatorname{Tr}(\\rho_\\ell^{(k)})=1$. The partial trace of a tensor product factors by the same finite sums, so $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. Thus the local density family is consistent, and [L3] extends it to a state $\\eta_\\ell$ on $\\mathcal A$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "L3",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The state $\\eta_\\ell$ is invariant under shifts in $\\ell\\mathbb Z^d$ because these shifts permute identical block factors, using the covariance and action law [F6]–[F7]. Average its $\\ell^d$ translates over residues $r\\in\\{0,\\ldots,\\ell-1\\}^d$ to obtain $\\omega_\\ell=\\ell^{-d}\\sum_r\\eta_\\ell\\circ\\tau_r$. The group law in [F6] makes each lattice translation permute the residue classes modulo $\\ell$, so $\\omega_\\ell\\in\\mathcal S_{\\mathrm{inv}}$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F6",
+            "F7",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For each fixed phase $r$, the restriction of $\\eta_\\ell\\circ\\tau_r$ to $Q_L$ is a tensor product of full block densities and partial-block marginals. In each coordinate, $Q_L$ contains $L/\\ell+O(1)$ full intervals of length $\\ell$, so the number of full blocks is $L^d/\\ell^d+O_\\ell(L^{d-1})$. Entropy additivity in [L2] gives the full-block contribution, while every partial marginal has nonnegative entropy by the opening finite-density spectral calculation in the proof of [F2]; hence $\\liminf_{L\\to\\infty}S_{Q_L}(\\eta_\\ell\\circ\\tau_r)/L^d\\ge s(\\rho_\\ell)/\\ell^d$. At each finite $L$, concavity in [L2] gives $S_{Q_L}(\\omega_\\ell)\\ge\\ell^{-d}\\sum_r S_{Q_L}(\\eta_\\ell\\circ\\tau_r)$. Divide by $L^d$, take the limit on the invariant left side using [F2], and use the finite number of phases to obtain $s(\\omega_\\ell)\\ge s(\\rho_\\ell)/\\ell^d$.",
+          "inputs": [
+            "A2",
+            "L2",
+            "F2",
+            "F5",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Put $r=\\lceil R\\rceil$. By the phase average and translation covariance [F7], $u_\\Phi(\\omega_\\ell)=\\ell^{-d}\\sum_{x\\in Q_\\ell}\\sum_{S\\in\\mathscr S_\\Phi}\\eta_\\ell(\\Phi(S+x))$. Because each anchored shape contains $0$, the terms with $S+x\\subseteq Q_\\ell$ sum exactly to $\\operatorname{Tr}(\\rho_\\ell H_\\ell)$. Every remaining pair $(S,x)$ has $x\\in D_{\\ell,r}:=\\{y\\in Q_\\ell:\\operatorname{dist}_\\infty(y,\\mathbb Z^d\\setminus Q_\\ell)\\le r\\}$, since the support contains $x$ and has diameter at most $R$. If $r=0$, no support crosses a block face and $D_{\\ell,0}=\\varnothing$. If $r\\ge1$, a union bound over the $2d$ faces gives $|D_{\\ell,r}|\\le2dr\\ell^{d-1}$. Terms anchored in these layers may use partial block marginals of $\\eta_\\ell$; those marginals are positive trace-one by steps 1.2–3.1, and [F5] gives $|\\eta_\\ell(A)|\\le\\|A\\|$ for each local term. At each anchor the sum of term norms is at most $J_\\Phi\\le\\kappa$ by [F8]. Hence $|u_\\Phi(\\omega_\\ell)-\\operatorname{Tr}(\\rho_\\ell H_\\ell)/\\ell^d|\\le2dr\\kappa/\\ell$. By the equality case of [L1], $s(\\rho_\\ell)-\\beta\\operatorname{Tr}(\\rho_\\ell H_\\ell)=\\log Z_{Q_\\ell}(\\beta)$. Hence $s(\\omega_\\ell)-\\beta u_\\Phi(\\omega_\\ell)\\ge p_{Q_\\ell}(\\beta)-2\\beta dr\\kappa/\\ell$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "L1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "Take any sequence of positive integers $\\ell_j\\to\\infty$. By [F2], a subsequence of $\\omega_{\\ell_j}$ converges pointwise to some invariant algebraic state $\\omega_*$. The right side of step 5.1 tends to $p_\\Phi(\\beta)$ by [F1], while step 1.1 bounds every variational value above by $p_\\Phi(\\beta)$. Thus the sequence of variational values converges to $p_\\Phi(\\beta)$. Upper semicontinuity of $s$ and continuity of $u_\\Phi$ from [F2] imply $s(\\omega_*)-\\beta u_\\Phi(\\omega_*)\\ge p_\\Phi(\\beta)$; step 1.1 gives the reverse inequality. Therefore equality is attained, proving the maximum formula.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "L2",
+            "step 1.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 define the scalar unit density for an empty local region and preserve consistency under complete partial trace."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 remain valid for zero interaction; the block Gibbs density is maximally mixed and the boundary-energy error is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–6.1 allow q=1; all local algebras are scalar, local entropy is zero, and the partial-trace construction remains finite."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2–6.1 remain valid in d=1 and for R=0; the energy boundary error in step 5.1 then vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The formula is stated for fixed beta>0 and makes no claim at beta=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 6.1 use the named Countable Choice inputs in A1, while step 4.1 uses the Axiom of Choice in A2; block and phase choices are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The variational identity is a one-way equality, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The variational identity is a one-way equality, not an iff statement."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "uniform onsite interaction",
+          "status": "checked",
+          "evidence": "For Phi({x})=cI the B-page calculation gives p=log(q)-beta c. The translation-invariant product tracial state has dimensionless entropy density log(q) and energy density c, attaining s-beta u=log(q)-beta c exactly."
+        }
+      ],
+      "finite_checks_disposition": "The uniform onsite case is an exact analytic consistency check; the general maximizing-state construction and boundary correction are established in steps 1.2–6.1.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-40",
+        "notes": "Checked all seven proof steps and all seventeen direct suppliers, including the complete finite partial-trace coordinate, trace-pairing and positivity proofs. The finite Gibbs inequality applies at k_B>0 and beta>0, includes rank-deficient restrictions and gives the upper bound after k_B cancels. Block Gibbs marginals form a positive trace-one consistent local family: nested partial traces reorder finite sums and completely traced blocks contribute one, including the empty region. The extension is bounded on the completed algebra under Countable Choice; no infinite tensor-product Hilbert space is presumed. Averaging all ell^d phases yields invariance by the translation group law. Full-block entropy is additive, marginal entropy nonnegative and finite mixing concave, so the invariant state has the stated lower entropy bound. Anchors contain zero; crossing anchors lie within r of a face and J_Phi<=kappa gives the 2dr*kappa/ell error, zero at R=0. A diverging integer block sequence gives pressure recovery; sequential compactness plus upper semicontinuity and continuous energy yields an attained maximum, with the reverse bound from step 1.1. Full AC is explicitly retained through finite entropy, and scalar spins/zero interaction remain valid. No uniqueness, KMS characterization, empirical preparation or observed concentration is inferred. Naaijkens 3.4.16 has stronger scope than used here; Lanford–Robinson 3.1(4) provides variational context, not a substitute for the local recovery proof. Reader/refuter findings are empty."
+      }
+    },
+    "ex-qsm-uniform-onsite-pressure": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "At each site, the only possibly nonzero interaction term containing it is its singleton term, and that term has operator norm $|c|$. Every possibly nonzero support is a singleton, so this interaction is translation invariant, has support-size bound $M=1$, range $R=0$, and uniform per-site norm bound $\\kappa=|c|$.",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Each term $cI_{\\{x\\}}$ embeds into $\\mathcal A_\\Lambda$ as $cI_\\Lambda$. Therefore $H_\\Lambda=c|\\Lambda|I_\\Lambda$, and the dimension formula gives $Z_\\Lambda(\\beta)=q^{|\\Lambda|}e^{-\\beta c|\\Lambda|}$. Thus $|\\Lambda|^{-1}\\log Z_\\Lambda(\\beta)=\\log q-\\beta c$ for every finite nonempty $\\Lambda$; this same value is the limit along every van Hove sequence. For $c=0$ it is $\\log q$, and for $q=1$ it is $-\\beta c$.",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example and Verification are stated for finite nonempty Lambda."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 substitutes c=0 and gives p=log(q) for every finite nonempty region."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 substitutes q=1 and gives p=-beta c, including c=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact trace calculation in steps 1.1–2.1 applies for every positive integer d, including d=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example fixes beta>0 and states no beta=0 limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use an explicit singleton formula and finite-dimensional trace; no selection principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Verification is a direct evaluation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Verification is a direct evaluation, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero coupling and one-dimensional spin",
+          "status": "checked",
+          "evidence": "The exact expression p=log(q)-beta c gives p=log(q) when c=0 and p=-beta c when q=1, matching the direct scalar Hamiltonian and trace."
+        }
+      ],
+      "finite_checks_disposition": "The example is itself an exact finite-volume symbolic trace check; no numerical measurement or computational estimate is asserted."
+    }
+  }
+}

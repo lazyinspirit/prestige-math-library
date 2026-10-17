@@ -1,0 +1,966 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "scope": [
+    "lem-tgr-perfect-fluid-projection",
+    "lem-tgr-carter-circulation",
+    "lem-tgr-dissipative-entropy-identity",
+    "lem-tgr-first-order-model-limits",
+    "ex-tgrmath-null-landau-obstruction"
+  ],
+  "contracts": {
+    "lem-tgr-perfect-fluid-projection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tgr-local-gibbs-euler",
+          "source_section": "Statement",
+          "quote": "$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "It is torsion-free and $g$-compatible",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Metric compatibility gives $\\nabla_a\\Delta^{ab}=\\theta u^b+a^b$, and\n$u_ba^b=0$ follows by differentiating $u_bu^b=-1$. Expanding the two terms of\n$T^{ab}$ with the tensor product rule in [F4] yields\n$$\\nabla_aT^{ab}=(D\\epsilon+h\\theta)u^b+ha^b+\\Delta^{ab}\\nabla_a p.$$\nContracting with $u_b$ gives $-(D\\epsilon+h\\theta)=u_bf^b$; projecting with\n$\\Delta^c{}_b$ gives $ha^c+\\Delta^{ca}\\nabla_a p=\\Delta^c{}_bf^b$. The\nparallel and orthogonal projections sum to the identity, so these two equations\nalso imply the full balance equation.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "The product rule gives $\\nabla_aJ^a=Dn+n\\theta$. Along the state map,\n[F3] gives $D\\epsilon=T Ds+\\mu Dn$ and $h=Ts+\\mu n$, hence\n$$D\\epsilon+h\\theta=T(Ds+s\\theta)+\\mu(Dn+n\\theta) =T\\nabla_a(su^a)+\\mu\\nabla_aJ^a.$$\nSubstituting the two balances proves $T\\nabla_a(su^a)=-u_bf^b$. Since\n$s=n\\sigma_p$, the particle balance also gives\n$\\nabla_a(su^a)=nD\\sigma_p+\\sigma_p\\nabla_aJ^a=nD\\sigma_p$; therefore\n$nT D\\sigma_p=-u_bf^b$. Positivity of $n,T$ permits the isolated conclusions\nwhen $f=0$.",
+          "inputs": [
+            "A2",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published axiom definition; exact AC_omega premise inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "Only the countable choice axiom AC_omega.",
+          "supplier_proof_status": "Published axiom definition; no proof obligation applies.",
+          "consumer_use": "Carries the only stated foundational choice premise."
+        },
+        {
+          "supplier": "def-gr-smooth-lorentzian-objects",
+          "carrier": "items/def-gr-smooth-lorentzian-objects.md",
+          "status": "Published mathematical definition; signature, time orientation, and causal conventions inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold without boundary; signature (-,+,+,+); chosen time orientation.",
+          "supplier_proof_status": "Published definition; mathematical prerequisites and definition inspected.",
+          "consumer_use": "Fixes the Lorentz signature and causal/spatial positivity convention."
+        },
+        {
+          "supplier": "def-tgr-local-fluid-state",
+          "carrier": "items/def-tgr-local-fluid-state.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Definition",
+          "exact_statement": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "relevant_hypotheses_and_conventions": "Nonempty open spacetime set O; smooth future unit observer congruence; nonempty open state domain X; e in C2(X); C2 state map; signature (-,+,+,+); x0=ct; no conservation or constitutive law is imposed.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the state maps, regularity, observer frame, units, and geometric current conventions used in the cited proof steps."
+        },
+        {
+          "supplier": "lem-tgr-local-gibbs-euler",
+          "carrier": "items/lem-tgr-local-gibbs-euler.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Statement",
+          "exact_statement": "$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.",
+          "relevant_hypotheses_and_conventions": "Nonempty open X subset (0,infinity) times R; e in C2(X); n>0 and (1/n,s/n) in X; identities are state differentials.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the Gibbs differential and Euler identity used in the balance-to-entropy cancellation."
+        },
+        {
+          "supplier": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "carrier": "items/thm-gr-nondegenerate-levi-civita-and-tensor-derivative.md",
+          "status": "Published mathematical theorem; full relevant proof clauses inspected.",
+          "source_section": "Statement",
+          "exact_statement": "It is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold; smooth symmetric nondegenerate metric; AC_omega tangent-bundle smooth-structure convention.",
+          "supplier_proof_status": "Published theorem; complete supplier proof inspected.",
+          "consumer_use": "Supplies metric compatibility, torsion freedom, and tensor product/contraction differentiation."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: The pointwise identities hold for every supplied spacetime point; no empty set is constructed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: At f=0, step 2.1 gives divergence-free su and D sigma_p=0, with n,T positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no one-element index or sample case in the differential identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: The conclusions dividing by n or T use the stated n>0 and T>0 hypotheses; no conclusion is asserted at n=0 or T=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof is pointwise and contains no endpoint integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Facts & Assumptions A1: AC_omega is the only stated choice principle; no arbitrary family is selected in either proof step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: step 1.1 contracts the full stress balance and applies the orthogonal projector to obtain both component equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: step 1.1 uses the decomposition into parallel and orthogonal projections to recover the full vector balance; the current balance is expanded by the product rule in step 2.1."
+        }
+      ]
+    },
+    "lem-tgr-carter-circulation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-perfect-fluid-projection",
+          "source_section": "Statement",
+          "quote": "In particular, when $f=0$, the entropy current $su$ is divergence-free and specific entropy is advected, $D\\sigma_p=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold**",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "It is torsion-free and $g$-compatible",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tdmath-local-contraction-flow",
+          "source_section": "Statement",
+          "quote": "There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tdmath-variational-flow-and-commutation",
+          "source_section": "Statement",
+          "quote": "Its local flow $\\phi_X^t(q)$ from [[lem-tdmath-local-contraction-flow]] is $C^2$ jointly in $(t,q)$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "In each chart meeting $\\gamma_0([0,1])$, the coordinate components of the\nsmooth field $u$ are $C^2$. The local-flow suppliers [F5] therefore give a\njointly $C^2$ flow on a neighborhood of each point of the curve. Compactness of\nthe curve image gives a finite subcover; taking the minimum of the finitely many\npositive flow times gives a common interval about $\\lambda=0$. Coordinate\nchanges carry solutions to solutions, and local uniqueness makes the chartwise\nflows agree on overlaps. Thus $\\gamma_\\lambda$ is a $C^2$ closed-curve family\non a common local interval.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "1.2",
+          "claim": "From [F1], $de=-p\\,dv+T\\,d\\sigma_p$. Differentiating $H=e+pv$ gives\n$dH=de+p\\,dv+v\\,dp=T\\,d\\sigma_p+v\\,dp$. From [F2],\n$H a^\\flat+v\\Delta\\,dp=0$ and $D\\sigma_p=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.1",
+          "claim": "Torsion freedom and the product rule yield, in any chart,\n$$\\bigl(\\iota_u d(Hu^\\flat)\\bigr)_b=u^a\\nabla_a(Hu_b)-u^a\\nabla_b(Hu_a)=(DH)u_b+Ha_b+\\nabla_bH=Ha_b+\\Delta_b{}^a\\nabla_aH.$$\nHere $u^a\\nabla_bu_a=\\tfrac12\\nabla_b(u^au_a)=0$, and the last equality is\nthe definition of the spatial covector projection. Substituting the expression\nfor $dH$ from step 1.2 and using $\\Delta\\,d\\sigma_p=d\\sigma_p$ from\n$D\\sigma_p=0$ gives\n$\\iota_u d(Hu^\\flat)=H a^\\flat+T d\\sigma_p+v\\Delta\\,dp=T d\\sigma_p$.",
+          "inputs": [
+            "step 1.2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "3.1",
+          "claim": "Subdivide $[0,1]$ into finitely many closed subintervals whose curve images\nlie in coordinate charts; compactness gives such a subdivision, and endpoint\nterms will telescope. On each chart subarc put\n$F(\\lambda,s)=P_a(\\gamma_\\lambda(s))\\partial_s\\gamma_\\lambda^a(s)$.\nIt is $C^1$ on each compact parameter rectangle. The one-variable fundamental\ntheorem of calculus gives\n$[F(\\lambda+h,s)-F(\\lambda,s)]/h\n=h^{-1}\\int_\\lambda^{\\lambda+h}\\partial_rF(r,s)\\,dr$; uniform continuity of\n$\\partial_\\lambda F$ on the compact rectangle makes this quotient converge\nuniformly in $s$ to $\\partial_\\lambda F(\\lambda,s)$. Integrating that uniform\nlimit proves differentiation under the line integral. Since\n$\\partial_\\lambda\\gamma=u$,\n$$\\partial_\\lambda F=\\bigl(u^b\\partial_bP_a+P_b\\partial_au^b\\bigr)\\partial_s\\gamma_\\lambda^a.$$\nThus $\\mathcal C'=\\int_{\\gamma_\\lambda}\\mathcal L_uP$, where in coordinates\n$(\\mathcal L_uP)_a=u^b\\partial_bP_a+P_b\\partial_au^b$. Direct expansion gives\n$(\\iota_udP+d(P(u)))_a=u^b(\\partial_bP_a-\\partial_aP_b)+\\partial_a(u^bP_b)$,\nso direct expansion proves $\\mathcal L_uP=\\iota_udP+d(P(u))$. The exact\none-form integrates on each subarc to its endpoint difference, and these\ndifferences telescope to zero because $\\gamma_\\lambda(0)=\\gamma_\\lambda(1)$.\nSince $dP=(1/c)d(Hu^\\flat)$, step 2.1 yields\n$\\mathcal C'=c^{-1}\\int_{\\gamma_\\lambda}T\\,d\\sigma_p$. If $\\sigma_p$ is\nconstant throughout the swept region, $d\\sigma_p=0$ there and the derivative\nvanishes.",
+          "inputs": [
+            "A2",
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published axiom definition; exact AC_omega premise inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "Only the countable choice axiom AC_omega.",
+          "supplier_proof_status": "Published axiom definition; no proof obligation applies.",
+          "consumer_use": "Carries the only stated foundational choice premise."
+        },
+        {
+          "supplier": "def-tgr-local-fluid-state",
+          "carrier": "items/def-tgr-local-fluid-state.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Definition",
+          "exact_statement": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "relevant_hypotheses_and_conventions": "Nonempty open spacetime set O; smooth future unit observer congruence; nonempty open state domain X; e in C2(X); C2 state map; signature (-,+,+,+); x0=ct; no conservation or constitutive law is imposed.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the state maps, regularity, observer frame, units, and geometric current conventions used in the cited proof steps."
+        },
+        {
+          "supplier": "lem-tgr-perfect-fluid-projection",
+          "carrier": "items/lem-tgr-perfect-fluid-projection.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Statement",
+          "exact_statement": "For any smooth vector field $f^b$, the balance equation $\\nabla_aT^{ab}=f^b$\nis equivalent to the pair\n\n$$D\\epsilon+h\\theta=-u_bf^b,\\qquad\nha^c+\\Delta^{ca}\\nabla_a p=\\Delta^c{}_bf^b,$$\n\nand $\\nabla_aJ^a=0$ is equivalent to $Dn+n\\theta=0$. Whenever both balances\nhold, the exact entropy identities are\n\n$$T\\nabla_a(su^a)=-u_bf^b,\\qquad nT D\\sigma_p=-u_bf^b.$$",
+          "relevant_hypotheses_and_conventions": "Smooth perfect stress T=epsilon uu+p Delta and particle current J=nu; smooth source f; stress and particle balance equations; state and Gibbs-Euler interfaces.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the isolated perfect-fluid balance and advected-entropy identities used to derive Carter circulation."
+        },
+        {
+          "supplier": "def-gr-smooth-lorentzian-objects",
+          "carrier": "items/def-gr-smooth-lorentzian-objects.md",
+          "status": "Published mathematical definition; signature, time orientation, and causal conventions inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold without boundary; signature (-,+,+,+); chosen time orientation.",
+          "supplier_proof_status": "Published definition; mathematical prerequisites and definition inspected.",
+          "consumer_use": "Fixes the Lorentz signature and causal/spatial positivity convention."
+        },
+        {
+          "supplier": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "carrier": "items/thm-gr-nondegenerate-levi-civita-and-tensor-derivative.md",
+          "status": "Published mathematical theorem; full relevant proof clauses inspected.",
+          "source_section": "Statement",
+          "exact_statement": "It is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold; smooth symmetric nondegenerate metric; AC_omega tangent-bundle smooth-structure convention.",
+          "supplier_proof_status": "Published theorem; complete supplier proof inspected.",
+          "consumer_use": "Supplies metric compatibility, torsion freedom, and tensor product/contraction differentiation."
+        },
+        {
+          "supplier": "lem-tdmath-local-contraction-flow",
+          "carrier": "items/lem-tdmath-local-contraction-flow.md",
+          "status": "Published mathematical lemma; local existence and uniqueness proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $U\\subseteq\\mathbb R^m$ be open, $m\\ge1$, let $X:U\\to\\mathbb R^m$ have continuous first partial derivatives, and fix $q_0\\in U$. There are $r,\\delta>0$ and a map $\\phi:[-\\delta,\\delta]\\times\\overline B(q_0,r/2)\\to\\overline B(q_0,r)$ such that for each $p\\in\\overline B(q_0,r/2)$, $t\\mapsto\\phi(t,p)$ is $C^1$, satisfies $\\phi(0,p)=p$ and $\\partial_t\\phi(t,p)=X(\\phi(t,p))$ on $(-\\delta,\\delta)$, and is the unique such solution that stays in $\\overline B(q_0,r)$. The dependence on the initial point is locally Lipschitz, and the local flow law $\\phi(t,\\phi(s,p))=\\phi(t+s,p)$ holds whenever the displayed maps are defined in the chosen neighborhood.",
+          "relevant_hypotheses_and_conventions": "C1 coordinate vector field on an open Euclidean domain; local neighborhood of each point.",
+          "supplier_proof_status": "Published lemma; full relevant proof inspected.",
+          "consumer_use": "Supplies chartwise local flow existence and uniqueness."
+        },
+        {
+          "supplier": "lem-tdmath-variational-flow-and-commutation",
+          "carrier": "items/lem-tdmath-variational-flow-and-commutation.md",
+          "status": "Published mathematical lemma; joint C2 flow regularity proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $X$ be a $C^2$ vector field on an open subset of $\\mathbb R^m$, where $C^2$ means that total derivatives through order two exist and are continuous. Its local flow $\\phi_X^t(q)$ from [[lem-tdmath-local-contraction-flow]] is $C^2$ jointly in $(t,q)$, and $J(t,q):=D_q\\phi_X^t(q)$ satisfies $\\partial_tJ=DX(\\phi_X^t(q))J$ and $J(0,q)=I$.",
+          "relevant_hypotheses_and_conventions": "C2 vector field on an open Euclidean subset.",
+          "supplier_proof_status": "Published lemma; full relevant proof inspected.",
+          "consumer_use": "Supplies joint C2 regularity of the local flow."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement supplies a nonempty interval-parameterized curve; no empty set case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: If d sigma_p=0 on the swept region, step 3.1 gives dC/dlambda=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: A constant closed curve is allowed; its line integral and the circulation source integral are both zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: The state assumptions require n,T>0 and the curve flow is local; no conclusion is made at T=0, n=0, or outside the flow domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: Step 3.1 uses gamma_lambda(0)=gamma_lambda(1) to cancel the exact one-form endpoint term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses finite compact covers and makes no selection from an arbitrary family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a differential identity, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a differential identity, not an iff."
+        }
+      ]
+    },
+    "lem-tgr-dissipative-entropy-identity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-local-gibbs-euler",
+          "source_section": "Statement",
+          "quote": "$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "It is torsion-free and $g$-compatible",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "From metric compatibility,\n$\\nabla_a\\Delta^{ab}=\\theta u^b+a^b$ and $u_b\\nabla_a u^b=0$. The perfect\nenergy term contracts as\n$u_b\\nabla_a(\\epsilon u^au^b)=-D\\epsilon-\\epsilon\\theta$; the isotropic\npressure term contributes $-(p+\\Pi)\\theta$. Orthogonality and the product\nrule give\n$u_b\\nabla_a(u^aQ^b)=-Q^ba_b$ and\n$u_b\\nabla_a(Q^au^b)=-\\nabla_aQ^a$. Finally\n$u_b\\nabla_a\\pi^{ab}=-\\pi^{ab}\\nabla_a u_b=-\\pi^{ab}\\sigma_{ab}$:\nthe spatial symmetric trace-free tensor $\\pi$ annihilates the antisymmetric\npart of $\\nabla u$ and its isotropic spatial trace. Thus the stress balance is\n$$D\\epsilon+h\\theta+\\Pi\\theta+\\nabla_aQ^a+Q^aa_a +\\pi^{ab}\\sigma_{ab}=-u_bf^b.$$",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "The particle balance gives\n$Dn+n\\theta=-\\nabla_aV^a$. By [F2],\n$$D\\epsilon+h\\theta=T(Ds+s\\theta)+\\mu(Dn+n\\theta) =T\\nabla_a(su^a)-\\mu\\nabla_aV^a.$$\nSubstitution in step 1.1 yields\n$$T\\nabla_a(su^a)=-\\Pi\\theta-\\pi^{ab}\\sigma_{ab} -\\nabla_aQ^a-Q^aa_a+\\mu\\nabla_aV^a-u_bf^b.$$",
+          "inputs": [
+            "A2",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "By the definition $S^a=su^a+Q^a/T-\\mu V^a/T$, its divergence is\n$\\nabla_a(su^a)+\\nabla_a(Q^a/T)-\\nabla_a(\\mu V^a/T)$: the last derivative is\nsubtracted. The product rule gives\n$$\\nabla_a\\!\\left(\\frac{Q^a}{T}\\right)=\\frac{\\nabla_aQ^a}{T}-\\frac{Q^a\\nabla_aT}{T^2},\\qquad \\nabla_a\\!\\left(\\frac{\\mu V^a}{T}\\right)=\\frac{\\mu}{T}\\nabla_aV^a+V^a\\nabla_a\\!\\left(\\frac{\\mu}{T}\\right).$$\nSubstituting these expressions and step 2.1 gives\n$$\\nabla_aS^a=\\frac{-\\Pi\\theta-\\pi^{ab}\\sigma_{ab}-\\nabla_aQ^a-Q^aa_a+\\mu\\nabla_aV^a-u_bf^b}{T}+\\frac{\\nabla_aQ^a}{T}-\\frac{Q^a\\nabla_aT}{T^2}-\\frac{\\mu\\nabla_aV^a}{T}-V^a\\nabla_a\\!\\left(\\frac{\\mu}{T}\\right).$$\nThe $\\nabla_aQ^a/T$ and $\\mu\\nabla_aV^a/T$ terms cancel with the displayed\nopposite-sign terms. The remaining heat terms combine as\n$-Q^a\\nabla_aT/T^2-Q^aa_a/T=-Q^a(\\nabla_aT+Ta_a)/T^2$, proving the stated\nidentity. Since $Q,V$ are spatial, only the rest-space projections of the\ncorresponding gradients contribute.",
+          "inputs": [
+            "step 2.1",
+            "A2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published axiom definition; exact AC_omega premise inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "Only the countable choice axiom AC_omega.",
+          "supplier_proof_status": "Published axiom definition; no proof obligation applies.",
+          "consumer_use": "Carries the only stated foundational choice premise."
+        },
+        {
+          "supplier": "def-tgr-local-fluid-state",
+          "carrier": "items/def-tgr-local-fluid-state.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Definition",
+          "exact_statement": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "relevant_hypotheses_and_conventions": "Nonempty open spacetime set O; smooth future unit observer congruence; nonempty open state domain X; e in C2(X); C2 state map; signature (-,+,+,+); x0=ct; no conservation or constitutive law is imposed.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the state maps, regularity, observer frame, units, and geometric current conventions used in the cited proof steps."
+        },
+        {
+          "supplier": "lem-tgr-local-gibbs-euler",
+          "carrier": "items/lem-tgr-local-gibbs-euler.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Statement",
+          "exact_statement": "$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.",
+          "relevant_hypotheses_and_conventions": "Nonempty open X subset (0,infinity) times R; e in C2(X); n>0 and (1/n,s/n) in X; identities are state differentials.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the Gibbs differential and Euler identity used in the balance-to-entropy cancellation."
+        },
+        {
+          "supplier": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "carrier": "items/thm-gr-nondegenerate-levi-civita-and-tensor-derivative.md",
+          "status": "Published mathematical theorem; full relevant proof clauses inspected.",
+          "source_section": "Statement",
+          "exact_statement": "It is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold; smooth symmetric nondegenerate metric; AC_omega tangent-bundle smooth-structure convention.",
+          "supplier_proof_status": "Published theorem; complete supplier proof inspected.",
+          "consumer_use": "Supplies metric compatibility, torsion freedom, and tensor product/contraction differentiation."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is a pointwise differential identity for supplied fields."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: If Q=V=Pi=pi=0 and f=0, the formula reduces to div(su) from the perfect-fluid balance."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element index or finite-sample case occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: T>0 is required for the displayed entropy current; n,T=0 cases are outside the state hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or improper integral occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Facts & Assumptions A1: Only the explicitly stated AC_omega premise is carried; the local contraction proof introduces no stronger choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is an identity, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is an identity, not an equivalence."
+        }
+      ]
+    },
+    "lem-tgr-first-order-model-limits": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-dissipative-entropy-identity",
+          "source_section": "Statement",
+          "quote": "satisfies the exact identity $$\\nabla_aS^a=-\\frac{\\Pi\\theta+\\pi^{ab}\\sigma_{ab}}{T}",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-heat-kernel",
+          "source_section": "Definition",
+          "quote": "The **heat kernel on $\\mathbb R^n$** is the function $$\\Gamma(x,t):=(4\\pi t)^{-n/2}\\exp\\!\\Bigl(-\\frac{|x|^2}{4t}\\Bigr)",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For every $t>0$: (i) $\\Gamma(\\cdot,t)>0$ and $\\int_{\\mathbb R^n}\\Gamma(x,t)\\,dx=1$",
+          "uses": []
+        },
+        {
+          "fact": "F4",
+          "source": "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "source_section": "Statement",
+          "quote": "Then $u$ is $C^\\infty$ on $\\mathbb R^n\\times(0,\\infty)$, satisfies $\\partial_tu=\\Delta_xu$ there",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Substitute the first-order laws into [F1] under the no-work assumption\n$u_bf^b=0$ of [A3]. They give\n$-\\Pi\\theta/T=\\zeta c\\theta^2/T$,\n$-\\pi^{ab}\\sigma_{ab}/T=2\\eta c\\,\\sigma^{ab}\\sigma_{ab}/T$,\n$-Q^a(\\nabla_aT+Ta_a)/T^2=\n\\kappa\\Delta^{ab}(\\nabla_aT+Ta_a)(\\nabla_bT+Ta_b)/(cT^2)$, and\n$-V^a\\nabla_a(\\mu/T)=L\\Delta^{ab}\\nabla_a(\\mu/T)\\nabla_b(\\mu/T)$.\nThe rest-space metric induced by $\\Delta$ is positive definite by [F5]; with\n$T,c>0$ and nonnegative coefficients every summand is nonnegative, proving\nthe stated residual inequality.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "F6",
+            "given",
+            "algebra",
+            "A3"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "1.2",
+          "claim": "In Minkowski coordinates, $T^{00}=\\epsilon$ and $T^{i0}=Q^i$ for the\nfixed-rest stress of [A2]. The temporal balance $\\nabla_aT^{a0}=f^0=0$ is\n$c^{-1}\\partial_t\\epsilon+\\partial_iQ^i=0$. The spatial components are\n$\\nabla_aT^{ai}=c^{-1}\\partial_tQ^i+\\partial_i p=f^i$, as required by [A2].\nUsing $\\epsilon=\\epsilon_0+C\\vartheta$ and $q=cQ=-\\kappa\\nabla\\vartheta$,\nthe temporal balance becomes $C\\partial_t\\vartheta+\\nabla\\cdot q=0$, or\n$C\\partial_t\\vartheta-\\kappa\\Delta\\vartheta=0$. Put $a_h=\\kappa/C>0$ and\n$U(\\mathbf x,\\tau)=\\int_{\\mathbb R^3}\\Gamma(\\mathbf x-\\mathbf y,\\tau)\n\\vartheta_0(\\mathbf y)\\,d\\mathbf y$. The smooth compactly supported datum in\n[A2] is bounded and uniformly continuous, so [F4] gives a smooth solution of\n$U_\\tau=\\Delta U$ for $\\tau>0$ with initial trace $\\vartheta_0$ locally\nuniformly. Then $\\vartheta(\\mathbf x,t)=U(\\mathbf x,a_ht)$ solves the fixed-rest\nequation and has the stated boundary trace. Kernel positivity [F2] and\n$\\vartheta_0\\ge0$ give $\\vartheta\\ge0$; the sup-norm bound in [F4] gives\n$\\vartheta\\le\\delta$, so the temperature remains in the specified state\ninterval.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "1.3",
+          "claim": "Write $u^0=1+O(|\\mathbf w|^2)$ and $u^i=w^i+O(|\\mathbf w|^2)$ in the\nhomogeneous rest perturbation of [A4]. With $x^0=ct$,\n$a^i=u^a\\nabla_a u^i=c^{-1}\\dot w^i$ to first order, so the first-order\nacceleration heat law gives $Q^i=-\\kappa T_0\\dot w^i/c^2$. In\n$\\nabla_aT^{ai}=0$, the linearized mixed component is\n$T^{0i}=h_0w^i+Q^i$: the perfect part contributes $h_0w^i$, the term\n$u^0Q^i$ contributes $Q^i$, and $Q^0u^i$ is second order. All spatial\nderivatives vanish, so $\\partial_0T^{0i}=0$ gives\n$h_0\\dot w^i/c+\\dot Q^i/c=0$. Multiplication by $c$ gives\n$h_0\\dot w^i+\\dot Q^i=0$, the stated homogeneous linearized momentum equation.",
+          "inputs": [
+            "A4",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.1",
+          "claim": "Since $\\vartheta_0$ is continuous, nonnegative, and nonzero, it is bounded\nbelow by a positive constant on some closed ball of positive radius. For every\nfixed $\\mathbf x$ and $t>0$, the continuous kernel\n$\\Gamma(\\mathbf x-\\mathbf y,a_ht)$ has a positive minimum on that ball by\n[F2], so the convolution from step 1.2 is strictly positive. Thus\n$\\operatorname{supp}\\vartheta(\\cdot,t)=\\mathbb R^3$. For any finite $v\\ge0$,\n$\\operatorname{supp}\\vartheta_0+\\overline B_{vt}(0)$ is bounded at each fixed\n$t>0$ because $\\operatorname{supp}\\vartheta_0$ is compact; it cannot contain\n$\\operatorname{supp}\\vartheta(\\cdot,t)$. This proves the claimed failure of\nfinite propagation.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "step": "3.1",
+          "claim": "Let $\\alpha=\\kappa T_0/c^2>0$. Substitution of\n$Q^i=-\\alpha\\dot w^i$ into the equation of step 1.3 gives\n$\\ddot w^i=(h_0/\\alpha)\\dot w^i=\\lambda\\dot w^i$. For any\n$\\mathbf w_*\\ne0$, $w^i(t)=w_*^i e^{\\lambda t}$ satisfies this equation because\n$\\ddot w^i=\\lambda^2w^i=\\lambda\\dot w^i$. Since $\\lambda>0$, its norm grows\nexponentially. This proves a linearly growing mode without asserting that the\nlinearized solution remains within the regime of a nonlinear material model.",
+          "inputs": [
+            "step 1.3",
+            "A4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published axiom definition; exact AC_omega premise inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "Only the countable choice axiom AC_omega.",
+          "supplier_proof_status": "Published axiom definition; no proof obligation applies.",
+          "consumer_use": "Carries the only stated foundational choice premise."
+        },
+        {
+          "supplier": "lem-tgr-dissipative-entropy-identity",
+          "carrier": "items/lem-tgr-dissipative-entropy-identity.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Statement",
+          "exact_statement": "satisfies the exact identity\n\n$$\\nabla_aS^a=-\\frac{\\Pi\\theta+\\pi^{ab}\\sigma_{ab}}{T}\n-\\frac{Q^a(\\nabla_aT+Ta_a)}{T^2}\n-V^a\\nabla_a\\!\\left(\\frac{\\mu}{T}\\right)-\\frac{u_bf^b}{T}.$$",
+          "relevant_hypotheses_and_conventions": "Smooth Lorentzian fields and state; n,T>0; spatial Q,V; symmetric spatial trace-free pi; displayed stress and particle balances.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the residual entropy divergence inserted into the first-order branch."
+        },
+        {
+          "supplier": "def-tgr-local-fluid-state",
+          "carrier": "items/def-tgr-local-fluid-state.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Definition",
+          "exact_statement": "For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$",
+          "relevant_hypotheses_and_conventions": "Nonempty open spacetime set O; smooth future unit observer congruence; nonempty open state domain X; e in C2(X); C2 state map; signature (-,+,+,+); x0=ct; no conservation or constitutive law is imposed.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the state maps, regularity, observer frame, units, and geometric current conventions used in the cited proof steps."
+        },
+        {
+          "supplier": "def-heat-kernel",
+          "carrier": "items/def-heat-kernel.md",
+          "status": "Published mathematical definition; formula and positivity proof inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The **heat kernel on $\\mathbb R^n$** is the function\n\n$$\\Gamma(x,t):=(4\\pi t)^{-n/2}\\exp\\!\\Bigl(-\\frac{|x|^2}{4t}\\Bigr),\\qquad x\\in\\mathbb R^n,$$\n\nwhere $|x|^2=\\langle x,x\\rangle$ is the Euclidean square of\n[[def-euclidean-inner-product]] and $\\exp$ is the real exponential function of\n[[def-real-exponential-function-and-e]].",
+          "relevant_hypotheses_and_conventions": "n>=1, t>0, Euclidean norm on R^n.",
+          "supplier_proof_status": "Published definition; positivity follows from the real exponential definition and its cited positivity theorem.",
+          "consumer_use": "Defines the strictly positive Gaussian kernel used in the heat solution."
+        },
+        {
+          "supplier": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "carrier": "items/lem-heat-kernel-normalisation-scaling-and-derivatives.md",
+          "status": "Published mathematical lemma; positivity and unit-mass clause inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice and let $n\\ge1$. For every $t>0$: (i) $\\Gamma(\\cdot,t)>0$\nand $\\int_{\\mathbb R^n}\\Gamma(x,t)\\,dx=1$",
+          "relevant_hypotheses_and_conventions": "Countable Choice and n>=1; positive time.",
+          "supplier_proof_status": "Published lemma; complete relevant proof inspected.",
+          "consumer_use": "Supplies positivity and unit mass of the Gaussian kernel."
+        },
+        {
+          "supplier": "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "carrier": "items/thm-heat-cauchy-solution-for-bounded-continuous-data.md",
+          "status": "Published mathematical theorem; exact current statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice and let $n\\ge1$, and let\n$u_0:\\mathbb R^n\\to\\mathbb C$ be bounded and uniformly continuous. Define\n$u(x,t):=\\int_{\\mathbb R^n}\\Gamma(x-y,t)u_0(y)\\,dy$ for $t>0$ and\n$u(x,0):=u_0(x)$. Then $u$ is $C^\\infty$ on\n$\\mathbb R^n\\times(0,\\infty)$, satisfies $\\partial_tu=\\Delta_xu$ there, is\nbounded with $\\|u(\\cdot,t)\\|_\\infty\\le\\|u_0\\|_\\infty$, and converges locally\nuniformly at the initial time:\n$\\sup_{x\\in K}|u(x,t)-u_0(x)|\\to0$ as $t\\downarrow0^+$ for every compact\n$K\\subseteq\\mathbb R^n$.",
+          "relevant_hypotheses_and_conventions": "Countable Choice; n>=1; bounded uniformly continuous datum u0; Gaussian convolution solution.",
+          "supplier_proof_status": "Published theorem; complete relevant proof body inspected.",
+          "consumer_use": "Constructs the bounded heat solution and supplies its sup-norm bound and initial recovery."
+        },
+        {
+          "supplier": "def-gr-smooth-lorentzian-objects",
+          "carrier": "items/def-gr-smooth-lorentzian-objects.md",
+          "status": "Published mathematical definition; signature, time orientation, and causal conventions inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold without boundary; signature (-,+,+,+); chosen time orientation.",
+          "supplier_proof_status": "Published definition; mathematical prerequisites and definition inspected.",
+          "consumer_use": "Fixes the Lorentz signature and causal/spatial positivity convention."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item proves identities for stated model fields and has no empty set case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If all four coefficients vanish, the constitutive residual in step 1.1 is zero; the Fourier and Eckart examples separately require kappa>0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element state or index set is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "T=0 is excluded from the entropy identity; kappa=0 removes the heat examples and h0=0 removes the stated Eckart growth rate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2: The heat theorem recovers the initial datum at t=0; the strict-tail conclusion is only for t>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Facts & Assumptions A1: Only AC_omega, exactly as required by the published heat suppliers, is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states a conditional positivity result and two model witnesses, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states a conditional positivity result and two model witnesses, not an equivalence."
+        }
+      ]
+    },
+    "ex-tgrmath-null-landau-obstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-tgr-fluid-frame-projection",
+          "source_section": "Statement",
+          "quote": "one has the unique decomposition\n$$\\mathsf T^{ab}=\\varepsilon_u u^a u^b+u^aQ^b+Q^a u^b+P^{ab}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Write $u=(u^0,u^1,u^2,u^3)$. Future timelikeness gives $u^0>0$ and\n$-(u^0)^2+(u^1)^2+(u^2)^2+(u^3)^2=-1$, so\n$|\\mathbf u|^2=(u^0)^2-1<(u^0)^2$. Consequently\n$\\ell_bu^b=-u^0+u^1<0$, since $u^1\\le|\\mathbf u|<u^0$. Hence\n$\\epsilon_u=\\rho(\\ell_bu^b)^2>0$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Contract the stress decomposition in [F1] on its first index with $u_a$.\nUsing $u_au^a=-1$, $u_aQ^a=0$, and $u_aP^{ab}=0$ gives\n$u_aT^{ab}=-\\epsilon_u u^b-Q^b$. Since $T$ is symmetric, this means\n$T^a{}_bu^b=-\\epsilon_u u^a$ if $Q=0$. By the definition of $T^a{}_b$ and\nthe metric, the left side is $\\rho\\ell^a(\\ell_bu^b)$, a nonzero null vector\nby step 1.1.\nThe right side is nonzero timelike because $\\epsilon_u>0$ and $u$ is timelike.\nEquality is impossible because equal vectors have equal quadratic norm, while\nthese norms are respectively zero and negative. Hence $Q\\ne0$ for every\ncandidate future unit timelike $u$, and the tensor has no Landau frame.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "name": "Rest-observer component check",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ],
+          "expected": "For u=(1,0,0,0), T^a_b u^b=-rho(1,1,0,0) is null while -epsilon_u u^a=-rho(1,0,0,0) is timelike."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published axiom definition; exact AC_omega premise inspected.",
+          "source_section": "Definition",
+          "exact_statement": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "relevant_hypotheses_and_conventions": "Only the countable choice axiom AC_omega.",
+          "supplier_proof_status": "Published axiom definition; no proof obligation applies.",
+          "consumer_use": "Carries the only stated foundational choice premise."
+        },
+        {
+          "supplier": "lem-tgr-fluid-frame-projection",
+          "carrier": "items/lem-tgr-fluid-frame-projection.md",
+          "status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "source_section": "Statement",
+          "exact_statement": "one has the unique decomposition\n$$\\mathsf T^{ab}=\\varepsilon_u u^a u^b+u^aQ^b+Q^a u^b+P^{ab}.$$",
+          "relevant_hypotheses_and_conventions": "Four-dimensional Lorentz vector space with signature (-,+,+,+), chosen future cone, future unit timelike u, and symmetric contravariant rank-two tensor.",
+          "supplier_proof_status": "Prior status annotation was accidentally overwritten during owner maintenance; original wording unavailable. No current supplier review, proof acceptance, or readiness is attested here. See research/physics-remaining-80-2026-10-17-owner-tgr-readiness-round2/batch55-contract-status-scope-correction.json.",
+          "consumer_use": "Supplies the current definition and decomposition of projected energy flux used in the explicit example; clause 5 is not used."
+        },
+        {
+          "supplier": "def-gr-smooth-lorentzian-objects",
+          "carrier": "items/def-gr-smooth-lorentzian-objects.md",
+          "status": "Published mathematical definition; signature, time orientation, and causal conventions inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold without boundary; signature (-,+,+,+); chosen time orientation.",
+          "supplier_proof_status": "Published definition; mathematical prerequisites and definition inspected.",
+          "consumer_use": "Fixes the Lorentz signature and causal/spatial positivity convention."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies a nonempty Minkowski spacetime and one tensor."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: The strict rho>0 and nonzero null ell assumptions are essential; if rho=0 or ell=0 then T=0 has every timelike vector as a zero eigenvector."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element index set occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: The tensor is nonzero null dust; the proof explicitly excludes the zero-tensor case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no endpoint or limiting process."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Facts & Assumptions A1: Only the explicitly stated AC_omega geometry premise is carried; the finite coordinate calculation selects no arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example refutes existence for this tensor; it does not state an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example refutes existence for this tensor; it does not state an iff."
+        }
+      ]
+    }
+  }
+}

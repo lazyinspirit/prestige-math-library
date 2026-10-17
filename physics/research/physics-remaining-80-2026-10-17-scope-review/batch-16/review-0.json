@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "16",
+  "round": 0,
+  "reviewed_items": [
+    "lem-emg-potential-maxwell-wave-identity",
+    "lem-emg-controlled-maxwell-wkb",
+    "lem-emg-source-and-test-scaling",
+    "thm-emg-weak-slow-test-lorentz-limit",
+    "ex-emgmath-ml-b07",
+    "ex-emgmath-ml-b08"
+  ],
+  "reviewed_pages": [
+    "emg-mm03",
+    "emg-mm03-examples"
+  ],
+  "decision": "repair",
+  "reason": "Complete batch and supplier review found repairable proof and prerequisite-use gaps within the assigned pages; no scope gap or unresolved outside-page prerequisite requires escalation.",
+  "findings": [
+    {
+      "id": "batch16-source-scaling-residual-interface",
+      "type": "local",
+      "reason": "In lem-emg-source-and-test-scaling, Facts [F4] attributes a T_EM residual formula to prop-emg-test-field-residual-order, whose actual statement uses Q and T^(1)=μ0^-1Q. Step 2.1 follows after matching the residual definitions using [F1]; make that algebraic identification explicit and correct [F4]."
+    },
+    {
+      "id": "batch16-wkb-local-integral-curves",
+      "type": "prerequisite",
+      "reason": "In lem-emg-controlled-maxwell-wkb step 1.4, Picard–Lindelöf is invoked for k^sharp because it is C3, but the actual supplier requires a locally Lipschitz coordinate vector field. Define k^sharp by metric raising and establish local Lipschitz regularity before applying the theorem."
+    },
+    {
+      "id": "batch16-wkb-transport-amplitude",
+      "type": "local",
+      "reason": "In lem-emg-controlled-maxwell-wkb step 2.2, e=a0/A divides by the transport amplitude. Specify a nonzero initial value A(λ0) so the formula proves A remains nowhere zero."
+    },
+    {
+      "id": "batch16-b07-sourcefree-hypothesis",
+      "type": "prerequisite",
+      "reason": "In ex-emgmath-ml-b07 step 3.1, lem-emg-source-and-test-scaling requires dF=0 and d(star F)=0. Step 2.1 verifies dF=0 and the divergence-form equation; add the flat-space equivalence or directly verify d(star F)=0 for this plane wave."
+    },
+    {
+      "id": "batch16-b08-sourcefree-hypothesis",
+      "type": "prerequisite",
+      "reason": "In ex-emgmath-ml-b08 step 5.1, lem-emg-source-and-test-scaling requires dF=0 and d(star F)=0, but the constant magnetic field is not checked against those hypotheses. Verify both directly for the prescribed flat field before applying the supplier."
+    },
+    {
+      "id": "batch16-b08-zero-time-integral",
+      "type": "local",
+      "reason": "In ex-emgmath-ml-b08 step 4.1, the FTC supplier for ∫₀ˢ s ds requires 0<S. Handle S=0 separately, where the matched position error is zero, and apply the supplier for S>0."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-emgmath-ml-b07",
+      "decision": "repair",
+      "reason": "Repair the source-free hypothesis check used in step 3.1 before relying on lem-emg-source-and-test-scaling."
+    },
+    {
+      "id": "ex-emgmath-ml-b08",
+      "decision": "repair",
+      "reason": "Repair the source-free hypothesis check in step 5.1 and the S=0 endpoint case in step 4.1."
+    }
+  ]
+}

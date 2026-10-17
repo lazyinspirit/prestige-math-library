@@ -1,0 +1,1054 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "scope": [
+    "lem-tgr-spatial-shear-properties",
+    "lem-tgr-eckart-entropy-specialization",
+    "thm-tgr-supported-static-heat-evolution",
+    "ex-tgr-static-cosine-heat-relaxation"
+  ],
+  "contracts": {
+    "lem-tgr-eckart-entropy-specialization": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-local-gibbs-euler",
+          "source_section": "Statement",
+          "quote": "Let $X\\subset(0,\\infty)\\times\\mathbb R$ be nonempty and open, let $e\\in C^2(X,\\mathbb R)$, and define\n$$Y:=\\{(n,s)\\in(0,\\infty)\\times\\mathbb R:(1/n,s/n)\\in X\\},\\qquad \\varepsilon(n,s):=n\\,e(1/n,s/n).$$\nFor $(n,s)\\in Y$, put $v=1/n$, $\\sigma_p=s/n$, $T=e_{\\sigma_p}$, $p=-e_v$, $H=e+pv$, $h=\\varepsilon+p=nH$, and $\\mu=H-T\\sigma_p$, as in [[def-tgr-local-fluid-state]]. Then the following identities hold as equalities of differentials on $Y$:\n$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.$$\n\nFor parcel totals $\\mathsf S\\in\\mathbb R$ (entropy), $\\mathsf V>0$ (proper volume), and $\\mathsf N>0$ (marker count) with $(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N)\\in X$, define\n$$E(\\mathsf S,\\mathsf V,\\mathsf N):=\\mathsf N\\,e(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N).$$\nThen $E$ is $C^2$, is positively homogeneous of degree one, and satisfies\n$$dE=T\\,d\\mathsf S-p\\,d\\mathsf V+\\mu\\,d\\mathsf N,\\qquad E=T\\mathsf S-p\\mathsf V+\\mu\\mathsf N.$$\nIf $E$ is viewed on its open domain in $(\\mathsf S,\\mathsf V,\\mathsf N)$, its Hessian annihilates the radial vector $(\\mathsf S,\\mathsf V,\\mathsf N)$.\n\nThe local response statements are conditional. At a state with $T>0$ and $e_{\\sigma_p\\sigma_p}>0$, temperature is a valid local coordinate at fixed $v$, and the per-marker heat capacity\n$$c_v:=\\left(\\frac{\\partial e}{\\partial T}\\right)_v=\\frac{T}{e_{\\sigma_p\\sigma_p}}$$\nis positive. At a state with $e_{vv}>0$, the isentropic compressibility\n$$\\kappa_{\\sigma_p}:=-\\frac1v\\left(\\frac{\\partial v}{\\partial p}\\right)_{\\sigma_p}=\\frac1{v e_{vv}}$$\nis positive. At a state with $e_{vv}>0$ and $h>0$, the local pressure-energy response\n$$\\alpha_{\\sigma_p}:=\\left(\\frac{\\partial p}{\\partial\\varepsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}}{n h}$$\nis positive. If $X$ is convex and $e$ is convex on $X$, then $D^2e$ is positive semidefinite. Positivity of the displayed diagonal responses is not asserted to imply convexity, a sound cone, or an evolution theorem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-tgr-dissipative-entropy-identity",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$, $u$, $\\nabla$, and the fixed-composition state be as in\n[[def-tgr-local-fluid-state]] and [[lem-tgr-local-gibbs-euler]], with\n$g(u,u)=-1$, $n>0$, and $T>0$. Define\n$\\Delta^{ab}=g^{ab}+u^au^b$, $\\Delta_{ab}=g_{ab}+u_au_b$,\n$\\Delta_a{}^b=\\delta_a{}^b+u_au^b$, and $D=u^a\\nabla_a$,\n$\\theta=\\nabla_a u^a$, $a^b=u^a\\nabla_a u^b$, and the spatial symmetric\ntrace-free shear\n\n$$\\sigma_{ab}=\\Delta_a{}^c\\Delta_b{}^d\\nabla_{(c}u_{d)} -\\frac{\\theta}{3}\\Delta_{ab},$$\n\nwhere parentheses denote the averaged symmetric part. Suppose smooth fields\n$\\Pi$, $Q^a$, $V^a$, and $\\pi^{ab}$ obey $u_aQ^a=u_aV^a=0$,\n$u_a\\pi^{ab}=0$, and $\\pi^{ab}$ is symmetric with $g_{ab}\\pi^{ab}=0$. Set\n\n$$T^{ab}=\\epsilon u^au^b+(p+\\Pi)\\Delta^{ab} +u^aQ^b+Q^au^b+\\pi^{ab},\\qquad J^a=nu^a+V^a.$$\n\nIf $\\nabla_aT^{ab}=f^b$ and $\\nabla_aJ^a=0$, the vector field\n\n$$S^a=su^a+\\frac{Q^a}{T}-\\frac{\\mu V^a}{T}$$\n\nsatisfies the exact identity\n\n$$\\nabla_aS^a=-\\frac{\\Pi\\theta+\\pi^{ab}\\sigma_{ab}}{T} -\\frac{Q^a(\\nabla_aT+Ta_a)}{T^2} -V^a\\nabla_a\\!\\left(\\frac{\\mu}{T}\\right)-\\frac{u_bf^b}{T}.$$\n\nThis identity applies to the stated smooth fields and conventions; it does not\nselect a constitutive law or assert that any such fields solve an evolution\nproblem.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tgr-fluid-frame-projection",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal V$ be a four-dimensional real vector space and let $g:\\mathcal V\\times\\mathcal V\\to\\mathbb R$ be a symmetric nondegenerate bilinear form of signature $(-,+,+,+)$, meaning that in some basis its matrix is $\\operatorname{diag}(-1,1,1,1)$. A vector $X$ is timelike when $g(X,X)<0$, and null when $X\\ne0$ and $g(X,X)=0$. Choose one connected component $C^+$ of the timelike set $\\{X:g(X,X)<0\\}$ as the future cone; a timelike vector is future-directed when it belongs to $C^+$. Components and connectedness use the basis-independent finite-dimensional real vector-space topology. Lower indices with $g$ and raise them with its inverse, summing repeated upper/lower indices over $0,1,2,3$. Let $u\\in C^+$ be unit timelike, $g(u,u)=-1$, and define $\\Delta^a{}_b=\\delta^a{}_b+u^a u_b$ as in [[def-tgr-local-fluid-state]]. For every vector $J\\in\\mathcal V$ and symmetric contravariant rank-two tensor $\\mathsf T$ on $\\mathcal V$, the following statements hold.\n\n1. The operator $\\Delta$ is the $g$-orthogonal projection onto $u^\\perp$, and\n$$J^a=\\nu_u u^a+V^a,\\qquad \\nu_u=-u_aJ^a,\\qquad V^a=\\Delta^a{}_bJ^b,$$\nis the unique decomposition with $V\\in u^\\perp$.\n\n2. With\n$$\\varepsilon_u=\\mathsf T^{ab}u_a u_b,\\quad Q^a=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\quad P^{ab}=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\none has the unique decomposition\n$$\\mathsf T^{ab}=\\varepsilon_u u^a u^b+u^aQ^b+Q^a u^b+P^{ab}.$$\nThe scalar $p_{\\mathrm{mech}}=\\tfrac13g_{ab}P^{ab}$ and tensor $\\pi^{ab}=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}$ satisfy $u_aQ^a=u_aP^{ab}=0$, $u_a\\pi^{ab}=0$, and $g_{ab}\\pi^{ab}=0$. Also, $Q=0$ if and only if $u$ is a timelike eigenvector of $\\mathsf T^a{}_b$.\n\n3. If $J$ is future timelike, then\n$$u_E:=\\frac{J}{\\sqrt{-g(J,J)}}$$\nis the unique future unit timelike observer vector for which the spatial number current vanishes, $\\Delta_{u_E}J=0$, where $\\Delta_{u_E}{}^a{}_b:=\\delta^a{}_b+u_E^a(u_E)_b$ is the clause-1 projection computed using $u_E$. Call $u_E$ the pointwise Eckart observer vector associated with $J$; it is a vector, not a chart or a tetrad.\n\n4. Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let $O\\subset M$ be open, and let $\\mathsf T$ be a $C^1$ symmetric tensor field on $O$. At $x_0\\in O$, choose an open neighborhood $O_0\\subset O$ and a smooth future tetrad $(E_0,E_1,E_2,E_3)$ on $O_0$ as supplied by [[thm-gr-local-lorentz-tetrad-existence]], and put $u_0:=E_0(x_0)$ and $\\Delta_0{}^a{}_b:=\\delta^a{}_b+u_0^a(u_0)_b$. Define $\\mathbb B^3:=\\{w\\in\\mathbb R^3:\\sum_{i=1}^3(w^i)^2<1\\}$ and, for $x\\in O_0$ and $w\\in\\mathbb B^3$, define\n$$u(x,w):=(1-|w|^2)^{-1/2}\\left(E_0(x)+\\sum_{i=1}^3w^iE_i(x)\\right)\\in T_xM.$$\nThe tetrad equations make $u(x,w)$ future unit timelike. If\n$$\\mathsf T^{ab}(x_0)=\\varepsilon_0 u_0^a u_0^b+p_0\\Delta_0^{ab},\\qquad h_0:=\\varepsilon_0+p_0>0,$$\nthen there are a neighborhood $U\\subset O_0$ of $x_0$ and an open neighborhood $W\\subset\\mathbb B^3$ of $0$ such that there is a unique $C^1$ map $w_L:U\\to W$ for which $u_L(x):=u(x,w_L(x))$ satisfies $Q_{u_L(x)}(x)=0$ for every $x\\in U$. Thus $u_L$ is a $C^1$ observer field, meaning a $C^1$ vector field whose values are future unit timelike; it is distinct from the chosen tetrad field and from any coordinate chart. This is a local result; no far-from-equilibrium or global Landau-field existence is asserted.\n\n5. In a Lorentz vector space, for every nonzero null vector $\\ell$ and $\\rho>0$, the pointwise tensor $\\mathsf T^{ab}=\\rho\\ell^a\\ell^b$ has no timelike eigenvector. Hence no future unit timelike observer vector has $Q=0$ for this tensor, so no pointwise Landau observer vector exists.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-tgr-spatial-shear-properties",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a smooth time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let $O\\subseteq M$ be open, and let $u$ be a smooth vector field on $O$ satisfying $g(u,u)=-1$ and $g(u,N)<0$ pointwise. Use the unique torsion-free metric-compatible connection $\\nabla$ of $g$. Define\n$$\nh_{ab}:=g_{ab}+u_a u_b,\\qquad h_a{}^c:=\\delta_a{}^c+u_a u^c,\\qquad \\theta:=\\nabla_a u^a,\n$$\nand the shear\n$$\n\\sigma_{ab}:=h_a{}^c h_b{}^d\\nabla_{(c}u_{d)}-\\frac{\\theta}{3}h_{ab},\n$$\nwhere parentheses denote symmetrization with factor $1/2$. The field $u$ is a future unit timelike observer field in the convention of [[def-gr-observer-and-rest-space]]. Then $\\sigma_{ab}$ is symmetric, spatial in both indices ($u^a\\sigma_{ab}=u^b\\sigma_{ab}=0$), and trace-free ($g^{ab}\\sigma_{ab}=0$). The metric restricted to $u^\\perp$ is positive definite, so\n$$\n\\sigma^{ab}\\sigma_{ab}\\ge 0,\n$$\nwith equality exactly when $\\sigma_{ab}=0$. More generally, every spatial vector $Y$ satisfies $g_{ab}Y^aY^b\\ge0$, with equality exactly when $Y=0$. These are pointwise geometric statements and assume no field equation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[F1] fixes the state and $q=cQ$ convention, while [F2] supplies the Gibbs and Euler identities required by [F3]. By [F5], the closure $\\pi^{ab}=-2\\eta c\\sigma^{ab}$ is symmetric, spatial and trace-free, so it satisfies [F3]'s stress hypotheses; $Q$ is spatial by [F4], and $V=0$. Since $u_bf^b=0$, the remaining balance hypotheses of [F3] also hold. Its entropy current reduces to $S^a=su^a+Q^a/T$. Because $Q$ is spatial, $Q^a(\\nabla_aT+Ta_a)=Q^aX_a$, and therefore $$\\nabla_aS^a=-\\frac{\\Pi\\theta}{T}-\\frac{\\pi^{ab}\\sigma_{ab}}{T}-\\frac{Q^aX_a}{T^2}.$$",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From $Q^a=-\\kappa X^a/c$, $\\Pi=-\\zeta_{\\rm b}c\\theta$, and $\\pi^{ab}=-2\\eta c\\sigma^{ab}$, the three terms in step 1.1 become, respectively, $\\zeta_{\\rm b}c\\theta^2/T$, $2\\eta c\\sigma^{ab}\\sigma_{ab}/T$, and $\\kappa X^aX_a/(cT^2)$. The vector $X$ is spatial by [F4], so [F5]'s positive-definite rest metric gives $X^aX_a\\ge0$; the same fact in [F5] gives $\\sigma^{ab}\\sigma_{ab}\\ge0$. Since $c,T>0$ and the coefficient functions are nonnegative, their sum is the stated identity and is nonnegative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-tgr-local-fluid-state",
+          "carrier": "items/def-tgr-local-fluid-state.md",
+          "status": "Draft definition; current state types and smooth specialization match this use. Native root-rebound record was observed closed in the focused batch65 review.",
+          "source_section": "Definition",
+          "exact_statement": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "relevant_hypotheses_and_conventions": "See the exact hypotheses and conventions in the quoted supplier interface.",
+          "supplier_proof_status": "Draft definition; current state types and smooth specialization match this use. Native root-rebound record was observed closed in the focused batch65 review.",
+          "consumer_use": "Supplies the smooth state maps, units, observer congruence and q=cQ convention."
+        },
+        {
+          "supplier": "lem-tgr-local-gibbs-euler",
+          "carrier": "items/lem-tgr-local-gibbs-euler.md",
+          "status": "Draft theorem; the exact Gibbs and Euler clauses were checked at the stated smooth specialization. Native root-rebound record was observed closed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $X\\subset(0,\\infty)\\times\\mathbb R$ be nonempty and open, let $e\\in C^2(X,\\mathbb R)$, and define\n$$Y:=\\{(n,s)\\in(0,\\infty)\\times\\mathbb R:(1/n,s/n)\\in X\\},\\qquad \\varepsilon(n,s):=n\\,e(1/n,s/n).$$\nFor $(n,s)\\in Y$, put $v=1/n$, $\\sigma_p=s/n$, $T=e_{\\sigma_p}$, $p=-e_v$, $H=e+pv$, $h=\\varepsilon+p=nH$, and $\\mu=H-T\\sigma_p$, as in [[def-tgr-local-fluid-state]]. Then the following identities hold as equalities of differentials on $Y$:\n$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.$$\n\nFor parcel totals $\\mathsf S\\in\\mathbb R$ (entropy), $\\mathsf V>0$ (proper volume), and $\\mathsf N>0$ (marker count) with $(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N)\\in X$, define\n$$E(\\mathsf S,\\mathsf V,\\mathsf N):=\\mathsf N\\,e(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N).$$\nThen $E$ is $C^2$, is positively homogeneous of degree one, and satisfies\n$$dE=T\\,d\\mathsf S-p\\,d\\mathsf V+\\mu\\,d\\mathsf N,\\qquad E=T\\mathsf S-p\\mathsf V+\\mu\\mathsf N.$$\nIf $E$ is viewed on its open domain in $(\\mathsf S,\\mathsf V,\\mathsf N)$, its Hessian annihilates the radial vector $(\\mathsf S,\\mathsf V,\\mathsf N)$.\n\nThe local response statements are conditional. At a state with $T>0$ and $e_{\\sigma_p\\sigma_p}>0$, temperature is a valid local coordinate at fixed $v$, and the per-marker heat capacity\n$$c_v:=\\left(\\frac{\\partial e}{\\partial T}\\right)_v=\\frac{T}{e_{\\sigma_p\\sigma_p}}$$\nis positive. At a state with $e_{vv}>0$, the isentropic compressibility\n$$\\kappa_{\\sigma_p}:=-\\frac1v\\left(\\frac{\\partial v}{\\partial p}\\right)_{\\sigma_p}=\\frac1{v e_{vv}}$$\nis positive. At a state with $e_{vv}>0$ and $h>0$, the local pressure-energy response\n$$\\alpha_{\\sigma_p}:=\\left(\\frac{\\partial p}{\\partial\\varepsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}}{n h}$$\nis positive. If $X$ is convex and $e$ is convex on $X$, then $D^2e$ is positive semidefinite. Positivity of the displayed diagonal responses is not asserted to imply convexity, a sound cone, or an evolution theorem.",
+          "relevant_hypotheses_and_conventions": "**Given:** $X\\subset(0,\\infty)\\times\\mathbb R$ is nonempty and open, $e\\in C^2(X,\\mathbb R)$, and $(n,s)\\in Y$.",
+          "supplier_proof_status": "Draft theorem; the exact Gibbs and Euler clauses were checked at the stated smooth specialization. Native root-rebound record was observed closed.",
+          "consumer_use": "Supplies the local Gibbs differential and Euler identity."
+        },
+        {
+          "supplier": "lem-tgr-dissipative-entropy-identity",
+          "carrier": "items/lem-tgr-dissipative-entropy-identity.md",
+          "status": "Draft lemma; the exact current stress/current entropy identity and zero-power specialization were checked. Native root-rebound record was observed closed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N)$, $u$, $\\nabla$, and the fixed-composition state be as in\n[[def-tgr-local-fluid-state]] and [[lem-tgr-local-gibbs-euler]], with\n$g(u,u)=-1$, $n>0$, and $T>0$. Define\n$\\Delta^{ab}=g^{ab}+u^au^b$, $\\Delta_{ab}=g_{ab}+u_au_b$,\n$\\Delta_a{}^b=\\delta_a{}^b+u_au^b$, and $D=u^a\\nabla_a$,\n$\\theta=\\nabla_a u^a$, $a^b=u^a\\nabla_a u^b$, and the spatial symmetric\ntrace-free shear\n\n$$\\sigma_{ab}=\\Delta_a{}^c\\Delta_b{}^d\\nabla_{(c}u_{d)} -\\frac{\\theta}{3}\\Delta_{ab},$$\n\nwhere parentheses denote the averaged symmetric part. Suppose smooth fields\n$\\Pi$, $Q^a$, $V^a$, and $\\pi^{ab}$ obey $u_aQ^a=u_aV^a=0$,\n$u_a\\pi^{ab}=0$, and $\\pi^{ab}$ is symmetric with $g_{ab}\\pi^{ab}=0$. Set\n\n$$T^{ab}=\\epsilon u^au^b+(p+\\Pi)\\Delta^{ab} +u^aQ^b+Q^au^b+\\pi^{ab},\\qquad J^a=nu^a+V^a.$$\n\nIf $\\nabla_aT^{ab}=f^b$ and $\\nabla_aJ^a=0$, the vector field\n\n$$S^a=su^a+\\frac{Q^a}{T}-\\frac{\\mu V^a}{T}$$\n\nsatisfies the exact identity\n\n$$\\nabla_aS^a=-\\frac{\\Pi\\theta+\\pi^{ab}\\sigma_{ab}}{T} -\\frac{Q^a(\\nabla_aT+Ta_a)}{T^2} -V^a\\nabla_a\\!\\left(\\frac{\\mu}{T}\\right)-\\frac{u_bf^b}{T}.$$\n\nThis identity applies to the stated smooth fields and conventions; it does not\nselect a constitutive law or assert that any such fields solve an evolution\nproblem.",
+          "relevant_hypotheses_and_conventions": "**Given:** A nonempty open set $O$ and the smooth Lorentzian data of [[def-tgr-local-fluid-state]], a $C^2$ state map into a nonempty open state domain, the thermodynamic identities of [[lem-tgr-local-gibbs-euler]], and the stress and particle balances displayed in the Statement.",
+          "supplier_proof_status": "Draft lemma; the exact current stress/current entropy identity and zero-power specialization were checked. Native root-rebound record was observed closed.",
+          "consumer_use": "Supplies the exact dissipative entropy-current identity."
+        },
+        {
+          "supplier": "lem-tgr-fluid-frame-projection",
+          "carrier": "items/lem-tgr-fluid-frame-projection.md",
+          "status": "Draft lemma; only the pointwise orthogonal rest-space projection convention is used and was checked. Native root-rebound record was observed closed.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\mathcal V$ be a four-dimensional real vector space and let $g:\\mathcal V\\times\\mathcal V\\to\\mathbb R$ be a symmetric nondegenerate bilinear form of signature $(-,+,+,+)$, meaning that in some basis its matrix is $\\operatorname{diag}(-1,1,1,1)$. A vector $X$ is timelike when $g(X,X)<0$, and null when $X\\ne0$ and $g(X,X)=0$. Choose one connected component $C^+$ of the timelike set $\\{X:g(X,X)<0\\}$ as the future cone; a timelike vector is future-directed when it belongs to $C^+$. Components and connectedness use the basis-independent finite-dimensional real vector-space topology. Lower indices with $g$ and raise them with its inverse, summing repeated upper/lower indices over $0,1,2,3$. Let $u\\in C^+$ be unit timelike, $g(u,u)=-1$, and define $\\Delta^a{}_b=\\delta^a{}_b+u^a u_b$ as in [[def-tgr-local-fluid-state]]. For every vector $J\\in\\mathcal V$ and symmetric contravariant rank-two tensor $\\mathsf T$ on $\\mathcal V$, the following statements hold.\n\n1. The operator $\\Delta$ is the $g$-orthogonal projection onto $u^\\perp$, and\n$$J^a=\\nu_u u^a+V^a,\\qquad \\nu_u=-u_aJ^a,\\qquad V^a=\\Delta^a{}_bJ^b,$$\nis the unique decomposition with $V\\in u^\\perp$.\n\n2. With\n$$\\varepsilon_u=\\mathsf T^{ab}u_a u_b,\\quad Q^a=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\quad P^{ab}=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\none has the unique decomposition\n$$\\mathsf T^{ab}=\\varepsilon_u u^a u^b+u^aQ^b+Q^a u^b+P^{ab}.$$\nThe scalar $p_{\\mathrm{mech}}=\\tfrac13g_{ab}P^{ab}$ and tensor $\\pi^{ab}=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}$ satisfy $u_aQ^a=u_aP^{ab}=0$, $u_a\\pi^{ab}=0$, and $g_{ab}\\pi^{ab}=0$. Also, $Q=0$ if and only if $u$ is a timelike eigenvector of $\\mathsf T^a{}_b$.\n\n3. If $J$ is future timelike, then\n$$u_E:=\\frac{J}{\\sqrt{-g(J,J)}}$$\nis the unique future unit timelike observer vector for which the spatial number current vanishes, $\\Delta_{u_E}J=0$, where $\\Delta_{u_E}{}^a{}_b:=\\delta^a{}_b+u_E^a(u_E)_b$ is the clause-1 projection computed using $u_E$. Call $u_E$ the pointwise Eckart observer vector associated with $J$; it is a vector, not a chart or a tetrad.\n\n4. Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let $O\\subset M$ be open, and let $\\mathsf T$ be a $C^1$ symmetric tensor field on $O$. At $x_0\\in O$, choose an open neighborhood $O_0\\subset O$ and a smooth future tetrad $(E_0,E_1,E_2,E_3)$ on $O_0$ as supplied by [[thm-gr-local-lorentz-tetrad-existence]], and put $u_0:=E_0(x_0)$ and $\\Delta_0{}^a{}_b:=\\delta^a{}_b+u_0^a(u_0)_b$. Define $\\mathbb B^3:=\\{w\\in\\mathbb R^3:\\sum_{i=1}^3(w^i)^2<1\\}$ and, for $x\\in O_0$ and $w\\in\\mathbb B^3$, define\n$$u(x,w):=(1-|w|^2)^{-1/2}\\left(E_0(x)+\\sum_{i=1}^3w^iE_i(x)\\right)\\in T_xM.$$\nThe tetrad equations make $u(x,w)$ future unit timelike. If\n$$\\mathsf T^{ab}(x_0)=\\varepsilon_0 u_0^a u_0^b+p_0\\Delta_0^{ab},\\qquad h_0:=\\varepsilon_0+p_0>0,$$\nthen there are a neighborhood $U\\subset O_0$ of $x_0$ and an open neighborhood $W\\subset\\mathbb B^3$ of $0$ such that there is a unique $C^1$ map $w_L:U\\to W$ for which $u_L(x):=u(x,w_L(x))$ satisfies $Q_{u_L(x)}(x)=0$ for every $x\\in U$. Thus $u_L$ is a $C^1$ observer field, meaning a $C^1$ vector field whose values are future unit timelike; it is distinct from the chosen tetrad field and from any coordinate chart. This is a local result; no far-from-equilibrium or global Landau-field existence is asserted.\n\n5. In a Lorentz vector space, for every nonzero null vector $\\ell$ and $\\rho>0$, the pointwise tensor $\\mathsf T^{ab}=\\rho\\ell^a\\ell^b$ has no timelike eigenvector. Hence no future unit timelike observer vector has $Q=0$ for this tensor, so no pointwise Landau observer vector exists.",
+          "relevant_hypotheses_and_conventions": "**Given:** The Lorentz vector space and future unit timelike vector in clauses 1\u20133, and the $C^1$ symmetric tensor field and pointwise perfect-fluid value in clause 4.",
+          "supplier_proof_status": "Draft lemma; only the pointwise orthogonal rest-space projection convention is used and was checked. Native root-rebound record was observed closed.",
+          "consumer_use": "Supplies the projection identities making the heat-gradient vector and Q spatial; the local shear lemma supplies positivity and shear properties."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published exact axiom definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "relevant_hypotheses_and_conventions": "See the exact hypotheses and conventions in the quoted supplier interface.",
+          "supplier_proof_status": "Published exact axiom definition inspected.",
+          "consumer_use": "Carries the exact AC_omega assumption."
+        },
+        {
+          "supplier": "lem-tgr-spatial-shear-properties",
+          "carrier": "items/lem-tgr-spatial-shear-properties.md",
+          "status": "Current batch-65 local supplier; complete pointwise proof with published geometric inputs inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N)$ be a smooth time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let $O\\subseteq M$ be open, and let $u$ be a smooth vector field on $O$ satisfying $g(u,u)=-1$ and $g(u,N)<0$ pointwise. Use the unique torsion-free metric-compatible connection $\\nabla$ of $g$. Define\n$$\nh_{ab}:=g_{ab}+u_a u_b,\\qquad h_a{}^c:=\\delta_a{}^c+u_a u^c,\\qquad \\theta:=\\nabla_a u^a,\n$$\nand the shear\n$$\n\\sigma_{ab}:=h_a{}^c h_b{}^d\\nabla_{(c}u_{d)}-\\frac{\\theta}{3}h_{ab},\n$$\nwhere parentheses denote symmetrization with factor $1/2$. The field $u$ is a future unit timelike observer field in the convention of [[def-gr-observer-and-rest-space]]. Then $\\sigma_{ab}$ is symmetric, spatial in both indices ($u^a\\sigma_{ab}=u^b\\sigma_{ab}=0$), and trace-free ($g^{ab}\\sigma_{ab}=0$). The metric restricted to $u^\\perp$ is positive definite, so\n$$\n\\sigma^{ab}\\sigma_{ab}\\ge 0,\n$$\nwith equality exactly when $\\sigma_{ab}=0$. More generally, every spatial vector $Y$ satisfies $g_{ab}Y^aY^b\\ge0$, with equality exactly when $Y=0$. These are pointwise geometric statements and assume no field equation.",
+          "relevant_hypotheses_and_conventions": "For a smooth future unit timelike field and its metric-compatible connection, the shear is symmetric, spatial, trace-free and has nonnegative norm.",
+          "supplier_proof_status": "The local three-step proof is complete; the helper has no in-run dependencies and exact published mathematical inputs are listed in its contract.",
+          "consumer_use": "Supplies the shear-tensor properties required by the dissipative entropy identity and proves positivity of the shear and heat norms."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the domain O is nonempty and all fields are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: zero coefficients or vanishing heat/shear/expansion contributions give zero corresponding production terms."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element index or sample occurs.",
+          "template_review": {
+            "upheld": true,
+            "by": "physics_gate_coverage_tgr",
+            "reason": "This is a fixed four-dimensional tensor identity, not a sample or cell aggregate. Proof 2.1 adds the three heat/shear/bulk production terms and allows any individual coefficient to vanish without requiring a count-one branch.",
+            "item_sha256": "7455f70b03122be1fd4038226cbd0313296e33ccabbbb398c1156b20a80898f6",
+            "row_sha256": "0dbf9dc9239b0587b8e624750cf216e08359f3a8bcf307194ca2be0c95ec7401"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: c,T>0 and the rest-space metric is positive definite."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint integral occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1 carry only AC_omega."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim is stated."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-65",
+        "notes": "Independently checked both proof steps, full current local-state and Gibbs/Euler carriers, their producer contract/manifest, current frame projection and full dissipative entropy cancellation proof, and earlier spatial-shear proof. Smooth hypotheses imply supplier C2 state requirements; n,T,c are positive. Closure pi=-2 eta c sigma is spatial symmetric trace-free; V=0, particle/stress balances and u.f=0 satisfy the exact entropy identity. Orthogonal projection preserves Q contraction; signs and c factors yield the three displayed nonnegative terms. Zero coefficients/gradients/shear/expansion are allowed; T=0 is excluded. AC_omega only; no existence, causality, stability or empirical claim. Both routed historical supplier-title findings confirmed nonfatal and already fixed by producer, without mathematical interface change. Gourgoulhon Eq.4.13 and shear Eq.7.30 checked; Romatschke section3 and section4 explicitly have zero-charge/Landau and conformal limitations, not imported into this local calculation. No repair needed."
+      }
+    },
+    "thm-tgr-supported-static-heat-evolution": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-eckart-entropy-specialization",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a smooth time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let $O\\subseteq M$ be nonempty and open, and let $u$ be a smooth future unit timelike vector field on $O$. Use the metric-compatible torsion-free connection $\\nabla$ and a smooth local state map $(v,\\sigma_p):O\\to X$ with $X\\subset(0,\\infty)\\times\\mathbb R$ open and $e\\in C^\\infty(X)$, as in [[def-tgr-local-fluid-state]]. Thus $n=v^{-1}>0$, $s=n\\sigma_p$, $\\epsilon=ne$, $T=e_{\\sigma_p}$, $p=-e_v$, and $\\mu=e+pv-T\\sigma_p$; assume $T>0$ on $O$ and the Gibbs and Euler identities of [[lem-tgr-local-gibbs-euler]]. Use the convention $x^0=ct$ with $c>0$ in $\\mathrm{m\\,s^{-1}}$.\n\nDefine $\\Delta^a{}_b=\\delta^a{}_b+u^a u_b$, $\\Delta^{ab}=g^{ac}\\Delta^b{}_c$, $\\Delta_{ab}=g_{ab}+u_a u_b$, $D=u^a\\nabla_a$, $\\theta=\\nabla_a u^a$, and $a^b=D u^b$. Let $\\sigma_{ab}$ be the shear defined in [[lem-tgr-spatial-shear-properties]]: the spatially projected symmetrized derivative of $u$, minus $\\theta\\Delta_{ab}/3$, with averaged symmetrization. That lemma proves $\\sigma$ symmetric, spatial, trace-free, and of nonnegative squared norm. Let $\\kappa,\\eta,\\zeta_{\\rm b}\\in C^\\infty(O)$ be pointwise nonnegative, with SI units $\\mathrm{W\\,m^{-1}K^{-1}}$, $\\mathrm{Pa\\,s}$ and $\\mathrm{Pa\\,s}$, respectively. Put\n$$\nX^a=\\Delta^{ab}(\\nabla_bT+Ta_b),\\qquad q^a=-\\kappa X^a,\\qquad Q^a=q^a/c,\n$$\nso $q$ is the physical heat flux and $Q$ is its geometric stress component. Set the particle-diffusion current $V^a=0$, the bulk correction $\\Pi=-\\zeta_{\\rm b}c\\theta$, and the symmetric spatial trace-free stress $\\pi^{ab}=-2\\eta c\\sigma^{ab}$. Suppose $\\nabla_aJ^a=0$ for $J^a=nu^a$, and suppose the symmetric stress\n$$\n\\mathsf T^{ab}=\\epsilon u^au^b+(p+\\Pi)\\Delta^{ab}+u^aQ^b+Q^au^b+\\pi^{ab}\n$$\nsatisfies $\\nabla_a\\mathsf T^{ab}=f^b$ with zero local power $u_bf^b=0$. Then for $S^a=su^a+Q^a/T$ the exact entropy-production identity is\n$$\n\\nabla_aS^a=\\frac{\\kappa}{cT^2}X^aX_a+\\frac{2\\eta c}{T}\\sigma^{ab}\\sigma_{ab}+\\frac{\\zeta_{\\rm b}c}{T}\\theta^2\\ge0.\n$$\nThe conclusion is a conditional identity for the stated smooth fields and closure; it asserts neither existence nor causality, stability, or empirical applicability of an evolution.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-tgr-stationary-thermal-carriers",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N_0)$ be a smooth time-oriented Lorentzian four-manifold of signature\n$(-,+,+,+)$ in the sense of [[def-gr-smooth-lorentzian-objects]], and let\n$\\nabla$ be its unique torsion-free $g$-compatible connection supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Fix a nonempty\nconnected open set $O\\subseteq M$. A **selected stationary thermal carrier** on\n$O$ consists of a smooth future timelike vector field $\\xi$ and a smooth\npositive scalar field $T:O\\to(0,\\infty)$, where $T$ is measured in kelvins,\nsuch that $\\xi$ is a Killing field of $g$ in the sense of\n[[def-gr-killing-field]]. Equivalently, the criterion is\n$\\nabla_{(a}\\xi_{b)}=0$ by\n[[thm-gr-killing-and-on-shell-matter-identities]]. The round brackets mean\nsymmetrization with factor $1/2$. The choice of $\\xi$ specifies the thermal congruence; no\ncoordinate chart or universal observer field is selected.\n\nSet $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}>0$ and $u:=\\xi/N_\\xi$. Then\n$g(u,u)=-1$. In the length-coordinate convention $x^0=ct$, $u$ is\ndimensionless and $cu$ is the physical four-velocity, with $c>0$ in\n$\\mathrm{m\\,s^{-1}}$. For a fixed Boltzmann constant $k_B>0$ in\n$\\mathrm{J\\,K^{-1}}$, define the inverse-temperature vector\n$\\beta:=u/(k_BT)$, with units $\\mathrm{J^{-1}}$, and the Killing-normalized\ntemperature field $T_K:=N_\\xi T$. Thus $\\beta=\\xi/(k_BT_K)$; this definition\ndoes not assert that $T_K$ is constant.\n\nFor a smooth chemical-potential scalar $\\mu:O\\to\\mathbb R$ in joules, put\n$\\zeta:=\\mu/(k_BT)$, a dimensionless scalar. Define the rest-space metric,\nderivative, acceleration, expansion and shear by\n$$h_{ab}:=g_{ab}+u_au_b,\\qquad D:=u^a\\nabla_a,\\qquad a_b:=u^a\\nabla_au_b,\\qquad \\theta:=\\nabla_au^a,\\qquad \\sigma_{ab}:=h_a{}^ch_b{}^d\\nabla_{(c}u_{d)}-\\frac13\\theta h_{ab}.$$\nHere $a$, $\\theta$ and $\\sigma$ have inverse-length units; the physical\nproper acceleration is $c^2a$. The smooth tangent-bundle structure used by\nthe cited GR suppliers assumes the Axiom of Countable Choice\n[[def-countable-choice]]; no stronger choice principle is part of this\ndefinition.",
+          "uses": [
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tgr-killing-thermal-normalization",
+          "source_section": "Statement",
+          "quote": "Let $O$ and the smooth fields $(g,\\nabla,\\xi,T,u,N_\\xi,\\beta)$ be as in\n[[def-tgr-stationary-thermal-carriers]]. Then\n$$\\beta\\text{ is Killing}\\quad\\Longleftrightarrow\\quad N_\\xi T=T_K\\text{ for a constant }T_K>0.$$\nWhen this holds, $\\beta=\\xi/(k_BT_K)$, and the Killing congruence has\n$$\\xi(N_\\xi)=0,\\qquad a=\\nabla\\log N_\\xi,\\qquad \\theta=0,\\qquad \\sigma_{ab}=0.$$\nIf $\\xi$ is replaced by $b\\xi$ with a constant $b>0$, then\n$N_\\xi$ and $T_K$ scale by $b$, while $u$ and $\\beta$ are unchanged.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $n\\ge1$, and let\n$u_0:\\mathbb R^n\\to\\mathbb C$ be bounded and uniformly continuous. Define\n$u(x,t):=\\int_{\\mathbb R^n}\\Gamma(x-y,t)u_0(y)\\,dy$ for $t>0$ and\n$u(x,0):=u_0(x)$. Then $u$ is $C^\\infty$ on\n$\\mathbb R^n\\times(0,\\infty)$, satisfies $\\partial_tu=\\Delta_xu$ there, is\nbounded with $\\|u(\\cdot,t)\\|_\\infty\\le\\|u_0\\|_\\infty$, and converges locally\nuniformly at the initial time:\n$\\sup_{x\\in K}|u(x,t)-u_0(x)|\\to0$ as $t\\downarrow0^+$ for every compact\n$K\\subseteq\\mathbb R^n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-heat-kernel",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and $t>0$. The **heat kernel on $\\mathbb R^n$** is the function\n\n$$\\Gamma(x,t):=(4\\pi t)^{-n/2}\\exp\\!\\Bigl(-\\frac{|x|^2}{4t}\\Bigr),\\qquad x\\in\\mathbb R^n,$$\n\nwhere $|x|^2=\\langle x,x\\rangle$ is the Euclidean square of\n[[def-euclidean-inner-product]] and $\\exp$ is the real exponential function of\n[[def-real-exponential-function-and-e]]. For fixed $t>0$ the map\n$x\\mapsto\\Gamma(x,t)$ is a composite of the quadratic form with the exponential\nand a scalar multiple, so it is $C^\\infty$ in the sense of\n[[def-ck-and-multi-index-notation-in-several-variables]] by\n[[thm-derivative-of-exponential]] and\n[[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], and it is\nstrictly positive by [[cor-exponential-reciprocal-and-positivity]]. The\nspatial Laplacian entering the heat equation is that of\n[[def-laplacian-of-a-c2-function]].\n\nThe **causal extension** of the heat kernel is $\\Gamma(x,t)$ for $t>0$ and\n$\\Gamma(x,t):=0$ for $t\\le0$; the displayed formula is not evaluated at $t=0$\nas a function value. The normalisation is fixed by the unit-mass identity\nproved for the kernel on this page, and the causal extension is used only as a\nlocally integrable function or, after embedding, as a distribution.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and let $n\\ge1$. For every $t>0$: (i) $\\Gamma(\\cdot,t)>0$\nand $\\int_{\\mathbb R^n}\\Gamma(x,t)\\,dx=1$; (ii) parabolic scaling:\n$\\Gamma(\\lambda x,\\lambda^2t)=\\lambda^{-n}\\Gamma(x,t)$ for every $\\lambda>0$ and\n$x\\in\\mathbb R^n$; (iii) $\\Gamma$ is $C^\\infty$ on\n$\\mathbb R^n\\times(0,\\infty)$ and solves the heat equation there,\n$\\partial_t\\Gamma(x,t)=\\Delta_x\\Gamma(x,t)$; (iv) for every multi-index $\\alpha$\nthere is $C_{n,\\alpha}<\\infty$ with\n$|D^\\alpha_x\\Gamma(x,t)|\\le C_{n,\\alpha}t^{-(|\\alpha|+n)/2}e^{-|x|^2/(8t)}$ for\nall $x\\in\\mathbb R^n$, $t>0$; in particular $\\|\\Gamma(\\cdot,t)\\|_1=1$ and\n$(\\Gamma(\\cdot,t))_{t>0}$ is an $L^1$ approximate identity on $\\mathbb R^n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some \u2014 equivalently every \u2014 basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi\u2013Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.2",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-calligraphic-l-p-on-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $p$ be a real number with\n$0<p<\\infty$. Write $\\mathcal M(X,\\mu)$ for the measurable functions\n$f:X\\to\\mathbb R$. For $f\\in\\mathcal M(X,\\mu)$ define the extended-valued\n$p$-functional\n\n$$\\|f\\|_p:=\\begin{cases}\\left(\\int |f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int |f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int |f|^p\\,d\\mu=+\\infty.\\end{cases}$$\n\nThe finite power uses [[def-real-power]], while the second clause avoids\napplying real powers to the extended value $+\\infty$. The integral is the\nnonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].\n\nThe class\n\n$$\\mathcal L^p(\\mu):=\\{f\\in\\mathcal M(X,\\mu): \\|f\\|_p<\\infty\\}$$\n\nis the measurable-function space used on this page before passing to\nalmost-everywhere equivalence classes.\n\nFor $1\\le p<\\infty$, the pointwise operations make $\\mathcal L^p(\\mu)$ a real\nvector space by\n[[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. For $1\\le p<\\infty$, the rule\n   $$\\|[f]\\|_p:=\\|f\\|_p\\qquad([f]\\in L^p(\\mu))$$\n   is well defined on the quotient classes.\n2. For $p=\\infty$, the rule\n   $$\\|[f]\\|_\\infty:=\\|f\\|_\\infty\\qquad([f]\\in L^\\infty(\\mu))$$\n   is well defined.\n3. In either case, with the quotient vector-space operations of\n   [[prop-quotient-vector-space-operations-and-projection]], the resulting pair\n   $(L^p(\\mu),\\|\\cdot\\|_p)$ is a normed space in the sense of\n   [[def-norm-and-normed-space]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "3.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-tonelli-and-fubini-for-completed-product-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), and let\n$\\overline{\\mu \\times \\nu}$ be the completed product of two sigma-finite\nmeasure spaces.\n\n1. If $f : X \\times Y \\to [0,\\infty]$ is $\\overline{\\mu \\times \\nu}$-measurable, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that $f_x$ is $\\overline{\\mathcal B}$-measurable for $x\\notin A$ and $f^y$ is $\\overline{\\mathcal A}$-measurable for $y\\notin B$. Define $I_f(x)=\\int_Y f_x\\,d\\overline\\nu$ for $x\\notin A$ and $I_f(x)=0$ on $A$; define $J_f(y)=\\int_X f^y\\,d\\overline\\mu$ for $y\\notin B$ and $J_f(y)=0$ on $B$. Then $I_f,J_f$ are measurable and\n$$\\int f\\,d\\overline{\\mu \\times \\nu}=\\int_X I_f\\,d\\mu=\\int_Y J_f\\,d\\nu.$$\n2. If $f \\in L^1(\\overline{\\mu \\times \\nu})$, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that the sections are measurable and integrable outside them. Define $I_f,J_f$ by the same section integrals outside $A,B$ and by zero on $A,B$. They are measurable and integrable, and the same equality holds.",
+          "uses": [
+            "3.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-gr-killing-field",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\xi$ be a smooth vector field\non $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **Lie\nderivative of the metric along $\\xi$**, written $\\mathcal L_\\xi g$, is the\nsmooth symmetric covariant $2$-tensor field obtained by the flow definition of\n[[def-lie-derivative-of-a-tensor-field]] applied to $g$: for the local flow\n$\\Phi_t$ of $\\xi$,\n\n$$\\mathcal L_\\xi g:=\\frac{d}{dt}\\Big|_{t=0}\\Phi_t^*g .$$\n\nThe field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and\n$\\xi_b:=g_{bc}\\xi^c$ is the lowered field, is proved in\n[[thm-gr-killing-and-on-shell-matter-identities]] clause (a); the definition\nitself asserts neither direction. Whether a given metric has Killing fields is\na property of that metric: neither existence nor uniqueness of a Killing field\nis asserted here, and a general metric has none beyond the trivial field\n$\\xi=0$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $\\alpha=A_0/C_V>0$. The extension $\\widetilde\\vartheta_0$ is bounded and uniformly continuous because it is continuous and periodic. Apply [F5] with time variable $\\tau=\\alpha t_K$ to define $\\vartheta(t_K,x)=\\int\\Gamma(x-y,\\alpha t_K)\\widetilde\\vartheta_0(y)\\,dy$ for $t_K>0$ and $\\vartheta(0,x)=\\vartheta_0(x)$. The chain rule gives $\\partial_{t_K}\\vartheta=\\alpha\\Delta_x\\vartheta$, and local uniform initial recovery on the compact set $\\overline\\Omega$ gives continuity to the stated initial trace.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The local flow of $\\xi=\\partial_{x^0}$ is $\\Phi_t(x^0,x^1,x^2,x^3)=(x^0+t,x^1,x^2,x^3)$. Since $g$ is independent of $x^0$, $\\Phi_t^*g=g$, so [F12] gives $\\mathcal L_\\xi g=0$. The components give $g(\\xi,\\xi)=-N^2$, $u^0=N^{-1}$, $u^i=0$, $u_0=-N$, and $u_i=0$; hence $g(u,u)=-1$ and $g(u,\\xi)=-N<0$, so $u$ is future directed. The Christoffel formula [F9] gives $\\Gamma^0{}_{0i}=\\Gamma^0{}_{i0}=\\partial_iN/N$, $\\Gamma^i{}_{00}=N\\partial_iN$, and all other coefficients vanish. In particular $\\Gamma^a{}_{a0}=0$ and $\\Gamma^a{}_{ai}=\\partial_i\\log N$. Since $\\partial_a u^a=0$, $u^i=0$, and $\\Gamma^a{}_{a0}=0$, the coordinate formula $\\nabla_a u^a=\\partial_a u^a+\\Gamma^a{}_{ac}u^c$ gives $\\theta=0$. Directly, $\\nabla_0u_i=\\partial_iN$, $\\nabla_i u_0=\\nabla_0u_0=\\nabla_i u_j=0$, and $\\Delta_0{}^a=0$, $\\Delta_i{}^a=\\delta_i{}^a$; the projected spatial symmetric derivative vanishes and $\\sigma_{ab}=0$. Also $a_i=u^0\\nabla_0u_i=\\partial_iN/N=\\partial_i\\log N$ and $a_0=0$. The chosen material state map is smooth because $T=\\vartheta/N>0$ for $t_K>0$; differentiation of $e$ gives $T=e_{\\sigma_p}=T_{\\rm ref}e^{(\\sigma_p-\\sigma_{\\rm ref})/c_v}$ and $p=-e_v=0$, whence $\\epsilon=n_0e=C_VT+n_0e_0$ and $s=n_0\\sigma_p=n_0\\sigma_{\\rm ref}+C_V\\log(T/T_{\\rm ref})$. Finally $J=n_0u$ has zero divergence, while $V=\\Pi=\\pi=0$ and $Q=q/c$ give precisely the stress in the Statement and the specialization of [F2].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "F12",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Positivity and unit mass in [F6] give $m_0\\le\\vartheta\\le M_0$. For a period translation $P_i(x)=x+2L_ie_i$, the substitution $y=P_i z$ in [F7] has absolute Jacobian $1$; periodicity of the datum and radiality of $\\Gamma$ yield $\\vartheta(P_ix,t_K)=\\vartheta(x,t_K)$. For reflection $R_i(x)=(x_1,\\ldots,-x_i,\\ldots,x_3)$, the same change-of-variables formula and the evenness of the datum and kernel give $\\vartheta(R_ix,t_K)=\\vartheta(x,t_K)$. Periodicity plus reflection makes $\\vartheta$ even about each plane $x_i=L_i$ as well as $x_i=0$. Smoothness for $t_K>0$ then forces the normal derivative to vanish on each face; $N^2q=-A_0\\nabla_x(NT)=-A_0\\nabla_x\\vartheta$, so this is exactly the insulated condition.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A2",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $\\vartheta_1=NT_1$ and $\\vartheta_2=NT_2$ be the redshifted temperatures of two solutions in the stated class with the same initial data, and put $w=\\vartheta_1-\\vartheta_2$. The transformed equation and face condition give $C_V\\partial_{t_K}w=A_0\\Delta_x w$ and $\\partial_\\nu w=0$. For $0<s<t_K$, differentiating the squared integral and integrating by parts on each coordinate interval gives $\\frac{d}{dt_K}\\|w\\|_2^2=2\\int_\\Omega w\\partial_{t_K}w\\,dx=-2(A_0/C_V)\\|\\nabla_x w\\|_2^2\\le0$, since every boundary term contains $\\partial_\\nu w=0$. Thus $\\|w(t_K)\\|_2^2\\le\\|w(s)\\|_2^2$; continuity on the compact initial cylinder and equal initial data make the latter tend to zero as $s\\downarrow0$, proving uniqueness.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The nonzero stress components are $\\mathsf T^{00}=\\epsilon/N^2$, $\\mathsf T^{0i}=\\mathsf T^{i0}=q^i/(cN)$, and $\\mathsf T^{ij}=0$. The determinant is $\\det g=-N^2$, and [F9] with step 1.2 gives $\\nabla_a\\mathsf T^{a0}=N^{-1}\\partial_{x^a}(N\\mathsf T^{a0})+\\Gamma^0{}_{ac}\\mathsf T^{ac}$: the trace term uses $\\Gamma^a{}_{ac}=\\partial_c\\log N$, and the only nonzero term in the last contraction is $2\\Gamma^0{}_{0i}\\mathsf T^{0i}$. Since $u_0=-N$, $u_i=0$, and $\\partial_{x^0}=c^{-1}\\partial_{t_K}$, $$u_bf^b=-N\\nabla_a\\mathsf T^{a0}=-\\frac1{cN}\\left(\\partial_{t_K}\\epsilon+N\\operatorname{div}_xq+2q\\cdot\\nabla_xN\\right).$$ Here $\\epsilon=C_VT+n_0e_0$, so this expression vanishes exactly when $NC_V\\partial_{t_K}T+\\operatorname{div}_x(N^2q)=0$. The constructed $\\vartheta$ satisfies this balance because $N^2q=-A_0\\nabla_x\\vartheta$ and $C_V\\partial_{t_K}\\vartheta=A_0\\Delta_x\\vartheta$. By the definition $f^b=\\nabla_a\\mathsf T^{ab}$ the stress balance holds, and the calculation proves $u_bf^b=0$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "step 1.1",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For every compact time interval in $t_K>0$, the integrands and their time derivatives are continuous on its product with $\\overline\\Omega$; the fundamental theorem of calculus in time and [F11] therefore justify differentiating the finite-volume integral. The heat balance and boundary condition give $$\\frac{d}{dt_K}\\int_\\Omega N\\epsilon\\,dx=\\int_\\Omega NC_V\\partial_{t_K}T\\,dx=-\\int_\\Omega\\operatorname{div}_x(N^2q)\\,dx=0.$$ The last equality follows by applying the one-dimensional fundamental theorem of calculus to each coordinate derivative and summing the six face fluxes, each zero by the insulated condition. Continuity at $t_K=0$ extends this constant value to the initial time, proving conservation of $\\mathcal E_K$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.3",
+            "step 2.1",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In [F2] set $\\kappa=\\kappa_{\\rm th}=A_0/N$, $\\eta=\\zeta_{\\rm b}=0$, $V=0$, and use $u_bf^b=0$ from step 2.3. Since $X_i=\\partial_iT+T\\partial_i\\log N=N^{-1}\\partial_i\\vartheta$, the spatial metric is Euclidean and $T=\\vartheta/N$, the identity in [F2] gives $\\nabla_aS^a=\\kappa_{\\rm th}X^aX_a/(cT^2)=A_0|\\nabla_x\\vartheta|^2/(cN\\vartheta^2)$. The coordinate divergence formula from [F9] is $\\nabla_aS^a=N^{-1}\\partial_{x^a}(NS^a)$; with $NS^0=s$ and $NS^i=Nq^i/(cT)$ it yields $$\\partial_{t_K}s+\\operatorname{div}_x(Nq/T)=cN\\nabla_aS^a.$$ Differentiation under the finite-volume integral is justified as in step 3.1. Integrating, the boundary term vanishes because $Nq\\cdot\\nu/T=0$ follows from $N^2q\\cdot\\nu=0$ and $N,T>0$. Thus $\\frac{d\\mathcal S}{dt_K}=A_0\\int_\\Omega |\\nabla_x\\vartheta|^2/\\vartheta^2\\,dx\\ge0$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.3",
+            "step 3.1",
+            "F2",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "The same compact-time differentiation argument as in step 3.1 and the heat equation give $\\frac{d}{dt_K}\\int_\\Omega\\vartheta\\,dx=(A_0/C_V)\\int_\\Omega\\Delta\\vartheta\\,dx=0$. The last integral vanishes by the coordinate fundamental theorem of calculus on each pair of opposite faces, whose normal derivatives are zero. Continuity to the initial trace then shows that the mean of $\\vartheta(t_K,\\cdot)$ is the positive constant $\\overline\\vartheta$.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "A2",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Put $w=\\vartheta-\\overline\\vartheta$, so $\\int_\\Omega w=0$. Expanding the square and using [F11] to integrate the continuous product over $\\Omega\\times\\Omega$ gives $$\\int_\\Omega\\int_\\Omega(w(x)-w(y))^2\\,dx\\,dy=2|\\Omega|\\int_\\Omega w^2\\,dx-2\\left(\\int_\\Omega w\\,dx\\right)^2=2|\\Omega|\\|w\\|_2^2.$$ Define $b_1=w(x_1,x_2,x_3)-w(y_1,x_2,x_3)$, $b_2=w(y_1,x_2,x_3)-w(y_1,y_2,x_3)$, and $b_3=w(y_1,y_2,x_3)-w(y_1,y_2,y_3)$, so $w(x)-w(y)=b_1+b_2+b_3$. For each $i$, the fundamental theorem of calculus expresses $b_i$ as the integral of $\\partial_iw$ over an interval of length at most $L_i$; [F11] therefore gives $|b_i|^2\\le L_i\\int_0^{L_i}|\\partial_iw|^2\\,dx_i$. Integrating this bound over $x,y$ gives $$\\int_{\\Omega\\times\\Omega}|b_i|^2\\,dx\\,dy\\le |\\Omega|L_i^2\\int_\\Omega|\\partial_iw|^2\\,dx,$$ because the two unused coordinates in direction $i$ contribute $L_i^2$, one unused coordinate in each other direction contributes $\\prod_{j\\ne i}L_j$, and the Cauchy\u2013Schwarz factor contributes the remaining $L_i$. Since $(b_1+b_2+b_3)^2\\le3\\sum_i b_i^2$, division by $2|\\Omega|$ yields $$\\|w\\|_2^2\\le\\frac32\\sum_iL_i^2\\|\\partial_iw\\|_2^2\\le C_\\Omega\\|\\nabla_xw\\|_2^2,$$ where $C_\\Omega=\\frac32(\\max_iL_i)^2$. For $t_K>0$, integration by parts and $\\partial_\\nu w=0$ give $$\\frac12\\frac{d}{dt_K}\\|w\\|_2^2=-\\frac{A_0}{C_V}\\|\\nabla_xw\\|_2^2\\le-\\frac{A_0}{C_VC_\\Omega}\\|w\\|_2^2.$$ Multiplying by $\\exp(2A_0t_K/(C_VC_\\Omega))$ and differentiating proves the exponential estimate after taking square roots; continuity at $t_K=0$ supplies the initial norm.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 4.2",
+            "A2",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Since $\\overline\\vartheta\\ge m_0>0$, $T_{\\rm eq}=\\overline\\vartheta/N$ is positive and smooth, and $\\|T-T_{\\rm eq}\\|_2\\le N_{\\min}^{-1}\\|\\vartheta-\\overline\\vartheta\\|_2$. On the connected open domain $(0,\\infty)\\times\\Omega$, [F3] applies with the selected Killing field $\\xi$ and lapse $N_\\xi=N$: $N_\\xi T_{\\rm eq}=\\overline\\vartheta$ is constant, so $\\beta=u/(k_BT_{\\rm eq})$ is Killing. These are the claimed relaxation and equilibrium properties.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "lem-tgr-killing-thermal-normalization",
+          "carrier": "items/lem-tgr-killing-thermal-normalization.md",
+          "status": "Draft lemma; the exact connected-domain, selected Killing field and positive-temperature equivalence was checked. Native root-rebound record was observed closed; the four required P pages are present.",
+          "source_section": "Statement",
+          "exact_statement": "Let $O$ and the smooth fields $(g,\\nabla,\\xi,T,u,N_\\xi,\\beta)$ be as in\n[[def-tgr-stationary-thermal-carriers]]. Then\n$$\\beta\\text{ is Killing}\\quad\\Longleftrightarrow\\quad N_\\xi T=T_K\\text{ for a constant }T_K>0.$$\nWhen this holds, $\\beta=\\xi/(k_BT_K)$, and the Killing congruence has\n$$\\xi(N_\\xi)=0,\\qquad a=\\nabla\\log N_\\xi,\\qquad \\theta=0,\\qquad \\sigma_{ab}=0.$$\nIf $\\xi$ is replaced by $b\\xi$ with a constant $b>0$, then\n$N_\\xi$ and $T_K$ scale by $b$, while $u$ and $\\beta$ are unchanged.",
+          "relevant_hypotheses_and_conventions": "**Given:** The connected open domain and smooth stationary carrier fields of [[def-tgr-stationary-thermal-carriers]].",
+          "supplier_proof_status": "Draft lemma; the exact connected-domain, selected Killing field and positive-temperature equivalence was checked. Native root-rebound record was observed closed; the four required P pages are present.",
+          "consumer_use": "Identifies the lapse-normalized Killing-temperature limit."
+        },
+        {
+          "supplier": "lem-tgr-eckart-entropy-specialization",
+          "carrier": "items/lem-tgr-eckart-entropy-specialization.md",
+          "status": "Draft lemma; its exact local entropy substitution proof and new shear supplier were checked in this focused batch65 review. This records no independent acceptance or native readiness.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N)$ be a smooth time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, let $O\\subseteq M$ be nonempty and open, and let $u$ be a smooth future unit timelike vector field on $O$. Use the metric-compatible torsion-free connection $\\nabla$ and a smooth local state map $(v,\\sigma_p):O\\to X$ with $X\\subset(0,\\infty)\\times\\mathbb R$ open and $e\\in C^\\infty(X)$, as in [[def-tgr-local-fluid-state]]. Thus $n=v^{-1}>0$, $s=n\\sigma_p$, $\\epsilon=ne$, $T=e_{\\sigma_p}$, $p=-e_v$, and $\\mu=e+pv-T\\sigma_p$; assume $T>0$ on $O$ and the Gibbs and Euler identities of [[lem-tgr-local-gibbs-euler]]. Use the convention $x^0=ct$ with $c>0$ in $\\mathrm{m\\,s^{-1}}$.\n\nDefine $\\Delta^a{}_b=\\delta^a{}_b+u^a u_b$, $\\Delta^{ab}=g^{ac}\\Delta^b{}_c$, $\\Delta_{ab}=g_{ab}+u_a u_b$, $D=u^a\\nabla_a$, $\\theta=\\nabla_a u^a$, and $a^b=D u^b$. Let $\\sigma_{ab}$ be the shear defined in [[lem-tgr-spatial-shear-properties]]: the spatially projected symmetrized derivative of $u$, minus $\\theta\\Delta_{ab}/3$, with averaged symmetrization. That lemma proves $\\sigma$ symmetric, spatial, trace-free, and of nonnegative squared norm. Let $\\kappa,\\eta,\\zeta_{\\rm b}\\in C^\\infty(O)$ be pointwise nonnegative, with SI units $\\mathrm{W\\,m^{-1}K^{-1}}$, $\\mathrm{Pa\\,s}$ and $\\mathrm{Pa\\,s}$, respectively. Put\n$$\nX^a=\\Delta^{ab}(\\nabla_bT+Ta_b),\\qquad q^a=-\\kappa X^a,\\qquad Q^a=q^a/c,\n$$\nso $q$ is the physical heat flux and $Q$ is its geometric stress component. Set the particle-diffusion current $V^a=0$, the bulk correction $\\Pi=-\\zeta_{\\rm b}c\\theta$, and the symmetric spatial trace-free stress $\\pi^{ab}=-2\\eta c\\sigma^{ab}$. Suppose $\\nabla_aJ^a=0$ for $J^a=nu^a$, and suppose the symmetric stress\n$$\n\\mathsf T^{ab}=\\epsilon u^au^b+(p+\\Pi)\\Delta^{ab}+u^aQ^b+Q^au^b+\\pi^{ab}\n$$\nsatisfies $\\nabla_a\\mathsf T^{ab}=f^b$ with zero local power $u_bf^b=0$. Then for $S^a=su^a+Q^a/T$ the exact entropy-production identity is\n$$\n\\nabla_aS^a=\\frac{\\kappa}{cT^2}X^aX_a+\\frac{2\\eta c}{T}\\sigma^{ab}\\sigma_{ab}+\\frac{\\zeta_{\\rm b}c}{T}\\theta^2\\ge0.\n$$\nThe conclusion is a conditional identity for the stated smooth fields and closure; it asserts neither existence nor causality, stability, or empirical applicability of an evolution.",
+          "relevant_hypotheses_and_conventions": "Smooth time-oriented Lorentzian data; a smooth local state map with T>0; the stated particle/stress balances; zero particle diffusion; zero local power; and the displayed heat and viscous closures. The shear convention and positivity are supplied by lem-tgr-spatial-shear-properties.",
+          "supplier_proof_status": "Draft lemma; its exact local entropy substitution proof and new shear supplier were checked in this focused batch65 review. This records no independent acceptance or native readiness.",
+          "consumer_use": "Supplies the exact local entropy divergence for the static heat-only specialization after setting shear/bulk viscosities and diffusion to zero."
+        },
+        {
+          "supplier": "def-tgr-local-fluid-state",
+          "carrier": "items/def-tgr-local-fluid-state.md",
+          "status": "Draft definition; the explicit smooth exponential state realizes its state types and unit conventions. Native root-rebound record was observed closed.",
+          "source_section": "Definition",
+          "exact_statement": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "relevant_hypotheses_and_conventions": "See the exact hypotheses and conventions in the quoted supplier interface.",
+          "supplier_proof_status": "Draft definition; the explicit smooth exponential state realizes its state types and unit conventions. Native root-rebound record was observed closed.",
+          "consumer_use": "Supplies the smooth state maps, units, observer congruence and q=cQ convention."
+        },
+        {
+          "supplier": "def-gr-smooth-lorentzian-objects",
+          "carrier": "items/def-gr-smooth-lorentzian-objects.md",
+          "status": "Published definition; current signature and orientation clause inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some \u2014 equivalently every \u2014 basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "relevant_hypotheses_and_conventions": "**Given:** The Lorentzian data of the Definition, a smooth future timelike curve $\\gamma:I\\to M$, and supplied $c>0$, $s_0\\in I$, $\\tau_0\\in\\mathbb R$.",
+          "supplier_proof_status": "Published definition; current signature and orientation clause inspected.",
+          "consumer_use": "Fixes the Lorentzian signature and time orientation."
+        },
+        {
+          "supplier": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "carrier": "items/thm-gr-nondegenerate-levi-civita-and-tensor-derivative.md",
+          "status": "Published; relevant connection and coordinate-formula proof clauses inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi\u2013Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "relevant_hypotheses_and_conventions": "**Given:** A smooth four-manifold $M$ without boundary, a smooth symmetric nondegenerate covariant $2$-tensor field $g$, and smooth vector fields $X,Y,Z$.",
+          "supplier_proof_status": "Published; relevant connection and coordinate-formula proof clauses inspected.",
+          "consumer_use": "Supplies the metric connection and Christoffel formula."
+        },
+        {
+          "supplier": "def-tgr-stationary-thermal-carriers",
+          "carrier": "items/def-tgr-stationary-thermal-carriers.md",
+          "status": "Draft definition; the explicit stationary geometry, selected timelike Killing field and positive equilibrium temperature match its interface. The four required P pages are present.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N_0)$ be a smooth time-oriented Lorentzian four-manifold of signature\n$(-,+,+,+)$ in the sense of [[def-gr-smooth-lorentzian-objects]], and let\n$\\nabla$ be its unique torsion-free $g$-compatible connection supplied by\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Fix a nonempty\nconnected open set $O\\subseteq M$. A **selected stationary thermal carrier** on\n$O$ consists of a smooth future timelike vector field $\\xi$ and a smooth\npositive scalar field $T:O\\to(0,\\infty)$, where $T$ is measured in kelvins,\nsuch that $\\xi$ is a Killing field of $g$ in the sense of\n[[def-gr-killing-field]]. Equivalently, the criterion is\n$\\nabla_{(a}\\xi_{b)}=0$ by\n[[thm-gr-killing-and-on-shell-matter-identities]]. The round brackets mean\nsymmetrization with factor $1/2$. The choice of $\\xi$ specifies the thermal congruence; no\ncoordinate chart or universal observer field is selected.\n\nSet $N_\\xi:=\\sqrt{-g(\\xi,\\xi)}>0$ and $u:=\\xi/N_\\xi$. Then\n$g(u,u)=-1$. In the length-coordinate convention $x^0=ct$, $u$ is\ndimensionless and $cu$ is the physical four-velocity, with $c>0$ in\n$\\mathrm{m\\,s^{-1}}$. For a fixed Boltzmann constant $k_B>0$ in\n$\\mathrm{J\\,K^{-1}}$, define the inverse-temperature vector\n$\\beta:=u/(k_BT)$, with units $\\mathrm{J^{-1}}$, and the Killing-normalized\ntemperature field $T_K:=N_\\xi T$. Thus $\\beta=\\xi/(k_BT_K)$; this definition\ndoes not assert that $T_K$ is constant.\n\nFor a smooth chemical-potential scalar $\\mu:O\\to\\mathbb R$ in joules, put\n$\\zeta:=\\mu/(k_BT)$, a dimensionless scalar. Define the rest-space metric,\nderivative, acceleration, expansion and shear by\n$$h_{ab}:=g_{ab}+u_au_b,\\qquad D:=u^a\\nabla_a,\\qquad a_b:=u^a\\nabla_au_b,\\qquad \\theta:=\\nabla_au^a,\\qquad \\sigma_{ab}:=h_a{}^ch_b{}^d\\nabla_{(c}u_{d)}-\\frac13\\theta h_{ab}.$$\nHere $a$, $\\theta$ and $\\sigma$ have inverse-length units; the physical\nproper acceleration is $c^2a$. The smooth tangent-bundle structure used by\nthe cited GR suppliers assumes the Axiom of Countable Choice\n[[def-countable-choice]]; no stronger choice principle is part of this\ndefinition.",
+          "relevant_hypotheses_and_conventions": "See the exact hypotheses and conventions in the quoted supplier interface.",
+          "supplier_proof_status": "Draft definition; the explicit stationary geometry, selected timelike Killing field and positive equilibrium temperature match its interface. The four required P pages are present.",
+          "consumer_use": "Supplies stationary geometric carrier definitions."
+        },
+        {
+          "supplier": "thm-heat-cauchy-solution-for-bounded-continuous-data",
+          "carrier": "items/thm-heat-cauchy-solution-for-bounded-continuous-data.md",
+          "status": "Published; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice and let $n\\ge1$, and let\n$u_0:\\mathbb R^n\\to\\mathbb C$ be bounded and uniformly continuous. Define\n$u(x,t):=\\int_{\\mathbb R^n}\\Gamma(x-y,t)u_0(y)\\,dy$ for $t>0$ and\n$u(x,0):=u_0(x)$. Then $u$ is $C^\\infty$ on\n$\\mathbb R^n\\times(0,\\infty)$, satisfies $\\partial_tu=\\Delta_xu$ there, is\nbounded with $\\|u(\\cdot,t)\\|_\\infty\\le\\|u_0\\|_\\infty$, and converges locally\nuniformly at the initial time:\n$\\sup_{x\\in K}|u(x,t)-u_0(x)|\\to0$ as $t\\downarrow0^+$ for every compact\n$K\\subseteq\\mathbb R^n$.",
+          "relevant_hypotheses_and_conventions": "**Given:** Countable Choice, $n\\ge1$, a bounded uniformly continuous $u_0:\\mathbb R^n\\to\\mathbb C$, a multi-index $\\alpha$, an integer $k\\ge0$, and $0<\\tau<T$ with $K\\subseteq\\mathbb R^n$ compact.",
+          "supplier_proof_status": "Published; complete statement and proof inspected.",
+          "consumer_use": "Supplies bounded-data heat convolution, positive-time smoothness and initial recovery."
+        },
+        {
+          "supplier": "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "carrier": "items/lem-heat-kernel-normalisation-scaling-and-derivatives.md",
+          "status": "Published; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume Countable Choice and let $n\\ge1$. For every $t>0$: (i) $\\Gamma(\\cdot,t)>0$\nand $\\int_{\\mathbb R^n}\\Gamma(x,t)\\,dx=1$; (ii) parabolic scaling:\n$\\Gamma(\\lambda x,\\lambda^2t)=\\lambda^{-n}\\Gamma(x,t)$ for every $\\lambda>0$ and\n$x\\in\\mathbb R^n$; (iii) $\\Gamma$ is $C^\\infty$ on\n$\\mathbb R^n\\times(0,\\infty)$ and solves the heat equation there,\n$\\partial_t\\Gamma(x,t)=\\Delta_x\\Gamma(x,t)$; (iv) for every multi-index $\\alpha$\nthere is $C_{n,\\alpha}<\\infty$ with\n$|D^\\alpha_x\\Gamma(x,t)|\\le C_{n,\\alpha}t^{-(|\\alpha|+n)/2}e^{-|x|^2/(8t)}$ for\nall $x\\in\\mathbb R^n$, $t>0$; in particular $\\|\\Gamma(\\cdot,t)\\|_1=1$ and\n$(\\Gamma(\\cdot,t))_{t>0}$ is an $L^1$ approximate identity on $\\mathbb R^n$.",
+          "relevant_hypotheses_and_conventions": "**Given:** Countable Choice, $n\\ge1$, together with $t,\\lambda>0$, a multi-index $\\alpha$ and $\\delta>0$ wherever these appear.",
+          "supplier_proof_status": "Published; complete statement and proof inspected.",
+          "consumer_use": "Supplies positivity, unit mass and Gaussian scaling."
+        },
+        {
+          "supplier": "def-heat-kernel",
+          "carrier": "items/def-heat-kernel.md",
+          "status": "Published definition; exact formula inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $n\\ge1$ and $t>0$. The **heat kernel on $\\mathbb R^n$** is the function\n\n$$\\Gamma(x,t):=(4\\pi t)^{-n/2}\\exp\\!\\Bigl(-\\frac{|x|^2}{4t}\\Bigr),\\qquad x\\in\\mathbb R^n,$$\n\nwhere $|x|^2=\\langle x,x\\rangle$ is the Euclidean square of\n[[def-euclidean-inner-product]] and $\\exp$ is the real exponential function of\n[[def-real-exponential-function-and-e]]. For fixed $t>0$ the map\n$x\\mapsto\\Gamma(x,t)$ is a composite of the quadratic form with the exponential\nand a scalar multiple, so it is $C^\\infty$ in the sense of\n[[def-ck-and-multi-index-notation-in-several-variables]] by\n[[thm-derivative-of-exponential]] and\n[[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], and it is\nstrictly positive by [[cor-exponential-reciprocal-and-positivity]]. The\nspatial Laplacian entering the heat equation is that of\n[[def-laplacian-of-a-c2-function]].\n\nThe **causal extension** of the heat kernel is $\\Gamma(x,t)$ for $t>0$ and\n$\\Gamma(x,t):=0$ for $t\\le0$; the displayed formula is not evaluated at $t=0$\nas a function value. The normalisation is fixed by the unit-mass identity\nproved for the kernel on this page, and the causal extension is used only as a\nlocally integrable function or, after embedding, as a distribution.",
+          "relevant_hypotheses_and_conventions": "See the exact hypotheses and conventions in the quoted supplier interface.",
+          "supplier_proof_status": "Published definition; exact formula inspected.",
+          "consumer_use": "Defines the three-dimensional Gaussian heat kernel."
+        },
+        {
+          "supplier": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "carrier": "items/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.md",
+          "status": "Published; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. For every nonnegative Lebesgue measurable\n$f : V \\to [0,\\infty]$,\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "relevant_hypotheses_and_conventions": "**Given:** The Axiom of Countable Choice, open sets $U,V \\subseteq \\mathbb R^n$, a $C^1$ diffeomorphism $T : U \\to V$, and a nonnegative Lebesgue measurable function $f : V \\to [0,\\infty]$.",
+          "supplier_proof_status": "Published; complete statement and proof inspected.",
+          "consumer_use": "Supplies the affine integral substitutions."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published exact axiom definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "relevant_hypotheses_and_conventions": "See the exact hypotheses and conventions in the quoted supplier interface.",
+          "supplier_proof_status": "Published exact axiom definition inspected.",
+          "consumer_use": "Carries the exact AC_omega assumption."
+        },
+        {
+          "supplier": "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "carrier": "items/def-lebesgue-measure-and-the-lebesgue-sigma-algebra.md",
+          "status": "Published definition; its well-definedness result was inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Fix $n \\ge 1$ and let $\\lambda_n^*$ be the Lebesgue outer set function on $\\mathbb{R}^n$\n([[def-lebesgue-outer-measure]]). A set $E \\subseteq \\mathbb{R}^n$ is\n**Lebesgue measurable** when\n\n$$\\lambda_n^*(A) \\;=\\; \\lambda_n^*(A \\cap E) \\;+\\; \\lambda_n^*(A \\setminus E) \\qquad \\text{for every } A \\subseteq \\mathbb{R}^n .$$\n\nThis formula makes sense before any outer-measure theorem is invoked. Under\ncountable choice, [[thm-lebesgue-outer-measure-is-an-outer-measure-agreeing-with-volume]]\nmakes $\\lambda_n^*$ an outer measure, and the displayed condition is then exactly\nCarath\u00e9odory measurability in the sense of [[def-caratheodory-measurable-set]].\n\nThe family of Lebesgue measurable sets is written $\\mathcal{L}(\\mathbb{R}^n)$,\nand **Lebesgue measure** is the restriction\n\n$$\\lambda_n \\;:=\\; \\lambda_n^*\\!\\restriction_{\\mathcal{L}(\\mathbb{R}^n)} .$$\n\nOn the real line the subscript is dropped and $\\lambda := \\lambda_1$.\n\nThe quantifier over every test set $A$ is part of the condition, and no\nhypothesis on $E$ is imposed before it is tested. That\n$\\mathcal{L}(\\mathbb{R}^n)$ is a sigma-algebra and that $\\lambda_n$ is a complete\nmeasure on it are not part of this definition: they are proved, under the Axiom\nof Countable Choice, in [[thm-lebesgue-measure-is-a-complete-measure]], which is\nrecorded in this item's `justified_by` because it is a statement about the\nobjects introduced here. Until that theorem the symbols $\\mathcal{L}(\\mathbb{R}^n)$\nand $\\lambda_n$ name a family of sets and a restricted set function, nothing more.",
+          "relevant_hypotheses_and_conventions": "Use $n=3$ and restrict the Lebesgue measure to the bounded box $\\Omega$.",
+          "supplier_proof_status": "Published definition; the justified-by complete-measure theorem and its proof were inspected under $\\mathrm{AC}_\\omega$.",
+          "consumer_use": "Defines the volume measure used by box integrals and the $L^2$ space."
+        },
+        {
+          "supplier": "def-calligraphic-l-p-on-a-measure-space",
+          "carrier": "items/def-calligraphic-l-p-on-a-measure-space.md",
+          "status": "Published definition; exact interface inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $p$ be a real number with\n$0<p<\\infty$. Write $\\mathcal M(X,\\mu)$ for the measurable functions\n$f:X\\to\\mathbb R$. For $f\\in\\mathcal M(X,\\mu)$ define the extended-valued\n$p$-functional\n\n$$\\|f\\|_p:=\\begin{cases}\\left(\\int |f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int |f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int |f|^p\\,d\\mu=+\\infty.\\end{cases}$$\n\nThe finite power uses [[def-real-power]], while the second clause avoids\napplying real powers to the extended value $+\\infty$. The integral is the\nnonnegative Lebesgue integral of [[def-nonnegative-lebesgue-integral]].\n\nThe class\n\n$$\\mathcal L^p(\\mu):=\\{f\\in\\mathcal M(X,\\mu): \\|f\\|_p<\\infty\\}$$\n\nis the measurable-function space used on this page before passing to\nalmost-everywhere equivalence classes.\n\nFor $1\\le p<\\infty$, the pointwise operations make $\\mathcal L^p(\\mu)$ a real\nvector space by\n[[thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one]].",
+          "relevant_hypotheses_and_conventions": "Use $p=2$ on the Lebesgue measure space over $\\Omega$.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required for this definition.",
+          "consumer_use": "Defines the $p=2$ integral functional."
+        },
+        {
+          "supplier": "def-l-p-space-as-a-quotient-by-null-functions",
+          "carrier": "items/def-l-p-space-as-a-quotient-by-null-functions.md",
+          "status": "Published definition; exact interface inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n- For $0<p<\\infty$, define an equivalence relation on $\\mathcal L^p(\\mu)$ by\n  $$f\\sim g\\quad\\Longleftrightarrow\\quad f-g\\in\\mathcal N(\\mu),$$\n  and write $L^p(\\mu)$ for the set of classes $[f]$.\n- For $p=\\infty$, define the same relation on $L^\\infty(\\mu)$ and again write\n  $L^\\infty(\\mu)$ for the set of classes.\n\nThus an element of $L^p(\\mu)$ is an almost-everywhere equivalence class of\nmeasurable representatives.\n\nWhen $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual\nquotient-vector-space construction of\n[[def-quotient-vector-space-and-canonical-projection]].\n\nFor $0<p<1$, the same class notation is used; under its stated choice hypothesis, the later item\n[[thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric]]\nsupplies the metric structure rather than a normed-space structure.",
+          "relevant_hypotheses_and_conventions": "Use $p=2$ and identify measurable representatives equal almost everywhere.",
+          "supplier_proof_status": "Published definition; no proof is supplied or required for this definition.",
+          "consumer_use": "Defines the $L^2$ equivalence classes."
+        },
+        {
+          "supplier": "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "carrier": "items/thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space.md",
+          "status": "Published; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. For $1\\le p<\\infty$, the rule\n   $$\\|[f]\\|_p:=\\|f\\|_p\\qquad([f]\\in L^p(\\mu))$$\n   is well defined on the quotient classes.\n2. For $p=\\infty$, the rule\n   $$\\|[f]\\|_\\infty:=\\|f\\|_\\infty\\qquad([f]\\in L^\\infty(\\mu))$$\n   is well defined.\n3. In either case, with the quotient vector-space operations of\n   [[prop-quotient-vector-space-operations-and-projection]], the resulting pair\n   $(L^p(\\mu),\\|\\cdot\\|_p)$ is a normed space in the sense of\n   [[def-norm-and-normed-space]].",
+          "relevant_hypotheses_and_conventions": "Use $p=2$ on the box measure space.",
+          "supplier_proof_status": "Published; complete proof inspected for well-definedness on almost-everywhere classes and the norm axioms.",
+          "consumer_use": "Supplies the $L^2$ norm used for uniqueness and relaxation."
+        },
+        {
+          "supplier": "thm-holder-inequality-for-integrals",
+          "carrier": "items/thm-holder-inequality-for-integrals.md",
+          "status": "Published; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "relevant_hypotheses_and_conventions": "Use the conjugate pair $p=q=2$ on each finite coordinate interval.",
+          "supplier_proof_status": "Published; complete proof inspected, including the $p=q=2$ case.",
+          "consumer_use": "Bounds each coordinate path integral by interval length times the integral of its squared derivative."
+        },
+        {
+          "supplier": "thm-tonelli-and-fubini-for-completed-product-measures",
+          "carrier": "items/thm-tonelli-and-fubini-for-completed-product-measures.md",
+          "status": "Published; complete statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), and let\n$\\overline{\\mu \\times \\nu}$ be the completed product of two sigma-finite\nmeasure spaces.\n\n1. If $f : X \\times Y \\to [0,\\infty]$ is $\\overline{\\mu \\times \\nu}$-measurable, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that $f_x$ is $\\overline{\\mathcal B}$-measurable for $x\\notin A$ and $f^y$ is $\\overline{\\mathcal A}$-measurable for $y\\notin B$. Define $I_f(x)=\\int_Y f_x\\,d\\overline\\nu$ for $x\\notin A$ and $I_f(x)=0$ on $A$; define $J_f(y)=\\int_X f^y\\,d\\overline\\mu$ for $y\\notin B$ and $J_f(y)=0$ on $B$. Then $I_f,J_f$ are measurable and\n$$\\int f\\,d\\overline{\\mu \\times \\nu}=\\int_X I_f\\,d\\mu=\\int_Y J_f\\,d\\nu.$$\n2. If $f \\in L^1(\\overline{\\mu \\times \\nu})$, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that the sections are measurable and integrable outside them. Define $I_f,J_f$ by the same section integrals outside $A,B$ and by zero on $A,B$. They are measurable and integrable, and the same equality holds.",
+          "relevant_hypotheses_and_conventions": "Use $\\mathrm{AC}_\\omega$ and finite Lebesgue measure factors restricted to the rectangular box.",
+          "supplier_proof_status": "Published; complete proof inspected for both nonnegative and integrable completed-product cases.",
+          "consumer_use": "Justifies the product integral identity and repeated finite-box integrations."
+        },
+        {
+          "supplier": "def-gr-killing-field",
+          "carrier": "items/def-gr-killing-field.md",
+          "status": "Published definition; exact flow-based Killing criterion inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\xi$ be a smooth vector field\non $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). The **Lie\nderivative of the metric along $\\xi$**, written $\\mathcal L_\\xi g$, is the\nsmooth symmetric covariant $2$-tensor field obtained by the flow definition of\n[[def-lie-derivative-of-a-tensor-field]] applied to $g$: for the local flow\n$\\Phi_t$ of $\\xi$,\n\n$$\\mathcal L_\\xi g:=\\frac{d}{dt}\\Big|_{t=0}\\Phi_t^*g .$$\n\nThe field $\\xi$ is a **Killing field** of $(M,g)$ (an **isometry generator**,\nor a **Killing vector**) when\n\n$$\\mathcal L_\\xi g=0 .$$\n\nThe equivalent local characterization\n\n$$\\mathcal L_\\xi g=0\\quad\\Longleftrightarrow\\quad\\nabla_a\\xi_b+\\nabla_b\\xi_a=0,$$\n\nwhere $\\nabla$ is the metric-selected connection of $g$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and\n$\\xi_b:=g_{bc}\\xi^c$ is the lowered field, is proved in\n[[thm-gr-killing-and-on-shell-matter-identities]] clause (a); the definition\nitself asserts neither direction. Whether a given metric has Killing fields is\na property of that metric: neither existence nor uniqueness of a Killing field\nis asserted here, and a general metric has none beyond the trivial field\n$\\xi=0$.",
+          "relevant_hypotheses_and_conventions": "A smooth vector field on the time-oriented Lorentzian four-manifold; Killing means the Lie derivative of the metric vanishes, with the derivative defined through the local flow.",
+          "supplier_proof_status": "Published definition; its exact statement and the local-flow definition were inspected.",
+          "consumer_use": "Defines the stationarity condition verified by the static coordinate flow."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Statement: each L_i>0 and the box is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: constant redshifted temperature has zero heat gradient and zero entropy production."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The spatial domain is fixed in three dimensions; no one-element sample occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: Statement and step 1.2: the lapse, capacity, conductivity, reference temperature and initial lower bound are positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 5.1 and 6.1: the initial trace is recovered and the exponential estimate implies convergence to the stated equilibrium."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: A1 and step 1.1 use only AC_omega."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.3: Step 2.3 shows the heat balance implies zero support power."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.3: Step 2.3 shows zero support power is equivalent to the heat balance."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-65",
+        "notes": "Independently checked all ten proof steps 1.1\u20136.1 and the 18 actual cited suppliers, including the bounded-uniformly-continuous heat Cauchy theorem and Gaussian normalization, not an L-infinity initial-convergence claim from Hunter. Positive C2 periodic datum is bounded uniformly continuous; positive unit-mass convolution gives m0<=vartheta<=M0 and positive-time smoothness. Reflections/translations have Jacobian magnitude one and preserve convolution; evenness plus period gives zero normal derivative at all faces including compatibility at edges. The change vartheta=NT transforms q=-A0 N^-2 grad vartheta and the balance to C_V vartheta_t=A0 Delta vartheta. Energy uniqueness holds from each positive starting time and passes to zero by compact continuity. Direct Christoffel calculation gives theta=sigma=0, a_i=partial_i log N, particle conservation, and the exact u.f expression; it vanishes by the heat balance for the defined external support. State e independent of v yields p=0, epsilon=C_V T+n0 e0, s=n0 sigma_ref+C_V log(T/T_ref). Entropy divergence converts by cN to the time/space balance and its insulated flux vanishes; lapse-weighted energy and mean vartheta are conserved. Continuous compact-time integrands justify differentiation and finite sigma-finite box Fubini; Holder p=q=2 and coordinate telescoping yield C_Omega=(3/2) max L_i^2. The squared norm decays with exponent twice the stated norm exponent; N_min>0 transfers L2 convergence. Positive constant mean on connected O satisfies the exact Killing normalization supplier. Zero initial perturbation yields equilibrium; n0,C_V,A0,L_i,N_min,m0>0 exclude singular denominators. Only AC_omega inherited; no Einstein equation, general fluid existence, finite propagation or empirical precision asserted. Reader/refuter report no mathematical defect; no source repair needed."
+      }
+    },
+    "ex-tgr-static-cosine-heat-relaxation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tgr-supported-static-heat-evolution",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega=\\prod_{i=1}^3(0,L_i)$ with $L_i>0$, and let $U\\subset\\mathbb R^3$ be an open neighborhood of $\\overline\\Omega$. Let $N\\in C^\\infty(U,(0,\\infty))$ satisfy $0<N_{\\min}\\le N(x)\\le N_{\\max}<\\infty$ on $\\overline\\Omega$. On $M=\\mathbb R_{x^0}\\times U$, use $x^0=ct_K$ with $c>0$ in $\\mathrm{m\\,s^{-1}}$, give $M$ the time orientation $\\xi=\\partial_{x^0}$, and use the metric\n$$\ng=-N(x)^2(dx^0)^2+\\sum_{i=1}^3(dx^i)^2,\n$$\nwhere $x^i$ are measured in metres, $t_K$ in seconds, and $N$ is dimensionless. By [[def-gr-killing-field]], a Killing field is one satisfying $\\mathcal L_\\xi g=0$, where $\\mathcal L_\\xi g=\\frac d{dt}|_{t=0}\\Phi_t^*g$ for the local flow $\\Phi_t$ of $\\xi$. Thus $\\xi$ is a future timelike Killing field, $N=\\sqrt{-g(\\xi,\\xi)}$, and $u=N^{-1}\\xi$ is the smooth future unit timelike observer congruence of [[def-tgr-local-fluid-state]]; here this congruence means the unit timelike vector field, not a coordinate chart. Write $\\nabla_x$, $\\operatorname{div}_x$, $\\nu$, and $dx$ for the Euclidean spatial gradient, divergence, outward unit normal, and three-dimensional Lebesgue volume on the box, and set $|\\Omega|:=\\int_\\Omega1\\,dx=L_1L_2L_3$. For scalar fields on $\\Omega$, $L^2(\\Omega)$ and its norm use this measure.\n\nFor $t_K>0$ use the open domain $O=(0,\\infty)\\times\\Omega$. Spatial vectors such as $q$ are extended to spacetime with zero $x^0$ component.\n\nFix constants $C_V,n_0,A_0,T_{\\rm ref}>0$, a reference entropy $\\sigma_{\\rm ref}\\in\\mathbb R$, and a reference energy $e_0\\in\\mathbb R$. Their units are $C_V$ in $\\mathrm{J\\,m^{-3}K^{-1}}$, $n_0$ in $\\mathrm{marker\\,m^{-3}}$, $A_0$ in $\\mathrm{W\\,m^{-1}K^{-1}}$, $T_{\\rm ref}$ in kelvins, $\\sigma_{\\rm ref}$ in $\\mathrm{J\\,K^{-1}marker^{-1}}$, and $e_0$ in $\\mathrm{J\\,marker^{-1}}$. Define the derived per-marker heat capacity $c_v=C_V/n_0$, with units $\\mathrm{J\\,K^{-1}marker^{-1}}$, and the local mathematical material state function on $X=(0,\\infty)\\times\\mathbb R$ by\n$$\ne(v,\\sigma_p)=c_vT_{\\rm ref}\\exp\\!\\left(\\frac{\\sigma_p-\\sigma_{\\rm ref}}{c_v}\\right)+e_0,\n$$\nindependent of $v$. For a positive proper temperature $T$, set $\\sigma_p=\\sigma_{\\rm ref}+c_v\\log(T/T_{\\rm ref})$ and $v=1/n_0$. The state definitions of [[def-tgr-local-fluid-state]] give $n=n_0$, $p=0$, $\\epsilon=C_VT+n_0e_0$, and $s=n_0\\sigma_{\\rm ref}+C_V\\log(T/T_{\\rm ref})$.\n\nLet $\\vartheta_0\\in C^2(\\overline\\Omega)$ satisfy $0<m_0\\le\\vartheta_0\\le M_0$ and admit a $C^2$ extension $\\widetilde\\vartheta_0:\\mathbb R^3\\to\\mathbb R$ with the same bounds, period $2L_i$ in coordinate $x^i$, and evenness under $x^i\\mapsto-x^i$ for each $i$. These conditions make the extension even about every face $x^i=0,L_i$. Set $T_0=\\vartheta_0/N$. Define the physical heat flux, conductivity, static heat balance, and insulated-face condition by\n$$\nq=-\\kappa_{\\rm th}(\\nabla_xT+T\\nabla_x\\log N),\\qquad \\kappa_{\\rm th}=A_0/N,\\qquad NC_V\\partial_{t_K}T+\\operatorname{div}_x(N^2q)=0,\\qquad N^2q\\cdot\\nu=0\\ \\text{on each face},\n$$\nwhere $q$ has units $\\mathrm{W\\,m^{-2}}$, $\\kappa_{\\rm th}$ has units $\\mathrm{W\\,m^{-1}K^{-1}}$, and $\\nu$ is the outward Euclidean unit normal to a face. In the entropy identity use zero particle diffusion and zero shear and bulk viscosity, $V=0$ and $\\eta=\\zeta_{\\rm b}=0$, so $\\Pi=0$ and $\\pi^{ab}=0$. The thermal diffusivity $A_0/C_V$ has units $\\mathrm{m^2\\,s^{-1}}$. There is a unique solution $T\\in C([0,\\infty)\\times\\overline\\Omega)\\cap C^{2,1}((0,\\infty)\\times\\overline\\Omega)$, where $C^{2,1}$ means two continuous spatial derivatives and one continuous time derivative up to the box faces, satisfying the heat balance, the face condition, and the initial condition $T(0,x)=T_0(x)=\\vartheta_0(x)/N(x)$. It is given by\n$$\\vartheta(t_K,x):=N(x)T(t_K,x)=\\int_{\\mathbb R^3}\\Gamma\\!\\left(x-y,\\frac{A_0}{C_V}t_K\\right)\\widetilde\\vartheta_0(y)\\,dy\\quad(t_K>0),\\qquad \\vartheta(0,x)=\\vartheta_0(x),\\qquad \\Gamma(z,t)=(4\\pi t)^{-3/2}e^{-|z|^2/(4t)},\\quad z\\in\\mathbb R^3,\\ t>0.$$\nThus $T=\\vartheta/N$. It satisfies $C_V\\partial_{t_K}\\vartheta=A_0\\Delta_x\\vartheta$, $\\partial_\\nu\\vartheta=0$ on each face, and $m_0\\le\\vartheta\\le M_0$.\n\nFor this solution set $Q^0=0$, $Q^i=q^i/c$, $J=n_0u$, and\n$$\n\\mathsf T^{ab}=\\epsilon u^au^b+u^aQ^b+Q^au^b,\\qquad f^b:=\\nabla_a\\mathsf T^{ab}.\n$$\nHere $Q=q/c$ has units $\\mathrm{Pa}$, $\\mathsf T$ has units $\\mathrm{Pa}$, and $f$ has units $\\mathrm{N\\,m^{-3}}$. Then $\\nabla_aJ^a=0$ and $u_bf^b=0$: $f$ is an explicitly defined external support that supplies no local power. The entropy current $S^a=su^a+Q^a/T$ has units $\\mathrm{J\\,K^{-1}m^{-3}}$ and total entropy $\\mathcal S(t_K)=\\int_\\Omega s(t_K,x)\\,dx$ in $\\mathrm{J\\,K^{-1}}$, with\n$$\n\\frac{d\\mathcal S}{dt_K}=A_0\\int_\\Omega\\frac{|\\nabla_x\\vartheta|^2}{\\vartheta^2}\\,dx\\ge0.\n$$\nThe lapse-weighted energy $\\mathcal E_K(t_K)=\\int_\\Omega N\\epsilon\\,dx$ is constant in $\\mathrm{J}$. If $\\overline\\vartheta=|\\Omega|^{-1}\\int_\\Omega\\vartheta_0\\,dx$ and $C_\\Omega=\\frac32(\\max_iL_i)^2$, then\n$$\n\\left\\|\\vartheta(t_K,\\cdot)-\\overline\\vartheta\\right\\|_{L^2(\\Omega)}\\le \\exp\\!\\left(-\\frac{A_0t_K}{C_VC_\\Omega}\\right)\\left\\|\\vartheta_0-\\overline\\vartheta\\right\\|_{L^2(\\Omega)}.\n$$\nThus $T$ converges in $L^2(\\Omega)$ to $T_{\\rm eq}=\\overline\\vartheta/N$. Since $N T_{\\rm eq}=\\overline\\vartheta>0$, the inverse-temperature vector $\\beta=u/(k_BT_{\\rm eq})$, for $k_B>0$ in $\\mathrm{J\\,K^{-1}}$, is Killing by [[lem-tgr-killing-thermal-normalization]]. This is a mathematical solution of the specified fixed-background, supported first-order heat model; it asserts no Einstein equation, general dissipative-fluid initial-value theorem, or finite propagation speed.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $r=A_0\\pi^2/(C_VL_1^2)>0$. The formula $\\widetilde\\vartheta_0(x)=\\overline\\vartheta+\\delta\\cos(\\pi x^1/L_1)$ on $\\mathbb R^3$ is smooth, even in each coordinate, and $2L_i$-periodic in each coordinate; $|\\delta|<\\overline\\vartheta$ makes it positive. Its average on $\\Omega$ is $\\overline\\vartheta$, since $$\\int_0^{L_1}\\cos(\\pi x^1/L_1)\\,dx^1=\\left[\\frac{L_1}{\\pi}\\sin(\\pi x^1/L_1)\\right]_{0}^{L_1}=0.$$ Differentiating the displayed time-dependent profile gives $\\partial_{t_K}\\vartheta=-r\\delta e^{-rt_K}\\cos(\\pi x^1/L_1)$ and $\\Delta_x\\vartheta=-(\\pi^2/L_1^2)\\delta e^{-rt_K}\\cos(\\pi x^1/L_1)$. Thus $C_V\\partial_{t_K}\\vartheta=A_0\\Delta_x\\vartheta$, and its initial trace is exactly $\\vartheta_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The bound $|\\delta e^{-rt_K}\\cos(\\pi x^1/L_1)|\\le|\\delta|<\\overline\\vartheta$ proves positivity. Direct differentiation gives $\\partial_{x^1}\\vartheta=-(\\pi\\delta/L_1)e^{-rt_K}\\sin(\\pi x^1/L_1)$, which vanishes at $x^1=0,L_1$; the other two normal derivatives vanish because the profile is independent of $x^2,x^3$. Hence it satisfies every boundary condition of [F1], and uniqueness identifies it with the theorem's heat solution. Using $\\cos^2 z=(1+\\cos(2z))/2$ and integrating the cosine term over $[0,L_1]$ gives $\\int_0^{L_1}\\cos^2(\\pi x^1/L_1)\\,dx^1=L_1/2$. Therefore $$\\|\\vartheta(t_K,\\cdot)-\\overline\\vartheta\\|_{L^2(\\Omega)}=|\\delta|\\sqrt{|\\Omega|/2}\\,e^{-rt_K}.$$ Dividing by the fixed positive lapse gives $T=\\vartheta/N$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "thm-tgr-supported-static-heat-evolution",
+          "carrier": "items/thm-tgr-supported-static-heat-evolution.md",
+          "status": "Current batch-65 draft; complete conditional proof with unresolved upstream readiness inputs.",
+          "source_section": "Statement",
+          "exact_statement": "Let $\\Omega=\\prod_{i=1}^3(0,L_i)$ with $L_i>0$, and let $U\\subset\\mathbb R^3$ be an open neighborhood of $\\overline\\Omega$. Let $N\\in C^\\infty(U,(0,\\infty))$ satisfy $0<N_{\\min}\\le N(x)\\le N_{\\max}<\\infty$ on $\\overline\\Omega$. On $M=\\mathbb R_{x^0}\\times U$, use $x^0=ct_K$ with $c>0$ in $\\mathrm{m\\,s^{-1}}$, give $M$ the time orientation $\\xi=\\partial_{x^0}$, and use the metric\n$$\ng=-N(x)^2(dx^0)^2+\\sum_{i=1}^3(dx^i)^2,\n$$\nwhere $x^i$ are measured in metres, $t_K$ in seconds, and $N$ is dimensionless. By [[def-gr-killing-field]], a Killing field is one satisfying $\\mathcal L_\\xi g=0$, where $\\mathcal L_\\xi g=\\frac d{dt}|_{t=0}\\Phi_t^*g$ for the local flow $\\Phi_t$ of $\\xi$. Thus $\\xi$ is a future timelike Killing field, $N=\\sqrt{-g(\\xi,\\xi)}$, and $u=N^{-1}\\xi$ is the smooth future unit timelike observer congruence of [[def-tgr-local-fluid-state]]; here this congruence means the unit timelike vector field, not a coordinate chart. Write $\\nabla_x$, $\\operatorname{div}_x$, $\\nu$, and $dx$ for the Euclidean spatial gradient, divergence, outward unit normal, and three-dimensional Lebesgue volume on the box, and set $|\\Omega|:=\\int_\\Omega1\\,dx=L_1L_2L_3$. For scalar fields on $\\Omega$, $L^2(\\Omega)$ and its norm use this measure.\n\nFor $t_K>0$ use the open domain $O=(0,\\infty)\\times\\Omega$. Spatial vectors such as $q$ are extended to spacetime with zero $x^0$ component.\n\nFix constants $C_V,n_0,A_0,T_{\\rm ref}>0$, a reference entropy $\\sigma_{\\rm ref}\\in\\mathbb R$, and a reference energy $e_0\\in\\mathbb R$. Their units are $C_V$ in $\\mathrm{J\\,m^{-3}K^{-1}}$, $n_0$ in $\\mathrm{marker\\,m^{-3}}$, $A_0$ in $\\mathrm{W\\,m^{-1}K^{-1}}$, $T_{\\rm ref}$ in kelvins, $\\sigma_{\\rm ref}$ in $\\mathrm{J\\,K^{-1}marker^{-1}}$, and $e_0$ in $\\mathrm{J\\,marker^{-1}}$. Define the derived per-marker heat capacity $c_v=C_V/n_0$, with units $\\mathrm{J\\,K^{-1}marker^{-1}}$, and the local mathematical material state function on $X=(0,\\infty)\\times\\mathbb R$ by\n$$\ne(v,\\sigma_p)=c_vT_{\\rm ref}\\exp\\!\\left(\\frac{\\sigma_p-\\sigma_{\\rm ref}}{c_v}\\right)+e_0,\n$$\nindependent of $v$. For a positive proper temperature $T$, set $\\sigma_p=\\sigma_{\\rm ref}+c_v\\log(T/T_{\\rm ref})$ and $v=1/n_0$. The state definitions of [[def-tgr-local-fluid-state]] give $n=n_0$, $p=0$, $\\epsilon=C_VT+n_0e_0$, and $s=n_0\\sigma_{\\rm ref}+C_V\\log(T/T_{\\rm ref})$.\n\nLet $\\vartheta_0\\in C^2(\\overline\\Omega)$ satisfy $0<m_0\\le\\vartheta_0\\le M_0$ and admit a $C^2$ extension $\\widetilde\\vartheta_0:\\mathbb R^3\\to\\mathbb R$ with the same bounds, period $2L_i$ in coordinate $x^i$, and evenness under $x^i\\mapsto-x^i$ for each $i$. These conditions make the extension even about every face $x^i=0,L_i$. Set $T_0=\\vartheta_0/N$. Define the physical heat flux, conductivity, static heat balance, and insulated-face condition by\n$$\nq=-\\kappa_{\\rm th}(\\nabla_xT+T\\nabla_x\\log N),\\qquad \\kappa_{\\rm th}=A_0/N,\\qquad NC_V\\partial_{t_K}T+\\operatorname{div}_x(N^2q)=0,\\qquad N^2q\\cdot\\nu=0\\ \\text{on each face},\n$$\nwhere $q$ has units $\\mathrm{W\\,m^{-2}}$, $\\kappa_{\\rm th}$ has units $\\mathrm{W\\,m^{-1}K^{-1}}$, and $\\nu$ is the outward Euclidean unit normal to a face. In the entropy identity use zero particle diffusion and zero shear and bulk viscosity, $V=0$ and $\\eta=\\zeta_{\\rm b}=0$, so $\\Pi=0$ and $\\pi^{ab}=0$. The thermal diffusivity $A_0/C_V$ has units $\\mathrm{m^2\\,s^{-1}}$. There is a unique solution $T\\in C([0,\\infty)\\times\\overline\\Omega)\\cap C^{2,1}((0,\\infty)\\times\\overline\\Omega)$, where $C^{2,1}$ means two continuous spatial derivatives and one continuous time derivative up to the box faces, satisfying the heat balance, the face condition, and the initial condition $T(0,x)=T_0(x)=\\vartheta_0(x)/N(x)$. It is given by\n$$\\vartheta(t_K,x):=N(x)T(t_K,x)=\\int_{\\mathbb R^3}\\Gamma\\!\\left(x-y,\\frac{A_0}{C_V}t_K\\right)\\widetilde\\vartheta_0(y)\\,dy\\quad(t_K>0),\\qquad \\vartheta(0,x)=\\vartheta_0(x),\\qquad \\Gamma(z,t)=(4\\pi t)^{-3/2}e^{-|z|^2/(4t)},\\quad z\\in\\mathbb R^3,\\ t>0.$$\nThus $T=\\vartheta/N$. It satisfies $C_V\\partial_{t_K}\\vartheta=A_0\\Delta_x\\vartheta$, $\\partial_\\nu\\vartheta=0$ on each face, and $m_0\\le\\vartheta\\le M_0$.\n\nFor this solution set $Q^0=0$, $Q^i=q^i/c$, $J=n_0u$, and\n$$\n\\mathsf T^{ab}=\\epsilon u^au^b+u^aQ^b+Q^au^b,\\qquad f^b:=\\nabla_a\\mathsf T^{ab}.\n$$\nHere $Q=q/c$ has units $\\mathrm{Pa}$, $\\mathsf T$ has units $\\mathrm{Pa}$, and $f$ has units $\\mathrm{N\\,m^{-3}}$. Then $\\nabla_aJ^a=0$ and $u_bf^b=0$: $f$ is an explicitly defined external support that supplies no local power. The entropy current $S^a=su^a+Q^a/T$ has units $\\mathrm{J\\,K^{-1}m^{-3}}$ and total entropy $\\mathcal S(t_K)=\\int_\\Omega s(t_K,x)\\,dx$ in $\\mathrm{J\\,K^{-1}}$, with\n$$\n\\frac{d\\mathcal S}{dt_K}=A_0\\int_\\Omega\\frac{|\\nabla_x\\vartheta|^2}{\\vartheta^2}\\,dx\\ge0.\n$$\nThe lapse-weighted energy $\\mathcal E_K(t_K)=\\int_\\Omega N\\epsilon\\,dx$ is constant in $\\mathrm{J}$. If $\\overline\\vartheta=|\\Omega|^{-1}\\int_\\Omega\\vartheta_0\\,dx$ and $C_\\Omega=\\frac32(\\max_iL_i)^2$, then\n$$\n\\left\\|\\vartheta(t_K,\\cdot)-\\overline\\vartheta\\right\\|_{L^2(\\Omega)}\\le \\exp\\!\\left(-\\frac{A_0t_K}{C_VC_\\Omega}\\right)\\left\\|\\vartheta_0-\\overline\\vartheta\\right\\|_{L^2(\\Omega)}.\n$$\nThus $T$ converges in $L^2(\\Omega)$ to $T_{\\rm eq}=\\overline\\vartheta/N$. Since $N T_{\\rm eq}=\\overline\\vartheta>0$, the inverse-temperature vector $\\beta=u/(k_BT_{\\rm eq})$, for $k_B>0$ in $\\mathrm{J\\,K^{-1}}$, is Killing by [[lem-tgr-killing-thermal-normalization]]. This is a mathematical solution of the specified fixed-background, supported first-order heat model; it asserts no Einstein equation, general dissipative-fluid initial-value theorem, or finite propagation speed.",
+          "relevant_hypotheses_and_conventions": "**Given:** the current batch-65 static heat theorem\u2019s positive-lapse box, material model, heat equation, boundary condition, solution class, and uniqueness assertion.",
+          "supplier_proof_status": "Current batch-65 draft; local proof complete conditional on the exact upstream interfaces recorded in the cross-batch dependency file.",
+          "consumer_use": "Supplies the fixed-background heat model, solution class and uniqueness used to identify the cosine solution."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Statement: all box lengths are positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: Step 2.1: delta=0 gives constant profile and zero deviation norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The profile is one explicit nonconstant cosine mode plus its mean. Verification 1.1 differentiates that mode and 2.1 computes its norm as |\u03b4|\u221a(|\u03a9|/2)e^-rt; no many-mode inference is needed for this singleton-mode example."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A1 and step 2.1 ensure strict positivity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 and step 2.1: Steps 1.1 and 2.1 give the initial trace and exponential decay."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: Statement: the example inherits only the theorem AC_omega premise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff claim is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff claim is made."
+        }
+      ]
+    },
+    "lem-tgr-spatial-shear-properties": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some \u2014 equivalently every \u2014 basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$, so that $TM$ carries its canonical smooth\nstructure. Let $M$ be a smooth manifold. A **smooth vector field** on $M$ is a\nsmooth section\n\n$$ X:M\\to TM $$\n\nof the tangent-bundle projection $\\pi:TM\\to M$. Thus $\\pi\\circ X=\\operatorname{id}_M$.\n\nEquivalently, for each $p\\in M$ the value $X(p)$ is a tangent vector in $T_pM$,\nand the dependence on $p$ is smooth with respect to the canonical smooth\nstructure on $TM$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-observer-and-rest-space",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]).\n\n**(a) Observers.** An **observer at $p$** is a tangent vector\n$n\\in T_pM$ such that $g_p(n,n)=-1$ and $n$ is future-directed in the sense of\n[[def-gr-smooth-lorentzian-objects]], that is, $g_p(n,N_p)<0$. Because\n$g_p(n,n)=-1\\neq0$, an observer is timelike and in particular nonzero\n([[def-causal-classification-of-lorentz-vectors]]). Observers at $p$ exist:\nthe vector $N_p$ is timelike, and\n$n:=N_p/\\sqrt{-g_p(N_p,N_p)}$ satisfies $g_p(n,n)=-1$ and\n$g_p(n,N_p)=-\\sqrt{-g_p(N_p,N_p)}<0$, where the square root is the\nnonnegative root of [[def-rational-power]]; then $-n$ is a unit timelike\nvector with $g_p(-n,N_p)>0$, so it is not an observer, and the two vectors\n$n,-n$ point in opposite time directions.\n\n**(b) Rest space.** For an observer $n$ at $p$, the **rest space** of $n$ is\nthe $g_p$-orthogonal complement of the line $\\mathbb Rn$,\n\n$$n^{\\perp}=\\{v\\in T_pM: g_p(v,n)=0\\},$$\n\nin the sense of [[def-lorentz-orthogonality-and-orthogonal-complement]]. It is\na linear subspace of $T_pM$. The further facts that $\\dim n^{\\perp}=3$ and\nthat the restriction of $g_p$ to $n^{\\perp}$ is positive definite are proved\nin [[lem-gr-observer-projection-decomposition]]; they are consequences, not\npart of the definition.\n\n**(c) Spatial projection.** The **spatial projection** of the observer $n$ is\nthe map\n\n$$h_n:T_pM\\longrightarrow T_pM,\\qquad h_n(v):=v+g_p(n,v)\\,n .$$\n\nThe map is linear because $g_p$ is bilinear, its image is contained in\n$n^{\\perp}$, and it fixes $n^{\\perp}$ pointwise; that it is the\n$g_p$-orthogonal projection onto $n^{\\perp}$ with kernel $\\mathbb Rn$ is\nproved in [[lem-gr-observer-projection-decomposition]].\n\n**(d) Scope.** An observer at $p$ is a single tangent vector. It is not an\nordered basis or frame of $T_pM$, not a chart, not a field of observers such as\nthe congruences defined later on this page, and not a curve or a worldline: no\nparametrized curve, clock reading, proper time or measurement is attached to\n$n$ by this definition. The physical reading of an observer as the direction\nof an ideal clock's worldline, and the measurement interpretation of the\nobserver-relative quantities introduced later on this page, belong to the\nphysical postulates and unit conventions of the framework and are not asserted\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gr-observer-projection-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let\n$p\\in M$, and let $n$ be an observer at $p$\n([[def-gr-observer-and-rest-space]]). Write $h:=h_n$,\n$n^{\\perp}=\\{v\\in T_pM:g_p(v,n)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and\n$\\mathbb Rn=\\{\\lambda n:\\lambda\\in\\mathbb R\\}$. Then:\n\n1. $h:T_pM\\to T_pM$ is linear, $h(n)=0$, $h(v)=v$ for every $v\\in n^{\\perp}$\n   and $h\\circ h=h$; its kernel is $\\ker h=\\mathbb Rn$, its image is\n   $\\operatorname{im}h=n^{\\perp}$, and\n   $T_pM=\\mathbb Rn\\oplus n^{\\perp}$ is an orthogonal direct sum: every\n   $v\\in T_pM$ has the unique decomposition\n\n   $$v=-g_p(v,n)\\,n+h(v),$$\n\n   in which $-g_p(v,n)n\\in\\mathbb Rn$ and $h(v)\\in n^{\\perp}$.\n2. For all $v,w\\in T_pM$ the **projection identity**\n\n   $$g_p(h(v),h(w))=g_p(v,w)+g_p(v,n)g_p(n,w)$$\n\n   holds; in particular $g_p(h(v),h(v))=g_p(v,v)+g_p(v,n)^2$.\n3. $\\dim n^{\\perp}=3$ and the restriction of $g_p$ to $n^{\\perp}$ is positive\n   definite.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi\u2013Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating $g_{ab}u^au^b=-1$ covariantly and using [F5] gives $u^d\\nabla_cu_d=0$ for every $c$. Also $u^ah_a{}^c=u^c+(u_au^a)u^c=0$, and similarly $u^bh_b{}^d=0$. Therefore both indices of $h_a{}^ch_b{}^d\\nabla_{(c}u_{d)}$ are spatial, and subtracting the spatial tensor $\\theta h_{ab}/3$ preserves spatiality. Since $h_{ab}$ and $\\nabla_{(c}u_{d)}$ are symmetric, their two-index projection and hence $\\sigma_{ab}$ are symmetric.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Expanding $h$ and using $g(u,u)=-1$ gives $g^{ab}h_a{}^ch_b{}^d=g^{cd}+u^cu^d$ and $g^{ab}h_{ab}=3$. Hence $g^{ab}\\sigma_{ab}=(g^{cd}+u^cu^d)\\nabla_{(c}u_{d)}-\\theta=\\theta+u^c(u^d\\nabla_cu_d)-\\theta=0$, where the middle term vanishes by step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F4], each pointwise rest space $u^\\perp$ is a finite-dimensional positive-definite inner-product space. Choose an algebraic basis there and apply the finite Gram\u2013Schmidt construction; each nonzero residual has positive norm and can be normalized. Since $\\sigma$ is spatial and symmetric by step 1.1, in that basis $\\sigma^{ab}\\sigma_{ab}=\\sum_{i,j=1}^3\\sigma_{ij}^2\\ge0$, and the sum is zero exactly when every component, hence $\\sigma$, is zero. The same positive-definite metric gives $g(Y,Y)\\ge0$ for every spatial vector, with equality only for $Y=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "supplier_excerpts": [
+        {
+          "supplier": "def-gr-smooth-lorentzian-objects",
+          "carrier": "items/def-gr-smooth-lorentzian-objects.md",
+          "status": "Published geometry definition; current signature and time-orientation clauses inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some \u2014 equivalently every \u2014 basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "relevant_hypotheses_and_conventions": "Smooth four-manifold with a smooth Lorentzian metric of signature (-,+,+,+) and smooth timelike time-orientation field.",
+          "supplier_proof_status": "Published definition; the current statement and its tangent-bundle convention were inspected.",
+          "consumer_use": "Supplies the Lorentzian signature, metric and time orientation."
+        },
+        {
+          "supplier": "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "carrier": "items/def-smooth-vector-field-as-a-tangent-bundle-section.md",
+          "status": "Published definition; exact smooth-section interface inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Assume $\\mathrm{AC}_\\omega$, so that $TM$ carries its canonical smooth\nstructure. Let $M$ be a smooth manifold. A **smooth vector field** on $M$ is a\nsmooth section\n\n$$ X:M\\to TM $$\n\nof the tangent-bundle projection $\\pi:TM\\to M$. Thus $\\pi\\circ X=\\operatorname{id}_M$.\n\nEquivalently, for each $p\\in M$ the value $X(p)$ is a tangent vector in $T_pM$,\nand the dependence on $p$ is smooth with respect to the canonical smooth\nstructure on $TM$.",
+          "relevant_hypotheses_and_conventions": "A smooth vector field is a smooth section of the tangent-bundle projection, under AC_omega.",
+          "supplier_proof_status": "Published definition; exact statement inspected.",
+          "consumer_use": "Supplies the meaning of the smooth field u."
+        },
+        {
+          "supplier": "def-gr-observer-and-rest-space",
+          "carrier": "items/def-gr-observer-and-rest-space.md",
+          "status": "Published observer definition; exact unit and future inequalities inspected.",
+          "source_section": "Definition",
+          "exact_statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]).\n\n**(a) Observers.** An **observer at $p$** is a tangent vector\n$n\\in T_pM$ such that $g_p(n,n)=-1$ and $n$ is future-directed in the sense of\n[[def-gr-smooth-lorentzian-objects]], that is, $g_p(n,N_p)<0$. Because\n$g_p(n,n)=-1\\neq0$, an observer is timelike and in particular nonzero\n([[def-causal-classification-of-lorentz-vectors]]). Observers at $p$ exist:\nthe vector $N_p$ is timelike, and\n$n:=N_p/\\sqrt{-g_p(N_p,N_p)}$ satisfies $g_p(n,n)=-1$ and\n$g_p(n,N_p)=-\\sqrt{-g_p(N_p,N_p)}<0$, where the square root is the\nnonnegative root of [[def-rational-power]]; then $-n$ is a unit timelike\nvector with $g_p(-n,N_p)>0$, so it is not an observer, and the two vectors\n$n,-n$ point in opposite time directions.\n\n**(b) Rest space.** For an observer $n$ at $p$, the **rest space** of $n$ is\nthe $g_p$-orthogonal complement of the line $\\mathbb Rn$,\n\n$$n^{\\perp}=\\{v\\in T_pM: g_p(v,n)=0\\},$$\n\nin the sense of [[def-lorentz-orthogonality-and-orthogonal-complement]]. It is\na linear subspace of $T_pM$. The further facts that $\\dim n^{\\perp}=3$ and\nthat the restriction of $g_p$ to $n^{\\perp}$ is positive definite are proved\nin [[lem-gr-observer-projection-decomposition]]; they are consequences, not\npart of the definition.\n\n**(c) Spatial projection.** The **spatial projection** of the observer $n$ is\nthe map\n\n$$h_n:T_pM\\longrightarrow T_pM,\\qquad h_n(v):=v+g_p(n,v)\\,n .$$\n\nThe map is linear because $g_p$ is bilinear, its image is contained in\n$n^{\\perp}$, and it fixes $n^{\\perp}$ pointwise; that it is the\n$g_p$-orthogonal projection onto $n^{\\perp}$ with kernel $\\mathbb Rn$ is\nproved in [[lem-gr-observer-projection-decomposition]].\n\n**(d) Scope.** An observer at $p$ is a single tangent vector. It is not an\nordered basis or frame of $T_pM$, not a chart, not a field of observers such as\nthe congruences defined later on this page, and not a curve or a worldline: no\nparametrized curve, clock reading, proper time or measurement is attached to\n$n$ by this definition. The physical reading of an observer as the direction\nof an ideal clock's worldline, and the measurement interpretation of the\nobserver-relative quantities introduced later on this page, belong to the\nphysical postulates and unit conventions of the framework and are not asserted\nhere.",
+          "relevant_hypotheses_and_conventions": "A future unit timelike observer has g(u,u)=-1 and g(u,N)<0; its rest space is u-perp.",
+          "supplier_proof_status": "Published definition; exact statement inspected.",
+          "consumer_use": "Supplies the observer and rest-space conventions."
+        },
+        {
+          "supplier": "lem-gr-observer-projection-decomposition",
+          "carrier": "items/lem-gr-observer-projection-decomposition.md",
+          "status": "Published mathematical item; full statement and proof inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let\n$p\\in M$, and let $n$ be an observer at $p$\n([[def-gr-observer-and-rest-space]]). Write $h:=h_n$,\n$n^{\\perp}=\\{v\\in T_pM:g_p(v,n)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and\n$\\mathbb Rn=\\{\\lambda n:\\lambda\\in\\mathbb R\\}$. Then:\n\n1. $h:T_pM\\to T_pM$ is linear, $h(n)=0$, $h(v)=v$ for every $v\\in n^{\\perp}$\n   and $h\\circ h=h$; its kernel is $\\ker h=\\mathbb Rn$, its image is\n   $\\operatorname{im}h=n^{\\perp}$, and\n   $T_pM=\\mathbb Rn\\oplus n^{\\perp}$ is an orthogonal direct sum: every\n   $v\\in T_pM$ has the unique decomposition\n\n   $$v=-g_p(v,n)\\,n+h(v),$$\n\n   in which $-g_p(v,n)n\\in\\mathbb Rn$ and $h(v)\\in n^{\\perp}$.\n2. For all $v,w\\in T_pM$ the **projection identity**\n\n   $$g_p(h(v),h(w))=g_p(v,w)+g_p(v,n)g_p(n,w)$$\n\n   holds; in particular $g_p(h(v),h(v))=g_p(v,v)+g_p(v,n)^2$.\n3. $\\dim n^{\\perp}=3$ and the restriction of $g_p$ to $n^{\\perp}$ is positive\n   definite.",
+          "relevant_hypotheses_and_conventions": "At each point, the unit timelike observer projection has a three-dimensional positive-definite orthogonal complement.",
+          "supplier_proof_status": "Published result; proof clauses 2.3 and 3.2 inspected for the positive rest-space metric and dimension.",
+          "consumer_use": "Supplies positive definiteness of u-perp for vector and shear contractions."
+        },
+        {
+          "supplier": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "carrier": "items/thm-gr-nondegenerate-levi-civita-and-tensor-derivative.md",
+          "status": "Published mathematical theorem; metric-compatibility and tensor-derivative clauses inspected.",
+          "source_section": "Statement",
+          "exact_statement": "Let $M$ be a smooth four-manifold without boundary and let $g$ be a smooth\nsymmetric covariant $2$-tensor field on $M$ such that $g_p$ is nondegenerate at\nevery $p\\in M$ ([[def-gr-smooth-covariant-two-tensor-field]]). Assume\n$\\mathrm{AC}_\\omega$ for the canonical tangent-bundle smooth structure\n([[def-countable-choice]], [[def-smooth-vector-field-as-a-tangent-bundle-section]]).\nFor this general metric define $\\flat_p(v):=g_p(v,\\cdot)$,\n$\\sharp_p:=\\flat_p^{-1}$, and\n$g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta)$.\nNondegeneracy makes $\\flat_p$ injective and hence invertible between the\nfour-dimensional tangent space and its dual. In a chart, $g^{ab}$ are the\nentries of the inverse matrix of $(g_{ab})$. These definitions agree with\n[[def-gr-inverse-metric-and-musical-isomorphisms]] in its Lorentzian scope.\nHere and below repeated upper/lower indices are summed over $0,1,2,3$.\nThis holds in particular\nwhen $(M,g,N)$ is a time-oriented smooth Lorentzian four-manifold and $g$ is\nits metric ([[def-gr-smooth-lorentzian-objects]]). For smooth local vector fields\n$X,Y,Z$ put\n\n$$K(X,Y,Z):=X\\bigl(g(Y,Z)\\bigr)+Y\\bigl(g(Z,X)\\bigr)-Z\\bigl(g(X,Y)\\bigr)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X),$$\n\nwith brackets as in [[def-lie-bracket-of-smooth-vector-fields]].\n\n**(a) Existence and formulas.** There is exactly one affine connection\n$\\nabla$ on $M$ ([[def-affine-connection-on-a-smooth-manifold]]) satisfying\n\n$$2g(\\nabla_XY,Z)=K(X,Y,Z)\\qquad\\text{for all smooth local }X,Y,Z .$$\n\nIt is torsion-free and $g$-compatible, so it is a metric-selected connection\nfor $(M,g)$, meaning torsion-free and satisfying\n$Xg(Y,Z)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$ for smooth local fields\n(the conditions of [[def-gr-metric-selected-connection]] extended here to\nnondegenerate $g$); in every smooth chart its\nChristoffel symbols are\n\n$$\\Gamma^a{}_{bc}=\\tfrac12\\,g^{ad}\\bigl(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}\\bigr),$$\n\nwith $g^{ad}$ the inverse-metric components defined above\n([[def-christoffel-symbols-of-an-affine-connection]]).\n\n**(b) Uniqueness.** If an affine connection $\\nabla'$ on $M$ is torsion-free\nand $g$-compatible, then $\\nabla'=\\nabla$. Consequently the class\n$\\operatorname{LC}(M,g)$ of metric-selected connections has exactly one\nelement; it is the **Levi\u2013Civita connection** of $g$.\n\n**(c) Induced derivative on tensor fields.** Let $\\nabla^*$ be the dual\nconnection on $T^*M$ and let the product connection of\n[[def-product-connection-on-tensor-and-hom-bundles]] act on\n$T^r_sM:=(TM)^{\\otimes r}\\otimes(T^*M)^{\\otimes s}$, for integers $r,s\\ge0$,\nconstructed by [[lem-finite-tensor-products-of-smooth-vector-bundles]]. A\ntype $(r,s)$ tensor at $p$ is a multilinear map\n$(T_p^*M)^r\\times(T_pM)^s\\to\\mathbb R$\n([[def-type-r-s-tensor-on-a-finite-dimensional-vector-space]]); a smooth\ntensor field is a section with smooth coefficients in each local product\nframe. The empty product is the scalar line. Its chart components are\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}=T(dx^{a_1},\\ldots,dx^{a_r},\\partial_{b_1},\\ldots,\\partial_{b_s})$,\nwhere $dx^a$ is dual to $\\partial_a$. This agrees with\n[[def-gr-tensor-fields-and-components]] in the Lorentzian case. Put\n$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}:=(\\nabla_{\\partial_c}T)^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}$.\nThen, in every smooth chart, for\nevery smooth tensor field $T$ of type $(r,s)$,\n\n$$T^{a_1\\cdots a_r}{}_{b_1\\cdots b_s;c}=\\partial_cT^{a_1\\cdots a_r}{}_{b_1\\cdots b_s}+\\sum_{i=1}^{r}\\Gamma^{a_i}{}_{dc}\\,T^{a_1\\cdots d\\cdots a_r}{}_{b_1\\cdots b_s}-\\sum_{j=1}^{s}\\Gamma^{d}{}_{b_jc}\\,T^{a_1\\cdots a_r}{}_{b_1\\cdots d\\cdots b_s},$$\n\nwhere the slot marked $d$ replaces the named index; this derivative commutes\nwith every contraction in the sense of [[def-contraction-of-a-mixed-tensor]],\nand it annihilates the metric and the inverse metric:\n\n$$g_{ab;c}=0,\\qquad g^{ab}{}_{;c}=0 .$$",
+          "relevant_hypotheses_and_conventions": "For a smooth nondegenerate metric, the unique torsion-free metric-compatible connection satisfies nabla g=0 and the tensor product rule.",
+          "supplier_proof_status": "Published theorem; the exact statement and proof clauses establishing metric compatibility were inspected.",
+          "consumer_use": "Supplies the covariant product rule used to differentiate g(u,u) and compute the shear trace."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published exact axiom definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "relevant_hypotheses_and_conventions": "The geometric tangent-bundle convention uses AC_omega; no unrestricted choice is invoked.",
+          "supplier_proof_status": "Published definition; exact AC_omega formulation inspected.",
+          "consumer_use": "Records the precise inherited choice strength."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the conclusions are pointwise, so the empty open set case is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: the component sum is zero exactly when every shear component is zero; zero spatial vectors have zero norm."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-element index or sample occurs.",
+          "template_review": {
+            "upheld": true,
+            "by": "physics_gate_coverage_tgr",
+            "reason": "Statement is fixed to a four-manifold with three-dimensional rest space. Proof 2.1 uses trace three and 3.1 uses a finite nine-square shear norm; a one-dimensional rest-space variant is not quantified.",
+            "item_sha256": "74e6cee159baee00cfe2927defc0e08d5d1599ca4ab86c82b1119627ee6ff3d2",
+            "row_sha256": "0dbf9dc9239b0587b8e624750cf216e08359f3a8bcf307194ca2be0c95ec7401"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: a unit timelike vector has a three-dimensional positive-definite rest space; the trace divisor is 3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint or limiting parameter is part of the claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and step 1.1: only the exact AC_omega tangent-bundle convention is inherited; the pointwise proof uses no further choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1: if sigma is zero, its component sum of squares is zero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1: if the sum of squared components is zero, every component and sigma are zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-65",
+        "notes": "Independently checked current Statement and all proof steps 1.1\u20133.1, and actual geometry/observer/connection/countable-choice suppliers. Metric compatibility gives u^d nabla_c u_d=0; projected symmetry and both spatial slots hold, trace(h)=3 and the projected derivative trace is theta. The positive three-dimensional rest metric of lem-gr-observer-projection-decomposition (proof 2.3 and 3.2) makes the shear contraction a finite sum of squares, with both zero-equivalence directions valid. Empty O is vacuous; no global frame or further choice is selected. No physical field equation or empirical premise enters. Reader and refuter report no mathematical defect; no repair needed."
+      }
+    }
+  }
+}

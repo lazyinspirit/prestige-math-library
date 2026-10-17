@@ -1,0 +1,14 @@
+# Batch 38: review 1
+
+Run: physics-remaining-80-2026-10-17
+Batch: 38
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qsm-quasilocal-states, qsm-quasilocal-states-examples
+Items: lem-qsm-integer-lattice-countable, def-qsm-local-spin-algebras, lem-qsm-local-spin-inclusions-isometric, def-qsm-quasilocal-spin-algebra, lem-qsm-quasilocal-completion, def-qsm-infinite-algebraic-state, lem-qsm-consistent-local-states, lem-qsm-spin-state-compactness, lem-qsm-state-gns-construction, ex-qsm-quasilocal-two-site-locality, ex-qsm-quasilocal-infinite-tail-observable, ex-qsm-maximally-mixed-consistent-product-state
+Consolidated findings: [{"id":"qsm-quasilocal-states","type":"local","reason":"The page's closing note says the current matrix-calculus proof has an uncorrected density assertion and leaves the C*-identity and state/density correspondence missing. The current proof distinguishes normalized vectors from rational-coordinate vectors, while lem-qsm-finite-matrix-cstar-and-state-duality supplies those two interfaces. Update the note to describe the current supplier split and retain the draft-status qualification."},{"id":"ex-qsm-quasilocal-infinite-tail-observable","type":"prerequisite","reason":"Facts [F1] and Step 3.1 need a positive site outside every finite region. lem-qsm-integer-lattice-countable proves at-most-countability, not infinitude, and “the usual integer order” is not an exact supplier. Supply a local proof that the positive integers cannot be exhausted by a finite region before using this fact."}]
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

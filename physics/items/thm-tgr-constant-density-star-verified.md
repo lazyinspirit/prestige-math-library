@@ -1,0 +1,91 @@
+---
+id: thm-tgr-constant-density-star-verified
+kind: theorem
+title: "Exact regular constant-density solution with verified matching"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 2
+deps:
+  - def-tgr-spherical-static-state-domain
+  - def-countable-choice
+  - lem-tgr-spherical-einstein-tov-reduction
+  - lem-tgr-even-radial-center-regularity
+  - thm-real-power-continuity-and-derivatives
+  - thm-algebra-of-derivatives
+  - thm-chain-rule-for-total-derivatives
+  - thm-ck-euclidean-maps-closed-under-algebra-and-composition
+  - thm-ftc-first-part
+  - thm-continuous-implies-integrable
+  - lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+proof_strategy: direct
+dependency_roles:
+  def-tgr-spherical-static-state-domain: mathematical-premise
+  def-countable-choice: mathematical-premise
+  lem-tgr-spherical-einstein-tov-reduction: mathematical-premise
+  lem-tgr-even-radial-center-regularity: mathematical-premise
+  thm-real-power-continuity-and-derivatives: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-ck-euclidean-maps-closed-under-algebra-and-composition: mathematical-premise
+  thm-ftc-first-part: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space: mathematical-premise
+sources:
+  references:
+    - title: "P.-H. Chavanis, Statistical mechanics of self-gravitating systems in general relativity: I. The quantum Fermi gas, arXiv:1908.10806v1 (2019), Sec. III.A, Eqs. (99)–(110)"
+      url: "https://arxiv.org/pdf/1908.10806"
+    - title: "MIT 8.962, General Relativity, Spring 2020 Lecture Guide, Lecture 21, PDF pp. 7–9"
+      url: "https://ocw.mit.edu/courses/8-962-general-relativity-spring-2020/743631236d2866f6ba129f06110d8b1a_MIT8_962S20_guide.pdf"
+---
+
+## Statement
+
+Assume $\mathrm{ZF}+\mathrm{AC}_\omega$ exactly as in [[def-countable-choice]] and use the geometry and units of [[def-tgr-spherical-static-state-domain]]. Let $\rho_0>0$ be a constant mass density in $\mathrm{kg}\,\mathrm m^{-3}$, $R>0$ in metres, $\epsilon_0=\rho_0c^2$ in $\mathrm J\,\mathrm m^{-3}$, $M_R=4\pi\rho_0R^3/3$ in kilograms, and
+$$u=\frac{2GM_R}{c^2R}\in(0,8/9),\qquad a=\sqrt{1-u},\qquad B(r)=\sqrt{1-u r^2/R^2}.$$
+For $0\le r\le R$, define
+$$M(r)=M_R(r/R)^3,\quad b(r)=B(r)^2,\quad p(r)=\epsilon_0\frac{B(r)-a}{3a-B(r)},\quad e^{\phi(r)}=\frac{3a-B(r)}2.$$
+Set $\epsilon(r)=\epsilon_0$ for $0\le r<R$ and $\epsilon(r)=0$ for $r\ge R$. For $r\ge R$, also set $M(r)=M_R$, $b(r)=1-2GM_R/(c^2r)$, $p(r)=0$, and $e^{\phi(r)}=\sqrt{b(r)}$. Then $p(R)=0$, $b>0$, the interior lapse is positive, and the central pressure is finite and equals $\epsilon_0(1-a)/(3a-1)$. The interior and exterior fields solve the spherical Einstein and conservation system of [[lem-tgr-spherical-einstein-tov-reduction]] on their open pieces; the interior equations extend to the center by continuity. The interior metric has a $C^2$ Cartesian center; the interior and exterior join at $r=R$ as a $C^1$ metric that is piecewise $C^2$, with matching first derivatives at the interface. For this interface assertion, a radial distribution on an open radial-coordinate interval $U$ is a linear functional $T$ on $C_c^\infty(U)$, the space of smooth real functions with compact support in $U$, such that for every compact $K\subset U$ there exist $C_K\ge0$ and an integer $N_K\ge0$ satisfying $|T[\psi]|\le C_K\max_{0\le j\le N_K}\sup_K|\psi^{(j)}|$ whenever $\operatorname{supp}\psi\subseteq K$, the Dirac distribution is $\delta_R[\psi]=\psi(R)$, and a delta-supported surface stress means a source term $S^a{}_b\delta_R$. The prescribed piecewise source has no such term. The proof also shows that $0<u<8/9$ is necessary and sufficient for these algebraic formulas to give real interior data with $b>0$, finite nonnegative pressure, and positive lapse throughout $[0,R]$. This range is specific to the constant-density family and is not a general Buchdahl theorem.
+
+## Facts & Assumptions
+
+**Given:** $\rho_0>0$, $R>0$, $u\in(0,8/9)$, $\epsilon_0=\rho_0c^2$, the metric convention of [[def-tgr-spherical-static-state-domain]], $\mathrm{AC}_\omega$ of [[def-countable-choice]], and the reduction and radial regularity results below.
+
+[F1] The metric signature, source components, curvature sign, and SI units are those of [[def-tgr-spherical-static-state-domain]]; the spherical Einstein/conservation system is equivalent on $r>0$ to the mass, lapse, and pressure equations in [[lem-tgr-spherical-einstein-tov-reduction]].
+
+[F2] For $b=1-r^2q$ with even $C^2$ $q$ and $b>0$, the spatial metric has the Cartesian form $\delta_{ij}+x_ix_jq/b$, and even radial lapse coefficients extend $C^2$ ([[lem-tgr-even-radial-center-regularity]]).
+
+[F3] The real-power derivative formula gives $(\sqrt{x})'=1/(2\sqrt{x})$ on $(0,\infty)$; repeated differentiation gives smoothness of positive-base powers ([[thm-real-power-continuity-and-derivatives]]).
+
+[F4] Total derivatives obey the chain rule, scalar products and quotients obey the usual derivative rules, and finite componentwise sums, products, and compositions of $C^k$ Euclidean maps are $C^k$ ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]]).
+
+[F5] A continuous integrand on a compact interval is integrable, and its variable-endpoint integral has derivative equal to the integrand at every continuity point ([[thm-continuous-implies-integrable]], [[thm-ftc-first-part]]).
+
+[F6] A smooth real function with nonzero derivative at a point has a smooth local inverse there ([[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]]).
+
+[A1] For the branch-range claim, for any real $u>0$ consider the same algebraic formulas wherever their square roots are real; a regular positive branch means that the interior has $b>0$, finite $p\ge0$, and positive lapse at every radius in $[0,R]$. No empirical stellar model or causal transport law is assumed.
+
+[A2] The geometric suppliers use $\mathrm{AC}_\omega$ as specified in [[def-countable-choice]]; no full Axiom of Choice is used.
+
+## Proof
+
+1.1 Since $0<u<8/9$, $a=\sqrt{1-u}>1/3$. On $0\le r\le R$, $a\le B(r)\le1$, so $b=B^2>0$ and $3a-B(r)\ge3a-1>0$. Thus the lapse and pressure are finite and the lapse is positive; $p(R)=0$, $p(r)\ge0$, and $p(0)=\epsilon_0(1-a)/(3a-1)$. [given, A1, A2, F3, algebra]
+
+2.1 To check sharpness, first take $8/9\le u<1$. At $u=8/9$, $a=1/3$ and $B(0)=1=3a$, so the pressure denominator vanishes at the center while its numerator is positive, and $e^{\phi(0)}=0$. If $8/9<u<1$, then $a<1/3$ and $a<3a<1=B(0)$, whereas $B(R)=a$; continuity gives $r_*\in(0,R)$ with $B(r_*)=3a$, where the pressure denominator vanishes and the lapse is zero. If $u=1$, then $b(R)=0$; if $u>1$, $B(R)$ is not real. Thus no $u\ge8/9$ gives a regular positive branch, while step 1.1 proves that every $0<u<8/9$ does. [given, A1, step 1.1, algebra]
+
+2.2 The mass formula gives $M'=3M_Rr^2/R^3=4\pi\rho_0r^2=4\pi r^2\epsilon_0/c^2$. The functions $B,\phi,p$ are even and smooth near $r=0$ because $1-u r^2/R^2>0$ and $3a-B>0$. Writing $b=1-r^2q$ with $q=u/R^2$, [F2] gives a $C^2$ Cartesian center for the interior metric. The Einstein equations hold at the center by continuity of the curvature and source components from $r>0$. [A2, step 1.1, F2, F3, algebra]
+
+2.3 For $0<r<R$, the chain, product, and quotient rules [F4], together with [F3], give $$B'=-\frac{ur}{R^2B},\quad \phi'=\frac{ur}{R^2B(3a-B)},\quad \left(\frac p{\epsilon_0}\right)'=-\frac{2au r}{R^2B(3a-B)^2}.$$ Also $1+p/\epsilon_0=2a/(3a-B)$, so $p'=-(\epsilon_0+p)\phi'$. Using $u=8\pi G\epsilon_0R^2/(3c^4)$ and $p/\epsilon_0=(B-a)/(3a-B)$, direct simplification yields $$\phi'=\frac{4\pi G r(\epsilon_0/3+p)}{c^4b} =\frac{GM/c^2+4\pi G r^3p/c^4}{r^2b},$$ where $M=M_Rr^3/R^3$. Substituting the displayed lapse into $p'=-(\epsilon_0+p)\phi'$ is the TOV pressure equation in [F1], so the interior mass, lapse, and pressure equations all hold. [A2, step 1.1, F1, F3, F4, algebra]
+
+2.4 For $r\ge R$, $M'=0$, $\epsilon=p=0$, and $b=1-uR/r>0$ since $u<1$. The chain and quotient rules [F4] give $\phi'=\frac12 b'/b=uR/(2r^2b)=GM_R/(c^2r^2b)$, so the vacuum mass and lapse equations hold and the pressure equation is $0=0$. [A2, F1, F4, step 1.1, algebra]
+
+3.1 Let $b_-(r)=1-ur^2/R^2$ on the interior side and $b_+(r)=1-uR/r$ on the exterior side. Both formulas are smooth and positive on separate open neighborhoods of $R$. By [F3]–[F4], their negative one-half powers are smooth there. For a common value $\ell_R$, define $\ell_\pm(r)=\ell_R+\int_R^r b_\pm(s)^{-1/2}\,ds$. By [F5] these functions have derivatives $d\ell_\pm/dr=b_\pm^{-1/2}>0$; repeated differentiation of these identities makes $\ell_\pm$ smooth. By [F6], after shrinking the neighborhoods, each has a smooth local inverse $r_\pm(\ell)$ satisfying $dr_\pm/d\ell=\sqrt{b_\pm(r_\pm(\ell))}$. Use $\ell<\ell_R$ for the interior and $\ell>\ell_R$ for the exterior as the matching chart, so $r_\pm(\ell_R)=R$ and $dr_\pm/d\ell(\ell_R)=a$ on both sides. At $r=R$, [F1] gives $b_-(R)=b_+(R)=a^2$ and both lapse values equal $a$. The lapse derivatives with respect to $r$ agree by steps 2.3–2.4: $(e^\phi)'_-(R)=u/(2Ra)=(\sqrt{b_+})'(R)$. Hence in the matching chart the coefficients $g_{00}=-e^{2\phi}$ and $r_\pm(\ell)^2\gamma$ have matching values and first derivatives, while $g_{\ell\ell}=1$ on both sides. Thus the metric is $C^1$ and piecewise $C^2$ in that chart. For a piecewise $C^2$ coefficient $f(\ell)$ with one-sided values and derivatives, define $Df[\psi]:=-\int f(\ell)\psi'(\ell)\,d\ell$ for $\psi\in C_c^\infty$, and define $\delta_{\ell_R}[\psi]=\psi(\ell_R)$ and $\delta'_{\ell_R}[\psi]=-\psi'(\ell_R)$. These functionals satisfy the stated test bounds: for nonempty compact $K\subset U$, choose a compact interval $[a,b]\subset U$ containing $K$ and let $M$ bound $|f|$ there on both sides of the interface. For $\operatorname{supp}\psi\subseteq K$, $|\int f\psi|\le(b-a)M\sup_K|\psi|$, $|Df[\psi]|\le(b-a)M\sup_K|\psi'|$, and $|D^2f[\psi]|=|\int f\psi''|\le(b-a)M\sup_K|\psi''|$; hence the orders $0,1,2$ suffice. Also $|\delta_{\ell_R}[\psi]|\le\sup_K|\psi|$ and $|\delta'_{\ell_R}[\psi]|\le\sup_K|\psi'|$, with both evaluations zero if $\ell_R\notin K$; empty $K$ admits only the zero test function. Linearity follows from these formulas. Integration by parts on the two sides gives $D^2f=f''_{\rm piecewise}+[f']\delta_{\ell_R}+[f]\delta'_{\ell_R}$, where $[f]=f(\ell_R+)-f(\ell_R-)$ and similarly for $[f']$. The matched metric coefficients and first derivatives make both jumps zero. The Christoffel coefficients are formed from the metric, its inverse, and its first derivatives; since the metric is nondegenerate, they are continuous and piecewise $C^1$. With the curvature convention of [F1], its coordinate formula on the smooth sides is $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb}$; in this interface calculation take those derivatives in the distributional sense just defined. Since the Christoffel coefficients are continuous, the curvature formula produces no surface-supported term. The source fields are piecewise ordinary functions and likewise contain no delta-supported surface stress. [A2, F1, F3, F4, F5, F6, step 1.1, step 2.2, step 2.3, step 2.4, algebra] ∎
+
+## Remarks
+
+The $u<8/9$ pressure restriction and endpoint divergence belong to this explicit uniform-density branch. The areal radius is used as a smooth coordinate on each side; the matching chart across $r=R$ is the proper-radial coordinate $\ell$ constructed in the proof. The argument neither proves the general Buchdahl theorem nor supplies a finite-sound-speed matter dynamics for the incompressible equation of state.
+
+

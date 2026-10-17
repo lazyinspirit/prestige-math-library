@@ -1,0 +1,67 @@
+---
+id: thm-emg-einstein-gauge-propagation
+kind: theorem
+title: "Einstein harmonic gauge propagation with Maxwell on shell"
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 5
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+deps:
+  - def-emg-electrovacuum-cauchy-system
+  - lem-emg-coupled-reduced-einstein-evolution
+  - thm-emg-maxwell-gauss-propagation
+  - lem-emg-maxwell-stress-conservation
+  - thm-emg-gauss-codazzi-maxwell-constraints
+  - lem-emg-fixed-smooth-background-harmonic-data
+  - lem-gr-einstein-residual-and-subsidiary-identity
+  - lem-gr-reduced-einstein-principal-part
+dependency_roles:
+  def-emg-electrovacuum-cauchy-system: mathematical-premise
+  lem-emg-coupled-reduced-einstein-evolution: mathematical-premise
+  thm-emg-maxwell-gauss-propagation: mathematical-premise
+  lem-emg-maxwell-stress-conservation: mathematical-premise
+  thm-emg-gauss-codazzi-maxwell-constraints: mathematical-premise
+  lem-emg-fixed-smooth-background-harmonic-data: mathematical-premise
+  lem-gr-einstein-residual-and-subsidiary-identity: mathematical-premise
+  lem-gr-reduced-einstein-principal-part: mathematical-premise
+sources:
+  references:
+    - title: "P. T. Chruściel, An introduction to the Cauchy problem for the Einstein equations, Roscoff lecture notes (2011), §1.6, printed pp. 23–25."
+      url: "https://gravity.univie.ac.at/fileadmin/user_upload/i_gravity_physics/material/teaching/WS_2012/Roscoff.pdf"
+    - title: "M. Alcubierre, J. C. Degollado and M. Salgado, The Einstein-Maxwell system in 3+1 form and initial data for multiple charged black holes, arXiv:0907.1151v2 (2009), §II, printed pp. 3–8."
+      url: "https://arxiv.org/pdf/0907.1151"
+verification:
+  precheck: pending
+---
+
+## Statement
+
+Let $(g,F)$ be a reduced Einstein–Maxwell solution with $g\in C^3$ and $F\in C^2$ on a neighborhood of a smooth spacelike initial hypersurface $\Sigma_0$. Let the initial metric and first derivatives be chosen by [[lem-emg-fixed-smooth-background-harmonic-data]], so the harmonic vector $H^a:=g^{bc}(\Gamma^a{}_{bc}-\bar\Gamma^a{}_{bc})$ vanishes on $\Sigma_0$. Assume the source-free Maxwell divergence constraints and the four Einstein Hamiltonian/momentum constraints hold on $\Sigma_0$. Conditional on the draft Maxwell stress-conservation and Gauss–Codazzi suppliers below, each present on disk but with precheck pending and listed in the batch-6 manifest, $H=0$ on a neighborhood of each point of $\Sigma_0$, and the reduced metric equation there is the full Einstein–Maxwell equation.
+
+## Facts & Assumptions
+**Given:** The coupled reduced evolution, $H|_{\Sigma_0}=0$, and the Maxwell and Einstein initial constraints.
+
+[L1] [[thm-emg-maxwell-gauss-propagation]] gives $dF=d\star_gF=0$ locally for $C^1$ metric and field, an explicit $C^1$ transverse future unit normal, the normal-slot evolution equations $\iota_n dF=\iota_n d\star_gF=0$, and zero initial Gauss divergences. The smooth coordinate slices and $g\in C^3$, $F\in C^2$ here meet those hypotheses.
+
+[L2] Draft supplier [[lem-emg-maxwell-stress-conservation]] proves for a smooth Maxwell two-form and current $j$ that $\nabla^aT_{ab}=-F_{bc}j^c$; for source-free $j=0$ this gives conservation. Its item file is listed in batch 6; its status is draft and its precheck is pending, so the use remains conditional.
+
+[L3] Draft supplier [[thm-emg-gauss-codazzi-maxwell-constraints]] proves, with $K(X,Y)=g(\nabla_Xn,Y)$ and the stated SI stress, the Einstein Hamiltonian and momentum constraints and Maxwell divergences $D_ie^i=D_ib^i=0$. Its item file is listed in batch 6; its status is draft and its precheck is pending; the use remains conditional on that actual draft proof.
+
+[F1] [[lem-gr-einstein-residual-and-subsidiary-identity]]: on a solution of the harmonic-reduced Einstein equation with constant $\kappa,\Lambda$ and $\nabla^aT_{ab}=0$, the unreduced residual is $E_{ab}=\tfrac12(\nabla_aH_b+\nabla_bH_a-g_{ab}\nabla_cH^c)$ and $H$ satisfies $\Box_gH_b+\operatorname{Ric}_{ba}H^a=0$.
+
+[F2] [[lem-gr-reduced-einstein-principal-part]] gives a symmetric first-order reduction of the wave operator, with positive definite time matrix on an admissible spacelike-slice chart and symmetric spatial matrices.
+
+## Proof
+
+1.1 By [L1], the reduced Maxwell evolution and its initial divergence constraints give the full source-free Maxwell equations. The stress-conservation interface [L2] then yields $\nabla^aT_{ab}=0$ before using the unreduced Einstein equations. Thus [F1] applies and the harmonic vector obeys its homogeneous linear wave equation. [given, L1, L2, F1]
+
+1.2 Since $H=0$ as a field on $\Sigma_0$, every tangential covariant derivative of $H$ vanishes there. The Einstein constraints [L3] say that the unreduced residual has zero normal-normal and normal-tangential components. In an initially orthogonal frame with $g_{00}=-1$ and $g_{0i}=0$, the residual formula of [F1] gives $E_{00}=\tfrac12\nabla_0H_0$ and $E_{0i}=\tfrac12\nabla_0H_i$: indeed $\nabla_iH_j=\nabla_iH_0=0$ on the slice, and $\nabla_cH^c=-\nabla_0H_0$. Hence $\nabla_nH=0$ initially. [given, L3, F1, algebra]
+
+2.1 Fix a point of $\Sigma_0$ and a relatively compact coordinate ball around it. Write the wave equation in [F1] as the first-order symmetric hyperbolic system for $W=(H,\partial_sH,\partial_iH)$ supplied by [F2]. On a sufficiently small compact cylinder its time matrix satisfies $A^0\succeq aI$ for some $a>0$, all spatial matrices are bounded, and all lower-order coefficients are bounded. Choose $\lambda> a^{-1}\sup_{|\nu|=1}\|\nu_iA^i\|$. For $s\ge0$ let $B_s$ be the Euclidean ball of radius $r-\lambda s$ about the chosen point and set $\mathcal E(s)=\int_{B_s}W^{\mathsf T}A^0W\,dx$. The symmetric system's product rule and spatial integration by parts give $\mathcal E'(s)\le C\mathcal E(s)-\int_{\partial B_s}W^{\mathsf T}(\lambda A^0+\nu_iA^i)W\,dS$. The boundary matrix is positive semidefinite because $\lambda a>\sup_{|\nu|=1}\|\nu_iA^i\|$; therefore $\mathcal E'\le C\mathcal E$. The zero initial values established in steps 1.1 and 1.2, together with Gronwall, force $\mathcal E=0$ in the shrinking cone. Reversing time proves the same on the past cone. Thus $H=0$ in a neighborhood of the chosen point, and the point was arbitrary. [step 1.1, step 1.2, F1, F2, algebra]
+
+3.1 When $H=0$, the harmonic-reduced Einstein equation differs from the unreduced equation by terms linear in $\nabla H$, which now vanish. Step 1.1 already gives both Maxwell equations, so the full coupled Einstein–Maxwell equations hold near the initial surface. The conclusion remains conditional on the CP01 draft statements [L2]–[L3], whose files are listed in batch 6 but remain precheck-pending. [step 2.1, step 1.1, L2, L3, F1, algebra] ∎

@@ -1,0 +1,1680 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-emg-rational-electrovac-verification-correctness",
+    "lem-emg-rational-electrovac-verification-termination-resources",
+    "lem-emg-xs-rn-tensor-identities",
+    "thm-emg-xs-rn-verification",
+    "prop-emg-xs-rn-curvature",
+    "lem-emg-xs-kn-rational-calculus",
+    "thm-emg-xs-kn-verification",
+    "prop-emg-xs-kn-invariants",
+    "lem-emg-xs-duality",
+    "prop-emg-xs-kn-dyonic-flux",
+    "ex-emg-xs-zero-rotation",
+    "ex-emg-xs-rn-charge-sign",
+    "cex-emg-xs-scalar-trace"
+  ],
+  "contracts": {
+    "lem-emg-rational-electrovac-verification-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-emg-rational-electrovac-verification",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Fix the integral domain\n$P=\\mathbb Q[r,y,M,a,q]$ on the ordered variables $(r,y,M,a,q)$ and its field of fractions\n$K=\\operatorname{Frac}(P)$. A run receives a symmetric $4\\times4$ matrix\n$g=(g_{ij})$ and a covector $A=(A_i)$ with entries in $K$, represented by\nfinite sparse polynomial numerator-denominator pairs, together with a specified\npolynomial $w\\in P$. It also receives the chart hypothesis that $\\det g$ is\nnonzero in $K$ and that on the real open chart under consideration all input\ndenominators are nonzero and $w=\\sqrt{|\\det g|}>0$. The coordinate derivations\nare $\\delta_0=\\delta_3=0$, $\\delta_1=\\partial_r$, and $\\delta_2=\\partial_y$.\nThe chart hypothesis is input; the procedure does not prove Lorentz signature\nor check the volume identity. For geometric interpretation use the curvature\nconvention $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$,\nwith $R^a{}_{bcd}$ the coefficient of $R(\\partial_c,\\partial_d)\\partial_b$ and\n$\\operatorname{Ric}_{bd}:=R^a{}_{bad}$. Expanding this definition yields the\ncoordinate Ricci schedule in Instruction 3.\n\n**Outputs.** Return the finite tables of: the sixteen entries of\n$gg^{-1}-I$; the six independent components of\n$F_{ij}:=\\delta_iA_j-\\delta_jA_i$; all sixteen raised components\n$F^{ij}$; the four Maxwell-density residuals\n$\\sum_i\\delta_i(wF^{ij})$; all sixty-four Christoffel entries; the sixteen\nRicci entries\n$$\\operatorname{Ric}_{ij} =\\sum_k\\left(\\delta_k\\Gamma^k{}_{ij}-\\delta_j\\Gamma^k{}_{ik}\\right) +\\sum_{k,l}\\left(\\Gamma^k{}_{kl}\\Gamma^l{}_{ij} -\\Gamma^k{}_{jl}\\Gamma^l{}_{ik}\\right);$$\nthe scalar $F_{ij}F^{ij}$; the sixteen entries of\n$$\\operatorname{Ric}_{ij} -2\\left(F_{ik}F_j{}^k-\\frac14g_{ij}F_{kl}F^{kl}\\right);$$\nthe scalar curvature and the Ricci-square. For every output rational function,\nreturn its numerator-denominator pair, its exact numerator-zero flag, and the\nfinite list of all divisor polynomials used.\n\n**Instructions.**\n\n1. Represent a polynomial by its finite set of exponent-vector/coefficient\n   pairs. Addition merges equal exponent vectors, multiplication enumerates\n   every pair of input monomials and collects equal exponent vectors, and\n   $\\partial_r,\\partial_y$ differentiate each monomial by the integer-power\n   rule. Represent a rational function by $(p,d)$ with $p,d\\in P$ and\n   $d\\ne0$. Addition and multiplication use cross-products, and division\n   replaces $(p,d)/(u,v)$ by $(pv,du)$ only when $u\\ne0$ in $P$.\n   Differentiation uses $(p'd-pd',d^2)$.\n\n2. Compute $\\det g$ by its twenty-four signed permutation products and form\n   $g^{-1}$ from cofactors divided by $\\det g$. Record and check all sixteen\n   entries of $gg^{-1}-I$.\n\n3. Compute every $F_{ij}$ and $F^{ij}$, then all four\n   $\\sum_i\\delta_i(wF^{ij})$. Compute every Christoffel entry by\n   $\\Gamma^i{}_{jk}=\\frac12\\sum_lg^{il}\n   (\\delta_jg_{lk}+\\delta_kg_{jl}-\\delta_lg_{jk})$, then all sixteen Ricci\n   entries by the displayed formula, with no symmetry-based component omitted.\n   Compute $F_{ij}F^{ij}$, every Einstein residual, $g^{ij}\\operatorname{Ric}_{ij}$\n   and $g^{ik}g^{jl}\\operatorname{Ric}_{ij}\\operatorname{Ric}_{kl}$ by their\n   full finite contractions.\n\n4. Record every polynomial divisor introduced by inversion, division, or a\n   rational derivative in the admissibility list. Do not remove a divisor from\n   that list when a later cancellation removes its factor from the displayed\n   numerator or denominator. Return failure if any required divisor is the\n   zero polynomial or an input denominator is zero.\n\nA zero flag means exactly that the polynomial numerator is the zero element of\n$P$. No floating-point tolerance, parameter sample, convergence test, or\nchoice of roots is part of the procedure. This is a finite mathematical\nprocedure; its operational correctness, termination, and resource bounds are\nseparate proved claims.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-multivariate-polynomial-ring-over-a-domain-is-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain, then $R[x_1,\\ldots,x_n]$ is an integral domain for every $n\\in\\mathbb N$, including $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-field-of-fractions",
+          "source_section": "Definition",
+          "quote": "If $D$ is an integral domain, then $D\\setminus\\{0\\}$ is multiplicative. Its localisation\n$$ \\operatorname{Frac}(D)=(D\\setminus\\{0\\})^{-1}D $$\nis the **field of fractions** of $D$. Thus its elements are fractions $a/b$ with $a,b\\in D$ and $b\\ne0$, modulo the localisation equivalence relation.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-emg-rational-electrovac-verification",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Fix the integral domain\n$P=\\mathbb Q[r,y,M,a,q]$ on the ordered variables $(r,y,M,a,q)$ and its field of fractions\n$K=\\operatorname{Frac}(P)$. A run receives a symmetric $4\\times4$ matrix\n$g=(g_{ij})$ and a covector $A=(A_i)$ with entries in $K$, represented by\nfinite sparse polynomial numerator-denominator pairs, together with a specified\npolynomial $w\\in P$. It also receives the chart hypothesis that $\\det g$ is\nnonzero in $K$ and that on the real open chart under consideration all input\ndenominators are nonzero and $w=\\sqrt{|\\det g|}>0$. The coordinate derivations\nare $\\delta_0=\\delta_3=0$, $\\delta_1=\\partial_r$, and $\\delta_2=\\partial_y$.\nThe chart hypothesis is input; the procedure does not prove Lorentz signature\nor check the volume identity. For geometric interpretation use the curvature\nconvention $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$,\nwith $R^a{}_{bcd}$ the coefficient of $R(\\partial_c,\\partial_d)\\partial_b$ and\n$\\operatorname{Ric}_{bd}:=R^a{}_{bad}$. Expanding this definition yields the\ncoordinate Ricci schedule in Instruction 3.\n\n**Outputs.** Return the finite tables of: the sixteen entries of\n$gg^{-1}-I$; the six independent components of\n$F_{ij}:=\\delta_iA_j-\\delta_jA_i$; all sixteen raised components\n$F^{ij}$; the four Maxwell-density residuals\n$\\sum_i\\delta_i(wF^{ij})$; all sixty-four Christoffel entries; the sixteen\nRicci entries\n$$\\operatorname{Ric}_{ij} =\\sum_k\\left(\\delta_k\\Gamma^k{}_{ij}-\\delta_j\\Gamma^k{}_{ik}\\right) +\\sum_{k,l}\\left(\\Gamma^k{}_{kl}\\Gamma^l{}_{ij} -\\Gamma^k{}_{jl}\\Gamma^l{}_{ik}\\right);$$\nthe scalar $F_{ij}F^{ij}$; the sixteen entries of\n$$\\operatorname{Ric}_{ij} -2\\left(F_{ik}F_j{}^k-\\frac14g_{ij}F_{kl}F^{kl}\\right);$$\nthe scalar curvature and the Ricci-square. For every output rational function,\nreturn its numerator-denominator pair, its exact numerator-zero flag, and the\nfinite list of all divisor polynomials used.\n\n**Instructions.**\n\n1. Represent a polynomial by its finite set of exponent-vector/coefficient\n   pairs. Addition merges equal exponent vectors, multiplication enumerates\n   every pair of input monomials and collects equal exponent vectors, and\n   $\\partial_r,\\partial_y$ differentiate each monomial by the integer-power\n   rule. Represent a rational function by $(p,d)$ with $p,d\\in P$ and\n   $d\\ne0$. Addition and multiplication use cross-products, and division\n   replaces $(p,d)/(u,v)$ by $(pv,du)$ only when $u\\ne0$ in $P$.\n   Differentiation uses $(p'd-pd',d^2)$.\n\n2. Compute $\\det g$ by its twenty-four signed permutation products and form\n   $g^{-1}$ from cofactors divided by $\\det g$. Record and check all sixteen\n   entries of $gg^{-1}-I$.\n\n3. Compute every $F_{ij}$ and $F^{ij}$, then all four\n   $\\sum_i\\delta_i(wF^{ij})$. Compute every Christoffel entry by\n   $\\Gamma^i{}_{jk}=\\frac12\\sum_lg^{il}\n   (\\delta_jg_{lk}+\\delta_kg_{jl}-\\delta_lg_{jk})$, then all sixteen Ricci\n   entries by the displayed formula, with no symmetry-based component omitted.\n   Compute $F_{ij}F^{ij}$, every Einstein residual, $g^{ij}\\operatorname{Ric}_{ij}$\n   and $g^{ik}g^{jl}\\operatorname{Ric}_{ij}\\operatorname{Ric}_{kl}$ by their\n   full finite contractions.\n\n4. Record every polynomial divisor introduced by inversion, division, or a\n   rational derivative in the admissibility list. Do not remove a divisor from\n   that list when a later cancellation removes its factor from the displayed\n   numerator or denominator. Return failure if any required divisor is the\n   zero polynomial or an input denominator is zero.\n\nA zero flag means exactly that the polynomial numerator is the zero element of\n$P$. No floating-point tolerance, parameter sample, convergence test, or\nchoice of roots is part of the procedure. This is a finite mathematical\nprocedure; its operational correctness, termination, and resource bounds are\nseparate proved claims.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each input polynomial has finite support. Addition enumerates and combines a finite set of coefficient terms, multiplication enumerates the finite Cartesian product of the two supports, and monomial differentiation returns one term or zero. By [F2] these operations are operations in the integral domain $P$, and by [F1] every operation in the procedure is one of these finite polynomial operations or a finite rational combination of them.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A pair $(p,d)$ with $d\\ne0$ represents $p/d$ in $K$. By [F3], equality of $(p,d)$ and $(u,v)$ is exactly $pv=ud$. Since $P$ is an integral domain, $p/d=0$ holds exactly when $p=0$. Thus each cross-product operation represents the corresponding sum, product, quotient or derivative from [F4], and the numerator-zero flag is exact; it is not a numerical tolerance.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The cofactor identity $g\\,\\operatorname{adj}(g)=(\\det g)I$ follows entrywise from the signed permutation expansion: diagonal entries are the Laplace expansion of $\\det g$, while each off-diagonal entry is the same expansion with two equal rows and is zero by pairwise cancellation of permutations. Division by $\\det g\\ne0$ in [A1] therefore returns the inverse matrix, and the sixteen inverse residuals are exactly zero.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The formula for $F$ differentiates the input covector and forms the\ncoordinate exterior derivative. The Christoffel schedule is symmetric in its\nlower indices, hence torsion-free. Substituting the schedule and using\n$g_{im}g^{ml}=\\delta_i^l$ gives\n$$g_{im}\\Gamma^m{}_{kj}+g_{jm}\\Gamma^m{}_{ki}=\\tfrac12(\\partial_k g_{ij}+\\partial_j g_{ik}-\\partial_i g_{kj})+\\tfrac12(\\partial_k g_{ji}+\\partial_i g_{jk}-\\partial_j g_{ki})=\\partial_k g_{ij}.$$\nso the connection is metric-compatible. If two such connections differ by\n$C^a{}_{bc}$, lower the first index with $g$; torsion-freeness makes\n$C_{abc}=C_{acb}$, and metric compatibility gives\n$C_{jki}+C_{ikj}=0$. Symmetry in the last two slots turns this into\n$C_{abc}=-C_{bac}$. These relations imply\n$C_{abc}=C_{acb}=-C_{cab}=-C_{cba}=C_{bca}=C_{bac}=-C_{abc}$, so the\ncomputed connection is unique. Expanding $R(\\partial_c,\\partial_d)\\partial_b$\nby [F5] gives\n$R^a{}_{bcd}=\\partial_c\\Gamma^a{}_{db}-\\partial_d\\Gamma^a{}_{cb}\n+\\Gamma^a{}_{ce}\\Gamma^e{}_{db}-\\Gamma^a{}_{de}\\Gamma^e{}_{cb}$;\nits trace $R^k{}_{ikj}$ is the algorithm's Ricci schedule, using lower-index\nsymmetry of $\\Gamma$. All contractions use the same inverse. By induction\nover the procedure's finite ordered instruction list, every stored rational\npair equals its corresponding coordinate expression.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "On the real chart, [A1] makes each rational denominator and each recorded divisor nonzero, so the fraction operations equal ordinary smooth-function operations there. The formal quotient rule in [F4] is therefore the chart derivative. Since the polynomial numerator is identically zero exactly when its element of $P$ is zero by [F2]-[F3], a true flag certifies the exact coordinate identity throughout the whole admissible chart, not merely at sampled points. The converse for a chart with fixed parameter values is not asserted: specialization can make a nonzero element of $P$ vanish. Lorentz signature and the volume equation remain separate input hypotheses in [A1].",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 permits empty polynomial supports and hence zero numerators. The formal flag in step 1.2 is a statement in Frac(Q[r,y,M,a,q]) independent of whether a real chart is empty; on an empty chart only its pointwise implication is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement and proof characterize zero exactly: p/d is zero iff its numerator polynomial p is zero in the integral domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The singleton support representing the constant polynomial 1 is handled by multiplication and differentiation in step 1.1: its derivative is zero and its product is the other polynomial. The inverse residuals in step 1.3 use the identity matrix with these unit entries."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The admissibility condition excludes a zero divisor but permits zero numerators; the exact flag remains valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 specializes formal identities only where all recorded divisors are nonzero. A point where a divisor vanishes is excluded even if a rational expression might admit a removable extension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The equality test pv=ud in step 1.2 and induction over the given instruction list in step 2.1 involve no choice of a fraction representative from an unspecified family; the pairs are the algorithm outputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: if p=0 then p/d is the zero fraction, as proved by the fraction representation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: if p/d is zero and d is admissible in an integral domain then p=0, the converse proved in the fraction representation."
+        }
+      ]
+    },
+    "lem-emg-rational-electrovac-verification-termination-resources": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-emg-rational-electrovac-verification",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Fix the integral domain $P=\\mathbb Q[r,y,M,a,q]$ on the ordered variables $(r,y,M,a,q)$ and its field of fractions $K=\\operatorname{Frac}(P)$. A run receives a symmetric $4\\times4$ matrix $g=(g_{ij})$ and a covector $A=(A_i)$ with entries in $K$, represented by finite sparse polynomial numerator-denominator pairs, together with a specified polynomial $w\\in P$. It also receives the chart hypothesis that $\\",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "The determinant uses $4!=24$ signed permutation products, the inverse table has sixteen entries, the four Maxwell residuals have four coordinate terms each, and every Christoffel, Ricci and contraction table has a fixed finite index range in $\\{0,1,2,3\\}$. By [F1], all loops therefore make finitely many calls to arithmetic operations on finite-support polynomials.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "A sparse sum combines at most $2R$ terms. A sparse product examines at most $R^2$ ordered monomial pairs; differentiating a support of size at most $R$ visits at most $R$ terms. Thus for each of the $K$ polynomial operations the stated upper bound $2R^2+2R$ dominates the coefficient work and insertion count. A sorted support list has at most $R$ entries, so each insertion makes at most $R$ comparisons. Summing over $K$ operations and retaining at most $R$ records for each of the $K$ intermediate results and $N_{\\mathrm{in}}$ inputs gives the stated operation, insertion and memory bounds.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "step": "3.1",
+          "claim": "All integer and rational coefficient operations and all finite list traversals terminate; the schedule has no convergence or data-dependent loop. The finite operation schedule from step 1.1 therefore terminates. The bounds count algebraic operations and records only; they do not bound coefficient bit lengths or elapsed machine time.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 enumerates fixed tensor-index loops even when a polynomial support is empty; a zero polynomial contributes no monomials to the finite traversals in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement has finite input supports and a fixed finite schedule; zero-support and zero-result polynomial cases still terminate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "With R=1, step 2.1 bounds a sum by two terms and a product by one ordered pair; 2R^2+2R=4 still bounds the work. A singleton support does not alter termination."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The finite-support bound permits zero support and the fixed loop schedule still terminates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The resource variables are finite nonnegative integers, not time or radial coordinates; step 3.1 makes no convergence-limit or geometric-boundary assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The explicit sixteen inverse entries and fixed coordinate ranges in step 1.1 determine the schedule without selecting representatives from a family; finite input supports are already given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is termination together with upper resource bounds for a supplied finite schedule. It does not characterize termination by a necessary-and-sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No assertion reconstructs K or R from a terminating run; step 3.1 only deduces termination from the finite schedule of F1."
+        }
+      ]
+    },
+    "lem-emg-xs-rn-tensor-identities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-xs-rn-data",
+          "source_section": "Definition",
+          "quote": "Let $M,q_e,q_m\\in\\mathbb R$ be length parameters and put $Q^2:=q_e^2+q_m^2$. Let $J\\subset(0,\\infty)$ be open and require $$f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2}\\ne0\\qquad(r\\in J).$$ On the smooth product $\\mathcal M_J:=\\mathbb R_{x^0}\\times J_r\\times S^2$, let $\\gamma_{S^2}$ be the unit round metric and $\\omega_{S^2}$ its positively oriented area form. The **dyonic RN datum** is $$g=-f(r)\\,dx^0\\otimes dx^0+f(r)^{-1}\\",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-gr-warped-spherical-christoffel-and-ricci",
+          "source_section": "Statement",
+          "quote": "Let $V\\subseteq\\mathbb R^2$ be a nonempty open set with global coordinates $y=(y^0,y^1)$ ([[def-interval]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]]), let $(q_{AB})$ be a smooth symmetric $2\\times2$ matrix of functions on $V$ with $$\\Delta_q(y):=\\det\\bigl(q_{AB}(y)\\bigr)<0\\qquad(y\\in V),$$ so that $q$ is a smooth symmetric covariant $2$-tensor field on $V$ whose value at every point is nondegenerate with ",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold ([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection $\\nabla$ ([[def-gr-metric-selected-connection]]), whose existence and uniqueness are supplied by [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; that theorem also extends $\\nabla$ to a derivative on tensor fields commuting with contractions and annihilating $g$ and $g^{-1",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-curvature-tensoriality-and-coordinate-formula",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with metric-selected connection $\\nabla$ ([[def-gr-smooth-lorentzian-objects]], [[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), and let $R$ be the curvature operator of [[def-gr-curvature-tensor-and-derived-tensors]], with components $R^a{}_{bcd}$ in a chart. **(a) Tensoriality.** For all smooth functi",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-curvature-algebraic-symmetries",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with metric-selected connection $\\nabla$ ([[def-gr-smooth-lorentzian-objects]], [[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), and let $R$, $R_{abcd}$, $\\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ be as in [[def-gr-curvature-tensor-and-derived-tensors]]. Then the following identities hold for all indic",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "On the two-dimensional base, $q^{00}=-f^{-1}$ and $q^{11}=f$. Its only nonzero Christoffel symbols, apart from lower-index symmetry, are $\\Gamma^0{}_{01}=f'/(2f)$, $\\Gamma^1{}_{00}=ff'/2$, and $\\Gamma^1{}_{11}=-f'/(2f)$, by the metric formula in [F3]. Substitution gives $\\operatorname{Ric}(q)_{00}=ff''/2$, $\\operatorname{Ric}(q)_{11}=-f''/(2f)$, $\\operatorname{Hess}_{00}r=-ff'/2$, $\\operatorname{Hess}_{11}r=f'/(2f)$, $z=f$, and $\\Delta_qr=f'$. Applying [F2] and then [A1] yields the four Ricci entries in the Statement; the angular factor $\\sin^2\\theta$ is the corresponding component of $\\gamma_{S^2}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "Contracting those diagonal entries with $g^{00}=-1/f$, $g^{11}=f$, $g^{22}=1/r^2$, $g^{33}=1/(r^2\\sin^2\\theta)$ gives $S=-Q^2/r^4-Q^2/r^4+Q^2/r^4+Q^2/r^4=0$ and $\\operatorname{Ric}_{ab}\\operatorname{Ric}^{ab}=4Q^4/r^8$. These contractions are valid for either sign of $f$ because only $f\\ne0$ is used.",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.2",
+          "step": "2.2",
+          "claim": "In coordinates $(x^0,r,\\theta,\\phi)$, the nonzero Christoffel symbols of the full metric, apart from lower-index symmetry, are $$\\Gamma^0{}_{01}=\\frac{f'}{2f},\\quad \\Gamma^1{}_{00}=\\frac{ff'}2,\\quad \\Gamma^1{}_{11}=-\\frac{f'}{2f},\\quad \\Gamma^1{}_{22}=-rf,\\quad \\Gamma^1{}_{33}=-rf\\sin^2\\theta,\\quad \\Gamma^2{}_{12}=\\frac1r,\\quad \\Gamma^3{}_{13}=\\frac1r,\\quad \\Gamma^2{}_{33}=-\\sin\\theta\\cos\\theta,\\quad \\Gamma^3{}_{23}=\\cot\\theta.$$ All other entries are zero. Substitution of this complete list in the coordinate curvature formula of [F3] gives the following matrix of the 21 independent pair-pair components, with row and column labels $01,02,03,12,13,23$: $$\\begin{array}{c|cccccc} &01&02&03&12&13&23\\\\\\hline 01&f''/2&0&0&0&0&0\\\\ 02&0&rff'/2&0&0&0&0\\\\ 03&0&0&rff'\\sin^2\\theta/2&0&0&0\\\\ 12&0&0&0&-rf'/(2f)&0&0\\\\ 13&0&0&0&0&-rf'\\sin^2\\theta/(2f)&0\\\\ 23&0&0&0&0&0&r^2(1-f)\\sin^2\\theta \\end{array}.$$ For example, the entries $R_{0101}$, $R_{0202}$ and $R_{2323}$ follow by using respectively the base-only, base-sphere and sphere Christoffel symbols in [F3]; the $03,12,13$ entries follow by the same substitution with the listed factors $\\sin^2\\theta$, $f^{-1}$ and $r^{-1}$. The table gives all 21 pair-pair entries, not only the nonzero ones. The pair symmetries [F4] then recover every ordered component.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "step": "3.1",
+          "claim": "In the full contraction, each independent diagonal pair entry occurs four times. The $01$ entry contributes $4(f''/2)^2=f''^2$. Each of the four base-sphere entries $02,03,12,13$ contributes $(f')^2/r^2$ after raising its four indices with $g^{00}=-1/f$, $g^{11}=f$, $g^{22}=1/r^2$ and $g^{33}=1/(r^2\\sin^2\\theta)$; their sum is $4(f')^2/r^2$. The $23$ entry contributes $4(1-f)^2/r^4$. Thus $R_{abcd}R^{abcd}=f''^2+4(f')^2/r^2+4(1-f)^2/r^4$ for either sign of $f$; only $f\\ne0$ is used.",
+          "inputs": [
+            "step 2.2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "step": "4.1",
+          "claim": "Substituting [A1] into the three terms gives respectively $16M^2/r^6-48MQ^2/r^7+36Q^4/r^8$, $16M^2/r^6-32MQ^2/r^7+16Q^4/r^8$, and $16M^2/r^6-16MQ^2/r^7+4Q^4/r^8$. Adding coefficients proves the displayed polynomial.",
+          "inputs": [
+            "A1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For J empty, there is no radius at which a component is asserted. For a disconnected nonempty J, steps 1.1–4.1 apply separately at every r>0 with f(r) nonzero, without selecting a component."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement and formulas include Q^2=0 and substitute the vacuum lapse without dividing by Q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Setting the RN lapse f=1 with M=Q=0 makes f prime and f double-prime zero; the table in step 2.2 and the contraction in step 3.1 then vanish. This is a genuine permitted unit-lapse specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The statement covers Q=0 and all real M on r>0,f!=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement requires J open with r>0 and f!=0; no endpoint or coordinate-root value is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 lists the complete six-by-six pair table and F4 fixes its symmetry partners; neither that finite reconstruction nor the pointwise contraction in step 3.1 selects from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed Ricci and Kretschmann formulas are identities for the given RN datum; no condition is claimed equivalent to being RN."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement does not infer the RN metric from curvature invariants. Steps 1.1 and 2.2 start with its specified lapse and connection."
+        }
+      ]
+    },
+    "thm-emg-xs-rn-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-xs-rn-data",
+          "source_section": "Definition",
+          "quote": "Let $M,q_e,q_m\\in\\mathbb R$ be length parameters and put\n$Q^2:=q_e^2+q_m^2$. Let $J\\subset(0,\\infty)$ be open and require\n$$f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2}\\ne0\\qquad(r\\in J).$$\nOn the smooth product $\\mathcal M_J:=\\mathbb R_{x^0}\\times J_r\\times S^2$,\nlet $\\gamma_{S^2}$ be the unit round metric and $\\omega_{S^2}$ its positively\noriented area form. The **dyonic RN datum** is\n$$g=-f(r)\\,dx^0\\otimes dx^0+f(r)^{-1}\\,dr\\otimes dr+r^2\\gamma_{S^2}, \\qquad \\mathcal F=-\\frac{q_e}{r^2}\\,dx^0\\wedge dr+q_m\\omega_{S^2}.$$\nHere $x^0$ and $r$ have units of metres, angles on $S^2$ are dimensionless,\nand $M,q_e,q_m$ have units of metres. The metric components are dimensionless\nin length coordinates; the nonzero coordinate components of $\\mathcal F$ have\nunits inherited from their coordinate Jacobians. Use the orientation\n$dx^0\\wedge dr\\wedge\\omega_{S^2}$.\n\nThe set $J$ may have several connected components. On $\\{f>0\\}$ choose the\ntime orientation $\\partial_{x^0}$; on $\\{f<0\\}$ choose $\\partial_r$. These\nare smooth timelike fields on their respective open subsets because\n$g(\\partial_{x^0},\\partial_{x^0})=-f<0$ when $f>0$ and\n$g(\\partial_r,\\partial_r)=f^{-1}<0$ when $f<0$. Since $f$ has no zero on\n$\\mathcal M_J$, this defines a smooth time orientation on the whole product.\nThe sphere area form and the displayed two-form are global on $S^2$.\n\nLet $N,S$ denote the north and south poles. On\n$U_N:=S^2\\setminus\\{S\\}$ and $U_S:=S^2\\setminus\\{N\\}$, respectively,\nlocal potential one-forms are\n$$\\mathcal A_N=-\\frac{q_e}{r}\\,dx^0+q_m(1-\\cos\\theta)\\,d\\phi,\\qquad \\mathcal A_S=-\\frac{q_e}{r}\\,dx^0-q_m(1+\\cos\\theta)\\,d\\phi.$$\nEach displayed potential extends smoothly over its named included pole:\n$(1-\\cos\\theta)d\\phi$ is smooth at $N$ and\n$(1+\\cos\\theta)d\\phi$ is smooth at $S$. Direct differentiation gives\n$d\\mathcal A_N=d\\mathcal A_S=\\mathcal F$ on the respective patches. Their\noverlap difference is $2q_m\\,d\\phi$; it is local potential data, not a global\nreal gauge function on the entire sphere. The definition assumes no $U(1)$\nbundle or charge quantization.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-xs-rn-tensor-identities",
+          "source_section": "Statement",
+          "quote": "Let $M,q_e,q_m\\in\\mathbb R$, $Q^2=q_e^2+q_m^2$, and let $J\\subset(0,\\infty)$ be open with\n$f(r)=1-2M/r+Q^2/r^2\\ne0$ on $J$. For the dyonic RN datum of\n[[def-emg-xs-rn-data]], in a spherical-polar chart its Ricci components are\n$$\\operatorname{Ric}_{00}=f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=\\frac{fQ^2}{r^4},\\quad \\operatorname{Ric}_{11}=-\\frac1f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=-\\frac{Q^2}{fr^4},$$\n$$\\operatorname{Ric}_{22}=1-f-rf'=\\frac{Q^2}{r^2},\\qquad \\operatorname{Ric}_{33}=(1-f-rf')\\sin^2\\theta=\\frac{Q^2\\sin^2\\theta}{r^2},$$\nand all mixed components vanish. The scalar curvature is zero and\n$\\operatorname{Ric}_{ab}\\operatorname{Ric}^{ab}=4Q^4/r^8$. The Kretschmann scalar is\n$$R_{abcd}R^{abcd}=f''^2+\\frac{4(f')^2}{r^2}+\\frac{4(1-f)^2}{r^4} =\\frac{48M^2}{r^6}-\\frac{96MQ^2}{r^7}+\\frac{56Q^4}{r^8}.$$\nAll formulas hold on every component of $J$, including $f<0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-xs-geometric-electrovac",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth oriented, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$; $o$ is the manifold orientation, $N$ is a smooth future timelike field, and the metric volume form is chosen to agree with $o$. Let $\\nabla$ be the metric-selected connection, let $\\mathcal F$ be a smooth real two-form on $M$, and use the curvature convention\n$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$.\nDefine\n$$Q_{ab}(\\mathcal F):=\\mathcal F_{ac}\\mathcal F_b{}^c-\\frac14 g_{ab}\\mathcal F_{cd}\\mathcal F^{cd},$$\nwhere both raised indices use $g^{-1}$. A **geometric electrovac datum with zero cosmological constant** is the tuple $(M,g,N,o,\\mathcal F)$ satisfying\n$$d\\mathcal F=0,\\qquad d(\\star_g\\mathcal F)=0,\\qquad \\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F)$$\nat every point of $M$. Here $\\star_g$ is the Lorentzian Hodge map determined by $g$ and $o$; on two-forms $\\star_g^2=-1$. No material current, matter tensor, global potential, asymptotic flatness, positive mass, horizon, or extension condition is part of this definition.\n\nFor an oriented embedded sphere $S$ on which the integrals converge, define its geometric electric and magnetic flux parameters by\n$$q_e(S):=\\frac1{4\\pi}\\int_S\\star_g\\mathcal F,\\qquad q_m(S):=\\frac1{4\\pi}\\int_S\\mathcal F.$$\nWhen $M$ and the coordinates have length units, these parameters have units of length. A magnetic flux need not have a global potential; no flux quantization is included. The background Lorentzian geometry and Hodge conventions carry the countable-choice assumption $\\mathrm{AC}_\\omega$ of their named suppliers; the algebraic identities in this definition require no additional choice principle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-maxwell-observer-stress",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented\nLorentzian four-manifold of [[def-emg-lorentzian-forms]]. Let $U\\subseteq M$\nbe open, let $n$ be a smooth observer congruence on $U$, and let $F$ be a\nsmooth real two-form. Fix $c,\\mu_0>0$ and\n$\\epsilon_0:=(\\mu_0c^2)^{-1}$. Assume the fixed-sector variational hypotheses\nand tensor formula supplied conditionally by\n[[lem-emg-maxwell-action-variation]], namely\n\n$$T_{\\mathrm{EM},ab}:=\\frac{1}{\\mu_0}\\left(F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd}\\right).$$\n\nFor the smooth observer covectors $E,B$ of\n[[lem-emg-observer-field-decomposition]], define the rest projector\n$h^a{}_b:=\\delta^a_b+n^an_b$ and the observer energy flux\n$S_n^a:=-c\\,h^a{}_bT_{\\mathrm{EM}}^{bc}n_c$. Then:\n\n**(a) Tensor symmetries.** $T_{\\mathrm{EM},ab}$ is symmetric and\n$g^{ab}T_{\\mathrm{EM},ab}=0$.\n\n**(b) Orthonormal observer components.** In any positively oriented\northonormal tetrad with $E_0=n$ and spatial orientation\n$\\epsilon_{123}=+1$, the components are\n\n$$T_{\\mathrm{EM}}^{00}=\\frac12\\left(\\epsilon_0\\sum_iE_i^2+\\frac1{\\mu_0}\\sum_iB_i^2\\right),\\qquad T_{\\mathrm{EM}}^{0i}=\\frac{(\\mathbf E\\times\\mathbf B)_i}{\\mu_0c},$$\n\n$$T_{\\mathrm{EM}}^{ij}=-\\left[\\epsilon_0\\left(E_iE_j-\\frac12\\delta_{ij}\\sum_kE_k^2\\right)+\\frac1{\\mu_0}\\left(B_iB_j-\\frac12\\delta_{ij}\\sum_kB_k^2\\right)\\right].$$\n\nHere $(\\mathbf E\\times\\mathbf B)_i:=\\epsilon_{ijk}E_jB_k$. In particular,\n$T_{\\mathrm{EM},0i}=-T_{\\mathrm{EM}}^{0i}$ in this tetrad.\n\n**(c) Observer energy and flux.** The measured energy density\n$u_n:=T_{\\mathrm{EM},ab}n^an^b$ equals the nonnegative value in part (b), and\nthe spatial vector $S_n$ has components\n$S_n^i=(\\mathbf E\\times\\mathbf B)_i/\\mu_0$ and $S_n^0=0$.\n\n**(d) Geometric normalization.** For every smooth real two-form $H$, define\n\n$$Q_g(H)_{ab}:=H_{ac}H_b{}^c-\\frac14g_{ab}H_{cd}H^{cd}.$$\n\nFor every real constant $\\lambda$, $Q_g(\\lambda H)=\\lambda^2Q_g(H)$. Fix also a formal constant $G_N>0$, and use the positive square-root convention of [[def-emg-explicit-power-regimes]] to set\n\n$$\\alpha:=\\sqrt{\\frac{4\\pi G_N}{\\mu_0c^4}},\\qquad\\mathcal F:=\\alpha F,\\qquad\\kappa_E:=\\frac{8\\pi G_N}{c^4}.$$\n\nThen $\\alpha>0$ and\n\n$$\\kappa_ET_{\\mathrm{EM},ab}=2Q_g(\\mathcal F)_{ab}.$$\n\nFor formal SI dimensional bookkeeping in length coordinates $x^0=ct$, take dimensionless $g_{ab}$, $[c]=\\mathrm{m\\,s^{-1}}$, $[G_N]=\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $[\\mu_0]=\\mathrm{kg\\,m\\,s^{-2}\\,A^{-2}}$, and $[F_{ab}]=\\mathrm{T}=\\mathrm{Wb\\,m^{-2}}$. Then $[T_{\\mathrm{EM},ab}]=\\mathrm{J\\,m^{-3}}$, $[\\alpha]=\\mathrm{m^{-1}\\,T^{-1}}$, $[\\mathcal F_{ab}]=\\mathrm{m^{-1}}$, and both sides of the last identity have units $\\mathrm{m^{-2}}$. Components in angular or other scaled coordinates acquire their units through the coordinate Jacobian. A two-form $\\mathcal F$ integrated over an oriented two-surface has length units under these assignments. These conventions introduce no measured constant or physical field-law premise.\n\nThese are conditional mathematical tensor identities. The batch-2 connection carriers are authored drafts. No independent proof acceptance or native readiness is claimed here.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The angular area form $\\omega_{S^2}$ is closed, and $d(r^{-2})=-2r^{-3}dr$. Therefore $d\\mathcal F=-q_e\\,d(r^{-2})\\wedge dx^0\\wedge dr+q_m\\,d\\omega_{S^2}=0$ because the first term contains $dr\\wedge dr$ and the second is a three-form on the two-dimensional sphere.",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "With orientation $dx^0\\wedge dr\\wedge\\omega_{S^2}$, the Hodge formula in [F3] gives $\\star_g\\mathcal F=q_e\\omega_{S^2}+q_mr^{-2}dx^0\\wedge dr$. Its exterior derivative is zero by the same repeated-$dr$ computation, so the vacuum Maxwell equation holds on the whole $f\\ne0$ domain, including components with $f<0$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "Direct coordinate contraction of [F1] gives $\\mathcal F_{ab}\\mathcal F^{ab}=2(q_m^2-q_e^2)/r^4$ and the only nonzero diagonal entries of $Q$ are $Q_{00}=fQ^2/(2r^4)$, $Q_{11}=-Q^2/(2fr^4)$, $Q_{22}=Q^2/(2r^2)$, $Q_{33}=Q^2\\sin^2\\theta/(2r^2)$; every mixed entry is zero.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Comparing [F2] and step 1.3 gives $\\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F)$ in every polar chart. Both sides are smooth tensor fields on the product, so equality on the dense polar-coordinate locus extends to the two poles by continuity. Together with steps 1.1-1.2 and the definition [F4], this proves the claimed source-free geometric electrovac statement.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "For the positive constant $\\alpha$, put $F=\\mathcal F/\\alpha$. Linearity of $d$ and of the Hodge star gives $dF=d(\\star_gF)=0$ from steps 1.1–1.2. By [F2], $S=0$, so $G=\\operatorname{Ric}$. By [F5] and step 2.1, $\\operatorname{Ric}=2Q_g(\\mathcal F)=\\kappa_E\\mu_0^{-1}Q_g(F)=\\kappa_ET$, exactly the normalized tensor equation. This uses the explicitly defined smooth tensor $T$ and does not require arbitrary dyonic flux to have a globally specified circle-bundle realization.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The universal open-set clause allows J empty; then the differential and Ricci equations have no points to check. On each nonempty component the explicit forms in steps 1.1–2.1 give the equations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement allows q_e=q_m=0; the two-form and its quadratic source then vanish and the vacuum equations remain covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The permitted choice M=q_e=q_m=0 has f=1 and zero two-form. The equations in steps 1.1–2.1 become the flat vacuum identities, and step 3.1 preserves them under any positive alpha."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The statement has no nonzero-charge assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement requires r>0 and f!=0; continuity fills only the two polar chart poles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 contracts four-dimensional components and step 3.1 rescales by the explicitly positive alpha; no representative of a nonempty family is chosen. The inherited geometric suppliers retain their own background convention."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "RN data are shown to satisfy the electrovac equations; the theorem does not assert that all electrovac data are RN."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Recovering M or the charge parameters from a solution is outside the stated verification. Step 2.1 compares tensors for the already fixed RN datum only."
+        }
+      ],
+      "owner_residual_interfaces_round2": {
+        "reviewer": "/root/emg_remaining_interfaces",
+        "mode": "Final approved local repair round; no third review cycle.",
+        "source_repair": "Finite-chart compact action globalization and/or explicit positive alpha tensor normalization; full approved claims retained.",
+        "live_consumer_limit": "Native partial batches5,11,12,15,22 retain their source ownership through actual successful drain; final affected-use/source-status closure is pending. WSL process death is not completion."
+      },
+      "owner_round2_supplier_status": "Typed prerequisites are authored drafts. Root’s source disposition supersedes the earlier invalid-remark classification because the audited imported mathematical remark has substantive Verification. No native readiness, independent acceptance, or import-pin refresh is asserted here."
+    },
+    "prop-emg-xs-rn-curvature": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-xs-rn-tensor-identities",
+          "source_section": "Statement",
+          "quote": "Let $M,q_e,q_m\\in\\mathbb R$, $Q^2=q_e^2+q_m^2$, and let $J\\subset(0,\\infty)$ be open with $f(r)=1-2M/r+Q^2/r^2\\ne0$ on $J$. For the dyonic RN datum of [[def-emg-xs-rn-data]], in a spherical-polar chart its Ricci components are $$\\operatorname{Ric}_{00}=f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=\\frac{fQ^2}{r^4},\\quad \\operatorname{Ric}_{11}=-\\frac1f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=-\\frac{Q^2}{fr^4},$$ $$\\operatornam",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "The scalar curvature and both polynomial invariants are the exact identities in [F1]. If $Q\\ne0$, then $4Q^4/r^8\\to+\\infty$ as $r\\downarrow0$; if $Q=0$ and $M\\ne0$, then $48M^2/r^6\\to+\\infty$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "If $M=Q=0$, then $f=1$ and the metric is the flat product metric while $\\mathcal F=0$; the displayed invariants vanish. This is the remaining parameter case, so the divergence alternatives in step 1.1 are exhaustive.",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "step": "3.1",
+          "claim": "In a $C^2$ nondegenerate extension, the metric components have continuous derivatives through order two and the inverse metric is continuous. The Christoffel symbols, curvature tensor, and scalar contractions are therefore continuous at the added point. A continuous real-valued scalar is finite at that point, contradicting either divergent invariant along the approaching sequence of step 1.1. Hence the stated $C^2$ extension is impossible. This obstruction does not create a point source or assert geodesic incompleteness.",
+          "inputs": [
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 3.1: The obstruction requires an approaching sequence r_n decreasing to zero in A1. An empty RN domain supplies no such sequence, so the invariant identities are vacuous and no extension obstruction is invoked."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement separates Q=0,M=0 from the zero-charge but massive case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At unit lapse f=1, namely M=Q=0, step 2.1 explicitly obtains a flat metric and vanishing invariants; it correctly gives no obstruction in that case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The statement covers the flat M=Q=0 case and the massive/charged alternatives."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint r down to zero is load-bearing: step 1.1 proves divergence for Q nonzero or Q=0,M nonzero, and step 3.1 contradicts finite continuous curvature at an approached C2 nondegenerate extension point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 supplies the particular approaching sequence; step 3.1 evaluates a continuous scalar on that sequence. It does not choose a sequence for each possible extension or use an arbitrary product of sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Divergence gives a sufficient obstruction to a C2 extension here; the statement is not an equivalence between bounded invariants and extendibility."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The flat parameter case is explicitly said to give no obstruction from these invariants. No converse concluding an extension from finite curvature is proved."
+        }
+      ]
+    },
+    "lem-emg-xs-kn-rational-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-xs-kn-data",
+          "source_section": "Definition",
+          "quote": "Let $M,a,q\\in\\mathbb R$ have units of metres. Write $$\\Sigma(r,\\theta):=r^2+a^2\\cos^2\\theta,\\quad \\Delta(r):=r^2-2Mr+a^2+q^2,\\quad R(r):=r^2+a^2,\\quad B(\\theta):=\\sin^2\\theta.$$ Let $U$ be an open subset of the Boyer-Lindquist coordinate region $\\{(x^0,r,\\theta,\\phi):\\Sigma>0,\\ \\Delta\\ne0,\\ 0<\\theta<\\pi\\}$. Coordinates $x^0,r$ have units of metres and $\\theta,\\phi$ are dimensionless. On $U$ define $$g=-\\frac{\\Delta}{",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-emg-rational-electrovac-verification",
+          "source_section": "Definition",
+          "quote": "**Inputs.** Fix the integral domain $P=\\mathbb Q[r,y,M,a,q]$ on the ordered variables $(r,y,M,a,q)$ and its field of fractions $K=\\operatorname{Frac}(P)$. A run receives a symmetric $4\\times4$ matrix $g=(g_{ij})$ and a covector $A=(A_i)$ with entries in $K$, represented by finite sparse polynomial numerator-denominator pairs, together with a specified polynomial $w\\in P$. It also receives the chart hypothesis that $\\",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-rational-electrovac-verification-correctness",
+          "source_section": "Statement",
+          "quote": "For every admissible input of [[alg-emg-rational-electrovac-verification]], every returned rational numerator-denominator pair represents the corresponding displayed inverse, Maxwell, Christoffel, Ricci, scalar, or Einstein-residual expression in $K=\\operatorname{Frac}(\\mathbb Q[r,y,M,a,q])$. Its numerator-zero flag is true if and only if that rational function is identically zero in $K$. On any real open chart where",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-rational-electrovac-verification-termination-resources",
+          "source_section": "Statement",
+          "quote": "For an input of [[alg-emg-rational-electrovac-verification]] with $N_{\\mathrm{in}}$ input coefficient/exponent records, suppose the expanded fixed schedule has $K$ polynomial operations and every intermediate polynomial support has at most $R$ monomials. The algorithm terminates. Under elementary rational-coefficient arithmetic, sparse addition, multiplication, differentiation and sorted-list insertion perform at mos",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-curvature-tensor-and-derived-tensors",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold ([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection $\\nabla$ ([[def-gr-metric-selected-connection]]), whose existence and uniqueness are supplied by [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; that theorem also extends $\\nabla$ to a derivative on tensor fields commuting with contractions and annihilating $g$ and $g^{-1",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-curvature-tensoriality-and-coordinate-formula",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with metric-selected connection $\\nabla$ ([[def-gr-smooth-lorentzian-objects]], [[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), and let $R$ be the curvature operator of [[def-gr-curvature-tensor-and-derived-tensors]], with components $R^a{}_{bcd}$ in a chart. **(a) Tensoriality.** For all smooth functi",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-gr-metric-volume-form-and-current-flux",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold ([[def-gr-smooth-lorentzian-objects]]), let $M$ carry an orientation in the sense of [[def-oriented-smooth-manifold-and-oriented-chart]] (so that its charts that are oriented in that orientation have orientation-preserving transition maps), and let $\\nabla$ be its metric-selected connection. This item fixes the metric volume form, the flux of a current ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-gr-density-divergence-and-finite-chain-flux",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with an orientation, metric-selected connection $\\nabla$, metric volume form $\\mathrm{vol}_g$ and current flux $\\Phi_J$ as in [[def-gr-metric-volume-form-and-current-flux]], and let $J$ be a smooth vector field on $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). Write $\\nabla_aJ^a$ for the divergence of $J$. **(a) Exterior derivative of th",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "The coordinate change $y=\\cos\\theta$ is a diffeomorphism on $0<\\theta<\\pi$ because $dy/d\\theta=-\\sin\\theta\\ne0$. Expanding the metric from [F1] gives the five nonzero entries $$g_{00}=-(\\Delta-a^2b)/\\Sigma,\\quad g_{03}=-ab(R-\\Delta)/\\Sigma,\\quad g_{33}=b(R^2-a^2\\Delta b)/\\Sigma,\\quad g_{11}=\\Sigma/\\Delta,\\quad g_{22}=\\Sigma/b.$$ Their $0,3$ block determinant is $-\\Delta b$ and the full determinant is $-\\Sigma^2$. Multiplying the stated inverse entries in [[def-emg-xs-kn-data]] by these blocks gives $gg^{-1}=I_4$; the $1,1$ and $2,2$ entries are reciprocal diagonal factors. Since $\\Sigma>0$, the volume polynomial is $w=\\Sigma$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "step": "1.2",
+          "claim": "The potential components from [F1] are $\\mathcal A_0=-qr/\\Sigma$, $\\mathcal A_3=qra b/\\Sigma$, and $\\mathcal A_1=\\mathcal A_2=0$. Applying $\\mathcal F_{ij}=\\delta_i\\mathcal A_j-\\delta_j\\mathcal A_i$ with $\\delta_1=\\partial_r$, $\\delta_2=\\partial_y$ gives the four independent field entries in the Statement; antisymmetry gives the remaining entries.",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "Substitution of the inverse and metric derivatives into the Christoffel schedule of [F2], followed by the GR coordinate Ricci formula [F4], gives the five nonzero Ricci entries $$\\operatorname{Ric}_{00}=\\omega(\\Delta+a^2b)/\\Sigma,\\quad \\operatorname{Ric}_{03}=-\\omega ab(\\Delta+R)/\\Sigma,\\quad \\operatorname{Ric}_{33}=\\omega(a^2\\Delta b^2+bR^2)/\\Sigma,\\quad \\operatorname{Ric}_{11}=-\\omega\\Sigma/\\Delta,\\quad \\operatorname{Ric}_{22}=\\omega\\Sigma/b,$$ with $\\omega=q^2/\\Sigma^2$; the remaining entries vanish. The exact execution record enumerates all sixteen Ricci outputs.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "step": "3.1",
+          "claim": "The same finite table computes the full contractions in the Statement. The exact execution record returns four zero Maxwell-density numerators and sixteen zero Einstein-residual numerators. By [F3] these are identities in the fraction field; because $\\Sigma,\\Delta,b$ are nonzero under [A1], they hold as smooth coordinate identities on every admitted real chart component.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "All residual conclusions in step 3.1 are identities restricted to an admissible real chart. Restriction to an empty chart is vacuous, while the formal fraction-field numerator flags are unchanged."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement and exact table allow q=0; then F and all matter residuals vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: At a=0,M=q=0 on r nonzero, Sigma=r^2 and the lapse is one; the finite algorithm still computes the flat spherical-coordinate table. No instruction assumes nonzero rotation or charge."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The rational chart conditions, not nonzero charge or rotation, are the admissibility conditions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The change y=cos(theta) in step 1.1 requires b>0; step 3.1 also retains Sigma and Delta as nonzero divisors. Neither poles b=0 nor the excluded ring or Delta roots are certified by this pole-free rational calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The inverse blocks in step 1.1 and all sixteen residuals in step 3.1 are explicitly enumerated; the correctness lemma applies to those supplied rational pairs, not to a choice of local solutions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma computes the table and zero residual flags for KN inputs; it gives no characterization of KN metrics by those flags."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Vanishing Einstein and Maxwell residuals is not used to infer the KN ansatz. Its metric and potential are fixed before step 1.1."
+        }
+      ]
+    },
+    "thm-emg-xs-kn-verification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-xs-kn-data",
+          "source_section": "Definition",
+          "quote": "Let $M,a,q\\in\\mathbb R$ have units of metres. Write\n$$\\Sigma(r,\\theta):=r^2+a^2\\cos^2\\theta,\\quad \\Delta(r):=r^2-2Mr+a^2+q^2,\\quad R(r):=r^2+a^2,\\quad B(\\theta):=\\sin^2\\theta.$$\nLet $U$ be an open subset of the Boyer-Lindquist coordinate region\n$\\{(x^0,r,\\theta,\\phi):\\Sigma>0,\\ \\Delta\\ne0,\\ 0<\\theta<\\pi\\}$.\nCoordinates $x^0,r$ have units of metres and $\\theta,\\phi$ are dimensionless.\nOn $U$ define\n$$g=-\\frac{\\Delta}{\\Sigma}(dx^0-aB\\,d\\phi)^2 +\\frac{\\Sigma}{\\Delta}\\,dr^2+\\Sigma\\,d\\theta^2 +\\frac{B}{\\Sigma}(R\\,d\\phi-a\\,dx^0)^2,\\qquad \\mathcal A=-\\frac{qr}{\\Sigma}(dx^0-aB\\,d\\phi),\\quad\\mathcal F:=d\\mathcal A.$$\nThe metric is the exact real symmetric tensor given by this display; no value\non $\\Delta=0$, the axes $\\theta=0,\\pi$, or $\\Sigma=0$ is part of this\ndefinition. The scalar $q$ is a geometric electric flux-length parameter; no\nSI conversion is fixed in this Definition.\n\n**Well-definedness on the stated patch.** In the coordinates\n$(x^0,r,y,\\phi)$ with $y=\\cos\\theta$ and $b=1-y^2$, the coordinate change is\na smooth diffeomorphism because $dy/d\\theta=-\\sin\\theta\\ne0$. The metric\nmatrix has\n$$g_{00}=-\\frac{\\Delta-a^2b}{\\Sigma},\\quad g_{03}=-\\frac{ab(R-\\Delta)}{\\Sigma},\\quad g_{33}=\\frac{b(R^2-a^2\\Delta b)}{\\Sigma},\\quad g_{11}=\\frac{\\Sigma}{\\Delta},\\quad g_{22}=\\frac{\\Sigma}{b}.$$\nThe inverse has nonzero entries\n$$g^{00}=-\\frac{R^2-a^2\\Delta b}{\\Sigma\\Delta},\\quad g^{03}=-\\frac{a(R-\\Delta)}{\\Sigma\\Delta},\\quad g^{33}=\\frac{\\Delta-a^2b}{\\Sigma\\Delta b},\\quad g^{11}=\\frac{\\Delta}{\\Sigma},\\quad g^{22}=\\frac{b}{\\Sigma}.$$\nMultiplying the $0,3$ blocks and the reciprocal $1,1$ and $2,2$ entries\ngives $gg^{-1}=I_4$.\nThe $t,\\phi$ block determinant is $-\\Delta b$, and the full determinant is\n$-\\Sigma^2$ in these coordinates. If $\\Delta>0$, the $t,\\phi$ block has one\npositive and one negative eigenvalue while the $r,\\theta$ entries are positive.\nIf $\\Delta<0$, $g_{33}>0$ and the $t,\\phi$ block has positive determinant,\nhence is positive definite, while $g_{11}<0$ and $g_{22}>0$. Thus $g$ is\nnondegenerate of signature $(-,+,+,+)$ on every component of $U$. Since this\nis a coordinate patch, a smooth time orientation may be supplied locally;\nthe geometric electrovac equations below do not use its choice.\n\nThe potential is a smooth real one-form on $U$ because $\\Sigma>0$, so $\\mathcal F$\nis a smooth real two-form. Exterior differentiation gives $d\\mathcal F=d^2\\mathcal A=0$\nusing commutation of smooth mixed coordinate derivatives. This definition is\nonly on the pole-free Boyer-Lindquist patch and asserts no global potential,\naxis extension, horizon extension, or global topology.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emg-xs-kn-full-sphere-exterior",
+          "source_section": "Definition",
+          "quote": "Let $M,a,q\\in\\mathbb R$ have units of metres, choose $R_0>4|M|$, and\nset\n$$\\mathcal X:=\\mathbb R_{x^0}\\times(R_0,\\infty)_r\\times S^2,\\qquad R=r^2+a^2,\\quad b=1-Z^2,\\quad \\Sigma=r^2+a^2Z^2,\\quad \\Delta=r^2-2Mr+a^2+q^2,$$\nwhere $S^2=\\{(X,Y,Z)\\in\\mathbb R^3:X^2+Y^2+Z^2=1\\}$ has its induced\nunit round metric $\\gamma$ and outward area form $\\omega$. Write\n$$\\lambda:=X\\,dY-Y\\,dX,\\qquad \\bar g:=-\\frac{\\Delta-a^2b}{\\Sigma}(dx^0)^2 +\\frac{\\Sigma}{\\Delta}\\,dr^2+\\Sigma\\gamma +\\frac{a^2(R+\\Sigma-\\Delta)}{\\Sigma}\\lambda^2 -\\frac{2a(R-\\Delta)}{\\Sigma}\\,dx^0\\odot\\lambda,$$\n$$\\bar{\\mathcal A}:=-\\frac{qr}{\\Sigma}(dx^0-a\\lambda),\\qquad \\bar{\\mathcal F}:=d\\bar{\\mathcal A}.$$\nHere $\\lambda^2=\\lambda\\otimes\\lambda$ and\n$u\\odot v=(u\\otimes v+v\\otimes u)/2$. This is the **full-sphere exterior\nextension** of the pole-free datum in [[def-emg-xs-kn-data]]. The coordinates\n$x^0,r$ and parameters $M,a,q$ have units of metres; sphere coordinates\nare dimensionless. The field $\\bar{\\mathcal F}$ is the geometric\nlength-normalized two-form and no SI conversion is part of this definition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-xs-kn-rational-calculus",
+          "source_section": "Statement",
+          "quote": "Let $M,a,q\\in\\mathbb R$ and use the electric Kerr-Newman datum on a\nBoyer-Lindquist chart with $\\Sigma>0$, $\\Delta\\ne0$, $0<\\theta<\\pi$. Set\n$y=\\cos\\theta$, $b=1-y^2$, $R=r^2+a^2$, and use the rational procedure of\n[[alg-emg-rational-electrovac-verification]] with volume polynomial $w=\\Sigma$.\nIts exact component table is: the metric and inverse entries and determinant\nin Facts [F1]-[F2]; the field components\n$$\\mathcal F_{10}=\\frac{q(r^2-a^2y^2)}{\\Sigma^2},\\quad \\mathcal F_{20}=\\frac{2qra^2y}{\\Sigma^2},\\quad \\mathcal F_{13}=-\\frac{abq(r^2-a^2y^2)}{\\Sigma^2},\\quad \\mathcal F_{23}=-\\frac{2qraR\\,y}{\\Sigma^2};$$\nthe compact Ricci table in [F3]; and the exact contractions\n$$\\mathcal F_{ij}\\mathcal F^{ij} =-\\frac{2q^2(r^4-6a^2r^2y^2+a^4y^4)}{\\Sigma^4},\\qquad \\operatorname{Ric}_{ij}\\operatorname{Ric}^{ij}=\\frac{4q^4}{\\Sigma^4}, \\qquad g^{ij}\\operatorname{Ric}_{ij}=0.$$\nThe exact rational calculation returns zero numerator flags for all four\nMaxwell-density residuals and all sixteen Einstein residuals.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-density-divergence-and-finite-chain-flux",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with an\norientation, metric-selected connection $\\nabla$, metric volume form\n$\\mathrm{vol}_g$ and current flux $\\Phi_J$ as in\n[[def-gr-metric-volume-form-and-current-flux]], and let $J$ be a smooth vector\nfield on $M$ ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). Write\n$\\nabla_aJ^a$ for the divergence of $J$.\n\n**(a) Exterior derivative of the current form.** As smooth $4$-forms on $M$,\n\n$$d\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)=\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\n**(b) Flux balance (Stokes).** For every finite smooth singular $4$-chain $C$\nof $M$ — a finite formal real sum of smooth singular $4$-simplices, the\nlibrary convention `def-smooth-singular-chain-and-cochain-complexes` restated\nin [[def-gr-metric-volume-form-and-current-flux]] clause (b) — and the flux\n$\\Phi_J$ of the induced boundary $3$-chain\n([[def-integral-of-a-form-over-a-smooth-singular-simplex]],\n[[thm-stokes-theorem-for-smooth-singular-chains]]),\n\n$$\\Phi_J(\\partial C)=\\int_C\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\nConsequently, if $\\partial C=\\Sigma_2-\\Sigma_1+B$ for smooth singular $3$-chains\n$\\Sigma_1,\\Sigma_2,B$, then\n\n$$\\Phi_J(\\Sigma_2)-\\Phi_J(\\Sigma_1)=-\\Phi_J(B)+\\int_C\\bigl(\\nabla_aJ^a\\bigr)\\mathrm{vol}_g .$$\n\nIn particular, if $\\nabla_aJ^a=0$ on $C$ then\n$\\Phi_J(\\Sigma_2)-\\Phi_J(\\Sigma_1)=-\\Phi_J(B)$, and if moreover\n$\\Phi_J(B)=0$ then $\\Phi_J(\\Sigma_2)=\\Phi_J(\\Sigma_1)$: equal charges need a\nvanishing side flux, not merely a divergence-free current.\n\n**(c) Non-null face formula.** Let $\\sigma$ be a smooth singular $3$-simplex —\na map $\\sigma:\\Delta^3\\to M$ admitting a smooth extension to a neighbourhood\nof the standard $3$-simplex inside its affine plane, the convention restated\nin [[def-gr-metric-volume-form-and-current-flux]] clause (b) — that is\nnon-null at a parameter point $t$\n([[def-gr-metric-volume-form-and-current-flux]] clause (c)), with\n$v_i:=\\sigma_*\\partial_i|_t$ spanning the hyperplane $H$ and with the unit\nnormal $\\nu^{*}$ adapted to the ordered basis $(v_1,v_2,v_3)$ as in\n[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (c); write\n$\\varepsilon:=g_{\\sigma(t)}(\\nu^{*},\\nu^{*})\\in\\{-1,1\\}$. Then\n\n$$\\sigma^{*}\\bigl(\\iota_J\\mathrm{vol}_g\\bigr)(\\partial_1,\\partial_2,\\partial_3)\\big|_{t} =\\varepsilon\\,g_{\\sigma(t)}\\bigl(J,\\nu^{*}\\bigr)\\sqrt{\\bigl|\\det\\bigl(g_{\\sigma(t)}(v_i,v_j)\\bigr)\\bigr|} .$$\n\nEquivalently, the tangent vector $J$ is decomposed as\n$J=\\varepsilon g(J,\\nu^{*})\\nu^{*}+w'$ with $w'\\in H$, and only the normal\ncomponent contributes to the flux through the face.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-emg-maxwell-current-forms",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented\nLorentzian four-manifold of [[def-emg-lorentzian-forms]], with signature\n$(-,+,+,+)$, metric-selected connection $\\nabla$ and oriented metric volume\nform $\\mathrm{vol}_g$. Let $F\\in\\Omega^2(M)$ be a smooth real two-form and\n$j\\in\\Gamma(TM)$ a smooth vector field. Fix constants $\\mu_0>0$ and $c>0$;\n$\\mu_0$ is a real coefficient here, and $c$ is the positive coordinate\nconversion in $x^0=ct$ of [[def-emg-lorentzian-forms]]. Assume the mathematical\nfield equations\n\n$$dF=0,\\qquad \\nabla_aF^{ab}=-\\mu_0j^b.$$\n\nThe equations are conditional hypotheses, not physical postulates in this\nmathematical item. Define $v\\in\\Gamma(TM)$ by $v^b:=\\nabla_aF^{ab}$ and\ndefine the current three-form by $\\iota_j\\mathrm{vol}_g$, the contraction\nspecified in [[def-gr-metric-volume-form-and-current-flux]]. Then:\n\n**(a) Sign identity.** On $M$,\n\n$$d(\\star_gF)=-\\iota_v\\mathrm{vol}_g.$$\n\nConsequently the sourced equation is equivalently\n\n$$\\nabla_aF^{ab}=-\\mu_0j^b\\quad\\Longleftrightarrow\\quad d(\\star_gF)=\\mu_0\\iota_j\\mathrm{vol}_g.$$\n\n**(b) Current conservation.** Either equivalent sourced equation implies\n$\\nabla_aj^a=0$. This conclusion requires the sourced equation and $\\mu_0>0$;\nit does not require $dF=0$.\n\n**(c) Local component check.** At any $p\\in M$, choose a positively oriented\npoint-normal chart supplied by\n[[thm-gr-point-normal-and-exponential-coordinate-charts]]. In that chart,\nwrite $E_i(x):=-cF_{0i}(x)$ and\n$B_i(x):=\\frac12\\epsilon_{ijk}F_{jk}(x)$, where $\\epsilon_{123}=+1$ and\n$\\epsilon_{ijk}$ is alternating. These are local component abbreviations in\nthe chosen chart, not global observer fields. With\n$\\operatorname{div}E:=\\partial_iE_i$,\n$(\\operatorname{curl}E)_k:=\\epsilon_{kij}\\partial_iE_j$, and similarly\nfor $B$, the pointwise component identities are\n\n$$v^0=-\\frac{1}{c}\\operatorname{div}E,\\qquad v^k=\\frac{1}{c^2}\\partial_tE_k-(\\operatorname{curl}B)_k,$$\n\n$$ (d\\star_gF)_{123}=\\frac{1}{c}\\operatorname{div}E,\\qquad (d\\star_gF)_{0ij}=\\epsilon_{ijk}\\left(\\frac{1}{c^2}\\partial_tE_k-(\\operatorname{curl}B)_k\\right),$$\n\n$$ (dF)_{123}=\\operatorname{div}B,\\qquad (dF)_{0ij}=\\frac{\\epsilon_{ijk}}{c}\\left(\\partial_tB_k+(\\operatorname{curl}E)_k\\right),$$\n\nwhere $\\partial_t:=c\\,\\partial_0$. The equations are pointwise identities\nin normal coordinates; they do not assert that these component abbreviations\nform global three-vector fields on curved spacetime.\n\nOn an open flat Minkowski domain with a fixed inertial Cartesian chart\n$x^0=ct$, define $\\rho:=j^0/c$, $J^i:=j^i$, and\n$\\epsilon_0:=(\\mu_0c^2)^{-1}$. The same component formulas at every point give\n\n$$\\operatorname{div}E=\\frac{\\rho}{\\epsilon_0},\\qquad \\operatorname{curl}B-\\frac{1}{c^2}\\partial_tE=\\mu_0J,\\qquad \\operatorname{div}B=0,\\qquad \\partial_tB+\\operatorname{curl}E=0.$$\n\nThese are a coordinate reduction of the stated tensor and form equations, not\nclaims that the smooth fields describe an experiment.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-xs-geometric-electrovac",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth oriented, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$; $o$ is the manifold orientation, $N$ is a smooth future timelike field, and the metric volume form is chosen to agree with $o$. Let $\\nabla$ be the metric-selected connection, let $\\mathcal F$ be a smooth real two-form on $M$, and use the curvature convention\n$R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y]}Z$.\nDefine\n$$Q_{ab}(\\mathcal F):=\\mathcal F_{ac}\\mathcal F_b{}^c-\\frac14 g_{ab}\\mathcal F_{cd}\\mathcal F^{cd},$$\nwhere both raised indices use $g^{-1}$. A **geometric electrovac datum with zero cosmological constant** is the tuple $(M,g,N,o,\\mathcal F)$ satisfying\n$$d\\mathcal F=0,\\qquad d(\\star_g\\mathcal F)=0,\\qquad \\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F)$$\nat every point of $M$. Here $\\star_g$ is the Lorentzian Hodge map determined by $g$ and $o$; on two-forms $\\star_g^2=-1$. No material current, matter tensor, global potential, asymptotic flatness, positive mass, horizon, or extension condition is part of this definition.\n\nFor an oriented embedded sphere $S$ on which the integrals converge, define its geometric electric and magnetic flux parameters by\n$$q_e(S):=\\frac1{4\\pi}\\int_S\\star_g\\mathcal F,\\qquad q_m(S):=\\frac1{4\\pi}\\int_S\\mathcal F.$$\nWhen $M$ and the coordinates have length units, these parameters have units of length. A magnetic flux need not have a global potential; no flux quantization is included. The background Lorentzian geometry and Hodge conventions carry the countable-choice assumption $\\mathrm{AC}_\\omega$ of their named suppliers; the algebraic identities in this definition require no additional choice principle.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-emg-maxwell-observer-stress",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented\nLorentzian four-manifold of [[def-emg-lorentzian-forms]]. Let $U\\subseteq M$\nbe open, let $n$ be a smooth observer congruence on $U$, and let $F$ be a\nsmooth real two-form. Fix $c,\\mu_0>0$ and\n$\\epsilon_0:=(\\mu_0c^2)^{-1}$. Assume the fixed-sector variational hypotheses\nand tensor formula supplied conditionally by\n[[lem-emg-maxwell-action-variation]], namely\n\n$$T_{\\mathrm{EM},ab}:=\\frac{1}{\\mu_0}\\left(F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd}\\right).$$\n\nFor the smooth observer covectors $E,B$ of\n[[lem-emg-observer-field-decomposition]], define the rest projector\n$h^a{}_b:=\\delta^a_b+n^an_b$ and the observer energy flux\n$S_n^a:=-c\\,h^a{}_bT_{\\mathrm{EM}}^{bc}n_c$. Then:\n\n**(a) Tensor symmetries.** $T_{\\mathrm{EM},ab}$ is symmetric and\n$g^{ab}T_{\\mathrm{EM},ab}=0$.\n\n**(b) Orthonormal observer components.** In any positively oriented\northonormal tetrad with $E_0=n$ and spatial orientation\n$\\epsilon_{123}=+1$, the components are\n\n$$T_{\\mathrm{EM}}^{00}=\\frac12\\left(\\epsilon_0\\sum_iE_i^2+\\frac1{\\mu_0}\\sum_iB_i^2\\right),\\qquad T_{\\mathrm{EM}}^{0i}=\\frac{(\\mathbf E\\times\\mathbf B)_i}{\\mu_0c},$$\n\n$$T_{\\mathrm{EM}}^{ij}=-\\left[\\epsilon_0\\left(E_iE_j-\\frac12\\delta_{ij}\\sum_kE_k^2\\right)+\\frac1{\\mu_0}\\left(B_iB_j-\\frac12\\delta_{ij}\\sum_kB_k^2\\right)\\right].$$\n\nHere $(\\mathbf E\\times\\mathbf B)_i:=\\epsilon_{ijk}E_jB_k$. In particular,\n$T_{\\mathrm{EM},0i}=-T_{\\mathrm{EM}}^{0i}$ in this tetrad.\n\n**(c) Observer energy and flux.** The measured energy density\n$u_n:=T_{\\mathrm{EM},ab}n^an^b$ equals the nonnegative value in part (b), and\nthe spatial vector $S_n$ has components\n$S_n^i=(\\mathbf E\\times\\mathbf B)_i/\\mu_0$ and $S_n^0=0$.\n\n**(d) Geometric normalization.** For every smooth real two-form $H$, define\n\n$$Q_g(H)_{ab}:=H_{ac}H_b{}^c-\\frac14g_{ab}H_{cd}H^{cd}.$$\n\nFor every real constant $\\lambda$, $Q_g(\\lambda H)=\\lambda^2Q_g(H)$. Fix also a formal constant $G_N>0$, and use the positive square-root convention of [[def-emg-explicit-power-regimes]] to set\n\n$$\\alpha:=\\sqrt{\\frac{4\\pi G_N}{\\mu_0c^4}},\\qquad\\mathcal F:=\\alpha F,\\qquad\\kappa_E:=\\frac{8\\pi G_N}{c^4}.$$\n\nThen $\\alpha>0$ and\n\n$$\\kappa_ET_{\\mathrm{EM},ab}=2Q_g(\\mathcal F)_{ab}.$$\n\nFor formal SI dimensional bookkeeping in length coordinates $x^0=ct$, take dimensionless $g_{ab}$, $[c]=\\mathrm{m\\,s^{-1}}$, $[G_N]=\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $[\\mu_0]=\\mathrm{kg\\,m\\,s^{-2}\\,A^{-2}}$, and $[F_{ab}]=\\mathrm{T}=\\mathrm{Wb\\,m^{-2}}$. Then $[T_{\\mathrm{EM},ab}]=\\mathrm{J\\,m^{-3}}$, $[\\alpha]=\\mathrm{m^{-1}\\,T^{-1}}$, $[\\mathcal F_{ab}]=\\mathrm{m^{-1}}$, and both sides of the last identity have units $\\mathrm{m^{-2}}$. Components in angular or other scaled coordinates acquire their units through the coordinate Jacobian. A two-form $\\mathcal F$ integrated over an oriented two-surface has length units under these assignments. These conventions introduce no measured constant or physical field-law premise.\n\nThese are conditional mathematical tensor identities. The batch-2 connection carriers are authored drafts. No independent proof acceptance or native readiness is claimed here.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "On a pole-free patch, [F1] and commutation of smooth mixed partials give $d\\mathcal F=d^2\\mathcal A=0$. On the full-sphere exterior, the global potential in [F5] gives the same identity everywhere.",
+          "inputs": [
+            "F1",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "The four Maxwell-density residuals in [F2] are exactly zero on the pole-free region. By [F3] they give $\\nabla_i\\mathcal F^{ij}=0$ there. The sign identity in the actual batch-3 draft [L1] with $v=0$ gives $d(\\star_g\\mathcal F)=0$ there. In the full-sphere extension, this three-form is smooth by [F5] and vanishes on a dense set, so it vanishes at the poles by continuity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "L1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "The sixteen metric-field residuals in [F2] are exactly zero on every pole-free patch, using the metric, orientation and curvature convention in [F3]. In the full-sphere extension both sides of the geometric Einstein equation are smooth by [F5]; equality on the dense pole-free region therefore extends to the poles by continuity. This proves $\\operatorname{Ric}=2Q(\\mathcal F)$ for the length-normalized form. The tensor conversion follows from [L2] as established below.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Steps 1.1, 1.2 and 1.3 give the three equations in [F4] on every pole-free chart under [A1]. For the full-sphere exterior, [F5] supplies the smooth time-oriented Lorentzian datum, and the same equations hold at the poles by the continuity arguments in steps 1.2 and 1.3. Thus both stated domains are geometric electrovac data. No horizon or maximal-extension claim is made.",
+          "inputs": [
+            "F4",
+            "F5",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "With the positive constant $\\alpha$ in the Statement, linearity gives $dF=\\alpha^{-1}d\\mathcal F=0$ and $d(\\star_gF)=\\alpha^{-1}d(\\star_g\\mathcal F)=0$. Trace-freeness of the quadratic tensor follows by contracting its formula: $g^{ab}Q_g(\\mathcal F)_{ab}=\\mathcal F_{ac}\\mathcal F^{ac}-\\frac44\\mathcal F_{cd}\\mathcal F^{cd}=0$. Taking the trace of the Ricci equation in step 1.3 gives $S=0$, hence $G=\\operatorname{Ric}$. By [L2], $2Q_g(\\mathcal F)=\\kappa_E\\mu_0^{-1}Q_g(F)=\\kappa_ET$, proving every normalized equation in the Statement. This is algebra for the explicitly defined tensor $T$; identifying it as a Hilbert tensor requires the separate stated action hypotheses.",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A pole-free patch may be empty, in which case its equations are vacuous; the additional exterior R0>4|M| has a nonempty radial interval and is treated globally by F5 and steps 1.2–2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement includes q=0, yielding the vacuum Kerr equations on its stated domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The zero-parameter specialization M=a=q=0 on an admissible positive-radius exterior has unit lapse and zero field. The exact residuals in F2 and the positive-alpha conversion in step 3.1 retain this flat case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The statement has no nonzero-charge or nonzero-rotation assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement excludes Delta=0 and axes in the original chart; the separate exterior item supplies only the pole values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The global exterior metric and potential are supplied by F5; steps 1.2 and 1.3 extend their already smooth tensors to the poles by continuity, without choosing a potential in each chart."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The three equations are conclusions for specified KN domains, not a uniqueness statement for every geometric electrovac solution."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 verifies the given metric-field pair; it never reconstructs a Boyer-Lindquist datum from the field equations."
+        }
+      ],
+      "owner_residual_interfaces_round2": {
+        "reviewer": "/root/emg_remaining_interfaces",
+        "mode": "Final approved local repair round; no third review cycle.",
+        "source_repair": "Finite-chart compact action globalization and/or explicit positive alpha tensor normalization; full approved claims retained.",
+        "live_consumer_limit": "Native partial batches5,11,12,15,22 retain their source ownership through actual successful drain; final affected-use/source-status closure is pending. WSL process death is not completion."
+      },
+      "owner_round2_supplier_status": "Typed prerequisites are authored drafts. Root’s source disposition supersedes the earlier invalid-remark classification because the audited imported mathematical remark has substantive Verification. No native readiness, independent acceptance, or import-pin refresh is asserted here."
+    },
+    "prop-emg-xs-kn-invariants": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-xs-kn-rational-calculus",
+          "source_section": "Statement",
+          "quote": "Let $M,a,q\\in\\mathbb R$ and use the electric Kerr-Newman datum on a Boyer-Lindquist chart with $\\Sigma>0$, $\\Delta\\ne0$, $0<\\theta<\\pi$. Set $y=\\cos\\theta$, $b=1-y^2$, $R=r^2+a^2$, and use the rational procedure of [[alg-emg-rational-electrovac-verification]] with volume polynomial $w=\\Sigma$. Its exact component table is: the metric and inverse entries and determinant in Facts [F1]-[F2]; the field components $$\\math",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "The coordinate entries and inverse in [F1] give the exact contraction\n$\\mathcal F_{ab}\\mathcal F^{ab}=2(B_m^2-E^2)$ with the algebraic abbreviations\n$$E=\\frac{q(r^2-a^2y^2)}{\\Sigma^2},\\qquad B_m=\\frac{2qar y}{\\Sigma^2},\\qquad y=\\cos\\theta.$$\nExpanding\n$(r^2-a^2y^2)^2-4a^2r^2y^2\n=r^4-6a^2r^2y^2+a^4y^4$\ngives the field scalar in [F1]. The same exact rational output gives $S=0$\nand $\\operatorname{Ric}_{ab}\\operatorname{Ric}^{ab}=4q^4/\\Sigma^4$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "step": "1.2",
+          "claim": "If $q\\ne0$ and $\\Sigma\\to0$, then $4q^4/\\Sigma^4\\to+\\infty$. A $C^2$\nnondegenerate metric extension has continuous inverse metric and continuous\ncurvature contractions at its added point, so this divergence is impossible.\nIf $q=0$, the displayed Ricci-square vanishes and this argument gives no\nobstruction.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "For $a\\ne0$, define\n$$X=\\sqrt{r^2+a^2}\\sin\\theta\\cos\\phi,\\quad Y=\\sqrt{r^2+a^2}\\sin\\theta\\sin\\phi,\\quad Z=r\\cos\\theta.$$\nAt $r=0$, $\\theta=\\pi/2$, these satisfy $X^2+Y^2=a^2$ and $Z=0$, the ring.\nThis map labels the excluded locus only; it is not asserted to be an injective\ncoordinate chart through the disk.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "An empty admissible chart has no curvature values and no sequence approaching Sigma=0. The conditional obstruction in A1 and step 1.2 concerns only an actually approached extension point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement explicitly says q=0 removes the charged Ricci-square obstruction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The specialization M=a=q=0 gives unit lapse and zero charged invariants. In particular step 1.2 does not infer an obstruction when q=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The proposition explicitly distinguishes q=0 from the charged obstruction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Sigma tending to zero is the explicit endpoint test in step 1.2: 4q^4/Sigma^4 diverges for q nonzero, incompatible with continuous curvature of a C2 nondegenerate extension. Step 2.1 labels the excluded ring only."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proposed approaching sequence is a hypothesis in A1; the coordinate map X,Y,Z in step 2.1 is explicit. Neither part chooses an extension or a chart from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The charged-invariant calculation supplies an obstruction when q is nonzero; it does not classify all singular or extendible KN data."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For q=0 the text expressly withholds a Weyl-singularity conclusion, so vanishing Ricci square is not claimed to imply regularity."
+        }
+      ]
+    },
+    "lem-emg-xs-duality": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-xs-geometric-electrovac",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth oriented, time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$; $o$ is the manifold orientation, $N$ is a smooth future timelike field, and the metric volume form is chosen to agree with $o$. Let $\\nabla$ be the metric-selected connection, let $\\mathcal F$ be a smooth real two-form on $M$, and use the curvature convention $R(X,Y)Z=\\nabla_X\\nabla_YZ-\\nabla_Y\\nabla_XZ-\\nabla_{[X,Y",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by $$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$ and extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metri",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "Since $\\beta$ is constant, $d\\mathcal F_\\beta=\\cos\\beta\\,d\\mathcal F+ \\sin\\beta\\,d(\\star_g\\mathcal F)=0$ by [F1].",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "step": "1.2",
+          "claim": "By [F2], $\\star_g\\mathcal F_\\beta=\\cos\\beta\\,\\star_g\\mathcal F +\\sin\\beta\\,\\star_g^2\\mathcal F=\\cos\\beta\\,\\star_g\\mathcal F -\\sin\\beta\\,\\mathcal F$. Applying $d$ and using [F1] proves $d(\\star_g\\mathcal F_\\beta)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.3",
+          "step": "1.3",
+          "claim": "In a positive oriented orthonormal frame let $E_i=-\\mathcal F_{0i}$ and $B_i=\\tfrac12\\epsilon_{ijk}\\mathcal F_{jk}$. The component formula [F2] gives $E(\\star\\mathcal F)=-B$ and $B(\\star\\mathcal F)=E$, hence $E_\\beta=E\\cos\\beta-B\\sin\\beta$ and $B_\\beta=B\\cos\\beta+E\\sin\\beta$. Direct expansion gives $E_\\beta^2+B_\\beta^2=E^2+B^2$, $E_\\beta\\times B_\\beta=E\\times B$, and $E_{\\beta i}E_{\\beta j}+B_{\\beta i}B_{\\beta j} =E_iE_j+B_iB_j$: the mixed symmetric terms cancel and $B\\times E=-E\\times B$.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "The observer-frame components of the quadratic tensor $Q_{ab}=\\mathcal F_{ac}\\mathcal F_b{}^c-\\tfrac14g_{ab}\\mathcal F^2$ are $Q_{00}=\\tfrac12(E^2+B^2)$, $Q_{0i}=-(E\\times B)_i$, and $Q_{ij}=-E_iE_j-B_iB_j+\\tfrac12\\delta_{ij}(E^2+B^2)$, by direct raising with $\\eta=\\operatorname{diag}(-1,1,1,1)$. Each is unchanged by step 1.3, so tensoriality gives $Q(\\mathcal F_\\beta)=Q(\\mathcal F)$ globally. The observer-stress dependency remains a draft interface; this proof uses only the displayed geometric quadratic tensor and does not assert an SI normalization.",
+          "inputs": [
+            "F1",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "step": "3.1",
+          "claim": "By steps 1.1-1.2 the rotated field is closed with closed dual, and by step 2.1 its quadratic tensor is unchanged. Substitution in [F1] therefore gives the same Ricci equation for $\\mathcal F_\\beta$, proving the Statement.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The geometric electrovac datum supplies its manifold and Hodge structure; should one restrict these tensor identities to an empty open set, steps 1.1–2.1 impose no values there and remain vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement and proof include zero field and beta=0 without changing Q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At beta=0, cos(beta)=1 and sin(beta)=0, so the rotated form is exactly the original form. Steps 1.1–1.3 include this identity rotation without dividing by either trigonometric coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The tensor rotation calculation applies to degenerate zero fields."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The duality parameter beta is any constant real number and the sine/cosine formulas have no excluded angle or endpoint limit; no boundary extension is part of this rotation identity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 explicitly retains only the inherited countable-choice convention. The two-term linear combination and the component cancellation in step 1.3 add no choices of solutions or frames across the manifold."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion sends a given electrovac field to a dual-rotated electrovac field. It does not state a biconditional criterion on arbitrary pairs of two-forms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Although rotation by negative beta would undo this formula, the statement does not require a converse classification of fields with equal stress; step 2.1 proves only invariance for the displayed rotation."
+        }
+      ]
+    },
+    "prop-emg-xs-kn-dyonic-flux": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-emg-xs-kn-verification",
+          "source_section": "Statement",
+          "quote": "For $M,a,q\\in\\mathbb R$, on every pole-free Boyer-Lindquist domain with $\\Sigma>0$ and $\\Delta\\ne0$, the metric and potential of [[def-emg-xs-kn-data]] satisfy the equations below. In addition, for every $R_0>4|M|$, the full-sphere exterior extension of [[def-emg-xs-kn-full-sphere-exterior]] satisfies the same equations on $\\mathbb R_{x^0}\\times(R_0,\\infty)\\times S^2$. On all these domains, $$d\\mathcal F=0,\\qquad d(\\",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-xs-duality",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o,\\mathcal F)$ be a smooth geometric electrovac datum with zero cosmological constant, and let $\\beta\\in\\mathbb R$ be constant. Define $$\\mathcal F_\\beta:=\\cos\\beta\\,\\mathcal F+\\sin\\beta\\,\\star_g\\mathcal F.$$ Then $d\\mathcal F_\\beta=d(\\star_g\\mathcal F_\\beta)=0$ and $Q_{ab}(\\mathcal F_\\beta)=Q_{ab}(\\mathcal F)$, so the same metric satisfies $\\operatorname{Ric}_{ab}=2Q_{ab}(\\mathcal F_\\beta)$. This is a cl",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emg-xs-kn-full-sphere-exterior",
+          "source_section": "Definition",
+          "quote": "Let $M,a,q\\in\\mathbb R$ have units of metres, choose $R_0>4|M|$, and set $$\\mathcal X:=\\mathbb R_{x^0}\\times(R_0,\\infty)_r\\times S^2,\\qquad R=r^2+a^2,\\quad b=1-Z^2,\\quad \\Sigma=r^2+a^2Z^2,\\quad \\Delta=r^2-2Mr+a^2+q^2,$$ where $S^2=\\{(X,Y,Z)\\in\\mathbb R^3:X^2+Y^2+Z^2=1\\}$ has its induced unit round metric $\\gamma$ and outward area form $\\omega$. Write $$\\lambda:=X\\,dY-Y\\,dX,\\qquad \\bar g:=-\\frac{\\Delta-a^2b}{\\Sigma}(d",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-emg-gauss-finite-chain",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]], let $F\\in\\Omega^2(M)$ and $j\\in\\Gamma(TM)$ be smooth, and fix constants $c,\\mu_0>0$. Assume $dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$, equivalently $d(\\star_gF)=\\mu_0\\iota_j\\mathrm{vol}_g$ by [[lem-emg-maxwell-current-forms]]. A finite smooth singular $k$-chain means a finite formal real linear combination o",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-emg-maxwell-current-forms",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]], with signature $(-,+,+,+)$, metric-selected connection $\\nabla$ and oriented metric volume form $\\mathrm{vol}_g$. Let $F\\in\\Omega^2(M)$ be a smooth real two-form and $j\\in\\Gamma(TM)$ a smooth vector field. Fix constants $\\mu_0>0$ and $c>0$; $\\mu_0$ is a real coefficient here, and $c$ is th",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "On the sphere let $X=\\sin\\theta\\cos\\phi$ and $Y=\\sin\\theta\\sin\\phi$. Then $\\lambda=X\\,dY-Y\\,dX=\\sin^2\\theta\\,d\\phi$ away from the poles, and [F3] proves this is a global smooth one-form. The global potential $\\bar{\\mathcal A}=-qr\\Sigma^{-1}(dx^0-a\\lambda)$ is smooth since $\\Sigma>0$. Hence $\\bar{\\mathcal F}=d\\bar{\\mathcal A}$ and Stokes on the closed sphere gives $\\int_{S_r}\\bar{\\mathcal F}=0$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "step": "1.2",
+          "claim": "In the oriented $(x^0,r,\\theta,\\phi)$ coordinates, direct raising of $\\mathcal F_{r0}=q(r^2-a^2y^2)/\\Sigma^2$ and $\\mathcal F_{r\\phi}=-a\\sin^2\\theta\\,\\mathcal F_{r0}$ with the KN inverse metric gives $$(\\star_g\\mathcal F)_{\\theta\\phi} =\\frac{q(r^2+a^2)(r^2-a^2y^2)\\sin\\theta}{\\Sigma^2} =q\\sin\\theta+O(r^{-2})\\sin\\theta,$$ The numerator factor minus $\\Sigma^2$ is $a^2r^2(1-3y^2)-a^4y^2(1+y^2)$, whose absolute value is at most $2a^2r^2+2a^4$ for $|y|\\le1$. Since $\\Sigma^2\\ge r^4$, the remainder is uniformly $O(r^{-2})$ on the sphere. Hence $\\lim_{r\\to\\infty}(4\\pi)^{-1}\\int_{S_r}\\star_g\\mathcal F=q$.",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "For $R_0<r_1<r_2$, triangulate $S^2$ by its eight octahedral faces; radial projection of each planar face to $S^2$ is smooth because the face plane stays a positive distance from the origin. The product of each face with $[r_1,r_2]$ is a triangular prism, which splits into three tetrahedra. Their oriented sum is a finite smooth singular three-chain: internal faces cancel and its boundary is $S_{r_2}-S_{r_1}$. By steps 1.1-1.2, $d\\mathcal F=0$ and $d(\\star_g\\mathcal F)=0$. Apply the current-forms equivalence [L2] with $j=0$ to obtain $\\nabla_a\\mathcal F^{ab}=0$, then apply the actual finite-chain draft [L1] to this chain. Its charge integral is zero, so the two sphere fluxes are equal. Step 1.2 identifies their common value as $4\\pi q$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "L1",
+            "L2",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d3.1",
+          "step": "3.1",
+          "claim": "The fluxes of $\\mathcal F_\\beta$ satisfy $\\star_g\\mathcal F_\\beta=\\cos\\beta\\,\\star_g\\mathcal F-\\sin\\beta\\,\\mathcal F$ by [F2]. Dividing the two sphere integrals by $4\\pi$ and using steps 1.1 and 2.1 gives $q_e=q\\cos\\beta$ and $q_m=q\\sin\\beta$.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d4.1",
+          "step": "4.1",
+          "claim": "The metric function $\\Delta=r^2-2Mr+a^2+q^2$ is unchanged because $q_e^2+q_m^2=q^2(\\cos^2\\beta+\\sin^2\\beta)=q^2$. The stress tensor is unchanged by [F2], so the same metric satisfies the dyonic geometric electrovac equations. This is a classical flux normalization; no integrality condition follows.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The flux objects are full spheres in a nonempty exterior annulus, not arbitrary empty cycles. R0=4|M|+1 in A1 guarantees a positive exterior region; steps 1.1 and 2.1 integrate on the specified spheres."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The statement gives q_e=q_m=0 when q=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At beta=0, step 3.1 gives q_e=q and q_m=0, retaining the original electric solution; this angle with cosine one is included in the displayed flux formulas."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The flux relations remain valid at q=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The statement restricts conservation to finite homologous exterior spheres and finite boundaries; no noncompact boundary claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 specifies eight octahedral faces and three tetrahedra per radial prism. This is a fixed finite chain construction rather than a choice from an arbitrary family of sphere fillings."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition evaluates the flux of a KN field after a specified rotation. It does not assert that prescribed fluxes uniquely determine this metric or field."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The relation q_e^2+q_m^2=q^2 follows from the chosen beta in step 4.1; no converse existence or flux-quantization theorem is stated."
+        }
+      ]
+    },
+    "ex-emg-xs-zero-rotation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-emg-xs-kn-verification",
+          "source_section": "Statement",
+          "quote": "For $M,a,q\\in\\mathbb R$, on every pole-free Boyer-Lindquist domain with $\\Sigma>0$ and $\\Delta\\ne0$, the metric and potential of [[def-emg-xs-kn-data]] satisfy the equations below. In addition, for every $R_0>4|M|$, the full-sphere exterior extension of [[def-emg-xs-kn-full-sphere-exterior]] satisfies the same equations on $\\mathbb R_{x^0}\\times(R_0,\\infty)\\times S^2$. On all these domains, $$d\\mathcal F=0,\\qquad d(\\",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emg-xs-rn-verification",
+          "source_section": "Statement",
+          "quote": "For arbitrary $M,q_e,q_m\\in\\mathbb R$, put $Q^2=q_e^2+q_m^2$ and $f(r)=1-2M/r+Q^2/r^2$. On every open $J\\subset(0,\\infty)$ with $f\\ne0$, the dyonic RN datum of [[def-emg-xs-rn-data]] is a geometric electrovac datum of [[def-emg-xs-geometric-electrovac]] on $\\mathbb R_{x^0}\\times J\\times S^2$. In particular, its global two-form is smooth, $d\\mathcal F=d(\\star_g\\mathcal F)=0$, and $\\operatorname{Ric}_{ab}=2Q_{ab}(\\math",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-gr-schwarzschild-exterior-model",
+          "source_section": "Definition",
+          "quote": "This item assumes the axiom of countable choice $\\mathrm{AC}_\\omega$ through the tangent-bundle structure used by [[def-gr-smooth-lorentzian-objects]] clause (c) ([[def-countable-choice]]); no further choice principle is used. **(a) Parameters and the Schwarzschild radius.** Let $c>0$ and $G_N>0$ be real constants and let $m_*>0$ be a real **mass parameter**. Put $$s:=\\frac{2G_Nm_*}{c^2}>0 .$$ The number $s$ is the *",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "Set $a=0$ and retain the electric parameter $q$. Then\n$\\Sigma=r^2$, $\\Delta=r^2-2Mr+q^2$, and the KN line element reduces term by\nterm to\n$$-\\left(1-\\frac{2M}{r}+\\frac{q^2}{r^2}\\right)(dx^0)^2+ \\left(1-\\frac{2M}{r}+\\frac{q^2}{r^2}\\right)^{-1}dr^2+r^2d\\Omega^2.$$\nIts potential becomes $-q\\,dx^0/r$, so it is exactly the electric RN datum\nwith $q_e=q,q_m=0$; no uniqueness theorem is used.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d1.2",
+          "step": "1.2",
+          "claim": "Set $q=0$ with $a$ arbitrary. The potential and field vanish, while\n$\\Delta=r^2-2Mr+a^2$ and the displayed metric is the vacuum Kerr form. Since\nthe KN residual identity of [F1] remains valid at $q=0$, its Ricci tensor\nvanishes. This is the vacuum rotating limit, not a classification claim.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "Set both $a=0$ and $q=0$. On the component $M>0$ and $r>2M$, the metric\nfunction is $1-2M/r$. With $s=2M$ and\n$m_*=c^2M/G_N$, [F3] identifies it with the Schwarzschild exterior metric\nform. The conclusion is only the coordinate substitution and local metric\nidentity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification step 1.1: Each substitution is an identity on the common admissible chart with Sigma>0 and Delta nonzero. If that common region is empty there is no local metric value to compare, rather than an added global solution."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The example explicitly checks a=0 and q=0 substitutions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Taking also M=0 in the a=q=0 substitution gives f=1, the flat zero-field specialization. The Schwarzschild exterior identification in step 2.1 separately assumes M>0 and does not apply its positive-mass name to M=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The example includes both zero-rotation and zero-charge branches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes a=0 and step 1.2 specializes q=0 exactly, so these parameter endpoints are included. Coordinate roots remain excluded; the Schwarzschild comparison in step 2.1 is only on r>2M."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification steps 1.1 and 1.2: The three parameter substitutions are explicitly a=0, q=0, and both zero. The resulting coordinate coefficients are computed directly, without selecting an isometry or invoking uniqueness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example lists sufficient parameter substitutions giving RN, Kerr and Schwarzschild forms; it makes no if-and-only-if classification of all metrics with those forms."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No argument recovers a unique parameter triple from a metric. Step 2.1 establishes one displayed local identity with s=2M only."
+        }
+      ]
+    },
+    "ex-emg-xs-rn-charge-sign": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-xs-rn-data",
+          "source_section": "Definition",
+          "quote": "Let $M,q_e,q_m\\in\\mathbb R$ be length parameters and put $Q^2:=q_e^2+q_m^2$. Let $J\\subset(0,\\infty)$ be open and require $$f(r):=1-\\frac{2M}{r}+\\frac{Q^2}{r^2}\\ne0\\qquad(r\\in J).$$ On the smooth product $\\mathcal M_J:=\\mathbb R_{x^0}\\times J_r\\times S^2$, let $\\gamma_{S^2}$ be the unit round metric and $\\omega_{S^2}$ its positively oriented area form. The **dyonic RN datum** is $$g=-f(r)\\,dx^0\\otimes dx^0+f(r)^{-1}\\",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-emg-xs-rn-verification",
+          "source_section": "Statement",
+          "quote": "For arbitrary $M,q_e,q_m\\in\\mathbb R$, put $Q^2=q_e^2+q_m^2$ and $f(r)=1-2M/r+Q^2/r^2$. On every open $J\\subset(0,\\infty)$ with $f\\ne0$, the dyonic RN datum of [[def-emg-xs-rn-data]] is a geometric electrovac datum of [[def-emg-xs-geometric-electrovac]] on $\\mathbb R_{x^0}\\times J\\times S^2$. In particular, its global two-form is smooth, $d\\mathcal F=d(\\star_g\\mathcal F)=0$, and $\\operatorname{Ric}_{ab}=2Q_{ab}(\\math",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "Since $(+\\ell)^2=(-\\ell)^2$, both lapse functions equal $1-2M/r+\\ell^2/r^2$. Every metric coefficient is consequently identical.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "The two fields are $\\mathcal F_\\pm=\\mp\\ell r^{-2}dx^0\\wedge dr$, so $\\mathcal F_-=-\\mathcal F_+$. Their normalized oriented electric sphere flux parameters $(4\\pi)^{-1}\\int_{S_r}\\star_g\\mathcal F_\\pm$ are $\\pm\\ell$ because $\\star_g\\mathcal F_\\pm=\\pm\\ell\\,\\omega_{S^2}$ and $\\int_{S^2}\\omega_{S^2}=4\\pi$. Thus the metric does not determine the sign of the electric flux parameter.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example statement and step 1.1: The comparison uses a fixed positive ell and a positive-radius interval where the common lapse is nonzero. If no radii are selected the equality of coefficients is vacuous; the sign comparison concerns regular full spheres in a nonempty datum."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes ell>0, so the zero-charge case is excluded by its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There are exactly two prescribed charge values +ell and -ell, distinct because ell>0. Setting a field coefficient to numerical one does not collapse this pair or change the square identity in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes strictly positive ell and has no zero-charge degeneracy in its domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint ell=0 is excluded by the example: at zero both fields and their sign distinction disappear. Radial lapse roots are also excluded, so neither step extends the comparison across them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 compares the two explicitly supplied signs and step 2.1 applies the same Hodge operation to each; no sign is selected from a variable family. The normalized electric flux parameters are +ell and -ell."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example exhibits equal metrics for opposite electric parameters, not a characterization of all parameter changes that leave a metric invariant."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Its conclusion is failure of sign recovery from the metric; equality of metrics is not asserted to force precisely this pair of fields."
+        }
+      ]
+    },
+    "cex-emg-xs-scalar-trace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-emg-xs-rn-tensor-identities",
+          "source_section": "Statement",
+          "quote": "Let $M,q_e,q_m\\in\\mathbb R$, $Q^2=q_e^2+q_m^2$, and let $J\\subset(0,\\infty)$ be open with $f(r)=1-2M/r+Q^2/r^2\\ne0$ on $J$. For the dyonic RN datum of [[def-emg-xs-rn-data]], in a spherical-polar chart its Ricci components are $$\\operatorname{Ric}_{00}=f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=\\frac{fQ^2}{r^4},\\quad \\operatorname{Ric}_{11}=-\\frac1f\\left(\\frac{f''}{2}+\\frac{f'}r\\right)=-\\frac{Q^2}{fr^4},$$ $$\\operatornam",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1.1",
+          "step": "1.1",
+          "claim": "At $r=2\\ell$, $Q^2=\\ell^2$ and $\\operatorname{Ric}_{22}=Q^2/r^2=1/4\\ne0$, while [F1] gives $S=0$. By continuity the same nonvanishing holds on a sufficiently small open neighborhood of that radius.",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "d2.1",
+          "step": "2.1",
+          "claim": "The hypotheses of the refuted statement hold on this smooth RN chart but its conclusion fails because the displayed Ricci component is nonzero. Hence the universal implication is false.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The witness is a nonempty open interval about r=2ell with ell>0. An empty domain cannot supply the nonzero Ricci component needed to refute the universal implication; step 1.1 supplies an actual radius."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes ell>0, so the zero-charge case is excluded by its hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 obtains Ric_22=1/4, a nonzero scalar component at the single specified witness radius. One witness suffices against the universal metric claim, and continuity provides an open neighborhood as well."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes strictly positive ell and has no zero-charge degeneracy in its domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The chosen radius 2ell is interior, strictly positive, and has f=1+ell^2/r^2>0. No r=0 limit or boundary extension is used in this scalar-trace counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: A1 gives the explicit parameters M=0,q_e=ell,q_m=0 and witness r=2ell. Refutation therefore needs no choice of a metric with unspecified properties."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement refuted is the one-way implication S=0 implies Ric=0; step 2.1 falsifies that implication, rather than proving a forward direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse implication Ric=0 implies S=0 is not the claim under refutation and is not denied by the witness."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "run": "physics-remaining-80-2026-10-17",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "27",
+  "input_sha256": "5069ebbce538d3053e82afeabfa2d42eb86eb896f2ecc926382251c372776a2a",
+  "decisions": [
+    {
+      "id": "ex-csm-chain-analytic-interacting-model",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "ae5c0efac168f816d070a4b8728a24618b70810e0d125a986bc7853bd178002c",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "reason": "Step 1.2 asserted the pressure identity for every finite K>0 using F2, whose Statement asserts that identity only for |K|<1/2. The correct unrestricted claim therefore lacked an adequate cited supplier. Repaired by citing thm-tdmath-ising-chain-limit directly as F4 and explicitly specializing its periodic partition identity to h=0; the series remains restricted to 0<K<1/2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-csm-chain-analytic-interacting-model",
+      "disposition": "repaired",
+      "post_sha256": "82c6e7d596f704e27ba7717e04110502271c9d541598dbcbb077000174467f83",
+      "review_context_sha256": "2c40b6dc78ba33cb2442cf104a527f76bc5ce31226237f5291fde9ec62a73e4e",
+      "reason": "Checked the current periodic partition, J>0, beta>0, h=0, dimensionless K and counting normalization against the full Statement and Proof of thm-tdmath-ising-chain-limit. Its zero-field eigenvalues give Z_N=(2 cosh K)^N(1+q^N), 0<q<1, and the pressure error lies between 0 and log(2)/N. Checked F2 only supplies the stated restricted series convergence. The Markov construction and DLR uniqueness suppliers retain finite-parameter and Countable Choice hypotheses; the equilibrium interpretation remains an adopted conditional model with no empirical claim. Updated only this item and its owning contract/dependency mirror. This is the repair author's check, not independent review.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "gate_resolutions": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "ex-csm-chain-analytic-interacting-model",
+      "phase": "repeat",
+      "round": 1,
+      "status": "fixed",
+      "outcome": "confirmed_fatal",
+      "defect_type": "dependency_citation",
+      "location": "Verification step 1.2",
+      "reason": "The high-temperature series theorem cannot establish the all-positive-K pressure identity through its Statement. Directly cited the existing published periodic-chain theorem, verified its entire finite-matrix argument, and specialized it at zero field without weakening the Example.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "supporting_evidence": {
+    "research/physics-remaining-80-2026-10-17-batch-27-step5-context.json": "b60bb8130d1a9d307e6cc506fc7bf2c4394b9904100eb7f1d17af3849c712134"
+  },
+  "repair_notes": {
+    "claim_and_conventions": "Zero-field periodic two-state Ising chain, finite J>0 joules, finite beta>0 in inverse joules, K=beta J, N>=2. Dimensionless pressure is lim log(Z_N)/N. Countable Choice is used for the infinite-volume Markov measure, not the finite matrix calculation.",
+    "sources_examined": [
+      {
+        "path": "items/thm-tdmath-ising-chain-limit.md",
+        "sections": [
+          "Statement",
+          "Facts & Assumptions",
+          "Proof steps 1.1-3.1"
+        ],
+        "use": "Exact periodic partition identity and unrestricted finite-parameter pressure limit; the local proof specializes to h=0."
+      },
+      {
+        "path": "items/thm-csm-ising-chain-convergent-series.md",
+        "sections": [
+          "Statement",
+          "Facts & Assumptions",
+          "Proof"
+        ],
+        "use": "Its stated pressure identity and convergent logarithmic series are restricted to |K|<1/2."
+      },
+      {
+        "path": "items/lem-csm-chain-markov-bridge.md",
+        "sections": [
+          "Statement",
+          "Facts & Assumptions",
+          "Proof"
+        ],
+        "use": "Positive transfer matrix and stationary Markov law under Countable Choice."
+      },
+      {
+        "path": "items/thm-csm-chain-dlr-uniqueness.md",
+        "sections": [
+          "Statement",
+          "Facts & Assumptions",
+          "Proof"
+        ],
+        "use": "Finite-parameter DLR identification and endpoint-uniform cylinder convergence."
+      },
+      {
+        "path": "items/post-csm-interacting-equilibrium-gibbs.md",
+        "sections": [
+          "Postulate"
+        ],
+        "use": "Counting reference, DLR definition, and adopted physical interpretation without equilibration or empirical proof."
+      }
+    ],
+    "interface_comparison": "The Example section, physical_scope and empirical qualifications remain byte-for-byte unchanged from the assigned carrier; they match the unchanged manifest statement and scope. Only proof, Facts, and dependency metadata changed. No consumer propagation is triggered.",
+    "metadata": "Under the shared write lock, appended only thm-tdmath-ising-chain-limit as a mathematical premise to the assigned manifest item; added exact F4 Statement citation and revised step-1-2 derivation/risk review in its owning contract. No page or other item edited.",
+    "published_ledger_updates": [],
+    "unresolved_obligations": [],
+    "focused_checks": [
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-remaining-80-2026-10-17-batch-27.proof-contracts.json --strict --items ex-csm-chain-analytic-interacting-model",
+        "exit_code": 0,
+        "output": "proof-contract: 0 error(s), 0 warning(s), 1/1 item(s) checked"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-csm-chain-analytic-interacting-model.md",
+        "exit_code": 0,
+        "output": "PASS; 1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/ex-csm-chain-analytic-interacting-model.md",
+        "exit_code": 0,
+        "output": "OK: 1 file; YAML and every math span parse"
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/ex-csm-chain-analytic-interacting-model.md",
+        "exit_code": 0,
+        "output": "proof-layout: 1 items, 3 steps, 0 defects"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-v2-repeat-r1-u27-items.json --json",
+        "selection": [
+          "ex-csm-chain-analytic-interacting-model"
+        ],
+        "exit_code": 0,
+        "output": "Focused item and home-page dependency checks: 0 errors, 0 warnings; 1122 prerequisite items and 380 prerequisite pages checked for cycles."
+      }
+    ],
+    "next_action": "Controller collection and ordinary rejudgment: one confirmed-fatal item in this round, repaired here. No unresolved local obligations; no judges, certification or transitions launched."
+  }
+}

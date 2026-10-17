@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {readItem} from '../../tools/physics-support/physics-content.mjs';
+import {sourceSectionText} from '../../tools/physics-support/facts-block.mjs';
+import {originalImportPath} from '../../tools/physics-support/physics-imports.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)),run='physics-remaining-80-2026-10-17',out=join(root,'research',run+'-owner-import-refresh-50'),sha=b=>createHash('sha256').update(b).digest('hex'),json=p=>JSON.parse(readFileSync(p));
+const before=json(join(out,'before/research/math-imports.json')),after=json(join(root,'research/math-imports.json')),preflight=json(join(out,'preflight.json')),changes=[];
+for(const pin of after.files){if(sha(readFileSync(join(root,pin.path)))!==pin.sha256)throw Error('Refreshed local pin mismatch '+pin.path);}
+for(const row of preflight.root_changes){const pin=after.files.find(x=>x.path===row.path),source=originalImportPath(after,pin),archive=join(out,'before',row.path),sourceBytes=readFileSync(source);if(sha(readFileSync(archive))!==row.local_before)throw Error('Archive mismatch');const current=readFileSync(join(root,row.path)),record={...row,after_local_sha256:sha(current),after_pin:pin.sha256,after_root_sha256:sha(sourceBytes),original_unchanged_by_physics:true};
+ if(row.path.startsWith('items/')){if(sha(current)!==sha(sourceBytes))throw Error('Current relevant source drift '+row.path);const old=readItem(archive),now=readItem(join(root,row.path));record.public_statement_unchanged=sourceSectionText(old.body,'Statement')===sourceSectionText(now.body,'Statement');record.deps_unchanged=JSON.stringify(old.deps)===JSON.stringify(now.deps);record.physical_scope_unchanged=old.physical_scope===now.physical_scope;if(!record.public_statement_unchanged||!record.deps_unchanged)throw Error('Public math supplier change needs consumer-owner review');record.change='Proof/Facts/verification-only upstream repair; no public Statement or logical edge changes';}else record.change='Upstream pathway metadata/prose snapshot context; no item public claim';changes.push(record);
+}
+const report={run,at:new Date().toISOString(),authorization:preflight.authorization,old_imports:before.files.length,new_imports:after.files.length,all_local_pins_match:true,changes,originals_modified:false,scientific_consumer_reaudit_required_for_proof_only_change:false,receipt_before_sha256:sha(readFileSync(join(out,'before/research/math-imports.json'))),receipt_after_sha256:sha(readFileSync(join(root,'research/math-imports.json'))),gate_attempt:false};writeFileSync(join(out,'completion.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({imports:after.files.length,local_pins_verified:true,changes:changes.length,public_math_statement_changes:0}));

@@ -1,0 +1,616 @@
+{
+  "version": 1,
+  "scope": [
+    "def-tgr-local-fluid-state",
+    "lem-tgr-local-gibbs-euler",
+    "lem-tgr-fluid-frame-projection",
+    "ex-tgrmath-parcel-rest-shift"
+  ],
+  "contracts": {
+    "def-tgr-local-fluid-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition explicitly requires nonempty open O and nonempty open X."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: sigma_p may be zero and J or S may vanish; the state and current formulas divide only by positive v, and the frame projections remain defined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the state is per marker and imposes no integer restriction on a total marker count; no formula fails at one marker."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: e is only C2; it does not require nonzero response derivatives or assert an inverse chart."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "O and X are open and the Definition makes no boundary-state or endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the smooth-congruence convention inherits only AC_omega through def-countable-choice; no witness family or full AC is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition introduces state and current maps and contains no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition introduces state and current maps and contains no biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-53",
+        "notes": "Independently checked the complete Definition and exact published geometry suppliers: smooth time-oriented Lorentz four-manifold, future unit congruence, open integral-curve domains, distinct tetrad/chart types and AC_omega convention. Positive v makes n and the C2 state compositions defined; first derivatives T,p are C1, sufficient for the stated C1 current divergences. Inverse metric exists by nondegeneracy; all projections are typed. Units of cJ,cS,cQ agree. Neither conservation, constitutive equality, positivity of T/h nor empirical applicability is asserted. Reader/refuter title-space defect confirmed and corrected only in title; Definition unchanged."
+      }
+    },
+    "lem-tgr-local-gibbs-euler": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q\\le n$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^q$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]]. Suppose $F(x_*)=0$ and some $q\\times q$ minor of the derivative matrix $DF(x_*)$ is invertible. This nonsingular-minor hypothesis is the explicit full-row-rank condition used here. If $q<n$, then after permuting coordinates $x=(u,v)\\in\\mathbb R^{n-q}\\times\\mathbb R^q$, there are open neighborhoods $P$ of $u_*$ and $Q$ of $v_*$ and a unique $C^1$ map $\\varphi:P\\to Q$ such that\n\n$$F(u,v)=0\\quad\\Longleftrightarrow\\quad v=\\varphi(u)\\qquad((u,v)\\in P\\times Q).$$\n\nIts derivative is\n\n$$D\\varphi(u)=-D_vF(u,\\varphi(u))^{-1}D_uF(u,\\varphi(u)).$$\n\nThus the local zero set is a graph over $n-q$ free coordinates. If $q=n$, the zero is locally isolated, so the local graph dimension is zero. Here “local graph dimension $k$” means a local graph parameterized by an open subset of $\\mathbb R^k$, with a singleton counted as dimension zero.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "1.6",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-tdmath-concave-affine-maximizer-and-hessian",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^d$, $d\\ge1$, be open, and let $f:U\\to\\mathbb R$ be differentiable. For $x,y\\in U$, suppose the whole segment $[x,y]$ lies in $U$ and its concavity inequality holds:\n\n$$f(x+t(y-x))\\ge(1-t)f(x)+tf(y)\\qquad(0\\le t\\le1).$$\n\nThen the supporting bound is $f(y)\\le f(x)+Df(x)(y-x)$. In particular this bound holds for every $x,y$ in any convex subset of $U$ on which $f$ is concave. No global convexity of $U$ is assumed.\n\nLet $A:\\mathbb R^d\\to\\mathbb R^k$ be linear, $b\\in\\mathbb R^k$, and $F=U\\cap\\{x:Ax=b\\}$. Suppose $x_*\\in F$, $Df(x_*)h=0$ for every $h\\in\\ker A$, and for every $y\\in F$ the segment $[x_*,y]$ lies in $U$ and has the displayed concavity inequality. Then $x_*$ is a global maximum of $f$ on $F$. If $F$ is convex and $f|_F$ is strictly concave, meaning the inequality is strict for distinct endpoints and $0<t<1$, the maximum is unique.\n\nFor the curvature clause, suppose $f\\in C^2(U)$ and fix $x\\in U$. If, for every $h\\in\\mathbb R^d$, all sufficiently small $|t|$ satisfy $x\\pm th\\in U$ and\n\n$$f(x+th)+f(x-th)\\le2f(x),$$\n\nthen the Hessian bilinear form $D^2f(x)=D(Df)(x)$ satisfies $D^2f(x)[h,h]\\le0$ for every $h$. This condition holds whenever $f$ is concave on a neighborhood of $x$. Thus a $C^2$ function concave on an open convex region has negative-semidefinite Hessian there. Concavity alone does not assert strict curvature.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $(n,s)\\mapsto(v,\\sigma_p)=(1/n,s/n)$ is smooth on $(0,\\infty)\\times\\mathbb R$, so $Y$ is open as the inverse image of $X$. Direct differentiation gives $dv=-dn/n^2$ and $d\\sigma_p=ds/n-s\\,dn/n^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "From $h=\\varepsilon+p=n(e+pv)$ and $\\mu=H-T\\sigma_p$, we obtain $Ts+\\mu n=T(n\\sigma_p)+(H-T\\sigma_p)n=nH=h=\\varepsilon+p$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The map $(\\mathsf S,\\mathsf V,\\mathsf N)\\mapsto(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N)$ is smooth on the open set $\\mathbb R\\times(0,\\infty)^2$, so the parcel domain $\\mathcal D=\\{(\\mathsf S,\\mathsf V,\\mathsf N):\\mathsf V>0,\\mathsf N>0,(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N)\\in X\\}$ is open. The definition of $E$ is a $C^2$ composition. Differentiating it gives\n$$\\partial_{\\mathsf S}E=e_{\\sigma_p}=T,\\quad \\partial_{\\mathsf V}E=e_v=-p,\\quad \\partial_{\\mathsf N}E=e-v e_v-\\sigma_p e_{\\sigma_p}=e+pv-T\\sigma_p=\\mu.$$\nThus $dE=T\\,d\\mathsf S-p\\,d\\mathsf V+\\mu\\,d\\mathsf N$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the heat-capacity clause, define $F(v,\\sigma_p,T)=e_{\\sigma_p}(v,\\sigma_p)-T$. This is $C^1$, vanishes at the given state with $T=e_{\\sigma_p}$, and its derivative in $\\sigma_p$ is $e_{\\sigma_p\\sigma_p}>0$. By [F2] its zero set is locally a unique $C^1$ graph $\\sigma_p=\\varphi(v,T)$. Differentiating at fixed $v$ gives $\\partial_T\\sigma_p=1/e_{\\sigma_p\\sigma_p}$, whence $c_v=e_{\\sigma_p}\\partial_T\\sigma_p=T/e_{\\sigma_p\\sigma_p}>0$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "For the compressibility clause, define $G(v,\\sigma_p,p)=p(v,\\sigma_p)-p=-e_v(v,\\sigma_p)-p$. It is $C^1$ and its derivative in $v$ is $-e_{vv}<0$. By [F2], $v$ is a local $C^1$ function of $(\\sigma_p,p)$, with $(\\partial v/\\partial p)_{\\sigma_p}=-1/e_{vv}$. Therefore $\\kappa_{\\sigma_p}=1/(v e_{vv})>0$.",
+          "step": "1.5",
+          "inputs": [
+            "F1",
+            "F2",
+            "A2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "At fixed $\\sigma_p$, $\\varepsilon(n,\\sigma_p)=n e(1/n,\\sigma_p)$ and $p(n,\\sigma_p)=-e_v(1/n,\\sigma_p)$. Differentiating gives $\\partial_n\\varepsilon=e-e_v/n=e+p/n=h/n$ and $\\partial_np=e_{vv}/n^2$. Since $h/n>0$ by [A3], the local implicit-rank theorem makes $\\varepsilon$ a valid local coordinate in place of $n$. Taking the ratio of the two derivatives yields $\\alpha_{\\sigma_p}=e_{vv}/(nh)>0$.",
+          "step": "1.6",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "A3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the chain rule, $de=e_v\\,dv+e_{\\sigma_p}\\,d\\sigma_p=-p\\,dv+T\\,d\\sigma_p$. Since $\\varepsilon=ne$, the product rule and step 1.1 give\n$$d\\varepsilon=e\\,dn+n\\,de=T\\,ds+\\left(e+\\frac{p}{n}-T\\sigma_p\\right)dn=T\\,ds+\\mu\\,dn.$$\nHere $v=1/n$, so $e+p/n-T\\sigma_p=H-T\\sigma_p=\\mu$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $\\lambda>0$, $E(\\lambda\\mathsf S,\\lambda\\mathsf V,\\lambda\\mathsf N)=\\lambda E(\\mathsf S,\\mathsf V,\\mathsf N)$ because the intensive ratios are unchanged. Differentiating this identity in $\\lambda$ at $1$ yields $E=T\\mathsf S-p\\mathsf V+\\mu\\mathsf N$. At $z_0=(\\mathsf S,\\mathsf V,\\mathsf N)$, differentiate Euler's identity $DE(z_0)[z_0]=E(z_0)$ in an arbitrary direction $w$. The two first-derivative terms cancel, leaving $D^2E(z_0)[w,z_0]=0$ for every $w$; symmetry of the Hessian gives $D^2E(z_0)[z_0,w]=0$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Differentiating $\\varepsilon+p=Ts+\\mu n$ and substituting step 2.1 cancels $T\\,ds$ and $\\mu\\,dn$, leaving $dp=s\\,dT+n\\,d\\mu$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply [F4] to $-e$, which is concave when $e$ is convex on the convex open domain $X$. Its Hessian is $-D^2e$ and is negative semidefinite, so $D^2e$ is positive semidefinite. This conditional curvature statement does not promote the response inequalities to convexity without [A4].",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "A4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "temperature-coordinate minor",
+          "status": "checked",
+          "evidence": "At the stated state the one-by-one derivative minor is [e_sigma_sigma], positive by A1."
+        },
+        {
+          "case": "pressure-coordinate minor",
+          "status": "checked",
+          "evidence": "The one-by-one derivative minor is [-e_vv], nonzero by A2."
+        },
+        {
+          "case": "energy-coordinate minor",
+          "status": "checked",
+          "evidence": "At fixed sigma_p the one-by-one derivative minor is [h/n], positive by A3."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement assumes nonempty open X and considers states in its nonempty state domain Y."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 remains valid at sigma_p=0. The boundary n=0 is excluded by Y and no identity is claimed there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.2 apply at marker total N=1; the parcel differential, Euler identity, and homogeneity formula have no exceptional one-marker case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.4–1.6 invoke local charts only when the specified derivatives are strictly nonzero; equality e_sigma_sigma=0, e_vv=0, or h=0 is outside those response clauses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All local inverse charts are on open state domains; no boundary-state extension is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof constructs no choice function or family of witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains identities and conditional derivative formulas, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains identities and conditional derivative formulas, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-53",
+        "notes": "Independently checked all ten proof steps and four exact suppliers, including open-domain implicit-rank graph theorem and concave-Hessian clause. Y and parcel domain are open; n,v,N are strictly positive, so all divisions and compositions are defined. C2 e gives required C1 response maps. Chain/product rules yield Gibbs, Euler and Gibbs-Duhem identities; the parcel domain is invariant under every positive scaling, and differentiating Euler gives radial Hessian kernel without any global spacetime extensivity claim. Response minors are respectively e_sigma_sigma, -e_vv and h/n, nonzero under the exact separate assumptions; their ratios and positive signs agree. No response is asserted at vanishing minors, nor does diagonal positivity imply convexity. Applied concave-Hessian supplier to -e only under convex X and convex e. Reader/refuter comma-space finding confirmed nonfatal and repaired in title only; Statement and proof unchanged."
+      }
+    },
+    "lem-tgr-fluid-frame-projection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-local-implicit-rank",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q\\le n$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^q$ be $C^1$ in the sense of [[def-c-one-map-and-local-inverse]]. Suppose $F(x_*)=0$ and some $q\\times q$ minor of the derivative matrix $DF(x_*)$ is invertible. This nonsingular-minor hypothesis is the explicit full-row-rank condition used here. If $q<n$, then after permuting coordinates $x=(u,v)\\in\\mathbb R^{n-q}\\times\\mathbb R^q$, there are open neighborhoods $P$ of $u_*$ and $Q$ of $v_*$ and a unique $C^1$ map $\\varphi:P\\to Q$ such that\n\n$$F(u,v)=0\\quad\\Longleftrightarrow\\quad v=\\varphi(u)\\qquad((u,v)\\in P\\times Q).$$\n\nIts derivative is\n\n$$D\\varphi(u)=-D_vF(u,\\varphi(u))^{-1}D_uF(u,\\varphi(u)).$$\n\nThus the local zero set is a graph over $n-q$ free coordinates. If $q=n$, the zero is locally isolated, so the local graph dimension is zero. Here “local graph dimension $k$” means a local graph parameterized by an open subset of $\\mathbb R^k$, with a singleton counted as dimension zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-gr-local-lorentz-tetrad-existence",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]). Then there is an open\nneighborhood $U\\subseteq M$ of $p$ and a smooth future-directed tetrad field\n$(E_0,E_1,E_2,E_3)$ on $U$\n([[def-gr-local-frame-and-tetrad-fields]]), i.e.\n$g_q(E_A(q),E_B(q))=\\operatorname{diag}(-1,1,1,1)_{AB}$ for all $q\\in U$ with\n$E_0(q)$ future-directed for every $q\\in U$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-gr-observer-projection-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let\n$p\\in M$, and let $n$ be an observer at $p$\n([[def-gr-observer-and-rest-space]]). Write $h:=h_n$,\n$n^{\\perp}=\\{v\\in T_pM:g_p(v,n)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and\n$\\mathbb Rn=\\{\\lambda n:\\lambda\\in\\mathbb R\\}$. Then:\n\n1. $h:T_pM\\to T_pM$ is linear, $h(n)=0$, $h(v)=v$ for every $v\\in n^{\\perp}$\n   and $h\\circ h=h$; its kernel is $\\ker h=\\mathbb Rn$, its image is\n   $\\operatorname{im}h=n^{\\perp}$, and\n   $T_pM=\\mathbb Rn\\oplus n^{\\perp}$ is an orthogonal direct sum: every\n   $v\\in T_pM$ has the unique decomposition\n\n   $$v=-g_p(v,n)\\,n+h(v),$$\n\n   in which $-g_p(v,n)n\\in\\mathbb Rn$ and $h(v)\\in n^{\\perp}$.\n2. For all $v,w\\in T_pM$ the **projection identity**\n\n   $$g_p(h(v),h(w))=g_p(v,w)+g_p(v,n)g_p(n,w)$$\n\n   holds; in particular $g_p(h(v),h(v))=g_p(v,v)+g_p(v,n)^2$.\n3. $\\dim n^{\\perp}=3$ and the restriction of $g_p$ to $n^{\\perp}$ is positive\n   definite.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every vector $X$, $u_a(\\Delta X)^a=u_aX^a+(u_au^a)(u_bX^b)=0$ and $\\Delta u=0$. If $X\\in u^\\perp$, then $\\Delta X=X$. Hence $\\operatorname{im}\\Delta=u^\\perp$, $\\ker\\Delta=\\mathbb Ru$, and $\\Delta^2=\\Delta$. Also $g(\\Delta X,Y)=g(X,Y)+g(X,u)g(u,Y)=g(X,\\Delta Y)$ for all $X,Y$, so $\\Delta$ is self-adjoint and is the orthogonal projection onto $u^\\perp$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $\\delta^a{}_c=\\Delta^a{}_c-u^a u_c$, expansion in both indices gives\n$$\\mathsf T^{ab}=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd}-u^a u_c\\Delta^b{}_d\\mathsf T^{cd}-\\Delta^a{}_c\\mathsf T^{cd}u_d\\,u^b+u^a u^b u_cu_d\\mathsf T^{cd}.$$\nBy the definitions this is the stated decomposition. Orthogonality of $Q$ and $P$ follows by $u_a\\Delta^a{}_c=0$, so $\\pi$ is spatial as well. Since $g_{ab}\\Delta^{ab}=3$, the definition of $p_{\\mathrm{mech}}$ gives $g_{ab}\\pi^{ab}=0$. The component formulas recover $\\varepsilon_u,Q,P$ from any such decomposition, so it is unique.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "In the chosen tetrad of [F3], identify symmetric contravariant tensors with the ten-dimensional vector space $\\operatorname{Sym}^2(\\mathbb R^4)$ and write $T^A{}_B=\\mathsf T^{AC}\\eta_{CB}$ for their mixed components. For $w\\in\\mathbb B^3$, put $\\gamma(w)=(1-|w|^2)^{-1/2}$ and $\\widehat u^A(w)=\\gamma(w)(1,w^1,w^2,w^3)$, the tetrad components of $u(x,w)$ from clause 4, and define\n$$\\Phi_i(T,w):=T^i{}_A\\widehat u^A(w)-w^iT^0{}_A\\widehat u^A(w)\\quad(i=1,2,3).$$\nThis is a smooth map on the open subset $\\operatorname{Sym}^2(\\mathbb R^4)\\times\\mathbb B^3\\cong\\mathbb R^{10}\\times\\mathbb B^3$ of $\\mathbb R^{13}$, and $\\Phi(T_0,0)=0$. At $T_0=\\operatorname{diag}(\\varepsilon_0,p_0,p_0,p_0)$ as a contravariant matrix, the mixed matrix is $\\operatorname{diag}(-\\varepsilon_0,p_0,p_0,p_0)$. Since $\\partial_{w^j}\\widehat u^0(0)=0$ and $\\partial_{w^j}\\widehat u^k(0)=\\delta^k_j$, direct differentiation gives $\\partial_{w^j}\\Phi_i(T_0,0)=p_0\\delta_{ij}+\\varepsilon_0\\delta_{ij}=h_0\\delta_{ij}$. Thus $D_w\\Phi(T_0,0)=h_0I_3$ is invertible by $h_0>0$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "given",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\nu_u=-u\\cdot J$. Then $J-\\nu_u u=J+u(u\\cdot J)=\\Delta J=V$, and [step 1.1] shows $V\\in u^\\perp$. If $J=\\nu u+W$ with $W\\perp u$, contracting with $u$ forces $\\nu=\\nu_u$ and applying $\\Delta$ forces $W=V$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "$Q=0$ is equivalent to $\\Delta(\\mathsf T^\\sharp u)=0$, where $(\\mathsf T^\\sharp u)^a:=\\mathsf T^{ab}u_b$. By [step 1.1], $\\ker\\Delta=\\mathbb Ru$, so this holds exactly when $\\mathsf T^a{}_b u^b$ is a scalar multiple of $u^a$, the timelike-eigenvector condition.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F2] with $q=3$ to $\\Phi(T,w)=0$. The $3\\times3$ minor in the $w$ variables is invertible by step 1.3, so near $(T_0,0)$ the zero set is a unique $C^1$ graph $w=\\varphi(T)$. Choose an open ball $W\\subset\\mathbb B^3$ about $0$ within the graph neighborhood and shrink the tensor neighborhood so that $\\varphi(T)\\in W$. In the chosen tetrad, the component map $x\\mapsto T^A{}_B(x)$ is $C^1$, because $\\mathsf T$ is $C^1$ and the tetrad is smooth. Shrink to a neighborhood $U\\subset O_0$ on which these components remain in that tensor neighborhood; then $w_L(x):=\\varphi(T(x))$ is $C^1$, and $u_L(x):=u(x,w_L(x))$ is a $C^1$ future unit timelike field. The equations $\\Phi_i(T(x),w_L(x))=0$ say that the spatial components of $\\mathsf T^A{}_B(x)u_L^B(x)$ equal $w_L^i(x)$ times its time component, so $\\mathsf T^A{}_B(x)u_L^B(x)=\\lambda(x)u_L^A(x)$ for a scalar $\\lambda(x)$. By step 2.2 this is equivalent to $Q_{u_L(x)}(x)=0$, and uniqueness of the local graph gives the claimed uniqueness of $w_L$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "step 1.3",
+            "F2",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $r:=\\sqrt{-g(J,J)}>0$. Then $u_E=J/r$ is future unit timelike and $\\Delta_{u_E}J=J+u_E(u_E\\cdot J)=J+(J/r)(-r)=0$. Conversely, if a future unit timelike $u$ has $\\Delta_uJ=0$, step 2.1 gives $J=\\lambda u$ for a scalar $\\lambda$. Since both $J$ and $u$ are future timelike, $\\lambda>0$; hence $-g(J,J)=\\lambda^2$ forces $\\lambda=r$ and $u=u_E$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $g(\\ell,u)=0$, then $\\ell\\in u^\\perp$, and [F4] makes the restricted metric positive definite; since $g(\\ell,\\ell)=0$, this would force $\\ell=0$. Therefore $g(\\ell,u)\\ne0$, so $\\mathsf T^\\sharp u=\\rho\\ell\\,g(\\ell,u)$ is a nonzero null vector. It cannot equal $\\lambda u$ for any scalar $\\lambda$: if $\\lambda=0$ it is nonzero, and if $\\lambda\\ne0$ the right side is timelike while the left side is null. Thus no timelike eigenvector exists.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "Landau Jacobian minor",
+          "status": "checked",
+          "evidence": "Step 1.3 computes D_w Phi(T0,0)=h0 I3, whose determinant is h0^3>0 by the stated h0>0."
+        },
+        {
+          "case": "implicit graph dimensions",
+          "status": "checked",
+          "evidence": "Step 1.3 uses Sym^2(R4) of dimension 10 and w in R3, so Phi maps an open 13-dimensional domain to R3; step 3.1 applies the rank theorem using the stated 3x3 w minor."
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement uses a four-dimensional Lorentz space and the fixed sum i=1,2,3 in the supplied tetrad velocity chart, not a sum over a variable index set. Clause4 supplies x0 in O and neighborhoods of x0 and0, so empty O or an empty spatial basis is not an admissible input.",
+          "reviewed": {
+            "upheld": true,
+            "by": "owner scoped Step2 battery1 review, csm_excluded_supplier",
+            "reason": "The empty-family detector matches the displayed sum defining the observer velocity, but its bounds are explicitly1 through3. The pointwise space has dimension4, and the local-field construction is conditional on a supplied x0 in O. No empty-index aggregate is normalized or selected in this lemma; the original non-applicability is valid for this specific axis."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 decomposes J=0 as nu=0 and V=0; step 3.2 excludes J=0 from the Eckart construction by requiring J future timelike."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No finite cardinality or one-dimensional parameter is varied in the frame claims."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 requires h0>0; when h0=0 the derivative minor is singular and no local Landau existence claim is made. Step 4.1 proves the explicit null-dust obstruction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The construction concerns pointwise tensor fields on open neighborhoods and no curve endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.3 uses the local tetrad supplier with its AC_omega tangent-bundle convention [A1]; no full axiom of choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves Q=0 implies that u is a timelike eigenvector."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves that a timelike eigenvector u has Q=0."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-53",
+        "notes": "Read all eight proof steps and exact projection, tetrad and implicit-rank suppliers. Confirmed reader:53:3 as an explicit-definition defect under the mandatory standalone-object rule; transitive geometry definitions do not explicitly instantiate its abstract V. Added bilinear type, symmetry, nondegeneracy, signature, timelike/null and future component plus index conventions; all clauses retained. Projection expansion recovers unique components, trace Delta=3 and both eigenvector directions. Eckart excludes zero/null J and future component fixes the positive factor. Landau Phi is smooth on R10 x B3, zero at (T0,0), with DwPhi=h0 I3 invertible; local graph uniqueness in W composes with C1 tensor components. No h0=0/global existence claim. Null dust obstruction uses positive definite u-perp and rho>0. Only inherited AC_omega is used. Direct consumers ex-tgrmath-null-landau-obstruction, lem-tgr-eckart-entropy-specialization and tgr-mc01 satisfy clarified hypotheses and need no repair."
+      }
+    },
+    "ex-tgrmath-parcel-rest-shift": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-tgr-local-fluid-state",
+          "source_section": "Definition",
+          "quote": "Use a smooth time-oriented Lorentz four-manifold $(M,g,N)$ of signature $(-,+,+,+)$, in the sense of [[def-gr-smooth-lorentzian-objects]], with the unique torsion-free metric-compatible connection $\\nabla$ of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]. Use length coordinates $x^0=ct$ when assigning physical units: $g$ and the components of $u$ are dimensionless, and $c>0$ has units $\\mathrm{m\\,s^{-1}}$. The physical reading of the geometry is not asserted here.\n\nLet $O\\subseteq M$ be a nonempty open set and let $u$ be an observer congruence on $O$ in the sense of [[def-gr-observer-congruence-and-adapted-charts]]: $u$ is a smooth vector field whose values are future-directed unit timelike observers, so $g(u,u)=-1$. Its maximal integral curves have open interval parameter domains and are smooth regular future timelike curves; no completeness, geodesic equation, or orthogonal rest-space foliation is assumed. The frame in this definition means this congruence field and its associated pointwise rest spaces. It is not an adapted chart or a tetrad field; those are distinct objects in [[def-gr-observer-congruence-and-adapted-charts]] and [[def-gr-local-frame-and-tetrad-fields]]. The physical four-velocity associated with $u$ is $U=cu$, with $g(U,U)=-c^2$.\n\nAt $x\\in O$, the rest space is $u^\\perp$ as in [[def-gr-observer-and-rest-space]]. Put $u_b=g_{bc}u^c$ and define the mixed rest-space endomorphism\n$$\\Delta^a{}_b:=\\delta^a{}_b+u^a u_b,\\qquad \\Delta^{ab}:=g^{ac}\\Delta^b{}_c.$$\nFor any vector $X^a$, write $\\Delta X$ for $\\Delta^a{}_bX^b$. This defines a tensor field; its projection properties are proved in the accompanying fluid-frame lemma.\n\nA local material state consists of a nonempty open set $X\\subset(0,\\infty)\\times\\mathbb R$, coordinates $(v,\\sigma_p)$ on $X$, and a specified $e\\in C^2(X,\\mathbb R)$. A **marker** is a formal counted constituent used to normalize these state quantities; calling it conserved does not impose a spacetime conservation equation. Here $v$ is the positive rest-volume-per-marker state coordinate, interpreted as volume measured in the observer's local rest space; the model selects no spatial region whose volume is being integrated. It has units $\\mathrm{m^3\\,marker^{-1}}$. The coordinate $\\sigma_p$ is entropy per marker, with units $\\mathrm{J\\,K^{-1}\\,marker^{-1}}$, and $e$ is energy per marker, with units $\\mathrm{J\\,marker^{-1}}$. For a $C^2$ state map $(v,\\sigma_p):O\\to X$, define\n$$n:=v^{-1},\\qquad s:=n\\sigma_p,\\qquad \\varepsilon:=ne,\\qquad T:=\\partial_{\\sigma_p}e,\\qquad p:=-\\partial_v e,$$\n$$H:=e+pv,\\qquad h:=\\varepsilon+p=nH,\\qquad \\mu:=H-T\\sigma_p.$$\nThus $n$ has units $\\mathrm{marker\\,m^{-3}}$, $s$ has units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$, $\\varepsilon,p,h$ have units $\\mathrm{J\\,m^{-3}}=\\mathrm{Pa}$, $T$ has units $\\mathrm K$, and $H,\\mu$ have units $\\mathrm{J\\,marker^{-1}}$. These are mathematical state maps from the supplied function $e$; no constitutive law is asserted to describe an actual material.\n\nA geometric number current is a $C^1$ vector field $J^a$ with components of units $\\mathrm{marker\\,m^{-3}}$; its physical flux is $cJ$, with units $\\mathrm{marker\\,m^{-2}\\,s^{-1}}$. Define its frame density and spatial part by\n$$\\nu_u:=-u_aJ^a,\\qquad V^a:=\\Delta^a{}_bJ^b.$$\nA geometric entropy current is a $C^1$ vector field $S^a$ with components of units $\\mathrm{J\\,K^{-1}\\,m^{-3}}$; its physical flux is $cS$, with units $\\mathrm{W\\,K^{-1}\\,m^{-2}}$. Define\n$$s_u:=-u_aS^a,\\qquad \\Sigma^a:=\\Delta^a{}_bS^b.$$\nA geometric stress-energy current is a $C^1$ symmetric contravariant tensor field $\\mathsf T^{ab}$ with components of units $\\mathrm{Pa}$. Define its frame projections\n$$\\varepsilon_u:=\\mathsf T^{ab}u_a u_b,\\qquad Q^a:=-\\Delta^a{}_c\\mathsf T^{cd}u_d,\\qquad P^{ab}:=\\Delta^a{}_c\\Delta^b{}_d\\mathsf T^{cd},$$\n$$p_{\\mathrm{mech}}:=\\tfrac13 g_{ab}P^{ab},\\qquad \\pi^{ab}:=P^{ab}-p_{\\mathrm{mech}}\\Delta^{ab}.$$\nHere $Q$ has units $\\mathrm{Pa}$ and $cQ$ is physical energy flux with units $\\mathrm{W\\,m^{-2}}$; $P,p_{\\mathrm{mech}},\\pi$ have units $\\mathrm{Pa}$. The thermodynamic quantities $(\\varepsilon,p)$ and the tensor projections $(\\varepsilon_u,p_{\\mathrm{mech}})$ are not identified by this definition.\n\nFor these $C^1$ fields, $\\nabla_aJ^a$ and $\\nabla_aS^a$ denote scalar covariant divergences, and $\\nabla_a\\mathsf T^{ab}$ denotes the vector covariant divergence, using the connection fixed above. No conservation equation, perfect-fluid stress form, equality $\\nu_u=n$, equality $s_u=s$, or physical interpretation is imposed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-tgr-local-gibbs-euler",
+          "source_section": "Statement",
+          "quote": "Let $X\\subset(0,\\infty)\\times\\mathbb R$ be nonempty and open, let $e\\in C^2(X,\\mathbb R)$, and define\n$$Y:=\\{(n,s)\\in(0,\\infty)\\times\\mathbb R:(1/n,s/n)\\in X\\},\\qquad \\varepsilon(n,s):=n\\,e(1/n,s/n).$$\nFor $(n,s)\\in Y$, put $v=1/n$, $\\sigma_p=s/n$, $T=e_{\\sigma_p}$, $p=-e_v$, $H=e+pv$, $h=\\varepsilon+p=nH$, and $\\mu=H-T\\sigma_p$, as in [[def-tgr-local-fluid-state]]. Then the following identities hold as equalities of differentials on $Y$:\n$$d\\varepsilon=T\\,ds+\\mu\\,dn,\\qquad \\varepsilon+p=Ts+\\mu n,\\qquad dp=s\\,dT+n\\,d\\mu.$$\n\nFor parcel totals $\\mathsf S\\in\\mathbb R$ (entropy), $\\mathsf V>0$ (proper volume), and $\\mathsf N>0$ (marker count) with $(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N)\\in X$, define\n$$E(\\mathsf S,\\mathsf V,\\mathsf N):=\\mathsf N\\,e(\\mathsf V/\\mathsf N,\\mathsf S/\\mathsf N).$$\nThen $E$ is $C^2$, is positively homogeneous of degree one, and satisfies\n$$dE=T\\,d\\mathsf S-p\\,d\\mathsf V+\\mu\\,d\\mathsf N,\\qquad E=T\\mathsf S-p\\mathsf V+\\mu\\mathsf N.$$\nIf $E$ is viewed on its open domain in $(\\mathsf S,\\mathsf V,\\mathsf N)$, its Hessian annihilates the radial vector $(\\mathsf S,\\mathsf V,\\mathsf N)$.\n\nThe local response statements are conditional. At a state with $T>0$ and $e_{\\sigma_p\\sigma_p}>0$, temperature is a valid local coordinate at fixed $v$, and the per-marker heat capacity\n$$c_v:=\\left(\\frac{\\partial e}{\\partial T}\\right)_v=\\frac{T}{e_{\\sigma_p\\sigma_p}}$$\nis positive. At a state with $e_{vv}>0$, the isentropic compressibility\n$$\\kappa_{\\sigma_p}:=-\\frac1v\\left(\\frac{\\partial v}{\\partial p}\\right)_{\\sigma_p}=\\frac1{v e_{vv}}$$\nis positive. At a state with $e_{vv}>0$ and $h>0$, the local pressure-energy response\n$$\\alpha_{\\sigma_p}:=\\left(\\frac{\\partial p}{\\partial\\varepsilon}\\right)_{\\sigma_p}=\\frac{e_{vv}}{n h}$$\nis positive. If $X$ is convex and $e$ is convex on $X$, then $D^2e$ is positive semidefinite. Positivity of the displayed diagonal responses is not asserted to imply convexity, a sound cone, or an evolution theorem.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $mc^2$ is constant in $(v,\\sigma_p)$, $(e_m)_{\\sigma_p}=(e_0)_{\\sigma_p}$ and $-(e_m)_v=-(e_0)_v$. Thus the derived temperature and pressure are unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The definitions give $H_m=e_m+p_mv=H_0+mc^2$ and $\\mu_m=H_m-T_m\\sigma_p=\\mu_0+mc^2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "With $n=1/v$ unchanged, $\\varepsilon_m=ne_m=\\varepsilon_0+nmc^2$ and $h_m=\\varepsilon_m+p_m=h_0+nmc^2$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At fixed $(\\mathsf S,\\mathsf V,\\mathsf N)$, the parcel construction gives $E_m=E_0+\\mathsf Nmc^2$. Differentiating adds only $mc^2\\,d\\mathsf N$ to $dE_0$; hence at fixed marker count it changes neither the entropy derivative $T$ nor the pressure-work derivative $-p$. This agrees with the chemical-potential shift in step 2.1 and the parcel first law in [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "A1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example assumes a supplied nonempty state domain X and a state point in X."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 remain valid at m=0, when every displayed rest-energy shift is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 applies at total marker count N=1 and gives E_m=E_0+mc^2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 differentiates only the constant offset; no Hessian or inverse response condition is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Example is pointwise on the open state domain and asserts no boundary extension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The direct calculation selects no witness from any family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example proves direct derivative identities, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Example proves direct derivative identities, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "beta-batch-53",
+        "notes": "The example is a symbolic calculation from the local C2 state map and its parcel first law. It identifies the offset in epsilon, h, H, and mu while preserving T and p; no material measurement or global energy-additivity claim is made."
+      }
+    }
+  }
+}

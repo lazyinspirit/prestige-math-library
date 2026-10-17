@@ -1,0 +1,152 @@
+{
+  "group": "r",
+  "batches": ["60"],
+  "pages_read": ["tgr-c03", "tgr-c03-examples"],
+  "items_read": [
+    "post-tgr-linearized-material-model",
+    "pthm-tgr-perfect-causal-linear-response",
+    "pthm-tgr-bulk-causal-linear-response",
+    "ex-tgr-perfect-neutral-modes"
+  ],
+  "conventions": [
+    {
+      "convention": "The prescribed background is Minkowski spacetime with signature (-,+,+,+), length coordinate x⁰=ct, physical time t, reference velocity u₀=(1,0,0,0), and reference bulk pressure Π₀=0.",
+      "fixed_by": "post-tgr-linearized-material-model",
+      "matters_for": [
+        "pthm-tgr-perfect-causal-linear-response",
+        "pthm-tgr-bulk-causal-linear-response",
+        "ex-tgr-perfect-neutral-modes"
+      ]
+    },
+    {
+      "convention": "The adiabatic sector has δσ_p=0; r=δε and Π̂=δΠ have units Pa, w consists of the dimensionless spatial velocity variations, and a_s=e_vv/(n₀h₀)>0 is dimensionless. Bulk viscosity ζ₀ and relaxation time τ₀ have units Pa s and s.",
+      "fixed_by": "post-tgr-linearized-material-model",
+      "matters_for": [
+        "pthm-tgr-perfect-causal-linear-response",
+        "pthm-tgr-bulk-causal-linear-response",
+        "ex-tgr-perfect-neutral-modes"
+      ]
+    },
+    {
+      "convention": "The two effective linear systems are stipulated model inputs. First-variation families need not solve nonlinear equations away from the reference state; no nonlinear error estimate, lifespan, curved-background existence theorem or empirical applicability is asserted.",
+      "fixed_by": "post-tgr-linearized-material-model",
+      "matters_for": [
+        "pthm-tgr-perfect-causal-linear-response",
+        "pthm-tgr-bulk-causal-linear-response",
+        "ex-tgr-perfect-neutral-modes"
+      ]
+    },
+    {
+      "convention": "Both response theorems assume Countable Choice and use componentwise real Schwartz data on ℝ³ or smooth periodic data on T³_L, L>0. Fourier transforms use the negative-sign 2π normalization; contraction is asserted for t≥0 and every Sobolev exponent q≥0.",
+      "fixed_by": "pthm-tgr-perfect-causal-linear-response",
+      "matters_for": [
+        "pthm-tgr-perfect-causal-linear-response",
+        "pthm-tgr-bulk-causal-linear-response",
+        "ex-tgr-perfect-neutral-modes"
+      ]
+    },
+    {
+      "convention": "Causality allows equality: the perfect branch requires 0<a_s≤1, while the bulk branch requires positive coefficients and a_s+ζ₀/(τ₀h₀)≤1. Stability means energy and weighted Sobolev contraction, not decay of every mode.",
+      "fixed_by": "pthm-tgr-bulk-causal-linear-response",
+      "matters_for": [
+        "pthm-tgr-perfect-causal-linear-response",
+        "pthm-tgr-bulk-causal-linear-response",
+        "ex-tgr-perfect-neutral-modes"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "post-tgr-linearized-material-model",
+      "statement": "Adopts the perfect system r_t+c h₀ div w=0, w_t+(c a_s/h₀)∇r=0, and the bulk system r_t+c h₀ div w=0, w_t+(c/h₀)∇(a_s r+Π̂)=0, τ₀Π̂_t+Π̂=−ζ₀c div w, with the stated reference-state, positivity, regularity and unit conventions.",
+      "used_by": [
+        "pthm-tgr-perfect-causal-linear-response",
+        "pthm-tgr-bulk-causal-linear-response"
+      ]
+    },
+    {
+      "id": "pthm-tgr-perfect-causal-linear-response",
+      "statement": "Under the stipulated perfect branch, c,h₀>0, 0<a_s≤1 and Countable Choice, every real Schwartz or smooth periodic initial datum has a unique global smooth solution with the stated conserved energy identity, nonincreasing weighted Sobolev norms for t≥0, characteristic speeds 0 and ±c√a_s, and shrinking-ball finite propagation at c√a_s≤c.",
+      "used_by": ["ex-tgr-perfect-neutral-modes"]
+    },
+    {
+      "id": "pthm-tgr-bulk-causal-linear-response",
+      "statement": "Under the stipulated bulk branch, h₀,T₀,c,a_s,ζ₀,τ₀>0, Countable Choice and a_s+ζ₀/(τ₀h₀)≤1, every real Schwartz or smooth periodic initial datum has a unique global smooth solution with the stated positive energy and dissipation identity, weighted Sobolev contraction for t≥0, and finite propagation at c√(a_s+ζ₀/(τ₀h₀))≤c. Energy contraction does not assert decay of every mode.",
+      "used_by": []
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact sequence-indexed choice assumption explicitly carried by both response theorems and the example.",
+      "opened": true
+    },
+    {
+      "id": "def-schwartz-space-and-its-seminorms",
+      "used_for": "The mathematical evolution suppliers use its scalar Schwartz definition componentwise on real vector data; the assigned postulate states the matching definition.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+      "used_for": "The constant-coefficient evolution supplier transforms Schwartz data and uses the derivative and polynomial-multiplication identities under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-inversion-on-schwartz-space",
+      "used_for": "The evolution supplier reconstructs its global smooth solution by absolutely convergent inverse Fourier integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-plancherel",
+      "used_for": "The evolution supplier identifies Fourier energy with the corresponding L² framework under Countable Choice.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms",
+      "used_for": "The evolution supplier identifies integral and Plancherel transforms as tempered distributions with the same negative-sign 2π normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "The evolution supplier's shrinking-ball energy proof applies outward-normal divergence integration on bounded smooth Euclidean balls.",
+      "opened": true
+    },
+    {
+      "id": "def-gr-smooth-lorentzian-objects",
+      "used_for": "Earlier material and geometric suppliers fix signature, future direction and smooth Lorentzian background conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+      "used_for": "Earlier stress-projection suppliers use metric compatibility and tensor product/contraction rules; the prescribed Minkowski specialization has ordinary coordinate derivatives.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "The local Gibbs supplier differentiates the state functions and obtains the fixed-entropy pressure-energy response used in the assigned postulate.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [
+    {
+      "item": "post-tgr-bulk-relaxation-model",
+      "finding": "Its sources.references entry calls arXiv:0906.4787v2 “Paul Romatschke, New Developments in Relativistic Viscous Hydrodynamics”. The opened author submission record identifies this exact arXiv ID and version as “Relativistic Viscous Fluid Dynamics and Non-Equilibrium Entropy”: [arXiv record](https://arxiv.org/abs/0906.4787). The reference title therefore does not match its linked source.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "tgr-c03",
+      "to": "tgr-c01",
+      "faithful": true,
+      "note": "Checked the earlier page and perfect-material postulate against the consuming linearized postulate. The supplied C² state function, positive temperature, perfect stress, conserved marker current and source-free balances are retained. The consumer separately stipulates a uniform Minkowski reference state, positive response and effective linear equations; it does not attribute linear evolution or nonlinear existence to the earlier page."
+    },
+    {
+      "from": "tgr-c03",
+      "to": "tgr-c02",
+      "faithful": true,
+      "note": "Checked the earlier page and bulk-relaxation postulate against the consuming branch. Zero reference bulk pressure and constant positive transport parameters match the specialization of the derivative-corrected bulk law. The linear systems are independently stipulated, so the consumer does not claim global nonlinear validity in the supplier's restricted near-equilibrium regime or infer causality from positive relaxation time alone."
+    }
+  ]
+}

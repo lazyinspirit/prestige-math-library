@@ -1,0 +1,1158 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": 33,
+  "scope": [
+    "post-csm-dk-selected-thermal-langevin-bath",
+    "post-csm-dk-selected-reversible-bath-rates",
+    "thm-csm-dk-nonexplosive-ctmc-and-gap",
+    "thm-csm-dk-ou-velocity-diffusion-response",
+    "pthm-csm-dk-ou-green-kubo-einstein",
+    "thm-csm-dk-finite-rate-fluctuation-response",
+    "thm-csm-dk-markov-entropy-and-strong-averages",
+    "thm-csm-dk-strong-lumpability",
+    "pthm-csm-dk-finite-bath-response",
+    "cex-csm-dk-hidden-state-rate-obstruction"
+  ],
+  "contracts": {
+    "post-csm-dk-selected-thermal-langevin-bath": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section states the scalar inertial-velocity integral equation, Brownian filtration convention, positive parameters, measurable initial position, independent stationary Gaussian initial velocity, deterministic force, and SI dimensions."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The frontmatter physical_scope and Postulate section restrict the assumption to one nonrelativistic scalar component with constant mass, damping, bath temperature, additive noise, stationary preparation, and continuous deterministic force."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item cites Seifert §2.6.1 and Pavliotis ch. 3 §3.7/ch. 4 §4.4; coverage records their full-text locators, supported items, dispositions, and current fetch stamps."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The text identifies the noise normalization and Gaussian preparation as adopted assumptions and explicitly asserts no measurement, material calibration, nonlinear response, or microscopic derivation."
+        }
+      }
+    },
+    "post-csm-dk-selected-reversible-bath-rates": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section fixes finite coarse-state energies, baseline reversible rates, Gibbs initialization for the response branch, and the explicit symmetric exponential controlled-rate rule with dimensionless exponent."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The frontmatter physical_scope limits the model to a prescribed connected finite-state network at one positive temperature; it does not claim a microscopic Hamiltonian reduction or a unique bath prefactor."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The item cites Seifert §§6.1–6.2, 8.1.1, 8.2.4, 9.4.5 and Aldous–Fill ch. 2 §2.1.2/ch. 3 §§3.1–3.2; coverage maps the relevant text and supported claims."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The text calls the symmetric splitting an additional modeling choice, notes that rate ratios leave pair prefactors undetermined, and asserts no experiment or empirical rate estimate."
+        }
+      }
+    },
+    "thm-csm-dk-nonexplosive-ctmc-and-gap": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-finite-reversible-rate-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Set $\\Lambda>\\max_aq_a$ and $K:=I+Q/\\Lambda$. Every off-diagonal entry of $K$ is nonnegative, $K_{aa}=1-q_a/\\Lambda>0$, and each row sums to one, so $K$ is a transition matrix. The balance relation in [F1] gives $\\pi_aK_{ab}=\\pi_bK_{ba}$ for all $a,b$. Use [F2] with state space $E\\times(0,1)$, initial state distributed as $p_0$ with an independent uniform mark, and transition kernel $K(a,b)\\,du'$ from $(a,u)$ to $(b,u')$. Write $Y_n$ for the state coordinate and $U_n$ for the uniform mark; the sequence $Y_n$ has transitions $K$, and the marks $U_n$ are independent uniforms independent of the state sequence. The holding intervals $\\tau_n:=-\\log U_n/\\Lambda$ are independent exponentials of rate $\\Lambda$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "For every $n$, $\\Pr(\\tau_n\\ge1/\\Lambda)=e^{-1}$. For each fixed $m$, independence gives probability $(1-e^{-1})^N$ that none of $\\tau_m,\\ldots,\\tau_{m+N-1}$ reaches $1/\\Lambda$; this tends to zero. A countable union over $m$ shows that infinitely many holding intervals are at least $1/\\Lambda$, almost surely. Therefore $S_n:=\\sum_{j=0}^{n-1}\\tau_j\\to\\infty$. For each $t\\ge0$, there is a unique $N(t)$ with $S_{N(t)}\\le t<S_{N(t)+1}$; set $X_t:=Y_{N(t)}$. Thus the constructed path is piecewise constant and has only finitely many transition attempts on each bounded interval. This proves nonexplosion.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "The sum of $k\\ge1$ independent rate-$\\Lambda$ exponential holding times has density $\\Lambda^ks^{k-1}e^{-\\Lambda s}/(k-1)!$, as follows by induction using convolution. Integrating this density against the survival $e^{-\\Lambda(t-s)}$ of the next holding time gives $\\Pr(N(t)=k)=e^{-\\Lambda t}(\\Lambda t)^k/k!$; for $k=0$ it is $e^{-\\Lambda t}$. Starting from state $a$, each uniformized attempt stays at $a$ with probability $K_{aa}=1-q_a/\\Lambda$. Since $N(t)$ is Poisson and independent of the $K$-chain, the probability of no state change by time $t$ is $\\sum_{k\\ge0}e^{-\\Lambda t}(\\Lambda t)^kK_{aa}^k/k!=e^{-q_at}$. At the first attempt that changes state, the destination $b\\ne a$ has conditional probability $K_{ab}/(1-K_{aa})=w_{ab}/q_a$. Thus the actual holding time and jump destination have exactly the law stated in the Definition. The exponential holding times are memoryless and independent of the $K$-chain, so after any time the remaining clock and future transitions have the same laws from the current state; conditioning on $N(t)$ therefore yields the time-homogeneous transition matrix $P_t=e^{-\\Lambda t}\\sum_{k=0}^{\\infty}(\\Lambda t)^kK^k/k!=e^{tQ}$ because $Q=\\Lambda(K-I)$. The finite-matrix series converges absolutely, differentiates termwise, and satisfies $P'_t=P_tQ$ and $P_0=I$. Each term is stochastic, hence $P_t$ is stochastic. For each state $b$, detailed balance gives $(\\pi Q)_b=\\sum_{a\\ne b}\\pi_aw_{ab}-\\pi_bq_b=\\pi_b\\sum_{a\\ne b}w_{ba}-\\pi_b\\sum_{a\\ne b}w_{ba}=0$; therefore $\\pi P_t=\\pi$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "4.1",
+          "claim": "For $f,g\\in L^2(E,\\pi)$, detailed balance gives $\\langle f,Qg\\rangle_\\pi=\\langle Qf,g\\rangle_\\pi$. Pairing the two directed terms for each edge gives $-\\langle f,Qf\\rangle_\\pi=\\frac12\\sum_{a\\in E}\\sum_{b\\ne a}\\pi_aw_{ab}(f_b-f_a)^2\\ge0$. Equality holds only when $f_a=f_b$ along every positive-rate edge; connectedness in [F1] then makes $f$ constant. Thus the zero eigenspace is exactly the constants. By [F3], $Q$ has a real orthonormal eigenbasis; nonpositivity and the one-dimensional kernel imply all other eigenvalues are $-\\lambda_j$ with $\\lambda_j>0$. Expanding in this basis gives $P_tf=\\pi(f)1+\\sum_{j=1}^{r-1}e^{-\\lambda_jt}\\langle f,\\phi_j\\rangle_\\pi\\phi_j$, proving the positive gap and exponential convergence.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "step": "5.1",
+          "claim": "Apply [F2] on $((E\\times(0,1))^2)$ with initial state whose two $E$ coordinates are equal with law $\\pi$ and whose two marks $U_0^+,U_0^-$ are independent uniforms. From a state pair $(a^+,a^-)$, use the product kernel $K(a^+,b^+)K(a^-,b^-)\\,du'^+du'^-$; this makes the two $K$-chains conditionally independent given their shared initial state and gives independent uniform marks at every step. Denote the state coordinates by $Y_n^\\pm$, set $\\tau_n^\\pm:=-\\log U_n^\\pm/\\Lambda$, $S_0^\\pm:=0$, and $S_n^\\pm:=\\sum_{j=0}^{n-1}\\tau_j^\\pm$. For $s\\ge0$, let $N^\\pm(s)$ be the unique index with $S_{N^\\pm(s)}^\\pm\\le s<S_{N^\\pm(s)+1}^\\pm$ and put $Z_s^\\pm:=Y_{N^\\pm(s)}^\\pm$. Step 2.1 applied to each clock sequence ensures these indices exist for every finite $s$. Put $X_t=Z_t^+$ for $t\\ge0$ and $X_t=Z_{-t}^-$ for $t<0$. For times entirely on the nonnegative half, the Markov-chain law has the stated product form. For negative times $t_1<\\cdots<t_k<0$, append the time $0$ with state $c=X_0$. In the forward parameter $s=-t$, the ordered states are $c,a_k,\\ldots,a_1$, so their joint probability is $\\pi_cP_{-t_k}(c,a_k)\\prod_{i=1}^{k-1}P_{t_{i+1}-t_i}(a_{i+1},a_i)$. Applying $\\pi_aP_u(a,b)=\\pi_bP_u(b,a)$ first to the factor from $0$ to $t_k$ and then successively to the remaining factors gives $\\pi_{a_1}\\prod_{i=1}^{k-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})P_{-t_k}(a_k,c)$. Summing over $c$ gives the negative-time marginal; $k=1$ is included by the empty-product convention. If a list also has nonnegative times, conditional independence of the halves given $X_0=c$ multiplies this negative-side factor by $P_{t_{k+1}}(c,a_{k+1})\\prod_{i=k+1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. For adjacent times $t_k<0\\le t_{k+1}$ around zero, summing over $c$ joins the two factors because $\\sum_cP_{-t_k}(a_k,c)P_{t_{k+1}}(c,a_{k+1})=P_{t_{k+1}-t_k}(a_k,a_{k+1})$, by the semigroup law. Thus in every case the joint probability is $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$, which depends only on time differences. For each $a\\in E$, the set $\\{(s,\\omega):Z_s^\\pm(\\omega)=a\\}$ equals $\\bigcup_{n\\ge0}\\{(s,\\omega):S_n^\\pm(\\omega)\\le s<S_{n+1}^\\pm(\\omega),\\ Y_n^\\pm(\\omega)=a\\}$; every set in this union is product-measurable because $S_n^\\pm$ and $Y_n^\\pm$ are measurable. Since $E$ is finite, both half-processes are jointly measurable, and composing the negative half with $t\\mapsto -t$ and gluing on the measurable half-lines preserves joint measurability. Step 2.1 gives finitely many jumps on every bounded interval on both halves, so the glued process has the stated local path property.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite model has r=|E|>=2 and a probability initial vector, so an empty state graph cannot satisfy the premises. In uniformization, a zero number of clock rings is allowed and contributes the identity term K^0 to exp(tQ); nonexplosion2.1 does not require a jump in every interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 allows zero individual rates; connectedness, not positivity of every edge rate, makes the Dirichlet kernel exactly constant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits r=2; the connected graph then has one undirected edge and the same kernel and gap argument applies in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 uses an orthonormal eigenbasis and does not require distinct nonzero eigenvalues."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 gives P₀=I and the finite-time semigroup; step 5.1 constructs the stationary law across time zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 use the explicitly assumed AC through Ionescu–Tulcea to construct the countable chains."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence and spectral result, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence and spectral result, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-csm-dk-ou-velocity-diffusion-response": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tdmath-ornstein-uhlenbeck-equation",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,(\\mathcal F_t)_{t\\ge0},P)$ carry a standard Brownian motion $B$ adapted to the filtration, with future increments independent of the present sigma-algebra. Fix constants $\\gamma>0$ and $\\sigma>0$, and an $\\mathcal F_0$-measurable real random variable $X_0$ with finite second moment. A **continuous adapted solution of the Ornstein–Uhlenbeck equation** on $[0,T]$ is a continuous adapted process $X$ satisfying, almost surely for every $t\\in[0,T]$,\n$$X_t=X_0-\\gamma\\int_0^tX_s\\,ds+\\sigma B_t,$$\nwhere the time integral is the ordinary Lebesgue integral along the continuous path. In differential notation this is $dX_t=-\\gamma X_t\\,dt+\\sigma\\,dB_t$, with the stochastic differential interpreted through the displayed integral equation.\n\nThe definition asserts neither existence nor uniqueness. The Itô integral in the explicit representation is the square-integrable predictable-process integral of [[def-ito-integral-for-square-integrable-predictable-processes]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-ornstein-uhlenbeck-model",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. Assume the filtered probability space, Brownian increment hypothesis, and initial data of [[def-tdmath-ornstein-uhlenbeck-equation]], including $\\mathbb E X_0^2<\\infty$ and future increments independent of $\\mathcal F_0$. For $\\gamma,\\sigma>0$, on every finite time interval the process\n$$X_t=e^{-\\gamma t}X_0+\\sigma e^{-\\gamma t}\\int_0^t e^{\\gamma s}\\,dB_s$$\nhas a continuous adapted version, solves the stated Ornstein–Uhlenbeck integral equation, and is the unique continuous solution driven by the same $(X_0,B)$. Put $V=\\sigma^2/(2\\gamma)$. For $0\\le s<t$, its transition law conditional on $\\mathcal F_s$ is normal with mean $e^{-\\gamma(t-s)}X_s$ and variance $V(1-e^{-2\\gamma(t-s)})$. Consequently\n$$\\mathbb E X_t=e^{-\\gamma t}\\mathbb E X_0,\\qquad\\operatorname{Var}(X_t)=e^{-2\\gamma t}\\operatorname{Var}(X_0)+V(1-e^{-2\\gamma t}).$$\nFrom any such initial law, $X_t$ converges in distribution to $N(0,V)$. If $X_0\\sim N(0,V)$ and is independent of future Brownian increments, the process is stationary Gaussian with covariance $C(\\tau)=Ve^{-\\gamma|\\tau|}$, and its transition kernel satisfies detailed balance with the $N(0,V)$ density. Its transition density solves the Fokker–Planck equation for positive time. Under the convention $S(\\omega)=(2\\pi)^{-1}\\int_{\\mathbb R}C(\\tau)e^{i\\omega\\tau}\\,d\\tau$, the stationary spectrum and time-average bound are\n$$S(\\omega)=\\frac{V\\gamma}{\\pi(\\gamma^2+\\omega^2)},\\qquad\\operatorname{Var}\\!\\left(\\frac1T\\int_0^T X_t\\,dt\\right)\\le\\frac{2V}{\\gamma T}.$$\nAll these statements concern the specified linear stochastic model. An Einstein relation between $\\sigma$ and a physical bath temperature would be an additional physical postulate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Let $V^0$ be the unforced OU solution from [F2]. Define the deterministic function $g(t):=\\frac1m\\int_0^te^{-\\gamma(t-s)}u(s)\\,ds$. Differentiation under this finite integral gives $g(0)=0$ and $g'(t)=-\\gamma g(t)+u(t)/m$. Hence $V_t:=V^0_t+g(t)$ is continuous and satisfies [F1] with the added input term. If two forced solutions have the same initial state and Brownian path, their difference $z$ satisfies $z(t)=-\\gamma\\int_0^tz(s)\\,ds$; with $H(t)=\\int_0^t|z(s)|\\,ds$, one has $H'(t)\\le\\gamma H(t)$ and $H(0)=0$, whence $H=0$ and $z=0$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Since $V^0$ is centered and $g$ is deterministic, $\\mathbb E V_t=g(t)$, giving the claimed mean. The parameter relation gives $\\sigma^2/(2\\gamma)=k_B\\Theta/m=v_\\Theta$, so [F2] gives stationarity, Gaussianity and the displayed covariance for the unforced solution.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "For a uniform partition of $[0,t]$, the Riemann sums $S_n=(t/n)\\sum_{j=0}^{n-1}V_{jt/n}$ converge almost surely to $Y_t$ because $V$ has continuous paths. Each $S_n$ is centered Gaussian under $u=0$. By the covariance in step 2.1, its variance is a Riemann sum converging to $\\int_0^t\\int_0^t v_\\Theta e^{-\\gamma|s-r|}\\,ds\\,dr=2v_\\Theta\\int_0^t(t-a)e^{-\\gamma a}\\,da=2v_\\Theta\\left(\\frac{t}{\\gamma}-\\frac{1-e^{-\\gamma t}}{\\gamma^2}\\right)$. Hence the Gaussian characteristic functions of $S_n$ converge to that of the centered normal with this variance. For each real $\\xi$, almost-sure convergence and $|e^{i\\xi S_n}|=1$ let bounded convergence give $\\mathbb E e^{i\\xi S_n}\\to\\mathbb E e^{i\\xi Y_t}$. Therefore $Y_t$ has the stated Gaussian law and variance. Adding the deterministic $g$ to velocity changes only the mean of its integral, not this variance.",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "4.1",
+          "claim": "Dividing the variance formula in step 3.1 by $2t$ and letting $t\\to\\infty$ gives $D=v_\\Theta/\\gamma$. The centered displacement has Gaussian variance $2Dt-2v_\\Theta(1-e^{-\\gamma t})/\\gamma^2$; after division by $t$ this tends to $2D$, proving the distributional limit. For constant $u_0$, step 1.1 gives $\\mathbb E V_t=u_0(1-e^{-\\gamma t})/(m\\gamma)$, so $\\chi=1/(m\\gamma)$ and $D=(k_B\\Theta/m)/\\gamma=\\chi k_B\\Theta$.",
+          "inputs": [
+            "step 3.1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement concerns a scalar process on a nonempty probability space and a finite interval with t_f>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 explicitly handle zero deterministic input and the centered stationary OU process."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement is the one-dimensional scalar OU equation; all vector-valued generalizations are outside its scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 give zero displacement variance at t=0 and the centered Gaussian case for zero input."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite-horizon solution is defined on [0,t_f], including t=0 and t=t_f; steps 1.1 and 3.1 use these endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes the published OU supplier under the explicit Axiom of Choice assumption."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence, uniqueness, and response theorem, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence, uniqueness, and response theorem, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "pthm-csm-dk-ou-green-kubo-einstein": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-csm-dk-selected-thermal-langevin-bath",
+          "source_section": "Postulate",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and the filtered Brownian probability-space convention of [[def-tdmath-ornstein-uhlenbeck-equation]]. Use one Brownian motion and one process on $[0,\\infty)$; equations and the continuous-force condition are understood on each finite interval $[0,t_f]$, $t_f>0$. The one-dimensional coordinate $x\\in\\mathbb R$ is signed displacement along a fixed spatial axis in one chosen Newtonian inertial coordinate: within that coordinate, inertial means that an isolated free particle has constant coordinate velocity. Let $X_0$ be an $\\mathcal F_0$-measurable real-valued initial position coordinate, measured in metres; its law and dependence on $V_0$ are unrestricted because the conclusions concern velocity and displacement increments. Position $X_t$ is measured in metres and velocity $V_t$ in metres per second; they satisfy $X_t=X_0+\\int_0^tV_s\\,ds$, so the continuous velocity paths make $X_t$ continuously differentiable and $V_t=dX_t/dt$.\n\nTake a primitive particle mass $m>0$ in kilograms, a primitive constant bath temperature $T_b>0$ in kelvins, and the primitive SI Boltzmann constant $k_B>0$ in joules per kelvin. The positive damping rate $\\gamma$ is a primitive model parameter in seconds$^{-1}$; the positive noise amplitude $\\sigma$ is derived as the square root of $2\\gamma k_BT_b/m$ and has units metres seconds$^{-3/2}$. Let $B_t$ be standard scalar Brownian motion with $B_0=0$, variance $t$ in seconds, and future increments independent of the present filtration. Prepare $V_0\\sim N(0,k_BT_b/m)$ independently of those future increments. The force $F:[0,\\infty)\\to\\mathbb R$ is a prescribed deterministic locally continuous input in newtons. Adopt\n\n$$V_t=V_0-\\gamma\\int_0^tV_s\\,ds+\\frac1m\\int_0^tF(s)\\,ds+\\sigma B_t,\\qquad \\sigma^2=\\frac{2\\gamma k_BT_b}{m}.$$\n\nThe displayed integral equation is the definition of the stochastic differential notation $dV_t=-\\gamma V_t\\,dt+F(t)\\,dt/m+\\sigma\\,dB_t$. Brownian increments have units seconds$^{1/2}$, so every term in the equation for $V_t$ has units metres seconds$^{-1}$. When $F=0$, the preparation is the stationary OU Gaussian law because its variance is $\\sigma^2/(2\\gamma)=k_BT_b/m$; the cited mathematical supplier establishes the specified OU model properties. The thermal noise normalization, Gaussian preparation, constant damping, and deterministic force coupling are adopted assumptions. No measurement, material calibration, nonlinear response, or microscopic derivation of this bath is asserted.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-csm-dk-ou-velocity-diffusion-response",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and the Brownian probability-space hypotheses in [[def-tdmath-ornstein-uhlenbeck-equation]]. Let $\\gamma,m,\\Theta,k_B>0$, $\\sigma>0$, and $\\sigma^2=2\\gamma k_B\\Theta/m$. Here these are real mathematical parameters; a separate physics postulate assigns their physical units and interpretation. Let $V_0\\sim N(0,k_B\\Theta/m)$ be independent of future Brownian increments. For any locally continuous deterministic input $u:[0,\\infty)\\to\\mathbb R$, and every finite $t_f>0$, the equation restricted to $[0,t_f]$\n$$V_t=V_0-\\gamma\\int_0^tV_s\\,ds+\\frac1m\\int_0^tu(s)\\,ds+\\sigma B_t,\\qquad 0\\le t\\le t_f,$$\nhas a unique continuous solution; these unique finite-horizon solutions agree on overlapping intervals and define one solution for all $t\\ge0$. Its mean is\n$$\\mathbb E V_t=\\frac1m\\int_0^te^{-\\gamma(t-s)}u(s)\\,ds.$$\nFor $u=0$, $V$ is a stationary centered Gaussian process on $[0,\\infty)$ with covariance\n$$\\mathbb E[V_sV_t]=v_\\Theta e^{-\\gamma|t-s|},\\qquad v_\\Theta:=k_B\\Theta/m.$$\nDefine $Y_t:=\\int_0^tV_s\\,ds$ and $D:=v_\\Theta/\\gamma$. Then\n$$\\operatorname{Var}(Y_t)=2v_\\Theta\\left(\\frac{t}{\\gamma}-\\frac{1-e^{-\\gamma t}}{\\gamma^2}\\right),\\qquad \\lim_{t\\to\\infty}\\frac{\\operatorname{Var}(Y_t)}{2t}=D.$$\nFor every deterministic input, the centered displacement $Y_t-\\mathbb E Y_t$ is Gaussian with the variance above; consequently $(Y_t-\\mathbb E Y_t)/\\sqrt t$ converges in distribution to $N(0,2D)$. For constant input $u(s)=u_0$, $\\lim_{t\\to\\infty}\\mathbb E[V_t]/u_0=\\chi:=1/(m\\gamma)$ when $u_0\\ne0$, and $D=\\chi k_B\\Theta$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Substituting $\\sigma^2=2\\gamma k_BT_b/m$ from [A1] into the stationary variance $V=\\sigma^2/(2\\gamma)$ gives $V=k_BT_b/m$. Its units are $\\mathrm J/\\mathrm{kg}=\\mathrm{m^2\\,s^{-2}}$, the square of a velocity.",
+          "inputs": [
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Apply [F1] with $\\Theta=T_b$ and input $u=F$. Its covariance and response formulas give $C_{VV}(\\tau)=(k_BT_b/m)e^{-\\gamma|\\tau|}$ and $R_{VF}(t-s)=m^{-1}e^{-\\gamma(t-s)}$. Since $(k_BT_b)^{-1}C_{VV}(t-s)=m^{-1}e^{-\\gamma(t-s)}$, the claimed equilibrium response relation follows.",
+          "inputs": [
+            "A2",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.2",
+          "claim": "The same substitution in the displacement-variance limit of [F1] gives $D=k_BT_b/(m\\gamma)$. Its constant-input response gives $\\mu=1/(m\\gamma)$, so $D=\\mu k_BT_b$. The unit of $\\mu$ is $(\\mathrm{m\\,s^{-1}})/\\mathrm N=\\mathrm{s\\,kg^{-1}}$, and multiplication by $k_BT_b$ in joules gives $\\mathrm{m^2\\,s^{-1}}$.",
+          "inputs": [
+            "A2",
+            "F1",
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "3.1",
+          "claim": "The centered-displacement distributional limit in [F1] gives $[X_t-X_0-\\mathbb E(X_t-X_0)]/\\sqrt t\\Rightarrow N(0,2D)$. Every conclusion is conditional on [A1]; no observed value or empirical certainty is inferred.",
+          "inputs": [
+            "A2",
+            "F1",
+            "A1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The adopted bath has positive parameters and a scalar degree of freedom; an empty state space is not part of this model."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 treat zero external force as the stationary covariance branch; the response formula is zero when the force is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement explicitly restricts the physical prediction to one scalar velocity coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the stationary variance normalization; steps 2.1–3.1 handle the centered stationary and constant-force cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The displacement variance is zero at t=0 and its long-time limit is taken in steps 2.2–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use the stated Choice assumption through the OU mathematical supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives conditional equalities and limits, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives conditional equalities and limits, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-csm-dk-finite-rate-fluctuation-response": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-finite-reversible-rate-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and let $E,\\pi,w,Q$ be the finite model data of [[def-csm-dk-finite-reversible-rate-model]], with $|E|=r\\ge2$. For every initial probability row vector $p_0$, there exists a time-homogeneous continuous-time Markov chain $X_t$ on $E$, $t\\ge0$, with no finite accumulation of jumps, transition matrix $P_t=e^{tQ}$, and law $p_t=p_0P_t$. The detailed-balance law $\\pi$ is stationary. On the real inner-product space $L^2(E,\\pi)$, $Q$ is self-adjoint and has an orthonormal eigenbasis $\\phi_0=1,\\phi_1,\\ldots,\\phi_{r-1}$ with eigenvalues $0,-\\lambda_1,\\ldots,-\\lambda_{r-1}$, where every $\\lambda_j>0$. Thus the spectral gap $\\lambda_*:=\\min_j\\lambda_j$ is positive and $P_t$ converges exponentially to projection onto constants.\n\nHere a finite-state continuous-time Markov chain means a process with piecewise-constant paths whose conditional transition matrix over an interval of length $t$ is $P_t$, independent of the starting time. For initial law $\\pi$, the chain has a two-sided stationary extension $X_t$, $t\\in\\mathbb R$, whose finite-dimensional laws at $t_1<\\cdots<t_n$ are $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. Its sample paths are locally piecewise constant with finitely many jumps on every bounded time interval.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-dk-integrable-covariance-green-kubo",
+          "source_section": "Statement",
+          "quote": "Let $(\\Xi,\\mathcal F,\\mathbb P)$ be a probability space and let\n$V:\\mathbb R\\times\\Xi\\to\\mathbb R^d$ be jointly measurable for the completed\nproduct of Lebesgue measure and $\\mathbb P$. Assume $\\mathbb E[V(t)]=0$ for\nevery $t$, $\\mathbb E|V(0)|^2<\\infty$, and second-order stationarity in the\nexplicit sense that each covariance below is finite and\n$$C_{ij}(s):=\\mathbb E[V_i(u)V_j(u+s)]$$\nis independent of $u\\in\\mathbb R$ for every $s\\in\\mathbb R$ and every\n$1\\le i,j\\le d$. For $T>0$, the Lebesgue integral\n$X(T)=\\int_0^T V(s)\\,ds$ exists almost surely and in $L^2$. Define\n$$\\operatorname{Cov}(X(T))_{ij} =\\mathbb E[(X_i(T)-\\mathbb EX_i(T))(X_j(T)-\\mathbb EX_j(T))];$$\nthe centered hypothesis makes these means zero. Then\n$$\\operatorname{Cov}(X_i(T),X_j(T)) =\\int_0^T(T-s)\\big(C_{ij}(s)+C_{ji}(s)\\big)\\,ds.$$\nIf each $C_{ij}$ is absolutely integrable on $[0,\\infty)$, then\n$$\\frac{\\operatorname{Cov}(X(T))}{2T}\\longrightarrow D,\\qquad D_{ij}=\\frac12\\int_0^\\infty\\big(C_{ij}(s)+C_{ji}(s)\\big)\\,ds,$$\nand $D$ is positive semidefinite. This is a variance-growth conclusion; it\ndoes not assert a central limit theorem or identify a transport coefficient.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "By [F2], choose an orthonormal eigenbasis of $Q$ with $\\phi_0=1$ and $Q\\phi_j=-\\lambda_j\\phi_j$ for $j\\ge1$, where $\\lambda_j>0$. For centered $A,B$, expand $A_c=\\sum_{j\\ge1}a_j\\phi_j$ and $B_c=\\sum_{j\\ge1}b_j\\phi_j$. Then $C_{BA}(t)=\\sum_{j=1}^{r-1}b_ja_je^{-\\lambda_jt}$ and $\\int_0^\\infty C_{BA}(t)\\,dt=\\sum_{j=1}^{r-1}a_jb_j/\\lambda_j=\\langle B_c,(-Q)^{-1}A_c\\rangle_\\pi$. The sum is finite, so the correlation is absolutely integrable. Applying the same expansion to each component of $G_c$ gives $D_{ij}=\\sum_{j'=1}^{r-1}g_{i,j'}g_{j,j'}/\\lambda_{j'}$, a symmetric positive-semidefinite matrix. The two-sided stationary chain in [F2] has bounded, jointly measurable $G_c(X_t)$; its covariance is absolutely integrable by this expansion, so [F3] gives the stated covariance limit and agrees with this matrix.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "For a finite time interval, the controlled off-diagonal rate matrix has the uniform expansion $Q^\\epsilon(t)=Q+\\epsilon h(t)K+O(\\epsilon^2)$, where $K_{ab}=\\frac{\\beta}{2}w_{ab}(B_b-B_a)$ for $a\\ne b$ and each diagonal entry makes its row sum zero. The remainder is uniform because $E$ is finite and $h$ is bounded. The finite forward equation $p'=pQ^\\epsilon(t)$ has a unique solution: its Picard series converges uniformly, since the $n$th iterated integral is bounded by $M^nt_f^n/n!$ when $\\|Q^\\epsilon(t)\\|\\le M$. Since $E$ is finite, $h$ is bounded, and the exponential factors are bounded uniformly for $t\\in[0,t_f]$ and $|\\epsilon|\\le1$, choose one $\\Lambda$ larger than every controlled exit rate on this set. Then $Q^\\epsilon(t)+\\Lambda I$ has nonnegative entries; after $r(t)=e^{\\Lambda t}p^\\epsilon(t)$, its Picard series has nonnegative terms, so $p^\\epsilon(t)\\ge0$ for all such $\\epsilon$. The row sums of $Q^\\epsilon$ are zero, hence total mass remains one. Subtracting the unperturbed equation and using $\\pi Q=0$ gives $p^\\epsilon-\\pi=O(\\epsilon)$ on $[0,t_f]$ by successive substitution in the bounded linear integral equation. Put $y^\\epsilon=(p^\\epsilon-\\pi)/\\epsilon$; then $y^\\epsilon(t)=\\int_0^t y^\\epsilon(s)Q\\,ds+\\int_0^t p^\\epsilon(s)(Q^\\epsilon(s)-Q)/\\epsilon\\,ds$. The second integrand converges uniformly to $\\pi h(s)K$, since $p^\\epsilon\\to\\pi$ uniformly and $(Q^\\epsilon-Q)/\\epsilon\\to hK$ uniformly. Subtracting the limiting integral equation bounds $\\|y^\\epsilon-q\\|$ by a term tending uniformly to zero plus $M\\int_0^t\\|y^\\epsilon-q\\|,ds$; successive substitution bounds this difference by the forcing error times $e^{Mt_f}$. Thus $q=\\partial_\\epsilon p^\\epsilon|_0$ exists and satisfies $q'=qQ+h\\pi K$, $q(0)=0$. Variation of constants, verified by differentiation, gives $q(t)=\\int_0^t h(s)\\pi K P_{t-s}\\,ds$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "For each state $b$, detailed balance in [F1] and the definition of $K$ give $(\\pi K)_b=\\frac{\\beta}{2}\\sum_{a\\ne b}\\pi_aw_{ab}(B_b-B_a)-\\frac{\\beta}{2}\\pi_b\\sum_{c\\ne b}w_{bc}(B_c-B_b)=-\\beta\\pi_b(QB)_b$. Indeed, replacing $\\pi_aw_{ab}$ by $\\pi_bw_{ba}$ makes the first sum the negative of the second before its prefactor is applied. Thus $q(t)A=\\int_0^t h(s)(\\pi K)P_{t-s}A\\,ds=-\\beta\\int_0^t h(s)\\langle QB_c,P_{t-s}A_c\\rangle_\\pi\\,ds$. Self-adjointness of $Q$ and $P'_u=QP_u$ imply $C'_{BA}(u)=\\langle QB_c,P_uA_c\\rangle_\\pi$, proving the response formula.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "4.1",
+          "claim": "For constant $h$, define $\\pi^\\epsilon_a=Z_\\epsilon^{-1}\\pi_ae^{\\beta\\epsilon hB_a}$. Multiplying this by $w^\\epsilon_{ab}$ gives a common edge factor proportional to $\\pi_aw_{ab}e^{\\beta\\epsilon h(B_a+B_b)/2}$, symmetric in $a,b$ by detailed balance. Hence $\\pi^\\epsilon$ is stationary. Differentiating its finite normalization sum at $\\epsilon=0$ gives $\\left.\\partial_\\epsilon\\sum_a\\pi^\\epsilon_aA_a\\right|_0=\\beta h(\\pi(AB)-\\pi(A)\\pi(B))$, the stated static susceptibility.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The rate-model Definition requires a finite set of size r≥2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives D=0 for a constant vector observable; step 3.1 gives zero response when B is constant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits scalar observables (d=1 for G); the finite spectral expansion is unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 sums over eigenvalues with multiplicity and allows zero centered observables."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero response at t=0; the forward equation and field are defined on the closed finite interval [0,t_f]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC for the chain and ACω through the Green–Kubo supplier under its exact two-sided stationarity and integrability hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement contains no if-and-only-if assertion."
+        }
+      ]
+    },
+    "thm-csm-dk-markov-entropy-and-strong-averages": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-finite-reversible-rate-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and let $E,\\pi,w,Q$ be the finite model data of [[def-csm-dk-finite-reversible-rate-model]], with $|E|=r\\ge2$. For every initial probability row vector $p_0$, there exists a time-homogeneous continuous-time Markov chain $X_t$ on $E$, $t\\ge0$, with no finite accumulation of jumps, transition matrix $P_t=e^{tQ}$, and law $p_t=p_0P_t$. The detailed-balance law $\\pi$ is stationary. On the real inner-product space $L^2(E,\\pi)$, $Q$ is self-adjoint and has an orthonormal eigenbasis $\\phi_0=1,\\phi_1,\\ldots,\\phi_{r-1}$ with eigenvalues $0,-\\lambda_1,\\ldots,-\\lambda_{r-1}$, where every $\\lambda_j>0$. Thus the spectral gap $\\lambda_*:=\\min_j\\lambda_j$ is positive and $P_t$ converges exponentially to projection onto constants.\n\nHere a finite-state continuous-time Markov chain means a process with piecewise-constant paths whose conditional transition matrix over an interval of length $t$ is $P_t$, independent of the starting time. For initial law $\\pi$, the chain has a two-sided stationary extension $X_t$, $t\\in\\mathbb R$, whose finite-dimensional laws at $t_1<\\cdots<t_n$ are $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. Its sample paths are locally piecewise constant with finitely many jumps on every bounded time interval.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-dk-integrable-covariance-green-kubo",
+          "source_section": "Statement",
+          "quote": "Let $(\\Xi,\\mathcal F,\\mathbb P)$ be a probability space and let\n$V:\\mathbb R\\times\\Xi\\to\\mathbb R^d$ be jointly measurable for the completed\nproduct of Lebesgue measure and $\\mathbb P$. Assume $\\mathbb E[V(t)]=0$ for\nevery $t$, $\\mathbb E|V(0)|^2<\\infty$, and second-order stationarity in the\nexplicit sense that each covariance below is finite and\n$$C_{ij}(s):=\\mathbb E[V_i(u)V_j(u+s)]$$\nis independent of $u\\in\\mathbb R$ for every $s\\in\\mathbb R$ and every\n$1\\le i,j\\le d$. For $T>0$, the Lebesgue integral\n$X(T)=\\int_0^T V(s)\\,ds$ exists almost surely and in $L^2$. Define\n$$\\operatorname{Cov}(X(T))_{ij} =\\mathbb E[(X_i(T)-\\mathbb EX_i(T))(X_j(T)-\\mathbb EX_j(T))];$$\nthe centered hypothesis makes these means zero. Then\n$$\\operatorname{Cov}(X_i(T),X_j(T)) =\\int_0^T(T-s)\\big(C_{ij}(s)+C_{ji}(s)\\big)\\,ds.$$\nIf each $C_{ij}$ is absolutely integrable on $[0,\\infty)$, then\n$$\\frac{\\operatorname{Cov}(X(T))}{2T}\\longrightarrow D,\\qquad D_{ij}=\\frac12\\int_0^\\infty\\big(C_{ij}(s)+C_{ji}(s)\\big)\\,ds,$$\nand $D$ is positive semidefinite. This is a variance-growth conclusion; it\ndoes not assert a central limit theorem or identify a transport coefficient.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Choose $\\Lambda>\\max_aq_a$ and set $K=I+Q/\\Lambda$. By [F1], $K$ is stochastic with positive diagonal, and for any distinct $a,b$ a positive-rate path of length $k$ gives $K^k_{ab}>0$; for $a=b$ take $k=0$. By [F2], $P_t=e^{tQ}=e^{-\\Lambda t}\\sum_{n\\ge0}(\\Lambda t)^nK^n/n!$. Every summand is nonnegative and the term for this $k$ is strictly positive, so $P_t(a,b)>0$ for every $t>0$. Hence $p_t(b)=\\sum_a p_0(a)P_t(a,b)>0$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "1.2",
+          "claim": "The eigenbasis in [F2] gives, for centered $A_c=\\sum_{j\\ge1}a_j\\phi_j$, $C_A(s):=\\mathbb E_\\pi[A_c(X_0)A_c(X_s)]=\\langle A_c,P_sA_c\\rangle_\\pi=\\sum_{j\\ge1}a_j^2e^{-\\lambda_js}$ for $s\\ge0$. Thus $C_A(s)\\ge0$ and $\\int_0^\\infty C_A(s)\\,ds=\\sum_{j\\ge1}a_j^2/\\lambda_j\\le\\|A_c\\|_{L^2(\\pi)}^2/\\lambda_*$. The process $A_c(X_s)$ is centered, jointly measurable and second-order stationary; the spectral sum makes its covariance absolutely integrable. By [F3] the variance of its time integral is the double-integral covariance formula. Dividing by $T^2$ and bounding $T-s\\le T$ proves the stated variance bound.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.1",
+          "claim": "For $t>0$, differentiate the finite sum defining $\\mathcal D$; the mass derivative $\\sum_a p'_a(t)$ is zero, so $\\mathcal D'(t)=\\sum_a p'_a(t)\\log r_a(t)=\\sum_{a}\\sum_{b\\ne a}p_a(t)w_{ab}(\\log r_b(t)-\\log r_a(t))$. Use $p_a=\\pi_ar_a$ and pair the directed $(a,b)$ and $(b,a)$ terms with the symmetric conductance $\\pi_aw_{ab}=\\pi_bw_{ba}$. This gives the displayed negative half-sum. For positive $x,y$, $(x-y)(\\log x-\\log y)\\ge0$, with equality only at $x=y$, since $\\log x-\\log y=\\int_y^x du/u$. Connectedness forces all $r_a$ equal when the sum vanishes; normalization then gives $r_a=1$ and $p_t=\\pi$.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D4",
+          "step": "2.2",
+          "claim": "Fix a reference time $t_*>0$ and put $T_n=n^2t_*$. For every $\\varepsilon>0$, the pointwise inequality $\\mathbf1_{\\{|Y|>\\varepsilon\\}}\\le Y^2/\\varepsilon^2$ applied to $Y=T_n^{-1}\\int_0^{T_n}A_c(X_s)\\,ds$, together with step 1.2, gives $\\sum_{n=1}^{\\infty}\\Pr_\\pi(|Y|>\\varepsilon)\\le\\frac{2\\|A_c\\|_{L^2(\\pi)}^2}{\\lambda_*\\varepsilon^2t_*}\\sum_{n=1}^{\\infty}n^{-2}<\\infty$. For each $N$, the probability that one of these events occurs for some $n\\ge N$ is at most the corresponding tail sum, which tends to zero. Thus only finitely many occur almost surely. Applying this argument to $\\varepsilon=1/k$ for each positive integer $k$ proves convergence to zero along $T_n$, almost surely.",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D5",
+          "step": "3.1",
+          "claim": "Let $M=\\max_{a\\in E}|A_c(a)|$. For $T_n\\le T\\le T_{n+1}$, $|T^{-1}\\int_0^TA_c(X_s)ds-T_n^{-1}\\int_0^{T_n}A_c(X_s)ds|\\le 2M(T_{n+1}-T_n)/T_n\\to0$. Hence the time averages converge to zero for stationary initial law. For any future-path event $H$ and state $a$, let $\\mu_a(H)$ be its probability under the common transition kernels started from $a$. Then $\\Pr_{p_0}(H)=\\sum_a p_0(a)\\mu_a(H)=\\mathbb E_\\pi[(p_0(X_0)/\\pi(X_0))1_H]$, so the forward path law from $p_0$ has density $p_0(X_0)/\\pi(X_0)$ relative to the stationary path law. This density is bounded because $E$ is finite and every $\\pi_a>0$. Every stationary null event, including failure of the almost-sure limit, is therefore null for every initial preparation. Adding $\\pi(A)$ proves the claimed limit.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D6",
+          "step": "4.1",
+          "claim": "Exponential convergence in [F2] gives $p_t\\to\\pi$ entrywise. The function $x\\mapsto x\\log(x/\\pi_a)$ extends continuously to $x=0$ by value zero, so the finite sum $\\mathcal D(p_t\\Vert\\pi)$ tends to zero. Combined with step 2.1 this proves all the relative-information claims.",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite connected graph has r>=2. The entropy sum includes zero initial p_a via0log0=0; for positive t every p_a(t)>0 by1.1. Empty edge sums cannot occur on this connected multi-state graph, while the mean of the zero observable is trivially0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles zero initial probabilities by proving strict positivity only for t>0; the convention 0 log 0=0 covers t=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The irreducible two-state case is included; the spectral expansion in step 2.1 has one nonconstant eigenmode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes p₀=π, where relative information and its derivative vanish; step 2.1 gives zero centered variance for constant observables."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The derivative formula is stated for t>0, the initial entropy uses 0 log 0=0, and step 4.1 proves the t→∞ limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 carry AC and ACω for the transition chain and the two-sided covariance supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "At positive time, entropy dissipation vanishes only if every connected-edge density ratio is equal: the nonnegative terms in2.1 and graph connectivity force r_a constant and hence p_t=pi. This checks the forward zero-dissipation implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Conversely p_t=pi makes all density ratios1, so each dissipation term in2.1 vanishes. This is the reverse of the actual exactly-when clause; it does not reverse the almost-sure time-average theorem."
+        }
+      ]
+    },
+    "thm-csm-dk-strong-lumpability": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-finite-reversible-rate-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and let $E,\\pi,w,Q$ be the finite model data of [[def-csm-dk-finite-reversible-rate-model]], with $|E|=r\\ge2$. For every initial probability row vector $p_0$, there exists a time-homogeneous continuous-time Markov chain $X_t$ on $E$, $t\\ge0$, with no finite accumulation of jumps, transition matrix $P_t=e^{tQ}$, and law $p_t=p_0P_t$. The detailed-balance law $\\pi$ is stationary. On the real inner-product space $L^2(E,\\pi)$, $Q$ is self-adjoint and has an orthonormal eigenbasis $\\phi_0=1,\\phi_1,\\ldots,\\phi_{r-1}$ with eigenvalues $0,-\\lambda_1,\\ldots,-\\lambda_{r-1}$, where every $\\lambda_j>0$. Thus the spectral gap $\\lambda_*:=\\min_j\\lambda_j$ is positive and $P_t$ converges exponentially to projection onto constants.\n\nHere a finite-state continuous-time Markov chain means a process with piecewise-constant paths whose conditional transition matrix over an interval of length $t$ is $P_t$, independent of the starting time. For initial law $\\pi$, the chain has a two-sided stationary extension $X_t$, $t\\in\\mathbb R$, whose finite-dimensional laws at $t_1<\\cdots<t_n$ are $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. Its sample paths are locally piecewise constant with finitely many jumps on every bounded time interval.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "Let $\\mathcal H$ be the subspace of functions on $E$ that are constant on each block. For $f(a)=\\bar f_i$ when $a\\in C_i$, $(Qf)(a)=\\sum_{j\\ne i}q(a,C_j)(\\bar f_j-\\bar f_i)$ for $a\\in C_i$. If the block-rate sums are constant within each $C_i$, this value is independent of the chosen $a\\in C_i$. Thus $Q$ maps $\\mathcal H$ into itself, and its restriction is the matrix $\\bar Q$ in the Statement. Every power $Q^n$ preserves $\\mathcal H$, so the matrix series $P_t=e^{tQ}$ does too; for any block $C_j$, $P_t1_{C_j}$ is constant on each block and defines $\\bar P_t=e^{t\\bar Q}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Conditional on the full microscopic history through time $t$, the Markov property gives $\\Pr(\\bar X_{t+s}=j\\mid\\mathcal F_t^X)=(P_s1_{C_j})(X_t)=(\\bar P_s)_{\\bar X_t,j}$. The right side depends only on the current block. Taking conditional expectation with respect to the coarser history proves that $\\bar X$ is a time-homogeneous Markov chain for every microscopic initial law. Moreover, $\\bar\\pi_i\\bar q_{ij}=\\sum_{a\\in C_i}\\sum_{b\\in C_j}\\pi_aw_{ab}=\\sum_{a\\in C_i}\\sum_{b\\in C_j}\\pi_bw_{ba}=\\bar\\pi_j\\bar q_{ji}$, so its stationary block weights satisfy detailed balance.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "Conversely, assume one time-homogeneous block generator applies for every microscopic initial law. Start once from a point mass at $a\\in C_i$ and once at $a'\\in C_i$. For $j\\ne i$, the finite matrix expansion $e^{hQ}=I+hQ+O(h^2)$ gives $\\Pr_a(\\bar X_h=j)=h q(a,C_j)+O(h^2)$ and $\\Pr_{a'}(\\bar X_h=j)=h q(a',C_j)+O(h^2)$. Both probabilities must use the same coarse transition entry from block $i$ to block $j$. Divide by $h>0$ and let $h\\downarrow0$; then $q(a,C_j)=q(a',C_j)$. This holds for each block pair, proving necessity and the equivalence.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement defines a partition by k≥1 nonempty pairwise-disjoint blocks whose union is E."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows zero inter-block rates; the quotient diagonal is fixed by the sum of its off-diagonal rates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For k=1 the projected chain is constant and the rate-constancy condition is vacuous; steps 1.1 and 3.1 cover both implications."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 only requires equal block-rate sums within a source block; coincident rates or repeated values require no extra hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 derives necessity from the h↓0 expansion of e^{hQ}."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Theorem dependencies include AC through the nonexplosive chain construction used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 prove that block-rate constancy yields a common time-homogeneous block generator."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that one generator for every microscopic initial law forces block-rate constancy."
+        }
+      ]
+    },
+    "pthm-csm-dk-finite-bath-response": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-csm-dk-selected-reversible-bath-rates",
+          "source_section": "Postulate",
+          "quote": "Use the finite state set, energies $e_a$, rates $w_{ab}$, Gibbs weights $\\pi_a$, and row generator $Q$ defined in [[def-csm-dk-finite-reversible-rate-model]]. Assign the state energies the physical meaning of coarse-state energies in joules. Use the primitive SI Boltzmann constant $k_B$ in joules per kelvin from [[post-csm-dk-selected-thermal-langevin-bath]], and set $\\beta=(k_BT_b)^{-1}$ in joules$^{-1}$ for the positive bath-temperature parameter $T_b$ in kelvins. Adopt the baseline transition rates $w_{ab}$ in seconds$^{-1}$ and the initial law $p_0=\\pi$ for the equilibrium-response branch. These choices define a finite phenomenological thermal rate model; they do not say that a real material has these rates.\n\nFor a fixed state observable $B:E\\to\\mathbb R$ with units denoted $[B]$, a dimensionless control amplitude $\\epsilon$, and a continuous field $h:[0,t_f]\\to\\mathbb R$ with units joules per $[B]$, adopt the controlled rates\n\n$$w_{ab}^{\\epsilon}(t)=w_{ab}\\exp\\!\\left(\\frac{\\beta\\epsilon h(t)}2(B_b-B_a)\\right),\\qquad a\\ne b.$$\n\nTheir units remain seconds$^{-1}$ because the exponent is dimensionless. This is one explicit symmetric allocation of the field-dependent rate factor. For constant $h$, the rate ratio obeys\n\n$$\\frac{w_{ab}^{\\epsilon}}{w_{ba}^{\\epsilon}}=\\exp\\!\\left(-\\beta\\left[(e_b-\\epsilon hB_b)-(e_a-\\epsilon hB_a)\\right]\\right),$$\n\nso the Gibbs weights of the shifted energies $e_a-\\epsilon hB_a$ satisfy detailed balance by direct multiplication. A rate ratio alone leaves state-pair prefactors undetermined; the symmetric splitting above is an additional modeling choice and is the specific perturbation analyzed in the consuming theorem. No experiment or empirical rate estimate is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-finite-reversible-rate-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-markov-entropy-and-strong-averages",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]], countable choice [[def-countable-choice]], and the model $E,\\pi,w,Q$ of [[def-csm-dk-finite-reversible-rate-model]]. For any initial probability vector $p_0$, let $p_t=p_0P_t$, where $P_t=e^{tQ}$ is supplied by [[thm-csm-dk-nonexplosive-ctmc-and-gap]], and define the dimensionless relative information\n$$\\mathcal D(p_t\\Vert\\pi):=\\sum_{a\\in E}p_a(t)\\log\\frac{p_a(t)}{\\pi_a},\\qquad 0\\log0:=0.$$\nFor every $t>0$, $p_a(t)>0$ for all states and\n$$\\frac{d}{dt}\\mathcal D(p_t\\Vert\\pi)=-\\frac12\\sum_{a\\in E}\\sum_{b\\ne a}\\pi_aw_{ab}(r_b(t)-r_a(t))(\\log r_b(t)-\\log r_a(t))\\le0,\\qquad r_a(t):=\\frac{p_a(t)}{\\pi_a}.$$\nAt a positive time the derivative vanishes exactly when $p_t=\\pi$, and $\\mathcal D(p_t\\Vert\\pi)\\to0$ as $t\\to\\infty$.\n\nFor every bounded observable $A:E\\to\\mathbb R$ and every initial law, the actual continuous-time average satisfies\n$$\\frac1T\\int_0^T A(X_s)\\,ds\\longrightarrow\\pi(A)\\quad\\text{almost surely as }T\\to\\infty.$$\nUnder stationary preparation, with $A_c=A-\\pi(A)$ and spectral gap $\\lambda_*$ from [[thm-csm-dk-nonexplosive-ctmc-and-gap]],\n$$\\operatorname{Var}_\\pi\\!\\left(\\frac1T\\int_0^T A(X_s)\\,ds\\right)\\le\\frac{2\\|A_c\\|_{L^2(\\pi)}^2}{\\lambda_*T}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-dk-finite-rate-fluctuation-response",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]], countable choice [[def-countable-choice]], and the rate model $E,\\pi,w,Q$ of [[def-csm-dk-finite-reversible-rate-model]]. Let $X_t$ be the stationary two-sided chain of [[thm-csm-dk-nonexplosive-ctmc-and-gap]], with transition semigroup $P_t=e^{tQ}$. For any real observables $A,B:E\\to\\mathbb R$, write $A_c=A-\\pi(A)$ and $B_c=B-\\pi(B)$, and define\n$$C_{BA}(t):=\\langle B_c,P_tA_c\\rangle_\\pi,\\qquad t\\ge0.$$\nDefine $\\operatorname{Cov}_\\pi(A,B):=\\pi(AB)-\\pi(A)\\pi(B)$, where $AB$ is pointwise multiplication.\nFor a continuous field $h:[0,t_f]\\to\\mathbb R$ and dimensionless $\\epsilon$, prescribe rates\n$$w^\\epsilon_{ab}(t)=w_{ab}\\exp\\! \\left(\\frac{\\beta\\epsilon h(t)}2(B_b-B_a)\\right),\\quad a\\ne b,$$\nwith negative row sums on the diagonal, and let $p^\\epsilon(0)=\\pi$ evolve by the resulting finite forward equation. The derivative of the observable mean at $\\epsilon=0$ is\n$$\\left.\\frac{\\partial}{\\partial\\epsilon}\\sum_a p^\\epsilon_a(t)A_a\\right|_{\\epsilon=0}=\\int_0^t h(s)R_{AB}(t-s)\\,ds,\\qquad R_{AB}(u)=-\\beta\\,\\frac{d}{du}C_{BA}(u).$$\nFor a constant field $h$, the perturbed Gibbs vector $\\pi^\\epsilon_a\\propto\\pi_a e^{\\beta\\epsilon hB_a}$ is stationary and its static susceptibility is $\\beta h\\,\\operatorname{Cov}_\\pi(A,B)$.\n\nFor any bounded vector observable $G:E\\to\\mathbb R^d$, set $G_c=G-\\pi(G)$ and\n$$C_{ij}(s):=\\langle (G_c)_i,P_s(G_c)_j\\rangle_\\pi.$$\nThese correlations are absolutely integrable. The Green–Kubo covariance limit is\n$$\\lim_{T\\to\\infty}\\frac{\\operatorname{Cov}_\\pi(\\int_0^T G(X_s)\\,ds)}{2T}=D,\\qquad D_{ij}=\\int_0^\\infty C_{ij}(s)\\,ds=\\langle (G_c)_i,(-Q)^{-1}(G_c)_j\\rangle_\\pi,$$\nwhere $(-Q)^{-1}$ is the inverse on the mean-zero subspace and $D$ is positive semidefinite.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "By [A1] and [F1], the adopted physical model supplies the exact finite state set, energy vector, inverse-temperature factor $\\beta$, connected rate graph and detailed-balance law used in [F2] and [F3]. The Choice assumptions [A2]–[A3] are the mathematical hypotheses inherited by those two suppliers.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "2.1",
+          "claim": "Apply [F2] to the unforced generator. It gives nonincrease and convergence of $\\mathcal D(p_t\\Vert\\pi)$ for every initial law and almost-sure convergence of every bounded-observable time average. These are consequences of the stipulated finite chain and its conditional probability law.",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "3.1",
+          "claim": "In the equilibrium-response branch, [A1] fixes $p_0=\\pi$ and the controlled rates exactly in the form assumed by [F3]. Therefore [F3] gives the stated correlation response and static susceptibility. The source's rate-ratio condition alone does not fix the adopted prefactors; the derivation uses the additional symmetric splitting in [A1]. The conclusions are conditional on that adopted model; no empirical observation or material-specific inference is involved.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The adopted rate model has a finite state set of size r≥2 and a connected rate graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 gives zero first-order response when h=0; the unperturbed equilibrium law is stationary in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows a scalar state observable A and its conjugate observable B."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the equilibrium preparation p₀=π and constant-field static response; the zero-field case is covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The response integral is zero at t=0, and the almost-sure average claim is the explicit T→∞ limit in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 carries AC and ACω as exact hypotheses of the two local mathematical suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives conditional predictions, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives conditional predictions, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-csm-dk-hidden-state-rate-obstruction": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-finite-reversible-rate-model",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]]. A **finite reversible stochastic rate model** consists of an integer $r\\ge2$, the finite state set $E=\\{1,\\ldots,r\\}$, real energy parameters $e_a\\in\\mathbb R$, an inverse-energy parameter $\\beta>0$, and finite transition rates $w_{ab}\\ge0$ for distinct $a,b\\in E$. When physical units are assigned, $e_a$ is measured in joules, $\\beta$ in joules$^{-1}$, and $w_{ab}$ in seconds$^{-1}$; this mathematical definition does not assert a physical realization. Define\n\n$$Z:=\\sum_{a\\in E}e^{-\\beta e_a},\\qquad \\pi_a:=Z^{-1}e^{-\\beta e_a}.$$\n\nThen $Z$ is finite and positive, and $\\pi$ is a strictly positive probability vector. Require $w_{ab}>0$ exactly when $w_{ba}>0$, require the undirected graph with edge $\\{a,b\\}$ whenever $w_{ab}>0$ to be connected, and impose detailed balance $\\pi_aw_{ab}=\\pi_bw_{ba}$. Define the row generator $Q$ by $Q_{ab}=w_{ab}$ for $a\\ne b$ and $Q_{aa}=-q_a$, where $q_a:=\\sum_{b\\ne a}w_{ab}$. Since $r\\ge2$ and the graph is connected, every $q_a>0$. Thus $(Qf)_a=\\sum_{b\\ne a}w_{ab}(f_b-f_a)$ for a column observable $f$, and a row probability vector evolves by $p'=pQ$.\n\nFor any observable $f:E\\to\\mathbb R$, write $\\pi(f):=\\sum_{a\\in E}\\pi_af_a$. For $f,g:E\\to\\mathbb R$, define $\\langle f,g\\rangle_\\pi:=\\sum_{a\\in E}\\pi_af_ag_a$. Since $E$ is finite and every $\\pi_a>0$, all real functions on $E$ belong to this finite-dimensional real inner-product space, denoted $L^2(E,\\pi)$; equality in it is pointwise equality.\n\nThe associated jump-chain construction waits an exponential time of rate $q_a$ in state $a$ and then selects state $b\\ne a$ with probability $w_{ab}/q_a$, using fresh independent random choices at successive jumps. Here an exponential time of rate $q>0$ has survival probability $\\Pr(\\tau>t)=e^{-qt}$ for $t\\ge0$. The Ionescu–Tulcea construction [[thm-ionescu-tulcea-construction-of-a-markov-chain]] supplies the countable random sequence under the stated Choice assumption. The theorem on this page proves nonexplosion, identifies the transition semigroup, and establishes the positive reversible spectral gap. This is a finite mathematical rate model, not a derivation of rates from Hamiltonian mechanics.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-nonexplosive-ctmc-and-gap",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and let $E,\\pi,w,Q$ be the finite model data of [[def-csm-dk-finite-reversible-rate-model]], with $|E|=r\\ge2$. For every initial probability row vector $p_0$, there exists a time-homogeneous continuous-time Markov chain $X_t$ on $E$, $t\\ge0$, with no finite accumulation of jumps, transition matrix $P_t=e^{tQ}$, and law $p_t=p_0P_t$. The detailed-balance law $\\pi$ is stationary. On the real inner-product space $L^2(E,\\pi)$, $Q$ is self-adjoint and has an orthonormal eigenbasis $\\phi_0=1,\\phi_1,\\ldots,\\phi_{r-1}$ with eigenvalues $0,-\\lambda_1,\\ldots,-\\lambda_{r-1}$, where every $\\lambda_j>0$. Thus the spectral gap $\\lambda_*:=\\min_j\\lambda_j$ is positive and $P_t$ converges exponentially to projection onto constants.\n\nHere a finite-state continuous-time Markov chain means a process with piecewise-constant paths whose conditional transition matrix over an interval of length $t$ is $P_t$, independent of the starting time. For initial law $\\pi$, the chain has a two-sided stationary extension $X_t$, $t\\in\\mathbb R$, whose finite-dimensional laws at $t_1<\\cdots<t_n$ are $\\pi_{a_1}\\prod_{i=1}^{n-1}P_{t_{i+1}-t_i}(a_i,a_{i+1})$. Its sample paths are locally piecewise constant with finitely many jumps on every bounded time interval.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-dk-strong-lumpability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice [[def-axiom-of-choice]] and the finite rate chain of [[def-csm-dk-finite-reversible-rate-model]] with transition semigroup supplied by [[thm-csm-dk-nonexplosive-ctmc-and-gap]]. Let $\\mathcal C=\\{C_1,\\ldots,C_k\\}$ be a partition of $E$, meaning $k\\ge1$, each $C_i$ is nonempty, the blocks are pairwise disjoint, and their union is $E$. For $a\\in C_i$ and $j\\ne i$, set\n$$q(a,C_j):=\\sum_{b\\in C_j}w_{ab}.$$\nThe projected process $\\bar X_t=i$ when $X_t\\in C_i$ has one time-homogeneous Markov generator valid for every initial microscopic probability law if and only if $q(a,C_j)$ is independent of $a\\in C_i$ for every $i$ and $j\\ne i$. Under this condition, the coarse generator has off-diagonal entries $\\bar q_{ij}=q(a,C_j)$ for any $a\\in C_i$ and diagonal entries $\\bar q_{ii}=-\\sum_{j\\ne i}\\bar q_{ij}$. Its stationary weights $\\bar\\pi_i=\\sum_{a\\in C_i}\\pi_a$ satisfy detailed balance.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "step": "1.1",
+          "claim": "The positive-rate graph is the connected path $1\\leftrightarrow2\\leftrightarrow3$. Equal state energies give $\\pi=(1/3,1/3,1/3)$, and every positive edge has equal forward and reverse rates, so $\\pi_aw_{ab}=\\pi_bw_{ba}$. Thus [F1] holds.",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D2",
+          "step": "1.2",
+          "claim": "The exit rate from state $1$ to $C_2$ is $q(1,C_2)=w_{13}=0$, while from state $2$ it is $q(2,C_2)=w_{23}=1$. Starting with observed block $C_1$, [F2] gives $\\Pr_1(\\bar X_h=C_2)=O(h^2)$ and $\\Pr_2(\\bar X_h=C_2)=h+O(h^2)$, because a transition from $1$ to $3$ needs at least two jumps, while the direct $2\\to3$ rate is $1$. The two preparations have the same initial block but different first-order block-transition probabilities.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "D3",
+          "step": "2.1",
+          "claim": "Therefore no single transition law on $\\{C_1,C_2\\}$ can govern the projection for both microscopic preparations. Equivalently, the required block-rate constancy in [F3] fails. This refutes the universal all-preparations claim; it makes no assertion about special initial preparations.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Counterexample uses the explicit nonempty three-state set E={1,2,3}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the allowed zero rates w₁₃=w₃₁=0 while retaining a connected positive-rate graph."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The explicit example has one three-state path and the two-block partition C₁={1,2}, C₂={3}."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the equal-energy, uniform-Gibbs case, including the equal positive forward and reverse rates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 compares the first-order h↓0 transition probabilities from the two allowed initial states."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the Axiom of Choice inherited by the Markov-chain supplier for the short-time transition expansion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal assertion by one counterexample; it makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal assertion by one counterexample; it makes no equivalence claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "three-state reversible generator and block exit rates",
+          "status": "checked",
+          "evidence": "For E={1,2,3}, e_a=0 and β=1 give Z=3 and π_a=1/3. The specified path rates are symmetric, connected, and satisfy detailed balance. Directly, q(1,C₂)=0 and q(2,C₂)=1, as computed in steps 1.1–1.2."
+        }
+      ]
+    }
+  }
+}

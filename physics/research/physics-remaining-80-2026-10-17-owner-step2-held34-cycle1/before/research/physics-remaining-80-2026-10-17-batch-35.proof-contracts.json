@@ -1,0 +1,1201 @@
+{
+  "version": 1,
+  "scope": [
+    "pthm-csm-bernoulli-fluctuation-bounds",
+    "pthm-csm-nonadditive-phase-countermodel",
+    "pthm-csm-walk-recurrence-and-entropy",
+    "ex-csm-bernoulli-fluctuation-bounds",
+    "ex-csm-nonadditive-phase-countermodel",
+    "ex-csm-walk-recurrence-and-entropy"
+  ],
+  "contracts": {
+    "pthm-csm-bernoulli-fluctuation-bounds": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-csm-examples-ensemble-preparations",
+          "source_section": "Postulate",
+          "quote": "For each named finite classical model in this page, adopt the preparation explicitly stated in its theorem. In a canonical branch, take a measurable phase space with a specified reference measure $\\nu$, a measurable Hamiltonian $H$, an inverse energy parameter $\\beta>0$, and a finite positive partition function $Z=\\int e^{-\\beta H}\\,d\\nu$; the adopted probability measure is $dP=Z^{-1}e^{-\\beta H}\\,d\\nu$. In a grand-canonical branch, take disjoint particle-number sectors with sector partition functions $Z_N$ and a dimensionless activity $z>0$ for which $\\Xi=\\sum_{N\\ge0}z^N Z_N$ is finite; sector $N$ has probability weight $z^N Z_N/\\Xi$. The spherical-shell and product preparations are separate explicitly specified probability laws in their consuming theorem statements. These are alternative model assumptions, not consequences of a Hamiltonian flow and not assertions that a laboratory system realizes them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-moment-generating-function",
+          "source_section": "Definition",
+          "quote": "For a finite real random variable $X$, its **moment generating function** is the everywhere-defined function\n$$M_X(t):=\\mathbb E[\\exp(tX)],\\qquad t\\in\\mathbb R.$$\nFiniteness of the outcome space makes this a finite sum, so no convergence hypothesis is needed.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "This is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.3",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-logarithm-slower-than-every-positive-power",
+          "source_section": "Statement",
+          "quote": "For every $\\alpha>0$,\n$$\\lim_{x\\to+\\infty}\\frac{\\log x}{x^\\alpha}=0.$$",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-csm-finite-variance",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space: $\\Omega$ is a finite set, each weight $w(\\omega)$ is nonnegative, and $\\sum_{\\omega\\in\\Omega}w(\\omega)=1$. Let $X:\\Omega\\to\\mathbb R$ be a real random variable and let $\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)$. Its **variance** is\n\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2]=\\sum_{\\omega\\in\\Omega}(X(\\omega)-\\mathbb E[X])^2w(\\omega).$$\n\nAll sums are finite, so the definition requires no additional integrability or moment hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The total weight is $\\prod_{i=1}^n(p+(1-p))=1$, so the stipulated weights form a finite probability law. Summing over all coordinates except $i$ gives $P(X_i=1)=p$ and $P(X_i=0)=1-p$; the product factorization also gives independence. For $0\\le k\\le n$ put $c_{n,k}:=\\#\\{S\\subseteq\\{1,\\ldots,n\\}:|S|=k\\}$. The set of coordinates with value $1$ gives a bijection between outcomes with $K=k$ and such subsets, so $P(K=k)=c_{n,k}p^k(1-p)^{n-k}$. By [F4] and [F12], $\\mathbb E X_i=p$ and $\\operatorname{Var}(X_i)=\\mathbb E[(X_i-p)^2]=p(1-p)$. For $i\\ne j$, the product weights factor the finite sum, giving $\\mathbb E[(X_i-p)(X_j-p)]=\\mathbb E(X_i-p)\\mathbb E(X_j-p)=0$. Expanding $K$ and $(K-np)^2$ therefore yields $\\mathbb E K=np$ and $\\operatorname{Var}(K)=np(1-p)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The finite-sum definition [F5] and product weights give $$M_K(s)=\\sum_{x\\in\\Omega_n}P_p(x)e^{s\\sum_i x_i}=\\prod_{i=1}^n\\bigl((1-p)+pe^s\\bigr)=(1-p+pe^s)^n.$$ This is a finite factorization, so no limiting interchange is involved.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "On $0<a<1$, differentiating the displayed expression for $D$ with [F9] gives $D(p\\Vert p)=0$, $\\partial_aD(a\\Vert p)|_{a=p}=0$, and $\\partial_a^2D(a\\Vert p)=1/[a(1-a)]\\ge4$, since $a(1-a)\\le1/4$. Let $G(a)=D(a\\Vert p)-2(a-p)^2$. Then $G(p)=G'(p)=0$ and $G''\\ge0$. For $a>p$, the mean value theorem applied first to $G'$ and then to $G$ gives $G'(a)\\ge0$ and $G(a)\\ge0$; for $a<p$, the same two applications give $G'(a)\\le0$ and again $G(a)\\ge0$. Thus $D(a\\Vert p)\\ge2(a-p)^2$ for interior $a$. At $a\\downarrow0$, the only noncontinuous-looking term is $a\\log a=-\\log(1/a)/(1/a)$, which tends to zero by [F11]; at $a\\uparrow1$ the analogous term is $(1-a)\\log(1-a)$. The remaining factors are continuous, so the endpoint extensions preserve the inequality.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $1\\le k\\le n-1$ and let $a=k/n$. For $0\\le j\\le n$ put $q_j=c_{n,j}a^j(1-a)^{n-j}$. These are the count probabilities under the finite product weights with parameter $a$; their sum is $1$ by factoring the total weight as $(a+(1-a))^n$. For each $0\\le j<n$, count pairs $(S,T)$ with $S\\subset T\\subseteq\\{1,\\ldots,n\\}$, $|S|=j$, and $|T|=j+1$. Choosing $S$ first gives $c_{n,j}(n-j)$ pairs, while choosing $T$ first gives $c_{n,j+1}(j+1)$; hence $c_{n,j+1}/c_{n,j}=(n-j)/(j+1)$. Therefore $$\\frac{q_{j+1}}{q_j}=\\frac{n-j}{j+1}\\frac{a}{1-a}.$$ The factor $(n-j)/(j+1)$ decreases strictly with $j$, since $(n-j-1)(j+1)<(n-j)(j+2)$ for $j<n-1$. At $j=k-1$ the ratio is $(n-k+1)/(n-k)>1$, and at $j=k$ it is $k/(k+1)<1$. Thus the sequence increases through $q_k$ and decreases after it, so $q_k$ is the largest of its $n+1$ masses. Their sum is $1$, whence $1/(n+1)\\le q_k\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Pointwise on $\\Omega_n$, $\\mathbf 1_{\\{|\\overline X-p|\\ge\\varepsilon\\}}\\le (\\overline X-p)^2/\\varepsilon^2$. Summing this inequality with the finite weights and using step 1.1 gives the first probability bound.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Suppose first $p<a<1$ and put $s=\\log\\!\\bigl(a(1-p)/(p(1-a))\\bigr)>0$. On $\\{K\\ge na\\}$, $e^{sK}\\ge e^{sna}$, so the finite expectation of the nonnegative random variable $e^{sK}$ is at least $e^{sna}P_p(K\\ge na)$. By step 1.2, $$P_p(K\\ge na)\\le e^{-sna}(1-p+pe^s)^n=e^{-nD(a\\Vert p)},$$ where $e^s=a(1-p)/(p(1-a))$, $1-p+pe^s=(1-p)/(1-a)$, and [F7]–[F8] simplify the logarithm. If $0<a<p$, the same value of $s$ is negative; on $\\{K\\le na\\}$ one again has $e^{sK}\\ge e^{sna}$, and the same substitution yields $P_p(K\\le na)\\le e^{-nD(a\\Vert p)}$. This proves both exponential tail bounds without using a general concentration theorem as a premise.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Direct division of the two point probabilities, using the same subset count $c_{n,k}$ from step 1.1, gives $$\\frac{P_p(K=k)}{q_k}=\\left(\\frac pa\\right)^k\\left(\\frac{1-p}{1-a}\\right)^{n-k}.$$ Since $k=na$ and $n-k=n(1-a)$, [F7]–[F8] give the logarithm of this ratio as $n a\\log(p/a)+n(1-a)\\log((1-p)/(1-a))=-nD(a\\Vert p)$, so the ratio is $e^{-nD(a\\Vert p)}$. Combining with step 2.1 proves the claimed bounds for $1\\le k\\le n-1$. For $k=0$ and $k=n$, direct evaluation gives $P_p(K=0)=(1-p)^n=e^{-nD(0\\Vert p)}$ and $P_p(K=n)=p^n=e^{-nD(1\\Vert p)}$, which satisfy the same inequalities.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $0<\\varepsilon<1$, split the deviation event into the upper threshold $a_+=p+\\varepsilon$ and lower threshold $a_-=p-\\varepsilon$. For an interior threshold apply step 2.3 and then step 1.3; at $a_+=1$ or $a_-=0$ use the exact endpoint probability $p^n$ or $(1-p)^n$ and the endpoint case of step 1.3; a threshold outside $[0,1]$ gives an empty event. Each nonempty tail is at most $e^{-2n\\varepsilon^2}$, so their sum is at most $2e^{-2n\\varepsilon^2}$. If $\\varepsilon\\ge1$, the deviation event is empty because $0\\le\\overline X\\le1$ and $0<p<1$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "step 2.3",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $k_n/n\\to a\\in(0,1)$, then $D(k_n/n\\Vert p)\\to D(a\\Vert p)$ by continuity on $(0,1)$. Taking logarithms of step 3.1 and dividing by $n$ bounds $n^{-1}\\log P_p(K=k_n)$ between $-D(k_n/n\\Vert p)-\\log(n+1)/n$ and $-D(k_n/n\\Vert p)$. By [F11], $\\log(n+1)/n\\to0$, so the squeeze theorem gives the stated rate. These probabilities remain conditional on the explicitly stipulated product law; no finite sample or measurement is asserted.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F11",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Omega_n={0,1}^n is nonempty forn>=1. A tailthreshold outside[0,1] gives an emptyevent and probability0 in3.2; the emptycoordinate product at an excludedn0 is not used for the theorem normalization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The countK=0 is included:3.1 evaluates P(K=0)=(1-p)^n and D(0||p)=-log(1-p). Zero toleranceepsilon is excluded; the variancebound divides onlyby epsilon>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "n=1 is allowed:K is a Bernoullivariable with meanp andvariancep(1-p). The pointmass endpointbounds andepsilon cases remain valid in1.1 and3.1–3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Bernoulli parameter is restricted to 0 < p < 1; degenerate p=0 or p=1 laws are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "k=0,n and rateparametersa=0,1 are covered by continuousendpoint extensions and exactprobabilities (1.3,3.1). The inputp stays strictlyinside(0,1); the convergence sequencek_n/n approaches an interiora."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses explicit finiteweights and subsetcounts. Even the limiting rate is squeezed between deterministicbounds4.1; no infiniteiidprocess or choiceaxiom is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–4.1 derive means, tailbounds and matchingpointmass rates for the explicitly assigned finiteBernoulliproductlaw. They are sufficient modelcalculations, not an iff testof physicalindependence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The same moment or probabilitybound does not imply independentlaboratorytrials or reconstruct the productlaw. The modelassumption is not inferred from smallprobabilities."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "n=1 endpoint masses",
+          "status": "checked",
+          "claim": "P_p(K=0)=1-p=e^{-D(0||p)} and P_p(K=1)=p=e^{-D(1||p)}; the type bounds hold with denominator 2.",
+          "evidence": "step 3.1"
+        }
+      ]
+    },
+    "pthm-csm-nonadditive-phase-countermodel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-csm-examples-ensemble-preparations",
+          "source_section": "Postulate",
+          "quote": "For each named finite classical model in this page, adopt the preparation explicitly stated in its theorem. In a canonical branch, take a measurable phase space with a specified reference measure $\\nu$, a measurable Hamiltonian $H$, an inverse energy parameter $\\beta>0$, and a finite positive partition function $Z=\\int e^{-\\beta H}\\,d\\nu$; the adopted probability measure is $dP=Z^{-1}e^{-\\beta H}\\,d\\nu$. In a grand-canonical branch, take disjoint particle-number sectors with sector partition functions $Z_N$ and a dimensionless activity $z>0$ for which $\\Xi=\\sum_{N\\ge0}z^N Z_N$ is finite; sector $N$ has probability weight $z^N Z_N/\\Xi$. The spherical-shell and product preparations are separate explicitly specified probability laws in their consuming theorem statements. These are alternative model assumptions, not consequences of a Hamiltonian flow and not assertions that a laboratory system realizes them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "2.3",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "This is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-analytic-function",
+          "source_section": "Definition",
+          "quote": "The representing series must converge throughout this neighbourhood ([[def-real-power-series-and-radius-of-convergence]], [[def-neighbourhood-r]]). The radius and coefficients may initially depend on $c$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-power-series-sums-are-real-analytic",
+          "source_section": "Statement",
+          "quote": "If a real power series centred at $c$ has radius $R>0$, then its sum is real analytic on $(c-R,c+R)$, interpreted as all of $\\mathbb R$ when $R=+\\infty$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "source_section": "Statement",
+          "quote": "On open real domains, sums and products of real-analytic functions are real analytic. If $g$ is nonzero throughout the domain, then $f/g$ is real analytic. If $g:U\\to V$ and $f:V\\to\\mathbb R$ are real analytic, then $f\\circ g$ is real analytic on $U$.",
+          "uses": [
+            "1.4",
+            "2.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a real analytic map between open subsets of $\\mathbb R^n$, $n\\ge1$. If $Df(a)$ is invertible, $f$ has a real analytic local inverse near $f(a)$. Let $P(x,y)$ be real analytic near $(a,b)\\in\\mathbb R^d\\times\\mathbb R^k$, $k\\ge1$, with $P(a,b)=0$ and $D_yP(a,b)$ invertible. On sufficiently small neighborhoods its zero set is exactly the graph of a unique real analytic $y=g(x)$ with $g(a)=b$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If this family were product-additive under the definition in the Statement, its fixed alphabet would have $|\\Gamma|=|\\Omega_1|=6$, forcing $|\\Omega_2|=|\\Gamma|^2=36$. But $|\\Omega_2|=1+1+4^2=18$. Thus no such product decomposition exists. The three sector weights in the finite exponential tilt are $1$, $x$, and $4^Nx^2$, where $x=e^{-\\beta N\\epsilon}>0$; they sum to the displayed positive finite $Z_N(\\beta)$, so division by $Z_N$ gives a finite probability law as in [F10]. For $\\beta>0$, [A1] and [F1] identify this normalized counting weight with the adopted canonical branch; for $\\beta\\le0$ it remains only the stated algebraic expression.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The energies of $A_N$ and $C_N$ differ from $N\\epsilon$ by exactly $N\\epsilon$. The condition $\\Delta<N\\epsilon$ excludes both sectors from $\\mathcal S_{N,\\Delta}$, while $B_N\\subseteq\\mathcal S_{N,\\Delta}$. Thus the shell is exactly the one-state set $B_N$ and its uniform counting probability assigns $B_N$ probability one.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $M_N=\\max\\{1,4^Nx^2\\}$. If $x\\le1$, then $x\\le M_N$; if $x>1$, then $4^Nx^2\\ge x$ since $N\\ge1$. Hence $M_N\\le Z_N\\le3M_N$. By [F2]–[F3], $$\\frac1N\\log M_N=\\max\\{0,\\log4-2\\beta\\epsilon\\}=\\psi(\\beta),$$ so taking logarithms in $M_N\\le Z_N\\le3M_N$ gives $0\\le\\psi_N-\\psi\\le(\\log3)/N$, and consequently $\\psi_N\\to\\psi$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "By [F4], $\\exp$ is a power series converging for every real argument, so [F6] makes $\\exp$ real analytic on $\\mathbb R$. The affine polynomial $\\beta\\mapsto-\\beta N\\epsilon$ is real analytic, hence [F7] makes $\\beta\\mapsto e^{-\\beta N\\epsilon}$ real analytic as well.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F4",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $(1-2^Nx)^2\\ge0$, $1+4^Nx^2\\ge2^{N+1}x$. Therefore $Z_N=1+x+4^Nx^2\\ge(2^{N+1}+1)x$, and division by $Z_N>0$ gives $P_{\\beta,N}(B_N)\\le(2^{N+1}+1)^{-1}$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F10",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The equality $\\log4=2\\log2$ from [F3] gives the unique corner $\\beta_c=(\\log2)/\\epsilon>0$. On $0<\\beta<\\beta_c$, the larger branch is $\\log4-2\\beta\\epsilon$ and has slope $-2\\epsilon$; on $\\beta>\\beta_c$ the larger branch is $0$ and has slope $0$. The one-sided slopes differ.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The exponential is positive, so $Z_N=1+e^{-\\beta N\\epsilon}+4^Ne^{-2\\beta N\\epsilon}>0$ for every real $\\beta$. Its expression as a sum and product of the analytic function in step 1.4 is real analytic by [F7].",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F7",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F12], with [F11] identifying $H_N$ as a finite real random variable, the mean energy per member is $u_N(\\beta)=\\epsilon\\bigl(x+2\\cdot4^Nx^2\\bigr)/Z_N$ for $\\beta>0$. If $0<\\beta<\\beta_c$, divide numerator and denominator by the high-sector weight $4^Nx^2$: the low-to-high ratio is $e^{-N(\\log4-2\\beta\\epsilon)}\\to0$ and the middle-to-high ratio is $e^{N(\\beta\\epsilon-\\log4)}\\le2^{-N}\\to0$, so $u_N(\\beta)\\to2\\epsilon$. If $\\beta>\\beta_c$, both non-low weights $x=e^{-\\beta N\\epsilon}$ and $4^Nx^2=e^{N(\\log4-2\\beta\\epsilon)}$ tend to zero, so $u_N(\\beta)\\to0$. At $\\beta=\\beta_c$, the three sector weights are $1$, $2^{-N}$, and $1$, so $u_N(\\beta_c)=\\epsilon(2^{-N}+2)/(2+2^{-N})\\to\\epsilon$. These limits give the stated piecewise $u$ and its unequal one-sided limits.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F11",
+            "F12",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Fix $\\beta_0\\in\\mathbb R$ and put $z_0=Z_N(\\beta_0)>0$. By step 1.4, $\\exp$ is real analytic; [F9] gives $\\exp'(\\log z_0)=z_0\\ne0$, so [F8] gives a real-analytic local inverse near $z_0$. By the inverse definition [F2], that local inverse is $\\log$ on this neighborhood, hence $\\log$ is real analytic near $z_0$.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F8",
+            "F9",
+            "step 1.4",
+            "step 2.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [F5] the target property is real analyticity, and [F7] makes the composition $N^{-1}\\log Z_N$ real analytic using steps 2.3 and 3.2. Hence every finite-$N$ function $\\psi_N$ is real analytic. The derivative jump in step 2.2 belongs to the limiting function, not to a finite-$N$ singularity.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F5",
+            "F7",
+            "step 2.2",
+            "step 2.3",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: The three sectors are nonempty by their stipulated sizes1,1,4^N. With0<=Delta<N epsilon the energyband contains exactlyB_N, includingDelta=0; hence its uniformcounting normalizer is1 and no empty band is divided."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: The energy ofA_N is0 and beta=0 is an allowed algebraicfiniteweight extension, givingZ=2+4^N. The physicalcanonical reading is onlybeta>0. ShellhalfwidthDelta=0 still includesB_N."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "ForN=1, sectorcounts are1,1,4 and the totalalphabet has6states. The non-product-additivity proof1.1 compares this withN2total18, which isnot6^2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The scale epsilon is strictly positive and N is at least one; the zero-energy-scale model is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The shell includesDelta=0 but excludesDelta=N epsilon, where neighboringsectors would enter. betac=log2/epsilon ispositive and the equalweightlimit there isepsilon; beta<=0 is onlyalgebraic, not a negative-temperaturepostulate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: EachfiniteOmega_N and itsweightformula is explicitlyspecified. The sequence of partitionbounds needs no selection of equilibriumstates or arbitrary infinitefamily elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–4.1 compare the explicit three finite-sector weights, prove the middle-sector suppression/shellcomparison and calculate the positivebeta corner. These do not form an iff phase-transition criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A pressurecorner or ensembleinequivalence does not imply this1,1,4^N family or a short-range materialmodel. The result intentionally supplies one globalcountermodel, not a converse classification."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "first two sector cardinalities",
+          "status": "checked",
+          "claim": "|Omega_1|=6 while |Omega_2|=18, whereas a fixed alphabet of size 6 would yield 36 at N=2.",
+          "evidence": "step 1.1"
+        }
+      ]
+    },
+    "pthm-csm-walk-recurrence-and-entropy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-csm-examples-ensemble-preparations",
+          "source_section": "Postulate",
+          "quote": "For each named finite classical model in this page, adopt the preparation explicitly stated in its theorem. In a canonical branch, take a measurable phase space with a specified reference measure $\\nu$, a measurable Hamiltonian $H$, an inverse energy parameter $\\beta>0$, and a finite positive partition function $Z=\\int e^{-\\beta H}\\,d\\nu$; the adopted probability measure is $dP=Z^{-1}e^{-\\beta H}\\,d\\nu$. In a grand-canonical branch, take disjoint particle-number sectors with sector partition functions $Z_N$ and a dimensionless activity $z>0$ for which $\\Xi=\\sum_{N\\ge0}z^N Z_N$ is finite; sector $N$ has probability weight $z^N Z_N/\\Xi$. The spherical-shell and product preparations are separate explicitly specified probability laws in their consuming theorem statements. These are alternative model assumptions, not consequences of a Hamiltonian flow and not assertions that a laboratory system realizes them.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-real-random-variable-and-distribution",
+          "source_section": "Definition",
+          "quote": "A **real random variable** on a finite probability space $(\\Omega,w)$ is a function $X:\\Omega\\to\\mathbb R$. Its range $X(\\Omega)$ is finite. The **distribution** or **law** of $X$ is the finite probability space on $X(\\Omega)$ with\n$$\\mathbb P_X(x):=\\mathbb P(\\{\\omega\\in\\Omega:X(\\omega)=x\\}).$$\nThe weights $\\mathbb P_X(x)$ are nonnegative and sum to $1$ because the fibres of $X$ form a finite partition of $\\Omega$ ([[thm-finite-additivity-of-probability]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-characteristic-function-of-a-real-random-variable",
+          "source_section": "Definition",
+          "quote": "For a real random variable $X$ on $(\\Omega,\\mathcal F,\\mathbb P)$, its **characteristic function** is\n$$\\varphi_X(t)=\\mathbb E[e^{itX}]=\\int_{\\mathbb R}e^{itx}\\,\\mathbb P_X(dx),\\qquad t\\in\\mathbb R.$$\nFor a specified Borel probability measure $\\mu$ on $\\mathbb R$, write $\\varphi_\\mu(t)=\\int e^{itx}\\,\\mu(dx)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-characteristic-function-of-a-normal-law",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $X$ has law $N(m,\\sigma^2)$ with $\\sigma\\ge0$, then $\\varphi_X(t)=\\exp(imt-\\sigma^2t^2/2)$ for every real $t$. Moreover $\\mathbb EX=m$ and $\\operatorname{Var}(X)=\\sigma^2$, including $\\sigma=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-characteristic-function-criterion-for-weak-convergence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For Borel probability laws $\\mu_n$ and a specified Borel probability law $\\mu$ on $\\mathbb R$,\n$$\\mu_n\\Rightarrow\\mu\\quad\\Longleftrightarrow\\quad\\varphi_{\\mu_n}(t)\\to\\varphi_\\mu(t)\\ \\text{for every }t\\in\\mathbb R.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "Thus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-taylor-peano-remainder",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$. If there is a real $\\delta>0$ such that $f$ is\n$n$-times differentiable on the open interval\n$N_\\delta(a)=(a-\\delta,a+\\delta)$, then\n$$\\frac{R_{n,a}f(x)}{(x-a)^n}\\longrightarrow0\\qquad(x\\to a).$$\nEquivalently, in the usual little-$o$ shorthand,\n$f(x)=T_{n,a}f(x)+o((x-a)^n)$. For $n=0$, the analogous assertion is the\nseparate continuity condition at $a$: for every $\\varepsilon>0$, all\ndomain points $x$ sufficiently near $a$ satisfy\n$|f(x)-f(a)|<\\varepsilon$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Lebesgue measure on $\\mathbb R^n$ is written\n$\\lambda_n$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]), and\n$\\mathbb Z\\subseteq\\mathbb R$ is the copy of the integers\n([[def-integers]]).\n\n**The torus.** Let $q:\\mathbb R\\to\\mathbb T:=\\mathbb R/\\mathbb Z$ be the\ncanonical projection of the quotient of the additive group $\\mathbb R$ by its\nsubgroup $\\mathbb Z$, carrying the quotient topology\n([[def-quotient-topology]], [[def-topological-space]]); we write\n$[t]:=q(t)=t+\\mathbb Z$. Thus $[s]=[t]$ exactly when $s-t\\in\\mathbb Z$. The map\n$q$ is continuous ([[def-continuous-map-top]]), and $\\mathbb T$ is a compact\nHausdorff space homeomorphic to the Euclidean unit circle.\n\n**Fundamental domain.** Every class has exactly one representative in $[0,1)$:\nfor $t\\in\\mathbb R$ the integer part $n=\\lfloor t\\rfloor$ satisfies\n$n\\le t<n+1$, so $t-n\\in[0,1)$ represents $[t]$ ([[lem-integer-part]]); and if\n$s,t\\in[0,1)$ satisfy $s-t\\in\\mathbb Z$, then $|s-t|<1$ forces $s=t$.\nConsequently the map $[0,1)\\to\\mathbb T$, $t\\mapsto[t]$, is a bijection.\n\n**Topological checks.** The closed interval $[0,1]$ is compact by [[thm-heine-borel-r]] and maps onto $\\mathbb T$, so the quotient is compact by [[thm-compactness-under-continuous-maps]]. The map $t\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is continuous by [[thm-sine-and-cosine-derivatives]] and [[cor-differentiable-implies-continuous]], and is constant on quotient fibres by [[thm-sine-cosine-zero-sets-and-fundamental-period]]. It induces a continuous map $\\varphi:\\mathbb T\\to S^1$ by [[thm-quotient-universal-property]]. The bijection of $[0,2\\pi)$ with the circle in [[thm-sine-and-cosine-parametrize-the-unit-circle]], together with the unique representatives in $[0,1)$, makes $\\varphi$ bijective. The Euclidean circle is Hausdorff by [[thm-metric-hausdorff-separation]], so the compact-to-Hausdorff clause of [[thm-compactness-under-continuous-maps]] makes $\\varphi$ a homeomorphism. In particular $\\mathbb T$ is Hausdorff.\n\nThe map $q$ is open: for an open $U\\subseteq\\mathbb R$, its saturation $q^{-1}[q[U]]=\\bigcup_{k\\in\\mathbb Z}(U+k)$ is open. The images under $q$ of rational-endpoint open intervals form a countable base: if $q(t)\\in V$ with $V$ open, choose such an interval containing $t$ and contained in $q^{-1}[V]$. Its image is an open neighbourhood contained in $V$.\n\n**The measure.** For a Borel set $E\\in\\mathcal B(\\mathbb T)$\n([[def-borel-sigma-algebra]]) the preimage $q^{-1}[E]$ is a Borel subset of\n$\\mathbb R$, because $q$ is continuous\n([[thm-continuous-preimages-of-borel-sets-are-borel]]), hence Lebesgue\nmeasurable ([[thm-borel-sets-are-lebesgue-measurable]]). Define\n\n$$m_{\\mathbb T}(E):=\\lambda_1\\bigl(q^{-1}[E]\\cap[0,1)\\bigr) ,$$\n\nthe value at $q^{-1}[E]$ of the same-ambient restriction of $\\lambda_1$ to $[0,1)$\n([[def-restriction-of-a-measure]]).\n\nThis is a measure on $\\mathcal B(\\mathbb T)$ by [[prop-restriction-is-a-measure]]:\nthe assignment $E\\mapsto\\lambda_1(q^{-1}[E]\\cap[0,1))$ is the composition of the\nrestriction measure with the inverse image along $q$, and inverse images preserve\nthe empty set, complements and countable unions, while countable additivity is\nthat of $\\lambda_1$. It is a **probability measure**:\n$m_{\\mathbb T}(\\mathbb T)=\\lambda_1([0,1))=1$\n([[thm-lebesgue-measure-of-a-box-of-every-kind]]). Thus\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T})$ is a probability measure space\n([[def-measure-space]], [[def-measure]]).\n\n**The integral.** For a Borel measurable $F:\\mathbb T\\to[0,+\\infty]$, define\n\n$$\\int_{\\mathbb T}F\\,dm_{\\mathbb T}:=\\int_{[0,1)}F\\circ q\\,d\\lambda_1 .$$\n\nThe defining integral is meaningful because $F\\circ q$ is Borel\n([[thm-composition-with-borel-functions-preserves-measurability]],\n[[thm-continuous-preimages-of-borel-sets-are-borel]]). The assignment agrees with\n$E\\mapsto m_{\\mathbb T}(E)$ on indicators, and it is additive and homogeneous on\nfinite nonnegative simple functions; for a sequence $0\\le F_0\\le F_1\\le\\cdots$\nwith $F_n\\uparrow F$ pointwise the identity passes to the limit because\n$F_n\\circ q\\uparrow F\\circ q$ and monotone convergence holds for $\\lambda_1$\n([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]],\n[[thm-monotone-convergence-for-the-integral]]). For real or complex integrable\n$F$ the integral is defined by decomposition into nonnegative parts or into real\nand imaginary parts, and it is linear\n([[def-integrable-real-and-complex-functions-and-their-integrals]],\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]]). In particular\n$\\int_{\\mathbb T}1\\,dm_{\\mathbb T}=1$, and the same formula holds with $[0,1)$\nreplaced by any half-open interval $[a,a+1)$ or $(a,a+1]$, by the periodicity of\n$q^{-1}[E]$ and the translation invariance of $\\lambda_1$\n([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).\n\n**Translation invariance.** For $y\\in\\mathbb R$ the map\n$\\tau_y:\\mathbb T\\to\\mathbb T$, $\\tau_y([t]):=[t+y]$, is well defined (if\n$s-t\\in\\mathbb Z$ then $(s+y)-(t+y)\\in\\mathbb Z$) and continuous, because it is\ninduced by the continuous map $t\\mapsto q(t+y)$ from $\\mathbb R$ to $\\mathbb T$. This composite is constant on the fibres of $q$, since $q(t)=q(s)$ implies $q(t+y)=q(s+y)$ ([[thm-quotient-universal-property]]). It preserves\n$m_{\\mathbb T}$: write $y=n+r$ with $n=\\lfloor y\\rfloor$ and $r\\in[0,1)$, put\n$A:=q^{-1}[E]$ and use that $A-n=A$ and that\n$A\\cap[0,1)=\\bigl(A\\cap[0,r)\\bigr)\\cup\\bigl(A\\cap[r,1)\\bigr)$ while\n$A\\cap[r,r+1)=\\bigl(A\\cap[r,1)\\bigr)\\cup\\bigl((A\\cap[0,r))+1\\bigr)$, so that\n\n$$m_{\\mathbb T}(\\tau_y^{-1}E)=\\lambda_1\\bigl((A-y)\\cap[0,1)\\bigr)=\\lambda_1\\bigl(A\\cap[r,r+1)\\bigr)=\\lambda_1\\bigl(A\\cap[0,1)\\bigr)=m_{\\mathbb T}(E),$$\n\nthe middle equality by translation invariance of $\\lambda_1$. Hence\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T},\\tau_y)$ is a measure-preserving\nsystem for every $y$, and the published integral-invariance theorem gives\n$\\int_{\\mathbb T}F\\circ\\tau_y\\,dm_{\\mathbb T}=\\int_{\\mathbb T}F\\,dm_{\\mathbb T}$\nfor every measurable $F\\ge0$ and every integrable $F$\n([[def-measure-preserving-transformation-and-system]],\n[[thm-integrals-are-invariant-under-measure-preserving-maps]]). This is the\n**normalized Haar integral** of $\\mathbb T$; abstract Haar theory is not\ninvoked.\n\n**The finite torus.** For a natural $n\\ge1$ put\n$\\mathbb T^n:=\\mathbb R^n/\\mathbb Z^n$ with the quotient topology of the\ncanonical projection $q_n$, and define\n\n$$m_{\\mathbb T^n}(E):=\\lambda_n\\bigl(q_n^{-1}[E]\\cap[0,1)^n\\bigr),\\qquad \\int_{\\mathbb T^n}F\\,dm_{\\mathbb T^n}:=\\int_{[0,1)^n}F\\circ q_n\\,d\\lambda_n .$$\n\nCoordinatewise integer parts give unique representatives in $[0,1)^n$, and the continuous quotient map sends the compact cube $[0,1]^n$ onto $\\mathbb T^n$. Compactness of the cube follows from [[thm-heine-borel-r]] and [[thm-finite-products-of-compact-spaces]], and compactness of its image follows from [[thm-compactness-under-continuous-maps]]. Preimages of Borel sets are Borel; disjoint preimages and countable additivity make the displayed set function a measure, and the box formula gives total mass one. The integral identity follows from indicators, increasing simple approximation and decomposition exactly as in one dimension. For translation invariance, discard the integer parts of the translation vector, split each coordinate of $[0,1)^n$ at its fractional part, and translate the resulting $2^n$ disjoint half-open boxes by integer vectors to partition the translated cube. The periodic preimage set is unchanged by these integer vectors; finite additivity and Lebesgue translation invariance give the same measure. Applying the indicator identity, simple approximation and decomposition gives the integral formula on any translated cube. The coordinate projections induce a continuous bijection\n$\\Phi:\\mathbb T^n\\to(\\mathbb R/\\mathbb Z)^n$ by the universal property. Its\ndomain is compact by the preceding check, while its codomain is a finite\nproduct of Hausdorff spaces and hence Hausdorff ([[lem-products-preserve-t0-t1-and-hausdorff]]); the continuous-bijection\ntheorem therefore makes $\\Phi$ a homeomorphism. Thus $\\mathbb T^n$ carries the\nfinite product topology ([[def-product-topology]],\n[[thm-finite-products-of-compact-spaces]],\n[[thm-compactness-under-continuous-maps]]), and its characters\n$x\\mapsto\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, are defined on this compact\nHausdorff space: replacing representatives by integer vectors leaves the exponential unchanged by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and the trigonometric period. Finite products of the countable base above form a countable rectangular base. Hence every product-open set is a countable union of Borel rectangles. Conversely coordinate projections are continuous, so Borel rectangles are Borel in the product. Thus the product Borel sigma-algebra equals the Borel sigma-algebra of $\\mathbb T^n$. On a product $A_0\\times\\cdots\\times A_{n-1}$ of Borel subsets\nof the factors, the defining fundamental-domain formula and repeated application of [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] give\n$m_{\\mathbb T^n}(A_0\\times\\cdots\\times A_{n-1})=\\prod_jm_{\\mathbb T}(A_j)$, so\n$m_{\\mathbb T^n}$ agrees on every measurable rectangle with the product measure\n$m_{\\mathbb T}\\times\\cdots\\times m_{\\mathbb T}$\n([[def-product-measure-on-sigma-finite-spaces]]); both are probability measures,\nand uniqueness of the product measure on sigma-finite spaces identifies them\non the entire Borel sigma-algebra\n([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\nFubini's theorem then computes iterated integrals of $L^1$ functions on\n$\\mathbb T^n$\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-csm-examples-flow-fine-entropy",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb T^n:=\\mathbb R^n/\\Lambda$ be a flat translation torus, where $\\Lambda$ is a full-rank lattice, and let $\\mu=c\\,da$ be its fixed translation-invariant volume measure in dimensionless translation coordinates, with $c>0$. Let $I\\subseteq\\mathbb R$ be an open interval containing $0$. Suppose $\\chi_t:\\mathbb T^n\\to\\mathbb T^n$ is a jointly $C^2$ family of diffeomorphisms with $\\chi_0=\\operatorname{id}$ and $C^1$ velocity field $b$ satisfying $\\operatorname{div}b=0$ in local translation charts. Let $f_0\\in C^1(\\mathbb T^n)$ satisfy $0<m\\le f_0\\le M<\\infty$ and $\\int f_0\\,d\\mu=1$, and define $f_t:=f_0\\circ\\chi_t^{-1}$. Then $f_t$ is a probability density for every $t\\in I$, the integral $H(f_t):=-\\int_{\\mathbb T^n}f_t\\log f_t\\,d\\mu$ is finite, and $H(f_t)=H(f_0)$. Here $H$ is the dimensionless fine entropy of this density; multiplication by a physical constant such as $k_B$ is a separate interpretation.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "def-weak-convergence-of-borel-probability-measures",
+          "source_section": "Definition",
+          "quote": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "def-csm-finite-variance",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,w)$ be a finite probability space: $\\Omega$ is a finite set, each weight $w(\\omega)$ is nonnegative, and $\\sum_{\\omega\\in\\Omega}w(\\omega)=1$. Let $X:\\Omega\\to\\mathbb R$ be a real random variable and let $\\mathbb E[X]=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega)$. Its **variance** is\n\n$$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2]=\\sum_{\\omega\\in\\Omega}(X(\\omega)-\\mathbb E[X])^2w(\\omega).$$\n\nAll sums are finite, so the definition requires no additional integrability or moment hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the product-preparation convention [F1], for a fixed $j$ the uniform weight on $\\{-1,1\\}^{n_j}$ is a probability law, including the singleton case $n_j=0$. Each increment has mean zero and square one by [F2]–[F4]. Independence follows from the product weights, so the cross terms in $\\mathbb E(\\sum_i\\Xi_i)^2$ vanish; hence $\\mathbb E S_j=0$ and, by [F19], $\\operatorname{Var}(S_j)=n_j\\ell_j^2$. Conditioning on the last increment gives $u_{n+1}(r)=\\tfrac12u_n(r-1)+\\tfrac12u_n(r+1)$, with the stated initial mass.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F19",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the rotor, write $R_s(q)=q+p_0s/I$ modulo $2\\pi$. At $T=2\\pi I/|p_0|$, the angle increment is $2\\pi$ when $p_0>0$ and $-2\\pi$ when $p_0<0$, so $R_T$ is the identity. The stated full AC includes the countable-choice assumption of [F16]. For every Borel $E\\subseteq\\mathcal X$, $\\iota_{p_0}^{-1}(\\Phi_s^{-1}E)=R_s^{-1}(\\iota_{p_0}^{-1}E)$; translation invariance in [F16] therefore gives $\\mu_0(\\Phi_s^{-1}E)=\\mu_0(E)$, and in particular $\\mu_0$ is invariant under the rotor flow.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "F9",
+            "F16",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Under the four-state pushforward, the first three probability vectors are $$\\pi_0=(1/2,1/2,0,0),\\quad \\pi_1=(0,1/2,1/2,0),\\quad \\pi_2=(0,0,1/2,1/2).$$ The map $\\mathcal T$ is a permutation, so it maps the uniform reference weights $1/4$ to themselves; it also leaves the multiset of the evolving fine probabilities unchanged, and each fine entropy is $-\\tfrac12\\log\\tfrac12-\\tfrac12\\log\\tfrac12=\\log2$. The coarse cell probabilities for $\\{\\{0,1\\},\\{2,3\\}\\}$ are $(1,0)$, $(1/2,1/2)$, and $(0,1)$, giving coarse entropies $0,\\log2,0$ under the zero-term convention. This proves the stated decrease.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "A3",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By independence and [F5], the characteristic function is $$\\varphi_{S_j}(k)=\\prod_{i=1}^{n_j}\\mathbb E(e^{ik\\ell_j\\Xi_i})=\\cos(\\ell_j k)^{n_j}.$$ Fix $k$. Continuity of cosine and $\\cos0=1$ make $\\cos u>0$ for all sufficiently small $|u|$. For such $u$, put $f(u)=\\log\\cos u$. By the chain rule, $f'(u)=-\\sin u/\\cos u$ and $f'(0)=0$. From [F10], $\\sin u/u\\to\\sin'(0)=1$ and $\\cos u\\to1$, so the difference quotient $f'(u)/u=-\\sin u/(u\\cos u)$ tends to $-1$; hence $f''(0)=-1$. The same derivative rules make $f$ twice differentiable on a neighbourhood of zero, so [F15] gives $\\log\\cos u=-u^2/2+o(u^2)$. For $t>0$, $n_j\\delta t_j\\to t$ because $0\\le t-n_j\\delta t_j<\\delta t_j$, and therefore $$n_j\\log\\cos(\\ell_jk)=-\\frac{n_j\\ell_j^2k^2}{2}+n_j\\,o(\\ell_j^2)\\longrightarrow-Dtk^2.$$ Indeed $n_j\\ell_j^2=2D n_j\\delta t_j\\to2Dt$, so $n_j\\ell_j^2$ is bounded, while $o(\\ell_j^2)/\\ell_j^2\\to0$; their product proves the remainder tends to zero. For $t=0$, $n_j=0$ and every law is $\\delta_0$. Thus in all cases $\\varphi_{S_j}(k)\\to e^{-Dtk^2}=\\varphi_{N(0,2Dt)}(k)$ for every real $k$, using [F6]–[F7] for the target law.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "F11",
+            "F12",
+            "F13",
+            "F14",
+            "F15",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The measure definition gives $\\mu_0(A)=\\nu([0,\\pi))=1/2$. At each $s=mT$, $\\Phi_s$ is the identity on the support of $\\mu_0$, so $\\mu_0(A\\cap\\Phi_s^{-1}A)=1/2\\ne1/4=\\mu_0(A)^2$, contradicting the mixing condition stated in the Statement. For $q_0=[\\theta_0]$, the function $g([\\theta],p)=\\cos(\\theta-\\theta_0)$ is well-defined and continuous on the quotient because cosine is continuous and $2\\pi$-periodic, and it is bounded by $1$. Its values are $1$ at times $mT$ and $-1$ at times $mT+T/2$, so its expectation has no limit. By [F18], weak convergence would force convergence of this expectation, so the evolving point laws have no weak limit.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F16",
+            "F18",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The mathematical result [F17] assumes a smooth diffeomorphic flow on a flat torus, divergence-free velocity, and a positive bounded $C^1$ density. The atomic four-state law in step 1.3 is not such a density or flow; its coarse-entropy decrease neither invokes nor contradicts that fine differential-entropy result. It establishes no monotonicity law for other coarse-graining procedures.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F17",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The right-hand side of step 2.1 is the characteristic function of the specified Borel probability $N(0,2Dt)$. Apply the reverse implication of [F8] to the Borel laws of $S_j$ to obtain weak convergence. The only non-finite-choice strength used here is the full AC explicitly carried by [F7]–[F9]; the finite product construction is in step 1.1 and its pointwise characteristic calculation is in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The walk limit in steps 1.1–2.1 concerns only fixed-time marginal laws under the stated independent-increment scaling; no path-space limit, deterministic collision limit, experiment, observed frequency, or empirical inference is part of the hypotheses or conclusion.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "A3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 1.2",
+            "step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: Atn_j=0 the walkspace{-1,1}^0 is the singletonemptytuple withweight1 andS_j=0. Emptycoarsecell probabilities contribute0log0=0; the underlying4statepermutation remains nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At t=0, n_j=0 and the limit isN(0,0)=delta0 (2.1). The rotor nonmixing/no-weak-limit clause requiresp0!=0; p0=0 would give a stationarypointlaw and isnot used as that witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one walkstep the characteristicfunction iscos(ell k) and varianceell^2 by1.1–2.1. The finitepermutation still has fourstates; it isnot replaced by a onepoint entropy model."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "DegenerateGaussian variance0 occurs at t=0 and is explicitlydelta0. The rotor initiallaw may be atomic, whereas the smoothfineentropy theorem assumes positiveC1density;2.3 keeps those hypotheses separate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The floorchoice n_j=floor(t/dt_j) includes intervals withn_j=0. At timesmT andmT+T/2 the rotor continuouswitness isplus/minus1; the alternatinglimits are whatruleout weakconvergence, not a genericrecurrence slogan."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: FullAC is explicitly retained for the normal-law and characteristicfunction weakconvergence suppliers, and covers the countablechoice used bytorusHaarmeasure. The finiteproduct/permutation arithmetic adds no choice strength."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–4.1 establish a fixed-time finite-productwalk limit, a periodic-rotor nonmixing witness and a finite coarseentropy reversal. They do not assert an iff bridge between invertibility,mixing and diffusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The sameGaussianlimit or coarseentropy decrease does not characterize a deterministiccollision model, and rotor nonmixing doesnot reverse the separate smoothfineentropy theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-time walk",
+          "status": "checked",
+          "claim": "At t=0, n_j=0, S_j=0 and the target law is N(0,0)=delta_0.",
+          "evidence": "step 1.1 and step 2.1"
+        },
+        {
+          "name": "four-state permutation",
+          "status": "checked",
+          "claim": "The distributions are (1/2,1/2,0,0), (0,1/2,1/2,0), (0,0,1/2,1/2); coarse entropies are 0, log 2, 0.",
+          "evidence": "step 1.3"
+        }
+      ]
+    },
+    "ex-csm-bernoulli-fluctuation-bounds": {
+      "unresolved_suppliers": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-csm-bernoulli-fluctuation-bounds",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ be an integer, let $p\\in(0,1)$, and give $\\Omega_n=\\{0,1\\}^n$ the explicitly stipulated product probability whose singleton weights are\n$$P_p(\\{(x_1,\\ldots,x_n)\\})=\\prod_{i=1}^n p^{x_i}(1-p)^{1-x_i};$$\nfor an event $A\\subseteq\\Omega_n$, $P_p(A)$ is the sum of these weights over $x\\in A$.\nWrite $X_i(x)=x_i$, $K=\\sum_{i=1}^nX_i$, and $\\overline X=K/n$. These variables and all probabilities are dimensionless. The product law is an adopted sampling model; independence is an assumption of that law, not an inference about any apparatus or equilibrium system.\n\nFor $a\\in(0,1)$ define the Bernoulli relative-entropy rate\n$$D(a\\Vert p)=a\\log\\frac ap+(1-a)\\log\\frac{1-a}{1-p},$$\nand set $D(0\\Vert p)=-\\log(1-p)$ and $D(1\\Vert p)=-\\log p$. Then\n$$\\mathbb E K=np,\\qquad \\operatorname{Var}(K)=np(1-p),$$\nand for every dimensionless $\\varepsilon>0$,\n$$P_p\\bigl(|\\overline X-p|\\ge\\varepsilon\\bigr)\\le\\frac{p(1-p)}{n\\varepsilon^2},\\qquad P_p\\bigl(|\\overline X-p|\\ge\\varepsilon\\bigr)\\le 2e^{-2n\\varepsilon^2}.$$\nFor $p<a<1$ and $0<a<p$, respectively,\n$$P_p(K\\ge na)\\le e^{-nD(a\\Vert p)},\\qquad P_p(K\\le na)\\le e^{-nD(a\\Vert p)}.$$\nFor each integer $0\\le k\\le n$, putting $a=k/n$ gives the point-mass bounds\n$$\\frac1{n+1}e^{-nD(a\\Vert p)}\\le P_p(K=k)\\le e^{-nD(a\\Vert p)}.$$\nConsequently, for every sequence of integers $k_n\\in\\{0,\\ldots,n\\}$ with $k_n/n\\to a\\in(0,1)$,\n$$\\lim_{n\\to\\infty}\\frac1n\\log P_p(K=k_n)=-D(a\\Vert p).$$\nAll conclusions are conditional calculations for this finite product model and make no claim that physical outcomes are independent or that a small model probability is a logical contradiction.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitution gives $\\mathbb EK=25$ and $\\operatorname{Var}(K)=100(1/4)(3/4)=75/4$. For $\\varepsilon=1/10$, the Chebyshev bound is $(3/16)/(100/100)=3/16$, while the exponential bound is $2e^{-2}$. These are upper bounds on a specified model probability, not results from 100 recorded trials.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $k=35$, $a=k/n=7/20$ and $$D(7/20\\Vert1/4)=\\frac7{20}\\log\\frac75+\\frac{13}{20}\\log\\frac{13}{15}.$$ The point-mass estimate in [F1] therefore reads $$\\frac1{101}e^{-100D(7/20\\Vert1/4)}\\le P_{1/4}(K=35)\\le e^{-100D(7/20\\Vert1/4)}.$$ This finite example displays the polynomial prefactor and common exponential rate without numerical fitting or empirical inference.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes n=100 and makes no claim about an empty sample space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The examplefixes epsilon1/10>0, so the Chebyshevdenominator isnotzero. CountsK=0 are possible in the inheritedBernoullilaw but arenot confused with its mean25 or the chosenpointcount35."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example: The sample size is fixed to100, not1. The parentlaw gives a positiveprobability forK=1, but the displayedpointmass calculation is specificallyk35; no singletonsample inference is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example fixes p=1/4, away from degenerate Bernoulli parameters."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting endpoint assertion is made in this fixed n=100 calculation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: All substitutions use rationaln,p,epsilon,k and the parentfiniteweightedlaw; no trialrecord, histogram or infiniteprobabilityconstruction is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–2.1 calculate the n100,p1/4 variance/tailbounds and k35rate for the specified parentlaw. They are numericalsymbolic specializations, not an iff characterization of measurements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The values25,75/4 or the rateD(7/20||1/4) do not imply any observedtrial outcomes or identify a unique physicalsampling law."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "n=100, p=1/4 specialization",
+          "status": "checked",
+          "claim": "E K=25, Var K=75/4, and the displayed Chebyshev, exponential, and k=35 type bounds follow by direct substitution.",
+          "evidence": "steps 1.1 and 1.2"
+        }
+      ]
+    },
+    "ex-csm-nonadditive-phase-countermodel": {
+      "unresolved_suppliers": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-csm-nonadditive-phase-countermodel",
+          "source_section": "Statement",
+          "quote": "Use counting measure on each $\\Omega_N$ as the reference measure, so every individual state has weight one. For a real inverse-energy parameter $\\beta$ in joules$^{-1}$, define the finite exponential-tilt probability by\n$$Z_N(\\beta)=\\sum_{\\omega\\in\\Omega_N}e^{-\\beta H_N(\\omega)}=1+e^{-\\beta N\\epsilon}+4^Ne^{-2\\beta N\\epsilon},\\qquad P_{\\beta,N}(\\omega)=\\frac{e^{-\\beta H_N(\\omega)}}{Z_N(\\beta)}.$$\nFor $\\beta>0$ this is the adopted canonical preparation. For $\\beta\\le0$ it is only the same finite counting formula used algebraically; no negative-temperature reservoir is asserted. Also, for a shell half-width $\\Delta$ in joules with $0\\le\\Delta<N\\epsilon$, define $\\mathcal S_{N,\\Delta}=\\{\\omega:|H_N(\\omega)-N\\epsilon|\\le\\Delta\\}$ and give it the uniform counting probability $Q_{N,\\Delta}(\\omega)=|\\mathcal S_{N,\\Delta}|^{-1}$ for $\\omega\\in\\mathcal S_{N,\\Delta}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\beta_cN\\epsilon=4\\log2$, the three aggregate canonical sector weights are $1$, $e^{-4\\log2}=1/16$, and $4^4e^{-8\\log2}=1$. Thus $Z_4=33/16$ and $P_{\\beta_c,4}(B_4)=(1/16)/(33/16)=1/33$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The shell centered at $4\\epsilon$ with half-width $\\Delta<4\\epsilon$ excludes the neighboring energy levels $0$ and $8\\epsilon$, so it contains exactly the single state in $B_4$. Its uniform probability is therefore one on $B_4$, compared with the canonical value $1/33$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed example has three nonempty sectors."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example: The A4sector hasenergy0 and itscanonicalweight is1; the middleaggregateweight is1/16, notzero. Delta=0 is allowed and stillselects the uniqueB4state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "B4 is a singleton and itsnormalizedshellprobability is1, while the fullfinitecanonical law spreads weightover1+1+256states. N=1 isnot the exampleparameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes epsilon>0 and fixes N=4."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example: The shellhalfwidth ranges0<=Delta<4epsilon; at the excludedendpoint4epsilon, the neighboringenergies0 and8epsilon would enter. The calculationuses positivebetac, not the beta<=0 algebraicextension."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example: The finite sectorcounting and three exactexponentialweights determine allprobabilities. No selection of a thermodynamicphase or randomtrajectory is involved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–2.1 compute the N4middle-sector weight1/33 and its uniformshellprobability1. This is a finitecountermodel specialization, not an iff criterion for ensembleequivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A pair of preparations disagreeing onB4 isnot claimed to imply thisspectralmultiplicity or an empiricalphasetransition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=4 transition sector weights",
+          "status": "checked",
+          "claim": "The aggregate weights are 1, 1/16, and 1, so Z_4=33/16 and the canonical middle-sector probability is 1/33.",
+          "evidence": "step 1.1"
+        }
+      ]
+    },
+    "ex-csm-walk-recurrence-and-entropy": {
+      "unresolved_suppliers": [],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-csm-walk-recurrence-and-entropy",
+          "source_section": "Statement",
+          "quote": "**Finite coarse-entropy model.** Let $\\Omega=\\{0,1,2,3\\}$ with uniform reference probability and permutation $\\mathcal T(0)=1,\\mathcal T(1)=2,\\mathcal T(2)=3,\\mathcal T(3)=0$. Start from $\\pi_0=(1/2,1/2,0,0)$, and evolve by pushforward under $\\mathcal T$. For the coarse partition $\\{\\{0,1\\},\\{2,3\\}\\}$, let $(r_1,r_2)$ be any probability vector with $r_i\\ge0$ and $r_1+r_2=1$, and define its coarse Shannon entropy by $H_c(r_1,r_2)=-\\sum_{i:r_i>0}r_i\\log r_i$ in nats. Define fine entropy analogously for a probability vector on the four states, using $0\\log0=0$. The coarse entropies at times $0,1,2$ are $0,\\log2,0$, while the fine entropy is $\\log2$ at all three times. Thus deterministic invertibility and preservation of the uniform reference measure do not imply monotone coarse entropy.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The scaling gives $\\ell=\\sqrt{2D\\delta t}=1/2$ m and $n=\\lfloor t/\\delta t\\rfloor=8$, so $\\operatorname{Var}(S_n)=8(1/2\\ {\\rm m})^2=2$ m$^2$ and $\\varphi_{S_n}(k)=\\cos((1/2\\ {\\rm m})k)^8$. This is a finite model marginal; its Gaussian limit is the separate $\\delta t\\downarrow0$ conclusion of [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The rotor return period is $2\\pi I/|p_0|=2\\pi$ s. The finite permutation calculation has coarse entropy $0$ at times zero and two and $\\log2$ at time one, while the fine entropy remains $\\log2$ at all three times.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This example fixes a positive one-second walk horizon and eight steps."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes D=1 and p_0=1, both nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exampleuses time1s anddt1/8s, giving exactly8walksteps, not1. It evaluatesone explicitlychosenrotor period2pi s and retains the fourstatepermutation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No zero-step or zero-momentum specialization is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting endpoint statement is part of the fixed numerical example."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every displayedparameter is fixed numerically in SIunits. The exampleimports the parentmodels and substitutes into explicitformulas; it doesnotconstruct a newchoice-dependent pathspace."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–2.1 evaluate a finitewalkvariance, one rotorperiod and the three finitecoarseentropyvalues. They illustrate separate parentmodels, not an iff diffusion/recurrence principle."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A variance2m^2, rotorperiod2pi or entropysequence0,log2,0 doesnot infer a continuumcollision limit or characterize all reversible dynamics."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one finite walk step size and rotor period",
+          "status": "checked",
+          "claim": "At the stated values, ell=1/2 m, n=8, Var(S_n)=2 m^2, and the rotor period is 2 pi s.",
+          "evidence": "steps 1.1 and 1.2"
+        }
+      ]
+    }
+  }
+}

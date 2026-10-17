@@ -1,0 +1,1827 @@
+{
+  "version": 1,
+  "scope": [
+    "def-qsm-pauli-two-qubit-conventions",
+    "def-qsm-finite-two-qubit-state-and-separability",
+    "lem-qsm-pauli-dimer-spectrum",
+    "lem-qsm-qubit-bloch-ball",
+    "lem-qsm-pauli-separable-correlation-bound",
+    "lem-qsm-pauli-boundary-mixture",
+    "thm-qsm-models-dimer-entanglement",
+    "pthm-qsm-interacting-dimer-gibbs",
+    "pthm-qsm-commuting-lattice-countermodels",
+    "pthm-qsm-onsite-interacting-atoms",
+    "ex-qsm-commuting-lattice-countermodels",
+    "ex-qsm-interacting-dimer-gibbs",
+    "ex-qsm-onsite-interacting-atoms"
+  ],
+  "contracts": {
+    "def-qsm-pauli-two-qubit-conventions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition fixes a two-dimensional qubit space and four-dimensional tensor space; neither basis is an empty indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: The displayed Pauli matrices have zero entries but no variable denominators; the zero vector has Euclidean norm zero and its product pairing vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition explicitly gives the unit coordinate vectors and I_2; each Pauli square equals I_2 by direct multiplication."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: The exchange matrix is defined without choosing eigenvectors or requiring distinct eigenvalues; its triplet degeneracy does not affect the matrix sum."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Pauli conventions fix three everywhere-defined matrices and the Euclidean norm; there is no time, temperature or interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The ordered basis e_0,e_1 and all three real unit vectors are explicitly supplied, so forming their four tensor products requires no selection axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition specifies the Pauli matrices and tensor action directly; it states no necessary-condition characterization to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exchange operator is assigned by a three-term sum; the Definition does not recover that operator from a proposed spectral criterion."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-qsm-finite-two-qubit-state-and-separability": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: An empty convex sum has trace zero and weight sum zero, so it cannot satisfy the displayed sum t_j=1; the normalized mixture necessarily has at least one term."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: Zero mixture coefficients are allowed and may be deleted; the zero matrix itself fails trace one and is not a density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Taking m=1,t_1=1 gives exactly a product density matrix, hence a separable state under this definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: Positive semidefinite includes rank-deficient factors and repeated eigenvalues; no inverse or strict positivity is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: Each mixture weight can equal zero or one subject to normalization; these are included by t_j>=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: The separability witness is one finite list with explicit weights; normalization prevents an empty witness and no simultaneous infinite choice is asserted."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Unpacking separability supplies a finite list of product densities with nonnegative normalized weights, exactly the witness specified in the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: Any such witnessed finite convex product sum is separable by the defining criterion; a state without such a witness is classified entangled."
+        }
+      ],
+      "finite_checks": []
+    },
+    "lem-qsm-pauli-dimer-spectrum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Use the usual complex field $\\mathbb C$; its scalar metric is $d_{\\mathbb C}(z,w)=|z-w|$ from [[def-complex-metric-convergence-and-continuity]]. On $\\mathbb C^2$, use the standard basis $e_0=(1,0)$, $e_1=(0,1)$ and inner product $\\langle x,y\\rangle=x_0\\overline{y_0}+x_1\\overline{y_1}$, linear in its first variable. On $\\mathbb R^3$, define $a\\cdot b:=a_xb_x+a_yb_y+a_zb_z$, $|a|:=\\sqrt{a\\cdot a}$ using the unique nonnegative square root from [[thm-nth-roots-exist]], and the standard unit vectors $\\mathbf e_x=(1,0,0)$, $\\mathbf e_y=(0,1,0)$, and $\\mathbf e_z=(0,0,1)$.\n\nUse the ordered tensor-product basis $(e_0\\otimes e_0,e_0\\otimes e_1,e_1\\otimes e_0,e_1\\otimes e_1)$ of $\\mathbb C^2\\otimes\\mathbb C^2$. Its inner product is the linear-first product inner product, specified on elementary tensors by $\\langle u\\otimes v,u'\\otimes v'\\rangle=\\langle u,u'\\rangle\\langle v,v'\\rangle$ and extended sesquilinearly. For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.\n\nWrite $I_2:=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ for the identity on $\\mathbb C^2$, use $I:=I_2$ when its domain is clear, and set $I_4:=I_2\\otimes I_2$. Define the everywhere-defined matrices\n\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nDefine the dimensionless exchange matrix\n\n$$C:=\\sigma_x\\otimes\\sigma_x+\\sigma_y\\otimes\\sigma_y+\\sigma_z\\otimes\\sigma_z.$$\n\nFor a finite matrix $A$, $\\operatorname{tr}(A)$ denotes the sum of its diagonal entries in the displayed basis. Each $\\sigma_j$ and $C$ is Hermitian and has full finite-dimensional domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be a complete ordered field ([[def-complete-ordered-field]]).\nFor every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$\n([[def-integer-power]]); we write\n\n$$s = a^{1/n} = \\sqrt[n]{a}.$$\n\nMoreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.\n\n**This generalises the published [[thm-of-square-roots]], and the case $n = 2$ is\nnot new.** That theorem already produces the unique $\\sqrt{a} \\ge 0$ with\n$(\\sqrt{a})^2 = a$, and it is cited as such throughout the library; the notation\n$a^{1/2}$ introduced here is the same number. What is new is the passage to\ngeneral $n$: the completed square that drives the $n = 2$ argument has no direct\nanalogue, and its place is taken by the factorisation of $b^n - a^n$ and the\nresulting Lipschitz estimate ([[lem-power-difference-factorisation]]).",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Applying the three tensor products in [F1] to the ordered basis $(00,01,10,11)$ gives the matrix with outer diagonal entries $1,1$, middle block $\\begin{pmatrix}-1&2\\\\2&-1\\end{pmatrix}$, and all other entries zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The outer basis vectors are eigenvectors with eigenvalue $1$. The middle block sends $(01-10)/\\sqrt2$ to $-3(01-10)/\\sqrt2$ and $(01+10)/\\sqrt2$ to $(01+10)/\\sqrt2$. Since $(\\sqrt2)^2=2$, each displayed middle vector has squared norm $(1+1)/2=1$; their inner product is $(1-1)/2=0$. They are also orthogonal to $00,11$, so together the four eigenvectors are an orthonormal basis and give the full spectrum.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement lists four concrete vectors in C^2 tensor C^2, so an empty eigenbasis is excluded by the specified four-dimensional space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof 1.1 computes the zero off-block entries directly; normalization divides only by the fixed positive sqrt(2) established in [F2]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 explicitly gives the triplet eigenvalue 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 identifies the three-dimensional triplet eigenspace and an orthonormal eigenbasis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The dimer spectrum is an equality for a fixed matrix, with no varying interval or limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof 2.1 uses precisely the four displayed normalized vectors; their explicit formulas avoid any eigenbasis-selection obligation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim computes singlet and triplet eigenvalues of a fixed exchange matrix; it does not characterize a variable matrix by an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 verifies the four eigenvectors and completeness; no converse reconstruction from arbitrary spectral data is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "four-state spectrum",
+          "calculation": "The explicitly derived matrix in step 1.1 has eigenvalues \u22123,1,1,1; their sum is zero, matching the zero diagonal trace of the Pauli exchange matrix.",
+          "disposition": "Exact finite-dimensional spectrum cross-check."
+        }
+      ]
+    },
+    "lem-qsm-qubit-bloch-ball": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Use the usual complex field $\\mathbb C$; its scalar metric is $d_{\\mathbb C}(z,w)=|z-w|$ from [[def-complex-metric-convergence-and-continuity]]. On $\\mathbb C^2$, use the standard basis $e_0=(1,0)$, $e_1=(0,1)$ and inner product $\\langle x,y\\rangle=x_0\\overline{y_0}+x_1\\overline{y_1}$, linear in its first variable. On $\\mathbb R^3$, define $a\\cdot b:=a_xb_x+a_yb_y+a_zb_z$, $|a|:=\\sqrt{a\\cdot a}$ using the unique nonnegative square root from [[thm-nth-roots-exist]], and the standard unit vectors $\\mathbf e_x=(1,0,0)$, $\\mathbf e_y=(0,1,0)$, and $\\mathbf e_z=(0,0,1)$.\n\nUse the ordered tensor-product basis $(e_0\\otimes e_0,e_0\\otimes e_1,e_1\\otimes e_0,e_1\\otimes e_1)$ of $\\mathbb C^2\\otimes\\mathbb C^2$. Its inner product is the linear-first product inner product, specified on elementary tensors by $\\langle u\\otimes v,u'\\otimes v'\\rangle=\\langle u,u'\\rangle\\langle v,v'\\rangle$ and extended sesquilinearly. For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.\n\nWrite $I_2:=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ for the identity on $\\mathbb C^2$, use $I:=I_2$ when its domain is clear, and set $I_4:=I_2\\otimes I_2$. Define the everywhere-defined matrices\n\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nDefine the dimensionless exchange matrix\n\n$$C:=\\sigma_x\\otimes\\sigma_x+\\sigma_y\\otimes\\sigma_y+\\sigma_z\\otimes\\sigma_z.$$\n\nFor a finite matrix $A$, $\\operatorname{tr}(A)$ denotes the sum of its diagonal entries in the displayed basis. Each $\\sigma_j$ and $C$ is Hermitian and has full finite-dimensional domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-finite-two-qubit-state-and-separability",
+          "source_section": "Definition",
+          "quote": "Use the single-qubit space and ordered two-qubit basis from [[def-qsm-pauli-two-qubit-conventions]]. A one-qubit density matrix is a Hermitian $2\\times2$ matrix $\\rho$ such that $\\langle \\rho x,x\\rangle\\ge0$ for every $x\\in\\mathbb C^2$ and $\\operatorname{tr}(\\rho)=1$. A two-qubit density matrix is defined in the same way on $\\mathbb C^2\\otimes\\mathbb C^2$, using the four-dimensional trace. A product density matrix is $\\rho_A\\otimes\\rho_B$ for one-qubit density matrices $\\rho_A,\\rho_B$. A two-qubit density matrix is **separable** if it is a finite convex combination $\\sum_{j=1}^m t_j\\rho_{A,j}\\otimes\\rho_{B,j}$, where $t_j\\ge0$ and $\\sum_{j=1}^m t_j=1$. A two-qubit density matrix that is not separable is **entangled**. This finite-convex-combination convention is the one used by the local threshold proof.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $\\rho=\\begin{pmatrix}u&z\\\\\\overline z&1-u\\end{pmatrix}$, where $u\\in\\mathbb R$ because $\\rho$ is Hermitian and the lower diagonal entry is fixed by $\\operatorname{tr}\\rho=1$. Set $a_x=2\\operatorname{Re}z$, $a_y=-2\\operatorname{Im}z$, and $a_z=2u-1$. Direct substitution of the displayed Pauli matrices gives $\\rho=\\tfrac12(I+a_x\\sigma_x+a_y\\sigma_y+a_z\\sigma_z)$. Direct multiplication gives $\\operatorname{tr}(\\rho\\sigma_j)=a_j$ for each $j$, so the entries of $\\rho$ force uniqueness and each coefficient is real.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The displayed matrix $A:=a_x\\sigma_x+a_y\\sigma_y+a_z\\sigma_z$ is $\\begin{pmatrix}a_z&a_x-ia_y\\\\a_x+ia_y&-a_z\\end{pmatrix}$. Expanding its $2\\times2$ determinant gives $\\det(\\lambda I-A)=\\lambda^2-a_x^2-a_y^2-a_z^2=\\lambda^2-|a|^2$. Thus the eigenvalues of the Hermitian matrix $A$ are $|a|$ and $-|a|$, and those of $\\rho=(I+A)/2$ are $(1+|a|)/2$ and $(1-|a|)/2$. By the density definition [F2], $\\rho$ is positive semidefinite exactly when both are nonnegative, which is equivalent to $|a|\\le1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Trace one in the one-qubit density hypothesis excludes an empty-dimensional matrix; Proof 1.1 treats exactly its two rows and columns."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 covers |a|=0, when both density eigenvalues equal 1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 covers |a|=1, when the eigenvalues are 1 and 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 covers the repeated eigenvalue at |a|=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 proves positivity through the closed endpoint |a|=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof 1.1 constructs the unique Bloch coordinates from u and z by a_x=2 Re z, a_y=-2 Im z, a_z=2u\u22121; existence uses no choice of eigenvectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves |a|\u22641 implies both eigenvalues are nonnegative."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves positivity forces the smaller eigenvalue (1\u2212|a|)/2 to be nonnegative."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "maximally mixed qubit",
+          "calculation": "At a=0 the formula gives \u03c1=I\u2082/2 and both eigenvalues are 1/2.",
+          "disposition": "Direct zero-vector boundary calculation."
+        },
+        {
+          "case": "pure z state",
+          "calculation": "At a=e_z the matrix is diag(1,0), a positive trace-one rank-one state with |a|=1.",
+          "disposition": "Direct closed-ball endpoint calculation."
+        }
+      ]
+    },
+    "lem-qsm-pauli-separable-correlation-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Use the usual complex field $\\mathbb C$; its scalar metric is $d_{\\mathbb C}(z,w)=|z-w|$ from [[def-complex-metric-convergence-and-continuity]]. On $\\mathbb C^2$, use the standard basis $e_0=(1,0)$, $e_1=(0,1)$ and inner product $\\langle x,y\\rangle=x_0\\overline{y_0}+x_1\\overline{y_1}$, linear in its first variable. On $\\mathbb R^3$, define $a\\cdot b:=a_xb_x+a_yb_y+a_zb_z$, $|a|:=\\sqrt{a\\cdot a}$ using the unique nonnegative square root from [[thm-nth-roots-exist]], and the standard unit vectors $\\mathbf e_x=(1,0,0)$, $\\mathbf e_y=(0,1,0)$, and $\\mathbf e_z=(0,0,1)$.\n\nUse the ordered tensor-product basis $(e_0\\otimes e_0,e_0\\otimes e_1,e_1\\otimes e_0,e_1\\otimes e_1)$ of $\\mathbb C^2\\otimes\\mathbb C^2$. Its inner product is the linear-first product inner product, specified on elementary tensors by $\\langle u\\otimes v,u'\\otimes v'\\rangle=\\langle u,u'\\rangle\\langle v,v'\\rangle$ and extended sesquilinearly. For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.\n\nWrite $I_2:=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ for the identity on $\\mathbb C^2$, use $I:=I_2$ when its domain is clear, and set $I_4:=I_2\\otimes I_2$. Define the everywhere-defined matrices\n\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nDefine the dimensionless exchange matrix\n\n$$C:=\\sigma_x\\otimes\\sigma_x+\\sigma_y\\otimes\\sigma_y+\\sigma_z\\otimes\\sigma_z.$$\n\nFor a finite matrix $A$, $\\operatorname{tr}(A)$ denotes the sum of its diagonal entries in the displayed basis. Each $\\sigma_j$ and $C$ is Hermitian and has full finite-dimensional domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-qubit-bloch-ball",
+          "source_section": "Statement",
+          "quote": "For every one-qubit density matrix $\\rho$ in [[def-qsm-finite-two-qubit-state-and-separability]], there is a unique vector $a=(a_x,a_y,a_z)\\in\\mathbb R^3$ such that\n\n$$\\rho=\\frac12(I+a_x\\sigma_x+a_y\\sigma_y+a_z\\sigma_z).$$\n\nThe matrix is positive exactly when $|a|\\le1$, where $|a|=\\sqrt{a\\cdot a}$ is the Euclidean norm defined in [[def-qsm-pauli-two-qubit-conventions]]. The coordinates are $a_j=\\operatorname{tr}(\\rho\\sigma_j)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-qsm-finite-two-qubit-state-and-separability",
+          "source_section": "Definition",
+          "quote": "Use the single-qubit space and ordered two-qubit basis from [[def-qsm-pauli-two-qubit-conventions]]. A one-qubit density matrix is a Hermitian $2\\times2$ matrix $\\rho$ such that $\\langle \\rho x,x\\rangle\\ge0$ for every $x\\in\\mathbb C^2$ and $\\operatorname{tr}(\\rho)=1$. A two-qubit density matrix is defined in the same way on $\\mathbb C^2\\otimes\\mathbb C^2$, using the four-dimensional trace. A product density matrix is $\\rho_A\\otimes\\rho_B$ for one-qubit density matrices $\\rho_A,\\rho_B$. A two-qubit density matrix is **separable** if it is a finite convex combination $\\sum_{j=1}^m t_j\\rho_{A,j}\\otimes\\rho_{B,j}$, where $t_j\\ge0$ and $\\sum_{j=1}^m t_j=1$. A two-qubit density matrix that is not separable is **entangled**. This finite-convex-combination convention is the one used by the local threshold proof.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For qubit density matrices $\\rho_A,\\rho_B$ with Bloch vectors $a,b$, factorization of the finite matrix trace gives $\\operatorname{tr}((\\rho_A\\otimes\\rho_B)C)=\\sum_{j=x,y,z}\\operatorname{tr}(\\rho_A\\sigma_j)\\operatorname{tr}(\\rho_B\\sigma_j)=a\\cdot b$. By [F4] and [F2], $a\\cdot b\\ge-|a||b|\\ge-1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write a separable $\\rho$ as $\\sum_{k=1}^m p_k\\rho^A_k\\otimes\\rho^B_k$ as in [F3]. Linearity of the trace and step 1.1 give $\\operatorname{tr}(\\rho C)=\\sum_kp_k\\operatorname{tr}((\\rho^A_k\\otimes\\rho^B_k)C)\\ge\\sum_kp_k(-1)=-1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof 2.1 uses normalized convex weights; an empty list would sum to zero rather than one and cannot represent the assumed separable density."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives expectation 0 when either Bloch vector is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 includes unit Bloch vectors, where opposite pure vectors attain the bound \u22121."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1 needs only |a|,|b|<=1, so zero Bloch vectors and rank-one pure factors are both allowed; convexity in 2.1 retains the bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 retains equality when both Bloch vectors have norm one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite product decomposition is supplied by the assumed separability [F3]; Proof 1.1 constructs each factor Bloch vector using [F2]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The separability hypothesis implies the correlation lower bound through Cauchy\u2013Schwarz; the Statement does not claim this witness is a complete entanglement test."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A correlation at least \u22121 is not asserted to imply separability; Proof 2.1 establishes only the convex lower estimate."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "opposite pure Bloch vectors",
+          "calculation": "For a=e_z and b=\u2212e_z, the product state has tr((\u03c1_a\u2297\u03c1_b)C)=a\u00b7b=\u22121, so the lower bound is attained.",
+          "disposition": "Finite equality case from step 1.1."
+        }
+      ]
+    },
+    "lem-qsm-pauli-boundary-mixture": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Use the usual complex field $\\mathbb C$; its scalar metric is $d_{\\mathbb C}(z,w)=|z-w|$ from [[def-complex-metric-convergence-and-continuity]]. On $\\mathbb C^2$, use the standard basis $e_0=(1,0)$, $e_1=(0,1)$ and inner product $\\langle x,y\\rangle=x_0\\overline{y_0}+x_1\\overline{y_1}$, linear in its first variable. On $\\mathbb R^3$, define $a\\cdot b:=a_xb_x+a_yb_y+a_zb_z$, $|a|:=\\sqrt{a\\cdot a}$ using the unique nonnegative square root from [[thm-nth-roots-exist]], and the standard unit vectors $\\mathbf e_x=(1,0,0)$, $\\mathbf e_y=(0,1,0)$, and $\\mathbf e_z=(0,0,1)$.\n\nUse the ordered tensor-product basis $(e_0\\otimes e_0,e_0\\otimes e_1,e_1\\otimes e_0,e_1\\otimes e_1)$ of $\\mathbb C^2\\otimes\\mathbb C^2$. Its inner product is the linear-first product inner product, specified on elementary tensors by $\\langle u\\otimes v,u'\\otimes v'\\rangle=\\langle u,u'\\rangle\\langle v,v'\\rangle$ and extended sesquilinearly. For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.\n\nWrite $I_2:=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ for the identity on $\\mathbb C^2$, use $I:=I_2$ when its domain is clear, and set $I_4:=I_2\\otimes I_2$. Define the everywhere-defined matrices\n\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nDefine the dimensionless exchange matrix\n\n$$C:=\\sigma_x\\otimes\\sigma_x+\\sigma_y\\otimes\\sigma_y+\\sigma_z\\otimes\\sigma_z.$$\n\nFor a finite matrix $A$, $\\operatorname{tr}(A)$ denotes the sum of its diagonal entries in the displayed basis. Each $\\sigma_j$ and $C$ is Hermitian and has full finite-dimensional domain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-finite-two-qubit-state-and-separability",
+          "source_section": "Definition",
+          "quote": "Use the single-qubit space and ordered two-qubit basis from [[def-qsm-pauli-two-qubit-conventions]]. A one-qubit density matrix is a Hermitian $2\\times2$ matrix $\\rho$ such that $\\langle \\rho x,x\\rangle\\ge0$ for every $x\\in\\mathbb C^2$ and $\\operatorname{tr}(\\rho)=1$. A two-qubit density matrix is defined in the same way on $\\mathbb C^2\\otimes\\mathbb C^2$, using the four-dimensional trace. A product density matrix is $\\rho_A\\otimes\\rho_B$ for one-qubit density matrices $\\rho_A,\\rho_B$. A two-qubit density matrix is **separable** if it is a finite convex combination $\\sum_{j=1}^m t_j\\rho_{A,j}\\otimes\\rho_{B,j}$, where $t_j\\ge0$ and $\\sum_{j=1}^m t_j=1$. A two-qubit density matrix that is not separable is **entangled**. This finite-convex-combination convention is the one used by the local threshold proof.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-qubit-bloch-ball",
+          "source_section": "Statement",
+          "quote": "For every one-qubit density matrix $\\rho$ in [[def-qsm-finite-two-qubit-state-and-separability]], there is a unique vector $a=(a_x,a_y,a_z)\\in\\mathbb R^3$ such that\n\n$$\\rho=\\frac12(I+a_x\\sigma_x+a_y\\sigma_y+a_z\\sigma_z).$$\n\nThe matrix is positive exactly when $|a|\\le1$, where $|a|=\\sqrt{a\\cdot a}$ is the Euclidean norm defined in [[def-qsm-pauli-two-qubit-conventions]]. The coordinates are $a_j=\\operatorname{tr}(\\rho\\sigma_j)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each vector $n$ in the six-term sum has exactly one coordinate equal to $1$ or $-1$ and the others zero, so the Euclidean norm in [F1] gives $|n|=1$. Thus [F3] makes $\\rho_n$ and $\\rho_{-n}$ qubit density matrices. The six terms have nonnegative equal weights $1/6$ summing to one; [F2] therefore proves that $\\rho_*$ is separable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a fixed axis $\\mathbf e_j$, direct expansion gives $\\rho_{e_j}\\otimes\\rho_{-e_j}+\\rho_{-e_j}\\otimes\\rho_{e_j}=\\tfrac12(I_4-\\sigma_j\\otimes\\sigma_j)$. Summing this identity over $j=x,y,z$ and dividing by six yields $\\rho_*=\\tfrac14I_4-\\tfrac1{12}C=\\tfrac14(I_4-C/3)$, as claimed.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement, six-vector averaging set: The averaging set is explicitly the six signed coordinate vectors, so its cardinality is six and the normalization 1/6 cannot be an empty-sum normalization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "In Proof 2.1 the linear Pauli terms cancel between opposite vectors; the remaining constant is I_4/4 and the correlation coefficient is \u22121/12."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks each of the six pure Bloch vectors has norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.1 includes pure qubit factors at |n|=1; their zero eigenvalues cause no division because the proof averages the matrices directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1\u20132.1 check the normalized six-term convex mixture and its exact boundary matrix."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness is the explicit six-element signed-axis list with equal weight1/6; Proof 1.1 certifies every listed factor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma constructs a particular separable boundary matrix by six product factors; it states no characterization of all separable matrices."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Proof 2.1 identifies the six-term mixture with its Pauli expansion, without claiming every separable state has this expansion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "six axis product states",
+          "calculation": "For each axis j, \u03c1_{e_j}\u2297\u03c1_{\u2212e_j}+\u03c1_{\u2212e_j}\u2297\u03c1_{e_j}=\u00bd(I\u2084\u2212\u03c3_j\u2297\u03c3_j); summing three axes and dividing by six gives \u03c1*=\u00bc(I\u2084\u2212C/3), with six nonnegative weights totaling one.",
+          "disposition": "Exact finite separable decomposition."
+        }
+      ]
+    },
+    "thm-qsm-models-dimer-entanglement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qsm-pauli-dimer-spectrum",
+          "source_section": "Statement",
+          "quote": "For $C$ from [[def-qsm-pauli-two-qubit-conventions]], the singlet vector $s=(e_0\\otimes e_1-e_1\\otimes e_0)/\\sqrt2$ is an eigenvector with eigenvalue $-3$, and the three orthonormal triplet vectors $e_0\\otimes e_0$, $(e_0\\otimes e_1+e_1\\otimes e_0)/\\sqrt2$, and $e_1\\otimes e_1$ have eigenvalue $1$. Here $\\sqrt2$ is the unique positive square root supplied by [[thm-nth-roots-exist]]. These four vectors are an orthonormal basis of $\\mathbb C^2\\otimes\\mathbb C^2$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-finite-two-qubit-state-and-separability",
+          "source_section": "Definition",
+          "quote": "Use the single-qubit space and ordered two-qubit basis from [[def-qsm-pauli-two-qubit-conventions]]. A one-qubit density matrix is a Hermitian $2\\times2$ matrix $\\rho$ such that $\\langle \\rho x,x\\rangle\\ge0$ for every $x\\in\\mathbb C^2$ and $\\operatorname{tr}(\\rho)=1$. A two-qubit density matrix is defined in the same way on $\\mathbb C^2\\otimes\\mathbb C^2$, using the four-dimensional trace. A product density matrix is $\\rho_A\\otimes\\rho_B$ for one-qubit density matrices $\\rho_A,\\rho_B$. A two-qubit density matrix is **separable** if it is a finite convex combination $\\sum_{j=1}^m t_j\\rho_{A,j}\\otimes\\rho_{B,j}$, where $t_j\\ge0$ and $\\sum_{j=1}^m t_j=1$. A two-qubit density matrix that is not separable is **entangled**. This finite-convex-combination convention is the one used by the local threshold proof.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-qubit-bloch-ball",
+          "source_section": "Statement",
+          "quote": "For every one-qubit density matrix $\\rho$ in [[def-qsm-finite-two-qubit-state-and-separability]], there is a unique vector $a=(a_x,a_y,a_z)\\in\\mathbb R^3$ such that\n\n$$\\rho=\\frac12(I+a_x\\sigma_x+a_y\\sigma_y+a_z\\sigma_z).$$\n\nThe matrix is positive exactly when $|a|\\le1$, where $|a|=\\sqrt{a\\cdot a}$ is the Euclidean norm defined in [[def-qsm-pauli-two-qubit-conventions]]. The coordinates are $a_j=\\operatorname{tr}(\\rho\\sigma_j)$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsm-finite-two-qubit-state-and-separability",
+          "source_section": "Definition",
+          "quote": "Use the single-qubit space and ordered two-qubit basis from [[def-qsm-pauli-two-qubit-conventions]]. A one-qubit density matrix is a Hermitian $2\\times2$ matrix $\\rho$ such that $\\langle \\rho x,x\\rangle\\ge0$ for every $x\\in\\mathbb C^2$ and $\\operatorname{tr}(\\rho)=1$. A two-qubit density matrix is defined in the same way on $\\mathbb C^2\\otimes\\mathbb C^2$, using the four-dimensional trace. A product density matrix is $\\rho_A\\otimes\\rho_B$ for one-qubit density matrices $\\rho_A,\\rho_B$. A two-qubit density matrix is **separable** if it is a finite convex combination $\\sum_{j=1}^m t_j\\rho_{A,j}\\otimes\\rho_{B,j}$, where $t_j\\ge0$ and $\\sum_{j=1}^m t_j=1$. A two-qubit density matrix that is not separable is **entangled**. This finite-convex-combination convention is the one used by the local threshold proof.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-qsm-pauli-separable-correlation-bound",
+          "source_section": "Statement",
+          "quote": "For every separable two-qubit density matrix $\\rho$ and exchange operator $C$ from [[def-qsm-pauli-two-qubit-conventions]],\n$$\\operatorname{tr}(\\rho C)\\ge-1.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-qsm-pauli-boundary-mixture",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\{\\pm\\mathbf e_x,\\pm\\mathbf e_y,\\pm\\mathbf e_z\\}$, with the standard vectors from [[def-qsm-pauli-two-qubit-conventions]], put $\\rho_n=(I+n_x\\sigma_x+n_y\\sigma_y+n_z\\sigma_z)/2$. The matrix\n$$\\rho_*:=\\frac16\\sum_{n\\in\\{\\pm e_x,\\pm e_y,\\pm e_z\\}}\\rho_n\\otimes\\rho_{-n} =\\frac14\\left(I_4-\\frac13C\\right)$$\nis a separable two-qubit density matrix.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The projections $P_s,P_t$ are orthogonal and have ranks one and three by [F1]. Their weighted sum in the definition of $\\rho_x$ is therefore positive, and its trace is $e^{3x}+3e^{-x}>0$; division normalizes its trace to one. By [F2] this is a two-qubit density matrix. Its singlet probability is $p_s=e^{3x}/(e^{3x}+3e^{-x})=e^{4x}/(e^{4x}+3)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Using the two eigenvalues in [F1], $\\operatorname{tr}(\\rho_xC)=-3p_s+(1-p_s)=1-4p_s=3(1-e^{4x})/(e^{4x}+3)=:c$. For $x\\ge0$, $e^{4x}\\ge1$, hence $-3\\le c\\le0$, and $c<-1$ exactly when $e^{4x}>3$, equivalently $x>(\\log3)/4$ by [F7].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $x>(\\log3)/4$, step 2.1 gives $\\operatorname{tr}(\\rho_xC)=c<-1$. This contradicts the lower bound [F5] satisfied by every separable state, so $\\rho_x$ is entangled.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $0\\le x\\le(\\log3)/4$, step 2.1 gives $-1\\le c\\le0$. The spectral projections in [F1] give $\\rho_x=\\tfrac14(I_4+(c/3)C)$; substituting [F6] yields $\\rho_x=(-c)\\rho_*+(1+c)I_4/4$. Both coefficients are nonnegative and sum to one; [F3] makes $I_2/2$ a qubit density matrix, so $I_4/4=(I_2/2)\\otimes(I_2/2)$ is a product density matrix. Thus [F4] and [F6] make $\\rho_x$ separable, including at equality $c=-1$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof 1.1 has projection ranks one and three, giving Z=e^{3x}+3e^{-x}>0; neither spectral sector nor the density normalization is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1\u20132.1 cover x=0, when the exchange expectation is c=0 and \u03c1\u2080=I\u2084/4."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 uses the endpoint e^{4x}=1 at x=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 cover the maximally mixed x=0 state and the equality boundary c=\u22121."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1\u20134.1 include both x=0 and x=(log 3)/4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof 4.1 explicitly writes rho_x as (\u2212c)rho_*+(1+c)I_4/4, using the six-factor witness of [F6]; entangled cases use the witness inequality in 3.1 instead of a selection argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 proves x>(log 3)/4 forces the separability witness below \u22121 and hence entanglement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1 proves every 0\u2264x\u2264(log 3)/4 is an explicit convex mixture of separable states."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "x=0",
+          "calculation": "p_s=1/4 and c=0, hence \u03c1\u2080=I\u2084/4=(I\u2082/2)\u2297(I\u2082/2), which is separable.",
+          "disposition": "Finite maximally mixed endpoint."
+        },
+        {
+          "case": "x=(log 3)/4",
+          "calculation": "e^{4x}=3, p_s=1/2 and c=\u22121; the decomposition in step 4.1 reduces to \u03c1_x=\u03c1*, which is separable.",
+          "disposition": "Exact threshold equality check."
+        }
+      ]
+    },
+    "pthm-qsm-interacting-dimer-gibbs": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-qsm-models-statistics-and-preparation",
+          "source_section": "Postulate",
+          "quote": "For a declared nonrelativistic quantum model, adopt a complex Hilbert space, positive trace-one states, and Born probabilities for its specified measurements. Specify the one-particle modes, Hamiltonian and interactions. When the modeled particles are assigned bosonic or fermionic statistics, choose the symmetric or antisymmetric sector, respectively, as an independent physical assumption. This selection is not derived from the Fock construction or a nonrelativistic spin-statistics theorem.\n\nFor a canonical preparation at inverse temperature $\\beta=(k_BT)^{-1}>0$, adopt $\\rho=Z^{-1}e^{-\\beta H}$ on the declared fixed-particle-number sector only when $0<Z=\\operatorname{Tr}e^{-\\beta H}<\\infty$. For a grand-canonical preparation with chemical potential $\\mu$, adopt $\\rho=\\Xi^{-1}e^{-\\beta(H-\\mu N)}$ only when the corresponding trace is finite and positive, as explicitly checked for the diagonal Fock model in [[lem-qsm-models-diagonal-occupation-trace]]. Fixed-number and grand-canonical preparations are distinct assumptions; in general the latter has independent mode occupations while conditioning on fixed total number couples them.\n\nThe assignments of $U=\\operatorname{Tr}(\\rho H)$, $S=-k_B\\operatorname{Tr}(\\rho\\log\\rho)$ and thermodynamic potentials are model definitions where their traces exist. An identification with measured macroscopic thermodynamic quantities requires a separate physical bridge. No thermalization mechanism, empirical value, or law for a particular material is postulated here.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Use the usual complex field $\\mathbb C$; its scalar metric is $d_{\\mathbb C}(z,w)=|z-w|$ from [[def-complex-metric-convergence-and-continuity]]. On $\\mathbb C^2$, use the standard basis $e_0=(1,0)$, $e_1=(0,1)$ and inner product $\\langle x,y\\rangle=x_0\\overline{y_0}+x_1\\overline{y_1}$, linear in its first variable. On $\\mathbb R^3$, define $a\\cdot b:=a_xb_x+a_yb_y+a_zb_z$, $|a|:=\\sqrt{a\\cdot a}$ using the unique nonnegative square root from [[thm-nth-roots-exist]], and the standard unit vectors $\\mathbf e_x=(1,0,0)$, $\\mathbf e_y=(0,1,0)$, and $\\mathbf e_z=(0,0,1)$.\n\nUse the ordered tensor-product basis $(e_0\\otimes e_0,e_0\\otimes e_1,e_1\\otimes e_0,e_1\\otimes e_1)$ of $\\mathbb C^2\\otimes\\mathbb C^2$. Its inner product is the linear-first product inner product, specified on elementary tensors by $\\langle u\\otimes v,u'\\otimes v'\\rangle=\\langle u,u'\\rangle\\langle v,v'\\rangle$ and extended sesquilinearly. For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.\n\nWrite $I_2:=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ for the identity on $\\mathbb C^2$, use $I:=I_2$ when its domain is clear, and set $I_4:=I_2\\otimes I_2$. Define the everywhere-defined matrices\n\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nDefine the dimensionless exchange matrix\n\n$$C:=\\sigma_x\\otimes\\sigma_x+\\sigma_y\\otimes\\sigma_y+\\sigma_z\\otimes\\sigma_z.$$\n\nFor a finite matrix $A$, $\\operatorname{tr}(A)$ denotes the sum of its diagonal entries in the displayed basis. Each $\\sigma_j$ and $C$ is Hermitian and has full finite-dimensional domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-pauli-dimer-spectrum",
+          "source_section": "Statement",
+          "quote": "For $C$ from [[def-qsm-pauli-two-qubit-conventions]], the singlet vector $s=(e_0\\otimes e_1-e_1\\otimes e_0)/\\sqrt2$ is an eigenvector with eigenvalue $-3$, and the three orthonormal triplet vectors $e_0\\otimes e_0$, $(e_0\\otimes e_1+e_1\\otimes e_0)/\\sqrt2$, and $e_1\\otimes e_1$ have eigenvalue $1$. Here $\\sqrt2$ is the unique positive square root supplied by [[thm-nth-roots-exist]]. These four vectors are an orthonormal basis of $\\mathbb C^2\\otimes\\mathbb C^2$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qsm-models-dimer-entanglement",
+          "source_section": "Statement",
+          "quote": "Use $C$ from [[def-qsm-pauli-two-qubit-conventions]], with singlet projection $P_s=|s\\rangle\\langle s|$ and triplet projection $P_t=I_4-P_s$, where $s=(e_0\\otimes e_1-e_1\\otimes e_0)/\\sqrt2$. For each dimensionless $x\\ge0$, define the finite two-qubit density matrix\n$$\\rho_x:=\\frac{e^{3x}P_s+e^{-x}P_t}{e^{3x}+3e^{-x}}.$$\nThen $\\rho_x$ is separable exactly when $x\\le(\\log 3)/4$, and it is entangled exactly when $x>(\\log 3)/4$. In particular, the equality state at $x=(\\log 3)/4$ is separable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-analytic-function",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R$ be open ([[def-open-and-closed-in-r]]). A function $f:U\\to\\mathbb R$ is **real analytic on $U$** if, for every $c\\in U$, there are a real $r>0$ and real coefficients $(a_n)_{n\\in\\mathbb N}$ such that $N_r(c)\\subseteq U$ and\n\n$$f(x)=\\sum_{n=0}^{\\infty}a_n(x-c)^n\\qquad(x\\in N_r(c)).$$\n\nThe representing series must converge throughout this neighbourhood ([[def-real-power-series-and-radius-of-convergence]], [[def-neighbourhood-r]]). The radius and coefficients may initially depend on $c$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-power-series-sums-are-real-analytic",
+          "source_section": "Statement",
+          "quote": "If a real power series centred at $c$ has radius $R>0$, then its sum is real analytic on $(c-R,c+R)$, interpreted as all of $\\mathbb R$ when $R=+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-real-analytic-functions-closed-under-algebra-quotients-and-composition",
+          "source_section": "Statement",
+          "quote": "On open real domains, sums and products of real-analytic functions are real analytic. If $g$ is nonzero throughout the domain, then $f/g$ is real analytic. If $g:U\\to V$ and $f:V\\to\\mathbb R$ are real analytic, then $f\\circ g$ is real analytic on $U$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "source_section": "Statement",
+          "quote": "Let $f$ be a real analytic map between open subsets of $\\mathbb R^n$, $n\\ge1$. If $Df(a)$ is invertible, $f$ has a real analytic local inverse near $f(a)$. Let $P(x,y)$ be real analytic near $(a,b)\\in\\mathbb R^d\\times\\mathbb R^k$, $k\\ge1$, with $P(a,b)=0$ and $D_yP(a,b)$ invertible. On sufficiently small neighborhoods its zero set is exactly the graph of a unique real analytic $y=g(x)$ with $g(a)=b$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the ordered basis $e_0e_0,e_0e_1,e_1e_0,e_1e_1$, the field operator $\\sigma_z\\otimes I+I\\otimes\\sigma_z$ has eigenvalues $2,0,0,-2$. The middle two basis vectors combine into the singlet and the $m=0$ triplet of [F2]; both have field eigenvalue $0$. The outer vectors are the $m=+1$ and $m=-1$ triplets, with field eigenvalues $2$ and $-2$. Since $H_{J,h}$ is a linear combination of these commuting matrices, the singlet energy is $-3J$ and the triplet energies are $J-2h,J,J+2h$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The canonical trace is the sum of the four positive weights associated with step 1.1. It is therefore finite and positive, and the adopted preparation [A1] gives the displayed partition function. At $h=0$ and $J>0$, setting $x=\\beta J$ identifies its normalized state with $\\rho_x$ in [F3], so that theorem gives the exact separability and entanglement alternatives, including the equality case.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $J,h$ and let $E_{\\min}$ be the least of the four energies from step 1.1, with multiplicity $g$. Write the other energies as $E_{\\min}+\\Delta_i$ with $\\Delta_i>0$. After factoring out $e^{-\\beta E_{\\min}}$, the denominator is $D_\\beta=g+\\sum_i e^{-\\beta\\Delta_i}\\to g$ and $1\\le D_\\beta\\le4$. The Gibbs probability of each ground vector is $1/D_\\beta$, so the total ground entropy tends to $-k_Bg(1/g)\\log(1/g)=k_B\\log g$. For an excited vector, $p_i=e^{-\\beta\\Delta_i}/D_\\beta$ and $-p_i\\log p_i=p_i(\\beta\\Delta_i+\\log D_\\beta)\\le e^{-\\beta\\Delta_i}(\\beta\\Delta_i+\\log4)$; this tends to zero by [F9], so the finite sum of excited entropy terms vanishes. At $h=0$, the triplet is the three-dimensional ground space for $J<0$, all four levels coincide for $J=0$, and the singlet is the unique ground state for $J>0$, giving the stated limits.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F9",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $J,h$ and any $\\beta_0>0$. For each of the four energies $E$ from step 1.1, the addition formula [F4] gives $e^{-\\beta E}=e^{-\\beta_0E}\\sum_{n\\ge0}[-E(\\beta-\\beta_0)]^n/n!$, a convergent power series about $\\beta_0$. The four-term sum $Z(\\beta)$ is therefore real analytic near $\\beta_0$ by [F5]\u2013[F6], and $Z(\\beta_0)>0$ by step 2.1. Put $y_0=\\log Z(\\beta_0)$. By [F8], $\\exp(y_0)=Z(\\beta_0)$; by [F7], $\\exp'(y_0)=\\exp(y_0)=Z(\\beta_0)\\ne0$. The real analytic inverse theorem gives a local analytic inverse to $\\exp$ near $Z(\\beta_0)$, and [F8] identifies that inverse with $\\log$. The composition clause of [F6] now makes $\\log Z$ real analytic near $\\beta_0$. Since $\\beta_0$ was arbitrary, $-\\beta^{-1}\\log Z$ is real analytic for every $\\beta>0$: the identity and constant functions have local polynomial series, so the quotient clause of [F6] makes $\\beta\\mapsto\\beta^{-1}$ analytic on this domain. Thus the finite-volume free energy has no singularity at the entanglement threshold.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $J>0$, the lowest triplet energy is $J-2|h|$. It equals the singlet energy $-3J$ exactly at $|h|=2J$. The two energy levels can cross as parameters vary, but step 2.1 is a strictly positive finite sum of exponentials at every $\\beta>0$, so this zero-temperature ground-space crossing creates no finite-temperature singularity.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof 2.1 sums exactly four positive Boltzmann weights. In 2.2 the excited list can be empty at J=h=0; then D_beta=g=4 and the entropy is k_B log4."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.2 covers J=0 at zero field, where all four levels are degenerate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.1\u20132.1 include h=0 and its three triplet weights in the finite partition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 treats the ground-space multiplicities for J<0 and J=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.2\u20134.1 cover the zero-temperature limit and the finite-\u03b2 field crossing."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof 1.1 gives all four energy vectors explicitly;2.2 chooses a minimum of that finite list and sums its multiplicities, requiring no infinite selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "At h=0,J>0, Proof 2.1 invokes the exact dimer criterion: an entangled Gibbs state must have beta J>log(3)/4, since at or below equality [F3] supplies separability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "At h=0,J>0, beta J>log(3)/4 gives the entangled branch of [F3] in Proof 2.1; equality is explicitly separable."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero field",
+          "calculation": "At h=0 the triplet weights combine to 3e^{\u2212\u03b2J}, giving Z=e^{3\u03b2J}+3e^{\u2212\u03b2J}; the \u03b2J separability boundary is the finite-state threshold already proved.",
+          "disposition": "Four-level partition and threshold cross-check."
+        },
+        {
+          "case": "zero-field ground multiplicities",
+          "calculation": "At h=0, J>0 has one singlet ground state, J<0 has three triplet ground states, and J=0 has all four states degenerate; the entropy limits are k_B log 1, k_B log 3, and k_B log 4.",
+          "disposition": "Finite degeneracy check of step 2.2."
+        }
+      ]
+    },
+    "pthm-qsm-commuting-lattice-countermodels": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-qsm-models-statistics-and-preparation",
+          "source_section": "Postulate",
+          "quote": "For a declared nonrelativistic quantum model, adopt a complex Hilbert space, positive trace-one states, and Born probabilities for its specified measurements. Specify the one-particle modes, Hamiltonian and interactions. When the modeled particles are assigned bosonic or fermionic statistics, choose the symmetric or antisymmetric sector, respectively, as an independent physical assumption. This selection is not derived from the Fock construction or a nonrelativistic spin-statistics theorem.\n\nFor a canonical preparation at inverse temperature $\\beta=(k_BT)^{-1}>0$, adopt $\\rho=Z^{-1}e^{-\\beta H}$ on the declared fixed-particle-number sector only when $0<Z=\\operatorname{Tr}e^{-\\beta H}<\\infty$. For a grand-canonical preparation with chemical potential $\\mu$, adopt $\\rho=\\Xi^{-1}e^{-\\beta(H-\\mu N)}$ only when the corresponding trace is finite and positive, as explicitly checked for the diagonal Fock model in [[lem-qsm-models-diagonal-occupation-trace]]. Fixed-number and grand-canonical preparations are distinct assumptions; in general the latter has independent mode occupations while conditioning on fixed total number couples them.\n\nThe assignments of $U=\\operatorname{Tr}(\\rho H)$, $S=-k_B\\operatorname{Tr}(\\rho\\log\\rho)$ and thermodynamic potentials are model definitions where their traces exist. An identification with measured macroscopic thermodynamic quantities requires a separate physical bridge. No thermalization mechanism, empirical value, or law for a particular material is postulated here.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-qsm-pauli-two-qubit-conventions",
+          "source_section": "Definition",
+          "quote": "Use the usual complex field $\\mathbb C$; its scalar metric is $d_{\\mathbb C}(z,w)=|z-w|$ from [[def-complex-metric-convergence-and-continuity]]. On $\\mathbb C^2$, use the standard basis $e_0=(1,0)$, $e_1=(0,1)$ and inner product $\\langle x,y\\rangle=x_0\\overline{y_0}+x_1\\overline{y_1}$, linear in its first variable. On $\\mathbb R^3$, define $a\\cdot b:=a_xb_x+a_yb_y+a_zb_z$, $|a|:=\\sqrt{a\\cdot a}$ using the unique nonnegative square root from [[thm-nth-roots-exist]], and the standard unit vectors $\\mathbf e_x=(1,0,0)$, $\\mathbf e_y=(0,1,0)$, and $\\mathbf e_z=(0,0,1)$.\n\nUse the ordered tensor-product basis $(e_0\\otimes e_0,e_0\\otimes e_1,e_1\\otimes e_0,e_1\\otimes e_1)$ of $\\mathbb C^2\\otimes\\mathbb C^2$. Its inner product is the linear-first product inner product, specified on elementary tensors by $\\langle u\\otimes v,u'\\otimes v'\\rangle=\\langle u,u'\\rangle\\langle v,v'\\rangle$ and extended sesquilinearly. For two $2\\times2$ matrices $A,B$, their tensor product acts by $(A\\otimes B)(u\\otimes v)=Au\\otimes Bv$ and is extended linearly.\n\nWrite $I_2:=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ for the identity on $\\mathbb C^2$, use $I:=I_2$ when its domain is clear, and set $I_4:=I_2\\otimes I_2$. Define the everywhere-defined matrices\n\n$$\\sigma_x=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y=\\begin{pmatrix}0&-i\\\\i&0\\end{pmatrix},\\qquad \\sigma_z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nDefine the dimensionless exchange matrix\n\n$$C:=\\sigma_x\\otimes\\sigma_x+\\sigma_y\\otimes\\sigma_y+\\sigma_z\\otimes\\sigma_z.$$\n\nFor a finite matrix $A$, $\\operatorname{tr}(A)$ denotes the sum of its diagonal entries in the displayed basis. Each $\\sigma_j$ and $C$ is Hermitian and has full finite-dimensional domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tdmath-ising-chain-limit",
+          "source_section": "Statement",
+          "quote": "Fix $\\beta>0$ and $J,h\\in\\mathbb R$. For $N\\ge2$, let $s_i\\in\\{-1,1\\}$, $s_{N+1}=s_1$, $H_N(s)=-J\\sum_{i=1}^Ns_is_{i+1}-h\\sum_{i=1}^Ns_i$, and $Z_N=\\sum_se^{-\\beta H_N(s)}$. Define $\\cosh x:=(e^x+e^{-x})/2$, $\\sinh x:=(e^x-e^{-x})/2$, and $T_{s,t}:=e^{\\beta Jst+\\beta h(s+t)/2}$. Then $Z_N=\\operatorname{tr}(T^N)=\\lambda_+^N+\\lambda_-^N$, where $\\lambda_\\pm=e^{\\beta J}\\cosh(\\beta h)\\pm\\sqrt{e^{2\\beta J}\\sinh^2(\\beta h)+e^{-2\\beta J}}$ and $\\lambda_+>|\\lambda_-|$. Therefore $N^{-1}\\log Z_N\\to\\log\\lambda_+$. On every compact subset of $(0,\\infty)\\times\\mathbb R^2$ in $(\\beta,J,h)$, the limit and its derivatives of every fixed finite order converge uniformly. This is a result for the specified one-dimensional periodic two-state model only.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-csm-ising-ring-correlation",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge2$, let $\\Omega_N=\\{-1,1\\}^N$ with cyclic indexing $s_{N+1}=s_1$, and count exactly the $N$ indexed periodic bonds (so $N=2$ has two bonds). For coupling $J\\ge0$ in joules, zero field, and $\\beta>0$ in J$^{-1}$, adopt the finite canonical law\n$$\\mathbb P_N(s)=Z_N^{-1}\\exp\\!\\left(\\beta J\\sum_{i=1}^Ns_is_{i+1}\\right).$$\nSet $t=\\tanh(\\beta J)\\in[0,1)$. For $1\\le r\\le N-1$,\n$$\\mathbb E_N[s_i]=0,\\qquad \\mathbb E_N[s_i s_{i+r}]=\\frac{t^r+t^{N-r}}{1+t^N}.$$\nFor fixed $r$ and $N\\to\\infty$, the correlation tends to $t^r$, with absolute error at most $t^{N-r}+t^{N+r}$. If $J>0$, the limiting correlation length in lattice spacings is $\\xi=-1/\\log t$. The zero-field susceptibility per spin, defined by $\\chi_N:=N^{-1}\\partial_h\\mathbb E_{N,h}[\\sum_i s_i]|_{h=0}$ for the field-coupled law with energy $-\\!J\\sum_i s_is_{i+1}-h\\sum_i s_i$, has limit\n$$\\chi_\\infty=\\beta\\frac{1+t}{1-t}.$$\nThe limiting free energy per spin is $-\\beta^{-1}\\log(2\\cosh(\\beta J))$, analytic at every finite positive temperature. No statement is made for arbitrary one-dimensional interactions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-csm-nonadditive-phase-countermodel",
+          "source_section": "Statement",
+          "quote": "Fix $N\\ge1$ and $\\epsilon>0$ joules. Let $\\Omega_N=A_N\\sqcup B_N\\sqcup C_N$ be disjoint finite sectors with $|A_N|=1$, $|B_N|=1$, and $|C_N|=4^N$, and define the energy $H_N$ to be $0$, $N\\epsilon$, and $2N\\epsilon$ on those sectors, respectively. The model is global and size-dependent. Here *product-additive* means that one fixed finite one-site alphabet $\\Gamma$ supplies $\\Omega_N=\\Gamma^N$ for every $N$, and one fixed one-site energy function $h:\\Gamma\\to\\mathbb R$ (with values measured in joules) satisfies $H_N(\\gamma_1,\\ldots,\\gamma_N)=\\sum_{i=1}^Nh(\\gamma_i)$. The present family is non-product-additive; no local, short-range, or fluid interpretation is assumed.\n\nUse counting measure on each $\\Omega_N$ as the reference measure, so every individual state has weight one. For a real inverse-energy parameter $\\beta$ in joules$^{-1}$, define the finite exponential-tilt probability by\n$$Z_N(\\beta)=\\sum_{\\omega\\in\\Omega_N}e^{-\\beta H_N(\\omega)}=1+e^{-\\beta N\\epsilon}+4^Ne^{-2\\beta N\\epsilon},\\qquad P_{\\beta,N}(\\omega)=\\frac{e^{-\\beta H_N(\\omega)}}{Z_N(\\beta)}.$$\nFor $\\beta>0$ this is the adopted canonical preparation. For $\\beta\\le0$ it is only the same finite counting formula used algebraically; no negative-temperature reservoir is asserted. Also, for a shell half-width $\\Delta$ in joules with $0\\le\\Delta<N\\epsilon$, define $\\mathcal S_{N,\\Delta}=\\{\\omega:|H_N(\\omega)-N\\epsilon|\\le\\Delta\\}$ and give it the uniform counting probability $Q_{N,\\Delta}(\\omega)=|\\mathcal S_{N,\\Delta}|^{-1}$ for $\\omega\\in\\mathcal S_{N,\\Delta}$.\n\nFor every real $\\beta$, the finite exponential-tilt probability of $B_N$ obeys\n$$P_{\\beta,N}(B_N)\\le\\frac{1}{2^{N+1}+1},$$\nwhereas the shell probability of $B_N$ is $1$. Define the dimensionless normalized log partition function $\\psi_N(\\beta)=N^{-1}\\log Z_N(\\beta)$. Then\n$$\\psi_N(\\beta)\\longrightarrow\\psi(\\beta):=\\max\\{0,\\log4-2\\beta\\epsilon\\},\\qquad 0\\le\\psi_N(\\beta)-\\psi(\\beta)\\le\\frac{\\log3}{N}.$$\nFor $\\beta>0$, define the canonical mean energy per member by $u_N(\\beta):=N^{-1}\\mathbb E_{P_{\\beta,N}}[H_N]$ and, when the limit exists, set $u(\\beta):=\\lim_{N\\to\\infty}u_N(\\beta)$. The corner occurs at the positive inverse temperature $\\beta_c=(\\log2)/\\epsilon$. The limit $u(\\beta)$ exists for every $\\beta>0$ and equals $2\\epsilon$ for $0<\\beta<\\beta_c$, $\\epsilon$ at $\\beta=\\beta_c$, and $0$ for $\\beta>\\beta_c$. In this item, a **first-order transition point** means a positive-$\\beta$ point where $u$ has finite but unequal one-sided limits; thus the jump at $\\beta_c$ is first order under this explicit convention. Every finite-$N$ function $\\psi_N$ is real analytic. This is one explicit global finite-state countermodel, not a universal criterion for phase transitions or ensemble equivalence in short-range matter.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each $Z_i$ is diagonal in the basis $|s_1,\\ldots,s_N\\rangle$, with eigenvalue $s_i$. Therefore $H_N^{\\mathrm q}|s\\rangle=H_N^{\\mathrm{cl}}(s)|s\\rangle$. The finite canonical trace is the sum of these positive weights, so $Z_N^{\\mathrm q}=\\sum_s e^{-\\beta H_N^{\\mathrm{cl}}(s)}$ and the diagonal Gibbs probability of each $|s\\rangle$ equals the classical probability of $s$. This proves the claimed finite correspondence without interpreting off-diagonal quantum observables classically.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The direct sum in the second model has multiplicities $1,1,4^N$, so summing its three energy weights gives $Z_N^{\\mathrm g}=1+x+4^Nx^2$ where $x=e^{-\\beta N\\epsilon}>0$. Since $(1-2^Nx)^2\\ge0$, $1+4^Nx^2\\ge2^{N+1}x$, whence the middle-sector probability $x/Z_N^{\\mathrm g}\\le(2^{N+1}+1)^{-1}$. For $0\\le\\Delta<N\\epsilon$, the sectors at energies $0$ and $2N\\epsilon$ lie exactly $N\\epsilon$ from the middle energy; the only basis vector in the shell is $|B\\rangle$, so $\\rho_{N,\\Delta}^{\\mathrm{shell}}=|B\\rangle\\langle B|$ and $\\operatorname{tr}(\\rho_{N,\\Delta}^{\\mathrm{shell}}|B\\rangle\\langle B|)=1$. These are the same finite-model values recorded in [F4], now obtained from the explicit Hilbert-space realization.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [F2] to this identical finite energy function gives the displayed transfer eigenvalues, limiting normalized log partition, and compact-uniform derivative convergence. Its strict eigenvalue gap and positive $\\lambda_+$ imply an analytic finite-temperature limit. In the restricted case $J\\ge0,h=0$, the equality of diagonal probabilities from step 1.1 transports each $\\sigma_z$ correlation to the classical spin correlation in [F3], under exactly that supplier's hypotheses.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Put $M_N=\\max\\{1,4^Nx^2\\}$. If $x\\le1$, then $x\\le M_N$; if $x>1$, then $4^Nx^2\\ge x$ for $N\\ge1$. Hence $M_N\\le Z_N^{\\mathrm g}\\le3M_N$, and $N^{-1}\\log M_N=\\max\\{0,\\log4-2\\beta\\epsilon\\}$. Taking logarithms gives the stated error bound and limit. Since $\\log4=2\\log2$, the two branches meet at $\\beta_c=(\\log2)/\\epsilon$. For $\\beta<\\beta_c$, the $4^Nx^2$ sector dominates and the mean energy per member tends to $2\\epsilon$; for $\\beta>\\beta_c>0$, the energy-zero sector dominates and the mean tends to $0$. At equality the three weights are $1,2^{-N},1$, so the mean tends to $\\epsilon$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Each finite partition function in both models is a finite sum of positive real exponentials, so it is real analytic and has no finite-$N$ thermodynamic singularity. The Ising limiting analytic statement follows under [F2]'s positive eigenvalue gap; the corner in step 2.2 belongs only to the separate non-product-additive limiting family.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The ring requires N>=2 and the global model N>=1. Proof 1.2 evaluates the shell as the singleton |B>, so its state normalization never divides by an empty shell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.2 applies to \u03b2=0 in the algebraic finite-weight extension, with x=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.2\u20132.2 include N=1 for the global three-sector construction; the Ising ring is explicitly restricted to N\u22652."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 checks the equal outer-sector contributions at \u03b2=\u03b2_c and the limiting middle-sector mean."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.2\u20132.2 prove the shell condition for the closed lower endpoint \u0394=0 and strict upper bound \u0394<N\u03b5, and compute the \u03b2_c branch point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The ring product basis and direct-sum vectors |A>,|B> are specified; Proof 1.2 identifies the shell by its sole vector and has no choice-dependent construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement proves finite diagonal correspondence, a probability bound, and asymptotic branches; it posits no general equivalence criterion for phase transitions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The global limiting corner does not assert a converse to the commuting Ising correspondence; Proof 2.2 evaluates one specified nonadditive family only."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=2 periodic ring",
+          "calculation": "The convention counts the two indexed bonds separately, so the diagonal energy is \u22122J s\u2081s\u2082\u2212h(s\u2081+s\u2082), exactly the two-bond classical ring expression.",
+          "disposition": "Smallest permitted quantum Ising ring check."
+        },
+        {
+          "case": "global model at N=1 and \u03b2=\u03b2_c",
+          "calculation": "At \u03b2_c \u03b5=log 2, the sector weights are 1, 1/2, and 1, so Z\u2081=5/2 and the middle-sector probability is 1/5, below its bound 1/5 exactly.",
+          "disposition": "Finite smallest-size check of the exact sector bound."
+        },
+        {
+          "case": "critical parameter \u03b2_c",
+          "calculation": "At \u03b2=\u03b2_c, the global-sector contributions are 1, 2^{\u2212N}, and 1, so Z_N=2+2^{\u2212N} and the mean energy per member tends to \u03b5.",
+          "disposition": "Exact finite critical sequence check."
+        }
+      ]
+    },
+    "pthm-qsm-onsite-interacting-atoms": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-qsm-models-statistics-and-preparation",
+          "source_section": "Postulate",
+          "quote": "For a declared QSM model, let $I$ be a specified finite or countably infinite mode set with a fixed enumeration and let $\\mathfrak h=\\ell^2(I)$. The model assigns a nonzero separable complex Hilbert space $\\mathcal H$ and declares whether it is a fixed-particle-number sector or the Fock space $\\mathcal F_\\pm(\\mathfrak h)$ of [[def-qsm-identical-particle-fock-sectors]]. By that definition, $\\mathcal F_\\pm(\\mathfrak h)$ is the Hilbert direct sum of the symmetric or antisymmetric $n$-particle tensor sectors for $n\\ge0$, including the vacuum sector $\\mathbb C$. The assignment is a physical model assumption. The symmetric or antisymmetric sector is selected independently for bosons or fermions; this selection is not derived from the Fock construction or from a nonrelativistic spin-statistics theorem.\n\nThe words **pure preparation** and **state** have the exact meanings in clauses (i)\u2013(iii) of [[post-nrqm-framework-state-and-composition]]: a pure preparation is a unit ray in $\\mathcal H$, and a general state is a self-adjoint positive trace-class operator $\\rho$ with $\\operatorname{tr}\\rho=1$. These mathematical state definitions are used for the QSM Hilbert spaces declared above; the reference does not extend that NRQM postulate's fixed-particle-number physical scope to a variable-number grand-canonical system. The countable-choice hypothesis is [[def-countable-choice]].\n\nA **sharp measurement** is specified by a densely defined self-adjoint operator $A:D(A)\\subseteq\\mathcal H\\to\\mathcal H$, its declared physical unit, and its spectral projection-valued measure $E_A$ on the Borel sets of $\\mathbb R$, as in clauses (i)\u2013(iii) of [[post-nrqm-framework-observable-and-probability]]. Here a projection-valued measure is a map from Borel sets to orthogonal projections with $E_A(\\varnothing)=0$, $E_A(\\mathbb R)=I$, $E_A(B\\cap C)=E_A(B)E_A(C)$, and strong countable additivity. The adopted Born law is $\\mu^A_\\rho(B):=\\operatorname{tr}(\\rho E_A(B))$ for Borel $B\\subseteq\\mathbb R$; clauses (a)\u2013(b) of [[lem-nrqm-composites-density-and-scalar-spectral-probability]] give a probability measure under $\\mathrm{AC}_\\omega$. For a finite unsharp measurement, a specified finite family of bounded effects $0\\le F_a\\le I$ with $\\sum_aF_a=I$ has outcome probabilities $\\operatorname{tr}(\\rho F_a)$, as in clause (iv) of [[post-nrqm-framework-observable-and-probability]]. The arbitrary self-adjoint spectral construction in that postulate also assumes the Axiom of Choice; any use inherits that exact mathematical premise.\n\nAn Axiom of Choice hypothesis [[def-axiom-of-choice]] accompanies the general self-adjoint spectral construction in P2. A model Hamiltonian is a densely defined self-adjoint operator $H:D(H)\\subseteq\\mathcal H\\to\\mathcal H$ representing energy, with its domain and energy unit declared. For a canonical preparation, write $H_N$ for the Hamiltonian on the declared fixed-number sector and adopt $\\rho=Z^{-1}e^{-\\beta H_N}$ only when the spectral-calculus exponential has $0<Z=\\operatorname{tr}(e^{-\\beta H_N})<\\infty$. For a grand-canonical preparation on the declared Fock space, let $|n|:=\\sum_jn_j$ for a finite-support occupation configuration $n$ of [[lem-qsm-fock-occupation-basis-and-car-relations]] and define the particle-number operator by $N|n\\rangle=|n||n\\rangle$ on $D(N)=\\{c\\in\\ell^2(\\Omega_\\pm):\\sum_n|n|^2|c_n|^2<\\infty\\}$, as in [[lem-qsm-models-diagonal-occupation-trace]]. Require $K_\\mu$ to be a specified self-adjoint realization of $H-\\mu N$ on a stated domain; self-adjointness of $H$ and $N$ separately does not by itself specify a self-adjoint domain for their difference. For $T>0$ in K, $k_B>0$ in J K$^{-1}$, $\\beta=(k_BT)^{-1}$ in J$^{-1}$, and chemical potential $\\mu$ in J, adopt $\\rho=\\Xi^{-1}e^{-\\beta K_\\mu}$ only when $0<\\Xi=\\operatorname{tr}(e^{-\\beta K_\\mu})<\\infty$.\n\nFor the additive diagonal Fock model, the trace and occupation statements of [[lem-qsm-models-diagonal-occupation-trace]] hold only under that lemma's mode-summability hypotheses and $\\mathrm{AC}_\\omega$. Under those hypotheses its finite collections of grand-canonical mode occupations are independent. This independence is not asserted for interacting Hamiltonians; conditioning a product grand law on a fixed total number generally couples the modes.\n\nIf the spectral law $\\mu^H_\\rho$ has finite first absolute moment, define the model mean energy by $U(\\rho;H):=\\int_{\\mathbb R}\\lambda\\,d\\mu^H_\\rho(\\lambda)$. If the nonzero eigenvalues $r_j$ of $\\rho$, repeated with multiplicity, satisfy $\\sum_j-r_j\\log r_j<\\infty$, define its von Neumann entropy by $S(\\rho):=-k_B\\sum_jr_j\\log r_j$, with $0\\log0:=0$; where finite, this is $-k_B\\operatorname{tr}(\\rho\\log\\rho)$. This postulate does not define Helmholtz free energy, grand potential, or other thermodynamic potentials; model-specific items define them with their own hypotheses. Identifying these quantities with measured macroscopic thermodynamic variables requires a separate physical bridge. No thermalization mechanism, empirical value, or law for a particular material is postulated here.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-qsm-fock-occupation-basis-and-car-relations",
+          "source_section": "Statement",
+          "quote": "Let $I$ and $\\mathcal F_\\pm(\\ell^2(I))$ be as in\n[[def-qsm-identical-particle-fock-sectors]]. Define\n$$\n\\Omega_B:=\\{m:I\\to\\mathbb N_0:m\\text{ has finite support}\\},\\qquad \\Omega_F:=\\{m:I\\to\\{0,1\\}:m\\text{ has finite support}\\}.\n$$\nFor either statistics choice, write $|m|=\\sum_jm_j$. If $m\\in\\Omega_B$, choose the elementary tensor $x_m$ containing $m_j$ copies of each mode $j$ in the fixed order and set\n$$\n|m\\rangle_B:=\\sqrt{\\frac{|m|!}{\\prod_jm_j!}}\\,P_+^{(|m|)}x_m.\n$$\nIf $m\\in\\Omega_F$, list its occupied modes increasingly in the fixed enumeration, let $x_m$ be their elementary tensor and set\n$$\n|m\\rangle_F:=\\sqrt{|m|!}\\,P_-^{(|m|)}x_m.\n$$\nFor $|m|=0$, both vectors are the vacuum. These vectors form orthonormal bases and define unitary identifications $\\mathcal F_+(\\ell^2(I))\\cong\\ell^2(\\Omega_B)$ and $\\mathcal F_-(\\ell^2(I))\\cong\\ell^2(\\Omega_F)$.\n\nOn the finite-support span $\\mathcal D_{\\rm fin}$ of the bosonic basis, define\n$$\na_j|m\\rangle_B=\\sqrt{m_j}|m-\\mathbf1_j\\rangle_B,\\qquad a_j^\\dagger|m\\rangle_B=\\sqrt{m_j+1}|m+\\mathbf1_j\\rangle_B,\n$$\nwhere the annihilation term is zero when $m_j=0$. Their maximal closed extensions have domains\n$$\nD(a_j)=\\left\\{c:\\sum_{m\\in\\Omega_B}m_j|c_m|^2<\\infty\\right\\},\\qquad D(a_j^\\dagger)=\\left\\{c:\\sum_{m\\in\\Omega_B}(m_j+1)|c_m|^2<\\infty\\right\\},\n$$\nand $a_j^\\dagger=a_j^*$. On $\\mathcal D_{\\rm fin}$, they satisfy\n$[a_i,a_j^\\dagger]=\\delta_{ij}I$, $[a_i,a_j]=0$, and $[a_i^\\dagger,a_j^\\dagger]=0$.\n\nOn the fermionic basis define\n$$\nc_j|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}m_j|m-\\mathbf1_j\\rangle_F,\\qquad c_j^\\dagger|m\\rangle_F=(-1)^{\\sum_{i<j}m_i}(1-m_j)|m+\\mathbf1_j\\rangle_F.\n$$\nThese operators are bounded on the full fermionic Fock space and satisfy\n$\\{c_i,c_j^\\dagger\\}=\\delta_{ij}I$ and $\\{c_i,c_j\\}=\\{c_i^\\dagger,c_j^\\dagger\\}=0$. These are mathematical sector relations; they do not select a physical species or imply a spin-statistics theorem.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-models-diagonal-occupation-trace",
+          "source_section": "Statement",
+          "quote": "Assume [[def-countable-choice]]. Let $I$ be finite or countably infinite with a specified enumeration, let $m\\in\\Omega_\\pm$ be the occupation configurations of [[lem-qsm-fock-occupation-basis-and-car-relations]], and let $\\epsilon_j\\in\\mathbb R$ be finite mode energies. For each finite-support configuration put\n$$\nE(m):=\\sum_j\\epsilon_jm_j,\\qquad N(m):=|m|=\\sum_jm_j.\n$$\nThese are finite sums. On $\\ell^2(\\Omega_\\pm)$, define the real diagonal multipliers\n$$\nD(H)=\\left\\{c:\\sum_mE(m)^2|c_m|^2<\\infty\\right\\},\\quad (Hc)_m=E(m)c_m,\n$$\n$$\nD(N)=\\left\\{c:\\sum_m|m|^2|c_m|^2<\\infty\\right\\},\\quad (Nc)_m=|m|c_m,\n$$\nand, for $\\mu\\in\\mathbb R$,\n$$\nD(K_\\mu)=\\left\\{c:\\sum_m|E(m)-\\mu|m||^2|c_m|^2<\\infty\\right\\},\\quad (K_\\mu c)_m=(E(m)-\\mu|m|)c_m.\n$$\nEach is self-adjoint on its displayed domain. No equality between $D(K_\\mu)$ and $D(H)\\cap D(N)$ is asserted.\n\nFor $\\beta>0$, set $q_j=e^{-\\beta(\\epsilon_j-\\mu)}$. In the bosonic case assume\n$$\n0<q_j<1,\\qquad q_*:=\\sup_jq_j<1,\\qquad \\sum_jq_j<\\infty;\n$$\nHere $q_*=0$ by convention when $I$ is empty; for nonempty $I$ the displayed supremum is unchanged. In the fermionic case assume $q_j>0$, $\\sum_jq_j<\\infty$, and only finitely many gaps $\\epsilon_j-\\mu$ are negative. Define the positive diagonal multiplier $G_{\\beta,\\mu}$ by $G_{\\beta,\\mu}|m\\rangle=e^{-\\beta(E(m)-\\mu|m|)}|m\\rangle$. Then $G_{\\beta,\\mu}$ is trace class, with\n$$\n\\Xi_B=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1-q_j)^{-1}<\\infty,\\qquad \\Xi_F=\\operatorname{Tr}G_{\\beta,\\mu}=\\prod_j(1+q_j)<\\infty.\n$$\nThus $\\rho_{\\beta,\\mu}=\\Xi^{-1}G_{\\beta,\\mu}$ is a positive trace-class operator of trace one. Its finite-mode marginals are independent: bosonic occupation $n_j\\in\\mathbb N_0$ has law $(1-q_j)q_j^{n_j}$, and fermionic occupation $n_j\\in\\{0,1\\}$ has probabilities $(1+q_j)^{-1}$ and $q_j(1+q_j)^{-1}$. In particular\n$$\n\\mathbb E_BN_j=\\frac{q_j}{1-q_j},\\quad \\operatorname{Var}_B(N_j)=\\frac{q_j}{(1-q_j)^2},\\qquad \\mathbb E_FN_j=\\frac{q_j}{1+q_j},\\quad \\operatorname{Var}_F(N_j)=\\frac{q_j}{(1+q_j)^2}.\n$$\nThe total number has finite mean and variance under the stated mode conditions. The trace hypotheses alone do not imply finite energy moments or differentiability in $\\beta,\\mu$.\n\nFor an additional compact-parameter envelope, the corresponding response identities hold. For fixed $\\mu$, if for every compact $B\\subset J\\subset(0,\\infty)$ a summable $(a_m)$ satisfies $(1+|E(m)-\\mu|m||^2)e^{-\\beta(E(m)-\\mu|m|)}\\le a_m$ for all $m$ and $\\beta\\in B$, then $-\\partial_\\beta\\log\\Xi=\\mathbb E(K_\\mu)$ and $\\partial_\\beta^2\\log\\Xi=\\operatorname{Var}(K_\\mu)$. If $(\\beta,\\mu)$ varies over an open set and a summable compact-parameter envelope dominates $e^{-\\beta(E(m)-\\mu|m|)}(1+|E(m)|^2+|m|^2)$, then at fixed $\\beta$, $\\partial_\\mu\\mathbb E(N)=\\beta\\operatorname{Var}(N)$ and $\\partial_\\mu\\mathbb E(E)=\\beta\\operatorname{Cov}(E,N)$. These stronger moment envelopes are additional hypotheses, not consequences of trace-class normalization.\n\nFor a finite mode set $J$, the canonical fixed-number coefficients are defined by\n$$\n\\prod_{j\\in J}(1-ze^{-\\beta\\epsilon_j})^{-1}=\\sum_{N\\ge0}Z_{B,N}(J)z^N,\\qquad \\prod_{j\\in J}(1+ze^{-\\beta\\epsilon_j})=\\sum_{N=0}^{|J|}Z_{F,N}(J)z^N.\n$$\nEach coefficient is the sum of the Boltzmann weights over the corresponding number sector; for a countable mode set it is the increasing limit over finite mode sets and is finite under the stated grand-trace hypotheses. A fixed-number law is the grand law conditioned on total number, so its occupations are generally coupled. The oscillator specialization uses the actual one-particle Hermite basis and diagonal domain of [[thm-nrqm-oscillator-oscillator-scaling-and-exact-realization]], not a formal differential eigenfunction list.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-qsm-models-statistics-and-preparation",
+          "source_section": "Postulate",
+          "quote": "For a declared QSM model, let $I$ be a specified finite or countably infinite mode set with a fixed enumeration and let $\\mathfrak h=\\ell^2(I)$. The model assigns a nonzero separable complex Hilbert space $\\mathcal H$ and declares whether it is a fixed-particle-number sector or the Fock space $\\mathcal F_\\pm(\\mathfrak h)$ of [[def-qsm-identical-particle-fock-sectors]]. By that definition, $\\mathcal F_\\pm(\\mathfrak h)$ is the Hilbert direct sum of the symmetric or antisymmetric $n$-particle tensor sectors for $n\\ge0$, including the vacuum sector $\\mathbb C$. The assignment is a physical model assumption. The symmetric or antisymmetric sector is selected independently for bosons or fermions; this selection is not derived from the Fock construction or from a nonrelativistic spin-statistics theorem.\n\nThe words **pure preparation** and **state** have the exact meanings in clauses (i)\u2013(iii) of [[post-nrqm-framework-state-and-composition]]: a pure preparation is a unit ray in $\\mathcal H$, and a general state is a self-adjoint positive trace-class operator $\\rho$ with $\\operatorname{tr}\\rho=1$. These mathematical state definitions are used for the QSM Hilbert spaces declared above; the reference does not extend that NRQM postulate's fixed-particle-number physical scope to a variable-number grand-canonical system. The countable-choice hypothesis is [[def-countable-choice]].\n\nA **sharp measurement** is specified by a densely defined self-adjoint operator $A:D(A)\\subseteq\\mathcal H\\to\\mathcal H$, its declared physical unit, and its spectral projection-valued measure $E_A$ on the Borel sets of $\\mathbb R$, as in clauses (i)\u2013(iii) of [[post-nrqm-framework-observable-and-probability]]. Here a projection-valued measure is a map from Borel sets to orthogonal projections with $E_A(\\varnothing)=0$, $E_A(\\mathbb R)=I$, $E_A(B\\cap C)=E_A(B)E_A(C)$, and strong countable additivity. The adopted Born law is $\\mu^A_\\rho(B):=\\operatorname{tr}(\\rho E_A(B))$ for Borel $B\\subseteq\\mathbb R$; clauses (a)\u2013(b) of [[lem-nrqm-composites-density-and-scalar-spectral-probability]] give a probability measure under $\\mathrm{AC}_\\omega$. For a finite unsharp measurement, a specified finite family of bounded effects $0\\le F_a\\le I$ with $\\sum_aF_a=I$ has outcome probabilities $\\operatorname{tr}(\\rho F_a)$, as in clause (iv) of [[post-nrqm-framework-observable-and-probability]]. The arbitrary self-adjoint spectral construction in that postulate also assumes the Axiom of Choice; any use inherits that exact mathematical premise.\n\nAn Axiom of Choice hypothesis [[def-axiom-of-choice]] accompanies the general self-adjoint spectral construction in P2. A model Hamiltonian is a densely defined self-adjoint operator $H:D(H)\\subseteq\\mathcal H\\to\\mathcal H$ representing energy, with its domain and energy unit declared. For a canonical preparation, write $H_N$ for the Hamiltonian on the declared fixed-number sector and adopt $\\rho=Z^{-1}e^{-\\beta H_N}$ only when the spectral-calculus exponential has $0<Z=\\operatorname{tr}(e^{-\\beta H_N})<\\infty$. For a grand-canonical preparation on the declared Fock space, let $|n|:=\\sum_jn_j$ for a finite-support occupation configuration $n$ of [[lem-qsm-fock-occupation-basis-and-car-relations]] and define the particle-number operator by $N|n\\rangle=|n||n\\rangle$ on $D(N)=\\{c\\in\\ell^2(\\Omega_\\pm):\\sum_n|n|^2|c_n|^2<\\infty\\}$, as in [[lem-qsm-models-diagonal-occupation-trace]]. Require $K_\\mu$ to be a specified self-adjoint realization of $H-\\mu N$ on a stated domain; self-adjointness of $H$ and $N$ separately does not by itself specify a self-adjoint domain for their difference. For $T>0$ in K, $k_B>0$ in J K$^{-1}$, $\\beta=(k_BT)^{-1}$ in J$^{-1}$, and chemical potential $\\mu$ in J, adopt $\\rho=\\Xi^{-1}e^{-\\beta K_\\mu}$ only when $0<\\Xi=\\operatorname{tr}(e^{-\\beta K_\\mu})<\\infty$.\n\nFor the additive diagonal Fock model, the trace and occupation statements of [[lem-qsm-models-diagonal-occupation-trace]] hold only under that lemma's mode-summability hypotheses and $\\mathrm{AC}_\\omega$. Under those hypotheses its finite collections of grand-canonical mode occupations are independent. This independence is not asserted for interacting Hamiltonians; conditioning a product grand law on a fixed total number generally couples the modes.\n\nIf the spectral law $\\mu^H_\\rho$ has finite first absolute moment, define the model mean energy by $U(\\rho;H):=\\int_{\\mathbb R}\\lambda\\,d\\mu^H_\\rho(\\lambda)$. If the nonzero eigenvalues $r_j$ of $\\rho$, repeated with multiplicity, satisfy $\\sum_j-r_j\\log r_j<\\infty$, define its von Neumann entropy by $S(\\rho):=-k_B\\sum_jr_j\\log r_j$, with $0\\log0:=0$; where finite, this is $-k_B\\operatorname{tr}(\\rho\\log\\rho)$. This postulate does not define Helmholtz free energy, grand potential, or other thermodynamic potentials; model-specific items define them with their own hypotheses. Identifying these quantities with measured macroscopic thermodynamic variables requires a separate physical bridge. No thermalization mechanism, empirical value, or law for a particular material is postulated here.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "2.2",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-analytic-germ-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge1$ and $a\\in\\mathbb R^n$. A real analytic germ at $a$ is an equivalence class of real functions agreeing on a neighborhood of $a$, represented on some polydisc $|x_i-a_i|<r_i$, $r_i>0$, by an absolutely convergent series $f(x)=\\sum_{\\alpha\\in\\mathbb N^n}c_\\alpha(x-a)^\\alpha$ with real coefficients. Here $0\\in\\mathbb N$, $\\alpha!=\\prod_i\\alpha_i!$, and $c_\\alpha=D^\\alpha f(a)/\\alpha!$. A vector germ has a finite positive number of such components, with a common polydisc obtained by taking coordinatewise minima of their radii.\n\nThe multi-index convention and absolute convergence are those of [[def-multivariable-power-series]]; for $n=1$ this agrees with [[def-real-analytic-function]]. The same coefficients define the complexification. Indeed choose a positive real polyradius $s<r$; absolute convergence at $a+s$ bounds $|c_\\alpha|s^\\alpha$ uniformly. [[thm-power-series-define-holomorphic-functions-in-several-variables]] therefore gives a holomorphic sum on the complex $s$-polydisc and the displayed derivative formula. Restriction to the real slice recovers $f$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].\n\nThis is a real power series centred at $0$ ([[def-real-power-series-and-radius-of-convergence]]). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "3.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "3.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "3.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]),\nso that $r^0 = 1$ for every $r$, including $r = 0$.\n\n1. If $|r| < 1$ then the series $\\sum r^k$ converges ([[def-series]]) and\n   $$\\sum_{k=0}^{\\infty} r^{k} \\;=\\; \\frac{1}{1-r} .$$\n2. If $|r| \\ge 1$ then $\\sum r^k$ diverges.\n\nThe series starts at $k = 0$ and its first term is $r^0 = 1$; in particular\n$\\sum_{k=0}^{\\infty} 2^{-k} = 2$, while the series starting at $k = 1$ sums to\n$1$. Which starting index is meant has to be said, and it is said here.",
+          "uses": [
+            "3.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-direct-comparison-test",
+          "source_section": "Statement",
+          "quote": "Let $(a_k)$ and $(b_k)$ be sequences of reals and suppose there is\n$K \\in \\mathbb{N}$ with\n\n$$0 \\;\\le\\; a_k \\;\\le\\; b_k \\qquad \\text{for all } k \\ge K .$$\n\nThen:\n\n1. if $\\sum b_k$ converges then $\\sum a_k$ converges ([[def-series]]);\n2. if $\\sum a_k$ diverges then $\\sum b_k$ diverges.\n\nThe same statement holds verbatim for series with a general starting index $m$,\napplied to the shifted sequences of [[def-series]].\n\nThe hypothesis is on the terms from some index on, not on all of them: finitely\nmany terms of either sequence may violate it, or be negative, without affecting\nthe conclusion. What may not be dropped is nonnegativity of $(a_k)$ from that\nindex on.",
+          "uses": [
+            "3.1",
+            "2.2",
+            "4.1",
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-power-series-define-holomorphic-functions-in-several-variables",
+          "source_section": "Statement",
+          "quote": "Fix $m\\ge1$, $a\\in\\mathbb C^m$, a polyradius $r$, a real $M\\ge0$ and\ncoefficients $c:\\mathbb N^m\\to\\mathbb C$ with\n\n$$|c_\\alpha|\\le M\\prod_{k<m}r_k^{-\\alpha_k}\\qquad\\text{for every multi-index }\\alpha.$$\n\nThen:\n\n1. for every $\\theta$ with $0<\\theta<1$ the series\n   $\\sum_\\alpha c_\\alpha(z-a)^\\alpha$ converges absolutely and uniformly on\n   $\\overline\\Delta_{\\theta r}(a)$, so its sum $g$ is defined on\n   $\\Delta_r(a)$;\n2. $g$ is holomorphic on $\\Delta_r(a)$, with\n   $$Dg(z)h=\\sum_{k<m}b_k(z)h_k,\\qquad b_k(z)=\\sum_{\\alpha}\\alpha_k\\,c_\\alpha(z-a)^{\\alpha-e_k},$$\n   the $k$th series running over the multi-indices with $\\alpha_k\\ge1$ and\n   converging absolutely on $\\Delta_r(a)$; equivalently\n   $\\partial_{z_k}g=b_k$;\n3. for every $\\theta$ with $0<\\theta<1$ the derived coefficients\n   $\\alpha_kc_\\alpha$, re-indexed as a power series, obey a bound of the same\n   shape on the polyradius $\\theta r$, so the differentiation may be iterated;\n   and every iterated complex partial derivative\n   $\\partial^\\beta_zg:=\\partial_{z_0}^{\\beta_0}\\cdots\\partial_{z_{m-1}}^{\\beta_{m-1}}g$\n   exists on $\\Delta_r(a)$ with\n   $$\\partial^\\beta_zg(a)=\\beta!\\,c_\\beta .$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-absolute-convergence-of-complex-series",
+          "source_section": "Statement",
+          "quote": "Every absolutely convergent complex series converges, and every rearrangement has the same sum. The conventions and prerequisite facts used below are recorded in [[def-complex-series-power-series-and-absolute-convergence]], [[thm-absolute-convergence-in-rn]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-tdmath-grand-response-covariance",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\Sigma,\\mu)$ be a measure space, let $w:X\\to[0,\\infty)$ and $X_a:X\\to\\mathbb R$ ($1\\le a\\le r$) be measurable, and let $U\\subseteq\\mathbb R^r$ be open. For $\\theta=(\\theta_1,\\ldots,\\theta_r)$, define $\\theta\\cdot X(x):=\\sum_{a=1}^r\\theta_aX_a(x)$. Set $Z(\\theta):=\\int w\\exp(\\theta\\cdot X)\\,d\\mu$ and assume $0<Z(\\theta)<\\infty$ on $U$. Suppose for every compact $K\\subset U$ there is an integrable $G_K\\ge0$ such that $w e^{\\theta\\cdot X}(1+\\sum_a|X_a|^2)\\le G_K$ pointwise for all $\\theta\\in K$. For the normalized density $p_\\theta=w e^{\\theta\\cdot X}/Z(\\theta)$, define $\\mathbb E_\\theta Y:=\\int Yp_\\theta\\,d\\mu$ when integrable and $\\operatorname{Cov}_\\theta(X_a,X_b):=\\mathbb E_\\theta[(X_a-\\mathbb E_\\theta X_a)(X_b-\\mathbb E_\\theta X_b)]$. Then $\\partial_a\\log Z=\\mathbb E_\\theta X_a$ and $\\partial_b\\mathbb E_\\theta X_a=\\operatorname{Cov}_\\theta(X_a,X_b)$. Thus the Hessian of $\\log Z$ is positive semidefinite. This is a mathematical model identity; it assumes no independence or absence of correlations.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "4.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carath\u00e9odory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The one-mode case of [F1] identifies the number basis with the standard basis of $\\ell^2(\\mathbb N_0)$, whose finite-support span is dense. For any real diagonal multiplier with entries $\\lambda_n$, testing the adjoint identity on each basis vector forces the adjoint image to have coordinates $\\lambda_nc_n$, so its adjoint domain is contained in $\\{c:\\sum_n\\lambda_n^2|c_n|^2<\\infty\\}$. Conversely, on that weighted domain [F11] makes the pairing bounded and identifies the adjoint action with the same multiplier. Thus its maximal diagonal domain is self-adjoint. Applying this calculation to $E_B(n)$, $n$, and $K_B(n)$ establishes the three domains in the Statement.",
+          "inputs": [
+            "given",
+            "A3",
+            "F1",
+            "F2",
+            "F11",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Consecutive Bose grand energies on the number basis [F1] satisfy $K_B(n+1)-K_B(n)=\\epsilon-\\mu+Un$, a strictly increasing affine sequence in $n$. It is positive at every $n\\ge0$ when $\\mu<\\epsilon$, so $0$ uniquely minimizes. For $r\\ge1$, it is negative through $n=r-1$ and positive from $n=r$ exactly when $\\epsilon+U(r-1)<\\mu<\\epsilon+Ur$, so $r$ uniquely minimizes. At $\\mu=\\epsilon+Ur$, the increment at $n=r$ is zero while all earlier increments are negative and all later increments positive; exactly $r,r+1$ minimize.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "The four Fermi basis states have grand energies $0$, $\\epsilon-\\mu-h$, $\\epsilon-\\mu+h$, and $2(\\epsilon-\\mu)+U$, respectively. Summing their four positive weights gives the displayed $\\Xi_F$, and summing $n_\\uparrow+n_\\downarrow$ or $n_\\uparrow n_\\downarrow$ against those weights gives the stated mean and double-occupation probability. The state is well-defined because this is a finite positive sum, as required by [A1] and [F3].",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "native46-domain-sum-identification",
+          "step": "2.1",
+          "claim": "For fixed real $a$ and $n\\ge0$, completing the square gives $|a|n\\le Un^2/4+a^2/U$. Hence, for $P_a(n)=Un^2/2+an$, $Un^2/4\\le|P_a(n)|+a^2/U$, so $n^2\\le(4/U)|P_a(n)|+4a^2/U^2$. Since $|P_a(n)|\\le1+P_a(n)^2$, this bound shows that the maximal diagonal domain associated with either quadratic sequence $E_B(n)$ or $K_B(n)$ is contained in $D(N_B)$. On $D(H_B)$, $K_Bc=H_Bc-\\mu N_Bc$ is square-summable, so $D(H_B)\\subseteq D(K_B)$; on $D(K_B)$, $H_Bc=K_Bc+\\mu N_Bc$ is square-summable, so $D(K_B)\\subseteq D(H_B)$. Thus $D(H_B)=D(K_B)\\subseteq D(N_B)$, and the operator sum $H_B-\\mu N_B$, whose domain is $D(H_B)\\cap D(N_B)$, equals $K_B$ on its maximal domain.",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "3.1",
+          "claim": "Put $a=\\epsilon-\\mu-U/2$. Completing the square gives $K_B(n)=\\frac U4n^2+\\frac U4(n+2a/U)^2-a^2/U\\ge\\frac U4n^2-a^2/U$. For $n\\ge1$, $n^2\\ge n$, so $e^{-\\beta K_B(n)}\\le e^{\\beta a^2/U}q^n$ with $q=e^{-\\beta U/4}$. Since $\\beta U/4>0$, [F5] gives $0<q<1$, and [F6] makes the geometric upper bound summable. The $n=0$ term is $1$, so $0<\\Xi_B<\\infty$ and [A1], [F3] give a well-defined normalized grand state for the exact operator $H_B-\\mu N_B=K_B$ from step 1.4. The free-mode product trace formula in [F2] is not used.",
+          "inputs": [
+            "given",
+            "A1",
+            "A3",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "In a strict interval with unique minimizer $r$, let $\\delta$ be the smaller positive adjacent energy gap from $r$ (use only the upward gap when $r=0$). For $n>r$, the gap is a sum of increments from step 1.2, each at least the upward gap at $r$; for $n<r$, it is a sum of reversed increments, each at least the downward gap from $r-1$. Hence $K_B(n)-K_B(r)\\ge\\delta|n-r|$. The total relative excited weight is therefore at most $2\\sum_{\\ell\\ge1}e^{-\\beta\\delta\\ell}=2e^{-\\beta\\delta}/(1-e^{-\\beta\\delta})$, which tends to zero. At a boundary $\\mu=\\epsilon+Ur$, the increments are $K_B(n+1)-K_B(n)=U(n-r)$, so exactly $r,r+1$ minimize. To the right, $K_B(r+1+\\ell)-K_B(r+1)=U(1+\\cdots+\\ell)\\ge U\\ell$; to the left, $K_B(r-\\ell)-K_B(r)=U(1+\\cdots+\\ell)\\ge U\\ell$ whenever $r\\ge\\ell$. Thus the total relative excited weight is at most $2\\sum_{\\ell\\ge1}e^{-\\beta U\\ell}=2e^{-\\beta U}/(1-e^{-\\beta U})$. The normalized Gibbs probabilities from [F3] therefore concentrate on the unique number state in a strict interval, or tend to $1/2,1/2$ on the adjacent pair at a boundary.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.2",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "4.1",
+          "claim": "Fix $(\\beta_0,\\mu_0)$ with $\\beta_0>0$, put $u=\\beta-\\beta_0$, $v=\\mu-\\mu_0$, $a_0=\\epsilon-\\mu_0-U/2$, and $K_n^0=Un^2/2+a_0n$. Then $-\\beta K_B(n;\\mu)=-\\beta_0K_n^0-uK_n^0+\\beta_0vn+uvn$, so [F5] expands each summand as $e^{-\\beta_0K_n^0}e^{-uK_n^0}e^{\\beta_0vn}e^{uvn}$. On radii $r_\\beta=\\beta_0/2$ and any fixed $r_\\mu>0$, the sum of the absolute values of all terms of these three exponential power series, over all $n$, is bounded by $\\sum_{n\\ge0}\\exp(-\\beta_0K_n^0+r_\\beta|K_n^0|+\\beta_0r_\\mu n+r_\\beta r_\\mu n)$. For all sufficiently large $n$, $K_n^0\\ge0$ and $|K_n^0|\\le Un^2/2+|a_0|n$, so the exponent is at most $-\\beta_0Un^2/4+Cn$ for a finite constant $C$. Increasing the cutoff so $Cn\\le\\beta_0Un^2/8$ leaves a tail bounded by $e^{-\\beta_0Un/8}$, whose series converges by [F5]\u2013[F6]; the finitely many initial terms are finite. Thus the total absolute coefficient sum is finite. Grouping $r+t=p$ and $s+t=q$ gives $c_{pq}=\\sum_{n\\ge0}e^{-\\beta_0K_n^0}\\sum_{t=0}^{\\min(p,q)}\\frac{(-K_n^0)^{p-t}(\\beta_0n)^{q-t}n^t}{(p-t)!(q-t)!t!}$. The absolute bound and [F7] justify these coefficient sums and rearrangement, and give $\\sum_{p,q}|c_{pq}|r_\\beta^p r_\\mu^q<\\infty$, hence $|c_{pq}|\\le M r_\\beta^{-p}r_\\mu^{-q}$ for some finite $M$. Applying the multivariable power-series theorem [F7] gives a holomorphic sum on the complex polydisc; its real restriction is the absolutely convergent germ in [F4]. Since $(\\beta_0,\\mu_0)$ was arbitrary, $\\Xi_B$ is jointly real analytic on $(0,\\infty)\\times\\mathbb R$.",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "F7",
+            "step 3.1",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "4.2",
+          "claim": "Fix $\\beta>0$ and let $\\mu$ range over a compact interval. The quantity $a=\\epsilon-\\mu-U/2$ is then bounded, so the square bound in step 3.1 gives $e^{-\\beta K_B(n;\\mu)}\\le C e^{-\\beta U n^2/4}$ for a constant $C$ uniform on that interval. Put $q=e^{-\\beta U/8}\\in(0,1)$. Since $n^2\\ge n$, $(1+n^2)e^{-\\beta K_B(n;\\mu)}\\le C(1+n^2)q^{2n}$. By [F9], $(1+n^2)q^n$ is bounded, so the right side is at most $C'q^n$, a summable geometric envelope. Apply [F8] on $\\mathbb N_0$ with the counting measure [A2], weight $w(n)=e^{-\\beta E_B(n)}$, observable $X(n)=n$, and natural parameter $\\theta=\\beta\\mu$. Its hypotheses hold by this compact envelope and step 3.1; it gives $\\partial_\\theta\\mathbb E(N_B)=\\operatorname{Var}(N_B)$. The chain rule [F12] yields the displayed response, while the normalized weights give the expectation formula.",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "F12",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "step": "3.2",
+          "claim": "Let $g=1$ in a strict interval and $g=2$ at a boundary, and shift all energies by their minimum so the ground energy is zero. The diagonal entropy from [F3] is $S_B/k_B=\\log D_\\beta+\\beta\\sum_{n\\ge0}p_nK_B(n)$, where $D_\\beta=g+R_\\beta$ and $R_\\beta$ is the total relative excited weight from step 2.2. Thus $D_\\beta\\to g$ by step 2.2 and $\\log D_\\beta\\to\\log g$ by continuity [F10]. In either case, for each distance $\\ell\\ge1$ there are at most two excited states; their lower gaps are $\\delta\\ell$ by step 2.2 and their upper gaps are $C(1+\\ell^2)$ because $K_B(n)$ is quadratic in $n$. Here $C$ is fixed and $\\delta=U$ at a boundary. For $\\beta\\ge1$, [F9] makes $(1+\\ell^2)e^{-\\delta\\ell/2}$ bounded; splitting $e^{-\\beta\\delta\\ell}=e^{-\\beta\\delta\\ell/2}e^{-\\beta\\delta\\ell/2}$ therefore bounds $\\beta\\sum_{\\ell\\ge1}(1+\\ell^2)e^{-\\beta\\delta\\ell}$ by a constant times $\\beta\\sum_{\\ell\\ge1}e^{-\\beta\\delta\\ell/2}=\\beta q_\\beta/(1-q_\\beta)$, where $q_\\beta=e^{-\\beta\\delta/2}$. This tends to zero by [F5], [F6], and [F9]. Consequently the excited contribution to the entropy vanishes, while the normalized ground weights contribute $0$ for $g=1$ and $\\log2$ for $g=2$.",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "F6",
+            "F9",
+            "F10",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "5.1",
+          "claim": "The normalized means are $\\langle n_\\uparrow\\rangle=(w_\\uparrow+w_2)/\\Xi_F$ and $\\langle n_\\downarrow\\rangle=(w_\\downarrow+w_2)/\\Xi_F$, while $\\langle n_\\uparrow n_\\downarrow\\rangle=w_2/\\Xi_F$. Subtracting the product of the means yields $\\operatorname{Cov}(n_\\uparrow,n_\\downarrow)=(w_2-w_\\uparrow w_\\downarrow)/\\Xi_F^2$. Since $w_\\uparrow w_\\downarrow=e^{-2\\beta(\\epsilon-\\mu)}$ and $w_2=e^{-2\\beta(\\epsilon-\\mu)}e^{-\\beta U}$, this is the displayed formula; $U\\ge0$ makes it nonpositive, with equality exactly at $U=0$.",
+          "inputs": [
+            "given",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Bose sum contains n=0 with weight1 in Proof 3.1; the Fermi list contains four weights in 1.3. In 2.2 a missing left excited branch at r=0 contributes zero to the geometric bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.2 and 4.2 include the Bose boundary r=0 and the Fermi covariance equality at U=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 1.2\u20132.2 include the one-occupation plateau and its adjacent boundary cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "steps 1.2\u20132.2 treat exactly two minimizing occupations at every Bose threshold \u03bc=\u03b5+Ur."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 2.2\u20133.2 establish the \u03b2\u2192\u221e state and entropy limits."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Bose minimizers are determined by the monotone explicit increment in 1.2, and the Fermi configurations are the four supplied occupation states; no nonconstructive state selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof 5.1 factors the covariance as a strictly positive prefactor times e^{\u2212beta U}\u22121; for beta>0 and U>=0 a zero covariance therefore forces U=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Substituting U=0 into Proof 5.1 makes e^{\u2212beta U}\u22121=0, while Xi_F>0 by 1.3, so the covariance is zero as asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "Bose threshold r=0",
+          "calculation": "At \u03bc=\u03b5, K_B(0)=K_B(1)=0 and K_B(n)>0 for n\u22652 when U>0, so the zero-temperature boundary occupations are 0 and 1.",
+          "disposition": "Smallest occupation boundary check."
+        },
+        {
+          "case": "Fermi U=0",
+          "calculation": "The covariance numerator is e^{\u22122\u03b2(\u03b5\u2212\u03bc)}(1\u22121)=0, confirming factorization at zero interaction.",
+          "disposition": "Exact interaction endpoint check."
+        }
+      ]
+    },
+    "ex-qsm-commuting-lattice-countermodels": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qsm-commuting-lattice-countermodels",
+          "source_section": "Statement",
+          "quote": "**Global three-sector countermodel.** For $N\\ge1$ and $\\epsilon>0$ joules, let $\\mathcal K_N=\\mathbb C\\oplus\\mathbb C\\oplus(\\mathbb C^2)^{\\otimes 2N}$ with its orthogonal direct-sum inner product, and write $I_{4^N}$ for the identity on the final $4^N$-dimensional summand. Let $|A\\rangle,|B\\rangle$ be the standard unit vectors in the first and second summands, and let $|s\\rangle$ range over the standard product basis in the final summand. Define $H_N^{\\mathrm g}=0\\oplus N\\epsilon\\oplus2N\\epsilon I_{4^N}$, so the basis energies are $E(A)=0$, $E(B)=N\\epsilon$, and $E(s)=2N\\epsilon$. For $0\\le\\Delta<N\\epsilon$, define the spectral-shell basis subset $S_{N,\\Delta}:=\\{v:|E(v)-N\\epsilon|\\le\\Delta\\}$ and its uniform state $\\rho_{N,\\Delta}^{\\mathrm{shell}}:=|S_{N,\\Delta}|^{-1}\\sum_{v\\in S_{N,\\Delta}}|v\\rangle\\langle v|$. For $\\beta>0$ this finite quantum model has\n$$Z_N^{\\mathrm g}=1+e^{-\\beta N\\epsilon}+4^Ne^{-2\\beta N\\epsilon}.$$\nFor every real $\\beta$ as an algebraic finite-weight extension, the normalized exponential-tilt weight of the one-dimensional middle sector is at most $(2^{N+1}+1)^{-1}$; the shell state above assigns that sector probability $1$. The term \u201cprobability\u201d here is the trace of the state against the middle-sector projection $|B\\rangle\\langle B|$. Also\n$$\\frac1N\\log Z_N^{\\mathrm g}\\longrightarrow\\max\\{0,\\log4-2\\beta\\epsilon\\},\\qquad 0\\le\\frac1N\\log Z_N^{\\mathrm g}-\\max\\{0,\\log4-2\\beta\\epsilon\\}\\le\\frac{\\log3}{N}.$$\nThe limiting function has a corner at $\\beta_c=(\\log2)/\\epsilon>0$; the canonical mean energy per member tends to $2\\epsilon$ from below, $0$ from above, and $\\epsilon$ at $\\beta_c$. Every finite-$N$ partition sum is analytic. This global, size-dependent family is not a product of one fixed finite one-site alphabet and makes no claim about local or short-range matter.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At $N=2$ and $\\beta=\\beta_c$, $e^{-\\beta N\\epsilon}=e^{-2\\log2}=1/4$ and $4^Ne^{-2\\beta N\\epsilon}=16e^{-4\\log2}=1$. Hence $Z_2=9/4$ and the middle-sector Gibbs probability is $(1/4)/(9/4)=1/9$. The finite partition is a sum of positive exponentials, so it is analytic at this parameter.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $2\\epsilon$ is the distance from the middle energy to either outer energy at $N=2$, every shell with $0\\le\\Delta<2\\epsilon$ selects exactly the one-dimensional middle sector and gives it uniform probability $1$. Thus the two specified finite preparations disagree on this observable, while the analytic finite sum and limiting cusp remain distinct claims.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Verification 2.1 computes the shell to contain the one middle-sector vector; the finite partition in 1.1 is9/4 and never an empty trace."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 checks the shell lower endpoint \u0394=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Although the Hilbert space has multiple sectors, the selected spectral shell is one-dimensional and hence gives middle-sector probability1 in Verification 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The final sector at N=2 has multiplicity16; Verification 1.1 includes that factor to obtain its total weight1 and the Gibbs middle probability1/9."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 uses the strict upper shell condition \u0394<2\u03b5, excluding the outer levels at distance exactly 2\u03b5."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The middle-sector vector and shell energy are fixed by [F1]; Verification 2.1 identifies its singleton support directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example compares two preparations at fixed N=2 and beta_c; it does not characterize when arbitrary canonical and shell preparations agree."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 2.1 establishes disagreement for the stipulated shell widths, without asserting a converse about other widths or other models."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=2 at \u03b2_c",
+          "calculation": "The weights are 1, 1/4, 1, hence Z\u2082=9/4 and the middle-sector probability is 1/9; for \u0394<2\u03b5 only the middle basis vector lies in the shell.",
+          "disposition": "Direct finite example calculation."
+        }
+      ]
+    },
+    "ex-qsm-interacting-dimer-gibbs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qsm-interacting-dimer-gibbs",
+          "source_section": "Statement",
+          "quote": "Let $e_0,e_1$ and $\\sigma_x,\\sigma_y,\\sigma_z,C$ be as in [[def-qsm-pauli-two-qubit-conventions]], with $\\sigma_z e_0=e_0$ and $\\sigma_z e_1=-e_1$. By [[lem-qsm-pauli-dimer-spectrum]], the normalized singlet $s=(e_0\\otimes e_1-e_1\\otimes e_0)/\\sqrt2$ has $C$-eigenvalue $-3$, and the three orthonormal triplets have eigenvalue $1$. Adopt the two-spin Hamiltonian\n$$H_{J,h}:=JC-h(\\sigma_z\\otimes I+I\\otimes\\sigma_z)$$\non $\\mathbb C^2\\otimes\\mathbb C^2$, where $J,h\\in\\mathbb R$ are energies in joules. For inverse temperature $\\beta>0$ in J$^{-1}$, use the canonical Gibbs preparation only after normalizing its finite trace. Its singlet energy is $-3J$; its triplet energies are $J-2h$, $J$, and $J+2h$. Here $\\cosh y:=(e^y+e^{-y})/2$.\n$$Z(\\beta,J,h)=e^{3\\beta J}+e^{-\\beta J}\\bigl(1+2\\cosh(2\\beta h)\\bigr)>0.$$\nAt $h=0$ and $J>0$, the Gibbs density matrix is entangled exactly when $\\beta J>(\\log3)/4$, and is separable at and below equality. This exact threshold is a finite-state quantum-model conclusion. For every fixed $J,h$, $Z$ and the free energy $-\\beta^{-1}\\log Z$ are real analytic for $\\beta>0$; the entanglement threshold is not a finite-temperature thermodynamic singularity. At zero field the entropy tends to $0$ as $\\beta\\to\\infty$ for $J>0$, to $k_B\\log3$ for $J<0$, and to $k_B\\log4$ for $J=0$. For $J>0$, a nonzero field makes the singlet and the field-aligned triplet cross at $|h|=2J$ at zero temperature; this ground-space crossing does not make $Z$ singular at finite positive temperature.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting $\\beta J=(\\log3)/4$ into [F1] gives the separable equality state; taking any $\\beta J>(\\log3)/4$ gives the entangled branch. These are conclusions about the defined two-qubit density matrix.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At $h=0$, $Z=e^{3\\beta J}+3e^{-\\beta J}$ is a finite positive sum of exponentials, so $-\\beta^{-1}\\log Z$ is analytic for $\\beta>0$, including at the separability threshold. Therefore this state-property boundary is not a thermodynamic singularity of the finite dimer.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Example fixes the four-dimensional dimer and its positive finite Z; no variable-size lattice or family can be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The field is exactly h=0, and Verification 2.1 substitutes it to obtain Z=e^{3beta J}+3e^{\u2212beta J}>0; J=0 and beta=0 are excluded by the Given."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks the exact equality point \u03b2J=(log 3)/4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero-field triplet has multiplicity three, retained as3e^{\u2212beta J} in Verification 2.1; no nondegenerate-spectrum hypothesis enters analyticity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1\u20132.1 distinguish the equality threshold from every strictly larger \u03b2J."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The equality parameter beta J=log(3)/4 is explicitly given, and Verification 1.1 invokes its specified two-qubit state rather than choosing a decomposition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states the equality state and the larger-parameter branch from [F1], plus analyticity; it does not introduce a new biconditional to prove."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 1.1 specializes the supplied threshold at and above equality; no converse from analyticity to separability is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "threshold equality",
+          "calculation": "At \u03b2J=(log 3)/4 and h=0, the thermal density is \u03c1* and separable; the partition sum remains a positive finite exponential sum.",
+          "disposition": "Finite state-property/analyticity comparison."
+        }
+      ]
+    },
+    "ex-qsm-onsite-interacting-atoms": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-qsm-onsite-interacting-atoms",
+          "source_section": "Statement",
+          "quote": "**Repulsive single-mode Bose site.** Let $\\mathcal H_B=\\ell^2(\\mathbb N_0)$ with orthonormal occupation basis $|n\\rangle$, supplied by the one-mode specialization of [[lem-qsm-fock-occupation-basis-and-car-relations]]. Put $E_B(n):=\\epsilon n+\\frac U2n(n-1)$, where $\\epsilon,\\mu\\in\\mathbb R$ and $U>0$ are in joules. Define $H_B$ and $N_B$ as real diagonal multipliers $H_B|n\\rangle=E_B(n)|n\\rangle$ and $N_B|n\\rangle=n|n\\rangle$ on their maximal domains\n$$D(H_B)=\\left\\{c\\in\\ell^2:\\sum_{n\\ge0}E_B(n)^2|c_n|^2<\\infty\\right\\},\\qquad D(N_B)=\\left\\{c\\in\\ell^2:\\sum_{n\\ge0}n^2|c_n|^2<\\infty\\right\\}.$$\nFor $\\beta>0$ in J$^{-1}$, define $K_B$ directly as the real diagonal multiplier with eigenvalues\n$$K_B(n):=E_B(n)-\\mu n=\\frac U2n^2+\\left(\\epsilon-\\mu-\\frac U2\\right)n$$\non the exact maximal domain $D(K_B)=\\{c\\in\\ell^2:\\sum_{n\\ge0}K_B(n)^2|c_n|^2<\\infty\\}$. These diagonal multipliers are self-adjoint on their displayed domains. The grand partition sum\n$$\\Xi_B(\\beta,\\mu)=\\sum_{n=0}^{\\infty}e^{-\\beta K_B(n)}$$\nis finite and positive for every such $(\\beta,\\mu)$. It is jointly real analytic locally on $(0,\\infty)\\times\\mathbb R$, meaning it has an absolutely convergent power-series representation in the two real parameters near every point. Its normalized diagonal Gibbs state has weights $p_n=\\Xi_B^{-1}e^{-\\beta K_B(n)}$ and\n$$\\langle N_B\\rangle=\\Xi_B^{-1}\\sum_{n\\ge0}n e^{-\\beta K_B(n)},\\qquad \\partial_\\mu\\langle N_B\\rangle=\\beta\\,\\operatorname{Var}(N_B).$$\nIn the zero-temperature limit $\\beta\\to\\infty$, the unique minimizing occupation is $0$ when $\\mu<\\epsilon$, and is $r\\ge1$ when $\\epsilon+U(r-1)<\\mu<\\epsilon+Ur$. At each boundary $\\mu=\\epsilon+Ur$ for $r\\in\\mathbb N_0$, exactly the adjacent occupations $r,r+1$ minimize $K_B$; their probabilities tend to $1/2$ each and the model entropy $S=-k_B\\operatorname{tr}(\\rho_B\\log\\rho_B)$ from [[post-qsm-models-statistics-and-preparation]] tends to $k_B\\log2$. In a strict interval, the unique minimizing number state has probability tending to one and entropy tending to zero.\n\n**Two-mode Fermi Hubbard atom.** On $\\mathcal H_F=\\mathbb C^4$ with orthonormal occupation basis $|n_\\uparrow,n_\\downarrow\\rangle$, $n_\\uparrow,n_\\downarrow\\in\\{0,1\\}$, define $n_\\uparrow|n_\\uparrow,n_\\downarrow\\rangle=n_\\uparrow|n_\\uparrow,n_\\downarrow\\rangle$ and $n_\\downarrow|n_\\uparrow,n_\\downarrow\\rangle=n_\\downarrow|n_\\uparrow,n_\\downarrow\\rangle$, and adopt\n$$H_F=\\epsilon(n_\\uparrow+n_\\downarrow)+U n_\\uparrow n_\\downarrow-h(n_\\uparrow-n_\\downarrow),$$\nwhere $\\epsilon,\\mu,U,h$ are in joules, $U\\ge0$, and $\\beta>0$. With $K_F=H_F-\\mu(n_\\uparrow+n_\\downarrow)$, its grand partition function and weights are\n$$\\Xi_F=1+w_\\uparrow+w_\\downarrow+w_2,\\quad w_\\uparrow=e^{-\\beta(\\epsilon-\\mu-h)},\\quad w_\\downarrow=e^{-\\beta(\\epsilon-\\mu+h)},\\quad w_2=e^{-\\beta(2(\\epsilon-\\mu)+U)}.$$\nThus $\\langle n_\\uparrow+n_\\downarrow\\rangle=(w_\\uparrow+w_\\downarrow+2w_2)/\\Xi_F$, the double-occupation probability $\\langle n_\\uparrow n_\\downarrow\\rangle$ is $w_2/\\Xi_F$, and, with $\\operatorname{Cov}(n_\\uparrow,n_\\downarrow):=\\langle n_\\uparrow n_\\downarrow\\rangle-\\langle n_\\uparrow\\rangle\\langle n_\\downarrow\\rangle$,\n$$\\operatorname{Cov}(n_\\uparrow,n_\\downarrow)=\\frac{e^{-2\\beta(\\epsilon-\\mu)}(e^{-\\beta U}-1)}{\\Xi_F^2}\\le0.$$\nThe covariance is zero at $U=0$ and strictly negative at $U>0$. These are exact conditional model calculations, not claims about measured atoms.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Substituting $h=0$ and $\\mu=\\epsilon$ into the Fermi weights gives $w_\\uparrow=w_\\downarrow=1$, $w_2=e^{-\\beta U}$, and $\\Xi_F=3+e^{-\\beta U}$. Since $U,\\beta>0$, $e^{-\\beta U}<1$, so [F1] gives the strictly negative covariance stated in the Example.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the Bose result of [F1], set $r=1$ and $\\mu=\\epsilon+U$. The adjacent minimizing occupations are $1,2$, their limiting probabilities are $1/2,1/2$, and the binary entropy is $-k_B(2)(1/2)\\log(1/2)=k_B\\log2$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Fermi calculation has the fixed four-state trace3+e^{\u2212beta U}; the Bose calculation fixes the nonempty minimizing pair1,2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification 1.1 includes zero field and mu\u2212epsilon=0, giving both single-occupation weights1. U=0 is excluded by U>0, which is essential for the strict covariance sign."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks the two singly occupied Fermi states at the symmetric parameters."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 checks the equal limiting probabilities of the two adjacent Bose occupations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 evaluates the \u03b2\u2192\u221e Bose boundary limit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Verification 2.1: The occupations1 and2 are computed by setting r=1 in [F1]; their equal limiting probabilities are supplied, with no choice among minimizers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Example evaluates one Fermi parameter slice and one Bose boundary; it supplies no classification by an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Verification 2.1 substitutes r=1 into the supplied boundary result; it does not infer parameters from observing a two-state entropy."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "symmetric Fermi atom",
+          "calculation": "At h=0 and \u03bc=\u03b5, w_up=w_down=1, w\u2082=e^{\u2212\u03b2U}, and \u039e_F=3+e^{\u2212\u03b2U}, yielding the stated negative covariance for U>0.",
+          "disposition": "Direct four-state substitution."
+        },
+        {
+          "case": "Bose boundary r=1",
+          "calculation": "At \u03bc=\u03b5+U, K_B(1)=K_B(2)=\u2212U and every other occupation has strictly higher energy; the limiting pair is uniform and has entropy k_B log 2.",
+          "disposition": "Direct adjacent-occupation boundary calculation."
+        }
+      ]
+    }
+  }
+}

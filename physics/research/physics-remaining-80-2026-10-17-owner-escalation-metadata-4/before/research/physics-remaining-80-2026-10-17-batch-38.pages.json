@@ -1,0 +1,582 @@
+[
+  {
+    "order": 573,
+    "id": "qsm-quasilocal-states",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Local spin matrix algebras and isometric inclusions",
+    "companion": "qsm-quasilocal-states-examples",
+    "requires": [
+      "countability-and-uncountability",
+      "gelfand-theory-and-commutative-c-star-algebras",
+      "qsm-states-ensembles",
+      "the-topology-of-euclidean-space",
+      "normed-and-banach-spaces",
+      "group-c-star-algebras-and-the-fell-unitary-dual",
+      "monotone-sequences-and-cauchy-completeness",
+      "construction-of-the-natural-numbers",
+      "hilbert-space-geometry-and-riesz-representation",
+      "bounded-linear-operators-and-quotient-spaces"
+    ],
+    "items": [
+      {
+        "id": "lem-qsm-integer-lattice-countable",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Countability of every finite-dimensional integer lattice",
+        "reference": "items/lem-qsm-integer-lattice-countable.md#statement",
+        "design_state": "batch-local inventory expansion; proof and supplier status recorded in batch evidence",
+        "deps": [
+          "def-countable",
+          "lem-countable-iff-surjection-from-n",
+          "lem-finite-powers-of-countable-sets-are-countable"
+        ],
+        "dependency_roles": {
+          "def-countable": "mathematical-premise",
+          "lem-countable-iff-surjection-from-n": "mathematical-premise",
+          "lem-finite-powers-of-countable-sets-are-countable": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 0,
+        "statement": "For every positive integer $d$, the integer lattice $\\Gamma=\\mathbb{Z}^d$ is at most countable. Countability here means finite or in bijection with $\\mathbb{N}$, as in [[def-countable]].",
+        "strategy": "Enumerate signed integers by parity, then apply the finite-power countability result to Z^d.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §§3.2.2–3.2.3, pp. 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, pp. 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qsm-local-spin-algebras",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Local spin matrix algebras and their factor inclusions",
+        "reference": "items/def-qsm-local-spin-algebras.md#definition",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "lem-qsm-integer-lattice-countable",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "lem-qsm-integer-lattice-countable": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 1,
+        "statement": "Fix an integer dimension $d\\ge1$, the countable site set $\\Gamma=\\mathbb{Z}^d$ of [[lem-qsm-integer-lattice-countable]], and one finite spin dimension $q\\ge1$. Equip $\\Gamma$ with the max-coordinate metric $d_\\infty(x,y)=\\max_{1\\le r\\le d}|x_r-y_r|$; symmetry and separation hold coordinatewise, and the triangle inequality follows from $|x_r-z_r|\\le|x_r-y_r|+|y_r-z_r|$ for every coordinate. A **finite region** is a finite subset $\\Lambda\\subseteq\\Gamma$; its cardinality is $|\\Lambda|$.\n\nFor a finite region $\\Lambda$, let $S_\\Lambda=\\{1,\\ldots,q\\}^{\\Lambda}$ be the set of spin configurations on $\\Lambda$ and let $\\mathcal H_\\Lambda$ be the vector space of functions $f:S_\\Lambda\\to\\mathbb C$ with inner product $\\langle f,g\\rangle=\\sum_{s\\in S_\\Lambda}f(s)\\overline{g(s)}$. For each $s\\in S_\\Lambda$, let $e_s$ be the indicator function of $\\{s\\}$; these vectors form an orthonormal basis. For $\\Lambda=\\varnothing$, $S_\\Lambda$ is a singleton and $\\mathcal H_\\Lambda\\cong\\mathbb C$. The **local spin matrix algebra** is\n\n$$\\mathcal A_\\Lambda:=\\mathcal B(\\mathcal H_\\Lambda)\\cong M_{q^{|\\Lambda|}}(\\mathbb C),$$\n\nHere $\\mathcal B(\\mathcal H_\\Lambda)$ denotes all complex-linear endomorphisms of the finite-dimensional Hilbert space; they are bounded. The algebra has composition, Hilbert adjoint, identity $I_\\Lambda$, and induced operator norm\n\n$$\\|T\\|:=\\sup_{\\|\\xi\\|=1}\\|T\\xi\\|.$$\n\nThe **finite local trace** is $\\operatorname{Tr}_\\Lambda(T):=\\sum_{s\\in S_\\Lambda}\\langle T e_s,e_s\\rangle$ in the displayed configuration basis $(e_s)$. This is the usual finite-matrix trace; basis independence and its cyclic/unitary identities are supplied by [[lem-qsm-matrix-state-calculus]].\n\nIf $\\Lambda\\subseteq\\Lambda'$, restriction of configurations gives the canonical factorization $\\mathcal H_{\\Lambda'}\\cong\\mathcal H_\\Lambda\\otimes\\mathcal H_{\\Lambda'\\setminus\\Lambda}$, with sites ordered lexicographically. The **factor inclusion** is the unital $*$-homomorphism $\\iota_{\\Lambda,\\Lambda'}:\\mathcal A_\\Lambda\\to\\mathcal A_{\\Lambda'}$ given by $T\\mapsto T\\otimes I_{\\Lambda'\\setminus\\Lambda}$. A **localization region** for $T$ is any finite $\\Lambda$ for which $T\\in\\mathcal A_\\Lambda$ under these inclusions; a localization region need not be minimal.\n\nThe ordinary operator norm makes each local matrix algebra a nonzero unital complete C*-algebra, and every positive normalized complex-linear functional is uniquely a trace pairing with a density matrix, by [[lem-qsm-finite-matrix-cstar-and-state-duality]]. This includes the empty region, whose Hilbert space is $\\mathbb C$. This definition does not posit an infinite-dimensional tensor-product Hilbert space.",
+        "strategy": "Explicitly define the finite configuration Hilbert spaces, their matrix algebras, and the identity-tensor inclusions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §§3.2.2–3.2.3, pp. 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, pp. 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qsm-local-spin-inclusions-isometric",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Local spin factor inclusions preserve the operator norm",
+        "reference": "items/lem-qsm-local-spin-inclusions-isometric.md#statement",
+        "design_state": "batch-local inventory expansion; proof and supplier status recorded in batch evidence",
+        "deps": [
+          "def-qsm-local-spin-algebras"
+        ],
+        "dependency_roles": {
+          "def-qsm-local-spin-algebras": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 2,
+        "statement": "Fix $d\\ge1$, $q\\ge1$, and finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\mathbb Z^d$ as in [[def-qsm-local-spin-algebras]]. Then the factor inclusion $\\iota_{\\Lambda,\\Lambda'}(T)=T\\otimes I$ is an isometric unital $*$-homomorphism:\n\n$$\\|\\iota_{\\Lambda,\\Lambda'}(T)\\|=\\|T\\|\\qquad(T\\in\\mathcal A_\\Lambda).$$\n\nFor nested finite regions $\\Lambda\\subseteq\\Lambda'\\subseteq\\Lambda''$, the inclusions compose: $\\iota_{\\Lambda',\\Lambda''}\\circ\\iota_{\\Lambda,\\Lambda'}=\\iota_{\\Lambda,\\Lambda''}$.",
+        "strategy": "Expand vectors in a finite orthonormal basis of the added tensor factor for the upper norm bound; use a near-norming vector and a unit configuration vector for the lower bound.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.2.2, pp. 55–56",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, p. 25",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qsm-quasilocal-spin-algebra",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Norm-completed quasi-local quantum spin algebra",
+        "reference": "items/def-qsm-quasilocal-spin-algebra.md#definition",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "def-c-star-algebra",
+          "def-completion-of-a-normed-space",
+          "def-countable-choice",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "def-c-star-algebra": "mathematical-premise",
+          "def-completion-of-a-normed-space": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 3,
+        "statement": "Use the finite local matrix algebras and isometric factor inclusions of [[def-qsm-local-spin-algebras]] and [[lem-qsm-local-spin-inclusions-isometric]]. Identify $A\\in\\mathcal A_\\Lambda$ with its image in every larger finite-region algebra. The directed union\n\n$$\\mathcal A_{\\mathrm{loc}}:=\\bigcup_{\\Lambda\\subseteq\\Gamma,\\ |\\Lambda|<\\infty}\\mathcal A_\\Lambda$$\n\nis the algebra of **strictly local observables**. Its norm is $\\|A\\|=\\|A\\|_{\\mathcal A_\\Lambda}$ for any finite localization region $\\Lambda$ of $A$; isometric inclusions make this independent of the chosen region. The **quasi-local spin algebra** is the norm completion\n\n$$\\mathcal A:=\\overline{\\mathcal A_{\\mathrm{loc}}}^{\\,\\|\\cdot\\|}.$$\n\nThe C*-algebra structure on this completion has product and adjoint extended continuously from the finite local matrix algebras. Countable Choice is assumed for the published existence theorem for metric completions; [[lem-qsm-quasilocal-completion]] supplies the full extension argument using the finite C*-identity of [[lem-qsm-finite-matrix-cstar-and-state-duality]].\n\n**No global Hilbert tensor product is selected.** “Quasi-local” means norm completion of the directed algebra of finite-region observables; it does not mean a chosen representation as operators on an infinite tensor-product Hilbert space. A local operator $A\\in\\mathcal A_\\Lambda$ may have more than one localization region. Disjoint finite local factors commute in their common finite tensor algebra.",
+        "strategy": "Take the directed union of the finite local algebras with their isometric identifications and complete it in norm; no infinite Hilbert tensor product is selected.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.2.3, pp. 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, pp. 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-qsm-quasilocal-completion"
+        ]
+      },
+      {
+        "id": "lem-qsm-quasilocal-completion",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Quasi-local algebra completion and locality",
+        "reference": "items/lem-qsm-quasilocal-completion.md#statement",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "def-qsm-quasilocal-spin-algebra",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "def-c-star-algebra",
+          "def-completion-of-a-normed-space",
+          "thm-metric-completion-carries-a-unique-banach-space-structure",
+          "lem-completion-operations-are-well-defined",
+          "def-countable-choice",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "def-c-star-algebra": "mathematical-premise",
+          "def-completion-of-a-normed-space": "mathematical-premise",
+          "thm-metric-completion-carries-a-unique-banach-space-structure": "mathematical-premise",
+          "lem-completion-operations-are-well-defined": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 4,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the Cauchy-sequence completion. For the local spin system of [[def-qsm-local-spin-algebras]], the normed $*$-algebra $\\mathcal A_{\\mathrm{loc}}$ and its completion $\\mathcal A$ of [[def-qsm-quasilocal-spin-algebra]] are well defined; $\\mathcal A$ is a unital complex C*-algebra and $\\mathcal A_{\\mathrm{loc}}$ is norm dense in it. If $A\\in\\mathcal A_\\Lambda$ and $B\\in\\mathcal A_\\Delta$ for disjoint finite regions $\\Lambda,\\Delta$, then $AB=BA$.",
+        "strategy": "Construct operations on Cauchy-sequence classes, prove product and adjoint well-defined and continuous, transfer the C*-identity conditionally from finite matrices, and compute disjoint-factor commutation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.2.3, pp. 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, pp. 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qsm-infinite-algebraic-state",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Infinite algebraic state and finite-region restrictions",
+        "reference": "items/def-qsm-infinite-algebraic-state.md#definition",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-matrix-state-calculus",
+          "def-countable-choice",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "def-state-on-a-c-star-algebra"
+        ],
+        "dependency_roles": {
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "def-state-on-a-c-star-algebra": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 5,
+        "statement": "Let $\\mathcal A$ be the unital quasi-local spin C*-algebra of [[def-qsm-quasilocal-spin-algebra]], whose C*-structure uses Countable Choice as in [[lem-qsm-quasilocal-completion]]. An **infinite algebraic state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ satisfying $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$.\n\nFor each finite region $\\Lambda\\subseteq\\mathbb Z^d$, the restriction $\\omega|_{\\mathcal A_\\Lambda}$ is a finite-matrix state. By [[lem-qsm-finite-matrix-cstar-and-state-duality]], every positive normalized functional on a finite matrix algebra is represented by a unique density matrix. Define its **local density matrix** $\\rho_\\Lambda$ by\n\n$$\\omega(A)=\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)\\qquad(A\\in\\mathcal A_\\Lambda),$$\n\nwhere $\\rho_\\Lambda=\\rho_\\Lambda^*\\ge0$ and $\\operatorname{Tr}_{\\Lambda}\\rho_\\Lambda=1$. For $\\Lambda\\subseteq\\Lambda'$, the local densities are **consistent** when $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$, with partial trace characterized by its pairing against every $A\\otimes I_{\\Lambda'\\setminus\\Lambda}$. No density operator on a globally chosen Hilbert space is part of this definition.\n\nThis agrees with the canonical state convention of [[def-state-on-a-c-star-algebra]]: the finite restrictions have norm one by [[lem-qsm-finite-matrix-cstar-and-state-duality]], giving $|\\omega(A)|\\le\\|A\\|$ on the dense local algebra and hence on its completion; evaluation at the norm-one identity gives $\\|\\omega\\|=1$. Conversely a canonical state has local restrictions with density matrices of trace one, since the finite norm formula and continuity on the dense local algebra imply $\\|\\omega\\|=\\omega(I)$. No global density representation is asserted.",
+        "strategy": "Define a bounded normalized positive functional and its finite-region density restrictions, conditional on the finite state/density correspondence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §§2.4–2.5, pp. 34–40",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §4, pp. 6–8",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qsm-consistent-local-states",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Consistent local densities extend to an algebraic state",
+        "reference": "items/lem-qsm-consistent-local-states.md#statement",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "def-qsm-infinite-algebraic-state",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-matrix-state-calculus",
+          "def-countable-choice",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 6,
+        "statement": "Assume Countable Choice for the norm completion in [[def-qsm-quasilocal-spin-algebra]]. Let $\\{\\rho_\\Lambda\\}$ be positive trace-one matrices, one on each finite-region algebra $\\mathcal A_\\Lambda$ of [[def-qsm-local-spin-algebras]], such that for every $\\Lambda\\subseteq\\Lambda'$ their partial traces agree: $\\operatorname{Tr}_{\\Lambda'\\setminus\\Lambda}(\\rho_{\\Lambda'})=\\rho_\\Lambda$. There is a unique infinite algebraic state $\\omega$ on $\\mathcal A$ whose restriction to each $\\mathcal A_\\Lambda$ is $A\\mapsto\\operatorname{Tr}_{\\Lambda}(\\rho_\\Lambda A)$.",
+        "strategy": "Define the local trace functional on the directed union, use consistency to make it well-defined, extend by its norm-one bound, prove positivity by continuity, and establish uniqueness by density.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §§2.4 and 3.2.3, pp. 34–36 and 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §4 and Chapter 3 §1, pp. 6–8 and 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qsm-spin-state-compactness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Sequential compactness of the quasi-local spin state space",
+        "reference": "items/lem-qsm-spin-state-compactness.md#statement",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "lem-qsm-consistent-local-states",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-matrix-state-calculus",
+          "def-countable-choice",
+          "def-countable",
+          "lem-countable-iff-surjection-from-n",
+          "lem-finite-powers-of-countable-sets-are-countable",
+          "thm-countable-union-of-countable",
+          "thm-rationals-countable",
+          "thm-nested-interval-property",
+          "thm-recursion",
+          "lem-qsm-integer-lattice-countable",
+          "def-qsm-infinite-algebraic-state",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-countable": "mathematical-premise",
+          "lem-countable-iff-surjection-from-n": "mathematical-premise",
+          "lem-finite-powers-of-countable-sets-are-countable": "mathematical-premise",
+          "thm-countable-union-of-countable": "mathematical-premise",
+          "thm-rationals-countable": "mathematical-premise",
+          "thm-nested-interval-property": "mathematical-premise",
+          "thm-recursion": "mathematical-premise",
+          "lem-qsm-integer-lattice-countable": "mathematical-premise",
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 7,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]) for the countable union of finite regions and the finite-dimensional state/density interface explicitly stated in Facts [F3]. Let $\\Gamma=\\mathbb Z^d$, $d\\ge1$, and $q\\ge1$ be as in [[def-qsm-local-spin-algebras]]. For every sequence of algebraic states $\\omega_n$ on the quasi-local spin algebra $\\mathcal A$, there is a subsequence $\\omega_{n_k}$ and an algebraic state $\\omega$ such that $\\omega_{n_k}(A)\\to\\omega(A)$ for every $A\\in\\mathcal A$. Thus the state space is sequentially compact in the pointwise topology, meaning convergence on every fixed observable. The conclusion concerns functional values; it does not assert convergence of global density matrices or a global trace-class representation.",
+        "strategy": "Construct a countable dense set of rational local matrices, diagonalize on it by deterministic nested-square subsequences, then extend pointwise convergence to all local and completed observables.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §§2.4 and 3.2.3, pp. 34–36 and 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §4 and Chapter 3 §1, pp. 6–8 and 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qsm-state-gns-construction",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Cyclic representation of a quasi-local state",
+        "reference": "items/lem-qsm-state-gns-construction.md#statement",
+        "design_state": "reserved item; authored conditionally at inspected supplier interfaces",
+        "deps": [
+          "lem-qsm-consistent-local-states",
+          "lem-qsm-quasilocal-completion",
+          "def-qsm-quasilocal-spin-algebra",
+          "def-qsm-infinite-algebraic-state",
+          "lem-qsm-matrix-state-calculus",
+          "def-countable-choice",
+          "thm-completion-of-an-inner-product-space-is-hilbert",
+          "def-space-of-bounded-linear-operators",
+          "def-operator-norm",
+          "thm-hilbert-adjoint-properties",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-completion-of-an-inner-product-space-is-hilbert": "mathematical-premise",
+          "def-space-of-bounded-linear-operators": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "thm-hilbert-adjoint-properties": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "dependency_level": 7,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]), the C*-algebra completion interface of [[lem-qsm-quasilocal-completion]], and the finite-matrix positive square-root interface of [[lem-qsm-matrix-state-calculus]]. Let $\\{\\rho_\\Lambda\\}$ be a consistent family of finite local density matrices as in [[lem-qsm-consistent-local-states]], and let $\\omega$ be its extended algebraic state on the unital quasi-local algebra $\\mathcal A$. Then there are a complex Hilbert space $\\mathcal H_\\omega$, a unital $*$-representation $\\pi_\\omega:\\mathcal A\\to\\mathcal B(\\mathcal H_\\omega)$, and a unit vector $\\Omega_\\omega$ cyclic for $\\pi_\\omega$ such that\n\n$$\\omega(A)=\\langle \\pi_\\omega(A)\\Omega_\\omega,\\Omega_\\omega\\rangle\\qquad(A\\in\\mathcal A),$$\n\nusing the linear-first inner-product convention. Here $\\mathcal B(\\mathcal H_\\omega)$ is the space of bounded linear operators with its operator norm, a $*$-representation is a complex-linear map preserving products, adjoints and the identity, and cyclic means that $\\{\\pi_\\omega(A)\\Omega_\\omega:A\\in\\mathcal A\\}$ is norm dense in $\\mathcal H_\\omega$. The theorem asserts existence of a cyclic representation, not uniqueness up to unitary equivalence.",
+        "strategy": "Derive functional Cauchy–Schwarz, quotient the local algebra by the null space, prove bounded left multiplication using finite local square roots, complete, and extend the representation by norm density.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §2.5, Theorem 2.5.3, pp. 38–40",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §4, pp. 7–8",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 574,
+    "id": "qsm-quasilocal-states-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Local spin matrix algebras and isometric inclusions — Examples",
+    "companion": "qsm-quasilocal-states",
+    "requires": [
+      "qsm-quasilocal-states"
+    ],
+    "items": [
+      {
+        "id": "ex-qsm-quasilocal-two-site-locality",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two-site Pauli observables commute at disjoint sites",
+        "reference": "items/ex-qsm-quasilocal-two-site-locality.md#statement",
+        "design_state": "batch-local inventory expansion; proof and supplier status recorded in batch evidence",
+        "deps": [
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "lem-qsm-quasilocal-completion"
+        ],
+        "dependency_roles": {
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 5,
+        "statement": "Take $d=1$, spin dimension $q=2$, and distinct sites $x,y\\in\\mathbb Z$. On $\\mathbb C^2$ define the Pauli matrices\n\n$$X=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad Z=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}.$$\n\nLet $X_x$ and $Z_y$ be their one-site observables embedded in the two-site algebra $\\mathcal A_{\\{x,y\\}}$ by the factor inclusions of [[def-qsm-local-spin-algebras]]. Then $X_x$ and $Z_y$ are self-adjoint unitaries of norm one and commute. This is a finite example of the locality clause in [[lem-qsm-quasilocal-completion]].",
+        "strategy": "Multiply the displayed Pauli matrices, embed them in the two-site tensor algebra, and verify their norms and commutation directly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §1.2 and §3.2.2–3.2.3, pp. 5–6 and 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, pp. 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-qsm-quasilocal-infinite-tail-observable",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A norm-convergent observable with no finite localization region",
+        "reference": "items/ex-qsm-quasilocal-infinite-tail-observable.md#statement",
+        "design_state": "batch-local inventory expansion; proof and supplier status recorded in batch evidence",
+        "deps": [
+          "lem-qsm-integer-lattice-countable",
+          "def-qsm-local-spin-algebras",
+          "lem-qsm-local-spin-inclusions-isometric",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-quasilocal-completion"
+        ],
+        "dependency_roles": {
+          "lem-qsm-integer-lattice-countable": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "lem-qsm-local-spin-inclusions-isometric": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 5,
+        "statement": "Take $d=1$ and $q=2$. For $n\\ge1$, let $Z_n$ be the one-site Pauli matrix $Z=\\operatorname{diag}(1,-1)$ embedded at site $n\\in\\mathbb Z$. The sequence\n\n$$H_N:=\\sum_{n=1}^N2^{-n}Z_n$$\n\nconverges in norm in the quasi-local algebra to an element $H$. This element is self-adjoint but has no finite localization region. Thus norm completion adds observables that are not strictly local.",
+        "strategy": "Bound the geometric tails to obtain norm convergence, compute a nonzero commutator at every site, and exclude finite localization.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §1.2 and §3.2.2–3.2.3, pp. 5–6 and 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 3 §1, pp. 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-qsm-maximally-mixed-consistent-product-state",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Consistent maximally mixed local densities",
+        "reference": "items/ex-qsm-maximally-mixed-consistent-product-state.md#statement",
+        "design_state": "batch-local inventory expansion; proof and supplier status recorded in batch evidence",
+        "deps": [
+          "def-qsm-local-spin-algebras",
+          "def-qsm-infinite-algebraic-state",
+          "lem-qsm-consistent-local-states",
+          "def-countable-choice",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "dependency_level": 7,
+        "statement": "Fix finite spin dimension $q\\ge1$ on $\\Gamma=\\mathbb Z^d$, $d\\ge1$. For every finite region $\\Lambda$, set\n\n$$\\rho_\\Lambda:=q^{-|\\Lambda|}I_\\Lambda.$$\n\nThis is a consistent family of maximally mixed local density matrices. By the finite-dimensional density-state correspondence of [[lem-qsm-finite-matrix-cstar-and-state-duality]] and [[lem-qsm-consistent-local-states]], it determines a unique algebraic state $\\omega$ on the quasi-local spin algebra. For local $A\\in\\mathcal A_\\Lambda$, its expectation is $\\omega(A)=q^{-|\\Lambda|}\\operatorname{Tr}_\\Lambda(A)$.",
+        "strategy": "Check positivity and trace one, compute every partial-trace consistency equation, apply the conditional extension lemma, and factor the finite trace on disjoint regions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §2.4 and §3.2.2–3.2.3, pp. 34–36 and 55–57",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §4 and Chapter 3 §1, pp. 6–8 and 25–26",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

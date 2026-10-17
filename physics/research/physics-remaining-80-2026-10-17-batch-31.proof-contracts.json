@@ -1,0 +1,1685 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "scope": [
+    "lem-csm-dk-continuous-time-field-smooth-flow",
+    "thm-csm-dk-finite-n-complete-flow",
+    "thm-csm-dk-global-lipschitz-vlasov",
+    "thm-csm-dk-dobrushin-and-particle-limit",
+    "thm-csm-dk-exact-bbgky",
+    "thm-csm-dk-compact-iid-propagation-of-chaos",
+    "pthm-csm-dk-qualified-mean-field-limit",
+    "ex-csm-dk-product-law-develops-correlations",
+    "post-csm-dk-mean-field-particle-and-iid-model",
+    "lem-csm-dk-smooth-tests-determine-phase-probability"
+  ],
+  "contracts": {
+    "lem-csm-dk-continuous-time-field-smooth-flow": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement takes d>=1 and a nonempty compact interval I=[a,b]; empty state spaces and empty time domains are outside its data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof includes G=0: the estimates reduce to V(t)=v0 and X(t)=x0+(t-a)v0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and the proof allow d=1; the scalar torus position and velocity satisfy the same continuation estimates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the proof handles the degenerate interval a=b by the identity solution map."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the proof continues the solution across the compact interval including a and b; the initial endpoint is the prescribed state."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1-1.3 use deterministic local uniqueness, continuation and variational equations; no nonempty family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma gives existence/uniqueness and smooth initial-state dependence under the bounded smooth force onI. Its additional joint-time smoothness clause is conditional, not an iff regularity characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Smooth flow behavior is not claimed to imply all stated bounded derivatives of G or recover a unique force outside the given interval; no reverse direction is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "singleton-time-interval",
+          "result": "For a=b the flow is the identity on initial data, as handled before continuation."
+        },
+        {
+          "case": "zero-force",
+          "result": "For G=0 the exact solution is V(t)=v0, X(t)=x0+(t-a)v0; all state jets are finite on I."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $a=b$, the only time is the prescribed initial time and the solution map is the identity, so the claims hold. Otherwise lift $G$ periodically to $\\widetilde G:J\\times\\mathbb R^d\\to\\mathbb R^d$ and write $z=(x,v)$ and $B(t,z)=(v,\\widetilde G(t,x))$. On every compact time interval and bounded state ball, $B$ is continuous, bounded and Lipschitz in state because $D_xG$ is bounded. Thus [F1] gives unique local solutions. Along any such solution, if $M:=\\sup_{I\\times\\mathbb T^d}|G|$, then $|V(t)-v_0|\\le M|t-a|$ and $|X(t)-x_0-(t-a)v_0|\\le M|t-a|^2/2$ for lifted positions. Hence a solution on a finite subinterval of $I$ remains in one bounded state cylinder. On a slightly larger cylinder the field has one finite bound and one finite state-Lipschitz constant, so the quantitative [F1] time estimate gives a common positive continuation length for every point of the trajectory. Finitely many such equal-length continuations cover $I$. Uniqueness on overlaps from [F1] gives one solution on all of $I$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix a compact subinterval and a base state $z_0$. The bound on $D_zB$ and [F2] give $|z(t,z_0+h)-z(t,z_0)|\\le C|h|$ uniformly in $t$ for small $h$. In the integral equations, set $\\Delta_h(t):=z(t,z_0+h)-z(t,z_0)$ and $A_h(t):=\\int_0^1D_zB\\bigl(t,z(t,z_0)+\\theta\\Delta_h(t)\\bigr)\\,d\\theta.$ Then $\\Delta_h(t)=h+\\int_a^t A_h(s)\\Delta_h(s)\\,ds$. Uniform continuity of $D_zB$ on the compact time interval and torus gives $A_h\\to A:=D_zB(t,z(t,z_0))$ uniformly in $t$. The linear integral equation $J(t)=I+\\int_a^t A(s)J(s)\\,ds$ has a unique solution by the same Picard iteration as [F1]. Subtracting it from the equation for $\\Delta_h$, applying [F2], and using $\\sup_t\\|A_h-A\\|\\to0$ proves $\\sup_t|\\Delta_h(t)-J(t)h|/|h|\\to0$. Thus $D_{z_0}z(t,z_0)=J(t)$ and it satisfies $\\dot J=D_zB(t,z(t,z_0))J$, $J(a)=I$. Since $D_zB$ is bounded uniformly in state, [F2] also gives $\\sup_{t\\in I,z_0}\\|J(t,z_0)\\|<\\infty$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $r\\ge2$, the candidate $r$-th state derivative $J_r$ satisfies the linear variational equation $\\dot J_r=D_zB(t,z)J_r+\\sum_{\\substack{\\pi\\text{ a partition of }\\{1,\\ldots,r\\}\\\\|\\pi|\\ge2}}D_z^{|\\pi|}B(t,z)\\bigl[J_{|C_1|},\\ldots,J_{|C_{|\\pi|}|}\\bigr],\\qquad J_r(a)=0,$ where $C_1,\\ldots,C_{|\\pi|}$ are the blocks of $\\pi$ and $z=z(t,z_0)$. The coefficient and all higher derivatives of $B$ are bounded uniformly in state. By induction, the forcing term is therefore bounded uniformly over initial states; [F2] gives a unique $J_r$ with a uniform finite-time bound. Applying the difference-quotient argument of step 1.2 to the equation for $J_{r-1}$, using uniform continuity of each $D_z^jB$ on the compact time interval and periodic state variable for $j\\le r$, shows that this $J_r$ is its derivative. Induction proves smooth dependence and the asserted uniform bounds. Solving the same system backward in time gives the inverse map, and uniqueness makes the two maps inverse. If $B$ is also smooth in time, $\\partial_tz=B(t,z)$ and the state-jet equations give every mixed time-state derivative by repeated chain rule.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all three proof steps and exact Picard-Lindelof and Gronwall statements. Periodic lifting, bounded acceleration and a common continuation cylinder give existence including endpoints and reversed time. Difference quotients converge uniformly to the first variational equation; higher jet equations have bounded forcing by induction, and Gronwall bounds all jets uniformly in initial state. No time derivatives are assumed until the final conditional joint-smoothness clause. Checked a=b, G=0 and d=1. No unresolved defect; reader reports source retrieval limitations and refuter incomplete visibility are not proof certifications."
+      }
+    },
+    "thm-csm-dk-finite-n-complete-flow": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "N=1 is permitted: the interaction sum is empty and the flow is free streaming, covered by the bounded-force continuation1.1. The phase space itself is nonempty for d>=1,L>0; normalized initial density excludes a zero-mass law."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof remain valid when W is constant, so K=0; the finite flow is free and the Liouville density is transported."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof covers N=1: the interaction sum is empty, and the complete flow is free motion on the torus times Euclidean momentum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires m>0 and L>0, so zero mass and zero side length are excluded; no nondegenerate-force hypothesis is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and the proof assert the flow and transport for every real t, including t=0 and both signs of time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite-dimensional ODE has unique deterministic trajectories; the proof makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–4.1 prove complete smooth Hamiltonian transport, volume/permutation invariance and the stated rapid-tail density result. These are consequences of the smooth bounded-force model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Completeness alone is not asserted to recover this pair interaction or imply arbitrary density tail bounds; the rapid-tail initial condition is retained as a separate hypothesis."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=1",
+          "result": "The pair sums vanish and the trajectory is q(t)=q(0)+tp(0)/m, p(t)=p(0); permutation symmetry is trivial."
+        },
+        {
+          "case": "constant-W",
+          "result": "K=0, so the Liouville equation reduces to free streaming and the normalized density remains normalized."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-periodic-mean-field-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a side length $L>0$ in metres, a mass $m>0$ in kilograms, and a smooth even periodic pair potential $W\\in C^\\infty(\\mathbb T_L^d;\\mathbb R)$ in joules, where $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$ is the flat position torus and even means $W(-q)=W(q)$. For each finite integer $N\\ge1$, the phase space is $(T^*\\mathbb T_L^d)^N$ with canonical coordinates $z_i=(q_i,p_i)$, $q_i\\in\\mathbb T_L^d$ in metres and $p_i\\in\\mathbb R^d$ in kilogram-metres per second. In position charts obtained by lifting torus coordinates to $\\mathbb R^d$, define\n\n$$\\theta_N:=\\sum_{i=1}^N\\sum_{a=1}^d p_i^a\\,dq_i^a,\\qquad \\omega_N:=-d\\theta_N=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_i^a.$$\n\nOverlaps of these position charts are translations by vectors in $L\\mathbb Z^d$, with the same momentum coordinates, so $dq_i^a$ and $p_i^a$ agree on overlaps. Thus the displayed forms glue globally on $(T^*\\mathbb T_L^d)^N$; $\\omega_N$ is closed and nondegenerate by its displayed coordinate matrix. Both forms have action units of joule-seconds. Use the Hamiltonian convention $\\iota_{X_{H_N}}\\omega_N=dH_N$ of [[def-csm-dk-hamiltonian-flow-measure]]. The finite-particle Hamiltonian, with energy in joules, is\n\n$$H_N(q_1,\\ldots,q_N,p_1,\\ldots,p_N)=\\sum_{i=1}^{N}\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j).$$\n\nThe interaction force is $K(q):=-\\nabla_qW(q)$, in newtons. It is bounded and globally Lipschitz on the compact torus; evenness of $W$ makes $K$ odd and $K(0)=0$. Hamilton's equations in the canonical convention are\n\n$$\\dot q_i=\\frac{p_i}{m},\\qquad \\dot p_i=\\frac1N\\sum_{j\\ne i}K(q_i-q_j).$$\n\nFor any chosen momentum scale $P_0>0$ in kilogram-metres per second, define the time scale $\\tau_0:=mL/P_0$ in seconds, dimensionless variables $x_i:=q_i/L\\in\\mathbb T^d:=(\\mathbb R/\\mathbb Z)^d$, $v_i:=p_i/P_0$, and $s:=t/\\tau_0$. Define the dimensionless potential $\\Phi(x):=mW(Lx)/P_0^2$ and force $k(x):=-\\nabla_x\\Phi(x)$. Then the equations become\n\n$$x_i'=v_i,\\qquad v_i'=\\frac1N\\sum_{j\\ne i}k(x_i-x_j),$$\n\nwhere prime denotes derivative with respect to dimensionless time $s$. Here\n$\\|Dk\\|_\\infty:=\\sup_{x\\in\\mathbb T^d}\\|Dk(x)\\|_{\\mathrm{op}}$, with operator\nnorm induced by the Euclidean norm, and $\\|k\\|_\\infty:=\\sup_x|k(x)|$; the\nconstants $A:=\\|Dk\\|_\\infty$ and $B:=\\|k\\|_\\infty$ are finite and\ndimensionless. This is the selected smooth periodic mean-field scaling; it is\nnot the hard-sphere Boltzmann-Grad scaling.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csm-dk-hamiltonian-flow-measure",
+          "source_section": "Definition",
+          "quote": "Adopt $\\mathrm{AC}_\\omega$ for the density-measure construction\n([[def-countable-choice]]). A **Hamiltonian phase datum** consists of a\nHausdorff second-countable smooth manifold $M$ of finite even dimension $2n$\nwithout boundary, a symplectic form $\\omega$ on $M$, and an autonomous smooth\nfunction $H:M\\to\\mathbb R$. Here symplectic means that $\\omega$ is a smooth\nclosed two-form and is nondegenerate at every point\n([[def-symplectic-form-and-symplectic-manifold]]). The Hamiltonian vector field\n$X_H$ is the unique smooth field satisfying $\\iota_{X_H}\\omega=dH$\n([[def-hamiltonian-vector-field-and-hamiltonian-function]],\n[[thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions]]).\nFor each $z\\in M$, let $I_z\\subseteq\\mathbb R$ be the maximal open interval\ncontaining $0$ on which the unique maximal $C^\\infty$ integral curve\n$\\gamma_z:I_z\\to M$ satisfying $\\dot\\gamma_z(t)=X_H(\\gamma_z(t))$ and\n$\\gamma_z(0)=z$ is defined; its existence and uniqueness follow from the\nsmooth ODE theorem ([[thm-fundamental-theorem-for-autonomous-smooth-odes]]).\nSet $D=\\{(t,z):z\\in M,\\ t\\in I_z\\}$ and define the maximal local flow\n$\\Phi:D\\to M$ by $\\Phi(t,z)=\\gamma_z(t)$. Write $\\Phi_t(z)=\\Phi(t,z)$ when\n$(t,z)\\in D$. Uniqueness gives $\\Phi_0(z)=z$ and\n$\\Phi_t(\\Phi_s(z))=\\Phi_{t+s}(z)$ whenever the terms are defined.\nThe domain $D$ is open, and in local charts $\\Phi$ is smooth in the initial\nstate and $C^1$ in time, as supplied by the stated ODE theorem.\nCompleteness of the flow on all of $M$ is not part of this datum.\n\nA Borel set $R\\subseteq M$ is a **complete invariant domain** for this datum\nif $\\{t\\}\\times R\\subseteq D$ and $\\Phi_t(R)=R$ for every\n$t\\in\\mathbb R$. Thus each restricted map $\\Phi_t|_R:R\\to R$ is defined\neverywhere on $R$. The definition makes no assertion that $M$ itself is\ncomplete or that such an $R$ has finite measure.\n\nThe symplectic orientation has volume form $\\Omega=\\omega^n/n!$\n([[cor-symplectic-manifolds-have-a-canonical-orientation-and-volume-form]]).\nFor a fixed positive reference action $a_0$, define the positive smooth density\n$\\eta_0=|\\Omega|/a_0^n$ and let $m_0$ be its intrinsic Borel measure\n([[def-density-bundle-and-smooth-density]],\n[[def-borel-measurable-nonnegative-density-on-a-manifold]],\n[[thm-density-measure-is-independent-of-the-chart-gluing]],\n[[thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure]]).\nThe measure $m_0$ may have infinite total mass. Use SI units for a physical\ninterpretation. In a standard mechanical cotangent chart, $q^i$ has unit m,\n$p_i$ has unit kg m/s, $H$ has unit J, $\\omega$ and $a_0$ have unit J s, and\n$\\eta_0$ is dimensionless. The scale $a_0$ is a normalization convention and\ndoes not assert quantization.\n\nAn **ensemble** on $R$ is a Borel probability measure $\\mu$ on $R$, distinct\nfrom an individual trajectory. If $\\mu$ has density $\\rho$ with respect to\n$m_0|_R$, then $\\rho\\ge0$ is Borel and $\\int_R\\rho\\,dm_0=1$. For $\\beta>0$,\nthe **canonical probability**, when it exists, is the Borel measure\n$$\\mu_\\beta(B)=Z_\\beta^{-1}\\int_B e^{-\\beta H}\\,dm_0,\\qquad Z_\\beta=\\int_R e^{-\\beta H}\\,dm_0,$$\nfor Borel $B\\subseteq R$, provided $0<Z_\\beta<\\infty$. For a\ntemperature-parameterized physical interpretation, take $T>0$ as an absolute\ntemperature in K and $k_B>0$ as a supplied energy-temperature conversion\nconstant in J/K, and set $\\beta=(k_BT)^{-1}$ in J$^{-1}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-liouville-volume-preservation",
+          "source_section": "Statement",
+          "quote": "On a $2n$-dimensional symplectic manifold, every Hamiltonian local flow\npreserves the Liouville volume form $\\Omega=\\omega^n/n!$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-and-fubini-for-completed-product-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), and let\n$\\overline{\\mu \\times \\nu}$ be the completed product of two sigma-finite\nmeasure spaces.\n\n1. If $f : X \\times Y \\to [0,\\infty]$ is $\\overline{\\mu \\times \\nu}$-measurable, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that $f_x$ is $\\overline{\\mathcal B}$-measurable for $x\\notin A$ and $f^y$ is $\\overline{\\mathcal A}$-measurable for $y\\notin B$. Define $I_f(x)=\\int_Y f_x\\,d\\overline\\nu$ for $x\\notin A$ and $I_f(x)=0$ on $A$; define $J_f(y)=\\int_X f^y\\,d\\overline\\mu$ for $y\\notin B$ and $J_f(y)=0$ on $B$. Then $I_f,J_f$ are measurable and\n$$\\int f\\,d\\overline{\\mu \\times \\nu}=\\int_X I_f\\,d\\mu=\\int_Y J_f\\,d\\nu.$$\n2. If $f \\in L^1(\\overline{\\mu \\times \\nu})$, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that the sections are measurable and integrable outside them. Define $I_f,J_f$ by the same section integrals outside $A,B$ and by zero on $A,B$. They are measurable and integrable, and the same equality holds.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Lift the torus positions periodically to $\\mathbb R^{dN}$. The force bound $K_*:=\\|K\\|_\\infty$ gives $|p_i(t)-p_i(0)|\\le K_*|t|$ and $|q_i(t)-q_i(0)-(t/m)p_i(0)|\\le K_*t^2/(2m)$ for each particle. Thus on every finite time interval the lifted trajectory stays in a bounded state cylinder. The lifted vector field from [F1] is smooth with bounded first derivatives there, so [F3] gives a common local continuation interval; repeating this fixed extension across the finite interval gives a global lifted solution, and periodicity makes it a well-defined torus solution. Reversing time gives existence on negative intervals. Local smooth dependence from [F3], composed over finitely many local intervals, makes every global finite-time map smooth; uniqueness makes $\\Phi_{-t}^N$ its inverse.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "With the symplectic form in [F1] and Hamiltonian sign convention in [F2], the Hamiltonian in [F1] defines the canonical Hamiltonian vector field on this cotangent phase space. Apply [F4] on each local time interval of step 1.1 and compose the volume-preserving local maps; this gives $(\\Phi_t^N)^*\\Omega_N=\\Omega_N$ for every real $t$. The Hamiltonian vector field is equivariant under every permutation $\\sigma$ of particle labels because the kinetic sum and even pair-potential sum are invariant. Hence $\\sigma\\Phi_t^N(z)$ and $\\Phi_t^N(\\sigma z)$ solve the same initial-value problem; uniqueness from [F3] gives equality.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Along characteristics $z(t)=\\Phi_t^N(z_0)$, the derivative of $F_N(t,z(t))=F_N^0(z_0)$ is zero. The chain rule therefore gives $\\partial_tF_N+X_{H_N}\\cdot\\nabla F_N=0$. Substituting the Hamilton equations from [F1] and grouping the two terms for each pair $i<j$, using $K(q_j-q_i)=-K(q_i-q_j)$, yields $\\partial_tF_N+\\sum_{i=1}^N\\frac{p_i}{m}\\cdot\\nabla_{q_i}F_N+\\frac1N\\sum_{1\\le i<j\\le N}K(q_i-q_j)\\cdot(\\nabla_{p_i}-\\nabla_{p_j})F_N=0.$ The rapid tails justify the displayed derivatives as classical ones on every finite time slab.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On each finite time slab the rapid bounds on all phase derivatives make $\\partial_tF_N$ integrable and supply one integrable majorant for its time difference quotients; [F6] therefore permits differentiation under the $d\\Omega_N$ integral. Integrate the equation in step 3.1 over all phase variables. The $q_i$-derivative terms have zero integral by periodicity. For each force term, $K(q_i-q_j)$ is independent of momenta, so integration by parts in $p_i$ and $p_j$ has zero boundary terms by the rapid tails. Fubini [F5] justifies these coordinate integrations and their order. Hence $\\frac d{dt}\\int F_N(t)\\,d\\Omega_N=0$; its value is $1$ at $t=0$ by [A2], so $F_N(t)$ remains normalized. The same permutation identity from step 2.1 and [A2] give $F_N(t,\\sigma z)=F_N(t,z)$. Finally, the vector field derivatives of every order are bounded globally: its first derivative has entries $1/m$ and $DK$, and higher derivatives are bounded derivatives of the periodic force. The variational equations and [F3] bound every finite state derivative of $\\Phi_{-t}^N$ on the time slab. Since $|p_i(t)-p_i(0)|\\le K_*|t|$, the momentum norms differ by at most $\\sqrt N K_*|t|$; the chain rule transfers every rapid-decay bound of $F_N^0$ to $F_N(t)$ uniformly on the slab.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F3",
+            "F5",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all four steps, current Hamiltonian definition and exact smooth-ODE, Liouville, completed-Fubini and DCT statements. Acceleration <= ||K|| gives continuation in both time directions for fixed finite N. Even W gives odd K and permutation equivariance. Local Hamiltonian volume preservation composes globally. Bounded state derivatives and bounded momentum displacement transfer all rapid-tail bounds; those bounds justify the earlier integrations by parts and time differentiation. Checked N=1, zero force, t=0, negative times, and noncompact momentum tails. Countable choice retained for intrinsic density and completed Fubini. No unresolved defect."
+      }
+    },
+    "thm-csm-dk-global-lipschitz-vlasov": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The initial datum is a probability on nonempty Z with d>=1; no empty probability or empty phase space is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof allow A=B=0; the fixed point is u=0 and the characteristics are free streaming."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits d=1; the Volterra, moment and weak-identity arguments in the proof are dimension independent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: A=0 is included in the proof with any finite h; finite or zero first moment satisfies the stated integrability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the proof constructs the global solution on successive closed finite slabs in either time direction, including slab endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Volterra contraction gives a unique fixed point by iteration; no arbitrary choice from a family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem constructs the global characteristic evolution and proves the stated weak identity, plus a separate smooth-density clause. These are forward consequences of the specified force and moment data."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "An arbitrary weak curve is not identified here without the precise uniqueness class later used in the Dobrushin theorem; no converse reconstructing smoothforce from a solution is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "zero-force",
+          "result": "For k=0, T maps every displacement to 0, so X=x+sv, V=v and the transported law solves free streaming."
+        },
+        {
+          "case": "first-moment-bound",
+          "result": "The acceleration bound gives |V_s-v|<=B|s|, hence the first moment grows by at most B|s|."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-periodic-mean-field-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a side length $L>0$ in metres, a mass $m>0$ in kilograms, and a smooth even periodic pair potential $W\\in C^\\infty(\\mathbb T_L^d;\\mathbb R)$ in joules, where $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$ is the flat position torus and even means $W(-q)=W(q)$. For each finite integer $N\\ge1$, the phase space is $(T^*\\mathbb T_L^d)^N$ with canonical coordinates $z_i=(q_i,p_i)$, $q_i\\in\\mathbb T_L^d$ in metres and $p_i\\in\\mathbb R^d$ in kilogram-metres per second. In position charts obtained by lifting torus coordinates to $\\mathbb R^d$, define\n\n$$\\theta_N:=\\sum_{i=1}^N\\sum_{a=1}^d p_i^a\\,dq_i^a,\\qquad \\omega_N:=-d\\theta_N=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_i^a.$$\n\nOverlaps of these position charts are translations by vectors in $L\\mathbb Z^d$, with the same momentum coordinates, so $dq_i^a$ and $p_i^a$ agree on overlaps. Thus the displayed forms glue globally on $(T^*\\mathbb T_L^d)^N$; $\\omega_N$ is closed and nondegenerate by its displayed coordinate matrix. Both forms have action units of joule-seconds. Use the Hamiltonian convention $\\iota_{X_{H_N}}\\omega_N=dH_N$ of [[def-csm-dk-hamiltonian-flow-measure]]. The finite-particle Hamiltonian, with energy in joules, is\n\n$$H_N(q_1,\\ldots,q_N,p_1,\\ldots,p_N)=\\sum_{i=1}^{N}\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j).$$\n\nThe interaction force is $K(q):=-\\nabla_qW(q)$, in newtons. It is bounded and globally Lipschitz on the compact torus; evenness of $W$ makes $K$ odd and $K(0)=0$. Hamilton's equations in the canonical convention are\n\n$$\\dot q_i=\\frac{p_i}{m},\\qquad \\dot p_i=\\frac1N\\sum_{j\\ne i}K(q_i-q_j).$$\n\nFor any chosen momentum scale $P_0>0$ in kilogram-metres per second, define the time scale $\\tau_0:=mL/P_0$ in seconds, dimensionless variables $x_i:=q_i/L\\in\\mathbb T^d:=(\\mathbb R/\\mathbb Z)^d$, $v_i:=p_i/P_0$, and $s:=t/\\tau_0$. Define the dimensionless potential $\\Phi(x):=mW(Lx)/P_0^2$ and force $k(x):=-\\nabla_x\\Phi(x)$. Then the equations become\n\n$$x_i'=v_i,\\qquad v_i'=\\frac1N\\sum_{j\\ne i}k(x_i-x_j),$$\n\nwhere prime denotes derivative with respect to dimensionless time $s$. Here\n$\\|Dk\\|_\\infty:=\\sup_{x\\in\\mathbb T^d}\\|Dk(x)\\|_{\\mathrm{op}}$, with operator\nnorm induced by the Euclidean norm, and $\\|k\\|_\\infty:=\\sup_x|k(x)|$; the\nconstants $A:=\\|Dk\\|_\\infty$ and $B:=\\|k\\|_\\infty$ are finite and\ndimensionless. This is the selected smooth periodic mean-field scaling; it is\nnot the hard-sphere Boltzmann-Grad scaling.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-csm-dk-continuous-time-field-smooth-flow",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $I=[a,b]$ be a compact interval contained in an open interval $J\\subseteq\\mathbb R$, and let $G:J\\times\\mathbb T^d\\to\\mathbb R^d$ be continuous in time with jointly continuous state derivatives $D_x^rG$ on $J\\times\\mathbb T^d$ for every integer $r\\ge1$. Assume that $G$ and each state derivative $D_x^rG$ are bounded on $I\\times\\mathbb T^d$ for every integer $r\\ge1$. For initial data $(x_0,v_0)\\in\\mathbb T^d\\times\\mathbb R^d$, the system\n\n$$\\dot X(t)=V(t),\\qquad \\dot V(t)=G(t,X(t)),\\qquad (X(a),V(a))=(x_0,v_0)$$\n\nhas a unique solution on all of $I$. For each $t\\in I$, the map\n$(x_0,v_0)\\mapsto(X(t),V(t))$ is $C^\\infty$; for every integer $r\\ge1$ its\n$r$th initial-state derivative is bounded uniformly over $t\\in I$ and all\n$(x_0,v_0)$. Its inverse is the solution map from $t$ back to $a$. If $G$ is\njointly $C^\\infty$ in $(t,x)$ on $J\\times\\mathbb T^d$, then the flow is jointly\n$C^\\infty$ in time and initial state.",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-change-of-variables-for-oriented-manifold-diffeomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be a diffeomorphism of oriented smooth $n$-manifolds and\n$\\omega\\in\\Omega_c^n(N)$. If $F$ preserves orientation everywhere,\n$\\int_MF^*\\omega=\\int_N\\omega$; if it reverses orientation everywhere,\n$\\int_MF^*\\omega=-\\int_N\\omega$. If the sign varies between components,\napply the appropriate signed equality on each component and add. The\ncompact-support integrals are the choice-free finite-chart values, equal to\nthe global partition integrals whenever those are available.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$. For $R>0$, $\\chi_R(x)=\\chi(x/R)$ satisfies $\\partial^\\beta\\chi_R(x)=R^{-|\\beta|}(\\partial^\\beta\\chi)(x/R)$. The construction requires no choice.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-csm-dk-smooth-tests-determine-phase-probability",
+          "source_section": "Statement",
+          "quote": "Use $Z=\\mathbb T^d\\times\\mathbb R^d$ and\n$d_Z((x,v),(y,w))=d_{\\mathbb T^d}(x,y)+|v-w|$ from\n[[def-csm-dk-phase-space-wasserstein-one]]. Let $\\mu$ and $\\nu$ be Borel\nprobability measures on $Z$. If\n\n$$\\int_Z\\varphi\\,d\\mu=\\int_Z\\varphi\\,d\\nu \\quad\\text{for every }\\varphi\\in C_c^\\infty(Z),$$\n\nwhere $C_c^\\infty(Z)$ means smooth and periodic in position with compact\nvelocity support, then $\\mu=\\nu$ on all Borel subsets of $Z$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-csm-dk-phase-space-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Use the dimensionless one-particle phase space $Z:=\\mathbb T^d\\times\\mathbb R^d$ from [[def-csm-dk-periodic-mean-field-model]], with its product topology and Borel sigma algebra. The finite torus is second-countable by [[def-the-one-dimensional-torus-and-normalized-haar-integral]], and Euclidean space is second-countable. Consequently $Z$ and $Z\\times Z$ are second-countable, and the Borel sigma algebra of each finite product equals the product of the factor Borel sigma algebras: every open set is a countable union of basic open rectangles. Use the product topology and its Borel sigma algebra on $Z\\times Z$ as well.\n\nFor $x,y\\in\\mathbb T^d$, let\n\n$$d_{\\mathbb T^d}(x,y):=\\min_{\\ell\\in\\mathbb Z^d}|\\widetilde x-\\widetilde y+\\ell|,$$\n\nwhere $\\widetilde x,\\widetilde y\\in\\mathbb R^d$ are any representatives; the minimum is independent of the representatives. Equip $Z$ with\n\n$$d_Z((x,v),(y,w)):=d_{\\mathbb T^d}(x,y)+|v-w|.$$\n\nLet $\\mathcal P_1(Z)$ be the Borel probability measures $\\mu$ on $Z$ with $\\int_Z|v|\\,d\\mu(x,v)<\\infty$. For $\\mu,\\nu\\in\\mathcal P_1(Z)$, a coupling is a Borel probability $\\pi$ on $Z\\times Z$ satisfying $\\pi(A\\times Z)=\\mu(A)$ and $\\pi(Z\\times B)=\\nu(B)$ for all Borel $A,B\\subseteq Z$; write $\\Pi(\\mu,\\nu)$ for the set of couplings. Define the phase-space Wasserstein-1 coupling cost by\n\n$$\\mathcal W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{Z\\times Z}d_Z(z,z')\\,d\\pi(z,z').$$\n\nBy [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], $\\mu\\otimes\\nu$ is a probability on $\\mathcal B(Z)\\otimes\\mathcal B(Z)=\\mathcal B(Z\\times Z)$ and its marginals are $\\mu,\\nu$; hence $\\Pi(\\mu,\\nu)$ is nonempty. The infimum is finite: this product coupling has torus cost at most $\\sqrt d/2$, and Tonelli's theorem bounds its velocity cost by $\\int|v|\\,d\\mu+\\int|w|\\,d\\nu$. No minimizing coupling is assumed to exist.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Lebesgue measure on $\\mathbb R^n$ is written\n$\\lambda_n$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]), and\n$\\mathbb Z\\subseteq\\mathbb R$ is the copy of the integers\n([[def-integers]]).\n\n**The torus.** Let $q:\\mathbb R\\to\\mathbb T:=\\mathbb R/\\mathbb Z$ be the\ncanonical projection of the quotient of the additive group $\\mathbb R$ by its\nsubgroup $\\mathbb Z$, carrying the quotient topology\n([[def-quotient-topology]], [[def-topological-space]]); we write\n$[t]:=q(t)=t+\\mathbb Z$. Thus $[s]=[t]$ exactly when $s-t\\in\\mathbb Z$. The map\n$q$ is continuous ([[def-continuous-map-top]]), and $\\mathbb T$ is a compact\nHausdorff space homeomorphic to the Euclidean unit circle.\n\n**Fundamental domain.** Every class has exactly one representative in $[0,1)$:\nfor $t\\in\\mathbb R$ the integer part $n=\\lfloor t\\rfloor$ satisfies\n$n\\le t<n+1$, so $t-n\\in[0,1)$ represents $[t]$ ([[lem-integer-part]]); and if\n$s,t\\in[0,1)$ satisfy $s-t\\in\\mathbb Z$, then $|s-t|<1$ forces $s=t$.\nConsequently the map $[0,1)\\to\\mathbb T$, $t\\mapsto[t]$, is a bijection.\n\n**Topological checks.** The closed interval $[0,1]$ is compact by [[thm-heine-borel-r]] and maps onto $\\mathbb T$, so the quotient is compact by [[thm-compactness-under-continuous-maps]]. The map $t\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is continuous by [[thm-sine-and-cosine-derivatives]] and [[cor-differentiable-implies-continuous]], and is constant on quotient fibres by [[thm-sine-cosine-zero-sets-and-fundamental-period]]. It induces a continuous map $\\varphi:\\mathbb T\\to S^1$ by [[thm-quotient-universal-property]]. The bijection of $[0,2\\pi)$ with the circle in [[thm-sine-and-cosine-parametrize-the-unit-circle]], together with the unique representatives in $[0,1)$, makes $\\varphi$ bijective. The Euclidean circle is Hausdorff by [[thm-metric-hausdorff-separation]], so the compact-to-Hausdorff clause of [[thm-compactness-under-continuous-maps]] makes $\\varphi$ a homeomorphism. In particular $\\mathbb T$ is Hausdorff.\n\nThe map $q$ is open: for an open $U\\subseteq\\mathbb R$, its saturation $q^{-1}[q[U]]=\\bigcup_{k\\in\\mathbb Z}(U+k)$ is open. The images under $q$ of rational-endpoint open intervals form a countable base: if $q(t)\\in V$ with $V$ open, choose such an interval containing $t$ and contained in $q^{-1}[V]$. Its image is an open neighbourhood contained in $V$.\n\n**The measure.** For a Borel set $E\\in\\mathcal B(\\mathbb T)$\n([[def-borel-sigma-algebra]]) the preimage $q^{-1}[E]$ is a Borel subset of\n$\\mathbb R$, because $q$ is continuous\n([[thm-continuous-preimages-of-borel-sets-are-borel]]), hence Lebesgue\nmeasurable ([[thm-borel-sets-are-lebesgue-measurable]]). Define\n\n$$m_{\\mathbb T}(E):=\\lambda_1\\bigl(q^{-1}[E]\\cap[0,1)\\bigr) ,$$\n\nthe value at $q^{-1}[E]$ of the same-ambient restriction of $\\lambda_1$ to $[0,1)$\n([[def-restriction-of-a-measure]]).\n\nThis is a measure on $\\mathcal B(\\mathbb T)$ by [[prop-restriction-is-a-measure]]:\nthe assignment $E\\mapsto\\lambda_1(q^{-1}[E]\\cap[0,1))$ is the composition of the\nrestriction measure with the inverse image along $q$, and inverse images preserve\nthe empty set, complements and countable unions, while countable additivity is\nthat of $\\lambda_1$. It is a **probability measure**:\n$m_{\\mathbb T}(\\mathbb T)=\\lambda_1([0,1))=1$\n([[thm-lebesgue-measure-of-a-box-of-every-kind]]). Thus\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T})$ is a probability measure space\n([[def-measure-space]], [[def-measure]]).\n\n**The integral.** For a Borel measurable $F:\\mathbb T\\to[0,+\\infty]$, define\n\n$$\\int_{\\mathbb T}F\\,dm_{\\mathbb T}:=\\int_{[0,1)}F\\circ q\\,d\\lambda_1 .$$\n\nThe defining integral is meaningful because $F\\circ q$ is Borel\n([[thm-composition-with-borel-functions-preserves-measurability]],\n[[thm-continuous-preimages-of-borel-sets-are-borel]]). The assignment agrees with\n$E\\mapsto m_{\\mathbb T}(E)$ on indicators, and it is additive and homogeneous on\nfinite nonnegative simple functions; for a sequence $0\\le F_0\\le F_1\\le\\cdots$\nwith $F_n\\uparrow F$ pointwise the identity passes to the limit because\n$F_n\\circ q\\uparrow F\\circ q$ and monotone convergence holds for $\\lambda_1$\n([[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]],\n[[thm-monotone-convergence-for-the-integral]]). For real or complex integrable\n$F$ the integral is defined by decomposition into nonnegative parts or into real\nand imaginary parts, and it is linear\n([[def-integrable-real-and-complex-functions-and-their-integrals]],\n[[thm-linearity-of-the-lebesgue-integral-on-l-one]]). In particular\n$\\int_{\\mathbb T}1\\,dm_{\\mathbb T}=1$, and the same formula holds with $[0,1)$\nreplaced by any half-open interval $[a,a+1)$ or $(a,a+1]$, by the periodicity of\n$q^{-1}[E]$ and the translation invariance of $\\lambda_1$\n([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]]).\n\n**Translation invariance.** For $y\\in\\mathbb R$ the map\n$\\tau_y:\\mathbb T\\to\\mathbb T$, $\\tau_y([t]):=[t+y]$, is well defined (if\n$s-t\\in\\mathbb Z$ then $(s+y)-(t+y)\\in\\mathbb Z$) and continuous, because it is\ninduced by the continuous map $t\\mapsto q(t+y)$ from $\\mathbb R$ to $\\mathbb T$. This composite is constant on the fibres of $q$, since $q(t)=q(s)$ implies $q(t+y)=q(s+y)$ ([[thm-quotient-universal-property]]). It preserves\n$m_{\\mathbb T}$: write $y=n+r$ with $n=\\lfloor y\\rfloor$ and $r\\in[0,1)$, put\n$A:=q^{-1}[E]$ and use that $A-n=A$ and that\n$A\\cap[0,1)=\\bigl(A\\cap[0,r)\\bigr)\\cup\\bigl(A\\cap[r,1)\\bigr)$ while\n$A\\cap[r,r+1)=\\bigl(A\\cap[r,1)\\bigr)\\cup\\bigl((A\\cap[0,r))+1\\bigr)$, so that\n\n$$m_{\\mathbb T}(\\tau_y^{-1}E)=\\lambda_1\\bigl((A-y)\\cap[0,1)\\bigr)=\\lambda_1\\bigl(A\\cap[r,r+1)\\bigr)=\\lambda_1\\bigl(A\\cap[0,1)\\bigr)=m_{\\mathbb T}(E),$$\n\nthe middle equality by translation invariance of $\\lambda_1$. Hence\n$(\\mathbb T,\\mathcal B(\\mathbb T),m_{\\mathbb T},\\tau_y)$ is a measure-preserving\nsystem for every $y$, and the published integral-invariance theorem gives\n$\\int_{\\mathbb T}F\\circ\\tau_y\\,dm_{\\mathbb T}=\\int_{\\mathbb T}F\\,dm_{\\mathbb T}$\nfor every measurable $F\\ge0$ and every integrable $F$\n([[def-measure-preserving-transformation-and-system]],\n[[thm-integrals-are-invariant-under-measure-preserving-maps]]). This is the\n**normalized Haar integral** of $\\mathbb T$; abstract Haar theory is not\ninvoked.\n\n**The finite torus.** For a natural $n\\ge1$ put\n$\\mathbb T^n:=\\mathbb R^n/\\mathbb Z^n$ with the quotient topology of the\ncanonical projection $q_n$, and define\n\n$$m_{\\mathbb T^n}(E):=\\lambda_n\\bigl(q_n^{-1}[E]\\cap[0,1)^n\\bigr),\\qquad \\int_{\\mathbb T^n}F\\,dm_{\\mathbb T^n}:=\\int_{[0,1)^n}F\\circ q_n\\,d\\lambda_n .$$\n\nCoordinatewise integer parts give unique representatives in $[0,1)^n$, and the continuous quotient map sends the compact cube $[0,1]^n$ onto $\\mathbb T^n$. Compactness of the cube follows from [[thm-heine-borel-r]] and [[thm-finite-products-of-compact-spaces]], and compactness of its image follows from [[thm-compactness-under-continuous-maps]]. Preimages of Borel sets are Borel; disjoint preimages and countable additivity make the displayed set function a measure, and the box formula gives total mass one. The integral identity follows from indicators, increasing simple approximation and decomposition exactly as in one dimension. For translation invariance, discard the integer parts of the translation vector, split each coordinate of $[0,1)^n$ at its fractional part, and translate the resulting $2^n$ disjoint half-open boxes by integer vectors to partition the translated cube. The periodic preimage set is unchanged by these integer vectors; finite additivity and Lebesgue translation invariance give the same measure. Applying the indicator identity, simple approximation and decomposition gives the integral formula on any translated cube. The coordinate projections induce a continuous bijection\n$\\Phi:\\mathbb T^n\\to(\\mathbb R/\\mathbb Z)^n$ by the universal property. Its\ndomain is compact by the preceding check, while its codomain is a finite\nproduct of Hausdorff spaces and hence Hausdorff ([[lem-products-preserve-t0-t1-and-hausdorff]]); the continuous-bijection\ntheorem therefore makes $\\Phi$ a homeomorphism. Thus $\\mathbb T^n$ carries the\nfinite product topology ([[def-product-topology]],\n[[thm-finite-products-of-compact-spaces]],\n[[thm-compactness-under-continuous-maps]]), and its characters\n$x\\mapsto\\exp(2\\pi i\\,k\\cdot x)$, $k\\in\\mathbb Z^n$, are defined on this compact\nHausdorff space: replacing representatives by integer vectors leaves the exponential unchanged by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]] and the trigonometric period. Finite products of the countable base above form a countable rectangular base. Hence every product-open set is a countable union of Borel rectangles. Conversely coordinate projections are continuous, so Borel rectangles are Borel in the product. Thus the product Borel sigma-algebra equals the Borel sigma-algebra of $\\mathbb T^n$. On a product $A_0\\times\\cdots\\times A_{n-1}$ of Borel subsets\nof the factors, the defining fundamental-domain formula and repeated application of [[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]] give\n$m_{\\mathbb T^n}(A_0\\times\\cdots\\times A_{n-1})=\\prod_jm_{\\mathbb T}(A_j)$, so\n$m_{\\mathbb T^n}$ agrees on every measurable rectangle with the product measure\n$m_{\\mathbb T}\\times\\cdots\\times m_{\\mathbb T}$\n([[def-product-measure-on-sigma-finite-spaces]]); both are probability measures,\nand uniqueness of the product measure on sigma-finite spaces identifies them\non the entire Borel sigma-algebra\n([[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]]).\nFubini's theorem then computes iterated integrals of $L^1$ functions on\n$\\mathbb T^n$\n([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. For $E \\in \\mathcal A \\otimes \\mathcal B$, define\n\n$$(\\mu \\times \\nu)(E) := \\int_X \\nu(E_x)\\,d\\mu = \\int_Y \\mu(E^y)\\,d\\nu.$$\n\nThe two displayed integrals are well-defined by\n[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by\n[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose $h>0$ with $Ah^2<1$; when $A=0$ any finite $h$ is allowed. For a bounded continuous displacement $u(s,x,v)$ in $\\mathbb R^d$ on $[0,h]\\times Z$, periodic in $x$ and with $u(0,\\cdot)=0$, set $(Tu)(s,x,v):=\\int_0^s(s-r)\\int_Z k\\bigl(x+rv+u(r,x,v)-y-rw-u(r,y,w)\\bigr)\\,d\\mu_0(y,w)\\,dr.$ with torus arguments understood modulo $\\mathbb Z^d$. On the closed set $\\sup|u|\\le Bh^2/2$, the map has the same bound because $|k|\\le B$. For every convergent sequence of $(s,x,v)$, the integrand is pointwise continuous in those variables and bounded by $B$ on $(Z,\\mathcal B(Z),\\mu_0)$; [F3] therefore gives joint continuity of $Tu$. Uniform limits preserve continuity, periodicity and the initial condition, so this closed function space is complete in the supremum norm.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any two displacements $u,\\widetilde u$, the force arguments change by at most $2\\sup|u-\\widetilde u|$. The Lipschitz bound $A$ and $\\int_0^s(s-r)\\,dr=s^2/2$ give $\\sup|Tu-T\\widetilde u|\\le Ah^2\\sup|u-\\widetilde u|$. Starting with $u_0=0$ and iterating $u_{n+1}=Tu_n$, successive differences are bounded by a geometric sequence with ratio $Ah^2<1$; hence $(u_n)$ is uniformly Cauchy. Its limit $u$ belongs to the closed complete set, and the Lipschitz estimate gives $Tu=u$. The same estimate makes this fixed point unique.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $X_s(x,v)=x+sv+u(s,x,v)$ modulo the torus and $V_s(x,v)=v+\\partial_su(s,x,v)$. The Volterra formula and continuity of the integrand imply $\\partial_s^2X_s=\\int_Zk(X_s(x,v)-X_s(y,w))\\,d\\mu_0(y,w)$, with $X_0=x$ and $\\dot X_0=v$; thus $(X_s,V_s)$ solves the displayed characteristic system. The bound $|V_s-v|\\le B|s|$ gives a finite first moment for every finite $s$. For bounded continuous $\\psi$, the integrand $\\psi(X_s,V_s)$ is pointwise continuous in $s$ and bounded by $\\|\\psi\\|_\\infty$, so [F3] gives narrow continuity of $\\mu_s$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The force $F_{\\mu_s}(x)$ is continuous in $(s,x)$: for $(s_n,x_n)\\to(s,x)$, its integrand converges pointwise and is bounded by $B$, so [F3] applies on $(Z,\\mu_0)$. Along each characteristic, the chain rule gives $\\frac{d}{ds}\\varphi(s,X_s,V_s) =\\bigl(\\partial_s\\varphi+V_s\\cdot\\nabla_x\\varphi +F_{\\mu_s}(X_s)\\cdot\\nabla_v\\varphi\\bigr)(s,X_s,V_s).$ On any bounded time interval the right side is bounded by $C(1+|v|)$, which is integrable by the assumed first moment. Difference quotients have the same common bound; [F3] therefore permits differentiation under the $\\mu_0$ integral and gives exactly the weak identity in the Statement.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "The fixed-point estimate and force bounds do not depend on the starting time or probability. Repeating the construction on successive intervals of length $h$ therefore gives a unique characteristic solution on every bounded positive interval. For negative times let $R(x,v)=(x,-v)$ and solve the same positive-time problem from $R_\\#\\mu_0$. If its characteristics are $(\\widetilde X_r,\\widetilde V_r)$, define, for $s\\le0$, $X_s(x,v)=\\widetilde X_{-s}(x,-v)$ and $V_s(x,v)=-\\widetilde V_{-s}(x,-v)$. Then $X_0=x$, $V_0=v$, $\\dot X_s=V_s$, and $\\dot V_s=F_{\\mu_s}(X_s)$: the transformed law has the same position marginal as $\\mu_s$, and the force depends only on position. Thus these are characteristics from $\\mu_0$ for negative times. Uniqueness on overlapping intervals follows from step 2.1 and continuation, so the positive and negative solutions form one global family.",
+          "step": "4.2",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Suppose $\\mu_0$ has the smooth density and all moments in the Statement. Its characteristic field is $b(s,x,v)=(v,F_{\\mu_s}(x))$. Every state derivative of $F_{\\mu_s}$ is bounded on a finite time slab because it is an integral of a bounded derivative of $k$. Step 4.1 makes $b$ continuous in time; [F2] gives a smooth state flow $S_{s,0}$ and its smooth backward inverse. Its state derivative $J_s=D S_{s,0}$ solves $\\dot J_s=D b(s,S_{s,0})J_s$, $J_0=I$, by [F2]. The divergence of $b$ is zero: $\\nabla_x\\cdot v=0$ and $F_{\\mu_s}$ is independent of $v$. Since the inverse flow makes $J_s$ invertible, multilinear differentiation of its determinant gives $\\frac d{ds}\\det J_s=\\det J_s\\,\\operatorname{tr}(J_s^{-1}D b\\,J_s) =\\det J_s\\,\\operatorname{tr}(D b)=0$; with $\\det J_0=1$ this yields $\\det J_s=1$. Define $\\rho_s=\\rho_0\\circ S_{0,s}$ relative to $dx\\,dv$. It is smooth in state, and the chain rule gives the classical transport equation.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Orient $Z$ by its standard translation-chart volume form $\\mathrm{vol}=dx^1\\wedge\\cdots\\wedge dx^d\\wedge dv^1\\wedge\\cdots\\wedge dv^d$. By [F9] and [F10], its associated volume measure is the product $dx\\,dv$ specified in the statement. Since $\\det J_s=1$, $S_{s,0}$ preserves this orientation. For $g\\in C_c^\\infty(Z)$ the top form $g\\rho_s\\,\\mathrm{vol}$ has compact support, so [F4] and step 5.1 give $\\int_Zg(z)\\rho_s(z)\\,dx\\,dv =\\int_Zg(S_{s,0}z)\\rho_s(S_{s,0}z)\\,dx\\,dv =\\int_Zg(S_{s,0}z)\\rho_0(z)\\,dx\\,dv.$ Take the cutoffs $\\chi_R(v)$ of [F5] for positive integers $R$. The identity with $g=\\chi_R$ gives $\\int_{|v|\\le R}\\rho_s\\,dx\\,dv\\le\\int_Z\\chi_R\\rho_s\\,dx\\,dv=\\int_Z\\chi_R(V_s(z))\\rho_0(z)\\,dx\\,dv\\le1$, since $\\rho_s\\ge0$ and $0\\le\\chi_R\\le1$. The indicators of the balls $\\{|v|\\le R\\}$ increase to $1$, so [F6] implies $\\int_Z\\rho_s\\,dx\\,dv\\le1$. Now $\\rho_s$ is integrable and $\\chi_R(v)\\to1$ pointwise. Apply [F3] to both sides of the cutoff identity, with majorants $\\rho_s$ and $\\rho_0$, to obtain $\\int_Z\\rho_s\\,dx\\,dv=\\int_Z\\rho_0\\,dx\\,dv=1$. Thus $\\rho_s\\,dx\\,dv$ is a probability. The identity also says $\\rho_s\\,dx\\,dv$ and the characteristic law $\\mu_s$ agree on all smooth compactly supported tests. Apply [F7] to conclude $\\rho_s\\,dx\\,dv=\\mu_s$, so $\\rho_s$ is the density of $\\mu_s$.",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "step 5.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "For every time-derivative order $r$, differentiating $F_{\\mu_s}(x)=\\int k(x-X_s(z))\\rho_0(z)\\,dz$ gives finite sums of bounded derivatives of $k$ times products of characteristic time derivatives. The base bounds $|V_s-v|\\le B|s|$ and $|\\dot V_s|\\le B$, followed by induction in the differentiated characteristic equation, bound each order-$r$ integrand by $C(r,T)(1+|v|^r)$ on $|s|\\le T$. Every such envelope is integrable by the all-moment assumption. Dominated convergence [F3] therefore justifies each time differentiation under the integral, so $F_{\\mu_s}$ is jointly smooth in $(s,x)$. The joint-smooth-time clause of [F2] then makes $S_{s,0}$ and $\\rho_s$ jointly smooth, proving the classical branch.",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra",
+            "induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all eight steps and exact flow, DCT, change-of-variables, cutoff, MCT, product-measure and smooth-test suppliers. The displacement ball is nonempty and complete; contraction ratio A h^2<1 and bounded acceleration give global continuation. Reflection reverses negative time correctly. First moments dominate weak-test derivatives. Bounded state derivatives give the nonautonomous state flow; divergence zero gives determinant one. Compact top-form change of variables plus monotone cutoffs normalizes the transported density, and smooth tests identify it. All velocity moments dominate repeated time derivatives of the force, giving the final joint smoothness. Checked A=0, zero time, singular initial probabilities versus the separate density branch, and negative times. Reader measure clarifications are sound; no proof gap remains."
+      }
+    },
+    "thm-csm-dk-dobrushin-and-particle-limit": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "P1(Z) consists of probabilities, so its coupling set contains the product probability and is nonempty. Empirical laws use N>=1; empty empirical sums are excluded rather than normalized. Zero W1 for equal initial laws is covered by4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof gives zero error when the initial laws coincide; at s=0 the bound is equality for every pair."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof covers N=1 because k(0)=0 makes the empirical one-atom law an exact characteristic solution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the proof includes A=0 and zero initial W1; the exponent bound remains valid and may be non-sharp for free streaming."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement includes s=0 and all positive and negative finite s; the proof treats negative time by velocity reversal."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the proof takes an infimum over every coupling and never assumes a minimizing coupling exists."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–4.1 prove the W1 stability, exact empirical evolution and uniqueness in the stated weak class. The estimate is a forward inequality for that second-order phase metric."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No inverse implication from a W1 estimate to smooth Hamiltonian dynamics, or from a weak equation outside the declared moment class, is asserted."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "identical-laws",
+          "result": "If mu0=nu0, the right side is zero; uniqueness gives identical characteristic evolutions."
+        },
+        {
+          "case": "N=1",
+          "result": "The empirical acceleration is k(0)=0, agreeing exactly with the Vlasov field generated by one atom."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-periodic-mean-field-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a side length $L>0$ in metres, a mass $m>0$ in kilograms, and a smooth even periodic pair potential $W\\in C^\\infty(\\mathbb T_L^d;\\mathbb R)$ in joules, where $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$ is the flat position torus and even means $W(-q)=W(q)$. For each finite integer $N\\ge1$, the phase space is $(T^*\\mathbb T_L^d)^N$ with canonical coordinates $z_i=(q_i,p_i)$, $q_i\\in\\mathbb T_L^d$ in metres and $p_i\\in\\mathbb R^d$ in kilogram-metres per second. In position charts obtained by lifting torus coordinates to $\\mathbb R^d$, define\n\n$$\\theta_N:=\\sum_{i=1}^N\\sum_{a=1}^d p_i^a\\,dq_i^a,\\qquad \\omega_N:=-d\\theta_N=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_i^a.$$\n\nOverlaps of these position charts are translations by vectors in $L\\mathbb Z^d$, with the same momentum coordinates, so $dq_i^a$ and $p_i^a$ agree on overlaps. Thus the displayed forms glue globally on $(T^*\\mathbb T_L^d)^N$; $\\omega_N$ is closed and nondegenerate by its displayed coordinate matrix. Both forms have action units of joule-seconds. Use the Hamiltonian convention $\\iota_{X_{H_N}}\\omega_N=dH_N$ of [[def-csm-dk-hamiltonian-flow-measure]]. The finite-particle Hamiltonian, with energy in joules, is\n\n$$H_N(q_1,\\ldots,q_N,p_1,\\ldots,p_N)=\\sum_{i=1}^{N}\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j).$$\n\nThe interaction force is $K(q):=-\\nabla_qW(q)$, in newtons. It is bounded and globally Lipschitz on the compact torus; evenness of $W$ makes $K$ odd and $K(0)=0$. Hamilton's equations in the canonical convention are\n\n$$\\dot q_i=\\frac{p_i}{m},\\qquad \\dot p_i=\\frac1N\\sum_{j\\ne i}K(q_i-q_j).$$\n\nFor any chosen momentum scale $P_0>0$ in kilogram-metres per second, define the time scale $\\tau_0:=mL/P_0$ in seconds, dimensionless variables $x_i:=q_i/L\\in\\mathbb T^d:=(\\mathbb R/\\mathbb Z)^d$, $v_i:=p_i/P_0$, and $s:=t/\\tau_0$. Define the dimensionless potential $\\Phi(x):=mW(Lx)/P_0^2$ and force $k(x):=-\\nabla_x\\Phi(x)$. Then the equations become\n\n$$x_i'=v_i,\\qquad v_i'=\\frac1N\\sum_{j\\ne i}k(x_i-x_j),$$\n\nwhere prime denotes derivative with respect to dimensionless time $s$. Here\n$\\|Dk\\|_\\infty:=\\sup_{x\\in\\mathbb T^d}\\|Dk(x)\\|_{\\mathrm{op}}$, with operator\nnorm induced by the Euclidean norm, and $\\|k\\|_\\infty:=\\sup_x|k(x)|$; the\nconstants $A:=\\|Dk\\|_\\infty$ and $B:=\\|k\\|_\\infty$ are finite and\ndimensionless. This is the selected smooth periodic mean-field scaling; it is\nnot the hard-sphere Boltzmann-Grad scaling.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-csm-dk-phase-space-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Use the dimensionless one-particle phase space $Z:=\\mathbb T^d\\times\\mathbb R^d$ from [[def-csm-dk-periodic-mean-field-model]], with its product topology and Borel sigma algebra. The finite torus is second-countable by [[def-the-one-dimensional-torus-and-normalized-haar-integral]], and Euclidean space is second-countable. Consequently $Z$ and $Z\\times Z$ are second-countable, and the Borel sigma algebra of each finite product equals the product of the factor Borel sigma algebras: every open set is a countable union of basic open rectangles. Use the product topology and its Borel sigma algebra on $Z\\times Z$ as well.\n\nFor $x,y\\in\\mathbb T^d$, let\n\n$$d_{\\mathbb T^d}(x,y):=\\min_{\\ell\\in\\mathbb Z^d}|\\widetilde x-\\widetilde y+\\ell|,$$\n\nwhere $\\widetilde x,\\widetilde y\\in\\mathbb R^d$ are any representatives; the minimum is independent of the representatives. Equip $Z$ with\n\n$$d_Z((x,v),(y,w)):=d_{\\mathbb T^d}(x,y)+|v-w|.$$\n\nLet $\\mathcal P_1(Z)$ be the Borel probability measures $\\mu$ on $Z$ with $\\int_Z|v|\\,d\\mu(x,v)<\\infty$. For $\\mu,\\nu\\in\\mathcal P_1(Z)$, a coupling is a Borel probability $\\pi$ on $Z\\times Z$ satisfying $\\pi(A\\times Z)=\\mu(A)$ and $\\pi(Z\\times B)=\\nu(B)$ for all Borel $A,B\\subseteq Z$; write $\\Pi(\\mu,\\nu)$ for the set of couplings. Define the phase-space Wasserstein-1 coupling cost by\n\n$$\\mathcal W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{Z\\times Z}d_Z(z,z')\\,d\\pi(z,z').$$\n\nBy [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], $\\mu\\otimes\\nu$ is a probability on $\\mathcal B(Z)\\otimes\\mathcal B(Z)=\\mathcal B(Z\\times Z)$ and its marginals are $\\mu,\\nu$; hence $\\Pi(\\mu,\\nu)$ is nonempty. The infimum is finite: this product coupling has torus cost at most $\\sqrt d/2$, and Tonelli's theorem bounds its velocity cost by $\\int|v|\\,d\\mu+\\int|w|\\,d\\nu$. No minimizing coupling is assumed to exist.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-dk-finite-n-complete-flow",
+          "source_section": "Statement",
+          "quote": "Assume countable choice [[def-countable-choice]] for the intrinsic\ndensity-measure construction in [[def-csm-dk-hamiltonian-flow-measure]]. On\n$(T^*\\mathbb T_L^d)^N$, use the canonical form\n$\\omega_N:=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_{i,a}$ and Liouville\nvolume form $\\Omega_N:=\\omega_N^{dN}/(dN)!$. The positive reference density\n$|\\Omega_N|/a_0^{dN}$ induces a Borel measure $m_{0,N}$ by that definition;\nwrite $d\\Omega_N:=a_0^{dN}dm_{0,N}$ for canonical Liouville measure, which\nin canonical coordinates is $dq_1\\,dp_1\\cdots dq_N\\,dp_N$. Fix $d\\ge1$,\n$m,L>0$, a finite integer $N\\ge1$, and the periodic smooth even potential\nand canonical phase-space convention of\n[[def-csm-dk-periodic-mean-field-model]]. The associated Hamiltonian ODE has\na unique complete smooth flow $\\Phi_t^N$ on $(T^*\\mathbb T_L^d)^N$ for all\n$t\\in\\mathbb R$. It preserves $\\Omega_N$ and commutes with permutations of\nthe $N$ particle labels.\n\nIf the initial law has a normalized symmetric $C^\\infty$ density\n$F_N^0(q_1,\\ldots,q_N,p_1,\\ldots,p_N)$ relative to $d\\Omega_N$ and, for\nevery pair of multi-indices $\\alpha,\\beta$ and integer $r\\ge0$,\n\n$$\\sup_{q\\in(\\mathbb T_L^d)^N,\\ p\\in\\mathbb R^{dN}}(1+|p|)^r|\\partial_q^\\alpha\\partial_p^\\beta F_N^0(q,p)|<\\infty,$$\n\nthen $F_N(t):=F_N^0\\circ\\Phi_{-t}^N$ is a normalized symmetric classical solution of the Liouville equation for all $t$. Its momentum tails, together with every phase derivative, remain rapidly decreasing uniformly on each bounded time interval.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-csm-dk-global-lipschitz-vlasov",
+          "source_section": "Statement",
+          "quote": "Let $Z=\\mathbb T^d\\times\\mathbb R^d$ be the dimensionless phase space from\n[[def-csm-dk-periodic-mean-field-model]], let $k$ be the odd, bounded, smooth,\nLipschitz force in that definition, and put $B=\\|k\\|_\\infty$ and\n$A=\\|Dk\\|_\\infty$ using its stated operator norm. Let $\\mu_0$ be any Borel\nprobability on $Z$ with finite first velocity moment\n$\\int_Z|v|\\,d\\mu_0(x,v)$. Then there is a unique global characteristic\nevolution $(X_s,V_s)$ with\n\n$$\\dot X_s(z)=V_s(z),\\qquad \\dot V_s(z)=\\int_Z k(X_s(z)-X_s(z'))\\,d\\mu_0(z'),\\qquad (X_0,V_0)(x,v)=(x,v),$$\n\nand $\\mu_s$ is the push-forward of $\\mu_0$ by $S_s(z):=(X_s(z),V_s(z))$; here\nthe push-forward is defined by $\\mu_s(A)=\\mu_0(S_s^{-1}(A))$ for each Borel set\n$A\\subseteq Z$. It is narrowly continuous with finite first velocity moment for every $s\\in\\mathbb R$. It\nsatisfies the weak Vlasov equation: for every time-dependent $C^1$ function\n$\\varphi(s,x,v)$ that is bounded with bounded first derivatives and periodic\nin $x$,\n\n$$\\frac{d}{ds}\\int_Z\\varphi(s,z)\\,d\\mu_s(z) =\\int_Z\\bigl(\\partial_s\\varphi+v\\cdot\\nabla_x\\varphi +F_{\\mu_s}(x)\\cdot\\nabla_v\\varphi\\bigr)(s,z)\\,d\\mu_s(z),\\qquad F_{\\mu_s}(x):=\\int_Z k(x-y)\\,d\\mu_s(y,w).$$\n\nFor the density clause, use $dx=m_{\\mathbb T^d}$ and $dv=\\lambda_d$, the\nnormalized torus probability and Euclidean Lebesgue measure defined in\n[[def-the-one-dimensional-torus-and-normalized-haar-integral]]. If $\\mu_0$ has a smooth probability\ndensity $\\rho_0$ with respect to $dx\\,dv$ and all velocity moments\n$\\int_Z(1+|v|^r)\\rho_0(x,v)\\,dx\\,dv$ are finite for integers $r\\ge1$, then\n$F_{\\mu_s}$ is jointly smooth in $(s,x)$ and the transported density is a\nclassical smooth solution of this Vlasov equation.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-csm-dk-continuous-time-field-smooth-flow",
+          "source_section": "Statement",
+          "quote": "Let $d\\ge1$, let $I=[a,b]$ be a compact interval contained in an open interval $J\\subseteq\\mathbb R$, and let $G:J\\times\\mathbb T^d\\to\\mathbb R^d$ be continuous in time with jointly continuous state derivatives $D_x^rG$ on $J\\times\\mathbb T^d$ for every integer $r\\ge1$. Assume that $G$ and each state derivative $D_x^rG$ are bounded on $I\\times\\mathbb T^d$ for every integer $r\\ge1$. For initial data $(x_0,v_0)\\in\\mathbb T^d\\times\\mathbb R^d$, the system\n\n$$\\dot X(t)=V(t),\\qquad \\dot V(t)=G(t,X(t)),\\qquad (X(a),V(a))=(x_0,v_0)$$\n\nhas a unique solution on all of $I$. For each $t\\in I$, the map\n$(x_0,v_0)\\mapsto(X(t),V(t))$ is $C^\\infty$; for every integer $r\\ge1$ its\n$r$th initial-state derivative is bounded uniformly over $t\\in I$ and all\n$(x_0,v_0)$. Its inverse is the solution map from $t$ back to $a$. If $G$ is\njointly $C^\\infty$ in $(t,x)$ on $J\\times\\mathbb T^d$, then the flow is jointly\n$C^\\infty$ in time and initial state.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. For $E \\in \\mathcal A \\otimes \\mathcal B$, define\n\n$$(\\mu \\times \\nu)(E) := \\int_X \\nu(E_x)\\,d\\mu = \\int_Y \\mu(E^y)\\,d\\nu.$$\n\nThe two displayed integrals are well-defined by\n[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by\n[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-csm-dk-smooth-tests-determine-phase-probability",
+          "source_section": "Statement",
+          "quote": "Use $Z=\\mathbb T^d\\times\\mathbb R^d$ and\n$d_Z((x,v),(y,w))=d_{\\mathbb T^d}(x,y)+|v-w|$ from\n[[def-csm-dk-phase-space-wasserstein-one]]. Let $\\mu$ and $\\nu$ be Borel\nprobability measures on $Z$. If\n\n$$\\int_Z\\varphi\\,d\\mu=\\int_Z\\varphi\\,d\\nu \\quad\\text{for every }\\varphi\\in C_c^\\infty(Z),$$\n\nwhere $C_c^\\infty(Z)$ means smooth and periodic in position with compact\nvelocity support, then $\\mu=\\nu$ on all Borel subsets of $Z$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $t_0\\le T$, let $u,a,b:[t_0,T]\\to\\mathbb R$ be continuous, with $u,b\\ge0$, and suppose\n\n$$u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds.$$\n\nThen\n\n$$u(t)\\le a(t)+\\int_{t_0}^t a(s)b(s)\\exp\\!\\left(\\int_s^t b(r)\\,dr\\right)ds.$$\n\nIf $a$ is nondecreasing, this gives $u(t)\\le a(t)\\exp(\\int_{t_0}^t b)$. The time-reflected form assumes $u(t)\\le a(t)+\\int_t^{t_0}b(s)u(s)\\,ds$ for $t\\le t_0$. In particular, when $a=A\\ge0$ and $b=B\\ge0$ are constant, the two orientations give $u(t)\\le A e^{B|t-t_0|}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a coupling $\\pi_0$ of $\\mu_0$ and $\\nu_0$. Write the two characteristics as $(X_s,V_s)$ and $(Y_s,W_s)$, and push $\\pi_0$ forward by their product flow to obtain $\\pi_s$. Define $D_x(s)=\\int d_{\\mathbb T^d}(X_s,Y_s)\\,d\\pi_0$, $D_v(s)=\\int|V_s-W_s|\\,d\\pi_0$, and $D=D_x+D_v$. The torus distance along absolutely continuous curves has upper derivative at most $|V_s-W_s|$. For an outer pair $(z,w)$, write $F_{\\mu_s}(X_s(z))=\\int k(X_s(z)-X_s(z'))\\,d\\pi_0(z',w')$ and $F_{\\nu_s}(Y_s(w))=\\int k(Y_s(w)-Y_s(w'))\\,d\\pi_0(z',w')$, using the two marginals of $\\pi_0$. The torus triangle inequality and the $A$-Lipschitz bound for $k$ give a force difference at most $A(d_{\\mathbb T^d}(X_s(z),Y_s(w))+d_{\\mathbb T^d}(X_s(z'),Y_s(w')))$. Integrating the inner pair $(z',w')$ against $\\pi_0$ bounds this by $A(d_{\\mathbb T^d}(X_s(z),Y_s(w))+D_x(s))$. On every bounded time slab the velocity difference is bounded by its integrable initial difference plus $2\\|k\\|_\\infty |s|$, and the acceleration difference is at most $2\\|k\\|_\\infty$. Integrate the pathwise distance inequalities in time and against the outer $\\pi_0$; Tonelli [F6] justifies the order of integration and gives $D(s)\\le D(0)+\\int_0^s(D_v(r)+2A D_x(r))\\,dr\\le D(0)+(1+2A)\\int_0^sD(r)\\,dr$. Gronwall [F9] gives $D(s)\\le e^{(1+2A)s}D(0)$. For negative time, the transformation $R(x,v)=(x,-v)$ sends a solution run backward to a forward solution starting from $R_\\#\\mu_0$ (and likewise for $\\nu_0$). Explicitly, if the original characteristic starts at $(x,v)$ with law $\\mu_0$, set $\\widetilde X_r=X_{-r}(x,v)$ and $\\widetilde V_r=-V_{-r}(x,v)$; the reversed initial state is $(x,-v)$. Then $\\dot{\\widetilde X}=\\widetilde V$ and $\\dot{\\widetilde V}=F_{\\mu_{-r}}(\\widetilde X)=F_{R_\\#\\mu_{-r}}(\\widetilde X)$, because the force depends only on position. Thus $R_\\#\\mu_{-r}$ is a forward solution starting at $R_\\#\\mu_0$. Since $R$ preserves $d_Z$, the positive-time estimate for these reversed solutions proves the estimate with $|s|$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F6",
+            "F9",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Let $\\sigma_s$ be a weak solution in the Statement and set $F_s(x)=\\int k(x-y)\\,d\\sigma_s(y,w)$. Narrow continuity and boundedness of $k$ make $F_s(x)$ continuous in $(s,x)$; every state derivative is bounded by the corresponding bound on $k$. By [F5] the field $(v,F_s(x))$ has a complete state flow on every bounded time interval and bounded state derivatives of that flow there. For fixed terminal $t$ and $\\psi\\in C_c^\\infty(Z)$, compose $\\psi$ with the characteristic map from time $s$ to $t$. Bounded acceleration makes the preimage of its compact velocity support remain in a bounded velocity set on the finite slab, so the resulting time-dependent test $\\phi(s,z)$, its first state derivatives, and its time derivative are bounded. It satisfies $\\partial_s\\phi+v\\cdot\\nabla_x\\phi+F_s\\cdot\\nabla_v\\phi=0$. The weak identity makes $\\int\\phi(s,z)\\,d\\sigma_s(z)$ constant, hence $\\int\\psi\\,d\\sigma_t=\\int\\psi(S_{t,0}(z))\\,d\\sigma_0(z)$. This is equality on every smooth compactly supported test, so the phase-space measure lemma [F8] gives $\\sigma_t=(S_{t,0})_\\#\\sigma_0$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F7",
+            "F8",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The measure $\\pi_s$ is a coupling of $\\mu_s$ and $\\nu_s$, so [F2] gives $\\mathcal W_1(\\mu_s,\\nu_s)\\le D(s)$. The estimate in step 1.1 holds for every coupling $\\pi_0$; taking the infimum of its right side gives the first claimed inequality without assuming an optimal coupling exists.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The trajectory defined in the Statement is complete by [F3]. Differentiating its coordinate and time rescaling using [F1] shows that $Z_i(s)=(X_i(s),V_i(s))$ satisfies $\\dot X_i=V_i$ and $\\dot V_i=N^{-1}\\sum_{j\\ne i}k(X_i-X_j)$. Since $k(0)=0$, this equals $N^{-1}\\sum_jk(X_i-X_j)$, the characteristic force generated by $\\mu_N(s)=N^{-1}\\sum_i\\delta_{Z_i(s)}$. The coordinatewise map $\\Xi_N$ commutes with label permutations, so the conjugated flow retains the permutation equivariance in [F3]. The finite sum $F_{\\mu_N(s)}$ is continuous in time, smooth in position and bounded with all state derivatives; [F5] therefore supplies its characteristic flow for every initial state. ODE uniqueness identifies this flow at each initial atom with the particle trajectory, so its push-forward of $\\mu_N(0)$ is $\\mu_N(s)$. The initial empirical law is in $\\mathcal P_1(Z)$, and uniqueness of the global characteristic evolution in [F4] identifies $\\mu_N(s)$ with that evolution from $\\mu_N(0)$. Applying step 2.1 to initial laws $\\mu_N(0)$ and $\\mu_0$ gives the particle estimate.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 1.2 any two weak solutions with the same initial law are the characteristic evolutions of that law. Step 2.1 gives zero $\\mathcal W_1$ between them at each time; alternatively their representation in step 1.2 already identifies both with the same push-forward. This proves uniqueness in the stated weak class.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all five steps against every actual dependency statement, including the current characteristic and smooth-test proofs. Product-pushed couplings preserve marginals; pathwise torus distance and force comparison yield Dv+2A Dx <= (1+2A)D, with Tonelli justified by first moments and bounded acceleration. Taking infima requires no minimizing plan. Velocity reflection gives |s|. Backward compact tests have bounded support/first derivatives on each finite slab and identify each weak law with the flow generated by its own force; uniqueness of the nonlinear characteristic evolution then applies. Scaling Xi_N and tau_0 yields the exact dimensionless ODE and k(0)=0 removes the self term. Checked N=1, identical and atomic laws, A=0 and negative time. Reader changes are contract citation refresh only; no carrier defect found."
+      }
+    },
+    "thm-csm-dk-exact-bbgky": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At k=N the integrated-out coordinate list and cross-pair set are empty: proof4.1 leaves f_N=F_N and the last hierarchy term0 without using f_(N+1). At N=1 the internal-pair sum is also0; all probability normalizations remain over a nonempty phase space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof gives the free-streaming identity when K=0; the proof also shows the cross term vanishes when N-k=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof has an empty internal-pair sum when k=1, exactly as the displayed hierarchy states."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the proof treats k=N: the coefficient (N-k)/N is zero and no f_(N+1) is required."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the proof hold for each time on a finite slab; phase-variable integration introduces no temporal endpoint term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Fact A1 and the proof explicitly retain countable choice for the completed-product Tonelli/Fubini supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Steps1.1–4.1 integrate the smooth finite-N Liouville equation to obtain the exact normalized hierarchy, retaining correlations. No iff characterization of full distributions by finitely many marginals is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A hierarchy solution without the declared complete-flow/smooth-tail assumptions is not claimed to reconstruct the Liouville density or imply molecular chaos."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=1,k=1",
+          "result": "Both interaction sums are empty and the hierarchy is the free Liouville equation."
+        },
+        {
+          "case": "k=N",
+          "result": "The cross coefficient is zero, leaving only streaming and internal interactions."
+        },
+        {
+          "case": "k=1",
+          "result": "The internal-pair sum is empty and there are N-1 symmetric cross contributions, each with coefficient 1/N."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-csm-dk-finite-n-complete-flow",
+          "source_section": "Statement",
+          "quote": "Assume countable choice [[def-countable-choice]] for the intrinsic\ndensity-measure construction in [[def-csm-dk-hamiltonian-flow-measure]]. On\n$(T^*\\mathbb T_L^d)^N$, use the canonical form\n$\\omega_N:=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_{i,a}$ and Liouville\nvolume form $\\Omega_N:=\\omega_N^{dN}/(dN)!$. The positive reference density\n$|\\Omega_N|/a_0^{dN}$ induces a Borel measure $m_{0,N}$ by that definition;\nwrite $d\\Omega_N:=a_0^{dN}dm_{0,N}$ for canonical Liouville measure, which\nin canonical coordinates is $dq_1\\,dp_1\\cdots dq_N\\,dp_N$. Fix $d\\ge1$,\n$m,L>0$, a finite integer $N\\ge1$, and the periodic smooth even potential\nand canonical phase-space convention of\n[[def-csm-dk-periodic-mean-field-model]]. The associated Hamiltonian ODE has\na unique complete smooth flow $\\Phi_t^N$ on $(T^*\\mathbb T_L^d)^N$ for all\n$t\\in\\mathbb R$. It preserves $\\Omega_N$ and commutes with permutations of\nthe $N$ particle labels.\n\nIf the initial law has a normalized symmetric $C^\\infty$ density\n$F_N^0(q_1,\\ldots,q_N,p_1,\\ldots,p_N)$ relative to $d\\Omega_N$ and, for\nevery pair of multi-indices $\\alpha,\\beta$ and integer $r\\ge0$,\n\n$$\\sup_{q\\in(\\mathbb T_L^d)^N,\\ p\\in\\mathbb R^{dN}}(1+|p|)^r|\\partial_q^\\alpha\\partial_p^\\beta F_N^0(q,p)|<\\infty,$$\n\nthen $F_N(t):=F_N^0\\circ\\Phi_{-t}^N$ is a normalized symmetric classical solution of the Liouville equation for all $t$. Its momentum tails, together with every phase derivative, remain rapidly decreasing uniformly on each bounded time interval.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-tonelli-and-fubini-for-completed-product-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), and let\n$\\overline{\\mu \\times \\nu}$ be the completed product of two sigma-finite\nmeasure spaces.\n\n1. If $f : X \\times Y \\to [0,\\infty]$ is $\\overline{\\mu \\times \\nu}$-measurable, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that $f_x$ is $\\overline{\\mathcal B}$-measurable for $x\\notin A$ and $f^y$ is $\\overline{\\mathcal A}$-measurable for $y\\notin B$. Define $I_f(x)=\\int_Y f_x\\,d\\overline\\nu$ for $x\\notin A$ and $I_f(x)=0$ on $A$; define $J_f(y)=\\int_X f^y\\,d\\overline\\mu$ for $y\\notin B$ and $J_f(y)=0$ on $B$. Then $I_f,J_f$ are measurable and\n$$\\int f\\,d\\overline{\\mu \\times \\nu}=\\int_X I_f\\,d\\mu=\\int_Y J_f\\,d\\nu.$$\n2. If $f \\in L^1(\\overline{\\mu \\times \\nu})$, there are measurable null sets $A\\subseteq X$ and $B\\subseteq Y$ such that the sections are measurable and integrable outside them. Define $I_f,J_f$ by the same section integrals outside $A,B$ and by zero on $A,B$. They are measurable and integrable, and the same equality holds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-dk-periodic-mean-field-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a side length $L>0$ in metres, a mass $m>0$ in kilograms, and a smooth even periodic pair potential $W\\in C^\\infty(\\mathbb T_L^d;\\mathbb R)$ in joules, where $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$ is the flat position torus and even means $W(-q)=W(q)$. For each finite integer $N\\ge1$, the phase space is $(T^*\\mathbb T_L^d)^N$ with canonical coordinates $z_i=(q_i,p_i)$, $q_i\\in\\mathbb T_L^d$ in metres and $p_i\\in\\mathbb R^d$ in kilogram-metres per second. In position charts obtained by lifting torus coordinates to $\\mathbb R^d$, define\n\n$$\\theta_N:=\\sum_{i=1}^N\\sum_{a=1}^d p_i^a\\,dq_i^a,\\qquad \\omega_N:=-d\\theta_N=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_i^a.$$\n\nOverlaps of these position charts are translations by vectors in $L\\mathbb Z^d$, with the same momentum coordinates, so $dq_i^a$ and $p_i^a$ agree on overlaps. Thus the displayed forms glue globally on $(T^*\\mathbb T_L^d)^N$; $\\omega_N$ is closed and nondegenerate by its displayed coordinate matrix. Both forms have action units of joule-seconds. Use the Hamiltonian convention $\\iota_{X_{H_N}}\\omega_N=dH_N$ of [[def-csm-dk-hamiltonian-flow-measure]]. The finite-particle Hamiltonian, with energy in joules, is\n\n$$H_N(q_1,\\ldots,q_N,p_1,\\ldots,p_N)=\\sum_{i=1}^{N}\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j).$$\n\nThe interaction force is $K(q):=-\\nabla_qW(q)$, in newtons. It is bounded and globally Lipschitz on the compact torus; evenness of $W$ makes $K$ odd and $K(0)=0$. Hamilton's equations in the canonical convention are\n\n$$\\dot q_i=\\frac{p_i}{m},\\qquad \\dot p_i=\\frac1N\\sum_{j\\ne i}K(q_i-q_j).$$\n\nFor any chosen momentum scale $P_0>0$ in kilogram-metres per second, define the time scale $\\tau_0:=mL/P_0$ in seconds, dimensionless variables $x_i:=q_i/L\\in\\mathbb T^d:=(\\mathbb R/\\mathbb Z)^d$, $v_i:=p_i/P_0$, and $s:=t/\\tau_0$. Define the dimensionless potential $\\Phi(x):=mW(Lx)/P_0^2$ and force $k(x):=-\\nabla_x\\Phi(x)$. Then the equations become\n\n$$x_i'=v_i,\\qquad v_i'=\\frac1N\\sum_{j\\ne i}k(x_i-x_j),$$\n\nwhere prime denotes derivative with respect to dimensionless time $s$. Here\n$\\|Dk\\|_\\infty:=\\sup_{x\\in\\mathbb T^d}\\|Dk(x)\\|_{\\mathrm{op}}$, with operator\nnorm induced by the Euclidean norm, and $\\|k\\|_\\infty:=\\sup_x|k(x)|$; the\nconstants $A:=\\|Dk\\|_\\infty$ and $B:=\\|k\\|_\\infty$ are finite and\ndimensionless. This is the selected smooth periodic mean-field scaling; it is\nnot the hard-sphere Boltzmann-Grad scaling.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the Hamilton equations and odd force $K$ from [F3], with the classical Liouville solution from [F1] under the countable-choice density measure assumption [A1]. Substituting these equations into $\\partial_tF_N+\\sum_i(\\dot q_i\\cdot\\nabla_{q_i}F_N+\\dot p_i\\cdot\\nabla_{p_i}F_N)=0$ and grouping the two terms for each unordered pair $i<j$ yields $\\partial_tF_N+\\sum_{i=1}^N\\frac{p_i}{m}\\cdot\\nabla_{q_i}F_N+\\frac1N\\sum_{1\\le i<j\\le N}K(q_i-q_j)\\cdot(\\nabla_{p_i}-\\nabla_{p_j})F_N=0.$ The sign in the second paired derivative uses $K(q_j-q_i)=-K(q_i-q_j)$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $k<N$ and integrate step 1.1 over $z_{k+1},\\ldots,z_N$. The integrations and time differentiation are legitimate by the all-phase-derivative rapid tails (the time derivative from step 1.1 adds at most one factor of momentum), compact periodic position variables, and [A1, F2]. A position derivative in an integrated variable has zero integral by periodicity; a momentum derivative in an integrated variable has zero boundary term by the stated decay. Thus one-body terms for $i\\le k$ and interaction pairs entirely inside $\\{1,\\ldots,k\\}$ give the first three terms of the target equation. Pairs with both labels greater than $k$ integrate to zero by the same momentum integration-by-parts argument.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For a cross pair $i\\le k<j$, the term containing $\\nabla_{p_j}F_N$ integrates to zero because $K(q_i-q_j)$ is independent of $p_j$ and the $p_j$-tail vanishes at infinity. The term containing $\\nabla_{p_i}F_N$ remains. By permutation symmetry of $F_N$, for fixed $i\\le k$ every label $j>k$ has the same integrated contribution, equal to $\\nabla_{p_i}\\cdot\\int K(q_i-q_{k+1})f_{k+1}(t,z_1,\\ldots,z_k,z_{k+1})\\,dz_{k+1}.$ There are exactly $N-k$ such labels, each carrying coefficient $1/N$. This gives the factor $(N-k)/N$ and all terms of the displayed hierarchy.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $k=N$, there are no cross pairs, so the same integration argument leaves only the one-body transport and internal-pair terms; the formula's cross coefficient is $(N-N)/N=0$. Thus the statement holds for every $1\\le k\\le N$, with no factorization assumption at any step.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "All four steps reviewed against finite-N transport and completed Fubini. Corrected the missing transported-density hypothesis in Statement/Given: arbitrary normalized smooth families do not satisfy Liouville (e.g. N=1, W=0, stationary nonuniform position density times a Gaussian). For the explicit transported density, rapid phase tails control time derivatives and boundary terms. Internal/exterior/cross pairs yield 1/N and (N-k)/N; k=N uses no f_(N+1). Checked N=1, k=1, k=N and zero force. Direct consumers ex-csm-dk-product-law-develops-correlations and pthm-csm-dk-qualified-mean-field-limit already use the transported density, so no consumer rewrite is necessary. Repair confidence 1."
+      }
+    },
+    "thm-csm-dk-compact-iid-propagation-of-chaos": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: A probability supported inK forces K nonempty. Empty partition cells have probability0 and are discarded/assigned zero mass in the finite-cell estimate; N>=1 and k>=1 prevent an empty empirical normalization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof covers cells with p_j=0 or 1, whose empirical frequency discrepancy has zero variance; singleton K gives zero initial W1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof gives the fixed k=1 comparison with zero collision correction; the proof also allows N=1 in the partition bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement and the proof cover singleton K, where D_K=0 and every empirical measure equals mu0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the proof applies stability at every |s|<=T, including both endpoints of the closed interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the proof states the exact full-Choice hypothesis for the countable product; the fourth-moment proof itself uses a direct countable tail-union argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem derives expected/almost-sure W1 and fixed-k marginal bounds from the compact iid preparation. It states sufficient conditions for chaos, not an iff characterization of iiddata."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Propagation of chaos does not imply finite-N independence or an iid initial construction; the result keeps the stated compactsupport and full Choice inputs."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "singleton-support",
+          "result": "Every iid sample point equals the support point almost surely, so W1(mu_N(0),mu0)=0 for all N."
+        },
+        {
+          "case": "k=1",
+          "result": "The with-replacement collision correction vanishes, leaving only the empirical W1 term."
+        },
+        {
+          "case": "partition-frequency",
+          "result": "For p_j=0 or 1, the Bernoulli fourth moment and frequency variance are exactly zero."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ionescu-tulcea-construction-of-a-markov-chain",
+          "source_section": "Statement",
+          "quote": "Assume Choice. Let $(E_n,\\mathcal E_n)_{n\\ge0}$ be measurable spaces, let\n$\\mu_0$ be a probability measure on $E_0$, and, for each $n\\ge0$, let $K_n$ be\na probability kernel from $E_0\\times\\cdots\\times E_n$ to $E_{n+1}$. There is a\nunique probability measure $P$ on\n$$ \\left(\\prod_{n\\ge0}E_n,\\ \\bigotimes_{n\\ge0}\\mathcal E_n\\right) $$ whose finite-prefix laws are the prescribed iterated integrals $$ \\mu_0(dx_0)K_0(x_0,dx_1)K_1(x_0,x_1,dx_2)\\cdots K_{r-1}(x_0,\\ldots,x_{r-1},dx_r). $$\nIn particular, if every $E_n=E$ and\n$K_n(x_0,\\ldots,x_n,A)=K(x_n,A)$, the coordinate process is a homogeneous\n$K$-chain with initial law $\\mu_0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-dk-periodic-mean-field-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a side length $L>0$ in metres, a mass $m>0$ in kilograms, and a smooth even periodic pair potential $W\\in C^\\infty(\\mathbb T_L^d;\\mathbb R)$ in joules, where $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$ is the flat position torus and even means $W(-q)=W(q)$. For each finite integer $N\\ge1$, the phase space is $(T^*\\mathbb T_L^d)^N$ with canonical coordinates $z_i=(q_i,p_i)$, $q_i\\in\\mathbb T_L^d$ in metres and $p_i\\in\\mathbb R^d$ in kilogram-metres per second. In position charts obtained by lifting torus coordinates to $\\mathbb R^d$, define\n\n$$\\theta_N:=\\sum_{i=1}^N\\sum_{a=1}^d p_i^a\\,dq_i^a,\\qquad \\omega_N:=-d\\theta_N=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_i^a.$$\n\nOverlaps of these position charts are translations by vectors in $L\\mathbb Z^d$, with the same momentum coordinates, so $dq_i^a$ and $p_i^a$ agree on overlaps. Thus the displayed forms glue globally on $(T^*\\mathbb T_L^d)^N$; $\\omega_N$ is closed and nondegenerate by its displayed coordinate matrix. Both forms have action units of joule-seconds. Use the Hamiltonian convention $\\iota_{X_{H_N}}\\omega_N=dH_N$ of [[def-csm-dk-hamiltonian-flow-measure]]. The finite-particle Hamiltonian, with energy in joules, is\n\n$$H_N(q_1,\\ldots,q_N,p_1,\\ldots,p_N)=\\sum_{i=1}^{N}\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j).$$\n\nThe interaction force is $K(q):=-\\nabla_qW(q)$, in newtons. It is bounded and globally Lipschitz on the compact torus; evenness of $W$ makes $K$ odd and $K(0)=0$. Hamilton's equations in the canonical convention are\n\n$$\\dot q_i=\\frac{p_i}{m},\\qquad \\dot p_i=\\frac1N\\sum_{j\\ne i}K(q_i-q_j).$$\n\nFor any chosen momentum scale $P_0>0$ in kilogram-metres per second, define the time scale $\\tau_0:=mL/P_0$ in seconds, dimensionless variables $x_i:=q_i/L\\in\\mathbb T^d:=(\\mathbb R/\\mathbb Z)^d$, $v_i:=p_i/P_0$, and $s:=t/\\tau_0$. Define the dimensionless potential $\\Phi(x):=mW(Lx)/P_0^2$ and force $k(x):=-\\nabla_x\\Phi(x)$. Then the equations become\n\n$$x_i'=v_i,\\qquad v_i'=\\frac1N\\sum_{j\\ne i}k(x_i-x_j),$$\n\nwhere prime denotes derivative with respect to dimensionless time $s$. Here\n$\\|Dk\\|_\\infty:=\\sup_{x\\in\\mathbb T^d}\\|Dk(x)\\|_{\\mathrm{op}}$, with operator\nnorm induced by the Euclidean norm, and $\\|k\\|_\\infty:=\\sup_x|k(x)|$; the\nconstants $A:=\\|Dk\\|_\\infty$ and $B:=\\|k\\|_\\infty$ are finite and\ndimensionless. This is the selected smooth periodic mean-field scaling; it is\nnot the hard-sphere Boltzmann-Grad scaling.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-dk-phase-space-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Use the dimensionless one-particle phase space $Z:=\\mathbb T^d\\times\\mathbb R^d$ from [[def-csm-dk-periodic-mean-field-model]], with its product topology and Borel sigma algebra. The finite torus is second-countable by [[def-the-one-dimensional-torus-and-normalized-haar-integral]], and Euclidean space is second-countable. Consequently $Z$ and $Z\\times Z$ are second-countable, and the Borel sigma algebra of each finite product equals the product of the factor Borel sigma algebras: every open set is a countable union of basic open rectangles. Use the product topology and its Borel sigma algebra on $Z\\times Z$ as well.\n\nFor $x,y\\in\\mathbb T^d$, let\n\n$$d_{\\mathbb T^d}(x,y):=\\min_{\\ell\\in\\mathbb Z^d}|\\widetilde x-\\widetilde y+\\ell|,$$\n\nwhere $\\widetilde x,\\widetilde y\\in\\mathbb R^d$ are any representatives; the minimum is independent of the representatives. Equip $Z$ with\n\n$$d_Z((x,v),(y,w)):=d_{\\mathbb T^d}(x,y)+|v-w|.$$\n\nLet $\\mathcal P_1(Z)$ be the Borel probability measures $\\mu$ on $Z$ with $\\int_Z|v|\\,d\\mu(x,v)<\\infty$. For $\\mu,\\nu\\in\\mathcal P_1(Z)$, a coupling is a Borel probability $\\pi$ on $Z\\times Z$ satisfying $\\pi(A\\times Z)=\\mu(A)$ and $\\pi(Z\\times B)=\\nu(B)$ for all Borel $A,B\\subseteq Z$; write $\\Pi(\\mu,\\nu)$ for the set of couplings. Define the phase-space Wasserstein-1 coupling cost by\n\n$$\\mathcal W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{Z\\times Z}d_Z(z,z')\\,d\\pi(z,z').$$\n\nBy [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], $\\mu\\otimes\\nu$ is a probability on $\\mathcal B(Z)\\otimes\\mathcal B(Z)=\\mathcal B(Z\\times Z)$ and its marginals are $\\mu,\\nu$; hence $\\Pi(\\mu,\\nu)$ is nonempty. The infimum is finite: this product coupling has torus cost at most $\\sqrt d/2$, and Tonelli's theorem bounds its velocity cost by $\\int|v|\\,d\\mu+\\int|w|\\,d\\nu$. No minimizing coupling is assumed to exist.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-csm-dk-finite-n-complete-flow",
+          "source_section": "Statement",
+          "quote": "Assume countable choice [[def-countable-choice]] for the intrinsic\ndensity-measure construction in [[def-csm-dk-hamiltonian-flow-measure]]. On\n$(T^*\\mathbb T_L^d)^N$, use the canonical form\n$\\omega_N:=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_{i,a}$ and Liouville\nvolume form $\\Omega_N:=\\omega_N^{dN}/(dN)!$. The positive reference density\n$|\\Omega_N|/a_0^{dN}$ induces a Borel measure $m_{0,N}$ by that definition;\nwrite $d\\Omega_N:=a_0^{dN}dm_{0,N}$ for canonical Liouville measure, which\nin canonical coordinates is $dq_1\\,dp_1\\cdots dq_N\\,dp_N$. Fix $d\\ge1$,\n$m,L>0$, a finite integer $N\\ge1$, and the periodic smooth even potential\nand canonical phase-space convention of\n[[def-csm-dk-periodic-mean-field-model]]. The associated Hamiltonian ODE has\na unique complete smooth flow $\\Phi_t^N$ on $(T^*\\mathbb T_L^d)^N$ for all\n$t\\in\\mathbb R$. It preserves $\\Omega_N$ and commutes with permutations of\nthe $N$ particle labels.\n\nIf the initial law has a normalized symmetric $C^\\infty$ density\n$F_N^0(q_1,\\ldots,q_N,p_1,\\ldots,p_N)$ relative to $d\\Omega_N$ and, for\nevery pair of multi-indices $\\alpha,\\beta$ and integer $r\\ge0$,\n\n$$\\sup_{q\\in(\\mathbb T_L^d)^N,\\ p\\in\\mathbb R^{dN}}(1+|p|)^r|\\partial_q^\\alpha\\partial_p^\\beta F_N^0(q,p)|<\\infty,$$\n\nthen $F_N(t):=F_N^0\\circ\\Phi_{-t}^N$ is a normalized symmetric classical solution of the Liouville equation for all $t$. Its momentum tails, together with every phase derivative, remain rapidly decreasing uniformly on each bounded time interval.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-csm-dk-dobrushin-and-particle-limit",
+          "source_section": "Statement",
+          "quote": "Use $Z=\\mathbb T^d\\times\\mathbb R^d$, $d_Z$, $\\mathcal P_1(Z)$ and\n$\\mathcal W_1$ from [[def-csm-dk-phase-space-wasserstein-one]], and the odd\nsmooth force $k$ with $A=\\|Dk\\|_\\infty$ and $k(0)=0$ from\n[[def-csm-dk-periodic-mean-field-model]]. If $\\mu_0,\\nu_0\\in\\mathcal P_1(Z)$,\nlet $\\mu_s,\\nu_s$ be their global characteristic evolutions from\n[[thm-csm-dk-global-lipschitz-vlasov]]. Then for every $s\\in\\mathbb R$,\n\n$$\\mathcal W_1(\\mu_s,\\nu_s)\\le e^{(1+2A)|s|}\\mathcal W_1(\\mu_0,\\nu_0).$$\n\nFor a finite integer $N\\ge1$, choose the momentum scale $P_0>0$ and set\n$\\tau_0=mL/P_0$ as in [[def-csm-dk-periodic-mean-field-model]]. Define\n$\\Xi_N:Z^N\\to(T^*\\mathbb T_L^d)^N$ by\n$\\Xi_N((x_i,v_i)_{i=1}^N)=((Lx_i,P_0v_i)_{i=1}^N)$, where multiplication\nby $L$ maps $\\mathbb R^d/\\mathbb Z^d$ to $\\mathbb R^d/L\\mathbb Z^d$.\nWrite $\\Phi_t^N$ for the complete flow in physical coordinates and time from\n[[thm-csm-dk-finite-n-complete-flow]]. For initial points\n$Z_1^0,\\ldots,Z_N^0\\in Z$, define their dimensionless trajectory by\n\n$$ (Z_i(s))_{i=1}^N:=\\Xi_N^{-1}\\!\\left(\\Phi_{\\tau_0s}^N\\bigl(\\Xi_N((Z_i^0)_{i=1}^N)\\bigr)\\right). $$\n\nPut $\\mu_N(s)=N^{-1}\\sum_{i=1}^N\\delta_{Z_i(s)}$. If $\\mu_s$ is the characteristic\nevolution from any $\\mu_0\\in\\mathcal P_1(Z)$, then\n\n$$\\mathcal W_1(\\mu_N(s),\\mu_s)\\le e^{(1+2A)|s|}\\mathcal W_1(\\mu_N(0),\\mu_0).$$\n\nFinally, a narrowly continuous curve (meaning that $s\\mapsto\\int g\\,d\\sigma_s$\nis continuous for every bounded continuous $g$) $\\sigma_s\\in\\mathcal P_1(Z)$ with\nlocally bounded first velocity moments that satisfies the weak Vlasov identity\nin [[thm-csm-dk-global-lipschitz-vlasov]] is the characteristic evolution from\nits initial law. Thus this weak-solution class is unique. The estimate is for\nthe periodic second-order phase metric above; it is not Golse's first-order\nestimate and does not use a collision or Boltzmann-Grad scaling.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-product-measure-on-sigma-finite-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. For $E \\in \\mathcal A \\otimes \\mathcal B$, define\n\n$$(\\mu \\times \\nu)(E) := \\int_X \\nu(E_x)\\,d\\mu = \\int_Y \\mu(E^y)\\,d\\nu.$$\n\nThe two displayed integrals are well-defined by\n[[prop-sigma-finite-section-measure-functions-are-measurable]] and equal by\n[[thm-iterated-section-measures-agree-on-product-measurable-sets]]. This is the\n**product measure** of $\\mu$ and $\\nu$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces. Then:\n\n1. the set function $E \\mapsto (\\mu \\times \\nu)(E)$ of\n   [[def-product-measure-on-sigma-finite-spaces]] is a measure on\n   $\\mathcal A \\otimes \\mathcal B$;\n2. for measurable rectangles,\n   $$(\\mu \\times \\nu)(A \\times B)=\\mu(A)\\nu(B),$$\n   with the nonnegative extended-product convention $0\\cdot\\infty=\\infty\\cdot0=0$;\n3. the measure $\\mu \\times \\nu$ is sigma-finite; and\n4. it is the unique measure on $\\mathcal A \\otimes \\mathcal B$ with the\n   rectangle formula.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "If $f,g\\in\\mathcal L^2(\\mu)$, then\n\n$$\\int |fg|\\,d\\mu\\le\\|f\\|_2\\|g\\|_2.$$\n\nEquality holds if and only if at least one of $f,g$ is zero almost everywhere,\nor there is a constant $c>0$ with\n\n$$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For any fixed $\\nu\\in\\mathcal P_1(Z)$, the map $z\\mapsto\\mathcal W_1(N^{-1}\\sum_i\\delta_{z_i},\\nu)$ is continuous. Indeed, split a coupling's mass at each repeated atom equally among its labels, and then move label $i$ from $z_i$ to $z_i'$ while keeping its target. The cost increases by at most $N^{-1}\\sum_i d_Z(z_i,z_i')$. Taking infima and reversing the roles gives the same bound for the absolute difference of the two Wasserstein values. Thus the initial Wasserstein error is a measurable random variable, bounded by $D_K$ on $K^N$. For a finite Borel partition $\\mathcal P=\\{C_1,\\ldots,C_M\\}$ of $K$ with cell diameters at most $\\delta$, put $p_j=\\mu_0(C_j)$ and $P_{N,j}=N^{-1}\\sum_{i=1}^N\\mathbf1_{C_j}(Z_i(0))$. A coupling matches the common mass $\\min(p_j,P_{N,j})$ inside each cell at cost at most $\\delta$; the leftover mass is $r=\\tfrac12\\sum_j|P_{N,j}-p_j|$ and can be coupled across $K$ at cost at most $D_Kr$. Product measures in [F6] construct these within-cell and residual couplings (if $r=0$, no residual coupling is needed). Hence $\\mathcal W_1(\\mu_N(0),\\mu_0)\\le\\delta+(D_K/2)\\sum_j|P_{N,j}-p_j|$. Independence [F1] gives $\\mathbb E|P_{N,j}-p_j|^2=p_j(1-p_j)/N$, so [F7] gives $\\mathbb E|P_{N,j}-p_j|\\le\\sqrt{p_j/N}$; therefore the sum of expected discrepancies is at most $\\sqrt{M/N}$. Partition a bounded velocity box containing $K$ and the position torus into rectangular cells of side at most a fixed multiple of $\\delta$; intersect with $K$ and disjointize the cover. There are at most $C_K\\delta^{-2d}$ cells, each with $d_Z$-diameter at most $\\delta$. This proves the expected initial bound in the Statement.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "F7",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each $\\mu_0$, take every coordinate space to be $(Z,\\mathcal B(Z))$ and set every history-dependent kernel to $K_n(z_0,\\ldots,z_n,A)=\\mu_0(A)$. For each fixed $A$ this is constant, hence measurable, and it is a probability measure in $A$. The Ionescu--Tulcea theorem [F2], under full Choice, supplies a probability on the countable product whose finite-prefix laws are the iterated products of $\\mu_0$. Reindexing coordinates from 0 to 1 gives the sequence in the Statement; its common marginals and product finite-prefix laws make its coordinates mutually independent and identically distributed by [F1].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a centered Bernoulli variable $Y=\\mathbf1_{C_j}(Z_i)-p_j$, $\\mathbb EY^2=p_j(1-p_j)$ and $\\mathbb EY^4\\le p_j$. Expanding the fourth power of the sum of independent centered variables leaves only terms with four equal indices or two equal pairs, so $\\mathbb E|P_{N,j}-p_j|^4 =N^{-4}\\left(N\\mathbb EY^4+3N(N-1)(\\mathbb EY^2)^2\\right)\\le4N^{-2}.$ For every rational $\\varepsilon>0$, the elementary bound $\\mathbb P(|P_{N,j}-p_j|>\\varepsilon)\\le \\varepsilon^{-4}\\mathbb E|P_{N,j}-p_j|^4$ makes $\\sum_N\\mathbb P(|P_{N,j}-p_j|>\\varepsilon)<\\infty$. By countable subadditivity, the probability of such deviations occurring for some $N\\ge n$ is bounded by the tail of that convergent series, which tends to zero; hence for this rational $\\varepsilon$ the deviations occur only finitely often almost surely. Intersect over rational $\\varepsilon>0$, over the finitely many cells of each of a countable sequence of partitions with mesh $\\delta_\\ell\\downarrow0$. The coupling bound in step 1.1 then gives $\\limsup_N\\mathcal W_1(\\mu_N(0),\\mu_0)\\le\\delta_\\ell$ for every $\\ell$, so the initial Wasserstein distance tends to zero almost surely.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 1.1 and $M_\\delta\\le C_K\\delta^{-2d}$ give $\\mathbb E\\mathcal W_1(\\mu_N(0),\\mu_0)\\le \\delta+(D_K\\sqrt{C_K}/2)\\delta^{-d}N^{-1/2}$. Taking $\\delta=N^{-1/(2d+2)}$ bounds both terms by constants times that power of $N$. Step 2.1 gives almost-sure convergence. To identify the trajectories used by [F4] and [F5], let $\\Xi_N:Z^N\\to(T^*\\mathbb T_L^d)^N$ be $\\Xi_N((x_i,v_i)_{i=1}^N)=((Lx_i\\bmod L,P_0v_i)_{i=1}^N)$ and set $\\tau_0=mL/P_0$, $k(x)=(mL/P_0^2)K(Lx)$ as in [F3]. For the first $N$ iid initial coordinates, define $(Z_i(s))_{i=1}^N:=\\Xi_N^{-1}\\!\\left(\\Phi_{\\tau_0s}^N\\bigl(\\Xi_N((Z_i(0))_{i=1}^N)\\bigr)\\right)=\\left(\\left(q_i(\\tau_0s)/L,p_i(\\tau_0s)/P_0\\right)\\right)_{i=1}^N$, where $\\Phi_t^N$ is the physical flow from [F4]. This is its conjugate in the dimensionless coordinates $Z=\\mathbb T^d\\times\\mathbb R^d$ and time $s$; differentiating and using the model equations gives $\\dot X_i=V_i$ and $\\dot V_i=N^{-1}\\sum_{j\\ne i}k(X_i-X_j)$. Since $k(0)=0$, $\\mu_N(s)=N^{-1}\\sum_i\\delta_{Z_i(s)}$ is the empirical characteristic evolution to which [F5] applies. The coordinate scaling commutes with particle permutations, so the exchangeability used below follows from [F4] and the iid initial law. On $[-T,T]$ the particle trajectories depend continuously on time and their initial vector by [F4]. The characteristics carrying $\\mu_0$ have uniformly bounded velocities there because $K$ is compact and $k$ is bounded. For two times $s,t$, transport the target of any empirical-to-$\\mu_s$ coupling by the characteristic map from $s$ to $t$, and move its labelled source atoms from $Z_i(s)$ to $Z_i(t)$. The cost changes by at most $N^{-1}\\sum_i d_Z(Z_i(s),Z_i(t))+\\int d_Z(\\chi_s z,\\chi_t z)\\,d\\mu_0(z)$, which tends to zero as $t\\to s$; reversing times proves continuity of the error. At each fixed time its dependence on the initial vector is continuous by the labelled-coupling bound above and [F4]. Its supremum over $[-T,T]$ therefore equals the supremum over a countable dense set of times and is measurable. Applying [F5] at every $|s|\\le T$ yields the supremum bound with factor $e^{CT}$, both in expectation and almost surely.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The joint law of the finite particle vector is permutation invariant by [F4] and iid symmetry [F1]. Given the finite-particle configuration at time $s$, draw $k$ indices independently and uniformly from $\\{1,\\ldots,N\\}$. The resulting tuple has conditional law $\\mu_N(s)^{\\otimes k}$. The chance of an index collision is at most $\\binom{k}{2}/N$ by a union bound. After averaging over the exchangeable particle vector, conditioning the index sampling on no collision makes the tuple's law equal to that of the first $k$ particles. Thus the expectation of $\\Psi$ under the true $k$-law and under $\\mu_N(s)^{\\otimes k}$ differs by at most $2\\|\\Psi\\|_\\infty\\binom{k}{2}/N$. For any coupling $\\pi$ of $\\mu_N(s)$ and $\\mu_s$, its $k$-fold product from [F6] couples their product laws, and the sum-metric Lipschitz bound gives a test-integral difference at most $k\\operatorname{Lip}(\\Psi)\\int d_Z\\,d\\pi$. Taking the infimum over $\\pi$, then expectation, and using [F5] gives the second term in the displayed bound. The estimate tends to zero uniformly for $|s|\\le T$, establishing fixed-$k$ propagation of chaos in the stated test class.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all five steps and exact iid, full-Choice Ionescu-Tulcea, L2 Cauchy-Schwarz, product-measure, finite-flow and Dobrushin suppliers. Within-cell and residual product couplings work with zero cell mass and r=0 omitted. Bernoulli variance and Cauchy-Schwarz give sum_j E|Pnj-pj|<=sqrt(M/N); grid cells on the compact phase set give M<=C_K delta^(-2d). Fourth-moment expansion has only four-equal and two-pair terms, bounds deviations by a summable O(N^-2) series, and countable mesh intersection yields almost-sure convergence. Balancing delta and delta^-d/sqrt(N) gives N^(-1/(2d+2)). Dobrushin propagates the same event for each finite T. Exchangeability plus with/without-replacement sampling gives collision probability <=k(k-1)/(2N); product couplings give k Lip(Psi) times W1. Checked singleton K (D_K=0), zero-probability cells, N=1, k=1, k=N and both time signs. Full Choice retained; no strong-law or optimal-rate claim imported. Reader delta is only citation enrichment."
+      }
+    },
+    "pthm-csm-dk-qualified-mean-field-limit": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both conditional branches require a normalized probability law; an empty law is outside the physical premises."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and the proof give zero cross coefficient at k=N; the proof still proves convergence when the initial empirical error is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the proof gives the N=1 exact hierarchy with k=1 and no interaction pair; the proof remains conditional on the stated fixed-k regime."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the proof treats k=N with zero cross coefficient, and the Statement keeps the smooth-density and compact-iid branches separate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the proof proves uniformity over the closed finite time interval [-T,T], including its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Facts A1-A3 and the proof explicitly retain full Choice for the iid sequence and countable choice for completed-product integration."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof1.1 and1.2 apply the exact hierarchy and compact-iid chaos results to two separately stated preparation branches. They are conditional deductions, not an iff equivalence of finite and infinite gases."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from the limiting product law to finite-N factorization, physical truth or a Boltzmann-Grad regime is asserted; all adoption/Choice assumptions remain explicit."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "k=N",
+          "result": "The exact hierarchy cross coefficient is (N-k)/N=0."
+        },
+        {
+          "case": "zero-initial-error",
+          "result": "If the initial empirical law equals mu0, the Dobrushin term is zero and only the finite-k collision correction remains."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-csm-dk-mean-field-particle-and-iid-model",
+          "source_section": "Postulate",
+          "quote": "Adopt [[def-csm-dk-periodic-mean-field-model]] as the selected finite-particle model: for each $N\\ge1$, the phase points $(q_i,p_i)$ evolve by its displayed Hamilton equations with smooth even periodic potential $W$ and interaction coefficient $1/N$. This is a model assumption with $q_i$ in metres, $p_i$ in kilogram-metres per second, $m$ in kilograms, $W$ in joules, and force $K=-\\nabla W$ in newtons.\n\nFor the propagation-of-chaos preparation branch, give $Z=\\mathbb T^d\\times\\mathbb R^d$ its product topology and the Borel sigma algebra generated by its open sets. Choose a Borel probability $\\mu_0$ and a compact set $K\\subset Z$ with $\\mu_0(K)=1$. Put $\\Omega=Z^{\\mathbb N}$ with product sigma algebra $\\mathcal B(Z)^{\\otimes\\mathbb N}$. Under the full Axiom of Choice, [[thm-ionescu-tulcea-construction-of-a-markov-chain]] applied to the constant kernels $K_n(z_0,\\ldots,z_n,A)=\\mu_0(A)$ supplies a probability $P$ on $\\Omega$. Let $Z_i(0):\\Omega\\to Z$ be the coordinate projections, and use the first $N$ coordinates for the finite-$N$ preparation. For every finite list of indices $i_1<\\cdots<i_r$ and Borel sets $A_1,\\ldots,A_r\\subseteq Z$, this construction gives\n\n$$P\\bigl(Z_{i_1}(0)\\in A_1,\\ldots,Z_{i_r}(0)\\in A_r\\bigr)=\\prod_{j=1}^r\\mu_0(A_j).$$\n\nThus each coordinate has law $\\mu_0$ and the coordinates are mutually independent. Here “iid” means exactly this common-marginal and finite-rectangle factorization property. The cited construction uses Choice to choose a compatible infinite coordinate sequence and again to choose successive coordinates in its continuity-at-the-empty-set argument; this postulate does not weaken that assumption.\n\nThese assumptions define the selected physical model and preparation. They do not assert that a real gas, hard-sphere system, or experiment realizes them, and they do not deduce the assumptions from mechanics or observation.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-csm-dk-exact-bbgky",
+          "source_section": "Statement",
+          "quote": "Fix the smooth periodic finite-N model and complete flow $\\Phi_t^N$ of [[thm-csm-dk-finite-n-complete-flow]]. Let $F_N(t)=F_N^0\\circ\\Phi_{-t}^N$ be the transported normalized symmetric $C^\\infty$ probability density relative to canonical phase volume, with all phase derivatives rapidly decreasing in momentum uniformly in position on each finite time slab. Here $z_i=(q_i,p_i)$, and rapid decrease means that for every position multi-index $\\alpha$, momentum multi-index $\\beta$, and integer $r\\ge0$, $(1+|p|)^r|\\partial_q^\\alpha\\partial_p^\\beta F_N(t,q,p)|$ is uniformly bounded on that slab. For $1\\le k\\le N$, define the normalized marginal\n\n$$f_k(t,z_1,\\ldots,z_k):=\\int F_N(t,z_1,\\ldots,z_N)\\,dz_{k+1}\\cdots dz_N.$$\n\nThen, for $1\\le k\\le N$,\n\n$$\\partial_t f_k+\\sum_{i=1}^k\\frac{p_i}{m}\\cdot\\nabla_{q_i}f_k+\\frac1N\\sum_{1\\le i<j\\le k}K(q_i-q_j)\\cdot(\\nabla_{p_i}-\\nabla_{p_j})f_k+\\frac{N-k}{N}\\sum_{i=1}^k\\nabla_{p_i}\\cdot\\int K(q_i-q_{k+1})f_{k+1}(t,z_1,\\ldots,z_{k+1})\\,dz_{k+1}=0.$$\n\nWhen $k=N$, the last term is zero and no $f_{N+1}$ is used. This identity is exact at finite $N$ and makes no factorization or molecular-chaos assumption.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-compact-iid-propagation-of-chaos",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset Z=\\mathbb T^d\\times\\mathbb R^d$ be compact and let\n$\\mu_0\\in\\mathcal P_1(Z)$ be supported in $K$. Take an iid sequence\n$(Z_i(0))_{i\\ge1}$ with common law $\\mu_0$ (iid means a common law and mutual\nindependence as in [[def-identically-distributed-and-iid-random-variables]]).\nIts existence for each $\\mu_0$ follows from the countable-kernel construction\n[[thm-ionescu-tulcea-construction-of-a-markov-chain]] under the Axiom of Choice.\nLet $P_0>0$ be the momentum scale, $\\tau_0=mL/P_0$, and\n$\\Xi_N:Z^N\\to(T^*\\mathbb T_L^d)^N$ be\n$\\Xi_N((x_i,v_i)_i)=((Lx_i,P_0v_i)_i)$, with torus multiplication as in\n[[def-csm-dk-periodic-mean-field-model]]. If $\\Phi_t^N$ is the physical\nfinite-N flow of [[thm-csm-dk-finite-n-complete-flow]], define the\nfirst $N$ dimensionless trajectories by\n$ (Z_i(s))_{i=1}^N:=\\Xi_N^{-1}\\Phi_{\\tau_0s}^N\\Xi_N((Z_i(0))_{i=1}^N)$.\nWrite\n$\\mu_N(s)=N^{-1}\\sum_{i=1}^N\\delta_{Z_i(s)}$, and let $\\mu_s$ be the global\ncharacteristic evolution from $\\mu_0$. For $C=1+2A$, every finite $T>0$ and\n$N\\ge1$ satisfy\n\n$$\\mathbb E\\sup_{|s|\\le T}\\mathcal W_1(\\mu_N(s),\\mu_s) \\le e^{CT}\\,\\mathbb E\\mathcal W_1(\\mu_N(0),\\mu_0) \\le e^{CT}\\left(\\delta+\\frac{D_K}{2}\\sqrt{\\frac{M_\\delta}{N}}\\right),$$\n\nwhere for each $0<\\delta\\le1$ one may choose a finite Borel partition of\n$K$ into $M_\\delta\\le C_K\\delta^{-2d}$ cells of diameter at most $\\delta$,\n$D_K=\\operatorname{diam}_{d_Z}(K)$, and $C_K$ depends only on $K$ and $d$.\nConsequently the expected phase-space Wasserstein error tends to zero; choosing\n$\\delta=N^{-1/(2d+2)}$ gives a bound of order $N^{-1/(2d+2)}$ with a constant\ndepending on $K,d,T,A$. Almost surely,\n$\\sup_{|s|\\le T}\\mathcal W_1(\\mu_N(s),\\mu_s)\\to0$.\n\nFor each fixed $k\\ge1$ and every bounded Lipschitz $\\Psi:Z^k\\to\\mathbb R$\nwith the sum metric $d_{Z^k}(z,z')=\\sum_{j=1}^k d_Z(z_j,z'_j)$, the law\n$f_N^{(k)}(s)$ of the first $k$ particles obeys,\nfor $N\\ge k$ and $|s|\\le T$,\n\n$$\\left|\\int\\Psi\\,df_N^{(k)}(s)-\\int\\Psi\\,d\\mu_s^{\\otimes k}\\right| \\le 2\\|\\Psi\\|_\\infty\\frac{k(k-1)}{2N} +k\\operatorname{Lip}(\\Psi)e^{CT}\\mathbb E\\mathcal W_1(\\mu_N(0),\\mu_0).$$\n\nThus every fixed marginal converges to the product law uniformly on bounded\ntime intervals in bounded-Lipschitz tests, where bounded-Lipschitz means\n$\\|\\Psi\\|_\\infty<\\infty$ and\n$\\operatorname{Lip}(\\Psi)=\\sup_{z\\ne z'}|\\Psi(z)-\\Psi(z')|/d_{Z^k}(z,z')<\\infty$.\nThis conclusion is specific to the\ncompact iid preparation and the smooth $N^{-1}$ mean-field model.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under the first stated regularity branch, the model's smooth complete finite-$N$ flow transports the normalized symmetric density. Apply [F1] with its exact smoothness, symmetry, rapid-tail and countable-choice assumptions [A3]. It yields the normalized hierarchy for every $k$, with coefficient $(N-k)/N$ and no factorization premise; this conclusion is entirely finite-$N$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Under the iid branch, [A1] supplies the adopted common law and the countably many iid coordinates under full Choice [A2]. Countable choice [A3] is separately the assumption carried by the completed-product argument in [F1]; neither choice use is inferred from the physical model. The compact iid theorem [F2] applies to these same first $N$ coordinates and their finite-$N$ flow. Its finite-k estimate is precisely the inequality in the Statement.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $k$ and $T$, the first term in the [F2] bound tends to zero as $N\\to\\infty$, and its second term tends to zero because the initial empirical expected Wasserstein distance tends to zero for compactly supported iid data. The constants are uniform for $|s|\\le T$. Therefore the fixed-$k$ laws converge in every bounded-Lipschitz test on each finite time interval. This is a conditional model deduction with the stated preparation and scaling; no experimental sampling or alternate collision limit enters the argument.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all three proof steps, the complete postulate and current corrected BBGKY and compact-iid suppliers. The density branch explicitly transports the smooth rapidly decreasing initial law, satisfying the corrected hierarchy hypothesis, with countable choice carried. The compact iid branch carries full Choice for countable construction and uses the exact finite-k theorem with fixed k and finite T; both error terms vanish uniformly on the finite slab. The branches are separated, so arbitrary compact iid laws need not have smooth density. Model/preparation assumptions are adopted, no empirical premises or observations are fabricated, and no real-gas, hard-sphere or Boltzmann-Grad conclusion is asserted. No consumer carrier change is necessary."
+      }
+    },
+    "ex-csm-dk-product-law-develops-correlations": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes N=2 and a normalized probability density on a nonempty torus phase space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof locates the open set where K dot (p1-p2) is nonzero; the derivative may vanish at individual zero-relative-momentum points without invalidating the open-set claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example allows d=1; the Gaussian normalization and periodic-gradient integral remain valid in one dimension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: The assumptions sigma_p>0 and nonconstant W exclude degenerate momentum density and zero interaction; the proof uses both."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the proof uses differentiability on a neighborhood of t=0 and proves nonfactorization at sufficiently small nonzero times."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: Fact A1 carries countable choice for the exact hierarchy integration used in the proof and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Proof2.1–3.1 exhibits zero initial marginal derivative but nonzero joint derivative in the explicit N2model, proving immediate failure of product factorization. This is a counterexample, not an iff criterion for correlations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example does not assert that every correlated law arises this way or that all product preparations instantly correlate; it deliberately requires a nonconstant potential."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "N=2,k=1",
+          "result": "The exact marginal cross coefficient is (2-1)/2=1/2."
+        },
+        {
+          "case": "Gaussian-derivative",
+          "result": "Each momentum gradient is -p_i/sigma_p^2 times its Gaussian, producing the stated positive sign after the Liouville minus sign."
+        },
+        {
+          "case": "periodic-force-average",
+          "result": "The torus integral of each component of -grad W over one period is zero."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-periodic-mean-field-model",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge1$, a side length $L>0$ in metres, a mass $m>0$ in kilograms, and a smooth even periodic pair potential $W\\in C^\\infty(\\mathbb T_L^d;\\mathbb R)$ in joules, where $\\mathbb T_L^d:=(\\mathbb R/L\\mathbb Z)^d$ is the flat position torus and even means $W(-q)=W(q)$. For each finite integer $N\\ge1$, the phase space is $(T^*\\mathbb T_L^d)^N$ with canonical coordinates $z_i=(q_i,p_i)$, $q_i\\in\\mathbb T_L^d$ in metres and $p_i\\in\\mathbb R^d$ in kilogram-metres per second. In position charts obtained by lifting torus coordinates to $\\mathbb R^d$, define\n\n$$\\theta_N:=\\sum_{i=1}^N\\sum_{a=1}^d p_i^a\\,dq_i^a,\\qquad \\omega_N:=-d\\theta_N=\\sum_{i=1}^N\\sum_{a=1}^d dq_i^a\\wedge dp_i^a.$$\n\nOverlaps of these position charts are translations by vectors in $L\\mathbb Z^d$, with the same momentum coordinates, so $dq_i^a$ and $p_i^a$ agree on overlaps. Thus the displayed forms glue globally on $(T^*\\mathbb T_L^d)^N$; $\\omega_N$ is closed and nondegenerate by its displayed coordinate matrix. Both forms have action units of joule-seconds. Use the Hamiltonian convention $\\iota_{X_{H_N}}\\omega_N=dH_N$ of [[def-csm-dk-hamiltonian-flow-measure]]. The finite-particle Hamiltonian, with energy in joules, is\n\n$$H_N(q_1,\\ldots,q_N,p_1,\\ldots,p_N)=\\sum_{i=1}^{N}\\frac{|p_i|^2}{2m}+\\frac1N\\sum_{1\\le i<j\\le N}W(q_i-q_j).$$\n\nThe interaction force is $K(q):=-\\nabla_qW(q)$, in newtons. It is bounded and globally Lipschitz on the compact torus; evenness of $W$ makes $K$ odd and $K(0)=0$. Hamilton's equations in the canonical convention are\n\n$$\\dot q_i=\\frac{p_i}{m},\\qquad \\dot p_i=\\frac1N\\sum_{j\\ne i}K(q_i-q_j).$$\n\nFor any chosen momentum scale $P_0>0$ in kilogram-metres per second, define the time scale $\\tau_0:=mL/P_0$ in seconds, dimensionless variables $x_i:=q_i/L\\in\\mathbb T^d:=(\\mathbb R/\\mathbb Z)^d$, $v_i:=p_i/P_0$, and $s:=t/\\tau_0$. Define the dimensionless potential $\\Phi(x):=mW(Lx)/P_0^2$ and force $k(x):=-\\nabla_x\\Phi(x)$. Then the equations become\n\n$$x_i'=v_i,\\qquad v_i'=\\frac1N\\sum_{j\\ne i}k(x_i-x_j),$$\n\nwhere prime denotes derivative with respect to dimensionless time $s$. Here\n$\\|Dk\\|_\\infty:=\\sup_{x\\in\\mathbb T^d}\\|Dk(x)\\|_{\\mathrm{op}}$, with operator\nnorm induced by the Euclidean norm, and $\\|k\\|_\\infty:=\\sup_x|k(x)|$; the\nconstants $A:=\\|Dk\\|_\\infty$ and $B:=\\|k\\|_\\infty$ are finite and\ndimensionless. This is the selected smooth periodic mean-field scaling; it is\nnot the hard-sphere Boltzmann-Grad scaling.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-dk-exact-bbgky",
+          "source_section": "Statement",
+          "quote": "Fix the smooth periodic finite-N model and complete flow $\\Phi_t^N$ of [[thm-csm-dk-finite-n-complete-flow]]. Let $F_N(t)=F_N^0\\circ\\Phi_{-t}^N$ be the transported normalized symmetric $C^\\infty$ probability density relative to canonical phase volume, with all phase derivatives rapidly decreasing in momentum uniformly in position on each finite time slab. Here $z_i=(q_i,p_i)$, and rapid decrease means that for every position multi-index $\\alpha$, momentum multi-index $\\beta$, and integer $r\\ge0$, $(1+|p|)^r|\\partial_q^\\alpha\\partial_p^\\beta F_N(t,q,p)|$ is uniformly bounded on that slab. For $1\\le k\\le N$, define the normalized marginal\n\n$$f_k(t,z_1,\\ldots,z_k):=\\int F_N(t,z_1,\\ldots,z_N)\\,dz_{k+1}\\cdots dz_N.$$\n\nThen, for $1\\le k\\le N$,\n\n$$\\partial_t f_k+\\sum_{i=1}^k\\frac{p_i}{m}\\cdot\\nabla_{q_i}f_k+\\frac1N\\sum_{1\\le i<j\\le k}K(q_i-q_j)\\cdot(\\nabla_{p_i}-\\nabla_{p_j})f_k+\\frac{N-k}{N}\\sum_{i=1}^k\\nabla_{p_i}\\cdot\\int K(q_i-q_{k+1})f_{k+1}(t,z_1,\\ldots,z_{k+1})\\,dz_{k+1}=0.$$\n\nWhen $k=N$, the last term is zero and no $f_{N+1}$ is used. This identity is exact at finite $N$ and makes no factorization or molecular-chaos assumption.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "For a natural $n\\ge1$ put\n$\\mathbb T^n:=\\mathbb R^n/\\mathbb Z^n$ with the quotient topology of the\ncanonical projection $q_n$, and define\n\n$$m_{\\mathbb T^n}(E):=\\lambda_n\\bigl(q_n^{-1}[E]\\cap[0,1)^n\\bigr),\\qquad \\int_{\\mathbb T^n}F\\,dm_{\\mathbb T^n}:=\\int_{[0,1)^n}F\\circ q_n\\,d\\lambda_n .$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F3], the position density $L^{-d}$ is normalized on $\\mathbb T_L^d$. Scaling $p=\\sqrt{2}\\sigma_pu$ and applying [F4] gives $\\int_{\\mathbb R}e^{-p^2/(2\\sigma_p^2)}\\,dp=\\sqrt{2\\pi}\\sigma_p$; Tonelli [F5] factors the $d$-dimensional integral, so $\\int_{\\mathbb R^d}g_{\\sigma_p}(p)\\,dp=1$. Therefore $F_2^0$ integrates to one relative to $dq_1dq_2dp_1dp_2$. It is symmetric and smooth; every momentum derivative is a polynomial times a Gaussian, so it has all rapid-tail bounds required by [F2]. Its one-particle marginal is $f_1(0,q,p)=L^{-d}g_{\\sigma_p}(p)$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "given",
+            "algebra",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use the $k=1,N=2$ case of [F2]: $\\partial_tf_1+\\frac{p_1}{m}\\cdot\\nabla_{q_1}f_1 +\\frac12\\nabla_{p_1}\\cdot\\int K(q_1-q_2)F_2(t,z_1,z_2)\\,dz_2=0.$ At $t=0$, the streaming derivative vanishes because $f_1(0)$ is independent of $q_1$. Also $\\int_{\\mathbb T_L^d}K(q_1-q_2)L^{-d}\\,dq_2=0$: by [F3], this is the normalized fundamental-cube integral of a periodic derivative of $W$, which is zero in each coordinate by the fundamental theorem of calculus and periodicity. Thus the force average in the marginal equation is identically zero before its momentum divergence, and $\\partial_tf_1(0)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The $N=2$ joint Liouville equation in [F2] has interaction coefficient $1/2$. The initial position derivatives vanish, and $\\nabla_{p_i}g_{\\sigma_p}(p_i)=-(p_i/\\sigma_p^2)g_{\\sigma_p}(p_i)$. Consequently $\\partial_tF_2(0)=-\\frac12K(q_1-q_2)\\cdot (\\nabla_{p_1}-\\nabla_{p_2})F_2^0 =\\frac{1}{2\\sigma_p^2}K(q_1-q_2)\\cdot(p_1-p_2)F_2^0.$ Because $W$ is nonconstant, its gradient is nonzero at some point; continuity gives an open set of differences where $K\\ne0$. For each such difference, the condition $K\\cdot(p_1-p_2)\\ne0$ holds on a nonempty open momentum set, and $F_2^0$ is strictly positive there. Hence the joint derivative is nonzero on a nonempty open set.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If the evolved joint density remained the product of its two one-particle marginals on a time interval around zero, differentiating that product at $t=0$ would give $\\partial_tf_1(0)\\otimes f_1(0)+f_1(0)\\otimes\\partial_tf_1(0)=0$ by step 2.1. Step 2.2 gives a nonzero joint derivative on an open set, a contradiction. At a point in that set, differentiability makes the difference between the joint density and the product density nonzero for all sufficiently small nonzero times. Thus correlations appear immediately from this initially factorized law.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read all four steps and exact model, corrected transported-density BBGKY hypothesis, torus-volume, Gaussian and Tonelli suppliers. Fundamental-domain volume is L^d; Gaussian scaling and product integration normalize F2. Uniform positions make the mean initial force zero by periodic integration of a gradient. Pair coefficient 1/2 and Gaussian derivative give the displayed sign and momentum factor. Nonconstant W has nonzero gradient somewhere on the connected torus; positivity of the Gaussian gives a nonempty open set where the joint derivative differs from the product derivative. At one fixed point the nonzero derivative makes the difference nonzero for every sufficiently small nonzero time; continuity then distinguishes the measures. Checked d=1 and both time signs. The direct BBGKY consumer already uses exact evolved density; no consumer edit is needed."
+      }
+    },
+    "post-csm-dk-mean-field-particle-and-iid-model": {
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The postulate states the exact smooth even periodic N^-1 Hamiltonian with units. The iid preparation is an explicit coordinate process on the product measurable space, with common marginal μ0 and finite-rectangle probabilities equal to the products of the corresponding μ0 probabilities, constructed under the stated full Axiom of Choice."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope limits the preparation to compact-support iid data in this mean-field regime and explicitly excludes hard-sphere, real-gas and Boltzmann-Grad interpretations."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Golse and Jabin-Wang full texts were retrieved and read at the locators recorded in batch-31.coverage.json; their source hypotheses are distinguished from the local model."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The item labels the equations and iid preparation as adopted assumptions and says they are not deduced from mechanics, experiment or observations."
+        }
+      }
+    },
+    "lem-csm-dk-smooth-tests-determine-phase-probability": {
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes probability measures on the nonempty metric space Z; no empty probability is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the proof preserves equality for zero and constant tests; the proof treats the empty closed set as mass zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement and the proof allow d=1; the periodic convolution and closed-set argument are unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the proof handles empty C separately; if mu=nu the conclusion is immediate from the test hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no time interval, endpoint data or limiting boundary parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 uses a fixed smooth mollifier and the supplied cutoff; it selects no element from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts a one-way test-integral criterion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts no reverse implication or equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "case": "distinct-dirac-laws",
+          "result": "For z0!=z1, f(z)=min(1,d_Z(z,z0)) is bounded Lipschitz, has integral 0 under delta_z0, and positive integral under delta_z1, so the test class distinguishes this pair."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-csm-dk-phase-space-wasserstein-one",
+          "source_section": "Definition",
+          "quote": "Use the dimensionless one-particle phase space $Z:=\\mathbb T^d\\times\\mathbb R^d$ from [[def-csm-dk-periodic-mean-field-model]], with its product topology and Borel sigma algebra. The finite torus is second-countable by [[def-the-one-dimensional-torus-and-normalized-haar-integral]], and Euclidean space is second-countable. Consequently $Z$ and $Z\\times Z$ are second-countable, and the Borel sigma algebra of each finite product equals the product of the factor Borel sigma algebras: every open set is a countable union of basic open rectangles. Use the product topology and its Borel sigma algebra on $Z\\times Z$ as well.\n\nFor $x,y\\in\\mathbb T^d$, let\n\n$$d_{\\mathbb T^d}(x,y):=\\min_{\\ell\\in\\mathbb Z^d}|\\widetilde x-\\widetilde y+\\ell|,$$\n\nwhere $\\widetilde x,\\widetilde y\\in\\mathbb R^d$ are any representatives; the minimum is independent of the representatives. Equip $Z$ with\n\n$$d_Z((x,v),(y,w)):=d_{\\mathbb T^d}(x,y)+|v-w|.$$\n\nLet $\\mathcal P_1(Z)$ be the Borel probability measures $\\mu$ on $Z$ with $\\int_Z|v|\\,d\\mu(x,v)<\\infty$. For $\\mu,\\nu\\in\\mathcal P_1(Z)$, a coupling is a Borel probability $\\pi$ on $Z\\times Z$ satisfying $\\pi(A\\times Z)=\\mu(A)$ and $\\pi(Z\\times B)=\\nu(B)$ for all Borel $A,B\\subseteq Z$; write $\\Pi(\\mu,\\nu)$ for the set of couplings. Define the phase-space Wasserstein-1 coupling cost by\n\n$$\\mathcal W_1(\\mu,\\nu):=\\inf_{\\pi\\in\\Pi(\\mu,\\nu)}\\int_{Z\\times Z}d_Z(z,z')\\,d\\pi(z,z').$$\n\nBy [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], $\\mu\\otimes\\nu$ is a probability on $\\mathcal B(Z)\\otimes\\mathcal B(Z)=\\mathcal B(Z\\times Z)$ and its marginals are $\\mu,\\nu$; hence $\\Pi(\\mu,\\nu)$ is nonempty. The infimum is finite: this product coupling has torus cost at most $\\sqrt d/2$, and Tonelli's theorem bounds its velocity cost by $\\int|v|\\,d\\mu+\\int|w|\\,d\\nu$. No minimizing coupling is assumed to exist.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, there exists $\\chi\\in C_c^\\infty(\\mathbb R^n)$ with $0\\le\\chi\\le1$, $\\chi=1$ on $|x|\\le1$, and $\\chi=0$ on $|x|\\ge2$. For $R>0$, $\\chi_R(x)=\\chi(x/R)$ satisfies $\\partial^\\beta\\chi_R(x)=R^{-|\\beta|}(\\partial^\\beta\\chi)(x/R)$. The construction requires no choice.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dynkin-pi-lambda",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal P$ be a pi-system on $X$. Then\n$\\lambda_X(\\mathcal P)=\\sigma_X(\\mathcal P)$. Consequently, if $\\mathcal D$ is\nany lambda-system on $X$ with $\\mathcal P\\subseteq\\mathcal D$, then\n$\\sigma_X(\\mathcal P)\\subseteq\\mathcal D$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "For a natural $n\\ge1$ put\n$\\mathbb T^n:=\\mathbb R^n/\\mathbb Z^n$ with the quotient topology of the\ncanonical projection $q_n$, and define\n\n$$m_{\\mathbb T^n}(E):=\\lambda_n\\bigl(q_n^{-1}[E]\\cap[0,1)^n\\bigr),\\qquad \\int_{\\mathbb T^n}F\\,dm_{\\mathbb T^n}:=\\int_{[0,1)^n}F\\circ q_n\\,d\\lambda_n .$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a bounded Lipschitz function $f:Z\\to\\mathbb R$. Use $\\lambda_d$ and $m_{\\mathbb T^d}$ from [F5]. Choose the smooth cutoff $\\chi$ of [F2] and set $\\eta(u)=c\\chi(2u)$ on $\\mathbb R^d$, where $c=(\\int_{\\mathbb R^d}\\chi(2u)\\,d\\lambda_d(u))^{-1}$; its integral is positive and finite because $\\chi=1$ on the unit ball and is supported in the radius-two ball. Thus $\\eta$ is a nonnegative smooth probability density supported in the unit ball. For $0<\\epsilon<1/4$, define $\\eta_\\epsilon^{\\mathbb R}(v)=\\epsilon^{-d}\\eta(v/\\epsilon)$ and periodize it to $\\mathbb T^d$ by $\\eta_\\epsilon^{\\mathbb T}(x)=\\sum_{n\\in\\mathbb Z^d}\\epsilon^{-d}\\eta((\\widetilde x+n)/\\epsilon)$, where $\\widetilde x$ is any representative. The sum is locally finite and independent of the representative; the fundamental-domain formula for $m_{\\mathbb T^d}$ in [F5], followed by the change of variables $u=(\\widetilde x+n)/\\epsilon$, gives integral one, and its support satisfies $d_{\\mathbb T^d}(x,0)\\le\\epsilon$. Set $f_\\epsilon(x,v)=\\int_{\\mathbb T^d}\\int_{\\mathbb R^d}\\eta_\\epsilon^{\\mathbb T}(x-y)\\eta_\\epsilon^{\\mathbb R}(v-w)f(y,w)\\,d\\lambda_d(w)\\,dm_{\\mathbb T^d}(y)$. Differentiating the compactly supported smooth kernels under the integral shows that $f_\\epsilon$ is smooth, and their nonnegativity and unit integrals give $\\|f_\\epsilon\\|_\\infty\\le\\|f\\|_\\infty$. On their support, $d_{\\mathbb T^d}(x,y)\\le\\epsilon$ and $|v-w|\\le\\epsilon$, so $\\|f_\\epsilon-f\\|_\\infty\\le2\\epsilon\\operatorname{Lip}(f)$. For each $R>0$, $\\chi_R(v)f_\\epsilon(x,v)$ is in $C_c^\\infty(Z)$, so its integrals agree by the hypothesis. Let $R\\to\\infty$ and apply [F3] to each probability measure; then let $\\epsilon\\downarrow0$ and use uniform convergence. Thus $\\mu$ and $\\nu$ have equal integrals for every bounded Lipschitz $f$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $C\\subseteq Z$ is a nonempty closed set, distance to $C$ is 1-Lipschitz by the triangle inequality. Hence $h_n(z)=\\max(0,1-n d_Z(z,C))$ is bounded Lipschitz and decreases pointwise to $\\mathbf1_C$. Step 1.1 gives equal integrals of $h_n$, and [F3] gives $\\mu(C)=\\nu(C)$. The empty closed set has mass zero for both. Let $\\mathcal D:=\\{E\\in\\mathcal B(Z):\\mu(E)=\\nu(E)\\}$. Since $\\mu$ and $\\nu$ are probabilities, $Z\\in\\mathcal D$; equality of total mass makes $\\mathcal D$ closed under complements in $Z$, and countable additivity makes it closed under countable disjoint unions. Thus $\\mathcal D$ is a lambda-system. The $d_Z$ sum metric induces the product topology on $Z$, so its closed sets form a pi-system containing $Z$ and generating $\\mathcal B(Z)$. Apply [F4] to this pi-system and $\\mathcal D$ to get $\\mu=\\nu$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-31",
+        "notes": "Read both steps and exact cutoff, torus measure, DCT and pi-lambda statements. The scaled compact mollifier is positive and normalized, its periodization locally finite and representative-independent. Convolution approximates each bounded Lipschitz test uniformly within 2 epsilon Lip(f); velocity cutoff removal uses finite-measure domination and does not require a velocity moment. Closed-set distance tests decrease to indicators; empty closed sets and total mass are handled before applying pi-lambda. No unresolved mathematical defect; explicit measures in reader repair are sound."
+      }
+    }
+  }
+}

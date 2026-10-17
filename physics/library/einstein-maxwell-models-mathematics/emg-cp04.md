@@ -1,0 +1,21 @@
+---
+page: emg-cp04
+title: Trivial-potential classical charged scalar system
+status: draft
+library: mathematics
+requires:
+  - emg-cp02
+  - emg-mg04
+items:
+  - def-emg-trivial-potential-charged-scalar-system
+  - def-emg-classical-charged-scalar-finite-regularity-system
+  - lem-emg-classical-charged-scalar-compact-variation
+  - lem-emg-temporal-scalar-positive-symmetric-reduction
+  - lem-emg-charged-scalar-subsidiary-chain
+  - thm-emg-local-classical-charged-scalar-development
+examples: []
+---
+
+## Scope
+
+This page defines the classical charged complex scalar equations in the global real-potential sector and fixes the SI component dimensions and sourced-current sign. Its local classical extension explicitly admits a $C^3$ Lorentzian metric and global $C^2$ potential/scalar fields on a smooth Hausdorff, second-countable manifold. It defines relative total actions by continuous compact densities and proves their compact first variations and exchange identities without assuming smooth physical fields. It derives the temporal-gauge scalar principal block, propagates the magnetic residual using the normal Maxwell evolution, recovers the potential and scalar compatibility, derives current conservation, then propagates the electric residual, cancels the stress exchanges, and propagates the harmonic Einstein gauge. The periodic local-development theorem states its complete Sobolev data, compact admissibility conditions, regularity, and the general smooth local clause. The finite-Sobolev branch uses $h,\varphi_0\in H^{s+1}$ and the remaining complete data in $H^s$ for integer $s\ge5$; smooth data persist on the same local interval. Smooth geometric comparison fixes temporal matter gauge after the wave-coordinate change and before reduced-system uniqueness, and the final equivalence uses a single real gauge function near the initial surface. The scope remains a trivial real-potential sector with exact magnetic two-form, smooth $V$ on the attained scalar range, and local evolution; it makes no quantum, empirical, nontrivial-bundle, singular-source, or global-existence claim.

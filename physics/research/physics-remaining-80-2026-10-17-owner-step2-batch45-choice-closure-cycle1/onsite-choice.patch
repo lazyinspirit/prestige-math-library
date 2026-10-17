@@ -1,0 +1,103 @@
+--- before/items/pthm-qsm-onsite-interacting-atoms.md
++++ after/items/pthm-qsm-onsite-interacting-atoms.md
+@@ -8,6 +8,7 @@
+ library: physics
+ dependency_level: 4
+ deps:
++  - def-countable-choice
+   - post-qsm-models-statistics-and-preparation
+   - lem-qsm-models-diagonal-occupation-trace
+   - lem-qsm-fock-occupation-basis-and-car-relations
+@@ -27,6 +28,7 @@
+   - thm-cauchy-schwarz-in-an-inner-product-space
+   - thm-chain-rule
+ dependency_roles:
++  def-countable-choice: mathematical-premise
+   post-qsm-models-statistics-and-preparation: physical-assumption
+   lem-qsm-models-diagonal-occupation-trace: mathematical-premise
+   lem-qsm-fock-occupation-basis-and-car-relations: mathematical-premise
+@@ -61,6 +63,8 @@
+ 
+ ## Statement
+ 
++Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the occupation-space and diagonal-domain supplier uses below.
++
+ **Repulsive single-mode Bose site.** Let $\mathcal H_B=\ell^2(\mathbb N_0)$ with orthonormal occupation basis $|n\rangle$, supplied by the one-mode specialization of [[lem-qsm-fock-occupation-basis-and-car-relations]]. Put $E_B(n):=\epsilon n+\frac U2n(n-1)$, where $\epsilon,\mu\in\mathbb R$ and $U>0$ are in joules. Define $H_B$ and $N_B$ as real diagonal multipliers $H_B|n\rangle=E_B(n)|n\rangle$ and $N_B|n\rangle=n|n\rangle$ on their maximal domains
+ $$D(H_B)=\left\{c\in\ell^2:\sum_{n\ge0}E_B(n)^2|c_n|^2<\infty\right\},\qquad D(N_B)=\left\{c\in\ell^2:\sum_{n\ge0}n^2|c_n|^2<\infty\right\}.$$
+ For $\beta>0$ in J$^{-1}$, define $K_B$ directly as the real diagonal multiplier with eigenvalues
+@@ -81,15 +85,17 @@
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** The Hilbert spaces, occupation bases, Hamiltonians, and parameter restrictions in the Statement. Occupation numbers are dimensionless, $k_B>0$ is in J K$^{-1}$, and the entropy has units J K$^{-1}$.
++**Given:** $\mathrm{AC}_\omega$, the Hilbert spaces, occupation bases, Hamiltonians, and parameter restrictions in the Statement. Occupation numbers are dimensionless, $k_B>0$ is in J K$^{-1}$, and the entropy has units J K$^{-1}$.
+ 
+ [A1] [[post-qsm-models-statistics-and-preparation]]: Bose or Fermi sector assignment is a separate physical assumption; the normalized grand Gibbs state is adopted only when its trace is finite and positive.
+ 
+ [A2] Use counting measure on $\mathbb N_0$ for the Bose sums and counting measure on the four occupation states for the finite Fermi sums.
+ 
++[A3] [[def-countable-choice]]: every at most countable family of nonempty sets has a choice function. This is the exact mathematical premise retained from the occupation-space and real diagonal-domain suppliers; no full Axiom of Choice is assumed.
++
+ [F1] [[lem-qsm-fock-occupation-basis-and-car-relations]]: for a one-element mode set, the bosonic finite-support configuration set is $\mathbb N_0$ and its occupation vectors form a complete orthonormal basis; the fermionic two-mode occupation configurations form the four-dimensional basis used here.
+ 
+-[F2] [[lem-qsm-models-diagonal-occupation-trace]]: real diagonal multipliers $H,N,K_\mu$ are self-adjoint on their exact maximal domains $\sum_mE(m)^2|c_m|^2<\infty$, $\sum_m|m|^2|c_m|^2<\infty$, and $\sum_m|E(m)-\mu|m||^2|c_m|^2<\infty$, respectively; the product trace formula there applies only to additive free-mode energies and is not used for the nonlinear Bose term.
++[F2] [[lem-qsm-models-diagonal-occupation-trace]]: under $\mathrm{AC}_\omega$, real diagonal multipliers $H,N,K_\mu$ are self-adjoint on their exact maximal domains $\sum_mE(m)^2|c_m|^2<\infty$, $\sum_m|m|^2|c_m|^2<\infty$, and $\sum_m|E(m)-\mu|m||^2|c_m|^2<\infty$, respectively; the product trace formula there applies only to additive free-mode energies and is not used for the nonlinear Bose term.
+ 
+ [F3] [[post-qsm-models-statistics-and-preparation]]: when the actual trace is positive and finite, the adopted grand state is $\rho=\Xi^{-1}e^{-\beta(H-\mu N)}$ and the model entropy is $S=-k_B\operatorname{tr}(\rho\log\rho)$ where defined.
+ 
+@@ -113,15 +119,15 @@
+ 
+ ## Proof
+ 
+-1.1 The one-mode case of [F1] identifies the number basis with the standard basis of $\ell^2(\mathbb N_0)$, whose finite-support span is dense. For any real diagonal multiplier with entries $\lambda_n$, testing the adjoint identity on each basis vector forces the adjoint image to have coordinates $\lambda_nc_n$, so its adjoint domain is contained in $\{c:\sum_n\lambda_n^2|c_n|^2<\infty\}$. Conversely, on that weighted domain [F11] makes the pairing bounded and identifies the adjoint action with the same multiplier. Thus its maximal diagonal domain is self-adjoint. Applying this calculation to $E_B(n)$, $n$, and $K_B(n)$ establishes the three domains in the Statement. [given, F1, F2, F11, algebra]
++1.1 The one-mode case of [F1] identifies the number basis with the standard basis of $\ell^2(\mathbb N_0)$, whose finite-support span is dense. For any real diagonal multiplier with entries $\lambda_n$, testing the adjoint identity on each basis vector forces the adjoint image to have coordinates $\lambda_nc_n$, so its adjoint domain is contained in $\{c:\sum_n\lambda_n^2|c_n|^2<\infty\}$. Conversely, on that weighted domain [F11] makes the pairing bounded and identifies the adjoint action with the same multiplier. Thus its maximal diagonal domain is self-adjoint. Applying this calculation to $E_B(n)$, $n$, and $K_B(n)$ establishes the three domains in the Statement. [given, A3, F1, F2, F11, algebra]
+ 
+ 1.2 Consecutive Bose grand energies on the number basis [F1] satisfy $K_B(n+1)-K_B(n)=\epsilon-\mu+Un$, a strictly increasing affine sequence in $n$. It is positive at every $n\ge0$ when $\mu<\epsilon$, so $0$ uniquely minimizes. For $r\ge1$, it is negative through $n=r-1$ and positive from $n=r$ exactly when $\epsilon+U(r-1)<\mu<\epsilon+Ur$, so $r$ uniquely minimizes. At $\mu=\epsilon+Ur$, the increment at $n=r$ is zero while all earlier increments are negative and all later increments positive; exactly $r,r+1$ minimize. [given, F1, algebra]
+ 
+ 1.3 The four Fermi basis states have grand energies $0$, $\epsilon-\mu-h$, $\epsilon-\mu+h$, and $2(\epsilon-\mu)+U$, respectively. Summing their four positive weights gives the displayed $\Xi_F$, and summing $n_\uparrow+n_\downarrow$ or $n_\uparrow n_\downarrow$ against those weights gives the stated mean and double-occupation probability. The state is well-defined because this is a finite positive sum, as required by [A1] and [F3]. [given, A1, F1, F3, algebra]
+ 
+-1.4 For fixed real $a$ and $n\ge0$, completing the square gives $|a|n\le Un^2/4+a^2/U$. Hence, for $P_a(n)=Un^2/2+an$, $Un^2/4\le|P_a(n)|+a^2/U$, so $n^2\le(4/U)|P_a(n)|+4a^2/U^2$. Since $|P_a(n)|\le1+P_a(n)^2$, this bound shows that the maximal diagonal domain associated with either quadratic sequence $E_B(n)$ or $K_B(n)$ is contained in $D(N_B)$. On $D(H_B)$, $K_Bc=H_Bc-\mu N_Bc$ is square-summable, so $D(H_B)\subseteq D(K_B)$; on $D(K_B)$, $H_Bc=K_Bc+\mu N_Bc$ is square-summable, so $D(K_B)\subseteq D(H_B)$. Thus $D(H_B)=D(K_B)\subseteq D(N_B)$, and the operator sum $H_B-\mu N_B$, whose domain is $D(H_B)\cap D(N_B)$, equals $K_B$ on its maximal domain. [given, A1, F2, step 1.1, algebra]
++1.4 For fixed real $a$ and $n\ge0$, completing the square gives $|a|n\le Un^2/4+a^2/U$. Hence, for $P_a(n)=Un^2/2+an$, $Un^2/4\le|P_a(n)|+a^2/U$, so $n^2\le(4/U)|P_a(n)|+4a^2/U^2$. Since $|P_a(n)|\le1+P_a(n)^2$, this bound shows that the maximal diagonal domain associated with either quadratic sequence $E_B(n)$ or $K_B(n)$ is contained in $D(N_B)$. On $D(H_B)$, $K_Bc=H_Bc-\mu N_Bc$ is square-summable, so $D(H_B)\subseteq D(K_B)$; on $D(K_B)$, $H_Bc=K_Bc+\mu N_Bc$ is square-summable, so $D(K_B)\subseteq D(H_B)$. Thus $D(H_B)=D(K_B)\subseteq D(N_B)$, and the operator sum $H_B-\mu N_B$, whose domain is $D(H_B)\cap D(N_B)$, equals $K_B$ on its maximal domain. [given, A1, A3, F2, step 1.1, algebra]
+ 
+-2.1 Put $a=\epsilon-\mu-U/2$. Completing the square gives $K_B(n)=\frac U4n^2+\frac U4(n+2a/U)^2-a^2/U\ge\frac U4n^2-a^2/U$. For $n\ge1$, $n^2\ge n$, so $e^{-\beta K_B(n)}\le e^{\beta a^2/U}q^n$ with $q=e^{-\beta U/4}$. Since $\beta U/4>0$, [F5] gives $0<q<1$, and [F6] makes the geometric upper bound summable. The $n=0$ term is $1$, so $0<\Xi_B<\infty$ and [A1], [F3] give a well-defined normalized grand state for the exact operator $H_B-\mu N_B=K_B$ from step 1.4. The free-mode product trace formula in [F2] is not used. [given, A1, F2, F3, F5, F6, step 1.1, step 1.4, algebra]
++2.1 Put $a=\epsilon-\mu-U/2$. Completing the square gives $K_B(n)=\frac U4n^2+\frac U4(n+2a/U)^2-a^2/U\ge\frac U4n^2-a^2/U$. For $n\ge1$, $n^2\ge n$, so $e^{-\beta K_B(n)}\le e^{\beta a^2/U}q^n$ with $q=e^{-\beta U/4}$. Since $\beta U/4>0$, [F5] gives $0<q<1$, and [F6] makes the geometric upper bound summable. The $n=0$ term is $1$, so $0<\Xi_B<\infty$ and [A1], [F3] give a well-defined normalized grand state for the exact operator $H_B-\mu N_B=K_B$ from step 1.4. The free-mode product trace formula in [F2] is not used. [given, A1, A3, F2, F3, F5, F6, step 1.1, step 1.4, algebra]
+ 
+ 2.2 In a strict interval with unique minimizer $r$, let $\delta$ be the smaller positive adjacent energy gap from $r$ (use only the upward gap when $r=0$). For $n>r$, the gap is a sum of increments from step 1.2, each at least the upward gap at $r$; for $n<r$, it is a sum of reversed increments, each at least the downward gap from $r-1$. Hence $K_B(n)-K_B(r)\ge\delta|n-r|$. The total relative excited weight is therefore at most $2\sum_{\ell\ge1}e^{-\beta\delta\ell}=2e^{-\beta\delta}/(1-e^{-\beta\delta})$, which tends to zero. At a boundary $\mu=\epsilon+Ur$, the increments are $K_B(n+1)-K_B(n)=U(n-r)$, so exactly $r,r+1$ minimize. To the right, $K_B(r+1+\ell)-K_B(r+1)=U(1+\cdots+\ell)\ge U\ell$; to the left, $K_B(r-\ell)-K_B(r)=U(1+\cdots+\ell)\ge U\ell$ whenever $r\ge\ell$. Thus the total relative excited weight is at most $2\sum_{\ell\ge1}e^{-\beta U\ell}=2e^{-\beta U}/(1-e^{-\beta U})$. The normalized Gibbs probabilities from [F3] therefore concentrate on the unique number state in a strict interval, or tend to $1/2,1/2$ on the adjacent pair at a boundary. [given, F3, step 1.2, F5, F6, algebra]
+ 
+--- before/items/ex-qsm-onsite-interacting-atoms.md
++++ after/items/ex-qsm-onsite-interacting-atoms.md
+@@ -8,8 +8,10 @@
+ library: physics
+ dependency_level: 5
+ deps:
++  - def-countable-choice
+   - pthm-qsm-onsite-interacting-atoms
+ dependency_roles:
++  def-countable-choice: mathematical-premise
+   pthm-qsm-onsite-interacting-atoms: physical-result
+ physical_scope: "A symmetric-parameter instance of the finite Fermi atom and a single Bose zero-temperature boundary in the isolated onsite models. No lattice or material-specific conclusion is drawn."
+ empirical_premises: []
+@@ -25,16 +27,20 @@
+ 
+ ## Example
+ 
++Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the inherited Bose occupation-space construction.
++
+ For the Fermi atom of [[pthm-qsm-onsite-interacting-atoms]], set $h=0$, $\mu=\epsilon$, and $U>0$. Then $\Xi_F=3+e^{-\beta U}$ and $\operatorname{Cov}(n_\uparrow,n_\downarrow)=(e^{-\beta U}-1)/(3+e^{-\beta U})^2<0$. For the Bose site, set $\mu=\epsilon+U$ with $U>0$; the two zero-temperature minimizing occupations are $1$ and $2$, each with limiting Gibbs probability $1/2$, and the entropy tends to $k_B\log2$.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** $\beta>0$, $U>0$, and the two exact onsite model statements.
++**Given:** $\mathrm{AC}_\omega$, $\beta>0$, $U>0$, and the two exact onsite model statements.
++
++[A1] [[def-countable-choice]]: every at most countable family of nonempty sets has a choice function; the Bose conclusion retains this premise from the theorem.
+ 
+ [F1] [[pthm-qsm-onsite-interacting-atoms]]: at $h=0$, $\mu=\epsilon$, the Fermi covariance has the displayed formula; for the Bose site the boundary $\mu=\epsilon+Ur$ has exactly the adjacent minimizing occupations $r,r+1$ with equal zero-temperature limiting probabilities.
+ 
+ ## Verification
+ 
+-1.1 Substituting $h=0$ and $\mu=\epsilon$ into the Fermi weights gives $w_\uparrow=w_\downarrow=1$, $w_2=e^{-\beta U}$, and $\Xi_F=3+e^{-\beta U}$. Since $U,\beta>0$, $e^{-\beta U}<1$, so [F1] gives the strictly negative covariance stated in the Example. [given, F1, algebra]
++1.1 Substituting $h=0$ and $\mu=\epsilon$ into the Fermi weights gives $w_\uparrow=w_\downarrow=1$, $w_2=e^{-\beta U}$, and $\Xi_F=3+e^{-\beta U}$. Since $U,\beta>0$, $e^{-\beta U}<1$, so [F1] gives the strictly negative covariance stated in the Example. [given, A1, F1, algebra]
+ 
+-2.1 In the Bose result of [F1], set $r=1$ and $\mu=\epsilon+U$. The adjacent minimizing occupations are $1,2$, their limiting probabilities are $1/2,1/2$, and the binary entropy is $-k_B(2)(1/2)\log(1/2)=k_B\log2$. [given, F1, algebra] ∎
++2.1 In the Bose result of [F1], set $r=1$ and $\mu=\epsilon+U$. The adjacent minimizing occupations are $1,2$, their limiting probabilities are $1/2,1/2$, and the binary entropy is $-k_B(2)(1/2)\log(1/2)=k_B\log2$. [given, A1, F1, algebra] ∎

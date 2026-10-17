@@ -1,0 +1,279 @@
+---
+id: lem-emg-maxwell-action-variation
+kind: lemma
+title: "Compact potential and metric variation of the Maxwell action"
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+physical_scope: null
+dependency_level: 2
+deps:
+  - def-countable-choice
+  - def-emg-lorentzian-forms
+  - def-emg-local-potentials-and-circle-data
+  - def-multidimensional-darboux-integral
+  - def-multidimensional-darboux-sums
+  - lem-emg-circle-connection-gluing
+  - lem-emg-lorentz-hodge-calculus
+  - lem-emg-maxwell-current-forms
+  - lem-gr-metric-divergence-and-density-formula
+  - thm-continuous-on-a-rectangle-is-riemann-integrable
+  - thm-gr-compact-metric-and-timelike-curve-variation
+  - thm-ftc-second-part
+  - thm-riemann-fubini-on-product-rectangles
+dependency_roles:
+  def-countable-choice: mathematical-premise
+  def-emg-lorentzian-forms: mathematical-premise
+  def-emg-local-potentials-and-circle-data: mathematical-premise
+  def-multidimensional-darboux-integral: mathematical-premise
+  def-multidimensional-darboux-sums: mathematical-premise
+  lem-emg-circle-connection-gluing: mathematical-premise
+  lem-emg-lorentz-hodge-calculus: mathematical-premise
+  lem-emg-maxwell-current-forms: mathematical-premise
+  lem-gr-metric-divergence-and-density-formula: mathematical-premise
+  thm-continuous-on-a-rectangle-is-riemann-integrable: mathematical-premise
+  thm-gr-compact-metric-and-timelike-curve-variation: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
+  thm-riemann-fubini-on-product-rectangles: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "David Tong, General Relativity, Cambridge Part III lecture notes, section 3.2.5 and section 4.5.3"
+      url: "https://www.damtp.cam.ac.uk/user/tong/gr/grhtml/S3.html"
+      locator: "Section 3.2.5, equations (3.114)–(3.115), Maxwell action, source variation and charge flux; §4.5.3, metric variation of the Maxwell action and its stress tensor."
+    - title: "Sean M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1"
+      url: "https://arxiv.org/pdf/gr-qc/9712019"
+      locator: "Chapter 1, field-strength and stress conventions, equations (1.73)–(1.78) and (1.111), printed pp. 20–24 and 30 (PDF pp. 26–30 and 36); chapter 7, Einstein–Maxwell stress and source-free equations (7.107)–(7.109), printed pp. 201–202 (PDF pp. 207–208)."
+---
+
+## Statement
+
+Let $(M,g,N,o)$ be the smooth, boundaryless, oriented and time-oriented
+Lorentzian four-manifold of [[def-emg-lorentzian-forms]], with the metric
+volume form $\mathrm{vol}_g$ and metric-selected connection $\nabla$. Let
+$F\in\Omega^2(M)$ be a smooth real two-form and let $c,\mu_0>0$ be fixed
+real coefficients. The action density is
+
+$$\mathcal L_{\mathrm{EM}}\,\mathrm{vol}_g=-\frac{1}{4\mu_0c}F_{ab}F^{ab}\,\mathrm{vol}_g=-\frac{1}{2\mu_0c}F\wedge\star_gF.$$
+
+When this density has a global integral, denote it by $S_{\mathrm{EM}}[g,F]$.
+On a noncompact domain, every displayed variation below means the finite
+action difference supported by the compactly supported variation.
+
+Assume the fixed smooth bundle sector and connection-variation interface in
+[A1] below. Then:
+
+**(a) Connection variation.** For every smooth compactly supported global
+one-form $\alpha$ allowed by that fixed-sector interface and supported in a
+single chart whose image contains its support in a coordinate rectangle,
+holding $g$ fixed gives $\delta F=d\alpha$ and
+
+$$\delta_A S_{\mathrm{EM}}[\alpha]=\frac{1}{\mu_0c}\int_M(\nabla_aF^{ab})\alpha_b\,\mathrm{vol}_g.$$
+
+If a differentiable source-sector functional on the same variations satisfies
+$\delta_A S_{\mathrm{m}}[\alpha]=c^{-1}\int_Mj^b\alpha_b\,\mathrm{vol}_g$ for a
+smooth vector field $j$, then stationarity of
+$S_{\mathrm{EM}}+S_{\mathrm m}$ under every such $\alpha$ is equivalent, on
+each coordinate domain, to
+
+$$\nabla_aF^{ab}=-\mu_0j^b,$$
+
+and hence to $d(\star_gF)=\mu_0\iota_j\mathrm{vol}_g$ by
+[[lem-emg-maxwell-current-forms]]. This is a conditional variational
+calculation; it asserts no matter-action existence or physical adoption.
+
+**(b) Metric variation.** For a smooth compactly supported symmetric inverse
+metric variation $q^{ab}:=\delta g^{ab}$, holding the lower components
+$F_{ab}$ fixed and preserving Lorentz signature for sufficiently small
+parameter, define $T_{\mathrm{EM},ab}$ by
+
+$$\delta_gS_{\mathrm{EM}}[q]=-\frac{1}{2c}\int_M T_{\mathrm{EM},ab}q^{ab}\,\mathrm{vol}_g.$$
+
+Then
+
+$$T_{\mathrm{EM},ab}=\frac{1}{\mu_0}\left(F_{ac}F_b{}^c-\frac14g_{ab}F_{cd}F^{cd}\right).$$
+
+This is the tensor obtained by varying the free electromagnetic action; it
+contains no stress contribution from a source or matter functional.
+
+## Facts & Assumptions
+
+**Given:** The smooth oriented Lorentzian geometry, the smooth two-form $F$,
+the positive constants $c,\mu_0$, compactly supported variation directions,
+and the explicit conditional source-variation hypothesis in the Statement.
+
+[F1] [[def-emg-lorentzian-forms]] fixes the boundaryless oriented,
+time-oriented Lorentzian four-manifold, metric volume form, metric-selected
+connection and length-coordinate scale $c$. The orientation is independent
+of the metric and time orientation.
+
+[F2] [[lem-emg-lorentz-hodge-calculus]] gives
+$F\wedge\star_gF=\frac12F_{ab}F^{ab}\mathrm{vol}_g$ for a two-form in the
+stated signature and orientation.
+
+[F3] For a smooth metric family with compact support, every prescribed smooth
+symmetric inverse-metric direction $q^{ab}$ is realizable on a sufficiently
+small parameter interval, and
+$\delta\mathrm{vol}_g=-\frac12g_{ab}q^{ab}\mathrm{vol}_g$
+([[thm-gr-compact-metric-and-timelike-curve-variation]], clauses (a) and (d)).
+Its compact-support chart-integral argument in Facts & Assumptions [L8]
+also shows that a smooth compactly supported coordinate divergence integrates
+to zero by the fundamental theorem of calculus and Fubini.
+
+[F4] In any chart,
+$\nabla_aW^a=w^{-1}\partial_a(wW^a)$ for a smooth vector field $W$,
+where $w=\sqrt{|\det g|}$
+([[lem-gr-metric-divergence-and-density-formula]], clause (c)).
+Thus for compactly supported $W$ the coordinate divergence term vanishes
+under the chart integration convention in [F3].
+
+[F5] The geometric suppliers inherit $\mathrm{AC}_\omega$, whose exact
+statement is that every countable family of nonempty sets has a choice
+function ([[def-countable-choice]]). The local variational calculation uses
+no additional choice.
+
+[F6] [[lem-emg-maxwell-current-forms]] proves the exact sign equivalence
+$\nabla_aF^{ab}=-\mu_0j^b\Longleftrightarrow
+d(\star_gF)=\mu_0\iota_j\mathrm{vol}_g$ for smooth $F,j$ and $\mu_0>0$.
+
+[F7] A bounded function on a closed nondegenerate rectangle is Riemann
+integrable when its lower and upper Darboux integrals agree; the integral is
+their common value. The lower and upper sums are the cell infima/suprema
+multiplied by cell volumes ([[def-multidimensional-darboux-integral]],
+[[def-multidimensional-darboux-sums]]).
+
+[F8] Every continuous real function on a closed nondegenerate rectangle in
+$\mathbb R^m$ is Riemann integrable
+([[thm-continuous-on-a-rectangle-is-riemann-integrable]]).
+
+[F9] For a Riemann-integrable function on a product rectangle, its iterated
+integrals in either coordinate order exist and equal its multiple integral,
+provided the sections in that order are integrable; for continuous
+coefficients they are integrable ([[thm-riemann-fubini-on-product-rectangles]]).
+
+[F10] If $G$ is differentiable at every point of a closed interval and
+$f=G'$ is integrable there, then $\int_a^b f=G(b)-G(a)$
+([[thm-ftc-second-part]]).
+
+[F11] A lower Darboux sum on a rectangle is the finite sum of the infimum on
+each cell multiplied by that cell's nonnegative volume
+([[def-multidimensional-darboux-sums]]). In particular, if a continuous
+function is at least $\eta>0$ on a nondegenerate rectangle $R$, its one-cell
+lower sum is at least $\eta\operatorname{vol}(R)>0$, so its integral is
+positive by [F7]–[F8].
+
+[A1] The current batch-2 carriers
+[[def-emg-local-potentials-and-circle-data]] and
+[[lem-emg-circle-connection-gluing]] exist, and their inspected interface
+matches the use here: $F=\kappa_0 f$ is the physical curvature two-form of a
+normalized connection on a fixed principal $U(1)$ bundle, given by a supplied
+countable open cover, smooth transition cocycle and compatible local forms;
+the gluing lemma states that two connections with the same transitions differ
+by a global smooth base one-form, so a compactly supported global physical
+one-form $\alpha$ is an allowed variation and $\delta F=d\alpha$. The
+normalization $\kappa_0>0$ rescales the circle connection and is not identified
+with $\hbar$ or an electric charge. Both carriers are currently draft; the
+gluing construction now uses the actual set-size definition authored on emg-mg02, together with the other six typed foundational conventions on that page. The fixed-sector variation interface is unchanged. These authored drafts do not assert independent acceptance, and the inherited Lorentzian geometry chain still reaches an imported geodesic definition with a remark premise; readiness remains subject to that external owner resolution.
+
+
+[A2] For the matter-coupled Euler–Lagrange clause, the smooth source $j$ is
+hypothesized to satisfy
+$\delta_A S_{\mathrm m}[\alpha]=c^{-1}\int_Mj^b\alpha_b\,\mathrm{vol}_g$
+for every admissible compactly supported $\alpha$. This is a conditional
+first-variation premise, not a claim that a global source functional exists.
+
+[A3] Stationarity means that the first variation of the total action vanishes
+for every admissible compactly supported connection variation. No matter
+equation, empirical premise or adopted physical field postulate is assumed.
+
+## Proof
+
+**Given:** Facts [F1]–[F11], the conditional fixed-sector interface [A1], the
+source-variation hypothesis [A2] when used, and compactly supported metric
+directions.
+
+1.1 For a connection variation in [A1], $\delta F=d\alpha$; in components
+$\delta F_{ab}=2\nabla_{[a}\alpha_{b]}$ because the Levi-Civita Christoffel
+symbols are symmetric in their lower indices. Holding $g$ fixed gives
+$\delta(F_{ab}F^{ab})=2F^{ab}\delta F_{ab}
+=4F^{ab}\nabla_a\alpha_b$. Differentiating the coefficient in the action
+therefore yields
+$\delta_A S_{\mathrm{EM}}=-(\mu_0c)^{-1}\int_MF^{ab}\nabla_a\alpha_b\,\mathrm{vol}_g$.
+[given, A1, F1, algebra]
+
+1.2 Let $q^{ab}=\delta g^{ab}$ and hold $F_{ab}$ fixed. From
+$F_{cd}F^{cd}=g^{ca}g^{db}F_{cd}F_{ab}$, symmetry of $q$ and antisymmetry
+of $F$ give
+$\delta(F_{cd}F^{cd})=2F_{ac}F_b{}^c q^{ab}$. The volume variation in [F3]
+then gives
+$$\delta_g(F_{cd}F^{cd}\mathrm{vol}_g)=\left(2F_{ac}F_b{}^c-\frac12g_{ab}F_{cd}F^{cd}\right)q^{ab}\mathrm{vol}_g.$$
+By [F2], this is the variation of the same action density as its wedge-form
+representative.
+Multiplying by $-1/(4\mu_0c)$ and comparing with the definition in part (b)
+gives the displayed $T_{\mathrm{EM},ab}$. The variation is local and
+compactly supported, so no boundary term is discarded. [given, F1, F2, F3, algebra]
+
+2.1 Set $W^a:=F^{ab}\alpha_b$. The product rule gives
+$\nabla_aW^a=(\nabla_aF^{ab})\alpha_b+F^{ab}\nabla_a\alpha_b$.
+Choose a closed nondegenerate coordinate rectangle $Q$ containing the compact
+support in its interior, and set $f^a=wW^a$ on that rectangle, extending it
+by zero outside the support. The compact interior support makes each extended
+$f^a$ smooth and zero near every face of $Q$. By [F8] and [F7], both $f^a$
+and its continuous partial derivative $\partial_af^a$ are integrable.
+Applying [F9] to the product split of coordinate $a$ and the other three
+coordinates, then [F10] on each $a$-coordinate slice, gives
+$\int_Q\partial_af^a\,d^4x=\int_{Q_{\ne a}}\bigl(f^a(\ldots,u_a,\ldots)-f^a(\ldots,\ell_a,\ldots)\bigr)\,d^3x=0,$
+because both endpoint values vanish. Summing this four-term identity and using
+[F4], $\int_Q(\nabla_aW^a)\,\mathrm{vol}_g=\int_Q\partial_af^a\,d^4x=0$.
+Substitution into step 1.1 gives
+$\delta_A S_{\mathrm{EM}}=(\mu_0c)^{-1}\int_M(\nabla_aF^{ab})\alpha_b\,\mathrm{vol}_g$,
+proving the connection-variation formula. [given, F4, F7, F8, F9, F10, step 1.1, algebra]
+
+3.1 Adding [A2] to step 2.1 gives
+$\delta_A(S_{\mathrm{EM}}+S_{\mathrm m})[\alpha]
+=(\mu_0c)^{-1}\int_M(\nabla_aF^{ab}+\mu_0j^b)\alpha_b\,\mathrm{vol}_g$.
+If $\nabla_aF^{ab}+\mu_0j^b=0$, this integral vanishes for every allowed
+$\alpha$. Conversely, if it vanishes for every smooth compactly supported
+one-form supported in one chart rectangle, fix a point and suppose a component
+$K^{b_0}:=\nabla_aF^{ab_0}+\mu_0j^{b_0}$ is nonzero there. By continuity,
+shrink to a coordinate ball with compact closure where $K^{b_0}$ has one
+strict sign and $w>0$. In coordinates centered at that point define
+$\phi(x)=\exp(-1/(r^2-|x|^2))$ for $|x|<r$ and $\phi(x)=0$ for $|x|\ge r$.
+Every derivative approaching $|x|=r$ is a finite sum of a polynomial in
+$1/(r^2-|x|^2)$ times the same exponential, and
+$s^{-m}e^{-1/s}\to0$ as $s\downarrow0$ for every $m\ge0$; hence $\phi$ is a
+smooth nonnegative compactly supported function, positive inside the ball.
+Set $\alpha=\phi\,dx^{b_0}$ in the chart and extend it by zero outside the
+compact support; this gives an admissible global one-form in [A1]. The bump
+and rectangle are explicitly constructed, so the ambient convention [F5]
+introduces no arbitrary choice. The product $K^{b_0}\phi w$ is continuous and
+supported in a compact rectangle containing the bump support, so [F8] makes
+its full integral well-defined. At the center,
+$|K^{b_0}\phi w|>0$; continuity gives a smaller closed nondegenerate
+rectangle $R$ on which this coefficient has one strict sign and absolute
+value at least some $\eta>0$. By [F8] it is Riemann integrable there. Applying
+[F11] to its sign-adjusted coefficient shows that the absolute value of the
+integral over $R$ is at least $\eta\operatorname{vol}(R)>0$. On the entire
+bump support the product has the same sign, since $K^{b_0}$ has one sign on
+the ball and $\phi,w$ are nonnegative; therefore its full integral over the
+support cannot vanish. This contradicts the assumed stationarity integral.
+Thus every component $K^b$ vanishes at every point. This proves the stated
+local-stationarity equivalence under [A2]–[A3].
+[given, A2, A3, F1, F5, F8, F11, step 2.1, construct, algebra]
+
+4.1 When the Euler–Lagrange equation in step 3.1 holds, apply [F6] to obtain
+$d(\star_gF)=\mu_0\iota_j\mathrm{vol}_g$. This uses the conditional current
+interface of [A1] and the exact current-sign identity proved in the earlier
+item; it adds no global potential or matter-action claim. [given, A1, F6, step 3.1] ∎
+
+## Remarks
+
+The fixed-bundle variation is the exact conditional scope of [A1]. A globally
+defined potential is not assumed; only the difference of connections in one
+fixed sector is used. The source action and its variation are also conditional.
+The free-field metric variation does not include the stress tensor of any
+source or matter sector.

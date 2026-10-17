@@ -1,0 +1,455 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-csm-relative-gibbs-variational-principle",
+    "ex-csm-finite-mixing-count",
+    "pthm-csm-ensemble-potentials"
+  ],
+  "contracts": {
+    "thm-csm-relative-gibbs-variational-principle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-statistical-state-observable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Gamma_N,\\mathcal F_N,m_N)$ be a sigma-finite phase-reference measure\nspace from [[def-csm-phase-space-reference]]; the cotangent construction uses\nthe stated Axiom of Countable Choice\n([[def-countable-choice]]). A **statistical state** is a probability measure\n$P$ on $(\\Gamma_N,\\mathcal F_N)$, meaning a countably additive measure with\n$P(\\Gamma_N)=1$ ([[def-measure]]). A **density** of $P$ relative to $m_N$ is a\nmeasurable $\\rho:\\Gamma_N\\to[0,\\infty]$ such that\n$$P(A)=\\int_A\\rho\\,dm_N\\quad(A\\in\\mathcal F_N),\\qquad \\int_{\\Gamma_N}\\rho\\,dm_N=1.$$\nEquivalently, $P=\\rho\\,m_N$ in the definition of a measure with density\n([[def-measure-with-density]]); integration against that density has the\nmeaning supplied by [[thm-integration-against-a-density]]. A state need not\nhave a density.\n\nAn **observable** is a real-valued measurable function\n$A:\\Gamma_N\\to\\mathbb R$ ([[def-extended-real-valued-measurable-function]]).\nIts expectation $\\langle A\\rangle_P:=\\int A\\,dP$ is used only when $A$ is\nintegrable, that is, $\\int|A|\\,dP<\\infty$\n([[def-integrable-real-and-complex-functions-and-their-integrals]]). Its\nvariance is\n$$\\operatorname{Var}_P(A):=\\int(A-\\langle A\\rangle_P)^2\\,dP$$\nwhen $A^2$ is integrable. For square-integrable $A,B$, their covariance is\n$$\\operatorname{Cov}_P(A,B):=\\int(A-\\langle A\\rangle_P)(B-\\langle B\\rangle_P)\\,dP.$$\nThese expressions are finite under the stated square-integrability\nhypotheses. Indeed, $P(\\Gamma_N)=1$ makes $1\\in L^2(P)$ with norm $1$.\nBy [[cor-cauchy-schwarz-inequality-for-l-two]],\n$\\int|A|\\,dP\\le(\\int A^2\\,dP)^{1/2}$, so the mean of a square-integrable\nobservable exists. If $a=\\langle A\\rangle_P$, then\n$|A-a|^2\\le2A^2+2a^2$ makes $A-a$ square-integrable; the same argument\napplies to $B-b$. A second application of that inequality gives\n$\\int|(A-a)(B-b)|\\,dP\\le\\|A-a\\|_2\\|B-b\\|_2<\\infty$.\nThus both the variance and covariance integrals above are well-defined.\n\nIf $P=\\rho m_N$ and the integrals are defined, these expectations equal\n$\\int A\\rho\\,dm_N$ by [[thm-integration-against-a-density]].\n\nA **macrostate map** is a measurable map\n$M:(\\Gamma_N,\\mathcal F_N)\\to(Y,\\mathcal G)$. Its induced state on $Y$ is\nthe pushforward $M_*P(B):=P(M^{-1}(B))$. The measure of a macrocell and an\nentropy assigned to that macrostate are additional constructions; they are\nnot identical to the expectation or variance of a microscopic observable.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $x>0$, set $h(x)=x-1-\\log x$. By [F1], $h'(x)=1-1/x$, which is negative for $0<x<1$ and positive for $x>1$; hence $h(x)\\ge h(1)=0$, with equality only at $x=1$. On $\\{p>0\\}$ put $x=q/p$ to obtain $p\\log(p/q)\\ge p-q$. The negative part of the left integrand is integrable: where $q>p$, writing $x=q/p>1$ gives $p\\log(q/p)=q(\\log x)/x\\le q$, since $h(x)\\ge0$ implies $\\log x\\le x-1$ and $(x-1)/x\\le1$. Therefore its integral is well-defined as an extended real number, and $$D(p\\Vert q)\\ge\\int_{\\{p>0\\}}(p-q)\\,dm =1-\\int_{\\{p>0\\}}q\\,dm\\ge0.$$",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $D=0$, both nonnegative gaps in the last inequalities vanish: $q$ has no mass on $\\{p=0\\}$, and $h(q/p)=0$ $p$-almost everywhere. The strict equality case in step 1.1 gives $q=p$ on $\\{p>0\\}$, hence $p=q$ almost everywhere. Conversely, if $p=q$ almost everywhere then the defining integrand is zero and $D=0$.",
+          "inputs": [
+            "A1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the Gibbs case, [F2] and [A2] give $\\log q=-\\beta H-\\log Z$ $p$-almost everywhere, so all terms below are integrable and $$D(p\\Vert q)=\\int p\\log p\\,dm+\\beta\\langle H\\rangle_p+\\log Z =\\beta\\left(\\langle H\\rangle_p+\\beta^{-1}\\int p\\log p\\,dm-F\\right).$$ Since $S[p]=-k\\int p\\log p\\,dm$ and $\\beta^{-1}=kT$, the middle term is $-TS[p]$. Nonnegativity and the equality condition follow from steps 1.1 and 2.1.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "If a density gives positive mass to $\\{q=0\\}$, its extended $D$ is $+\\infty$ by definition; otherwise step 1.1 applies after removal of null sets. Thus $\\mathcal F_{\\rm ext}\\ge F$ for every probability density. The density $q$ is allowed here without any energy or entropy integrability assumption: directly $D(q\\Vert q)=0$, so $\\mathcal F_{\\rm ext}[q]=F$. Step 2.1 gives uniqueness. Step 3.1 proves agreement with the original finite formula on $\\mathcal A$, without assigning any meaning to an undefined difference $+\\infty-\\infty$.",
+          "inputs": [
+            "A2",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Let $Q(B):=\\int_Bq\\,dm$. Positive finite $Z$ implies $H$ is finite $Q$-almost everywhere: $H=+\\infty$ has zero Gibbs weight, while $H=-\\infty$ can occur only on an $m$-null set, since its exponential weight is infinite. Set $A_n:=\\{|H|\\le n\\}$ and $c_n:=Q(A_n)$. Then $c_n\\uparrow1$. Indeed the disjoint sets $A_1,A_2\\setminus A_1,\\ldots$ cover the finite-energy set, so countable additivity of the probability measure $Q$ makes their partial sums $c_n$ converge to $1$. For every sufficiently large $n$, $c_n>0$ and $p_n:=q\\mathbf1_{A_n}/c_n$ is a probability density. On its support $|H|\\le n$ and $\\log p_n=-\\beta H-\\log Z-\\log c_n$ is bounded, so $p_n\\in\\mathcal A$. Moreover $p_n/q=1/c_n$ on that support, hence $$D(p_n\\Vert q)=-\\log c_n\\longrightarrow0.$$ The limit follows from the continuity of the logarithm at $1$ supplied by [F1]. Step 3.1 now gives finite free energies $F-\\beta^{-1}\\log c_n\\to F$, proving the stated infimum. Equality for any $p\\in\\mathcal A$ forces $p=q$ almost everywhere by step 2.1; consequently it is attained exactly when $q\\in\\mathcal A$, which is precisely the two stated integrability conditions.",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Probability normalization excludes an empty support for p."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: The density p may be zero off its support; the integral is explicitly restricted to {p>0}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement; proof steps 2.1 and 4.1: p=q gives D=0 and extended free energy F regardless of separate integrability. For the original finite class equality is attainable exactly when q is in that class, by step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement; proof steps 4.1 and 5.1: extended D is +infinity for positive p-mass where q=0. When q lacks finite energy/absolute entropy, extended free energy still has unique minimizer q, while the finite-class infimum F is not attained; normalized energy truncations approach it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement; proof step 5.1: H=+infinity has zero Gibbs mass and H=-infinity occurs only on an m-null set under finite Z. Finite-energy truncations have c_n increasing to one; terms on zero-density sets have the stated zero convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice premise occurs in the logarithm inequality proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement; proof steps 2.1 and 5.1: zero D forces p=q almost everywhere, so attainment in the finite class implies q has both finite integrability conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement; proof steps 2.1 and 5.1: if q has finite energy and absolute entropy then q belongs to the finite class and its zero D attains F."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-physics-planning-scope",
+        "notes": "Cycle 1 owner review of every current proof step and full declared source interfaces. Steps 1.1\u20132.1 retain the valid negative-part estimate and both equality directions. Step 3.1 retains the finite identity with explicitly finite energy and absolute entropy; F1 supplies log laws by the displayed derivative argument. Step 4.1 defines, rather than falsely identifies, extended relative free energy when separate integrals are undefined; q is always allowed and uniquely minimizes it. Step 5.1 proves q is finite-energy almost surely, c_n rises to one by countable additivity, normalized energy truncations have finite energy and bounded log density, and D=-log c_n tends to zero. Hence the original finite class has infimum F, attained exactly iff q has the two stated integrability properties. Native heavy-tail counterexample independently confirmed by t=log x: q dm=dt/t^2 on (1,infinity), H=t+2log t, so q energy and absolute entropy diverge; truncation D tends to zero without a finite-class minimizer. Both actual direct consumers were read in full: finite mixing has Gaussian finite moments/bounded positional factors; ensemble potentials assumes finite Gibbs energy and entropy explicitly. They use the preserved identity/equality case, not a false unrestricted finite-functional minimizer. Old709/current712 dependency, discharge and body-link closure has no further item consumers."
+      }
+    },
+    "ex-csm-finite-mixing-count": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-csm-counting-and-physical-observables",
+          "source_section": "Postulate",
+          "quote": "For a declared classical model with $N_a$ operationally indistinguishable\nparticles of each species $a$, label those particles by\n$\\{(a,i):1\\le i\\le N_a\\}$ on the auxiliary labelled cover, and let\n$S_{N_a}$ denote the permutation group of that species' finite label set.\nThe product group $G=\\prod_a S_{N_a}$ acts on the labelled phase space\n$\\Gamma_N=T^*Q_N$ by the cotangent lifts of within-species permutations. Let\n$\\Pi_N:\\Gamma_N\\to\\Gamma_N/G$ be its measurable orbit map from\n[[def-csm-phase-space-reference]]. Choose $a_0>0$ as a fixed primitive\nreference parameter with action units J s; [[def-cm01-units]] supplies its\ndimension, not its value or the choice of this parameter. Here $d$ is the\nnumber of spatial dimensions and $N=\\sum_aN_a$. No numerical value or\nidentification of $a_0$ with Planck's constant is imposed.\n\nUse the weighted labelled lift\n$$m_N^{\\mathrm{phys}}:=\\frac{1}{\\prod_aN_a!\\,a_0^{dN}}\\,d\\Lambda_N =\\frac{1}{\\prod_aN_a!\\,a_0^{dN}}\\,dq\\,dp$$\non $\\Gamma_N$, where $d\\Lambda_N$ is the Liouville density and the last\nexpression is its coordinate density in canonical charts, with coordinates\nread in SI numerical units. The coordinate volume $dq\\,dp$ has action\ndimension $(\\mathrm{J\\,s})^{dN}$, so the reference is dimensionless. The\nphysical quotient reference is\n$$\\bar m_N^{\\mathrm{phys}}(B):=m_N^{\\mathrm{phys}}(\\Pi_N^{-1}(B))\\qquad(B\\in\\mathcal F_{\\mathrm{quot}}).$$\nThus $m_N^{\\mathrm{phys}}$ is on the labelled cover $\\Gamma_N$, and\n$\\bar m_N^{\\mathrm{phys}}=(\\Pi_N)_*m_N^{\\mathrm{phys}}$ is on\n$\\Gamma_N/G$; with $c_N=a_0^{-dN}$, the latter is exactly the normalized\nquotient reference of [[def-csm-phase-space-reference]].\n\nPhysical observables for indistinguishable particles are measurable\n$G$-invariant functions $A:\\Gamma_N\\to\\mathbb R$, equivalently measurable\nfunctions $\\bar A$ on the quotient with $A=\\bar A\\circ\\Pi_N$. For every such\nobservable with an integrable expectation, its integral against\n$m_N^{\\mathrm{phys}}$ equals the quotient integral against\n$\\bar m_N^{\\mathrm{phys}}$. A labelled density represents a physical state on\nthe quotient only if it is invariant under $G$ almost everywhere with respect\nto $m_N^{\\mathrm{phys}}$; an invariant representative may then be used. In\nparticular, an indistinguishable-particle Hamiltonian must be invariant under\nthese permutations (or agree almost everywhere with its permuted versions\nwhen only its Gibbs density is at issue). A label-specific coordinate\nstatistic on the lift is not itself a quotient observable. Under a\npermutation-invariant state its marginal law\ncan instead be interpreted as the law of a uniformly selected particle within\nthe same species, or of a uniformly selected coordinate of the same type\nwithin that species. Symmetric sums and averages within each species are\nquotient observables.\nCalculations of labelled momentum components in\n[[pthm-csm-canonical-momentum-equipartition]] use this symmetric labelled\nlift, and their permutation-invariant kinetic sums and averages are physical\nobservables.\n\nIf labels are operationally distinguishable, omit the corresponding\npermutation factor and use the labelled phase space directly. The convention\nis part of the preparation and reference model; it is not deduced from\nHamiltonian mechanics. Whether a quantity is represented by a gauge-dependent\ncanonical momentum or by a gauge-invariant mechanical momentum is fixed by the\nstated model and gauge convention. No quantum exchange law, actual preparation\nmechanism, or empirical indistinguishability test is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-td-si-quantities",
+          "source_section": "Definition",
+          "quote": "This framework uses the modern International System of Units (SI). A scalar quantity has a real numerical value with the stated unit; a vector quantity has a value in the stated real coordinate space with the stated component unit. The numerical coordinates used elsewhere on this page are divided by their displayed SI units before they are placed in a Euclidean coordinate space.\n\nThe model's energy coordinate $U$ and its process-transfer values $Q$ and $W_{\\mathrm{on}}$ are scalar energies measured in joules (J). Volume $V$ is a scalar measured in cubic metres (m\u00b3); amount of substance $n_j$ for species $j$ is a scalar measured in moles (mol); and a particle count $N_j$, when separately used in a microscopic model, is dimensionless. Time $t$ is measured in seconds (s), mass $M$ in kilograms (kg), and a translational velocity $\\mathbf v_{\\mathrm{cm}}$ is a vector in $\\mathbb R^3$ with components measured in metres per second (m/s). The physical meanings of $U,Q,W_{\\mathrm{on}}$ are fixed by the state and process definitions, not by their units alone.\n\nThe relevant exact SI relations are\n\n$$1\\,\\mathrm J=1\\,\\mathrm{kg\\,m^2\\,s^{-2}},\\qquad 1\\,\\mathrm N=1\\,\\mathrm{kg\\,m\\,s^{-2}},\\qquad 1\\,\\mathrm{Pa}=1\\,\\mathrm{J\\,m^{-3}}.$$\n\nThe kelvin (K) is the SI unit of thermodynamic temperature. The Boltzmann constant has the exact defining value $k_{\\mathrm B}=1.380649\\times10^{-23}\\,\\mathrm{J\\,K^{-1}}$. The mole is the SI unit of amount of substance; the Avogadro constant has the exact defining value $N_{\\mathrm A}=6.02214076\\times10^{23}\\,\\mathrm{mol^{-1}}$. When a model uses particle counts, $n_j=N_j/N_{\\mathrm A}$. The molar gas constant is derived as $R=N_{\\mathrm A}k_{\\mathrm B}=8.31446261815324\\,\\mathrm{J\\,mol^{-1}\\,K^{-1}}$. This framework does not set $k_{\\mathrm B}=1$. These SI definitions do not themselves introduce a thermodynamic temperature state function or entropy function.\n\nWithin the macroscopic framework, $(U,V,n_j)$ are adopted state coordinates. A quantity's status as primitive in this model is separate from whether its SI unit is a base or derived unit.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-relative-gibbs-variational-principle",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,m)$ be a measure space and let $p,q$ be probability\ndensities relative to $m$, with $q>0$ almost everywhere on $\\{p>0\\}$. Define\nthe relative entropy\n$$D(p\\Vert q):=\\int_{\\{p>0\\}}p\\log(p/q)\\,dm,$$\nallowing $+\\infty$. Then $D(p\\Vert q)\\ge0$, and equality holds exactly\nwhen $p=q$ almost everywhere. For arbitrary probability densities, extend\n$D(p\\Vert q)$ to $+\\infty$ if $\\int_{\\{q=0\\}}p\\,dm>0$.\nIn particular, let $H$ be extended-real measurable, finite $p$-almost\neverywhere, let $\\beta>0$, and suppose\n$$0<Z=\\int e^{-\\beta H}dm<\\infty,\\quad q=Z^{-1}e^{-\\beta H},\\quad \\int p|H|dm<\\infty,\\quad \\int|p\\log p|dm<\\infty.$$\nFor $S[p]:=-k\\int p\\log p\\,dm$ and $F:=-\\beta^{-1}\\log Z$, with $k>0$\nand $\\beta kT=1$, one has\n$$D(p\\Vert q)=\\beta\\bigl(\\langle H\\rangle_p-F-TS[p]\\bigr)\\ge0.$$\nWrite $\\mathcal A$ for the probability densities satisfying these finite\nenergy and absolute entropy conditions. For every measurable $H$ with the\nstated positive finite $Z$, define the **extended relative free energy** on\nall probability densities by\n$$\\mathcal F_{\\rm ext}[p]:=F+\\beta^{-1}D(p\\Vert q)\\in[F,+\\infty].$$\nIt agrees with $\\langle H\\rangle_p-TS[p]$ on $\\mathcal A$ and has the\nunique minimizer $q$, up to almost-everywhere equality, even when the\nseparate energy and entropy integrals of $q$ are not finite. Moreover,\n$$\\inf_{p\\in\\mathcal A}\\bigl(\\langle H\\rangle_p-TS[p]\\bigr)=F.$$\nThis infimum is attained if and only if\n$\\int q|H|dm<\\infty$ and $\\int|q\\log q|dm<\\infty$; in that case its\nunique minimizer is $q$. Otherwise no density in $\\mathcal A$ attains the\ninfimum. Products with a zero density are taken as zero on the forbidden\nset, and densities may be redefined on null sets. These mathematical\nclaims do not derive a physical preparation.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $r$ particles in position volume $W$, separate the $r$ position integrals and use [F1] in all $dr$ momentum coordinates. For one coordinate put $a=\\beta/(2m)$; integrating $\\frac{d}{dp}(pe^{-ap^2})=e^{-ap^2}-2ap^2e^{-ap^2}$ over $\\mathbb R$ gives $\\langle p^2\\rangle=m/\\beta$, as the boundary term vanishes by Gaussian decay. Thus the mean kinetic energy is $dr/(2\\beta)$. The position law factorizes into $r$ uniform position laws. With $\\lambda_T=a_0\\sqrt{\\beta/(2\\pi m)}$, the partition function is $$Z_r(W)=\\frac{W^r}{r!a_0^{dr}}\\left(\\frac{2\\pi m}{\\beta}\\right)^{dr/2} =\\frac{(W/\\lambda_T^d)^r}{r!}.$$ For equal total particle count $2N$ before and after, the $\\beta U$ terms in [F2] cancel, so the entropy change is $k_B$ times the logarithm of the partition-function ratio.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Initially the ratio is $Z_{2N}(2V)/Z_N(V)^2$ $=4^N(N!)^2/(2N)!$; for two fixed distinguishable species it is $[Z_N(2V)/Z_N(V)]^2=4^N$. The first ratio exceeds one because $(2N)!/(N!)^2=\\binom{2N}{N}<\\sum_{j=0}^{2N}\\binom{2N}{j}=4^N$. Under the final positional law, the $2N$ particles independently fall in either half with probability $1/2$, so the central binomial probability is $\\binom{2N}{N}/4^N$, the reciprocal of the identical-particle ratio.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For each integer $n\\ge1$, monotonicity of $\\log x$ on unit intervals gives $$n\\log n-n+1\\le\\log(n!)\\le n\\log n-n+1+\\log n.$$ Indeed the lower bound integrates $\\log x\\le\\log j$ on $[j-1,j]$ for $j=2,\\ldots,n$, and the upper bound integrates $\\log x\\ge\\log j$ on $[j,j+1]$ for $j=1,\\ldots,n-1$, then adds $\\log n$. Substitution for $n=N$ and $n=2N$ cancels the terms linear in $N$ in $N\\log4+2\\log(N!)-\\log((2N)!)$, leaving a quantity bounded in absolute value by a constant multiple of $\\log(N+1)$. Therefore $\\Delta S_{\\mathrm{identical}}/N\\to0$ as $N\\to\\infty$.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes N>=1 in each compartment."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "N>=1 and T,m,a0>0 exclude a vacuum or zero-temperature normalization. Proof2.1 gives log(4^N(N!)^2/(2N)!)>0 at every finite N; proof3.1 makes it sublinear, not identically zero. The zero interaction U=0 is precisely the ideal model used in1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: The finite formula holds at N=1; the factorial and binomial expressions are defined."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: The one-particle case is nondegenerate because both compartments have positive volume."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: Both initial and final position volumes are finite and positive; no infinite-volume limit is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite combinatorial and Gaussian calculations use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and proof review: The exact entropy ratio is strictly positive for N>=1 by the strict central-binomial bound in the displayed step."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff statement is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Checked all three verification steps and four suppliers. Gaussian scaling and integration by parts give finite energy; thus Gibbs entropy identity is used only in its valid finite-integrability scope, not its overstrong minimizer sentence. Counting ratios are exact for N>=1; central binomial coefficient is strictly smaller than 4^N, and positivity is retained. Monotone-log integral factorial bounds cancel the linear terms and give O(log(N+1)), including N=1. Bernoulli half-box probability refers to the symmetric labelled lift; the count event is invariant. Initial/final canonical preparations are stipulated ideal laws, no finite-data or dynamics assertion."
+      }
+    },
+    "pthm-csm-ensemble-potentials": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-csm-canonical-preparation",
+          "source_section": "Postulate",
+          "quote": "For a fixed $N$, controls $\\lambda$, measurable classical Hamiltonian\n$H_{N,\\lambda}:\\Gamma_N\\to\\mathbb R\\cup\\{+\\infty\\}$, measurable for the\nphase Borel sigma-algebra and taking energy values in joules, and the declared\nphysical reference measure $m_N^{\\rm phys}$ of\n[[post-csm-counting-and-physical-observables]], choose a prescribed\nthermodynamic-temperature control $T>0$ in kelvins and\n$\\beta=(k_BT)^{-1}$ in J$^{-1}$ using the SI temperature convention of\n[[def-td-si-quantities]]. If\n$$0<Z_N(\\beta,\\lambda):=\\int_{\\Gamma_N}e^{-\\beta H_{N,\\lambda}}\\,dm_N^{\\rm phys}<\\infty,$$\nadopt the canonical state with density\n$$\\rho_{\\beta,\\lambda}=Z_N(\\beta,\\lambda)^{-1}e^{-\\beta H_{N,\\lambda}}$$\nrelative to $m_N^{\\rm phys}$. Set $e^{-\\beta(+\\infty)}=0$. Normalizability\nis a required condition on the chosen model; bounded-below energy alone does\nnot imply it. This probability law is an adopted preparation, not a\nconsequence of deterministic mechanics or evidence of laboratory\nequilibration.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-csm-grand-preparation",
+          "source_section": "Postulate",
+          "quote": "Let $T>0$ be the prescribed temperature control in kelvins,\n$\\beta=(k_BT)^{-1}$, and let the chemical-potential control $\\mu$ have\nunits J per particle under the SI convention\n[[def-td-si-quantities]]. In this adopted law, $\\mu$ is the energy\ncoefficient conjugate to the dimensionless sector count $N$ in the weight\n$e^{-\\beta(H_N-\\mu N)}$; no derivative with respect to integer $N$ is used.\nFor $N\\ge1$, let $\\Gamma_N$ and its reference\nmeasure be those of [[post-csm-counting-and-physical-observables]], and let\n$$H_N:\\Gamma_N\\to\\mathbb R\\cup\\{+\\infty\\}$$\nbe Borel measurable for the sector sigma-algebra\n$\\mathcal F_N$ generated by the open sets of $\\Gamma_N$, with $+\\infty$\nmarking forbidden states, and use the convention\n$e^{-\\beta(+\\infty)}:=0$.\nDefine\nthe vacuum sector by $\\Gamma_0=\\{*\\}$ with sigma-algebra\n$\\mathcal F_0=\\{\\varnothing,\\{*\\}\\}$, reference mass\n$m_0^{\\mathrm{phys}}(\\{*\\})=1$, particle number $N=0$, and vacuum Hamiltonian\n$H_0(*)=0$. On the disjoint union $\\mathcal G:=\\bigsqcup_{N=0}^\\infty\\Gamma_N$,\nuse the sigma-algebra\n$$\\mathcal F_{\\mathcal G}:=\\{A\\subseteq\\mathcal G:A\\cap\\Gamma_N\\in\\mathcal F_N\\text{ for every }N\\ge0\\},$$\nwhere $\\mathcal F_N$ is the declared measurable structure on sector $N$, and\nthe reference measure\n$$m^{\\mathrm{phys}}(A):=\\sum_{N=0}^\\infty m_N^{\\mathrm{phys}}(A\\cap\\Gamma_N).$$\nThis disjoint-union reference is sigma-finite because it is a countable sum\nof the sigma-finite sector references, including the finite vacuum measure.\nLet\n$$\\Xi(\\beta,\\mu):=\\sum_{N=0}^\\infty\\int_{\\Gamma_N} e^{-\\beta(H_N-\\mu N)}\\,dm_N^{\\rm phys}$$\nsatisfy $0<\\Xi<\\infty$. Adopt the probability measure on\n$(\\mathcal G,\\mathcal F_{\\mathcal G})$ with density\n$$\\rho(N,z):=\\Xi^{-1}e^{-\\beta(H_N(z)-\\mu N)}$$\nrelative to $m^{\\mathrm{phys}}$. The finiteness condition is\npart of the model; it requires control of the sector sum and is not implied\nby each finite-sector partition function being finite. Particle-exchange\npreparation is an assumption, not a deduction from fixed-$N$ dynamics. Under\nthe vacuum convention above, the $N=0$ contribution to $\\Xi$ is exactly one.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-csm-isobaric-preparation",
+          "source_section": "Postulate",
+          "quote": "Fix integers $N,d\\ge1$, a prescribed temperature control $T>0$ in kelvins,\n$\\beta=(k_BT)^{-1}$ as in [[def-td-si-quantities]], and external pressure\n$P_{\\rm ext}>0$ in J m$^{-d}$, a fixed dimensionless shape\n$Q_1\\subseteq\\mathbb R^d$ that is Lebesgue measurable, meaning\n$Q_1\\in\\mathcal L(\\mathbb R^d)$, and has Lebesgue measure\n$|Q_1|_d:=\\lambda_d(Q_1)=1$\n([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]), and\na positive volume reference $V_0$ in m$^d$. Write\n$y=(y_1,\\ldots,y_N)\\in Q_1^N$, take $dy$ to be product Lebesgue measure on\n$Q_1^N$, take $dp$ to be Lebesgue measure on $\\mathbb R^{dN}$, and take\n$dV$ to be Lebesgue measure on $(0,\\infty)$. Identify\nthe position domain at volume $V>0$ by $q_i=V^{1/d}y_i$. The Jacobian is\n$V^N$, which is the full position-volume factor because $|Q_1|_d=1$. Adopt\nthe joint reference\n$$d\\nu_N=\\frac{dV}{V_0}\\,\\frac{V^N\\,dy\\,dp}{N!a_0^{dN}},$$\nwhere $a_0>0$ is the action reference in J s. The factors $dV/V_0$ and\n$V^Ndy\\,dp/a_0^{dN}$ are dimensionless. Let\n$$H_N:(0,\\infty)\\times Q_1^N\\times\\mathbb R^{dN}\\to\\mathbb R\\cup\\{+\\infty\\}$$\nbe a product-measurable energy-valued Hamiltonian (in joules) for this\nreference, with $+\\infty$ marking forbidden states; set\n$e^{-\\beta(+\\infty+P_{\\rm ext}V)}:=0$. The product reference\n$\\nu_N$ is sigma-finite: $Q_1^N$ has finite measure, while $(0,\\infty)$ and\n$\\mathbb R^{dN}$ have countable finite-measure exhaustions; the factor $V^N$\nis finite on each set where $V$ is bounded. Assume\n$$0<\\Delta_N:=\\int_0^\\infty\\!\\int e^{-\\beta(H_N(V,y,p)+P_{\\rm ext}V)}\\,d\\nu_N<\\infty.$$\nAdopt the probability density\n$$\\rho_N(V,y,p):=\\Delta_N^{-1}e^{-\\beta(H_N(V,y,p)+P_{\\rm ext}V)}$$\nrelative to $\\nu_N$. The displayed\n$N!$ is the single-species convention; for several indistinguishable species\nwith fixed counts $N_a$, replace it by $\\prod_aN_a!$ as in\n[[post-csm-counting-and-physical-observables]]. The factor $dV/V_0$ is an\nexplicit volume-reference convention; a different piston state measure gives\na different preparation. This postulate includes no piston kinetic energy\nunless it is explicitly included in the Hamiltonian, and does not claim a\nsmooth wall dynamics.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-csm-exponential-normalization-covariance",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,m)$ be a sigma-finite measure space, let $w\\ge0$ be\nmeasurable with $m(\\{w>0\\})>0$, let $r\\ge1$ and let\n$X=(X_1,\\ldots,X_r):\\Omega\\to\\mathbb R^r$ be measurable and finite, and let\n$\\Theta\\subseteq\\mathbb R^r$ be open. For\neach compact $K\\subset\\Theta$, assume an integrable $G_K$ satisfies\n$$w(x)e^{\\theta\\cdot X(x)}\\left(1+\\sum_a|X_a(x)|^2\\right)\\le G_K(x)\\quad(\\theta\\in K).$$\nThen $Z(\\theta)=\\int w e^{\\theta\\cdot X}\\,dm$ is finite, strictly positive\nand $C^2$, and the probability density $\\rho_\\theta=Z(\\theta)^{-1}we^{\\theta\\cdot X}$\nsatisfies\n$$\\partial_a\\log Z=\\langle X_a\\rangle_\\theta,\\qquad \\partial_a\\partial_b\\log Z=\\operatorname{Cov}_\\theta(X_a,X_b).$$\nIn particular, the Hessian of $\\log Z$ is positive semidefinite.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-csm-statistical-state-observable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Gamma_N,\\mathcal F_N,m_N)$ be a sigma-finite phase-reference measure\nspace from [[def-csm-phase-space-reference]]; the cotangent construction uses\nthe stated Axiom of Countable Choice\n([[def-countable-choice]]). A **statistical state** is a probability measure\n$P$ on $(\\Gamma_N,\\mathcal F_N)$, meaning a countably additive measure with\n$P(\\Gamma_N)=1$ ([[def-measure]]). A **density** of $P$ relative to $m_N$ is a\nmeasurable $\\rho:\\Gamma_N\\to[0,\\infty]$ such that\n$$P(A)=\\int_A\\rho\\,dm_N\\quad(A\\in\\mathcal F_N),\\qquad \\int_{\\Gamma_N}\\rho\\,dm_N=1.$$\nEquivalently, $P=\\rho\\,m_N$ in the definition of a measure with density\n([[def-measure-with-density]]); integration against that density has the\nmeaning supplied by [[thm-integration-against-a-density]]. A state need not\nhave a density.\n\nAn **observable** is a real-valued measurable function\n$A:\\Gamma_N\\to\\mathbb R$ ([[def-extended-real-valued-measurable-function]]).\nIts expectation $\\langle A\\rangle_P:=\\int A\\,dP$ is used only when $A$ is\nintegrable, that is, $\\int|A|\\,dP<\\infty$\n([[def-integrable-real-and-complex-functions-and-their-integrals]]). Its\nvariance is\n$$\\operatorname{Var}_P(A):=\\int(A-\\langle A\\rangle_P)^2\\,dP$$\nwhen $A^2$ is integrable. For square-integrable $A,B$, their covariance is\n$$\\operatorname{Cov}_P(A,B):=\\int(A-\\langle A\\rangle_P)(B-\\langle B\\rangle_P)\\,dP.$$\nThese expressions are finite under the stated square-integrability\nhypotheses. Indeed, $P(\\Gamma_N)=1$ makes $1\\in L^2(P)$ with norm $1$.\nBy [[cor-cauchy-schwarz-inequality-for-l-two]],\n$\\int|A|\\,dP\\le(\\int A^2\\,dP)^{1/2}$, so the mean of a square-integrable\nobservable exists. If $a=\\langle A\\rangle_P$, then\n$|A-a|^2\\le2A^2+2a^2$ makes $A-a$ square-integrable; the same argument\napplies to $B-b$. A second application of that inequality gives\n$\\int|(A-a)(B-b)|\\,dP\\le\\|A-a\\|_2\\|B-b\\|_2<\\infty$.\nThus both the variance and covariance integrals above are well-defined.\n\nIf $P=\\rho m_N$ and the integrals are defined, these expectations equal\n$\\int A\\rho\\,dm_N$ by [[thm-integration-against-a-density]].\n\nA **macrostate map** is a measurable map\n$M:(\\Gamma_N,\\mathcal F_N)\\to(Y,\\mathcal G)$. Its induced state on $Y$ is\nthe pushforward $M_*P(B):=P(M^{-1}(B))$. The measure of a macrocell and an\nentropy assigned to that macrostate are additional constructions; they are\nnot identical to the expectation or variance of a microscopic observable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-csm-relative-gibbs-variational-principle",
+          "source_section": "Statement",
+          "quote": "Let $(\\Omega,\\mathcal F,m)$ be a measure space and let $p,q$ be probability\ndensities relative to $m$, with $q>0$ almost everywhere on $\\{p>0\\}$. Define\nthe relative entropy\n$$D(p\\Vert q):=\\int_{\\{p>0\\}}p\\log(p/q)\\,dm,$$\nallowing $+\\infty$. Then $D(p\\Vert q)\\ge0$, and equality holds exactly\nwhen $p=q$ almost everywhere. For arbitrary probability densities, extend\n$D(p\\Vert q)$ to $+\\infty$ if $\\int_{\\{q=0\\}}p\\,dm>0$.\nIn particular, let $H$ be extended-real measurable, finite $p$-almost\neverywhere, let $\\beta>0$, and suppose\n$$0<Z=\\int e^{-\\beta H}dm<\\infty,\\quad q=Z^{-1}e^{-\\beta H},\\quad \\int p|H|dm<\\infty,\\quad \\int|p\\log p|dm<\\infty.$$\nFor $S[p]:=-k\\int p\\log p\\,dm$ and $F:=-\\beta^{-1}\\log Z$, with $k>0$\nand $\\beta kT=1$, one has\n$$D(p\\Vert q)=\\beta\\bigl(\\langle H\\rangle_p-F-TS[p]\\bigr)\\ge0.$$\nWrite $\\mathcal A$ for the probability densities satisfying these finite\nenergy and absolute entropy conditions. For every measurable $H$ with the\nstated positive finite $Z$, define the **extended relative free energy** on\nall probability densities by\n$$\\mathcal F_{\\rm ext}[p]:=F+\\beta^{-1}D(p\\Vert q)\\in[F,+\\infty].$$\nIt agrees with $\\langle H\\rangle_p-TS[p]$ on $\\mathcal A$ and has the\nunique minimizer $q$, up to almost-everywhere equality, even when the\nseparate energy and entropy integrals of $q$ are not finite. Moreover,\n$$\\inf_{p\\in\\mathcal A}\\bigl(\\langle H\\rangle_p-TS[p]\\bigr)=F.$$\nThis infimum is attained if and only if\n$\\int q|H|dm<\\infty$ and $\\int|q\\log q|dm<\\infty$; in that case its\nunique minimizer is $q$. Otherwise no density in $\\mathcal A$ attains the\ninfimum. Products with a zero density are taken as zero on the forbidden\nset, and densities may be redefined on null sets. These mathematical\nclaims do not derive a physical preparation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-td-si-quantities",
+          "source_section": "Definition",
+          "quote": "This framework uses the modern International System of Units (SI). A scalar quantity has a real numerical value with the stated unit; a vector quantity has a value in the stated real coordinate space with the stated component unit. The numerical coordinates used elsewhere on this page are divided by their displayed SI units before they are placed in a Euclidean coordinate space.\n\nThe model's energy coordinate $U$ and its process-transfer values $Q$ and $W_{\\mathrm{on}}$ are scalar energies measured in joules (J). Volume $V$ is a scalar measured in cubic metres (m\u00b3); amount of substance $n_j$ for species $j$ is a scalar measured in moles (mol); and a particle count $N_j$, when separately used in a microscopic model, is dimensionless. Time $t$ is measured in seconds (s), mass $M$ in kilograms (kg), and a translational velocity $\\mathbf v_{\\mathrm{cm}}$ is a vector in $\\mathbb R^3$ with components measured in metres per second (m/s). The physical meanings of $U,Q,W_{\\mathrm{on}}$ are fixed by the state and process definitions, not by their units alone.\n\nThe relevant exact SI relations are\n\n$$1\\,\\mathrm J=1\\,\\mathrm{kg\\,m^2\\,s^{-2}},\\qquad 1\\,\\mathrm N=1\\,\\mathrm{kg\\,m\\,s^{-2}},\\qquad 1\\,\\mathrm{Pa}=1\\,\\mathrm{J\\,m^{-3}}.$$\n\nThe kelvin (K) is the SI unit of thermodynamic temperature. The Boltzmann constant has the exact defining value $k_{\\mathrm B}=1.380649\\times10^{-23}\\,\\mathrm{J\\,K^{-1}}$. The mole is the SI unit of amount of substance; the Avogadro constant has the exact defining value $N_{\\mathrm A}=6.02214076\\times10^{23}\\,\\mathrm{mol^{-1}}$. When a model uses particle counts, $n_j=N_j/N_{\\mathrm A}$. The molar gas constant is derived as $R=N_{\\mathrm A}k_{\\mathrm B}=8.31446261815324\\,\\mathrm{J\\,mol^{-1}\\,K^{-1}}$. This framework does not set $k_{\\mathrm B}=1$. These SI definitions do not themselves introduce a thermodynamic temperature state function or entropy function.\n\nWithin the macroscopic framework, $(U,V,n_j)$ are adopted state coordinates. A quantity's status as primitive in this model is separate from whether its SI unit is a base or derived unit.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a canonical density $\\rho=Z^{-1}e^{-\\beta H}$, $\\log\\rho=-\\beta H-\\log Z$. Integrating against $\\rho$ gives $S=k_B(\\log Z+\\beta U)$, so $-k_BT\\log Z=U-TS$ because $k_BT\\beta=1$. For any competitor $p$, [F3] gives $D(p\\Vert\\rho)=\\beta(\\langle H\\rangle_p-TS[p]-F)\\ge0$, with equality exactly when $p=\\rho$ almost everywhere. At fixed model, $U=-\\partial_\\beta\\log Z$ by [F2]. Differentiating $F=-\\beta^{-1}\\log Z$ and using $d\\beta/dT=-1/(k_BT^2)$ gives $\\partial_TF=-S$, proving the canonical differential.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the grand disjoint union, $\\log\\rho=-\\beta(H-\\mu N)-\\log\\Xi$. Integration gives $S=k_B(\\log\\Xi+\\beta(U-\\mu\\bar N))$, hence $\\Omega=-k_BT\\log\\Xi=U-TS-\\mu\\bar N$. Applying [F2] to the sufficient statistics $H$ and $N$ gives $\\partial_\\mu\\log\\Xi=\\beta\\bar N$ and $-\\partial_\\beta\\log\\Xi|_\\mu=U-\\mu\\bar N$. Thus $\\partial_\\mu\\Omega=-\\bar N$ and $\\partial_T\\Omega=-S$, proving the grand differential at fixed model.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the joint isothermal-isobaric density, $\\log\\rho=-\\beta(H+P_{\\rm ext}V)-\\log\\Delta$. Integration gives $S=k_B(\\log\\Delta+\\beta\\langle H+P_{\\rm ext}V\\rangle)$ and therefore the displayed $G_{\\rm isoP}$. Applying [F2] to $B=H+P_{\\rm ext}V$ gives $-\\partial_\\beta\\log\\Delta|_P=\\langle B\\rangle$, while $\\partial_P\\log\\Delta=-\\beta\\langle V\\rangle$; hence $\\partial_TG_{\\rm isoP}=-S$ and $\\partial_PG_{\\rm isoP}=\\langle V\\rangle$. This proves the stated differential and completes the conditional identities.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each adopted ensemble requires a positive finite normalizer and normalized density."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: Zero mean number, volume fluctuation or entropy is not excluded by the algebraic identities."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: The postulates permit a single particle and a one-state system when their normalizers are positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: No strict convexity or positive variance is asserted; a degenerate ensemble still satisfies the identities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof review: Statement: Only parameter values in the open envelope domain are differentiated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No new choice premise is used beyond the cited integral suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states identities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states identities, not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-26",
+        "notes": "Checked three steps and seven suppliers. Canonical, grand and joint-pressure logarithms integrate under explicit finite first moments and absolute entropy integrability; finite support restriction removes +infinity. Envelope hypotheses give derivatives along (-beta,beta mu) and (-beta,-beta P), with fixed microscopic Hamiltonian/reference. Signs of -S, -Nbar and +Vbar agree. Canonical competitor inequality uses only the valid relative-entropy identity/equality, and A1 makes the Gibbs density itself admissible, so the risk-only supplier minimizer overclaim does not infect this consumer. No derivative in integer N, no limit or empirical claim."
+      }
+    }
+  }
+}

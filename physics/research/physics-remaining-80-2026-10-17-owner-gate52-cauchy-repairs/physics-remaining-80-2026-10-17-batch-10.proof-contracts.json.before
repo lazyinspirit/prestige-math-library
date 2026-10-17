@@ -1,0 +1,1121 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "10",
+  "level": 4,
+  "scope": [
+    "lem-emg-spacelike-slice-normal-collar",
+    "lem-emg-closed-two-form-exact-on-cauchy-product",
+    "pthm-emg-local-electrovacuum-model",
+    "pthm-emg-on-shell-electromagnetic-conservation",
+    "pthm-emg-smooth-electrovacuum-maximal-model",
+    "ex-emg-adopted-parallel-field-model"
+  ],
+  "contracts": {
+    "lem-emg-spacelike-slice-normal-collar": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gr-spacelike-hypersurfaces-and-cauchy-sets",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with the\ncausal curves of [[def-gr-causal-curves-and-reachability]], and let\n$S\\subseteq M$.\n\n**(a) Spacelike hypersurfaces.** A subset $\\Sigma\\subseteq M$ is a **spacelike\nembedded hypersurface** when it is an embedded three-dimensional submanifold\nof $M$ ([[def-embedded-submanifold-and-slice-chart]]) such that the\nrestriction of $g_p$ to $T_p\\Sigma\\times T_p\\Sigma$ is positive definite for\nevery $p\\in\\Sigma$; equivalently, every nonzero vector tangent to $\\Sigma$ is\nspacelike ([[def-causal-classification-of-lorentz-vectors]]). A spacelike\nembedded hypersurface is automatically a nondegenerate hypersurface, so its\n$g$-orthogonal complement in $T_pM$ is one-dimensional and nondegenerate, and\nit carries a unique future-directed unit timelike normal; that normal is\nconstructed where it is used, not here.\n\n**(b) Achronality and acausality.** $S$ is **achronal** when no two distinct\npoints $p,q\\in S$ satisfy $p\\ll q$ or $q\\ll p$; $S$ is **acausal** when no two\ndistinct points $p,q\\in S$ satisfy $p\\le q$ or $q\\le p$. Every acausal set is\nachronal, since $p\\ll q$ implies $p\\le q$.\n\n**(c) Cauchy sets.** $S$ is a **Cauchy set** when for every inextendible\ncausal curve $\\gamma:I\\to M$ the parameter set\n$$\\gamma^{-1}[S]:=\\{t\\in I:\\gamma(t)\\in S\\}$$\nhas exactly one element. Because a strictly increasing continuous surjection\nof intervals induces a bijection of parameter sets, this condition is\ninvariant under reparametrization\n([[lem-gr-causal-curve-calculus]] clause (e)); it is stated in terms of\nparameters rather than of the point set $\\gamma(I)\\cap S$, so that a closed\ncausal curve counts two visits to the same point as two parameter values. A\n**Cauchy hypersurface** is a Cauchy set that is also a spacelike embedded\nhypersurface in the sense of clause (a).\n\n**(d) Domains of dependence.** For any $S\\subseteq M$ define\n$$D^+(S):=\\{p\\in M:\\text{every past-inextendible causal curve through }p \\text{ meets }S\\},$$\nand dually $D^-(S):=\\{p\\in M:\\text{every future-inextendible causal curve\nthrough }p\\text{ meets }S\\}$, where \"meets $S$\" means that some parameter\nvalue is mapped into $S$, and $D(S):=D^+(S)\\cup D^-(S)$ is the **domain of\ndependence** of $S$.\n\n**(e) Cauchy horizon.** For a closed set $S\\subseteq M$ the **future Cauchy\nhorizon** is\n$$H^+(S):=D^+(S)\\setminus I^-(D^+(S)),$$\nthe set of points of $D^+(S)$ that are not chronologically preceded by any\npoint of $D^+(S)$; dually $H^-(S):=D^-(S)\\setminus I^+(D^-(S))$, and the\n**Cauchy horizon** is $H(S):=H^+(S)\\cup H^-(S)$.\n\n**(f) Scope.** These are mathematical definitions. Neither existence of\nCauchy sets nor any relation between the objects defined here is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-gr-local-geodesics-and-exponential-map",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$\\nabla$ be its metric-selected connection, whose existence and uniqueness are\nsupplied by [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]; its\nChristoffel symbols are the smooth chart functions of\n[[def-christoffel-symbols-of-an-affine-connection]]. Recall that a **geodesic**\nis a curve with $D_t\\gamma'=0$ in its parameter\n([[def-geodesic-of-an-affine-connection]],\n[[def-covariant-derivative-along-a-curve]]).\n\n**(a) Local existence, uniqueness and maximality.** For every $(p,v)\\in TM$\nthere is a unique maximal geodesic $\\gamma_{p,v}:I_{p,v}\\to M$ with\n$\\gamma_{p,v}(0)=p$ and $\\gamma_{p,v}'(0)=v$; its domain $I_{p,v}$ is an open\ninterval containing $0$ and is not asserted to be all of $\\mathbb R$.\n\n**(b) Smooth dependence.** The set\n$\\mathcal G:=\\{(t,p,v):t\\in I_{p,v}\\}\\subseteq\\mathbb R\\times TM$ is open, and\nthe evaluation map $(t,p,v)\\mapsto\\gamma_{p,v}(t)$ is smooth on $\\mathcal G$.\n\n**(c) Scaling.** For every $s\\in\\mathbb R$ and every $t\\in\\mathbb R$,\n$t\\in I_{p,sv}$ if and only if $st\\in I_{p,v}$, and then\n$\\gamma_{p,sv}(t)=\\gamma_{p,v}(st)$.\n\n**(d) The exponential map.** Define $\\mathcal E_p:=\\{v\\in T_pM:1\\in I_{p,v}\\}$\nand $\\exp_p:\\mathcal E_p\\to M$, $\\exp_p(v):=\\gamma_{p,v}(1)$, and let\n$\\psi_p:T_pM\\to\\mathbb R^4$ be the coordinate isomorphism of a basis\n$e_0,\\dots,e_3$ of $T_pM$. Then $\\mathcal E_p$ is open and star-shaped about\n$0$ (if $v\\in\\mathcal E_p$ and $0\\le s\\le1$, then $sv\\in\\mathcal E_p$),\n$\\exp_p$ is smooth, $\\exp_p(0)=p$, and, under the canonical identification\n$T_0(T_pM)\\cong T_pM$ induced by the chart $\\psi_p$ on $T_pM$,\n$$d(\\exp_p)_0=\\operatorname{id}_{T_pM}.$$\nConsequently there is a star-shaped open neighborhood $W_p\\subseteq\\mathcal E_p$\nof $0$ such that $\\exp_p|_{W_p}$ is a diffeomorphism onto an open subset of\n$M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-smooth-inverse-function-theorem-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be a smooth map and let $p\\in M$. If $dF_p:T_pM\\to T_{F(p)}N$ is\nan isomorphism, then there are open neighbourhoods $U$ of $p$ and $V$ of\n$F(p)$ such that $F|_U:U\\to V$ is a diffeomorphism.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $(t,x)\\mapsto(t,i(x),n_{i(x)})$ is smooth and sends $(0,p)$ to\nadmissible geodesic initial data. By [F2] that datum has an open neighborhood\non which the geodesic evaluation map is smooth. Their composition is therefore\nthe normal exponential map $\\Phi_p$ on a neighborhood of $(0,p)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Differentiating the geodesic at zero gives the displayed differential:\nthe time direction maps to $n_{i(p)}$, and the slice direction maps to\n$d i_p(X)$. If $a n_{i(p)}+d i_p(X)=0$, its inner product with $n_{i(p)}$\nis $-a=0$ because $n$ is orthogonal to $i(\\Sigma)$; then $d i_p(X)=0$ and\n$X=0$ because an embedding is an immersion. Thus the differential is an\nisomorphism between four-dimensional tangent spaces. Apply [L1], then shrink\nits source neighborhood to a product $(-\\epsilon_p,\\epsilon_p)\\times U_p$;\nthe restriction is still a diffeomorphism onto its open image.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "L1",
+            "algebra",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If Σ is empty there is no p and the pointwise conclusion is vacuous (Statement)."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The local collar statement has no field-amplitude or zero-parameter case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no number-of-components or finite-family parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the differential is an isomorphism from timelike-normal and spacelike-tangent transversality; a degenerate slice is excluded by the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement claims only an open neighborhood of (0,p); its time interval is open and explicitly has no global-width assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement supplies the normal at each p and the proof uses only the stated ACω convention; no family of neighborhoods is selected globally."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite or computational check applies; the general claim is established analytically from the stated hypotheses and supplier interfaces.",
+      "risk_review": {
+        "status": "open",
+        "notes": "Step-1 authoring record only; independent proof review remains pending."
+      }
+    },
+    "lem-emg-closed-two-form-exact-on-cauchy-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-gr-smooth-lorentzian-objects",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some — equivalently every — basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-gr-smooth-cauchy-temporal-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice\n([[def-countable-choice]], [[def-dependent-choice]]). Let $(M,g,N)$ be a\nglobally hyperbolic time-oriented smooth Lorentzian four-manifold\n([[def-gr-causal-conditions-and-global-hyperbolicity]] clause (c)), and let\n$t$ be the volume time function of [[thm-gr-volume-time-function]]. Then\nthere exist a smooth function $T:M\\to\\mathbb R$ and, with $\\nabla T$ the\ngradient of [[def-gr-inverse-metric-and-musical-isomorphisms]], the\nfollowing hold.\n\n**(a)** $T$ is a temporal function in the sense of\n[[def-gr-causal-conditions-and-global-hyperbolicity]] clause (e): smooth,\n$g(\\nabla T,\\nabla T)<0$ and $g(\\nabla T,N)>0$ everywhere.\n\n**(b)** Every level set $S_c:=T^{-1}(c)$, $c\\in\\mathbb R$, is a Cauchy\nhypersurface ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clauses (a)\nand (c)): it is a spacelike embedded hypersurface and every inextendible\ncausal curve meets it in exactly one parameter value. In particular $T$ is\nsurjective.\n\n**(c)** Along every inextendible future-directed causal curve\n$T\\to+\\infty$, and along every inextendible past-directed causal curve\n$T\\to-\\infty$.\n\n**(d)** The vector field $X:=\\nabla T/g(\\nabla T,\\nabla T)$ is smooth,\nfuture-directed timelike, satisfies $X(T)=1$, and is complete\n([[def-complete-vector-field]]): every maximal integral curve of $X$ is\ndefined on all of $\\mathbb R$, so by\n[[prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]] its\nflow $\\Phi:\\mathbb R\\times M\\to M$ is a global smooth flow\n([[def-local-and-global-flow]]).\n\n**(e)** The map $\\Psi:\\mathbb R\\times S_0\\to M$, $\\Psi(s,z):=\\Phi(s,z)$, is\na diffeomorphism and $T(\\Psi(s,z))=s$ for all $(s,z)$; equivalently $M$ is\nfoliated by the Cauchy hypersurfaces $S_c$, each flow line meeting each level\nexactly once.\n\n**(f)** Put $\\beta:=-1/g(\\nabla T,\\nabla T)$, a smooth positive function, and\n$h_T:=g+\\beta\\,dT\\otimes dT$. Then $g=-\\beta\\,dT\\otimes dT+h_T$;\n$h_T(X,\\cdot)=0$; and $h_T$ restricted to $\\ker dT$ is a smooth Riemannian\nmetric, so the decomposition $T_pM=\\mathbb RX_p\\oplus\\ker dT_p$ is\n$g$-orthogonal with $g(X,X)=-\\beta$. Consequently the pullback of $g$ by the\ndiffeomorphism $\\Psi$ has no mixed terms,\n$$\\Psi^*g=-(\\beta\\circ\\Psi)\\,ds^2+h,\\qquad h_{(s,z)}(v,w):=g_{\\Phi(s,z)}\\bigl((d\\Phi_s)_zv,(d\\Phi_s)_zw\\bigr),$$\na sum of a negative definite one-dimensional form and the smooth family of\nRiemannian metrics induced on the levels.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-gr-spacelike-hypersurfaces-and-cauchy-sets",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with the\ncausal curves of [[def-gr-causal-curves-and-reachability]], and let\n$S\\subseteq M$.\n\n**(a) Spacelike hypersurfaces.** A subset $\\Sigma\\subseteq M$ is a **spacelike\nembedded hypersurface** when it is an embedded three-dimensional submanifold\nof $M$ ([[def-embedded-submanifold-and-slice-chart]]) such that the\nrestriction of $g_p$ to $T_p\\Sigma\\times T_p\\Sigma$ is positive definite for\nevery $p\\in\\Sigma$; equivalently, every nonzero vector tangent to $\\Sigma$ is\nspacelike ([[def-causal-classification-of-lorentz-vectors]]). A spacelike\nembedded hypersurface is automatically a nondegenerate hypersurface, so its\n$g$-orthogonal complement in $T_pM$ is one-dimensional and nondegenerate, and\nit carries a unique future-directed unit timelike normal; that normal is\nconstructed where it is used, not here.\n\n**(b) Achronality and acausality.** $S$ is **achronal** when no two distinct\npoints $p,q\\in S$ satisfy $p\\ll q$ or $q\\ll p$; $S$ is **acausal** when no two\ndistinct points $p,q\\in S$ satisfy $p\\le q$ or $q\\le p$. Every acausal set is\nachronal, since $p\\ll q$ implies $p\\le q$.\n\n**(c) Cauchy sets.** $S$ is a **Cauchy set** when for every inextendible\ncausal curve $\\gamma:I\\to M$ the parameter set\n$$\\gamma^{-1}[S]:=\\{t\\in I:\\gamma(t)\\in S\\}$$\nhas exactly one element. Because a strictly increasing continuous surjection\nof intervals induces a bijection of parameter sets, this condition is\ninvariant under reparametrization\n([[lem-gr-causal-curve-calculus]] clause (e)); it is stated in terms of\nparameters rather than of the point set $\\gamma(I)\\cap S$, so that a closed\ncausal curve counts two visits to the same point as two parameter values. A\n**Cauchy hypersurface** is a Cauchy set that is also a spacelike embedded\nhypersurface in the sense of clause (a).\n\n**(d) Domains of dependence.** For any $S\\subseteq M$ define\n$$D^+(S):=\\{p\\in M:\\text{every past-inextendible causal curve through }p \\text{ meets }S\\},$$\nand dually $D^-(S):=\\{p\\in M:\\text{every future-inextendible causal curve\nthrough }p\\text{ meets }S\\}$, where \"meets $S$\" means that some parameter\nvalue is mapped into $S$, and $D(S):=D^+(S)\\cup D^-(S)$ is the **domain of\ndependence** of $S$.\n\n**(e) Cauchy horizon.** For a closed set $S\\subseteq M$ the **future Cauchy\nhorizon** is\n$$H^+(S):=D^+(S)\\setminus I^-(D^+(S)),$$\nthe set of points of $D^+(S)$ that are not chronologically preceded by any\npoint of $D^+(S)$; dually $H^-(S):=D^-(S)\\setminus I^+(D^-(S))$, and the\n**Cauchy horizon** is $H(S):=H^+(S)\\cup H^-(S)$.\n\n**(f) Scope.** These are mathematical definitions. Neither existence of\nCauchy sets nor any relation between the objects defined here is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-lorentz-hodge-calculus",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N,o)$ have the oriented, time-oriented Lorentzian structure and volume form of [[def-emg-lorentzian-forms]]. On decomposable $k$-covectors define the induced exterior pairing by\n\n$$\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle_g:=\\det\\bigl(g^{-1}(\\alpha_i,\\beta_j)\\bigr),$$\n\nand extend it bilinearly. For $0\\le k\\le4$, its coordinate expression is the pointwise exterior metric on $k$-covectors\n\n$$\\langle\\alpha,\\beta\\rangle_g:=\\frac1{k!}\\alpha_{a_1\\cdots a_k}\\beta^{a_1\\cdots a_k},$$\n\nwhere indices are raised by $g^{-1}$. There is a unique smooth bundle map $\\star_g:\\Omega^k(M)\\to\\Omega^{4-k}(M)$ characterized by\n\n$$\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$$\n\nat every point. In a positively oriented $g$-orthonormal coframe $(e^0,e^1,e^2,e^3)$, put $\\epsilon_0=-1$ and $\\epsilon_1=\\epsilon_2=\\epsilon_3=1$. For an increasing index set $I\\subseteq\\{0,1,2,3\\}$, let $I^c$ be its increasing complement, let $s(I,I^c)$ be the sign of the permutation $(I,I^c)$ to $(0,1,2,3)$, and set $\\epsilon_I:=\\prod_{i\\in I}\\epsilon_i$. Then\n\n$$\\star_g e^I=\\epsilon_I s(I,I^c)e^{I^c}.$$\n\nConsequently, on $k$-forms,\n\n$$\\star_g^2=(-1)^{k(4-k)+1}\\operatorname{id}.$$\n\nIn particular $\\star_g^2=-\\operatorname{id}$ on two-forms. For a two-form $F$, the component formula in a positively oriented chart is\n\n$$({\\star_gF})_{ab}=\\frac12(\\mathrm{vol}_g)_{abcd}F^{cd}.$$\n\nThe exterior derivative in [[def-exterior-derivative-by-the-invariant-vector-field-formula]] has the local coordinate formula of [[thm-local-coordinate-formula-for-the-exterior-derivative]], satisfies $d^2=0$, and obeys the graded product rule of [[thm-the-exterior-derivative-is-a-graded-derivation]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-de-rham-cohomology",
+          "source_section": "Definition",
+          "quote": "The real **de Rham cohomology** is $H^k_{\\mathrm{dR}}(M)=Z^k(M)/B^k(M)$, with $Z^k,B^k$ as in [[def-closed-and-exact-differential-forms]].\n\nThis is [[def-cohomology-object-of-a-cochain-complex]] in real vector spaces. Only a closed form $\\omega$ represents a class $[\\omega]$. For closed forms $\\omega,\\omega\\prime$, equality $[\\omega]=[\\omega\\prime]$ means precisely $\\omega\\prime-\\omega=d\\eta$ for some $(k-1)$-form $\\eta$. Addition and real scalar multiplication are induced by those of forms. All groups on the empty manifold are zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-smooth-inverse-function-theorem-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be a smooth map and let $p\\in M$. If $dF_p:T_pM\\to T_{F(p)}N$ is\nan isomorphism, then there are open neighbourhoods $U$ of $p$ and $V$ of\n$F(p)$ such that $F|_U:U\\to V$ is a diffeomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $X$ and $\\Phi_t$ be the complete timelike field and its flow from [F1],\nand define $\\Psi:\\mathbb R\\times\\Sigma\\to M$ by\n$\\Psi(t,x)=\\Phi_t(i(x))$. Since $T(\\Phi_t(p))=T(p)+t$, each orbit has no\nendpoint at either infinite end and is an inextendible timelike curve. Thus\n[F2] makes its intersection with $i(\\Sigma)$ unique. Hence $\\Psi$ is\nsurjective and injective: if two images agree, their points lie on the same\norbit, their slice intersections agree, and the flow times agree because the\ntemporal function increases at unit rate along $X$. The flow is smooth, so\n$\\Psi$ is smooth. If\n$d\\Psi_{(t,x)}(a\\partial_t+V)=0$, applying $d\\Phi_{-t}$ gives\n$aX_{i(x)}+d i_x(V)=0$. The first vector is timelike when $a\\ne0$, while the\nsecond is tangent to a spacelike hypersurface; therefore $a=0$ and $V=0$.\nThus $d\\Psi$ is an isomorphism, and [L1] shows that $\\Psi$ is a local\ndiffeomorphism. Its bijectivity makes it a global diffeomorphism, with\n$\\Psi(0,x)=i(x)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "L1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pull back $G:=F-\\bar F$ to the product and write its unique time/spatial\ndecomposition as $\\widetilde G:=\\Psi^*G=dt\\wedge\\eta_t+\\beta_t$, where\n$\\eta_t$ is a smooth family of spatial one-forms and $\\beta_t$ a smooth\nfamily of spatial two-forms on $\\Sigma$. Pullback commutes with $d$: in local\ncoordinates the first-derivative terms in $d(\\Psi^*G)$ are the pullback of\n$dG$, while the second derivatives of $\\Psi$ cancel in pairs because mixed\npartials commute and $G$ is antisymmetric. Since $dG=0$ by hypothesis and\n[F3], the product-coordinate formula for $d\\widetilde G$ gives\n$\\partial_t\\beta_t=d_\\Sigma\\eta_t$. The slice equality implies $\\beta_0=0$.\nDefine the spatial one-form $\\widetilde\\alpha_t:=\\int_0^t\\eta_s\\,ds$ and\ngive $\\widetilde\\alpha$ zero $dt$ component. The integral of a smooth\nparameter family is smooth, and direct differentiation gives\n$d\\widetilde\\alpha=dt\\wedge\\eta_t+d_\\Sigma\\widetilde\\alpha_t\n=dt\\wedge\\eta_t+\\int_0^t d_\\Sigma\\eta_s\\,ds\n=dt\\wedge\\eta_t+\\beta_t=\\widetilde G$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Set $\\alpha:=(\\Psi^{-1})^*\\widetilde\\alpha$. The same coordinate\npullback identity gives $d\\alpha=G=F-\\bar F$. By [F4], this is exact on the\nwhole spacetime, not merely on coordinate neighborhoods.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: If M is empty, both spaces of forms contain only zero and α=0 gives the conclusion; otherwise the stated Cauchy hypothesis applies."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When F=F̄, the primitive α=0 works; the integral construction in step 2.1 also yields zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no number-of-components or finite-family parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The claim has no rank, determinant, or limiting-parameter case; smooth closed forms are handled directly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The temporal flow is complete by [F1], and step 2.1 integrates over each finite interval from 0 to t; no finite temporal endpoint is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the exact complete flow supplied under ACω+DC and makes no additional selection of slices or charts."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite or computational check applies; the general claim is established analytically from the stated hypotheses and supplier interfaces.",
+      "risk_review": {
+        "status": "open",
+        "notes": "Step-1 authoring record only; independent proof review remains pending."
+      }
+    },
+    "pthm-emg-local-electrovacuum-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-emg-einstein-maxwell-action",
+          "source_section": "Postulate",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, curvature\nconvention and SI constants of [[def-emg-geometry-units]] and\n[[def-emg-lorentzian-forms]]. Let $F$ be the curvature two-form of a smooth\nconnection in one fixed bundle sector. Choose the actual matter functional\n$S_m$ of [[post-emg-selected-matter-action]]. For configurations where the\naction is finite, or for compactly supported action differences on a\nnoncompact manifold, adopt\n\n$$S_{\\mathrm{tot}}[g,A,\\Psi] =\\frac{c^3}{16\\pi G_N}\\int_M(R-2\\Lambda)\\,\\mathrm{vol}_g -\\frac1{4\\mu_0c}\\int_M F_{ab}F^{ab}\\,\\mathrm{vol}_g +S_m[g,A,\\Psi].$$\n\nAdopt that a configuration is dynamically admissible in this branch exactly\nwhen the first variation of this total action vanishes independently for\nevery smooth compactly supported symmetric inverse-metric variation, every\nsmooth compactly supported fixed-sector connection one-form variation, and\nevery admissible compactly supported matter-field variation. If $M$ has a\nphysical boundary, only variations vanishing on a neighbourhood of that\nboundary are included. This makes no claim about a Gibbons–Hawking–York or\nother boundary action.\n\nThe earlier postulate [[post-em-stationary-action-model]] concerns its stated\nflat electromagnetic and prescribed-potential particle sectors. It supplies\nno unified matter–gravity action or coupled-solution theorem; the functional\nabove is an additional, explicitly adopted model. An equation-based\nEinstein–Maxwell formulation is a separate alternative, not a premise of this\naction branch.\n\nAll displayed coefficients are model parameters with the units and\ninterpretations in [[def-emg-geometry-units]]. Compact support is essential:\nthe Einstein–Hilbert and Maxwell integrations by parts have boundary terms in\ngeneral. The postulate asserts neither that its stationary configurations exist\nnor that the action describes nature.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emg-action-field-equations",
+          "source_section": "Statement",
+          "quote": "Let $(M,g)$, the fixed smooth connection sector, the constants $c,G_N,\\mu_0>0$,\nconstant $\\Lambda$, and the selected matter functional $S_m$ be exactly those\nof [[post-emg-einstein-maxwell-action]]. Write $F$ for the connection curvature,\n$j$ and $T^m$ for the current and Hilbert tensor in the selected matter\nvariation, and\n\n$$T^{\\mathrm{EM}}_{ab}:=\\frac1{\\mu_0}\\left(F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd}\\right),\\qquad \\kappa_E:=\\frac{8\\pi G_N}{c^4}.$$\n\nThe homogeneous identity $dF=0$ holds because $F$ is the curvature of the\nsmooth connection in the fixed sector. The adopted configuration is stationary\nunder every admissible compactly supported metric, connection, and matter\nvariation if and only if all of the following hold:\n\n$$\\nabla_aF^{ab}=-\\mu_0j^b,\\qquad G_{ab}+\\Lambda g_{ab}=\\kappa_E(T^{\\mathrm{EM}}_{ab}+T^m_{ab}),\\qquad \\delta_\\Psi S_m[\\zeta]=0\\ \\text{for every admissible compactly supported }\\zeta.$$\n\nThe last clause is the selected matter model's Euler–Lagrange condition; an\nexplicit local matter equation cannot be given until $S_m$ is specified.\nThese are model deductions from the adopted action and smooth compact\nvariation hypotheses, not evidence that a coupled solution exists or that the\nmodel describes nature.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emg-geometry-units",
+          "source_section": "Definition",
+          "quote": "Adopt SI units and the following model-local quantity roles. Here the selected Einstein–Maxwell framework combines the stated Lorentzian geometry with a classical electromagnetic two-form and current; this definition itself supplies no gravitational equation, matter action, or empirical claim. A primitive is an input or independent field variable of this formulation; a derived quantity is fixed by a stated construction from its inputs. Neither label is universal across physical theories, and unit choice alone does not determine it.\n\nThe spacetime data are a smooth, Hausdorff, second-countable, boundaryless four-manifold $M$, a smooth Lorentzian metric $g$ of signature $(-,+,+,+)$, a smooth time-orientation field, and an independent orientation, exactly as in [[def-emg-lorentzian-forms]]. The metric, its time orientation, and the manifold orientation are separate data. An observer at $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g(n,n)=-1$. A smooth observer congruence is a smooth field of such vectors. A local tetrad is a smooth basis $(e_0,e_1,e_2,e_3)$ with metric matrix $\\operatorname{diag}(-1,1,1,1)$; an observer congruence, a coordinate chart, and a tetrad are different objects. Tetrads and observer fields need only exist locally; this definition assumes no global inertial chart, global tetrad, or hypersurface-orthogonal congruence.\n\nThe electromagnetic field-strength variable $F$ is a smooth real two-form, hence an alternating covariant tensor of type $(0,2)$, on an open subset of $M$, as in [[def-emg-lorentzian-forms]]. It is primitive in this formulation. For an observer congruence $n$, its electric and magnetic observer covectors are derived by\n\n$$E_a:=cF_{ab}n^b,\\qquad B_a:=-({\\star_gF})_{ab}n^b.$$\n\nHere $\\star_g$ is the unique Hodge map characterized pointwise by $\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, using the metric and independent orientation, as in [[lem-emg-lorentz-hodge-calculus]]. Both covectors annihilate $n$ and lie in the rest covector space $\\{\\alpha\\in T_p^*M:\\alpha(n)=0\\}$, whose induced metric is positive definite. In a positively oriented future orthonormal tetrad with $e_0=n$ and $\\epsilon_{123}=+1$, their spatial components obey the fixed dictionary $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$ from [[lem-emg-observer-field-decomposition]]. Thus $E$ and $B$ are observer-dependent derived fields, not globally defined observer-independent three-vectors on a curved spacetime. Their tetrad components have units $\\mathrm{V\\,m^{-1}}$ and tesla (T), respectively; the components of $F$ in a length-coordinate chart have unit T. No global potential is assumed; when a local potential $A_a$ is used, its components have unit $\\mathrm{T\\,m}$ and a scalar potential $\\varphi$ has unit V.\n\nFor any chosen observer $n$, a smooth four-current is a vector field $j$ whose local decomposition is $j=c\\rho\\,n+J$, where $\\rho:=-g(n,j)/c$ is the observer charge density and $J:=j-c\\rho n$ is orthogonal to $n$. In the associated positively oriented orthonormal tetrad its components are $j^0=c\\rho$ and $j^i=J^i$. The units are $[\\rho]=\\mathrm{C\\,m^{-3}}$, $[J^i]=[j^a]=\\mathrm{A\\,m^{-2}}$, and $[q]=\\mathrm C$ for a charge parameter supplied by a matter model. The current is a prescribed input or is supplied by an explicitly stated matter model; it is not inferred from the Maxwell equation alone.\n\nThe SI constants and coordinate units are fixed as follows. The speed of ideal vacuum light $c>0$ is the exact SI defining constant $299\\,792\\,458\\ \\mathrm{m\\,s^{-1}}$; identifying it with the shared ideal-light and clock conversion constant is the adopted Minkowski model of [[post-em-minkowski-physical-model]], not a consequence of its unit definition. The elementary charge $e$ is exactly $1.602\\,176\\,634\\times10^{-19}\\ \\mathrm C$. These unit definitions do not imply that charge is quantized. The magnetic constant $\\mu_0>0$ has unit $\\mathrm{N\\,A^{-2}}$ and is experimentally determined in the revised SI, so no exact numerical value for $\\mu_0$ is adopted. Define the electric constant (vacuum permittivity) $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$; hence $\\varepsilon_0\\mu_0c^2=1$, and $\\varepsilon_0$ has the same relative standard uncertainty as $\\mu_0$ because $c$ is exact. The exact component equation $\\nabla_aF^{ab}=-\\mu_0j^b$ is dimensionally consistent: both sides have unit $\\mathrm{T\\,m^{-1}}$ in a length-coordinate frame.\n\nIn a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected. This is local coordinate bookkeeping, not a global inertial-coordinate claim. In such a chart $g_{ab}$ is dimensionless, the Levi-Civita coefficients $\\Gamma^a{}_{bc}$ have unit $\\mathrm{m^{-1}}$, and curvature components have unit $\\mathrm{m^{-2}}$, as in [[def-emg-lorentzian-forms]]. Components in other coordinate units transform by their Jacobians.\n\nFor the gravitational sector, take Newton's gravitational constant $G_N>0$ with unit $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$ and the cosmological constant parameter $\\Lambda\\in\\mathbb R$ with unit $\\mathrm{m^{-2}}$ as primitive parameters of the selected model; no numerical value for either is used here. The coupling normalization $\\kappa_E:=8\\pi G_N/c^4$ is derived from these parameters and has unit $\\mathrm{m\\,J^{-1}}$. This definition records the convention for a later Einstein equation; it asserts no Einstein equation. A separate positive normalization $\\kappa_0$ with unit weber (Wb) is a chosen flux conversion reserved for a later explicitly specified $U(1)$ formulation, where $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$ under multiplication. It is not $\\kappa_E$, an electric charge, $\\mu_0$, or Planck's constant, and it implies no charge quantization. Test-particle rest mass $m>0$ in kg and charge $q$ in C are externally supplied matter parameters, not quantities derived by classical electromagnetism.\n\nThese are SI and model-definition conventions only. They neither assert empirical measurements beyond the stated SI defining constants and measured status of $\\mu_0$, nor identify similarly named quantities in another framework.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-electrovacuum-cauchy-system",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, oriented and time-oriented four-manifold with smooth Lorentz metric of signature $(-,+,+,+)$, as in [[def-emg-lorentzian-forms]]. Use its metric-selected connection and curvature convention. Fix $c>0$, $G_N>0$, $\\mu_0>0$, and $\\Lambda\\in\\mathbb R$, and put\n\n$$\\kappa:=\\frac{8\\pi G_N}{c^4}>0.$$\n\nThese are parameters of the mathematical system. For the SI interpretation, $c$ has units $\\mathrm{m\\,s^{-1}}$, $G_N$ has units $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $\\mu_0$ has units $\\mathrm{N\\,A^{-2}}$, $\\kappa$ has units $\\mathrm{s^2\\,kg^{-1}\\,m^{-1}}$, and $\\Lambda$ has units $\\mathrm{m^{-2}}$. In a length-coordinate chart $x^0=ct$, metric components are dimensionless and curvature components have units $\\mathrm{m^{-2}}$.\n\nFor a smooth real two-form $F\\in\\Omega^2(M)$, define\n\n$$Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14 g_{ab}F_{cd}F^{cd},\\qquad T^{\\rm EM}_{ab}:=\\mu_0^{-1}Q_{ab}(g,F).$$\n\nIndices are raised with $g^{-1}$; $\\star_g$ is the Lorentzian Hodge star of [[lem-emg-lorentz-hodge-calculus]]. The electromagnetic stress tensor $T^{\\rm EM}$ is a symmetric covariant two-tensor; in an orthonormal frame its components have energy-density units $\\mathrm{J\\,m^{-3}}$. If $n$ is a future unit normal and $(\\mathfrak e_1,\\mathfrak e_2,\\mathfrak e_3)$ is a positively oriented orthonormal spatial triad, define $e_i:=F(\\mathfrak e_i,n)$ and $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathfrak e_j,\\mathfrak e_k)$. By [[lem-emg-observer-field-decomposition]], these are $E_i/c$ and $B_i$ in the SI observer convention; both have units tesla.\n\nFor sign clarity only, a sourced extension would write $\\nabla_aF^{ab}=-\\mu_0J^b$ for a smooth current vector $J$; the source-free system below is the case $J=0$.\n\nThe **source-free electrovacuum tensor Cauchy system** on an open set $U\\subseteq M$ is the system for a smooth Lorentz metric $g$ and smooth real two-form $F$ on $U$ given by\n\n$$G_{ab}[g]+\\Lambda g_{ab}=\\kappa T^{\\rm EM}_{ab}[g,F],\\qquad dF=0,\\qquad d(\\star_gF)=0.$$\n\nHere $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$ is the Einstein tensor. A **spacelike initial hypersurface** is a smooth spacelike embedded three-manifold $i:\\Sigma\\hookrightarrow U$ with induced Riemannian metric $h=i^*g$, future unit normal $n$, and second fundamental form $K(X,Y)=g(\\nabla_Xn,Y)=\\tfrac12(\\mathcal L_nh)(X,Y)$, using the convention of [[def-gr-spacelike-initial-data-and-constraints]]. It is a **Cauchy hypersurface in $U$** exactly when every inextendible causal curve $\\gamma:I\\to U$ meets it at exactly one parameter value, that is, $\\gamma^{-1}[i(\\Sigma)]$ has exactly one element, using the causal-curve convention of [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]. The local initial-data constructions require a spacelike initial hypersurface; they do not assume this global intersection property. The initial data are the induced $(h,K,e,b)$, where $e,b$ are the spatial fields just defined. No global electromagnetic potential is part of this definition.\n\nIn the SI convention the electromagnetic two-form has orthonormal-frame components in tesla, $T^{\\rm EM}_{ab}$ has units $\\mathrm{J\\,m^{-3}}$, and every term of the Einstein equation has units $\\mathrm{m^{-2}}$. The equations define a mathematical model; they do not assert that the model describes nature or that arbitrary Cauchy data have a development.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emg-constrained-electrovacuum-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a nonempty, smooth, oriented three-manifold without boundary. Let $h$ be a smooth Riemannian metric on $\\Sigma$, let $K$ be a smooth symmetric covariant two-tensor, and let $e,b$ be smooth vector fields tangent to $\\Sigma$. Let $D$ and $R(h)$ be the Levi-Civita connection and scalar curvature of $h$, set $\\tau:=\\operatorname{tr}_hK$ and $|K|_h^2:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell}$, and choose the induced spatial orientation so $\\operatorname{vol}_g=\\theta^0\\wedge\\operatorname{vol}_h=-n^\\flat\\wedge\\operatorname{vol}_h$ in a positively oriented normal coframe with $\\theta^0(n)=1$. Define the spatial cross product by $h(e\\times_hb,w)=\\operatorname{vol}_h(e,b,w)$ for each tangent vector $w$.\n\nFor the fixed parameters $(\\kappa,\\Lambda,\\mu_0)$ of [[def-emg-electrovacuum-cauchy-system]], the tuple $(\\Sigma,h,K,e,b)$ is **constrained electrovacuum initial data** when\n\n$$D_ie^i=0,\\qquad D_ib^i=0,$$\n\n$$R(h)+\\tau^2-|K|_h^2=2\\Lambda+\\frac{\\kappa}{\\mu_0}\\bigl(|e|_h^2+|b|_h^2\\bigr),$$\n\n$$D^jK_{ji}-D_i\\tau=-\\frac{\\kappa}{\\mu_0}(e\\times_hb)_i.$$\n\nHere the last display is an equality of covectors. The scalar-curvature form is the Gauss-Codazzi form of the normal projections in [[thm-gr-constraint-equations-in-normal-frame]]; the sign and $K$ convention are those of [[def-gr-spacelike-initial-data-and-constraints]] and [[def-emg-electrovacuum-cauchy-system]]. This definition asserts no existence or uniqueness of a spacetime development.\n\nFor the periodic high-regularity class, take $\\Sigma=\\mathbb T^3_{2\\pi}$, integer $s\\ge5$, $h\\in H^{s+1}$, $K,e,b\\in H^s$, and assume the continuous representative of $h$ has a uniform positive lower eigenvalue bound. The displayed constraint expressions then have continuous representatives: their weak-derivative orders are at most two for $h$ and one for $K,e,b$, and the embedding, algebra and smooth-composition suppliers [[lem-gr-periodic-sobolev-embedding]], [[lem-gr-periodic-sobolev-algebra]], and [[lem-gr-smooth-composition-and-commutator-estimates]] apply. In SI coordinates $K$ and $D$ carry one inverse-length factor, $R(h)$ and $\\Lambda$ carry inverse-length squared, while $e,b$ have units tesla; the coefficients $\\kappa/\\mu_0$ give the displayed terms matching units.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-emg-local-high-sobolev-electrovacuum",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $s\\ge5$ be an integer, $\\kappa>0$, $\\mu_0>0$, and $\\Lambda\\in\\mathbb R$. On $\\mathbb T^3_{2\\pi}=\\mathbb R^3/(2\\pi\\mathbb Z)^3$, let $h\\in H^{s+1}$ be a symmetric Riemannian metric with $h\\ge c_0 I$ for some $c_0>0$, let $K\\in H^s$ be a symmetric covariant two-tensor, and let $e,b\\in H^s$ be spatial vector fields. Here $H^s$ is the real componentwise Fourier Sobolev space of [[def-emg-periodic-high-sobolev-state]]. Use the length coordinate $t=x^0=ct_{\\rm SI}$, so $g,h$ are dimensionless, $K$ has units $\\mathrm m^{-1}$, and $e=E/c$ and $b=B$ both have units tesla in an oriented orthonormal frame; $\\kappa\\mu_0^{-1}|e|^2$ has units $\\mathrm m^{-2}$. Use the sign convention $K(X,Y)=g(\\nabla_Xn,Y)$ for the future unit normal. Assume\n$$D_ie^i=0,\\qquad D_ib^i=0,\\qquad R(h)+(\\operatorname{tr}_hK)^2-|K|_h^2=2\\Lambda+\\frac{\\kappa}{\\mu_0}(|e|_h^2+|b|_h^2),\\qquad D^jK_{ji}-D_i\\operatorname{tr}_hK=-\\frac{\\kappa}{\\mu_0}(e\\times_h b)_i,$$\nwhere $D$ is the Levi-Civita derivative of $h$. Then there are $T>0$ and a solution of the full source-free Einstein–Maxwell system on $(-T,T)\\times\\mathbb T^3$ with\n$$g\\in L^\\infty H^{s+1}\\cap C^0H^s,\\qquad \\partial_tg\\in L^\\infty H^s\\cap C^0H^{s-1},\\qquad F\\in L^\\infty H^s\\cap C^0H^{s-1}.$$\nThe initial two-form is reconstructed by $F(n,\\mathsf e_i)=-e_i$ and $F(\\mathsf e_i,\\mathsf e_j)=\\epsilon_{ijk}b_k$; no independent Maxwell normal derivative is prescribed. The metric remains Lorentzian with spacelike $t$-levels in a fixed compact admissible state neighborhood. Smooth data give a smooth solution on the same base-order interval. For a fixed harmonic background, on any common local interval with the stated compact-state and uniform $H^s$ bounds, the harmonic-reduced first-order state is unique and continuously dependent on its initial state in $C^0H^{s-1}$. In addition, on any smooth oriented three-manifold, smooth constrained data with these same equations have a smooth full development in a neighborhood of each initial point. No endpoint regularity threshold, strong $C^0H^s$ stability, global continuation, or geodesic completeness is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-emg-smooth-local-geometric-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $\\Sigma$ be a smooth oriented three-manifold without boundary, with smooth Riemannian metric $h$, smooth symmetric covariant tensor $K$, and smooth spatial vectors $e,b$. Fix $\\kappa>0$, $\\mu_0>0$, $\\Lambda\\in\\mathbb R$, use signature $(-,+,+,+)$ and $K(X,Y)=g(\\nabla_Xn,Y)$, and suppose the four Einstein–Maxwell constraints of [[thm-emg-gauss-codazzi-maxwell-constraints]] hold. In SI convention use length coordinate $x^0=ct$, dimensionless $g,h$, $K$ in $\\mathrm m^{-1}$, and $e=E/c$, $b=B$ in tesla. Reconstruct the complete initial two-form on $\\mathbb RN\\oplus T\\Sigma$ by\n$$F(N,\\mathsf e_i)=-e_i,\\qquad F(\\mathsf e_i,\\mathsf e_j)=\\epsilon_{ijk}b_k,$$\nwhere $N$ is the future unit normal symbol and $(\\mathsf e_i)$ is a positively oriented $h$-orthonormal frame. Then the data have a smooth time-oriented local source-free Einstein–Maxwell development on an open variable-width neighborhood of the entire initial surface. After restriction to a smaller collar, the interior of its intrinsic domain of dependence is a globally hyperbolic neighborhood with $\\Sigma$ Cauchy. Any two developments of this same model and complete data are related near the entire initial surface by a data-fixing, time-orientation-preserving isometry carrying $F$ to $F$. There is no uniform positive time width for noncompact $\\Sigma$ and no global-in-time conclusion.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nLet $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication, the subspace topology and the usual smooth circle structure. A **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, a smooth real phase lift $f_{ij}$ exists with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. Different lifts differ locally by an integer multiple of $2\\pi$, so their differentials agree and this compatibility condition is independent of the lift. Equivalently, with the globally defined real one-form $\\lambda(g)=-i\\,g^{-1}dg$ on each overlap, the condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe circle is a smooth Lie group and in particular a topological group: multiplication is the restriction of continuous complex multiplication and inversion is complex conjugation. A right principal $U(1)$-bundle has a continuous right action and locally trivial equivariant product charts; those charts make the action free and transitive on each fibre, as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-emg-circle-connection-gluing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-emg-spacelike-slice-normal-collar",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a smooth time-oriented Lorentzian four-manifold, let\n$\\Sigma$ be a smooth three-manifold, and let $i:\\Sigma\\to M$ be a smooth\nspacelike embedding. Suppose a smooth future unit normal field $n$ along\n$i(\\Sigma)$ is supplied. For every $p\\in\\Sigma$ there are an open\nneighborhood $U_p\\subseteq\\Sigma$, a number $\\epsilon_p>0$, and an open\n$V_p\\subseteq M$ such that the restricted map\n$\\Phi_p:(-\\epsilon_p,\\epsilon_p)\\times U_p\\to V_p$ given by\n\n$$\\Phi_p(t,x)=\\gamma_{i(x),n_{i(x)}}(t)$$\n\nis a diffeomorphism, where $\\gamma_{q,v}$ is the maximal affinely\nparameterized metric geodesic with initial data $(q,v)$. At its center,\n\n$$d(\\Phi_p)_{(0,p)}(a\\partial_t+X)=a n_{i(p)}+d i_p(X).$$\n\nThe neighborhoods and time widths may depend on $p$; no globally injective\nnormal exponential map or uniform width is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-emg-closed-two-form-exact-on-cauchy-product",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and Dependent Choice. Let $(M,g,N)$ be a smooth\ntime-oriented globally hyperbolic Lorentzian four-manifold, and let\n$i:\\Sigma\\hookrightarrow M$ be a smooth spacelike Cauchy embedding. If\n$F,\\bar F\\in\\Omega^2(M)$ are smooth closed two-forms with\n$i^*F=i^*\\bar F$, then $F-\\bar F$ is exact: there is a smooth\n$\\alpha\\in\\Omega^1(M)$ such that $d\\alpha=F-\\bar F$.\n\nHere a closed form has zero exterior derivative, and exactness means being the\nexterior derivative of a globally defined smooth form, as in\n[[def-de-rham-cohomology]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-gr-smooth-cauchy-temporal-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice\n([[def-countable-choice]], [[def-dependent-choice]]). Let $(M,g,N)$ be a\nglobally hyperbolic time-oriented smooth Lorentzian four-manifold\n([[def-gr-causal-conditions-and-global-hyperbolicity]] clause (c)), and let\n$t$ be the volume time function of [[thm-gr-volume-time-function]]. Then\nthere exist a smooth function $T:M\\to\\mathbb R$ and, with $\\nabla T$ the\ngradient of [[def-gr-inverse-metric-and-musical-isomorphisms]], the\nfollowing hold.\n\n**(a)** $T$ is a temporal function in the sense of\n[[def-gr-causal-conditions-and-global-hyperbolicity]] clause (e): smooth,\n$g(\\nabla T,\\nabla T)<0$ and $g(\\nabla T,N)>0$ everywhere.\n\n**(b)** Every level set $S_c:=T^{-1}(c)$, $c\\in\\mathbb R$, is a Cauchy\nhypersurface ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clauses (a)\nand (c)): it is a spacelike embedded hypersurface and every inextendible\ncausal curve meets it in exactly one parameter value. In particular $T$ is\nsurjective.\n\n**(c)** Along every inextendible future-directed causal curve\n$T\\to+\\infty$, and along every inextendible past-directed causal curve\n$T\\to-\\infty$.\n\n**(d)** The vector field $X:=\\nabla T/g(\\nabla T,\\nabla T)$ is smooth,\nfuture-directed timelike, satisfies $X(T)=1$, and is complete\n([[def-complete-vector-field]]): every maximal integral curve of $X$ is\ndefined on all of $\\mathbb R$, so by\n[[prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]] its\nflow $\\Phi:\\mathbb R\\times M\\to M$ is a global smooth flow\n([[def-local-and-global-flow]]).\n\n**(e)** The map $\\Psi:\\mathbb R\\times S_0\\to M$, $\\Psi(s,z):=\\Phi(s,z)$, is\na diffeomorphism and $T(\\Psi(s,z))=s$ for all $(s,z)$; equivalently $M$ is\nfoliated by the Cauchy hypersurfaces $S_c$, each flow line meeting each level\nexactly once.\n\n**(f)** Put $\\beta:=-1/g(\\nabla T,\\nabla T)$, a smooth positive function, and\n$h_T:=g+\\beta\\,dT\\otimes dT$. Then $g=-\\beta\\,dT\\otimes dT+h_T$;\n$h_T(X,\\cdot)=0$; and $h_T$ restricted to $\\ker dT$ is a smooth Riemannian\nmetric, so the decomposition $T_pM=\\mathbb RX_p\\oplus\\ker dT_p$ is\n$g$-orthogonal with $g(X,X)=-\\beta$. Consequently the pullback of $g$ by the\ndiffeomorphism $\\Psi$ has no mixed terms,\n$$\\Psi^*g=-(\\beta\\circ\\Psi)\\,ds^2+h,\\qquad h_{(s,z)}(v,w):=g_{\\Phi(s,z)}\\bigl((d\\Phi_s)_zv,(d\\Phi_s)_zw\\bigr),$$\na sum of a negative definite one-dimensional form and the smooth family of\nRiemannian metrics induced on the levels.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-smooth-inverse-function-theorem-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be a smooth map and let $p\\in M$. If $dF_p:T_pM\\to T_{F(p)}N$ is\nan isomorphism, then there are open neighbourhoods $U$ of $p$ and $V$ of\n$F(p)$ such that $F|_U:U\\to V$ is a diffeomorphism.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four constraints in [F5] are exactly the initial constraints for [F4]\nwith the same $K$, orientation, stress normalization, and definitions of\n$e,b$. The Cauchy data prescribe the magnetic two-form\n$\\beta_b(X,Y)=\\operatorname{vol}_h(b,X,Y)$ and the electric covector determined\nby $e$. In any resulting future-normal orthonormal frame, [F4] records their\ncomponents as $F(n,\\mathsf e_i)=-e_i$ and\n$F(\\mathsf e_i,\\mathsf e_j)=\\epsilon_{ijk}b_k$. These are the six independent\ncomponents of the initial field strength and require no global potential.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F6] to these smooth constrained data and choice assumptions [A3].\nIts arbitrary-slice clause gives a source-free solution locally near each\ninitial point. The stronger geometric patching and uniqueness supplier [F7]\nuses the same complete data and exact field-strength conventions; it yields a\nsingle smooth development on a variable-width neighborhood of the entire\ninitial surface and a smaller globally hyperbolic Cauchy neighborhood. No\npositive uniform width is inferred. The resulting spacelike Cauchy embedding\nhas a future unit normal by the definition of spacelike hypersurface; [F10]\nthen supplies normal geodesic charts at each point, again with no uniform\nwidth. These charts justify the local observer-frame reconstruction after\nthe spacetime exists; they are not used to assume local existence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "A3",
+            "F5",
+            "F6",
+            "F7",
+            "F10",
+            "F14"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Pull the initial local transition data in [A2] back to\n$\\mathbb R\\times\\Sigma$ by the projection to $\\Sigma$. Their cocycle and\npotential identities persist, so [F8]–[F9] construct a reference connection\nin the same normalized bundle sector, with curvature $\\bar F$ satisfying\n$i^*\\bar F=\\beta_b=i^*F$. Both $F$ and $\\bar F$ are closed by [F4] and\n[F9]. On the globally hyperbolic Cauchy neighborhood supplied in step 2.1,\napply [F11] to obtain a global one-form $\\alpha$ with $F-\\bar F=d\\alpha$. Adding\n$\\alpha/\\kappa_0$ to the normalized local connection representatives\npreserves their transition functions by [F9] and changes the physical\ncurvature by $\\kappa_0d(\\alpha/\\kappa_0)=d\\alpha$, hence to exactly $F$. Thus the\nfield-strength solution lies in the supplied fixed circle-bundle sector;\nthe temporal splitting and inverse-function inputs are exactly those used in\n[F10]–[F11].",
+          "step": "3.1",
+          "inputs": [
+            "A2",
+            "A3",
+            "step 2.1",
+            "F4",
+            "F8",
+            "F9",
+            "F11",
+            "F12",
+            "F13",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For any other solution of the same model with the same complete data,\n[F2] gives the same source-free field-strength system. [F7] then supplies a\ndata-fixing, time-orientation-preserving isometry on a neighborhood of the\ninitial surface carrying $g$ and $F$ to the other development. The argument\nasserts uniqueness of these field-strength fields, not uniqueness of a local\nconnection representative.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "A1",
+            "F2",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [A1], the selected matter variations vanish and $j=T^m=0$. The\nsolution from step 2.1 satisfies the field equations in [F4], and step 3.1\nrealizes its $F$ as the curvature of a connection in the fixed sector. The\nconverse direction of [F2] therefore makes this configuration stationary for\nthe adopted action under every allowed compact variation. This is a\nconditional deduction from the action branch, not a proof that the model\ndescribes nature.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Steps 2.1, 3.1, 4.1 and 3.2 prove the stated local existence, bundle\nsector, action stationarity and geometric uniqueness. No empirical premise,\nglobal-time claim, or maximal-development assertion has entered.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes a nonempty initial three-manifold, so the empty-data case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits e=b=0 whenever the constraints and supplied sector compatibility hold; no proof step divides by either field."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no number-of-components or finite-family parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires smooth Riemannian h and positive κ, μ₀, κ₀; in the periodic clause it also imposes h≥c₀I and s≥5."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement is restricted to a possibly variable-width open Cauchy neighborhood and expressly makes no global-time or uniform-width claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement assumes exactly ACω+DC; Facts [F14] and [A3] record these as the model and supplier assumptions, without full AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite or computational check applies; the general claim is established analytically from the stated hypotheses and supplier interfaces.",
+      "risk_review": {
+        "status": "open",
+        "notes": "Step-1 authoring record only; independent proof review remains pending."
+      }
+    },
+    "pthm-emg-on-shell-electromagnetic-conservation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-emg-einstein-maxwell-action",
+          "source_section": "Postulate",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, curvature\nconvention and SI constants of [[def-emg-geometry-units]] and\n[[def-emg-lorentzian-forms]]. Let $F$ be the curvature two-form of a smooth\nconnection in one fixed bundle sector. Choose the actual matter functional\n$S_m$ of [[post-emg-selected-matter-action]]. For configurations where the\naction is finite, or for compactly supported action differences on a\nnoncompact manifold, adopt\n\n$$S_{\\mathrm{tot}}[g,A,\\Psi] =\\frac{c^3}{16\\pi G_N}\\int_M(R-2\\Lambda)\\,\\mathrm{vol}_g -\\frac1{4\\mu_0c}\\int_M F_{ab}F^{ab}\\,\\mathrm{vol}_g +S_m[g,A,\\Psi].$$\n\nAdopt that a configuration is dynamically admissible in this branch exactly\nwhen the first variation of this total action vanishes independently for\nevery smooth compactly supported symmetric inverse-metric variation, every\nsmooth compactly supported fixed-sector connection one-form variation, and\nevery admissible compactly supported matter-field variation. If $M$ has a\nphysical boundary, only variations vanishing on a neighbourhood of that\nboundary are included. This makes no claim about a Gibbons–Hawking–York or\nother boundary action.\n\nThe earlier postulate [[post-em-stationary-action-model]] concerns its stated\nflat electromagnetic and prescribed-potential particle sectors. It supplies\nno unified matter–gravity action or coupled-solution theorem; the functional\nabove is an additional, explicitly adopted model. An equation-based\nEinstein–Maxwell formulation is a separate alternative, not a premise of this\naction branch.\n\nAll displayed coefficients are model parameters with the units and\ninterpretations in [[def-emg-geometry-units]]. Compact support is essential:\nthe Einstein–Hilbert and Maxwell integrations by parts have boundary terms in\ngeneral. The postulate asserts neither that its stationary configurations exist\nnor that the action describes nature.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emg-action-field-equations",
+          "source_section": "Statement",
+          "quote": "Let $(M,g)$, the fixed smooth connection sector, the constants $c,G_N,\\mu_0>0$,\nconstant $\\Lambda$, and the selected matter functional $S_m$ be exactly those\nof [[post-emg-einstein-maxwell-action]]. Write $F$ for the connection curvature,\n$j$ and $T^m$ for the current and Hilbert tensor in the selected matter\nvariation, and\n\n$$T^{\\mathrm{EM}}_{ab}:=\\frac1{\\mu_0}\\left(F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd}\\right),\\qquad \\kappa_E:=\\frac{8\\pi G_N}{c^4}.$$\n\nThe homogeneous identity $dF=0$ holds because $F$ is the curvature of the\nsmooth connection in the fixed sector. The adopted configuration is stationary\nunder every admissible compactly supported metric, connection, and matter\nvariation if and only if all of the following hold:\n\n$$\\nabla_aF^{ab}=-\\mu_0j^b,\\qquad G_{ab}+\\Lambda g_{ab}=\\kappa_E(T^{\\mathrm{EM}}_{ab}+T^m_{ab}),\\qquad \\delta_\\Psi S_m[\\zeta]=0\\ \\text{for every admissible compactly supported }\\zeta.$$\n\nThe last clause is the selected matter model's Euler–Lagrange condition; an\nexplicit local matter equation cannot be given until $S_m$ is specified.\nThese are model deductions from the adopted action and smooth compact\nvariation hypotheses, not evidence that a coupled solution exists or that the\nmodel describes nature.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-emg-maxwell-stress-conservation",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a smooth real two-form on a smooth oriented Lorentzian four-manifold of signature $(-,+,+,+)$, with the connection, Hodge star, and tensor $Q_{ab}=F_{ac}F_b{}^c-\\tfrac14g_{ab}F_{cd}F^{cd}$ of [[def-emg-electrovacuum-cauchy-system]]. For a smooth vector field $J$, suppose\n\n$$dF=0,\\qquad \\nabla_aF^{ab}=-\\mu_0J^b.$$\n\nThen $Q_{ab}$ is symmetric and trace-free, and the SI-normalized stress tensor $T^{\\rm EM}_{ab}=\\mu_0^{-1}Q_{ab}$ satisfies\n\n$$\\nabla^aT^{\\rm EM}_{ab}=-F_{bc}J^c.$$\n\nIn the source-free case $J=0$, $\\nabla^aT^{\\rm EM}_{ab}=0$. If $n$ is a future unit normal and $(\\mathfrak e_1,\\mathfrak e_2,\\mathfrak e_3)$ a positively oriented orthonormal spatial triad, put $e_i:=F(\\mathfrak e_i,n)$, $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathfrak e_j,\\mathfrak e_k)$, and $(e\\times b)_i:=\\epsilon_{ijk}e_jb_k$. Then\n\n$$T^{\\rm EM}(n,n)=\\frac{|e|^2+|b|^2}{2\\mu_0},\\qquad T^{\\rm EM}(n,\\mathfrak e_i)=-\\frac{(e\\times b)_i}{\\mu_0}.$$\n\nThese are pointwise tensor identities. In the SI interpretation $e=E/c$ and $b=B$ have units tesla; no measurement or physical applicability claim is included.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-electrovacuum-cauchy-system",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, oriented and time-oriented four-manifold with smooth Lorentz metric of signature $(-,+,+,+)$, as in [[def-emg-lorentzian-forms]]. Use its metric-selected connection and curvature convention. Fix $c>0$, $G_N>0$, $\\mu_0>0$, and $\\Lambda\\in\\mathbb R$, and put\n\n$$\\kappa:=\\frac{8\\pi G_N}{c^4}>0.$$\n\nThese are parameters of the mathematical system. For the SI interpretation, $c$ has units $\\mathrm{m\\,s^{-1}}$, $G_N$ has units $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $\\mu_0$ has units $\\mathrm{N\\,A^{-2}}$, $\\kappa$ has units $\\mathrm{s^2\\,kg^{-1}\\,m^{-1}}$, and $\\Lambda$ has units $\\mathrm{m^{-2}}$. In a length-coordinate chart $x^0=ct$, metric components are dimensionless and curvature components have units $\\mathrm{m^{-2}}$.\n\nFor a smooth real two-form $F\\in\\Omega^2(M)$, define\n\n$$Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14 g_{ab}F_{cd}F^{cd},\\qquad T^{\\rm EM}_{ab}:=\\mu_0^{-1}Q_{ab}(g,F).$$\n\nIndices are raised with $g^{-1}$; $\\star_g$ is the Lorentzian Hodge star of [[lem-emg-lorentz-hodge-calculus]]. The electromagnetic stress tensor $T^{\\rm EM}$ is a symmetric covariant two-tensor; in an orthonormal frame its components have energy-density units $\\mathrm{J\\,m^{-3}}$. If $n$ is a future unit normal and $(\\mathfrak e_1,\\mathfrak e_2,\\mathfrak e_3)$ is a positively oriented orthonormal spatial triad, define $e_i:=F(\\mathfrak e_i,n)$ and $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathfrak e_j,\\mathfrak e_k)$. By [[lem-emg-observer-field-decomposition]], these are $E_i/c$ and $B_i$ in the SI observer convention; both have units tesla.\n\nFor sign clarity only, a sourced extension would write $\\nabla_aF^{ab}=-\\mu_0J^b$ for a smooth current vector $J$; the source-free system below is the case $J=0$.\n\nThe **source-free electrovacuum tensor Cauchy system** on an open set $U\\subseteq M$ is the system for a smooth Lorentz metric $g$ and smooth real two-form $F$ on $U$ given by\n\n$$G_{ab}[g]+\\Lambda g_{ab}=\\kappa T^{\\rm EM}_{ab}[g,F],\\qquad dF=0,\\qquad d(\\star_gF)=0.$$\n\nHere $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$ is the Einstein tensor. A **spacelike initial hypersurface** is a smooth spacelike embedded three-manifold $i:\\Sigma\\hookrightarrow U$ with induced Riemannian metric $h=i^*g$, future unit normal $n$, and second fundamental form $K(X,Y)=g(\\nabla_Xn,Y)=\\tfrac12(\\mathcal L_nh)(X,Y)$, using the convention of [[def-gr-spacelike-initial-data-and-constraints]]. It is a **Cauchy hypersurface in $U$** exactly when every inextendible causal curve $\\gamma:I\\to U$ meets it at exactly one parameter value, that is, $\\gamma^{-1}[i(\\Sigma)]$ has exactly one element, using the causal-curve convention of [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]. The local initial-data constructions require a spacelike initial hypersurface; they do not assume this global intersection property. The initial data are the induced $(h,K,e,b)$, where $e,b$ are the spatial fields just defined. No global electromagnetic potential is part of this definition.\n\nIn the SI convention the electromagnetic two-form has orthonormal-frame components in tesla, $T^{\\rm EM}_{ab}$ has units $\\mathrm{J\\,m^{-3}}$, and every term of the Einstein equation has units $\\mathrm{m^{-2}}$. The equations define a mathematical model; they do not assert that the model describes nature or that arbitrary Cauchy data have a development.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-geometry-units",
+          "source_section": "Definition",
+          "quote": "Adopt SI units and the following model-local quantity roles. Here the selected Einstein–Maxwell framework combines the stated Lorentzian geometry with a classical electromagnetic two-form and current; this definition itself supplies no gravitational equation, matter action, or empirical claim. A primitive is an input or independent field variable of this formulation; a derived quantity is fixed by a stated construction from its inputs. Neither label is universal across physical theories, and unit choice alone does not determine it.\n\nThe spacetime data are a smooth, Hausdorff, second-countable, boundaryless four-manifold $M$, a smooth Lorentzian metric $g$ of signature $(-,+,+,+)$, a smooth time-orientation field, and an independent orientation, exactly as in [[def-emg-lorentzian-forms]]. The metric, its time orientation, and the manifold orientation are separate data. An observer at $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g(n,n)=-1$. A smooth observer congruence is a smooth field of such vectors. A local tetrad is a smooth basis $(e_0,e_1,e_2,e_3)$ with metric matrix $\\operatorname{diag}(-1,1,1,1)$; an observer congruence, a coordinate chart, and a tetrad are different objects. Tetrads and observer fields need only exist locally; this definition assumes no global inertial chart, global tetrad, or hypersurface-orthogonal congruence.\n\nThe electromagnetic field-strength variable $F$ is a smooth real two-form, hence an alternating covariant tensor of type $(0,2)$, on an open subset of $M$, as in [[def-emg-lorentzian-forms]]. It is primitive in this formulation. For an observer congruence $n$, its electric and magnetic observer covectors are derived by\n\n$$E_a:=cF_{ab}n^b,\\qquad B_a:=-({\\star_gF})_{ab}n^b.$$\n\nHere $\\star_g$ is the unique Hodge map characterized pointwise by $\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, using the metric and independent orientation, as in [[lem-emg-lorentz-hodge-calculus]]. Both covectors annihilate $n$ and lie in the rest covector space $\\{\\alpha\\in T_p^*M:\\alpha(n)=0\\}$, whose induced metric is positive definite. In a positively oriented future orthonormal tetrad with $e_0=n$ and $\\epsilon_{123}=+1$, their spatial components obey the fixed dictionary $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$ from [[lem-emg-observer-field-decomposition]]. Thus $E$ and $B$ are observer-dependent derived fields, not globally defined observer-independent three-vectors on a curved spacetime. Their tetrad components have units $\\mathrm{V\\,m^{-1}}$ and tesla (T), respectively; the components of $F$ in a length-coordinate chart have unit T. No global potential is assumed; when a local potential $A_a$ is used, its components have unit $\\mathrm{T\\,m}$ and a scalar potential $\\varphi$ has unit V.\n\nFor any chosen observer $n$, a smooth four-current is a vector field $j$ whose local decomposition is $j=c\\rho\\,n+J$, where $\\rho:=-g(n,j)/c$ is the observer charge density and $J:=j-c\\rho n$ is orthogonal to $n$. In the associated positively oriented orthonormal tetrad its components are $j^0=c\\rho$ and $j^i=J^i$. The units are $[\\rho]=\\mathrm{C\\,m^{-3}}$, $[J^i]=[j^a]=\\mathrm{A\\,m^{-2}}$, and $[q]=\\mathrm C$ for a charge parameter supplied by a matter model. The current is a prescribed input or is supplied by an explicitly stated matter model; it is not inferred from the Maxwell equation alone.\n\nThe SI constants and coordinate units are fixed as follows. The speed of ideal vacuum light $c>0$ is the exact SI defining constant $299\\,792\\,458\\ \\mathrm{m\\,s^{-1}}$; identifying it with the shared ideal-light and clock conversion constant is the adopted Minkowski model of [[post-em-minkowski-physical-model]], not a consequence of its unit definition. The elementary charge $e$ is exactly $1.602\\,176\\,634\\times10^{-19}\\ \\mathrm C$. These unit definitions do not imply that charge is quantized. The magnetic constant $\\mu_0>0$ has unit $\\mathrm{N\\,A^{-2}}$ and is experimentally determined in the revised SI, so no exact numerical value for $\\mu_0$ is adopted. Define the electric constant (vacuum permittivity) $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$; hence $\\varepsilon_0\\mu_0c^2=1$, and $\\varepsilon_0$ has the same relative standard uncertainty as $\\mu_0$ because $c$ is exact. The exact component equation $\\nabla_aF^{ab}=-\\mu_0j^b$ is dimensionally consistent: both sides have unit $\\mathrm{T\\,m^{-1}}$ in a length-coordinate frame.\n\nIn a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected. This is local coordinate bookkeeping, not a global inertial-coordinate claim. In such a chart $g_{ab}$ is dimensionless, the Levi-Civita coefficients $\\Gamma^a{}_{bc}$ have unit $\\mathrm{m^{-1}}$, and curvature components have unit $\\mathrm{m^{-2}}$, as in [[def-emg-lorentzian-forms]]. Components in other coordinate units transform by their Jacobians.\n\nFor the gravitational sector, take Newton's gravitational constant $G_N>0$ with unit $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$ and the cosmological constant parameter $\\Lambda\\in\\mathbb R$ with unit $\\mathrm{m^{-2}}$ as primitive parameters of the selected model; no numerical value for either is used here. The coupling normalization $\\kappa_E:=8\\pi G_N/c^4$ is derived from these parameters and has unit $\\mathrm{m\\,J^{-1}}$. This definition records the convention for a later Einstein equation; it asserts no Einstein equation. A separate positive normalization $\\kappa_0$ with unit weber (Wb) is a chosen flux conversion reserved for a later explicitly specified $U(1)$ formulation, where $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$ under multiplication. It is not $\\kappa_E$, an electric charge, $\\mu_0$, or Planck's constant, and it implies no charge quantization. Test-particle rest mass $m>0$ in kg and charge $q$ in C are externally supplied matter parameters, not quantities derived by classical electromagnetism.\n\nThese are SI and model-definition conventions only. They neither assert empirical measurements beyond the stated SI defining constants and measured status of $\\mu_0$, nor identify similarly named quantities in another framework.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nLet $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication, the subspace topology and the usual smooth circle structure. A **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, a smooth real phase lift $f_{ij}$ exists with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. Different lifts differ locally by an integer multiple of $2\\pi$, so their differentials agree and this compatibility condition is independent of the lift. Equivalently, with the globally defined real one-form $\\lambda(g)=-i\\,g^{-1}dg$ on each overlap, the condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe circle is a smooth Lie group and in particular a topological group: multiplication is the restriction of continuous complex multiplication and inversion is complex conjugation. A right principal $U(1)$-bundle has a continuous right action and locally trivial equivariant product charts; those charts make the action free and transitive on each fibre, as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-circle-connection-gluing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $S_m$ is the zero functional, its first variation is zero for every\nadmissible compactly supported metric, connection, or matter variation.\nConsequently the matter stress and current defined by [F1] satisfy\n$T^m_{ab}=0$ and $j^a=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F2] to the stationary configuration. Its connection equation and\nthe value $j=0$ from step 1.1 give $\\nabla_aF^{ab}=0$; the homogeneous equation\n$dF=0$ also holds because $F$ is the physical curvature of a smooth\nconnection with the normalization in [F5]. These are exactly the source-free\nMaxwell hypotheses of [F3].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] with $J=0$. Its pointwise identity reduces to\n$\\nabla^aT^{\\rm EM}_{ab}=0$, as claimed. This is covariant local conservation,\nnot a statement about a global energy charge.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If M is empty the tensor identity is vacuous; the Statement otherwise fixes the smooth Lorentzian domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the zero field gives zero electromagnetic stress, and no step divides by a field component."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no number-of-components or finite-family parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes a nondegenerate Lorentzian metric and μ₀>0; the local divergence identity uses no field-rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: The conclusion is a pointwise local tensor identity on M and contains no time interval or boundary charge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses the supplied connection and pointwise variation identities and makes no choice from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite or computational check applies; the general claim is established analytically from the stated hypotheses and supplier interfaces.",
+      "risk_review": {
+        "status": "open",
+        "notes": "Step-1 authoring record only; independent proof review remains pending."
+      }
+    },
+    "pthm-emg-smooth-electrovacuum-maximal-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-emg-einstein-maxwell-action",
+          "source_section": "Postulate",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, curvature\nconvention and SI constants of [[def-emg-geometry-units]] and\n[[def-emg-lorentzian-forms]]. Let $F$ be the curvature two-form of a smooth\nconnection in one fixed bundle sector. Choose the actual matter functional\n$S_m$ of [[post-emg-selected-matter-action]]. For configurations where the\naction is finite, or for compactly supported action differences on a\nnoncompact manifold, adopt\n\n$$S_{\\mathrm{tot}}[g,A,\\Psi] =\\frac{c^3}{16\\pi G_N}\\int_M(R-2\\Lambda)\\,\\mathrm{vol}_g -\\frac1{4\\mu_0c}\\int_M F_{ab}F^{ab}\\,\\mathrm{vol}_g +S_m[g,A,\\Psi].$$\n\nAdopt that a configuration is dynamically admissible in this branch exactly\nwhen the first variation of this total action vanishes independently for\nevery smooth compactly supported symmetric inverse-metric variation, every\nsmooth compactly supported fixed-sector connection one-form variation, and\nevery admissible compactly supported matter-field variation. If $M$ has a\nphysical boundary, only variations vanishing on a neighbourhood of that\nboundary are included. This makes no claim about a Gibbons–Hawking–York or\nother boundary action.\n\nThe earlier postulate [[post-em-stationary-action-model]] concerns its stated\nflat electromagnetic and prescribed-potential particle sectors. It supplies\nno unified matter–gravity action or coupled-solution theorem; the functional\nabove is an additional, explicitly adopted model. An equation-based\nEinstein–Maxwell formulation is a separate alternative, not a premise of this\naction branch.\n\nAll displayed coefficients are model parameters with the units and\ninterpretations in [[def-emg-geometry-units]]. Compact support is essential:\nthe Einstein–Hilbert and Maxwell integrations by parts have boundary terms in\ngeneral. The postulate asserts neither that its stationary configurations exist\nnor that the action describes nature.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-emg-action-field-equations",
+          "source_section": "Statement",
+          "quote": "Let $(M,g)$, the fixed smooth connection sector, the constants $c,G_N,\\mu_0>0$,\nconstant $\\Lambda$, and the selected matter functional $S_m$ be exactly those\nof [[post-emg-einstein-maxwell-action]]. Write $F$ for the connection curvature,\n$j$ and $T^m$ for the current and Hilbert tensor in the selected matter\nvariation, and\n\n$$T^{\\mathrm{EM}}_{ab}:=\\frac1{\\mu_0}\\left(F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd}\\right),\\qquad \\kappa_E:=\\frac{8\\pi G_N}{c^4}.$$\n\nThe homogeneous identity $dF=0$ holds because $F$ is the curvature of the\nsmooth connection in the fixed sector. The adopted configuration is stationary\nunder every admissible compactly supported metric, connection, and matter\nvariation if and only if all of the following hold:\n\n$$\\nabla_aF^{ab}=-\\mu_0j^b,\\qquad G_{ab}+\\Lambda g_{ab}=\\kappa_E(T^{\\mathrm{EM}}_{ab}+T^m_{ab}),\\qquad \\delta_\\Psi S_m[\\zeta]=0\\ \\text{for every admissible compactly supported }\\zeta.$$\n\nThe last clause is the selected matter model's Euler–Lagrange condition; an\nexplicit local matter equation cannot be given until $S_m$ is specified.\nThese are model deductions from the adopted action and smooth compact\nvariation hypotheses, not evidence that a coupled solution exists or that the\nmodel describes nature.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-emg-electrovacuum-cauchy-system",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be a smooth, Hausdorff, second-countable, oriented and time-oriented four-manifold with smooth Lorentz metric of signature $(-,+,+,+)$, as in [[def-emg-lorentzian-forms]]. Use its metric-selected connection and curvature convention. Fix $c>0$, $G_N>0$, $\\mu_0>0$, and $\\Lambda\\in\\mathbb R$, and put\n\n$$\\kappa:=\\frac{8\\pi G_N}{c^4}>0.$$\n\nThese are parameters of the mathematical system. For the SI interpretation, $c$ has units $\\mathrm{m\\,s^{-1}}$, $G_N$ has units $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $\\mu_0$ has units $\\mathrm{N\\,A^{-2}}$, $\\kappa$ has units $\\mathrm{s^2\\,kg^{-1}\\,m^{-1}}$, and $\\Lambda$ has units $\\mathrm{m^{-2}}$. In a length-coordinate chart $x^0=ct$, metric components are dimensionless and curvature components have units $\\mathrm{m^{-2}}$.\n\nFor a smooth real two-form $F\\in\\Omega^2(M)$, define\n\n$$Q_{ab}(g,F):=F_{ac}F_b{}^c-\\frac14 g_{ab}F_{cd}F^{cd},\\qquad T^{\\rm EM}_{ab}:=\\mu_0^{-1}Q_{ab}(g,F).$$\n\nIndices are raised with $g^{-1}$; $\\star_g$ is the Lorentzian Hodge star of [[lem-emg-lorentz-hodge-calculus]]. The electromagnetic stress tensor $T^{\\rm EM}$ is a symmetric covariant two-tensor; in an orthonormal frame its components have energy-density units $\\mathrm{J\\,m^{-3}}$. If $n$ is a future unit normal and $(\\mathfrak e_1,\\mathfrak e_2,\\mathfrak e_3)$ is a positively oriented orthonormal spatial triad, define $e_i:=F(\\mathfrak e_i,n)$ and $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathfrak e_j,\\mathfrak e_k)$. By [[lem-emg-observer-field-decomposition]], these are $E_i/c$ and $B_i$ in the SI observer convention; both have units tesla.\n\nFor sign clarity only, a sourced extension would write $\\nabla_aF^{ab}=-\\mu_0J^b$ for a smooth current vector $J$; the source-free system below is the case $J=0$.\n\nThe **source-free electrovacuum tensor Cauchy system** on an open set $U\\subseteq M$ is the system for a smooth Lorentz metric $g$ and smooth real two-form $F$ on $U$ given by\n\n$$G_{ab}[g]+\\Lambda g_{ab}=\\kappa T^{\\rm EM}_{ab}[g,F],\\qquad dF=0,\\qquad d(\\star_gF)=0.$$\n\nHere $G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12 Sg_{ab}$ is the Einstein tensor. A **spacelike initial hypersurface** is a smooth spacelike embedded three-manifold $i:\\Sigma\\hookrightarrow U$ with induced Riemannian metric $h=i^*g$, future unit normal $n$, and second fundamental form $K(X,Y)=g(\\nabla_Xn,Y)=\\tfrac12(\\mathcal L_nh)(X,Y)$, using the convention of [[def-gr-spacelike-initial-data-and-constraints]]. It is a **Cauchy hypersurface in $U$** exactly when every inextendible causal curve $\\gamma:I\\to U$ meets it at exactly one parameter value, that is, $\\gamma^{-1}[i(\\Sigma)]$ has exactly one element, using the causal-curve convention of [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]. The local initial-data constructions require a spacelike initial hypersurface; they do not assume this global intersection property. The initial data are the induced $(h,K,e,b)$, where $e,b$ are the spatial fields just defined. No global electromagnetic potential is part of this definition.\n\nIn the SI convention the electromagnetic two-form has orthonormal-frame components in tesla, $T^{\\rm EM}_{ab}$ has units $\\mathrm{J\\,m^{-3}}$, and every term of the Einstein equation has units $\\mathrm{m^{-2}}$. The equations define a mathematical model; they do not assert that the model describes nature or that arbitrary Cauchy data have a development.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-emg-constrained-electrovacuum-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a nonempty, smooth, oriented three-manifold without boundary. Let $h$ be a smooth Riemannian metric on $\\Sigma$, let $K$ be a smooth symmetric covariant two-tensor, and let $e,b$ be smooth vector fields tangent to $\\Sigma$. Let $D$ and $R(h)$ be the Levi-Civita connection and scalar curvature of $h$, set $\\tau:=\\operatorname{tr}_hK$ and $|K|_h^2:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell}$, and choose the induced spatial orientation so $\\operatorname{vol}_g=\\theta^0\\wedge\\operatorname{vol}_h=-n^\\flat\\wedge\\operatorname{vol}_h$ in a positively oriented normal coframe with $\\theta^0(n)=1$. Define the spatial cross product by $h(e\\times_hb,w)=\\operatorname{vol}_h(e,b,w)$ for each tangent vector $w$.\n\nFor the fixed parameters $(\\kappa,\\Lambda,\\mu_0)$ of [[def-emg-electrovacuum-cauchy-system]], the tuple $(\\Sigma,h,K,e,b)$ is **constrained electrovacuum initial data** when\n\n$$D_ie^i=0,\\qquad D_ib^i=0,$$\n\n$$R(h)+\\tau^2-|K|_h^2=2\\Lambda+\\frac{\\kappa}{\\mu_0}\\bigl(|e|_h^2+|b|_h^2\\bigr),$$\n\n$$D^jK_{ji}-D_i\\tau=-\\frac{\\kappa}{\\mu_0}(e\\times_hb)_i.$$\n\nHere the last display is an equality of covectors. The scalar-curvature form is the Gauss-Codazzi form of the normal projections in [[thm-gr-constraint-equations-in-normal-frame]]; the sign and $K$ convention are those of [[def-gr-spacelike-initial-data-and-constraints]] and [[def-emg-electrovacuum-cauchy-system]]. This definition asserts no existence or uniqueness of a spacetime development.\n\nFor the periodic high-regularity class, take $\\Sigma=\\mathbb T^3_{2\\pi}$, integer $s\\ge5$, $h\\in H^{s+1}$, $K,e,b\\in H^s$, and assume the continuous representative of $h$ has a uniform positive lower eigenvalue bound. The displayed constraint expressions then have continuous representatives: their weak-derivative orders are at most two for $h$ and one for $K,e,b$, and the embedding, algebra and smooth-composition suppliers [[lem-gr-periodic-sobolev-embedding]], [[lem-gr-periodic-sobolev-algebra]], and [[lem-gr-smooth-composition-and-commutator-estimates]] apply. In SI coordinates $K$ and $D$ carry one inverse-length factor, $R(h)$ and $\\Lambda$ carry inverse-length squared, while $e,b$ have units tesla; the coefficients $\\kappa/\\mu_0$ give the displayed terms matching units.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-gr-development-and-data-fixing-isometry",
+          "source_section": "Definition",
+          "quote": "**Data.** Fix $\\kappa>0$, $\\Lambda\\in\\mathbb R$, a smooth three-manifold $\\Sigma$ without boundary, a smooth Riemannian metric $h$ and smooth symmetric covariant $2$-tensor $K$. The normal convention is $K(V,W)=g(\\nabla_Vn,W)$ for the future unit normal. Specify one fixed covariant matter model, consisting of a finite list of smooth tensor fields $\\psi$, fixed equations $\\mathcal E(g,\\psi)=0$ and a fixed stress expression $\\mathcal T(g,\\psi)$, with pullback by local diffeomorphisms commuting with the equations and stress. Fix its complete smooth Cauchy data $d$: these determine all independent matter initial variables, not only the normal stress projections. Initial tensors with normal directions are specified on the abstract bundle $\\mathcal V=\\mathbb R\\nu\\oplus T\\Sigma$ with metric $g_0(a\\nu+X,b\\nu+Y)=-ab+h(X,Y)$. In a development, identify $a\\nu+X$ with $an+dj(X)$.\n\nAn admissible fixed coupled model is one satisfying the complete initialization, hyperbolic reduction, recovery and comparison hypotheses of [[thm-gr-local-geometric-development]], or a specified independent local existence and uniqueness reduction such as the dust branch below. The same fixed model, complete data and admissibility conditions are used in every comparison and at every restart. Admissibility includes the applicability of its supplied complete-data local existence and geometric uniqueness theorem to the data realized on each spacelike restart surface of the compared solutions. This must be checked for the actual model and surface; it is not inferred from stress conservation. This class includes the following four concrete branches; they do not exhaust it.\n\n1. **Vacuum:** no matter fields, $\\mathcal T=0$, and empty matter data.\n2. **Scalar field:** fix one smooth potential $V$ and one normalization $K_\\phi>0$. The field is $\\varphi$, its equation is $\\Box_g\\varphi-V'(\\varphi)=0$, its stress is the expression in [[def-gr-scalar-field-matter-model]] clause (c), and its complete data are $(\\varphi_0,\\pi_0)$ with $\\pi_0=n(\\varphi)|_\\Sigma$. The fixed potential has no sign restriction ([[thm-gr-scalar-field-local-evolution]]).\n3. **Strict barotropic fluid:** fix a smooth EOS $P:J\\to\\mathbb R$ on an open interval with $\\epsilon+P(\\epsilon)>0$ and $0<P'(\\epsilon)<1$. The fields are $\\epsilon\\in J$ and future unit velocity $u$, the stress is $(\\epsilon+P(\\epsilon))u^\\flat\\otimes u^\\flat+P(\\epsilon)g$, and the equations are the continuity and Euler equations of [[def-gr-perfect-fluid-matter-model]] clause (c), with this fixed EOS. Complete data are $(\\epsilon_0,v_0)$, where $\\epsilon_0:\\Sigma\\to J$ and $h(v_0,v_0)<1$, equivalently the bundle velocity $U_0=(1-h(v_0,v_0))^{-1/2}(\\nu+v_0)$. No small-tilt restriction is imposed ([[thm-gr-barotropic-fluid-local-evolution]]).\n4. **Geodesic nonnegative dust:** the fields are an energy-coefficient density $\\varepsilon\\ge0$ and a smooth future unit timelike field $u$, including on $\\{\\varepsilon=0\\}$. Set $\\mathcal T=\\varepsilon u^\\flat\\otimes u^\\flat$ and require both $\\nabla_u u=0$ and $u(\\varepsilon)+\\varepsilon\\nabla_a u^a=0$ everywhere. Complete data are $(\\varepsilon_0,U_0)$, with $\\varepsilon_0\\ge0$ and prescribed smooth future unit bundle velocity $U_0$, equivalently arbitrary smooth subluminal tilt. On positive-density regions this is [[def-gr-dust-matter-model]] with its density parameter equal to $\\varepsilon$. Through empty regions the geodesic velocity is separately prescribed and matched; conservation of stress alone is not substituted for this full system. For a fixed $c>0$, the mass-normalized theorem [[thm-gr-dust-local-evolution]] applies with $\\rho_0=\\varepsilon_0/c^2$ and reconstructs $\\varepsilon=c^2\\rho$.\n\nRequire the constraints for the initial stress $T_0$ computed from this complete data on $\\mathcal V$:\n$$S_h+(\\operatorname{tr}_hK)^2-|K|_h^2=2\\Lambda+2\\kappa T_0(\\nu,\\nu),\\qquad \\operatorname{div}_hK-d\\operatorname{tr}_hK=\\kappa T_0(\\nu,\\cdot).$$\nThese use the convention of [[thm-gr-constraint-equations-in-normal-frame]]. Equality of data includes equality of the model, constants, potential or EOS, and every component of $d$.\n\nThe local Cauchy-development and uniqueness suppliers for vacuum, scalar and strict fluid are the fixed-model theorem [[thm-gr-local-geometric-development]] and the two concrete branch theorems above. Its harmonic route requires the same fixed extraction/reconstruction rules and smooth symmetric-hyperbolic coefficient family for every compared physical solution, a positive time matrix on an admissible open state set, complete compatible initialization from $(h,K,d)$, propagation of auxiliary compatibility with recovery of the full matter equations on the reduced solution, and stress conservation on that reduced solution before Einstein recovery. These are the three explicit hypotheses of that theorem; conservation alone does not supply a Cauchy evolution law. Dust uses its independent common-flow/parallel-frame initialization, hyperbolic reduction, subsidiary recovery and uniqueness of [[thm-gr-dust-local-evolution]], rather than being asserted to satisfy the harmonic metric-first-derivative matter contract. Countable Choice and Dependent Choice are carried wherever these local theorems are invoked. Every additional fixed coupled model must supply the same complete-data local existence, admissibility, recovery and uniqueness obligations before it is used. This definition makes no local or global existence assertion.\n\n**(a) Development.** A **development** of this data is a tuple\n$(M,g,N,j,\\psi)$ consisting of:\n\n1. a time-oriented smooth Lorentzian four-manifold $(M,g,N)$\n   ([[def-gr-smooth-lorentzian-objects]]);\n2. a smooth embedding $j:\\Sigma\\to M$ whose image $j(\\Sigma)$ is a spacelike\n   embedded hypersurface ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]\n   clause (a));\n3. the smooth tensor fields $\\psi$ of the fixed model over $M$;\n4. the equations on $M$: $G_{ab}+\\Lambda g_{ab}=\\kappa\\,\\mathcal T_{ab}(g,\\psi)$ with\n   the Einstein tensor of $g$ ([[def-gr-curvature-tensor-and-derived-tensors]])\n   and $\\mathcal E(g,\\psi)=0$;\n5. the initial condition on $j(\\Sigma)$: $j(\\Sigma)$ is a Cauchy set of\n   $(M,g,N)$ in the sense of [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]\n   clause (c), that is, every inextendible causal curve of\n   [[def-gr-causal-curves-and-reachability]] meets $j(\\Sigma)$ in exactly one\n   parameter value;\n6. the induced data: $j^*(g)=h$, the second fundamental form of $j$ with\n   respect to the future unit normal equals $K$ in the convention\n   $K(V,W)=g(\\nabla_Vn,W)$ of\n   [[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]], and\n   the initial data of $\\psi$ on $j(\\Sigma)$ transported by $j$ equal $d$.\n\nNo completeness of $(M,g)$, no inextendibility of $M$, and no claim that the\nequations hold beyond $M$ are part of the definition. Whether a development is\nglobally hyperbolic is not part of the definition either; by clause 5 it\nfollows from [[thm-gr-cauchy-surface-implies-globally-hyperbolic]].\n\n**(b) Data-fixing isometry.** A **data-fixing isometry** between developments\n$(M,g,N,j,\\psi)$ and $(M',g',N',j',\\psi')$ of the same data is a smooth\ndiffeomorphism $\\varphi:M\\to M'$ such that\n\n1. $\\varphi^*(g')=g$;\n2. $g'_{\\varphi(p)}(d\\varphi_pN_p,N'_{\\varphi(p)})<0$ for every $p\\in M$: the isometry carries the future cone of $N$ onto that of $N'$;\n3. $\\varphi\\circ j=j'$;\n4. $\\varphi^*\\psi'=\\psi$, with the natural pullback action on every listed tensor type (and the inverse differential on contravariant slots). Equality includes every listed field, including the prescribed dust velocity at zero density.\n\n**(c) Development embedding.** A **development embedding** of $(M,g,N,j,\\psi)$\ninto $(M',g',N',j',\\psi')$ is a smooth map $\\varphi:M\\to M'$ that is a\ndiffeomorphism onto an open subset of $M'$ and satisfies clauses (b)1-4.\nDevelopment embeddings are isometric immersions by clause (b)1.\n\n**(d) Maximality.** A development $(M,g,N,j,\\psi)$ of the given data is\n**maximal** when for every development $(M',g',N',j',\\psi')$ of the same data\nthere exists a development embedding $\\varphi:M'\\to M$. A maximal development\nis also called a **maximal globally hyperbolic development** of the data.\n\n**(e) Scope.** This is a mathematical definition of the solution class used by\nthe Cauchy problem. The physical reading of $(M,g,N)$ and $\\psi$ and the\nstatus of $(h,K,d)$ as initial data of a model of nature are supplied by\nthe framework postulates of the physics library, not here; and no existence,\nuniqueness or maximality assertion is made by this definition.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-emg-sourcefree-smooth-maximal-development",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $\\Sigma$ be a nonempty connected smooth oriented three-manifold without boundary with smooth Riemannian metric $h$, smooth symmetric tensor $K$, and smooth spatial vectors $e,b$. Fix the source-free Einstein–Maxwell model, its constants $\\kappa>0$, $\\mu_0>0$, $\\Lambda\\in\\mathbb R$, signature $(-,+,+,+)$, orientation and $K(X,Y)=g(\\nabla_Xn,Y)$ convention as in [[def-emg-electrovacuum-cauchy-system]]. Assume the four constraints of [[thm-emg-gauss-codazzi-maxwell-constraints]] and reconstruct the complete initial two-form by $F(N,\\mathsf e_i)=-e_i$, $F(\\mathsf e_i,\\mathsf e_j)=\\epsilon_{ijk}b_k$. Then there is a smooth connected time-oriented globally hyperbolic development $(M_{\\max},g_{\\max},F_{\\max},\\iota)$ into which every other smooth source-free Einstein–Maxwell development of these complete data embeds by a time-orientation-preserving isometric embedding fixing $\\iota$ and carrying $F$ to $F_{\\max}$. The maximal development is unique up to a unique such data-fixing isometry. This maximality is within the smooth globally hyperbolic development class for this fixed two-form model; it asserts no geodesic completeness, no maximality among rough or non-globally-hyperbolic extensions, and no global-in-time regularity estimate.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nLet $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication, the subspace topology and the usual smooth circle structure. A **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, a smooth real phase lift $f_{ij}$ exists with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. Different lifts differ locally by an integer multiple of $2\\pi$, so their differentials agree and this compatibility condition is independent of the lift. Equivalently, with the globally defined real one-form $\\lambda(g)=-i\\,g^{-1}dg$ on each overlap, the condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe circle is a smooth Lie group and in particular a topological group: multiplication is the restriction of continuous complex multiplication and inversion is complex conjugation. A right principal $U(1)$-bundle has a continuous right action and locally trivial equivariant product charts; those charts make the action free and transitive on each fibre, as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-emg-circle-connection-gluing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-emg-closed-two-form-exact-on-cauchy-product",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ and Dependent Choice. Let $(M,g,N)$ be a smooth\ntime-oriented globally hyperbolic Lorentzian four-manifold, and let\n$i:\\Sigma\\hookrightarrow M$ be a smooth spacelike Cauchy embedding. If\n$F,\\bar F\\in\\Omega^2(M)$ are smooth closed two-forms with\n$i^*F=i^*\\bar F$, then $F-\\bar F$ is exact: there is a smooth\n$\\alpha\\in\\Omega^1(M)$ such that $d\\alpha=F-\\bar F$.\n\nHere a closed form has zero exterior derivative, and exactness means being the\nexterior derivative of a globally defined smooth form, as in\n[[def-de-rham-cohomology]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-gr-smooth-cauchy-temporal-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axioms of Countable Choice and Dependent Choice\n([[def-countable-choice]], [[def-dependent-choice]]). Let $(M,g,N)$ be a\nglobally hyperbolic time-oriented smooth Lorentzian four-manifold\n([[def-gr-causal-conditions-and-global-hyperbolicity]] clause (c)), and let\n$t$ be the volume time function of [[thm-gr-volume-time-function]]. Then\nthere exist a smooth function $T:M\\to\\mathbb R$ and, with $\\nabla T$ the\ngradient of [[def-gr-inverse-metric-and-musical-isomorphisms]], the\nfollowing hold.\n\n**(a)** $T$ is a temporal function in the sense of\n[[def-gr-causal-conditions-and-global-hyperbolicity]] clause (e): smooth,\n$g(\\nabla T,\\nabla T)<0$ and $g(\\nabla T,N)>0$ everywhere.\n\n**(b)** Every level set $S_c:=T^{-1}(c)$, $c\\in\\mathbb R$, is a Cauchy\nhypersurface ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clauses (a)\nand (c)): it is a spacelike embedded hypersurface and every inextendible\ncausal curve meets it in exactly one parameter value. In particular $T$ is\nsurjective.\n\n**(c)** Along every inextendible future-directed causal curve\n$T\\to+\\infty$, and along every inextendible past-directed causal curve\n$T\\to-\\infty$.\n\n**(d)** The vector field $X:=\\nabla T/g(\\nabla T,\\nabla T)$ is smooth,\nfuture-directed timelike, satisfies $X(T)=1$, and is complete\n([[def-complete-vector-field]]): every maximal integral curve of $X$ is\ndefined on all of $\\mathbb R$, so by\n[[prop-a-vector-field-is-complete-if-and-only-if-its-flow-is-global]] its\nflow $\\Phi:\\mathbb R\\times M\\to M$ is a global smooth flow\n([[def-local-and-global-flow]]).\n\n**(e)** The map $\\Psi:\\mathbb R\\times S_0\\to M$, $\\Psi(s,z):=\\Phi(s,z)$, is\na diffeomorphism and $T(\\Psi(s,z))=s$ for all $(s,z)$; equivalently $M$ is\nfoliated by the Cauchy hypersurfaces $S_c$, each flow line meeting each level\nexactly once.\n\n**(f)** Put $\\beta:=-1/g(\\nabla T,\\nabla T)$, a smooth positive function, and\n$h_T:=g+\\beta\\,dT\\otimes dT$. Then $g=-\\beta\\,dT\\otimes dT+h_T$;\n$h_T(X,\\cdot)=0$; and $h_T$ restricted to $\\ker dT$ is a smooth Riemannian\nmetric, so the decomposition $T_pM=\\mathbb RX_p\\oplus\\ker dT_p$ is\n$g$-orthogonal with $g(X,X)=-\\beta$. Consequently the pullback of $g$ by the\ndiffeomorphism $\\Psi$ has no mixed terms,\n$$\\Psi^*g=-(\\beta\\circ\\Psi)\\,ds^2+h,\\qquad h_{(s,z)}(v,w):=g_{\\Phi(s,z)}\\bigl((d\\Phi_s)_zv,(d\\Phi_s)_zw\\bigr),$$\na sum of a negative definite one-dimensional form and the smooth family of\nRiemannian metrics induced on the levels.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-emg-local-potentials-and-circle-data",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N,o)$ be the smooth, Hausdorff, second-countable, boundaryless oriented and time-oriented Lorentzian four-manifold of [[def-emg-lorentzian-forms]]. Its smooth real $k$-forms are sections of $\\bigwedge^kT^*M$, written $\\Omega^k(M)$, and $d$ is the exterior derivative of [[lem-emg-lorentz-hodge-calculus]]. A smooth two-form $F$ is **closed** when $dF=0$ and **exact** when $F=dA$ for some smooth real one-form $A$ on the whole base.\n\nBy [[def-de-rham-cohomology]], $H^2_{\\mathrm{dR}}(M)=Z^2(M)/B^2(M)$, where $Z^2(M)$ is the vector space of closed smooth two-forms and $B^2(M)$ is the vector space of exact smooth two-forms. Thus, for closed $F$, the statement $[F]=0$ means exactly that $F=dA$ for a global smooth one-form $A$. This equivalence is the quotient definition; it does not assert that every closed form is exact.\n\nLet $U(1)=\\{z\\in\\mathbb C:|z|=1\\}$ with complex multiplication, the subspace topology and the usual smooth circle structure. A **normalized circle-connection datum** on $M$ consists of a supplied countable open cover $(U_i)_{i\\in I}$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth real one-forms $a_i\\in\\Omega^1(U_i)$, and a fixed constant $\\kappa_0>0$. Require $g_{ii}=1$ and $g_{ij}g_{jk}=g_{ik}$ on every triple intersection. Around each point of $U_i\\cap U_j$, a smooth real phase lift $f_{ij}$ exists with $g_{ij}=e^{if_{ij}}$; require\n\n$$\na_j=a_i+df_{ij}\n$$\n\non every such phase-lift neighborhood. Different lifts differ locally by an integer multiple of $2\\pi$, so their differentials agree and this compatibility condition is independent of the lift. Equivalently, with the globally defined real one-form $\\lambda(g)=-i\\,g^{-1}dg$ on each overlap, the condition is $a_j=a_i+\\lambda(g_{ij})$.\n\nThe circle is a smooth Lie group and in particular a topological group: multiplication is the restriction of continuous complex multiplication and inversion is complex conjugation. A right principal $U(1)$-bundle has a continuous right action and locally trivial equivariant product charts; those charts make the action free and transitive on each fibre, as defined in [[def-principal-g-bundle-and-associated-fiber-bundle]]. The compatible transition functions are the gluing data for such a bundle, in the convention that a point with fibre coordinate $z_i$ in chart $i$ has coordinate $z_j=g_{ij}^{-1}z_i$ in chart $j$. No global real-valued angle on $U(1)$ is assumed.\n\nThe constant $\\kappa_0$ is a chosen normalization with units of webers; it is not Planck's constant and is not a unit of electric charge. On a chart whose coordinates have length units, the normalized connection components $a_i$ have units $\\mathrm m^{-1}$; the corresponding local potential $A_i:=\\kappa_0a_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-1}$, and its curvature $F_i:=dA_i=\\kappa_0\\,da_i$ has components $\\mathrm{Wb}\\,\\mathrm m^{-2}$. This definition imposes no flux or charge quantization.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four constraints and complete initial field-strength data are exactly\nthose of [F3]–[F4] with the fixed signature, SI constants, orientation, and\n$K$ sign. The normalized local potential data [A2] place the magnetic\ntwo-form in the supplied circle-bundle sector, while $e$ is independent\nnormal electric data. The zero-matter action choice [A1] specializes [F1]\nand its field-equation interface [F2] to the source-free system [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The constrained data in step 1.1 meet the exact smooth connected data\nhypotheses of [F6], with precisely its Countable Choice and Dependent Choice\nassumptions [F10]. Applying [F6] gives a smooth globally hyperbolic maximal\nfield-strength development $M_{\\max}$, universal for all smooth globally\nhyperbolic field-strength developments of these data and unique up to the\nstated data-fixing isometry. This constructs the field-strength development;\nits fixed-bundle connection realization is proved next.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "F6",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The Cauchy slice $i_{\\max}(\\Sigma)$ in the development from step 2.1 and\nits complete flow from [F9] provide the product map used in [F8]. Pull the\ninitial local connection data [A2] to that product and use [F7] to construct\nits reference connection with curvature $\\bar F$ restricting to $\\beta_b$.\nSince $F_{\\max}$ is closed by [F3] and agrees with $\\bar F$ on the initial\nslice, [F8] gives a global one-form $\\alpha$ with\n$F_{\\max}-\\bar F=d\\alpha$. Adding $\\alpha/\\kappa_0$ to the normalized local\nconnection forms retains their transition maps and changes the physical\ncurvature by $\\kappa_0d(\\alpha/\\kappa_0)=d\\alpha$, giving $F_{\\max}$. Thus\nthe maximal field-strength development is realized in the supplied initial\nbundle sector.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "A2",
+            "F3",
+            "F7",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let another smooth globally hyperbolic development have the same complete\ndata and be stationary for the adopted action. By [F2] and the zero-matter\nchoice [A1], it solves the source-free system [F3], so the universal\nembedding from [F6] carries its metric and field strength into $M_{\\max}$.\nOn its Cauchy product, pull back the same initial transition data; as in\nstep 3.1 they give a reference connection restricting to $\\beta_b$. The\nother solution's field is closed and has that same slice restriction, so [F8]\nsupplies one global exact adjustment and [F7] realizes it in the transported\ninitial bundle sector. By the development definition [F5], this proves\nmaximality within the stated smooth globally hyperbolic stationary class.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The uniqueness clause of [F6] gives exactly one data-fixing isometry\nbetween any two maximal metric/field-strength developments. Connection\nrepresentatives need not be unique and are not additional fields in the\ncompared development. The definition [F5] imposes no geodesic-completeness\ncondition, so no such conclusion follows.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "F5",
+            "F6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes a nonempty initial three-manifold, so the empty-data case is outside scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement permits zero e and b when the constraints and trivial normalized sector are compatible; no step divides by either field."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no number-of-components or finite-family parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement assumes smooth Riemannian h, a nondegenerate Lorentzian development, and positive κ, μ₀, κ₀; it claims no rough-data extension."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement gives maximality only within smooth globally hyperbolic developments and explicitly excludes completeness and global-in-time estimates."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement and [F11] assume exactly ACω+DC; no full Axiom of Choice is imported or used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        }
+      ],
+      "finite_checks": [],
+      "finite_checks_disposition": "No independent finite or computational check applies; the general claim is established analytically from the stated hypotheses and supplier interfaces.",
+      "risk_review": {
+        "status": "open",
+        "notes": "Step-1 authoring record only; independent proof review remains pending."
+      }
+    },
+    "ex-emg-adopted-parallel-field-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-emg-constrained-electrovacuum-data",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a nonempty, smooth, oriented three-manifold without boundary. Let $h$ be a smooth Riemannian metric on $\\Sigma$, let $K$ be a smooth symmetric covariant two-tensor, and let $e,b$ be smooth vector fields tangent to $\\Sigma$. Let $D$ and $R(h)$ be the Levi-Civita connection and scalar curvature of $h$, set $\\tau:=\\operatorname{tr}_hK$ and $|K|_h^2:=h^{ik}h^{j\\ell}K_{ij}K_{k\\ell}$, and choose the induced spatial orientation so $\\operatorname{vol}_g=\\theta^0\\wedge\\operatorname{vol}_h=-n^\\flat\\wedge\\operatorname{vol}_h$ in a positively oriented normal coframe with $\\theta^0(n)=1$. Define the spatial cross product by $h(e\\times_hb,w)=\\operatorname{vol}_h(e,b,w)$ for each tangent vector $w$.\n\nFor the fixed parameters $(\\kappa,\\Lambda,\\mu_0)$ of [[def-emg-electrovacuum-cauchy-system]], the tuple $(\\Sigma,h,K,e,b)$ is **constrained electrovacuum initial data** when\n\n$$D_ie^i=0,\\qquad D_ib^i=0,$$\n\n$$R(h)+\\tau^2-|K|_h^2=2\\Lambda+\\frac{\\kappa}{\\mu_0}\\bigl(|e|_h^2+|b|_h^2\\bigr),$$\n\n$$D^jK_{ji}-D_i\\tau=-\\frac{\\kappa}{\\mu_0}(e\\times_hb)_i.$$\n\nHere the last display is an equality of covectors. The scalar-curvature form is the Gauss-Codazzi form of the normal projections in [[thm-gr-constraint-equations-in-normal-frame]]; the sign and $K$ convention are those of [[def-gr-spacelike-initial-data-and-constraints]] and [[def-emg-electrovacuum-cauchy-system]]. This definition asserts no existence or uniqueness of a spacetime development.\n\nFor the periodic high-regularity class, take $\\Sigma=\\mathbb T^3_{2\\pi}$, integer $s\\ge5$, $h\\in H^{s+1}$, $K,e,b\\in H^s$, and assume the continuous representative of $h$ has a uniform positive lower eigenvalue bound. The displayed constraint expressions then have continuous representatives: their weak-derivative orders are at most two for $h$ and one for $K,e,b$, and the embedding, algebra and smooth-composition suppliers [[lem-gr-periodic-sobolev-embedding]], [[lem-gr-periodic-sobolev-algebra]], and [[lem-gr-smooth-composition-and-commutator-estimates]] apply. In SI coordinates $K$ and $D$ carry one inverse-length factor, $R(h)$ and $\\Lambda$ carry inverse-length squared, while $e,b$ have units tesla; the coefficients $\\kappa/\\mu_0$ give the displayed terms matching units.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-circle-connection-gluing",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth, Hausdorff, second-countable oriented four-manifold, and let $(U_i,g_{ij},a_i;\\kappa_0)$ be a normalized circle-connection datum as in [[def-emg-local-potentials-and-circle-data]]. Use the set-sized-object and quotient convention of [[def-emg-set-size-and-class-schema]]. Then the chart data construct a smooth Hausdorff second-countable right principal $U(1)$-bundle $\\pi:P\\to M$ and a global smooth real connection one-form $\\omega$ on $P$. Its curvature is basic: there is a smooth closed two-form $f\\in\\Omega^2(M)$ with $d\\omega=\\pi^*f$ and $f|_{U_i}=da_i$. The local potentials $A_i=\\kappa_0a_i$ satisfy $dA_i=F$, where $F=\\kappa_0 f$ is global. For two connections on the same fixed bundle with the same transition functions, their local-form differences are restrictions of one global base one-form; adding a global one-form to all local representatives stays in that bundle sector.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-emg-local-electrovacuum-model",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice and Dependent Choice. Let $\\Sigma$ be a nonempty\nsmooth oriented three-manifold without boundary, with smooth Riemannian metric\n$h$, smooth symmetric covariant tensor $K$, and smooth tangent vector fields\n$e,b$. Fix $\\kappa>0$, $\\mu_0>0$, and $\\Lambda\\in\\mathbb R$, and use the\nsignature, SI conventions, and electromagnetic stress tensor of\n[[def-emg-geometry-units]] and [[def-emg-electrovacuum-cauchy-system]].\nAssume $(\\Sigma,h,K,e,b)$ satisfies all four source-free constraints of\n[[def-emg-constrained-electrovacuum-data]].\n\nIn the periodic case $\\Sigma=\\mathbb T^3_{2\\pi}$, for an integer $s\\ge5$,\nalso consider smooth data with $h\\in H^{s+1}$, $K,e,b\\in H^s$, and the\nuniform lower eigenvalue bound $h\\ge c_0I$ for some $c_0>0$ specified by\n[[def-emg-periodic-high-sobolev-state]]. On its common local interval the\nfield-strength solution has\n$g\\in L^\\infty H^{s+1}\\cap C^0H^s$,\n$\\partial_tg\\in L^\\infty H^s\\cap C^0H^{s-1}$, and\n$F\\in L^\\infty H^s\\cap C^0H^{s-1}$, with the time coordinate measured in\nlength units as in [[def-emg-geometry-units]].\n\nFor the magnetic data define the smooth two-form\n$\\beta_b(X,Y):=\\operatorname{vol}_h(b,X,Y)$. Assume the following explicit\ninitial bundle compatibility: there are a countable open cover $(U_i)$ of\n$\\Sigma$, smooth transition maps $g_{ij}:U_i\\cap U_j\\to U(1)$, smooth local\nreal one-forms $a_i$, and one constant $\\kappa_0>0$. Require\n$g_{ii}=1$, $g_{ij}g_{jk}=g_{ik}$ on triple overlaps, and\n$a_j=a_i+\\lambda(g_{ij})$ on every overlap, where\n$\\lambda(g)=-i g^{-1}dg$; also require $\\kappa_0\\,da_i=\\beta_b$ on $U_i$.\nHere $\\kappa_0$\nhas units weber and the normalized local forms have the units in\n[[def-emg-local-potentials-and-circle-data]]. This is the fixed\nnormalized circle-bundle sector of [[def-emg-local-potentials-and-circle-data]];\nit imposes no global real-valued potential and no condition on the independent\nelectric data beyond the stated constraints.\n\nIn the action model of [[post-emg-einstein-maxwell-action]], choose the\nzero-matter branch: the matter configuration space is a singleton and\n$S_m\\equiv0$, so its current and Hilbert tensor vanish. Then there is a smooth\ntime-oriented local development of the source-free system on a neighborhood\nof the entire initial surface, after restriction to a possibly variable-width\nglobally hyperbolic Cauchy neighborhood. Its electromagnetic two-form is the\ncurvature of a smooth connection in the supplied normalized circle-bundle\nsector, and its initial electric and magnetic fields are exactly $e,b$.\nAny two such developments are related near the initial surface by a\ndata-fixing, time-orientation-preserving isometry carrying the metric and\ntwo-form to one another. This is a conditional model deduction; it asserts\nneither physical validity, a uniform positive time width for noncompact\n$\\Sigma$, global-time existence, nor a maximal-development result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-emg-geometry-units",
+          "source_section": "Definition",
+          "quote": "Adopt SI units and the following model-local quantity roles. Here the selected Einstein–Maxwell framework combines the stated Lorentzian geometry with a classical electromagnetic two-form and current; this definition itself supplies no gravitational equation, matter action, or empirical claim. A primitive is an input or independent field variable of this formulation; a derived quantity is fixed by a stated construction from its inputs. Neither label is universal across physical theories, and unit choice alone does not determine it.\n\nThe spacetime data are a smooth, Hausdorff, second-countable, boundaryless four-manifold $M$, a smooth Lorentzian metric $g$ of signature $(-,+,+,+)$, a smooth time-orientation field, and an independent orientation, exactly as in [[def-emg-lorentzian-forms]]. The metric, its time orientation, and the manifold orientation are separate data. An observer at $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g(n,n)=-1$. A smooth observer congruence is a smooth field of such vectors. A local tetrad is a smooth basis $(e_0,e_1,e_2,e_3)$ with metric matrix $\\operatorname{diag}(-1,1,1,1)$; an observer congruence, a coordinate chart, and a tetrad are different objects. Tetrads and observer fields need only exist locally; this definition assumes no global inertial chart, global tetrad, or hypersurface-orthogonal congruence.\n\nThe electromagnetic field-strength variable $F$ is a smooth real two-form, hence an alternating covariant tensor of type $(0,2)$, on an open subset of $M$, as in [[def-emg-lorentzian-forms]]. It is primitive in this formulation. For an observer congruence $n$, its electric and magnetic observer covectors are derived by\n\n$$E_a:=cF_{ab}n^b,\\qquad B_a:=-({\\star_gF})_{ab}n^b.$$\n\nHere $\\star_g$ is the unique Hodge map characterized pointwise by $\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, using the metric and independent orientation, as in [[lem-emg-lorentz-hodge-calculus]]. Both covectors annihilate $n$ and lie in the rest covector space $\\{\\alpha\\in T_p^*M:\\alpha(n)=0\\}$, whose induced metric is positive definite. In a positively oriented future orthonormal tetrad with $e_0=n$ and $\\epsilon_{123}=+1$, their spatial components obey the fixed dictionary $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$ from [[lem-emg-observer-field-decomposition]]. Thus $E$ and $B$ are observer-dependent derived fields, not globally defined observer-independent three-vectors on a curved spacetime. Their tetrad components have units $\\mathrm{V\\,m^{-1}}$ and tesla (T), respectively; the components of $F$ in a length-coordinate chart have unit T. No global potential is assumed; when a local potential $A_a$ is used, its components have unit $\\mathrm{T\\,m}$ and a scalar potential $\\varphi$ has unit V.\n\nFor any chosen observer $n$, a smooth four-current is a vector field $j$ whose local decomposition is $j=c\\rho\\,n+J$, where $\\rho:=-g(n,j)/c$ is the observer charge density and $J:=j-c\\rho n$ is orthogonal to $n$. In the associated positively oriented orthonormal tetrad its components are $j^0=c\\rho$ and $j^i=J^i$. The units are $[\\rho]=\\mathrm{C\\,m^{-3}}$, $[J^i]=[j^a]=\\mathrm{A\\,m^{-2}}$, and $[q]=\\mathrm C$ for a charge parameter supplied by a matter model. The current is a prescribed input or is supplied by an explicitly stated matter model; it is not inferred from the Maxwell equation alone.\n\nThe SI constants and coordinate units are fixed as follows. The speed of ideal vacuum light $c>0$ is the exact SI defining constant $299\\,792\\,458\\ \\mathrm{m\\,s^{-1}}$; identifying it with the shared ideal-light and clock conversion constant is the adopted Minkowski model of [[post-em-minkowski-physical-model]], not a consequence of its unit definition. The elementary charge $e$ is exactly $1.602\\,176\\,634\\times10^{-19}\\ \\mathrm C$. These unit definitions do not imply that charge is quantized. The magnetic constant $\\mu_0>0$ has unit $\\mathrm{N\\,A^{-2}}$ and is experimentally determined in the revised SI, so no exact numerical value for $\\mu_0$ is adopted. Define the electric constant (vacuum permittivity) $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$; hence $\\varepsilon_0\\mu_0c^2=1$, and $\\varepsilon_0$ has the same relative standard uncertainty as $\\mu_0$ because $c$ is exact. The exact component equation $\\nabla_aF^{ab}=-\\mu_0j^b$ is dimensionally consistent: both sides have unit $\\mathrm{T\\,m^{-1}}$ in a length-coordinate frame.\n\nIn a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected. This is local coordinate bookkeeping, not a global inertial-coordinate claim. In such a chart $g_{ab}$ is dimensionless, the Levi-Civita coefficients $\\Gamma^a{}_{bc}$ have unit $\\mathrm{m^{-1}}$, and curvature components have unit $\\mathrm{m^{-2}}$, as in [[def-emg-lorentzian-forms]]. Components in other coordinate units transform by their Jacobians.\n\nFor the gravitational sector, take Newton's gravitational constant $G_N>0$ with unit $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$ and the cosmological constant parameter $\\Lambda\\in\\mathbb R$ with unit $\\mathrm{m^{-2}}$ as primitive parameters of the selected model; no numerical value for either is used here. The coupling normalization $\\kappa_E:=8\\pi G_N/c^4$ is derived from these parameters and has unit $\\mathrm{m\\,J^{-1}}$. This definition records the convention for a later Einstein equation; it asserts no Einstein equation. A separate positive normalization $\\kappa_0$ with unit weber (Wb) is a chosen flux conversion reserved for a later explicitly specified $U(1)$ formulation, where $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$ under multiplication. It is not $\\kappa_E$, an electric charge, $\\mu_0$, or Planck's constant, and it implies no charge quantization. Test-particle rest mass $m>0$ in kg and charge $q$ in C are externally supplied matter parameters, not quantities derived by classical electromagnetism.\n\nThese are SI and model-definition conventions only. They neither assert empirical measurements beyond the stated SI defining constants and measured status of $\\mu_0$, nor identify similarly named quantities in another framework.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The three deck transformations in the Example act by lattice translations\non the base and their $U(1)$ multipliers commute: $T_XT_Y=T_YT_X$ because\nthe phase changes by $2\\pi$ over one $Y$ period; $T_Z$ commutes with both\nbecause it does not enter the phase. Thus they define a free proper deck\naction. Under $T_X$, the fiber term $-iz^{-1}dz$ changes by\n$-\\frac{2\\pi}{L}dY$, while the base term changes by\n$+\\frac{2\\pi}{L}dY$; under $T_Y,T_Z$ both terms are unchanged. Hence\n$\\omega$ descends. The right $U(1)$ action preserves it and its value on the\nvertical generator is $1$, so it is a principal connection. Its curvature\nand physical flux are\n$\\kappa_0d\\omega=B_0dX\\wedge dY$ and\n$\\int_{\\{Z=0\\}}\\beta_b=B_0L^2=2\\pi\\kappa_0$. This verifies the required\nnormalized bundle sector without a global one-form potential on the torus.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "A1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The fields are smooth and constant in the flat coordinates, so\n$D_ie^i=D_ib^i=0$. Also $R(h)=0$, $\\operatorname{tr}_hK=3H$,\n$|K|_h^2=3H^2$, and $e\\times_hb=0$. By the definition of $H$,\n$6H^2=2\\kappa B_0^2/\\mu_0\n=\\frac{\\kappa}{\\mu_0}(|e|_h^2+|b|_h^2)$.\nThe scalar constraint in [F1] follows with $\\Lambda=0$; the momentum\nconstraint has both sides zero because $K$ is parallel and $e\\times_hb=0$.\nThus all four constraints hold.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "A1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The bundle calculation in step 1.1 and constraint verification in step 1.2\nsatisfy every initial-data hypothesis of [F3]. Applying [F3] gives a\nsmooth local development in the zero-matter-action electrovacuum model with\nthe displayed nonzero parallel initial fields. This conclusion is conditional\non the stated mathematical and model assumptions and reports no experiment.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes L>0, so its base torus is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example fixes κ₀>0 and finite L>0, hence B₀=2πκ₀/L²>0; the zero-field case is excluded."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no number-of-components or finite-family parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example assumes L, κ, μ₀, κ₀>0, so the metric and displayed constants are nondegenerate and finite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example constructs initial data on the whole torus and invokes only the open local development of [F3]; no temporal endpoint claim is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 writes the deck transformations and transition explicitly; [F3] separately states the exact ACω+DC assumptions for local development."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts no biconditional or reverse implication."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "bundle-descent-and-flux",
+          "step": "1.1",
+          "method": "symbolic deck-transformation calculation",
+          "calculation": "Δ(-iz⁻¹dz)=−(2π/L)dY; Δ((2π/L²)XdY)=+(2π/L)dY; B₀L²=2πκ₀",
+          "result": "the connection descends and the magnetic flux is one supplied normalized sector quantum"
+        },
+        {
+          "name": "flat-torus-constraints",
+          "step": "2.1",
+          "method": "exact constant-field substitution",
+          "calculation": "tr K=3H; |K|²=3H²; e×ₕb=0; 6H²=2κB₀²/μ₀",
+          "result": "the scalar and momentum constraints hold exactly, and both divergence constraints vanish"
+        }
+      ],
+      "finite_checks_disposition": "The two exact symbolic calculations are recorded above; no numerical measurements are used.",
+      "risk_review": {
+        "status": "open",
+        "notes": "Step-1 authoring record only; independent proof review remains pending."
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+# Batch 53 Step 3a adjudication
+
+Run: `physics-remaining-80-2026-10-17`. Group: `batch-53` (the scope's historical group remains `w`). Scope: batch 53 only. All nine routed findings are decided in the companion decisions JSON, with five distinct closed defect-ledger rows. Repair confidence is 1 for each completed correction. No agents, judges, stamps, certification or engine transitions were invoked.
+
+## Historical evidence and verdicts
+
+Read the dispatch order, scope, reader report/findings, refuter report, pre/post snapshots, current carriers and owning contract/manifest. The frozen pre/post item/contract/manifest maps and page hash maps are identical: this was a read-only reader pass, so there are no accepted/amended/reverted reader repairs or touched/page obligations. Reversing precisely the local item edits reproduces each frozen raw pre-item hash, including the unchanged parcel example; no historical-byte uncertainty is claimed.
+
+| Obligations | Carrier | Verdict | Correction |
+|---|---|---|---|
+| reader:53:1, refuter:53:1 | def-tgr-local-fluid-state | confirmed_nonfatal | Insert space in title `state,frame`. |
+| reader:53:3 | lem-tgr-fluid-frame-projection | confirmed_fatal | Explicitly define the standalone Lorentz data and conventions before their use. |
+| reader:53:2, refuter:53:2 | lem-tgr-local-gibbs-euler | confirmed_nonfatal | Insert spaces in title `Gibbs,Euler,parcel`. |
+| reader:53:4, refuter:53:3 | tgr-mc01 | confirmed_nonfatal | Insert space in A-page title. |
+| reader:53:5, refuter:53:4 | tgr-mc01-examples | confirmed_nonfatal | Insert space in B-page title. |
+
+The refuter correctly identifies the intended definitions in the geometry dependency chain. That does not resolve the reader's narrower first-use objection: the original opening names a Lorentz form and future cone on an arbitrary vector space without an explicit definition or exact identification of the inherited definitions for that space. Under the mandatory explicit-definition rule, this is a statement-level defect. The repair specifies the symmetric nondegenerate bilinear map, diagonal signature, timelike and nonzero-null conditions, chosen connected timelike component, finite-dimensional topology, and index conventions. Every numbered claim is retained. The defect is not a counterexample to the algebra or to the repaired source.
+
+## Review in dispatched dependency order
+
+**Level 0 — def-tgr-local-fluid-state.** Read its entire Definition and all seven direct suppliers: `def-gr-smooth-lorentzian-objects` Definition (a)–(e), `def-gr-observer-and-rest-space` Definition, `def-gr-observer-congruence-and-adapted-charts` Definition, `def-gr-timelike-worldline-and-proper-time` Definition, `def-gr-local-frame-and-tetrad-fields` Definition, `thm-gr-nondegenerate-levi-civita-and-tensor-derivative` Statement (a)–(c), and `def-countable-choice` Definition. Nonempty open O and positive v give well-defined compositions and n. C2 e gives C1 T,p and the stated regularity suffices for current divergences with the smooth connection. Congruence, chart and tetrad are distinguished; integral-curve domains and absence of completeness assumptions are accurate. Inverse metric and projection types are consistent. Units of cJ, cS and cQ agree. No equality of thermodynamic and tensor-projection quantities, conservation equation or actual-material assertion follows. The inherited choice assumption is AC_omega for tangent-bundle smooth structure only. The title correction changes no Definition. Recorded the completed risk review before proceeding.
+
+**Level 1 — lem-tgr-fluid-frame-projection.** Read all eight proof steps and each of its five direct suppliers, including the full proofs of `lem-gr-observer-projection-decomposition`, `thm-gr-local-lorentz-tetrad-existence`, and `thm-tdmath-local-implicit-rank`. The projection algebra gives image, kernel, self-adjointness and uniqueness. Two-index expansion recovers epsilon, Q and P, with trace Delta=3 and trace-free pi. Both directions of Q=0 iff the mixed tensor sends u to a multiple of u hold. Future timelike J excludes zero/null input; normalization is defined and the future component selects the positive proportionality factor, hence Eckart uniqueness. The ten tensor components and three w coordinates give a smooth Phi on an open subset of R13, with Phi(T0,0)=0 and DwPhi=h0 I3. The invertible-minor supplier applies with q=3; restricting neighborhoods gives a unique local C1 graph, whose composition with C1 tensor components is the claimed observer field. No result is claimed at h0=0 or globally. For null dust, positive definiteness of u-perp excludes orthogonality to nonzero null ell, and the nonzero null image cannot be proportional to a timelike vector. No stronger choice assumption is introduced. Completed this risk review before the next item.
+
+**Level 1 — lem-tgr-local-gibbs-euler.** Read all ten steps and the four direct suppliers: the local state Definition, local implicit-rank theorem, `thm-chain-rule-for-total-derivatives` Statement, and `lem-tdmath-concave-affine-maximizer-and-hessian` Statement and proof. Also inspected the rank theorem's exact Euclidean implicit/inverse theorem statements and C1-map definition. Y and the parcel domain are open inverse images; n,v,N are positive. Differentiating ne yields Gibbs, the algebraic H relation gives Euler, and differentiation gives Gibbs–Duhem. The parcel domain is invariant under positive scaling; differentiating Euler in an arbitrary direction gives its radial Hessian kernel. The response minors are respectively e_sigma_sigma, -e_vv and h/n, nonzero under the separate hypotheses, and their ratios yield the stated positive responses. Applying the concave-Hessian supplier to -e is valid under convex X and convex e. No assertion is made at a singular minor or that diagonal positivity implies convexity, a sound cone or evolution. Only the title changed. Completed the risk review.
+
+**Page obligations.** Both page summaries and lists were read in full. Their current descriptions match the conditional mathematical scope. The unchanged parcel example was read completely: constant mc2 leaves T,p derivatives unchanged, shifts H,mu by mc2 and epsilon,h by nmc2, and shifts E by Nmc2. The calculations also hold at m=0 and N=1. No empirical observation or uncertain measured input occurs.
+
+## Consumer review and maintained artifacts
+
+Searched current items and pages for all references to the frame lemma; it has no aliases. Read all actual direct consumers: `lem-tgr-eckart-entropy-specialization`, `ex-tgrmath-null-landau-obstruction`, and page `tgr-mc01`. The entropy specialization uses only clause 1 in the Lorentz tangent spaces supplied by its geometry. The null example uses clause 2 with the explicit Minkowski metric, N=(1,0,0,0) and future u0>0; it proves its obstruction directly. The page uses the unchanged Eckart and local Landau conclusions. All satisfy the clarified hypotheses and require no repair. Thus no further interface hop or outside repair escalation is needed. The null example retains its own stale-input qualification; this review does not certify its input hashes.
+
+Synchronized owned manifest titles, frame Statement and statement provenance (`ai-altered`); recorded specific complete Alpha risk reviews in the owning proof contract. Existing proof provenance remains accurate. No proof was materially rewritten and none of the three edited items carried a judge record. Appended five `fixed` ledger rows owned at `3a-adjudicate`, with exact decision references, and an owned-consumer record in `briefs/tasks/frontier-dependency-ledger.md`. No items, pages or dependencies were added or removed; cross-batch inventory remains empty. Published/imported content was not edited. No published defect, proposed withdrawal or unresolved scientific prerequisite was identified.
+
+## Sources and limitations
+
+Retrieved the cited primary PDFs and inspected relevant passages: [Gourgoulhon](https://arxiv.org/pdf/gr-qc/0603009), §4.1 equations (4.1)–(4.3), §4.2 equations (4.4)–(4.9), and §4.3 equations (4.10)–(4.14), PDF pp. 14–17; [Borghini](https://www.physik.uni-bielefeld.de/~borghini/Teaching/Hydrodynamics15/Hydrodynamics.pdf), §IX.2, PDF pp. 145–146, and §§IX.4.1–IX.4.2, PDF pp. 154–155, equations (IX.37)–(IX.40). These supply thermodynamic and frame context. Source sign/normalization conventions are not copied unchecked: the local metric sign and geometric Q normalization are verified by contraction. The local Landau existence/uniqueness assertion is proved by the stated implicit-rank argument, not inferred from a textbook's naming of a frame. The source's physical assumptions do not become additional premises of these mathematical items. This is a scoped proof/supplier review, not a whole-library audit or cover-to-cover source review.
+
+## Local checks
+
+All checks below exited 0:
+
+- `node tools/physics-support/risk-report.mjs research/physics-remaining-80-2026-10-17-batch-53.proof-contracts.json`: three CRITICAL items, one ORDINARY item; 0 errors.
+- Same command with `--require-reviewed`: all required Alpha reviews complete; 0 errors.
+- `node tools/physics-support/proof-contract.mjs research/physics-remaining-80-2026-10-17-batch-53.proof-contracts.json --strict`: 0 errors, 0 warnings, 4/4 items checked.
+- `node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-tgr-local-fluid-state.md items/lem-tgr-fluid-frame-projection.md items/lem-tgr-local-gibbs-euler.md`: 2 proof items checked, 0 failing; the pure definition has no proof to precheck.
+- `node tools/physics-support/rendercheck.mjs` with the three edited items and both edited page paths: 5 files, YAML and KaTeX clean.
+- After final item edits, `node tools/physics-support/proof-layout.mjs items/def-tgr-local-fluid-state.md items/lem-tgr-fluid-frame-projection.md items/lem-tgr-local-gibbs-euler.md`: 3 items, 18 steps, 0 defects. Existing proof paragraphs required no reflow changes.
+- Local JSON/set comparison: exactly the nine frozen reader/refuter obligations, without duplicates or additional decisions; pre/post maps identical and inverse edits reproduce all four frozen raw pre-item hashes.
+
+No local blocker remains. The engine owns decision stamping, the gate battery and subsequent transitions.

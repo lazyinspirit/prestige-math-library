@@ -11,7 +11,125 @@
       "emg-cp03",
       "emg-g04"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "post-emg-strict-charged-fluid-model",
+        "kind": "postulate",
+        "title": "Adopted strict charged barotropic fluid model",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "physics-remaining-80-2026-10-17",
+        "domain": "physics",
+        "library": "physics",
+        "dependency_level": 2,
+        "deps": [
+          "def-emg-strict-charged-barotropic-system",
+          "def-emg-geometry-units"
+        ],
+        "dependency_roles": {
+          "def-emg-strict-charged-barotropic-system": "mathematical-premise",
+          "def-emg-geometry-units": "formulation-prerequisite"
+        },
+        "physical_scope": "An adopted smooth classical charged perfect-fluid material closure for the strict interior barotropic Einstein-Maxwell model, with an EOS-defined number-density variable and advected charge per particle. It adds no matter action and makes no claim that a real material universally obeys this closure.\n",
+        "empirical_premises": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yvonne Choquet-Bruhat, Introduction to General Relativity, Black Holes, and Cosmology, Oxford University Press, open-access first edition (2023), Chapter IX, Relativistic fluids",
+              "url": "https://inspirehep.net/files/b6b9e25e70e9a80e6aa13c2611ae4a76",
+              "locator": "Complete 300-page PDF inspected; §§IX.3–IX.4 and IX.13.1–IX.13.2, printed pp. 210–216 and 227–228."
+            },
+            {
+              "title": "Benoit Pausader, Relativistic Fluid Equations, complete Brown University lecture notes (16 pages, undated)",
+              "url": "https://www.math.brown.edu/bpausade/Relativistic%20fluid.pdf",
+              "locator": "Complete notes inspected; §§1.3–1.5 and 2.1.1–2.2.1, printed pp. 2–5 and 7–9."
+            },
+            {
+              "title": "Daniela Pugliese and Juan A. Valiente Kroon, On the evolution equations for ideal magnetohydrodynamics in curved spacetime, arXiv:1112.1525v2 (2012)",
+              "url": "https://arxiv.org/pdf/1112.1525",
+              "locator": "Full 25-page PDF fetched; abstract/introduction and §3.3 inspected for charged Einstein-Maxwell-Euler model context."
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "n/a"
+        },
+        "statement": "Use the smooth oriented, time-oriented Lorentzian four-manifold, metric-selected\nconnection, signature $(-,+,+,+)$, two-form field, and SI conventions stated in\n[[def-emg-geometry-units]] and [[def-emg-strict-charged-barotropic-system]].\nOn an open set $U$ of that spacetime, let $\\epsilon:U\\to J$ be a smooth\nrest-energy-density scalar, let $u$ be a smooth future-directed vector field\nwith $g(u,u)=-1$, and let $Z:U\\to\\mathbb R$ be a smooth charge-per-particle\nscalar. Here $J\\subseteq\\mathbb R$ is an open interval, $\\epsilon$ and\n$p(\\epsilon)$ have units J m$^{-3}$ = Pa, $u$ is dimensionless, and $Z$ has\nunits C. In this adopted model, the word *barotropic* means that pressure is a\nfunction of rest-energy density alone.\n\nAdopt a smooth equation of state $p:J\\to\\mathbb R$ satisfying\n$$\\epsilon+p(\\epsilon)>0,\\qquad 0<p'(\\epsilon)<1$$\nfor every $\\epsilon\\in J$. The dimensionless derivative gives the model's\nbarotropic characteristic speed $c_{\\mathrm s}:=c\\sqrt{p'(\\epsilon)}$, so\nthis selection requires $0<c_{\\mathrm s}<c$. Fix $\\epsilon_*\\in J$ and a\npositive normalization $N_*>0$ with units m$^{-3}$, and define\n$$N(\\epsilon):=N_*\\exp\\!\\left(\\int_{\\epsilon_*}^{\\epsilon} \\frac{dz}{z+p(z)}\\right).$$\nFor each $\\epsilon\\in J$, the closed segment between $\\epsilon_*$ and\n$\\epsilon$ is compact and contained in $J$; the smooth integrand is finite\nthere. Its integral is dimensionless, so $N(\\epsilon)>0$ has units m$^{-3}$.\nWithin this model, $N$ is the EOS-defined number-density variable and $N_*$\nis its chosen normalization. This definition makes no claim that a microscopic\nparticle theory derives $N$ for every EOS.\n\nAdopt the charged-fluid current and matter stress tensor\n$$j^a:=cN(\\epsilon)Zu^a,\\qquad T_{m,ab}:=(\\epsilon+p(\\epsilon))u_a u_b+p(\\epsilon)g_{ab},$$\nand the material balance and advection equations\n$$\\nabla^aT_{m,ab}=F_{bc}j^c,\\qquad u^a\\nabla_aZ=0.$$\nThus $j$ is a smooth four-current with components in A m$^{-2}$, and $T_m$\nhas components in Pa in length coordinates $x^0=ct$. The balance law adopts\nthe Lorentz-force density with the same field and current conventions as the\nchosen Einstein-Maxwell formulation. Charge-per-particle is carried along the\nfluid flow. Current conservation is not an additional adopted material law.\n\nThis is a physical postulate for smooth classical matter in the strict interior\nregime only. It excludes shocks, vacuum interfaces, free boundaries, degenerate\nor superluminal sound speed, finite-conductivity and dissipative currents,\npoint-charge sources, and arbitrary currents chosen independently of the\nfluid. The cited treatments motivate the perfect-fluid and charged-current\nstructures in their own conventions; they do not establish this exact EOS\nnormalization, the $Z$ transport choice, or the physical applicability of this\nmodel. No matter action, experiment, or universal material law is asserted."
+      },
+      {
+        "id": "pthm-emg-local-charged-fluid-model",
+        "kind": "physics-theorem",
+        "title": "Local evolution of the adopted strict charged-fluid model",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "physics-remaining-80-2026-10-17",
+        "domain": "physics",
+        "library": "physics",
+        "dependency_level": 4,
+        "deps": [
+          "post-emg-einstein-maxwell-equations",
+          "post-emg-strict-charged-fluid-model",
+          "thm-emg-local-charged-barotropic-development",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-emg-geometry-units",
+          "def-gr-harmonic-gauge-and-reduced-equations",
+          "def-gr-periodic-torus-and-sobolev-spaces",
+          "thm-gr-constraint-equations-in-normal-frame",
+          "lem-emg-observer-field-decomposition",
+          "lem-emg-fieldstrength-positive-symmetric-reduction",
+          "lem-emg-maxwell-stress-conservation"
+        ],
+        "dependency_roles": {
+          "post-emg-einstein-maxwell-equations": "physical-assumption",
+          "post-emg-strict-charged-fluid-model": "physical-assumption",
+          "thm-emg-local-charged-barotropic-development": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-emg-geometry-units": "formulation-prerequisite",
+          "def-gr-harmonic-gauge-and-reduced-equations": "mathematical-premise",
+          "def-gr-periodic-torus-and-sobolev-spaces": "mathematical-premise",
+          "thm-gr-constraint-equations-in-normal-frame": "mathematical-premise",
+          "lem-emg-observer-field-decomposition": "mathematical-premise",
+          "lem-emg-fieldstrength-positive-symmetric-reduction": "mathematical-premise",
+          "lem-emg-maxwell-stress-conservation": "mathematical-premise"
+        },
+        "physical_scope": "Conditional local development for the equation-based smooth SI Einstein-Maxwell model coupled to the adopted strict interior charged barotropic fluid, on complete compatible initial data. The conclusion covers only the stated torus Sobolev and smooth local branches; it asserts no global evolution, shock continuation, vacuum/free-boundary behavior, matter action, or empirical applicability.\n",
+        "empirical_premises": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yvonne Choquet-Bruhat, Introduction to General Relativity, Black Holes, and Cosmology, Oxford University Press, open-access first edition (2023), Chapter IX, Relativistic fluids",
+              "url": "https://inspirehep.net/files/b6b9e25e70e9a80e6aa13c2611ae4a76",
+              "locator": "Complete 300-page PDF inspected; charged-fluid model and Theorem IX.13.1, printed §§IX.13.1–IX.13.2, pp. 227–228."
+            },
+            {
+              "title": "Benoit Pausader, Relativistic Fluid Equations, complete Brown University lecture notes (16 pages, undated)",
+              "url": "https://www.math.brown.edu/bpausade/Relativistic%20fluid.pdf",
+              "locator": "Complete notes inspected; charged-fluid equations in §§2.1–2.2.1, printed pp. 7–9."
+            },
+            {
+              "title": "Daniela Pugliese and Juan A. Valiente Kroon, On the evolution equations for ideal magnetohydrodynamics in curved spacetime, arXiv:1112.1525v2 (2012)",
+              "url": "https://arxiv.org/pdf/1112.1525",
+              "locator": "Full PDF fetched; abstract/introduction, §3.3 and §4.6 inspected, including the paper's explicit omission of full constraint propagation."
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pending"
+        },
+        "statement": "Adopt the equation-based Einstein-Maxwell field postulate\n[[post-emg-einstein-maxwell-equations]] and the smooth material closure of\n[[post-emg-strict-charged-fluid-model]], with the SI, signature, and coordinate\nconventions of [[def-emg-geometry-units]]. Thus the spacetime field equations\nare $dF=0$, $\\nabla_aF^{ab}=-\\mu_0j^b$, and\n$$G_{ab}+\\Lambda g_{ab}=\\kappa(T_{m,ab}+T_{\\mathrm{EM},ab}),\\qquad \\kappa=8\\pi G_N/c^4,$$\nwhile the fluid contributes exactly its adopted $T_m,j$ and material balance\nequations. No matter action is assumed.\n\nAssume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ and Dependent Choice.\nLet $p=p(\\epsilon)$ be smooth on an open interval $J$, and let\n$K_\\epsilon\\Subset J$ be a compact interval containing the initial density\nvalues, on which $\\epsilon+p(\\epsilon)>0$ and $0<p'(\\epsilon)<1$. Take\n$\\kappa>0$, $\\mu_0>0$, $c>0$, and $\\Lambda\\in\\mathbb R$.\n\nLet $\\Sigma$ be a smooth oriented three-manifold without boundary, and let\n$\\mathfrak n$ be its future unit normal. Let $h$ be a Riemannian metric and\nlet $K\\in\\Gamma(\\operatorname{Sym}^2T^*\\Sigma)$ use the second fundamental\nform convention\n$$K(X,Y):=g(\\nabla_X\\mathfrak n,Y).$$\nThe initial normal bundle is\n$\\mathcal V:=\\mathbb R\\mathfrak n\\oplus T\\Sigma$ with\n$$g_0(a\\mathfrak n+X,b\\mathfrak n+Y):=-ab+h(X,Y).$$\nLet $\\epsilon_0,Z_0$ be smooth scalar fields, $u_0$ a smooth future unit\ntimelike section of $\\mathcal V$ satisfying $g_0(u_0,u_0)=-1$, and $e,b$\nsmooth spatial vector fields\nrepresenting $E/c$ and $B$ in an oriented orthonormal frame. Their units are\nJ m$^{-3}$, C, dimensionless, and tesla, respectively; $K$ has units m$^{-1}$.\nThe components of the smooth initial two-form $F_0$ are defined in every\npositively oriented $h$-orthonormal frame $(\\mathsf e_i)$ by\n$$e_i=F_0(\\mathsf e_i,\\mathfrak n),\\qquad b_i=\\tfrac12\\varepsilon_i{}^{jk}F_0(\\mathsf e_j,\\mathsf e_k), \\qquad \\varepsilon_{123}=1.$$\nThis fixes all six independent components of $F_0$. Set\n$j_0=cN(\\epsilon_0)Z_0u_0$ and $T_0=T_{m,0}+T_{\\mathrm{EM},0}$ from the\nadopted model.\n\nWrite $D$ for the Levi-Civita connection of $h$,\n$\\tau:=\\operatorname{tr}_hK=h^{ij}K_{ij}$,\n$|K|_h^2:=h^{ik}h^{jl}K_{ij}K_{kl}$,\n$(\\operatorname{div}_hK)_j:=h^{ik}(D_iK)_{kj}$, and $R(h)$ for the scalar\ncurvature of $h$. Assume the complete Einstein and sourced Maxwell initial\nconstraints\n$$R(h)+\\tau^2-|K|_h^2=2\\Lambda+2\\kappa T_0(\\mathfrak n,\\mathfrak n),\\qquad (\\operatorname{div}_hK)(X)-D_X\\tau=\\kappa T_0(\\mathfrak n,X)$$\nfor every tangent vector $X$, and\n$$\\operatorname{div}_h e=-\\mu_0g_0(j_0,\\mathfrak n),\\qquad \\operatorname{div}_h b=0.$$\n\nThen the adopted equation-based fluid model has the following conditional\nlocal developments.\n\n**(a) Torus Sobolev branch.** If\n$\\Sigma=\\mathbb T^3_{2\\pi}=\\mathbb R^3/(2\\pi\\mathbb Z)^3$ with the periodic\nSobolev spaces of [[def-gr-periodic-torus-and-sobolev-spaces]], assigning each\nspatial period length $2\\pi\\,\\mathrm m$ in the length-coordinate convention of\n[F6]. Assume $s\\ge5$ is an integer, $h\\in H^{s+1}$ and\n$K,e,b,\\epsilon_0,u_0,Z_0\\in H^s$, with the same strict compact\nadmissibility. Then there is $T>0$ and a solution on\n$(-T,T)\\times\\mathbb T^3$ in the harmonic gauge of\n[[def-gr-harmonic-gauge-and-reduced-equations]], relative to the fixed\nbackground used by [[thm-emg-local-charged-barotropic-development]]. In\nperiodic charts,\n$g\\in L^\\infty H^{s+1}\\cap C^0H^s$,\n$\\partial_tg\\in L^\\infty H^s\\cap C^0H^{s-1}$, and\n$F,\\epsilon,u,Z\\in L^\\infty H^s\\cap C^0H^{s-1}$. The equations hold\nclassically, and the reduced solution is unique on common intervals with common\ncompact admissible bounds.\n\n**(b) Smooth geometric branch.** For smooth data on any $\\Sigma$ above, there\nis a smooth time-oriented solution on an open variable-width neighborhood of\n$\\{0\\}\\times\\Sigma$, inducing exactly $(h,K,F_0,\\epsilon_0,u_0,Z_0)$. It is\nunique near the initial surface up to a data-fixing time-orientation-preserving\nisometry matching $F,\\epsilon,u,Z$. No uniform time width for noncompact\n$\\Sigma$, global existence, shock continuation, vacuum/free-boundary solution,\nor empirical validity is asserted.\n\nThis is a model deduction. It does not assert that the postulates describe\nnature."
+      }
+    ]
   },
   {
     "order": 454,
@@ -24,6 +142,78 @@
     "requires": [
       "emg-pcp02"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-emg-adopted-linear-eos-model",
+        "kind": "example",
+        "title": "A neutral, constraint-compatible linear-EOS sector",
+        "status": "draft",
+        "origin": "pipeline",
+        "pipeline_run": "physics-remaining-80-2026-10-17",
+        "domain": "physics",
+        "library": "physics",
+        "dependency_level": 5,
+        "deps": [
+          "post-emg-strict-charged-fluid-model",
+          "pthm-emg-local-charged-fluid-model",
+          "def-emg-strict-charged-barotropic-system",
+          "def-emg-geometry-units",
+          "lem-emg-charged-fluid-positive-symmetric-reduction",
+          "def-gr-periodic-torus-and-sobolev-spaces",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-gr-constraint-equations-in-normal-frame",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "lem-emg-fieldstrength-positive-symmetric-reduction",
+          "lem-emg-maxwell-stress-conservation"
+        ],
+        "dependency_roles": {
+          "post-emg-strict-charged-fluid-model": "physical-assumption",
+          "pthm-emg-local-charged-fluid-model": "physical-result",
+          "def-emg-strict-charged-barotropic-system": "mathematical-premise",
+          "def-emg-geometry-units": "formulation-prerequisite",
+          "lem-emg-charged-fluid-positive-symmetric-reduction": "mathematical-premise",
+          "def-gr-periodic-torus-and-sobolev-spaces": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "thm-gr-constraint-equations-in-normal-frame": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-natural-logarithm-laws": "mathematical-premise",
+          "lem-emg-fieldstrength-positive-symmetric-reduction": "mathematical-premise",
+          "lem-emg-maxwell-stress-conservation": "mathematical-premise"
+        },
+        "physical_scope": "A neutral, strictly subluminal p=w epsilon sector of the adopted smooth charged-fluid closure with explicit compatible flat-torus Einstein-Maxwell initial data. It supplies a conditional local model solution only; no global cosmological evolution, observation, or universal material law is asserted.\n",
+        "empirical_premises": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yvonne Choquet-Bruhat, Introduction to General Relativity, Black Holes, and Cosmology, Oxford University Press, open-access first edition (2023), Chapter IX, Relativistic fluids",
+              "url": "https://inspirehep.net/files/b6b9e25e70e9a80e6aa13c2611ae4a76",
+              "locator": "Complete relevant EOS and charged-fluid sections inspected: §§IX.4 and IX.13.2, printed pp. 212–216 and 228."
+            },
+            {
+              "title": "Benoit Pausader, Relativistic Fluid Equations, complete Brown University lecture notes (16 pages, undated)",
+              "url": "https://www.math.brown.edu/bpausade/Relativistic%20fluid.pdf",
+              "locator": "Complete relevant sections inspected: §1.5 and §2.2.1, printed pp. 4 and 8–9."
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pending"
+        },
+        "statement": "Choose $w\\in(0,1)$, a constant $H>0$ with units m$^{-1}$, and $N_*>0$ with\nunits m$^{-3}$. Use the Einstein coupling\n$\\kappa=\\kappa_E=8\\pi G_N/c^4>0$ from [[def-emg-geometry-units]], with units\nm J$^{-1}$. Set\n$$J=(0,\\infty),\\qquad \\epsilon_*:=\\frac{3H^2}{\\kappa},\\qquad p(\\epsilon):=w\\epsilon,\\qquad \\Lambda:=0.$$\nThen $\\epsilon_*>0$ has units J m$^{-3}$. Adopt the linear EOS on all of\n$J$, use $\\epsilon_*$ as the normalization point in the definition of $N$,\nand set the advected charge-per-particle field to $Z\\equiv0$.\n\nOn $\\Sigma=\\mathbb T^3_{2\\pi}:=\\mathbb R^3/(2\\pi\\mathbb Z)^3$, assign the\nspatial period length $2\\pi\\,\\mathrm m$ in the length-coordinate convention of\n[[def-emg-geometry-units]], and use the standard smooth quotient structure and\norientation. Take the flat metric $h=\\delta$,\nprescribe $K=Hh$, set the constant energy density $\\epsilon_0=\\epsilon_*$,\ntake fluid velocity $u_0=\\mathfrak n$, and set $e=b=0$. The slice is compact\nand has no boundary. The equation of state is strict on the open density interval, the\ncurrent vanishes, and the Einstein and Maxwell constraints hold exactly. By\nthe local theorem, these data admit a smooth local development, conditional\non $\\mathrm{AC}_\\omega$, Dependent Choice, the adopted model and the exact mathematical hypotheses used by [[pthm-emg-local-charged-fluid-model]]. This example is a model\ncalculation, not an observation."
+      }
+    ]
   }
 ]

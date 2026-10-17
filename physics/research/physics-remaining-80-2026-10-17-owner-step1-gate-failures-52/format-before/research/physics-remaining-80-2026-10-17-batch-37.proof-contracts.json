@@ -1,0 +1,1552 @@
+{
+  "version": 1,
+  "level": "physics-remaining-80-2026-10-17",
+  "scope": [
+    "lem-qsm-local-hermitian-diagonalization",
+    "def-qsm-local-finite-tensor-state",
+    "def-qsm-local-finite-matrix-entropy",
+    "def-qsm-local-additive-spectral-ensembles",
+    "lem-qsm-local-subsystem-trace-tests",
+    "def-qsm-local-matrix-net-completion",
+    "post-qsm-local-ensemble-preparations",
+    "lem-qsm-local-tensor-gibbs-factorization",
+    "thm-qsm-local-classical-diagonal-embedding",
+    "thm-qsm-local-independent-shell-equivalence",
+    "def-qsm-local-coercive-regulated-model",
+    "pthm-qsm-local-qualified-shell-measurements",
+    "pthm-qsm-local-regulated-interacting-gibbs",
+    "cex-qsm-local-empty-exact-band",
+    "cex-qsm-local-entropy-density-insufficient",
+    "cex-qsm-local-local-global-distinction"
+  ],
+  "contracts": {
+    "lem-qsm-local-hermitian-diagonalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "if and only if $K$ is closed in $\\mathbb{R}^n$ ([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]). 3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of $(\\mathbb{R",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "it has a maximum and a minimum ([[def-max-min]]): there are points $x_{\\max}, x_{\\min} \\in X$ with $$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$ and then $f(x_{\\max}) = \\sup",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$; we write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are exactly the nonzero squares: $x > 0$ if and only if $x = y^2$ for some $y \\neq 0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Identify $\\mathbb C^d$ with $\\mathbb R^{2d}$ by real and imaginary\ncoordinates. Its unit sphere is a closed bounded subset and is nonempty\nbecause $d\\ge1$; it is compact by [F1].",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The Rayleigh function $f(x)=x^*Ax$ is real on the unit sphere, since\n$A=A^*$, and is continuous because each coordinate of $f$ is a finite\npolynomial in the real and imaginary coordinates of $x$. By [F2] it has a\nmaximizer $u$ with $u^*u=1$.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix $w$ with $u^*w=0$ and let\n$g(t)=(u+tw)^*A(u+tw)/(u+tw)^*(u+tw)$ for real $t$. The denominator is\n$1+t^2w^*w>0$, so $g$ is differentiable near $0$; maximality of $u$ gives\n$g'(0)=0$. Expanding numerator and denominator gives\n$g'(0)=2\\operatorname{Re}(w^*Au)$, hence the real part of $w^*Au$ is zero.",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Apply step 2.1 with $iw$ in place of $w$. Since $(iw)^*Au=-i\\,w^*Au$,\nits real part is the imaginary part of $w^*Au$; therefore $w^*Au=0$ for\nevery $w\\perp u$. Decompose $Au=(u^*Au)u+w_0$ with $w_0\\perp u$; taking\n$w=w_0$ yields $w_0^*Au=\\|w_0\\|^2=0$. Thus $Au=\\lambda u$, where\n$\\lambda=u^*Au\\in\\mathbb R$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $x\\perp u$, then $u^*Ax=(Au)^*x=\\lambda u^*x=0$, so $u^\\perp$ is\ninvariant under $A$ and the restriction of $A$ to it is Hermitian. For $d=1$\nthe standard unit vector is already an eigenbasis. For $d>1$, induction on\nthe dimension supplies an orthonormal eigenbasis on $u^\\perp$; adjoining\n$u$ gives one for $\\mathbb C^d$.",
+          "inputs": [
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For any unit eigenvector $v$ with eigenvalue $\\mu$, positivity gives\n$\\mu=v^*Av\\ge0$. By [F3], each such $\\mu$ has a unique nonnegative square\nroot. In the eigenbasis from step 3.1, define $A^{1/2}$ to be diagonal with\nentries $\\sqrt{\\mu}$. This matrix is nonnegative and squares to $A$; it is\nindependent of choices inside repeated eigenspaces because the same scalar\nis assigned to every vector in that eigenspace.",
+          "inputs": [
+            "given",
+            "F3",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-qsm-local-finite-tensor-state": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        }
+      ],
+      "finite_checks": [],
+      "definition_review": {
+        "statement": "The definition fixes its objects, domains, conventions and boundary qualifications in its Definition section.",
+        "inputs": [
+          "def-qc-density-operator",
+          "def-qc-tensor-register-and-permutation"
+        ],
+        "edge_cases": "See exact zero, one, degeneracy, nonempty and endpoint dispositions below or in the Definition section.",
+        "well_definedness": "The definition uses the cited interfaces and finite operations explicitly; any missing conditional supplier is separately recorded."
+      }
+    },
+    "def-qsm-local-finite-matrix-entropy": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        }
+      ],
+      "finite_checks": [],
+      "definition_review": {
+        "statement": "The definition fixes its objects, domains, conventions and boundary qualifications in its Definition section.",
+        "inputs": [
+          "def-qsm-local-finite-tensor-state",
+          "lem-qsm-local-hermitian-diagonalization",
+          "def-natural-logarithm"
+        ],
+        "edge_cases": "See exact zero, one, degeneracy, nonempty and endpoint dispositions below or in the Definition section.",
+        "well_definedness": "The definition uses the cited interfaces and finite operations explicitly; any missing conditional supplier is separately recorded."
+      }
+    },
+    "def-qsm-local-additive-spectral-ensembles": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        }
+      ],
+      "finite_checks": [],
+      "definition_review": {
+        "statement": "The definition fixes its objects, domains, conventions and boundary qualifications in its Definition section.",
+        "inputs": [
+          "def-qsm-local-finite-tensor-state",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm"
+        ],
+        "edge_cases": "See exact zero, one, degeneracy, nonempty and endpoint dispositions below or in the Definition section.",
+        "well_definedness": "The definition uses the cited interfaces and finite operations explicitly; any missing conditional supplier is separately recorded."
+      }
+    },
+    "lem-qsm-local-subsystem-trace-tests": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-partial-trace",
+          "source_section": "Definition",
+          "quote": "$$\\bigl(\\operatorname{Tr}_B(R)\\bigr)_{i i'}:=\\sum_{j<b}R_{(i,j),(i',j)}.$$ Rows are output coordinates and columns are input coordinates, as in [[def-coordinate-column-and-matrix-of-a-linear-map]]. If $b=0$, th",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-qc-partial-trace-characterization-and-basis-independence",
+          "source_section": "Statement",
+          "quote": "is the unique linear map satisfying $$\\operatorname{tr}\\bigl((\\operatorname{Tr}_B R)\\circ T\\bigr)=\\operatorname{tr}\\bigl(R\\circ(T\\otimes I_{H_B})\\bigr)\\quad\\text{for every }R\\in\\operatorname{End}(H_A\\otimes H_B",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-qc-partial-trace-positive-and-trace-preserving",
+          "source_section": "Statement",
+          "quote": "$\\operatorname{Tr}_B(R)$ is non-negative and $$\\operatorname{tr}(\\operatorname{Tr}_B(R))=\\operatorname{tr}(R).$$ Here $\\operatorname{End}(H)$ is the set of linear maps $H\\to H$ as in [[def-qc-partial-trace]], $",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By the coordinate definition [F1], $\\rho_A$ is the second-factor partial\ntrace. Apply [F3] to the nonnegative trace-one operator $\\rho$. It gives\n$\\rho_A\\ge0$ and $\\operatorname{Tr}\\rho_A=\\operatorname{Tr}\\rho=1$;\ntherefore $\\rho_A$ is a density by the definition in\n[[def-qsm-local-finite-tensor-state]].",
+          "inputs": [
+            "given",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply [F2] with $R=\\rho$ and $T=A$ to obtain the displayed expectation\nidentity. If $(M_a)$ is a POVM, substitute $A=M_a$ for each $a$; these are\nexactly the outcome pairings for each lifted effect.",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-qsm-local-matrix-net-completion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qc-tensor-register-and-permutation",
+          "source_section": "Definition",
+          "quote": "An **ordered tensor register** consists of a finite ordered list of finite-dimensional complex inner-product spaces $H_0,\\ldots,H_{n-1}$, each equipped with a specified ordered orthonormal basis. Its space is $",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-c-star-algebra",
+          "source_section": "Definition",
+          "quote": "A **possibly nonunital complex Banach algebra** is a complex vector space $A$ equipped with an associative complex-bilinear multiplication $A \\times A \\to A$ ([[def-bounded-bilinear-map]] for the bilinearity co",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-local-hermitian-diagonalization",
+          "source_section": "Statement",
+          "quote": "For every integer $d\\ge1$ and Hermitian matrix $A\\in M_d(\\mathbb C)$, there is an orthonormal basis of $\\mathbb C^d$ consisting of eigenvectors of $A$, and all eigenvalues are real. If in addition $x^*Ax\\ge0$ for every $x\\in\\mathbb C^d$, every eigenvalue is nonnegative and the matrix $A^{1/2}$ obtained by replacing each eigenvalue by its nonnegative square root is well defined.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$ with equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The decomposition $x=\\sum_jx_j\\otimes|j\\rangle$ is orthogonal in the\nproduct basis [F1], and $A\\otimes I_q$ sends each summand to\n$Ax_j\\otimes|j\\rangle$. The displayed sum-of-squares formula follows.\nIt proves $\\|A\\otimes I_q\\|\\le\\|A\\|$. For every unit $v$,\n$\\|(A\\otimes I_q)(v\\otimes|1\\rangle)\\|=\\|Av\\|$; taking the supremum\nover unit $v$ proves the opposite inequality. Thus $\\iota_N$ is isometric.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For $A\\in\\mathcal A_N$, the finite Hermitian matrix $A^*A$ is\nnonnegative, since $x^*A^*Ax=\\|Ax\\|^2\\ge0$. By [F3] its eigenvalues are\nnonnegative, and in an orthonormal eigenbasis\n$$\\|A\\|^2=\\sup_{\\|x\\|=1}x^*A^*Ax=\\max\\operatorname{spec}(A^*A)=\\|A^*A\\|.$$\nIndeed, if its eigenvalues are $\\lambda_i\\ge0$, then\n$x^*A^*Ax=\\sum_i\\lambda_i|x_i|^2$ and\n$\\|A^*Ax\\|^2=\\sum_i\\lambda_i^2|x_i|^2$. The unit-vector suprema are\n$\\max_i\\lambda_i$ and $(\\max_i\\lambda_i)^2$, respectively.\nThus every local matrix algebra satisfies the C*-identity. Tensor\nmultiplication and adjoint give\n$(A\\otimes I)(B\\otimes I)=(AB)\\otimes I$ and\n$(A\\otimes I)^*=A^*\\otimes I$, while $I\\otimes I$ is the unit. Hence these\nmaps are unital *-homomorphisms, and their compatible inclusions make the\nunion operations well-defined. Operator-norm submultiplicativity follows\nfrom $\\|ABx\\|\\le\\|A\\|\\|B\\|\\|x\\|$. By [F4],\n$\\|z\\|=\\sup_{\\|x\\|=1}|\\langle z,x\\rangle|$, with equality at\n$x=z/\\|z\\|$ when $z\\ne0$. The adjoint identity gives\n$\\|A^*y\\|=\\sup_{\\|x\\|=1}|\\langle y,Ax\\rangle|\\le\\|A\\|\\|y\\|$;\napplying this to $A^*$ proves $\\|A^*\\|=\\|A\\|$. Hence the union is a\nnormed *-algebra satisfying the C*-identity. The norm completion preserves\nproduct, involution and that identity by continuity, and is complete by\nconstruction. By [F2] it is a C*-algebra.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "definition_review": {
+        "statement": "The definition fixes its objects, domains, conventions and boundary qualifications in its Definition section.",
+        "inputs": [
+          "def-qc-tensor-register-and-permutation",
+          "def-linear-map",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "lem-qsm-local-hermitian-diagonalization",
+          "def-c-star-algebra"
+        ],
+        "edge_cases": "See exact zero, one, degeneracy, nonempty and endpoint dispositions below or in the Definition section.",
+        "well_definedness": "The definition uses the cited interfaces and finite operations explicitly; any missing conditional supplier is separately recorded."
+      }
+    },
+    "post-qsm-local-ensemble-preparations": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "finite_checks": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section explicitly adopts finite canonical and conditional nonempty-band preparation rules."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The statement and physical_scope restrict the rule to the declared finite q-level tensor model and positive-temperature interpretation."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Complete Tong and Arovas lecture texts were inspected at the exact locators in batch coverage; they provide context only."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "The Postulate section states that preparation is adopted and does not claim thermalization, observations, or measured frequencies."
+        }
+      }
+    },
+    "lem-qsm-local-tensor-gibbs-factorization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-additive-spectral-ensembles",
+          "source_section": "Definition",
+          "quote": "repeated level values remain distinct basis labels and therefore count as degeneracy. For finite $\\beta\\in\\mathbb R$, put $$Z_1=\\sum_{j=1}^q e^{-\\beta e_j},\\qquad p_j=\\frac{e^{-\\beta e_j}}{Z_1},\\qquad E=\\sum_{j",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$ provided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1] and the notation in [F3], each label weight uses the real\nexponential $e^x=\\exp(x)$. Apply [F2]\nrepeatedly and use distributivity of finite sums to obtain\n$$Z_N=\\sum_{j_1,\\ldots,j_N}\\prod_{a=1}^N e^{-\\beta e_{j_a}} =\\prod_{a=1}^N\\sum_{j_a=1}^q e^{-\\beta e_{j_a}}=Z_1^N.$$\nFor each product label, division by this positive denominator makes its\ncanonical diagonal entry $\\prod_a p_{j_a}$; this is the diagonal entry of\n$\\gamma^{\\otimes N}$.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Summing the diagonal entries over the last $N-k$ labels multiplies each\nfirst-$k$ entry by $\\prod_{a=k+1}^N\\sum_{j_a}p_{j_a}=1$. Thus the reduced\ndiagonal matrix is $\\gamma^{\\otimes k}$. Finally its mean energy is\n$$\\sum_{j_1,\\ldots,j_N}\\Bigl(\\prod_a p_{j_a}\\Bigr)\\sum_a e_{j_a} =\\sum_{a=1}^N\\sum_{j_a}p_{j_a}e_{j_a}=NE,$$\nbecause every other factor sum is one.",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qsm-local-classical-diagonal-embedding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-matrix-net-completion",
+          "source_section": "Definition",
+          "quote": "The embeddings are isometric unital *-homomorphisms. For $m\\ge N$, define $\\iota_{N,m}(A)=A\\otimes I_q^{\\otimes(m-N)}$ and identify $A\\in\\mathcal A_N$ with its image at every larger register. For a two-step inclusion the",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-state-on-a-c-star-algebra",
+          "source_section": "Definition",
+          "quote": "A linear functional $\\omega:A\\to\\mathbb C$ is **positive** if $$\\omega(a^*a)\\ge0\\qquad\\text{for every }a\\in A,$$ and a **state** if in addition $\\|\\omega\\|=1$, the norm being the operator norm of the bounded li",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$ with equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under the inclusion $A\\mapsto A\\otimes I_q$, the diagonal entry at\n$(x,j)$ equals $A_{xx}$. Consistency of $\\mu_{N+1}$ says\n$\\sum_j\\mu_{N+1}(x,j)=\\mu_N(x)$; substituting this identity into\n$\\omega_{N+1}(A\\otimes I_q)$ gives $\\omega_N(A)$. Hence the rule is\nwell-defined on the union of positive-length local matrix algebras. Define\n$\\omega_0(cI)=c$ on $\\mathcal A_0=\\mathbb C I$. It agrees with the $N=1$\nformula because $\\sum_x\\mu_1(x)=1$. Each $\\omega_N$ is linear, and these\nidentities show the rule on the full union is linear and satisfies\n$\\omega(1)=1$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a local matrix $A$, positivity of the weights gives\n$|\\omega_N(A)|\\le\\sum_x\\mu_N(x)|A_{xx}|\\le\\|A\\|$ because\n$|\\langle A e_x,e_x\\rangle|\\le\\|A\\|$ by [F3], and the same marginal calculation\nmakes the functionals consistent. Thus $|\\omega(A)|\\le\\|A\\|$ on\n$\\mathcal A_{\\rm loc}$. If $A_n$ is a norm-Cauchy sequence of local\nmatrices, $(\\omega(A_n))$ is Cauchy; define its limit to extend $\\omega$.\nThe bound proves independence of approximating sequence, linearity and\ncontinuity, and density makes the extension unique.",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $A_n\\to A$ in norm, then $A_n^*A_n\\to A^*A$ by continuity of\nmultiplication and adjoint in the C*-norm. For local $A_n$, its diagonal\nentries obey\n$\\langle A_n^*A_ne_x,e_x\\rangle=\\|A_ne_x\\|^2\\ge0$, so\n$\\omega(A_n^*A_n)\\ge0$. Passing to the limit\nshows positivity of the extension. Its norm is at most one by step 2.1 and at\nleast one because $\\omega(1)=1$ and $\\|1\\|=1$. Hence it is a state by [F2].",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "thm-qsm-local-independent-shell-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-tdmath-independent-microcanonical-block-limit",
+          "source_section": "Statement",
+          "quote": "Then $\\Gamma_N$ is nonempty for every $N$; for each fixed $k\\ge1$, the first $k$-site marginal (for $N\\ge k$) converges in that distance to $p^{\\otimes k}$; and $$\\frac1N\\log|\\Gamma_N|\\longrightarrow H(p):=-\\su",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-local-subsystem-trace-tests",
+          "source_section": "Statement",
+          "quote": "is a finite tensor density on $V_A$. For every matrix $A$ on $V_A$, $$\\operatorname{Tr}(\\rho_AA)=\\operatorname{Tr}(\\rho(A\\otimes I_B)).$$ For a finite POVM $(M_a)_{a=1}^r$ on $V_A$, the trace pairings of its ou",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-qsm-local-tensor-gibbs-factorization",
+          "source_section": "Statement",
+          "quote": "$Z_N=Z_1^N$ and $\\gamma_N=\\gamma^{\\otimes N}$. Its first $k$-site reduced density is $\\gamma^{\\otimes k}$ for $1\\le k\\le N$, and its expected additive energy is $NE$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-qsm-local-finite-matrix-entropy",
+          "source_section": "Definition",
+          "quote": "Define its **dimensionless spectral entropy**, measured in nats, by $$s_N(\\rho):=-\\sum_{i:\\lambda_i>0}\\lambda_i\\log\\lambda_i,$$ with $0\\log0:=0$. This is independent of the ordering of the eigenvalues, includin",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-qsm-local-finite-tensor-state",
+          "source_section": "Definition",
+          "quote": "A **bounded observable matrix** on $V_N$ is a Hermitian matrix $A=A^*$, with operator norm $\\|A\\|_{\\mathrm{op}}=\\sup_{\\|x\\|=1}\\|Ax\\|$. Its mathematical expectation functional in $\\rho$ is $\\omega_\\rho(A)=\\opera",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space, $$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$ with equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Apply [F1] to the finite alphabet, levels, $\\beta$ and $\\delta_N$ in the\nstatement. It gives $\\Omega_N=|\\Gamma_N|>0$ and the classical $k$-label\nmarginal convergence. Since $\\sigma_N$ is diagonal with equal weight on each\nlabel in $\\Gamma_N$, the coordinate formula for partial trace sums over the\nlast $N-k$ labels and yields the diagonal density whose entries are exactly\nthat marginal.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Both $\\sigma_{N,k}$ and $\\gamma_k$ are diagonal. For diagonal matrices,\nthe eigenvalues of their difference are their diagonal entry differences;\ntherefore its trace norm is the sum of the absolute marginal differences,\nwhich is twice total variation. The convergence in [F1] gives\n$\\|\\sigma_{N,k}-\\gamma_k\\|_1\\to0$ for each fixed $k$.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F4], the eigenvalues of $\\sigma_N$ are $1/\\Omega_N$ with multiplicity\n$\\Omega_N$ and zero otherwise. The entropy definition therefore gives\n$s_N(\\sigma_N)=\\log\\Omega_N$. Dividing by $N$ and applying the entropy\nlimit in [F1] proves the second conclusion.",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "[F3] identifies the canonical $k$-site state as $\\gamma_k$, so the\ntrace-norm convergence already proved compares the shell reduction with the\nspecified canonical reduction.\nFor every Hermitian local observable $A$, diagonalizing the Hermitian\ndifference $D=\\sigma_{N,k}-\\gamma_k$ gives\n$|\\operatorname{Tr}(DA)|\\le\\|A\\|\\|D\\|_1$: in that eigenbasis each\ndiagonal expectation of $A$ has absolute value at most $\\|A\\|$. Thus the\nsame conclusion controls every fixed bounded local observable, including\nones not diagonal in the energy basis. By [F5] and Cauchy–Schwarz [F6], the bound uses the declared\noperator norm. The statement fixes $k$ before the\nlimit and makes no claim about a global trace distance.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "def-qsm-local-coercive-regulated-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This Definition has no theorem or biconditional conclusion; its object and domain conventions are stated in the Definition section."
+        }
+      ],
+      "finite_checks": [],
+      "definition_review": {
+        "statement": "Defines the fixed finite-mode coercive polynomial form model, selected self-adjoint realization, energy scale and trace-Gibbs density.",
+        "inputs": [
+          "def-qft-regulated-polynomial-hamiltonian",
+          "thm-qft-self-adjoint-regulated-interaction",
+          "thm-qft-regulated-gibbs-trace",
+          "def-countable-choice",
+          "post-qsm-normal-measurement-state"
+        ],
+        "edge_cases": "The dimension r is finite and at least one; the selected realization is form-based; beta and E_* are positive in the Gibbs clause; no cutoff removal is included.",
+        "well_definedness": "The QFT polynomial, self-adjointness and trace-Gibbs carriers provide the mathematical interface. The current batch-36 normal-state postulate carrier was inspected and matches the density/PVM use, but its readiness and dependency chain remain unresolved."
+      },
+      "supplier_interfaces": [
+        {
+          "item": "post-qsm-normal-measurement-state",
+          "carrier": "present in batch 36 as draft",
+          "readiness": "no current Step 1 record; unresolved dependencies in lem-qsm-trace-state-calculus",
+          "excerpt": "A prepared normal state is a trace-class density operator on a specified separable complex Hilbert space; a sharp self-adjoint measurement with spectral PVM E_A assigns its Born probability by Tr(rho E_A(C))."
+        }
+      ]
+    },
+    "pthm-qsm-local-qualified-shell-measurements": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "post-qsm-local-ensemble-preparations",
+          "source_section": "Postulate",
+          "quote": "For declared temperature $T>0$ kelvin and Boltzmann constant $k_B>0$ joules per kelvin, use $\\beta=(k_BT)^{-1}>0$ joules$^{-1}$ and assign the canonical finite density $\\gamma_N$ of [[def-qsm-local-additive-spe",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-qsm-local-independent-shell-equivalence",
+          "source_section": "Statement",
+          "quote": "Then every band is nonempty. For each fixed $k\\ge1$ and $N\\ge k$, let $\\sigma_{N,k}=\\operatorname{Tr}_{k+1,\\ldots,N}\\sigma_N$ and $\\gamma_k=\\gamma^{\\otimes k}$. Then $$\\|\\sigma_{N,k}-\\gamma_k\\|_1\\to0,\\qquad \\fr",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-local-finite-tensor-state",
+          "source_section": "Definition",
+          "quote": "A **finite tensor density** on $V_N$ is a density operator in the exact root-library sense of [[def-qc-density-operator]]: a nonnegative endomorphism $\\rho$ with $\\operatorname{Tr}\\rho=1$. In the standard colum",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [A1], the local laws are\n$p^{\\rm sh}_{N,a}=\\operatorname{Tr}(\\sigma_{N,k}M_a)$ and\n$p^{\\rm can}_{N,a}=\\operatorname{Tr}(\\gamma_kM_a)$. Put\n$D_N=\\sigma_{N,k}-\\gamma_k$. The states are diagonal in the common product\nenergy basis, so for each outcome\n$$\\operatorname{Tr}(D_NM_a)=\\sum_x (u_N(x)-p^{\\otimes k}(x))(M_a)_{xx}.$$\nFor every basis label $x$, positivity and completeness of the POVM imply\n$0\\le(M_a)_{xx}\\le1$ and $\\sum_a(M_a)_{xx}=1$.",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Apply the triangle inequality and sum over the finite outcomes:\n$$\\sum_a|\\operatorname{Tr}(D_NM_a)| \\le\\sum_x|u_N(x)-p^{\\otimes k}(x)|\\sum_a(M_a)_{xx} =\\sum_x|u_N(x)-p^{\\otimes k}(x)|=\\|D_N\\|_1.$$\nBy [F1] this last quantity tends to zero for fixed $k$, proving the claim.\nThe calculation compares model probabilities only. It makes no inference\nfrom finite observations, which would require separately declared sampling\nand apparatus assumptions.",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": []
+    },
+    "pthm-qsm-local-regulated-interacting-gibbs": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-qft-regulated-gibbs-trace",
+          "source_section": "Statement",
+          "quote": "Then $\\rho_\\beta$ is positive trace class and its trace $$Z_\\beta:=\\operatorname{Tr}(\\rho_\\beta)=\\sum_{k\\ge0}e^{-\\beta\\lambda_k}$$ satisfies the finite bound $$0<Z_\\beta\\le e^{\\beta C_0} \\prod_{j=1}^N\\frac{e^{-",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-relative-entropy-domain",
+          "source_section": "Definition",
+          "quote": "For a trace-class density $\\rho$ with positive eigenvalues $p_i$, define $S(\\rho)=-k_B\\sum_i p_i\\log p_i\\in[0,\\infty]$, with $0\\log0=0$. The logarithm is natural and acts on dimensionless density eigenvalues.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "post-qsm-thermal-gibbs-preparation",
+          "source_section": "Postulate",
+          "quote": "For temperature $T>0$, put $\\beta=(k_BT)^{-1}$ and adopt $ \\rho_\\beta=\\frac{e^{-\\beta H}}{Z_\\beta},\\qquad Z_\\beta=\\operatorname{Tr}(e^{-\\beta H}). $ In the infinite-dimensional case all scalar energy moments used in a conclusion must also be finite on the actu",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "thm-qsm-trace-gibbs-variational",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $H\\ne\\{0\\}$ be a separable complex Hilbert space and $A=A^*$ a densely defined Hamiltonian bounded below by $a\\in\\mathbb R$. Assume $e^{-\\beta A}$ is trace class for every $\\beta$ in an open interval $I\\subset(0,\\infty)$. Put $Z_\\beta=\\operatorname{Tr}(e^{-\\beta A})$, $\\rho_\\beta=e^{-\\beta A}/Z_\\beta$, $T=(k_B\\beta)^{-1}$, and $F_\\beta=-\\beta^{-1}\\log Z_\\beta$. Then $Z_\\beta\\in(0,\\infty)$, $\\rho_\\beta$ is a faithful normal density, and every normal density $\\rho$ with finite spectral form energy $ \\mathcal E_A(\\rho)=\\int_{\\mathbb R}\\lambda\\,d\\mu_\\rho(\\lambda),\\qquad \\int_{\\mathbb R}|\\lambda|\\,d\\mu_\\rho(\\lambda)<\\infty, $ has finite entropy and satisfies $ \\mathcal E_A(\\rho)-TS(\\rho)\\geq F_\\beta, $ with equality exactly at $\\rho=\\rho_\\beta$. The prepared Gibbs state also has $ S(\\rho_\\beta)=k_B\\bigl(\\log Z_\\beta+\\beta\\mathcal E_A(\\rho_\\beta)\\bigr). $ The trace-class and open-interval hypotheses are essential; a lower bound on $A$ alone does not imply finite $Z_\\beta$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "post-qsm-normal-measurement-state",
+          "source_section": "Postulate",
+          "quote": "Adopt the following measurement interpretation for this nonrelativistic quantum-statistical model. A prepared normal state is a trace-class density operator $\\rho$ on a specified separable complex Hilbert space $H$. A sharp measurement of a self-adjoint observable $A$, with spectral PVM $E_A$, assigns probability\n$\n\\mathbb P_\\rho\\{A\\in C\\}=\\operatorname{Tr}(\\rho E_A(C))\n$\nto each Borel outcome set $C\\subseteq\\mathbb R$. Finite projective measurements use the same rule with their orthogonal projections. This adopts a physical probability interpretation for the mathematical state law proved in [[lem-qsm-trace-state-calculus]]; it does not derive the Born rule, assert that an apparatus realizes a specified PVM, or report experimental outcomes. Infinite algebraic states not represented by trace-class density operators are not included.\n\nThe Axiom of Choice is inherited from the unbounded spectral theorem and its spectral-calculus supplier closure. Its strength is retained in the mathematical dependencies. The scalar probability and bounded cyclicity clauses now use the exact canonical suppliers cited by [[lem-qsm-trace-state-calculus]]; this source adoption supplies no native readiness or empirical validation, and implies no weaker foundation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The selected form realization in the model is self-adjoint and bounded\nbelow; write its lower bound as $h\\ge-C_0I$. Multiplication by $E_*>0$\npreserves self-adjointness and gives $H=E_*h\\ge-E_*C_0I$. Theorem [F1]\napplies at $b=\\beta E_*>0$, yielding\n$0<Z_\\beta=\\operatorname{Tr}(e^{-\\beta H})<\\infty$ and a positive\ntrace-class numerator. Dividing by $Z_\\beta$ produces a positive\ntrace-class operator of trace one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since the same trace finiteness holds for every $b>0$ by [F1] and AC is\nassumed explicitly by [A4], the map\n$e^{-\\beta H}$ is trace class for every $\\beta>0$; in particular it is\ntrace class on an open interval around the chosen positive $\\beta$. The\nentropy notation for normal densities is fixed by [F2]. The model, units,\nand this normal density meet the hypotheses in [A2] under its\nstated AC and finite-form-energy competitor conditions. Substitution into\nthat conditional variational theorem gives the free-energy inequality and\nuniqueness on exactly that competitor domain.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A2",
+            "A4",
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Under the preparation assumptions [A1] and [A3], the density obtained\nin step 1.1 supplies the stipulated normal Born predictions for each\ndeclared sharp measurement with spectral PVM. The batch-36 postulates remain adopted draft physical premises; this conditional argument does not establish native readiness or empirical validity for them. Neither\n[A1] nor [A2] asserts a physical process that drives states to the Gibbs\ndensity.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "supplier_interfaces": [
+        {
+          "item": "post-qsm-thermal-gibbs-preparation",
+          "carrier": "present in batch 36 as draft",
+          "readiness": "no current Step 1 record; depends on unresolved trace-Gibbs theorem",
+          "used_in": "A1"
+        },
+        {
+          "item": "thm-qsm-trace-gibbs-variational",
+          "carrier": "present in batch 36 as draft",
+          "readiness": "no current Step 1 record; pseudo-suppliers supplier-thermo-M33/M16 are not production carriers",
+          "used_in": "A2"
+        },
+        {
+          "item": "post-qsm-normal-measurement-state",
+          "carrier": "present in batch 36 as draft",
+          "readiness": "no current Step 1 record; transitive research-only M9/M2 supports remain unresolved",
+          "used_in": "A3"
+        }
+      ]
+    },
+    "cex-qsm-local-empty-exact-band": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-additive-spectral-ensembles",
+          "source_section": "Definition",
+          "quote": "repeated level values remain distinct basis labels and therefore count as degeneracy. For finite $\\beta\\in\\mathbb R$, put $$Z_1=\\sum_{j=1}^q e^{-\\beta e_j},\\qquad p_j=\\frac{e^{-\\beta e_j}}{Z_1},\\qquad E=\\sum_{j",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Take $q=2$, $e_1=0$, $e_2=\\epsilon>0$, and choose finite $\\beta>0$\nwith $\\beta\\epsilon=\\log\\sqrt2$. By [F1],\n$$p_2=\\frac{e^{-\\beta\\epsilon}}{1+e^{-\\beta\\epsilon}} =\\frac1{1+\\sqrt2}=\\sqrt2-1.$$\nThis number is irrational: if $\\sqrt2$ were rational, writing it as a\nreduced fraction $a/b$ gives $a^2=2b^2$, so $a$ is even, then $b$ is even,\ncontradicting reduction. Hence $p_2$ is irrational.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For any integer $N\\ge1$, an $N$-site label has energy $m\\epsilon$\nfor some integer $m$, whereas the canonical mean is $NE=N\\epsilon p_2$.\nThe zero-width band condition forces $m\\epsilon=N\\epsilon p_2$, hence\n$m=Np_2$. Since $p_2$ is irrational, $Np_2$ is not an integer. Thus no\nlabel satisfies the condition, $\\Gamma_N=\\varnothing$, and\n$\\Pi_N/|\\Gamma_N|$ is undefined. This shows why a nonemptiness or positive\nwidth hypothesis cannot be omitted.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-level irrational centered energy",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 calculate p2=√2−1 and show Np2 is nonintegral for every positive integer N."
+        }
+      ]
+    },
+    "cex-qsm-local-entropy-density-insufficient": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-qsm-local-finite-matrix-entropy",
+          "source_section": "Definition",
+          "quote": "Define its **dimensionless spectral entropy**, measured in nats, by $$s_N(\\rho):=-\\sum_{i:\\lambda_i>0}\\lambda_i\\log\\lambda_i,$$ with $0\\log0:=0$. This is independent of the ordering of the eigenvalues, includin",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-qsm-local-subsystem-trace-tests",
+          "source_section": "Statement",
+          "quote": "is a finite tensor density on $V_A$. For every matrix $A$ on $V_A$, $$\\operatorname{Tr}(\\rho_AA)=\\operatorname{Tr}(\\rho(A\\otimes I_B)).$$ For a finite POVM $(M_a)_{a=1}^r$ on $V_A$, the trace pairings of its ou",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "On $V=\\mathbb C^2$ put $\\gamma=I/2$. For each $N\\ge1$, set\n$\\gamma_N=(I/2)^{\\otimes N}$ and\n$\\tau_N=|1\\rangle\\langle1|\\otimes(I/2)^{\\otimes(N-1)}$. Both are positive\nof trace one, so are finite tensor densities. Their positive eigenvalues\nare respectively $2^{-N}$ with multiplicity $2^N$ and $2^{-(N-1)}$ with\nmultiplicity $2^{N-1}$. By [F1],\n$s_N(\\gamma_N)=N\\log2$ and $s_N(\\tau_N)=(N-1)\\log2$; therefore\n$|s_N(\\tau_N)-s_N(\\gamma_N)|/N=(\\log2)/N\\to0$.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], the one-site reductions are $\\gamma$ and\n$|1\\rangle\\langle1|$. Their difference in the ordered basis is\n$\\operatorname{diag}(1/2,-1/2)$, whose eigenvalues have absolute sum one.\nThus $\\|\\tau_{N,1}-\\gamma\\|_1=1$ for every $N$. Entropy-density agreement\nalone therefore does not imply local trace-norm convergence.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "finite entropy and first-site trace norm",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 calculate the two entropy values and ||τN,1−γ1||1=1."
+        }
+      ]
+    },
+    "cex-qsm-local-local-global-distinction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-qsm-local-subsystem-trace-tests",
+          "source_section": "Statement",
+          "quote": "is a finite tensor density on $V_A$. For every matrix $A$ on $V_A$, $$\\operatorname{Tr}(\\rho_AA)=\\operatorname{Tr}(\\rho(A\\otimes I_B)).$$ For a finite POVM $(M_a)_{a=1}^r$ on $V_A$, the trace pairings of its ou",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-qsm-local-finite-tensor-state",
+          "source_section": "Definition",
+          "quote": "A **finite tensor density** on $V_N$ is a density operator in the exact root-library sense of [[def-qc-density-operator]]: a nonnegative endomorphism $\\rho$ with $\\operatorname{Tr}\\rho=1$. In the standard colum",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $N\\ge2$, let $\\pi_N$ be the diagonal density uniform on binary\nstrings with even parity, and let $\\gamma_N=I/2^N$. There are $2^{N-1}$\neven strings: the first $N-1$ bits can be arbitrary and the last bit is\nuniquely determined. Fix $k<N$ coordinates and their values. Among the\n$N-k\\ge1$ unassigned coordinates, exactly half of the $2^{N-k}$ completions\nhave the required parity, namely $2^{N-k-1}$. Summing by [F1], the marginal\nprobability of each fixed $k$-bit string is\n$2^{N-k-1}/2^{N-1}=2^{-k}$. Thus\n$(\\pi_N)_k=I/2^k=(\\gamma_N)_k$ for every proper block.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "On an even string the diagonal difference $\\pi_N-\\gamma_N$ is\n$2^{-(N-1)}-2^{-N}=2^{-N}$; on an odd string it is $-2^{-N}$. There are\n$2^N$ strings in total, so the absolute eigenvalues sum to\n$2^N2^{-N}=1$. Therefore $\\|\\pi_N-\\gamma_N\\|_1=1$ for every $N$.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $P_{\\rm even}$ be the diagonal projection onto even strings. Then\n$(P_{\\rm even},I-P_{\\rm even})$ is a two-outcome POVM by [F2]. Its first\noutcome has probability $1$ in $\\pi_N$ and $1/2$ in $\\gamma_N$, a gap of\n$1/2$. Hence equality of all proper local marginals does not entail global\ntrace-norm convergence or equality of global measurement predictions.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The item statement and numbered proof address this boundary or explicitly exclude it; see 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "even-parity marginals and global effect",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 count proper marginals, calculate global trace norm 1, and calculate the POVM probability gap 1/2."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,716 @@
+--- old/def-csm-gibbs-physical-parameters
+
++++ current/def-csm-gibbs-physical-parameters
+
+@@ -23,6 +23,8 @@
+
+     - title: "David Ruelle, Superstable Interactions in Classical Statistical Mechanics, Communications in Mathematical Physics 18 (1970), 127–159"
+       url: "https://www.ihes.fr/~ruelle/PUBLICATIONS/%5B28%5D.pdf"
+       locator: "Complete PDF, especially printed pp. 128–134 / PDF pp. 1–6."
++    - title: "BIPM, SI base unit: kelvin"
++      url: "https://www.bipm.org/en/si-base-units/kelvin"
+ ---
+ 
+ ## Definition
+@@ -37,4 +39,6 @@
+
+ $$\int_{\mathbb R^d}e^{-\beta|p|^2/(2m_{\rm p})}\,d^dp=c^{-d}\pi^{d/2}=(2\pi m_{\rm p}k_BT)^{d/2}.$$
+ Under the phase-space reference measure $d^dx\,d^dp/h_{\rm ref}^d$, with reference action $h_{\rm ref}>0$ in joule-seconds, the integrated momentum factor is
+ $$h_{\rm ref}^{-d}\int_{\mathbb R^d}e^{-\beta|p|^2/(2m_{\rm p})}\,d^dp=\left(\frac{\sqrt{2\pi m_{\rm p}k_BT}}{h_{\rm ref}}\right)^d=\lambda_T^{-d},\qquad \lambda_T=\frac{h_{\rm ref}}{\sqrt{2\pi m_{\rm p}k_BT}}.$$
+-For chemical potential $\mu$ in joules, define the classical activity $z_c=e^{\beta\mu}\lambda_T^{-d}$, with units $\mathrm m^{-d}$. Thus $\lambda_T$ is a length and $z_c$ is inverse volume. This momentum integration explains the one-particle thermal factor; it does not derive particle indistinguishability or a factorial convention. The choice of $h_{\rm ref}$ is a reference convention, not a consequence of the classical equations of motion. For continuum interactions, the potential hypotheses and energy meaning are as in [[def-csm-stable-superstable-continuum-interaction]]. This item defines units and model quantities; it does not calibrate them to a material or claim empirical accuracy.
++For chemical potential $\mu$ in joules, define the classical activity $z_c=e^{\beta\mu}\lambda_T^{-d}$, with units $\mathrm m^{-d}$. Thus $\lambda_T$ is a length and $z_c$ is inverse volume. This momentum integration explains the one-particle thermal factor; it does not derive particle indistinguishability or a factorial convention. The choice of $h_{\rm ref}$ is a reference convention, not a consequence of the classical equations of motion. For continuum interactions, the potential hypotheses and energy meaning are as in [[def-csm-stable-superstable-continuum-interaction]].
++
++The parameter status in these formulas is model-relative. $T$, $a$, $J_{\rm I}$, and $h$ are inputs for the chosen lattice model; $m_{\rm p}$ and $\mu$ are inputs for the chosen continuum model. Here $h$ is an energy bias per dimensionless spin, not a magnetic-field strength. The reference action $h_{\rm ref}>0$ is a primitive normalization convention, not a derived quantity or an assertion that it equals Planck's constant. In the current SI, $k_B$ has the exact defining value $1.380649\times10^{-23}\,\mathrm{J\,K^{-1}}$; it is a fixed SI conversion constant, not a measured fit parameter in this model. The inverse temperature $\beta$, thermal wavelength $\lambda_T$, activity $z_c$, pressure and entropy densities, energy density $u$, entropy density $s$, and free-energy density $f$ are defined or derived from those inputs and the state as specified above; their formulas do not calibrate the inputs to a material or assert empirical accuracy.
+--- old/post-csm-interacting-equilibrium-gibbs
+
++++ current/post-csm-interacting-equilibrium-gibbs
+
+@@ -7,9 +7,9 @@
+
+ domain: physics
+ library: physics
+ dependency_level: 3
+-deps: ["def-csm-gibbs-physical-parameters", "post-csm-counting-and-physical-observables", "def-csm-lattice-gibbs-specification", "def-countable-choice"]
++deps: ["def-csm-gibbs-physical-parameters", "post-csm-counting-and-physical-observables", "def-csm-phase-space-reference", "def-csm-lattice-gibbs-specification", "lem-csm-lattice-specification-consistency", "lem-csm-lattice-product-and-measure-compactness", "def-countable-choice"]
+ justified_by: []
+-dependency_roles: {"def-csm-gibbs-physical-parameters": "formulation-prerequisite", "post-csm-counting-and-physical-observables": "formulation-prerequisite", "def-csm-lattice-gibbs-specification": "formulation-prerequisite", "def-countable-choice": "formulation-prerequisite"}
++dependency_roles: {"def-csm-gibbs-physical-parameters": "formulation-prerequisite", "post-csm-counting-and-physical-observables": "formulation-prerequisite", "def-csm-phase-space-reference": "formulation-prerequisite", "def-csm-lattice-gibbs-specification": "formulation-prerequisite", "lem-csm-lattice-specification-consistency": "formulation-prerequisite", "lem-csm-lattice-product-and-measure-compactness": "formulation-prerequisite", "def-countable-choice": "formulation-prerequisite"}
+ physical_scope: "Adopted equilibrium interpretation for the chosen classical Hamiltonian, temperature and reference measure; no claim of equilibration or empirical accuracy."
+ provenance:
+   statement: ai-altered
+@@ -27,8 +27,16 @@
+
+ 
+ ## Postulate
+ 
+-For a chosen classical interacting Hamiltonian and positive inverse temperature $\beta$, let $\mathcal X_\Lambda$ be the state space inside each finite region $\Lambda$, let $\eta$ be an admissible exterior state, and declare a reference measure $m_\Lambda^\eta$ and finite conditional energy $H_\Lambda(\cdot\mid\eta)$ in joules. Define
+-$$Z_\Lambda^\eta:=\int_{\mathcal X_\Lambda}e^{-\beta H_\Lambda(x\mid\eta)}\,dm_\Lambda^\eta(x),\qquad \gamma_\Lambda(B\mid\eta):=(Z_\Lambda^\eta)^{-1}\int_Be^{-\beta H_\Lambda(x\mid\eta)}\,dm_\Lambda^\eta(x),$$
+-and adopt these conditional laws when $0<Z_\Lambda^\eta<\infty$ for every finite $\Lambda$ and admissible $\eta$. In the finite-alphabet lattice setting these are the kernels of [[def-csm-lattice-gibbs-specification]], with the product-measure and Countable Choice conventions of [[def-countable-choice]]. An infinite-volume equilibrium state in this adopted model means a probability measure satisfying all the model's finite-region conditional identities (the DLR condition). This is a model postulate: normalization, stationarity of a Hamiltonian flow, or a finite-volume calculation does not prove equilibration or establish that the model describes nature.
++Fix a classical model with physical energy measured in joules and a positive inverse-temperature parameter $\beta=(k_BT)^{-1}$ in $\mathrm{J}^{-1}$. Its global configuration space is a measurable space $(\mathcal X,\mathscr F)$. For each finite region $\Lambda$, specify a local state measurable space $(\mathcal X_\Lambda,\mathscr F_\Lambda)$, an admissible exterior measurable space $(\mathcal E_\Lambda,\mathscr E_\Lambda)$, and a measurable concatenation map $c_\Lambda:\mathcal X_\Lambda\times\mathcal E_\Lambda\to\mathcal X$; write $x\eta:=c_\Lambda(x,\eta)$. Specify a jointly measurable conditional energy $H_\Lambda:\mathcal X_\Lambda\times\mathcal E_\Lambda\to\mathbb R\cup\{+\infty\}$, where $+\infty$ marks a forbidden local state, and a measurable kernel $\eta\mapsto m_\Lambda^\eta$ of positive $\sigma$-finite reference measures on $(\mathcal X_\Lambda,\mathscr F_\Lambda)$; $\sigma$-finite means that $\mathcal X_\Lambda$ is a countable union of measurable sets of finite $m_\Lambda^\eta$-measure. The reference normalization and any units carried by its coordinates are part of the model data. For a thermodynamic partition function, choose the reference normalization so $Z_\Lambda^\eta$ is dimensionless. The product $\beta H_\Lambda$ is dimensionless.
+ 
+-When particle-number sectors are present, use the current draft postulate [[post-csm-counting-and-physical-observables]] with its exact interface: for $N_a$ operationally indistinguishable particles of species $a$, total $N=\sum_aN_a$, and dimension $d$, the reference measure is $m_N^{\mathrm{phys}}=(\prod_aN_a!\,a_0^{dN})^{-1}dq\,dp$ in canonical coordinates read with their declared physical SI units, with $a_0>0$ the locally prescribed primitive action reference in joule-seconds. The phase-volume element has action dimension $(\mathrm{J\,s})^{dN}$, so the displayed reference is dimensionless. If using the thermal-wavelength convention of [[def-csm-gibbs-physical-parameters]], set $h_{\rm ref}=a_0$; omit the factorial for operationally distinguishable labels. The item exists as a draft postulate, and its phase-space and observable definition suppliers are drafts; this clause is conditional on that adopted interface, not a proved result. These choices affect entropy offsets and particle-exchange weights. No empirical parameter, measured transition temperature, or uncertainty is asserted here.
++For $\eta\in\mathcal E_\Lambda$, define
++$$Z_\Lambda^\eta:=\int_{\mathcal X_\Lambda}e^{-\beta H_\Lambda(x\mid\eta)}\,dm_\Lambda^\eta(x),\qquad \gamma_\Lambda(C\mid\eta):=(Z_\Lambda^\eta)^{-1}\int_{\mathcal X_\Lambda}\mathbf1_C(x\eta)e^{-\beta H_\Lambda(x\mid\eta)}\,dm_\Lambda^\eta(x),\quad C\in\mathscr F,$$
++with $e^{-\beta(+\infty)}:=0$. Adopt these conditional probability kernels only when $0<Z_\Lambda^\eta<\infty$ for every finite $\Lambda$ and admissible $\eta$, and when their dependence on $\eta$ is measurable. A probability measure $\mu$ on $(\mathcal X,\mathscr F)$ is a DLR state for this adopted model if, for every finite $\Lambda$, its exterior restriction lies in $\mathcal E_\Lambda$ almost surely and, for every $C\in\mathscr F$,
++$$\mu(C)=\int_{\mathcal X}\gamma_\Lambda(C\mid\eta|_{\Lambda^c})\,d\mu(\eta),$$
++where $\eta|_{\Lambda^c}$ is the exterior restriction. A specification is a family of these probability kernels that is **proper** when $\gamma_\Lambda(C\mid\eta)=\mathbf1_C(\eta)$ for each exterior-measurable event $C$ (equivalently, whenever $\mathbf1_C(x\eta)=\mathbf1_C(\eta)$ for every local state $x$), and **consistent** when $\gamma_\Lambda\gamma_\Delta f=\gamma_\Lambda f$ for every bounded measurable $f$ and finite $\Delta\subseteq\Lambda$; kernel composition means $\gamma_\Lambda\gamma_\Delta f=\gamma_\Lambda(\gamma_\Delta f)$. These identities are required when a DLR specification is asserted; normalization alone does not imply them.
++
++In the finite-alphabet lattice instance, let $A$ be finite and nonempty, $\mathcal X=A^{\mathbb Z^d}$ with the cylinder-generated Borel $\sigma$-algebra, $\mathcal X_\Lambda=A^\Lambda$ with its power-set $\sigma$-algebra, and $\mathcal E_\Lambda=A^{\Lambda^c}$. Concatenation is the coordinatewise patching map. For the finite-range interaction of [[def-csm-finite-range-lattice-interaction]], use counting measure on $A^\Lambda$ and the energy $E_\Lambda(\cdot\mid\eta)$ in joules; the resulting kernels are exactly those in [[def-csm-lattice-gibbs-specification]]. The consistency result [[lem-csm-lattice-specification-consistency]] supplies their properness and consistency. The cylinder-measure extension in [[lem-csm-lattice-product-and-measure-compactness]] uses the Countable Choice axiom [[def-countable-choice]] to construct an infinite-volume probability; no finite conditional sum spends that choice assumption.
++
++When particle-number sectors are present, use the exact interface of [[post-csm-counting-and-physical-observables]]. For species counts $N_a$ with total $N=\sum_aN_a\ge1$ in $d$ spatial dimensions, the phase-space definition [[def-csm-phase-space-reference]] sets the labelled reference to $m_N=c_N\Lambda_N$ with arbitrary $c_N>0$. This postulate chooses $c_N=a_0^{-dN}$, where $a_0>0$ is a prescribed reference action in joule-seconds, and uses the species factor $1/\prod_aN_a!$ in the normalized quotient reference. Equivalently, the symmetric labelled integral uses $(\prod_aN_a!\,a_0^{dN})^{-1}dq\,dp$; the factorial is included once, and the phase-volume dimension $(\mathrm{J\,s})^{dN}$ makes this reference dimensionless. For the vacuum sector $N=0$, define the zero-fold phase space to be a singleton with unit Dirac reference measure (consistent with $0!=1$ and $a_0^0=1$); in a finite region with nonempty exterior, the local vacuum still has the energy $H_\Lambda(\varnothing\mid\eta)$ in its Gibbs weight. If the thermal-wavelength convention of [[def-csm-gibbs-physical-parameters]] is used, set $h_{\rm ref}=a_0$; omit the species factorial for operationally distinguishable labels. These are adopted reference and counting conventions, not consequences of Hamiltonian mechanics or evidence of equilibration. No empirical parameter, measured transition temperature, or uncertainty is asserted here.
++
++This is a model postulate. Normalization, stationarity of a Hamiltonian flow, and finite-volume calculations do not prove equilibration or establish that the model describes nature.
+--- old/lem-csm-finite-gibbs-variational-identity
+
++++ current/lem-csm-finite-gibbs-variational-identity
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 0
+-deps: []
++deps: ["thm-logarithm-derivative-and-integral"]
+ justified_by: []
+-dependency_roles: {}
++dependency_roles: {"thm-logarithm-derivative-and-integral": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -37,9 +37,11 @@
+
+ 
+ [A1] Every term $e^{-\beta H(s)}$ is a positive finite real number; hence $0<Z<\infty$ and $\gamma$ is a strictly positive probability vector.
+ 
++[F1] For $r>0$, $\log r=\int_1^r dt/t$ ([[thm-logarithm-derivative-and-integral]]).
++
+ ## Proof
+-1.1 For $p(s)>0$, put $r_s=\gamma(s)/p(s)>0$. The scalar inequality $-\log r\geq1-r$ gives $p(s)\log(p(s)/\gamma(s))\geq p(s)-\gamma(s)$. Summing over the support of $p$ yields $D(p\Vert\gamma)\geq1-\sum_{p(s)>0}\gamma(s)\geq0$. [A1, algebra]
++1.1 For every $r>0$, [F1] gives $-\log r=\int_r^1dt/t\geq1-r$ when $r<1$, and $-\log r=-\int_1^r dt/t\geq1-r$ when $r>1$; both comparisons are strict unless $r=1$. For $p(s)>0$, put $r_s=\gamma(s)/p(s)>0$. Then $p(s)\log(p(s)/\gamma(s))\geq p(s)-\gamma(s)$. Summing over the support of $p$ yields $D(p\Vert\gamma)\geq1-\sum_{p(s)>0}\gamma(s)\geq0$. [A1, F1, algebra]
+ 
+-2.1 Equality in the sum requires both $\gamma(s)/p(s)=1$ for every $p(s)>0$ and $\sum_{p(s)>0}\gamma(s)=1$. Since $\gamma$ is positive at every state, the second condition forces $p(s)>0$ for every $s$; the first then gives $p=\gamma$. Conversely $p=\gamma$ makes every summand zero. [A1, step 1.1, algebra]
++2.1 If $D(p\Vert\gamma)=0$, the two nonnegative gaps in step 1.1 both vanish: every scalar inequality on the support is equality and the omitted $\gamma$-mass is zero. The strictness just proved gives $\gamma(s)/p(s)=1$ for every $p(s)>0$, while positivity of $\gamma$ makes zero omitted mass imply $p(s)>0$ for every $s$. Thus $p=\gamma$. Conversely $p=\gamma$ makes every summand zero. [A1, step 1.1, algebra]
+ 
+ 3.1 Expanding $\log\gamma(s)=-\beta H(s)-\log Z$ in the finite sum defining $D$ gives the displayed identity. Rearranging the nonnegativity and equality statement from steps 1.1–2.1 proves the unique-minimum formulation. [step 1.1, step 2.1, algebra] ∎ 
+--- old/lem-csm-gibbs-response-covariance
+
++++ current/lem-csm-gibbs-response-covariance
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 1
+-deps: ["lem-csm-finite-gibbs-variational-identity"]
++deps: ["lem-csm-finite-gibbs-variational-identity", "thm-derivative-of-exponential", "thm-logarithm-derivative-and-integral", "thm-algebra-of-derivatives", "thm-chain-rule"]
+ justified_by: []
+-dependency_roles: {"lem-csm-finite-gibbs-variational-identity": "mathematical-premise"}
++dependency_roles: {"lem-csm-finite-gibbs-variational-identity": "mathematical-premise", "thm-derivative-of-exponential": "mathematical-premise", "thm-logarithm-derivative-and-integral": "mathematical-premise", "thm-algebra-of-derivatives": "mathematical-premise", "thm-chain-rule": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -39,9 +39,15 @@
+
+ 
+ [A1] For finite energies and $\beta>0$, the finite Gibbs weights normalize to a strictly positive probability law ([[lem-csm-finite-gibbs-variational-identity]]).
+ 
++[F1] The real exponential is differentiable with derivative $\exp$ ([[thm-derivative-of-exponential]]).
++
++[F2] The natural logarithm is differentiable on $(0,\infty)$ with derivative $1/x$ ([[thm-logarithm-derivative-and-integral]]).
++
++[F3] Finite sums, products, quotients with nonzero denominator, and compositions of differentiable real functions obey the sum, product, quotient, and chain rules ([[thm-algebra-of-derivatives]], [[thm-chain-rule]]).
++
+ ## Proof
+-1.1 Differentiate the finite sum term by term: $Z'(t)=\beta\sum_sM(s)e^{-\beta H_t(s)}$. Dividing by $Z(t)>0$ gives $(\log Z)'=\beta\gamma_t(M)$. [given, A1, algebra]
++1.1 Since $S$ is finite, repeated use of the sum rule and chain rule [F1, F3] differentiates each summand and gives $Z'(t)=\beta\sum_sM(s)e^{-\beta H_t(s)}$. Positivity of $Z(t)$ follows from [A1]; the logarithm chain rule and [F2, F3] give $(\log Z)'=Z'/Z=\beta\gamma_t(M)$. [given, A1, F1, F2, F3]
+ 
+-2.1 Differentiate $\gamma_t(M)$ using the quotient rule: $\gamma_t'(M)=\beta(\gamma_t(M^2)-\gamma_t(M)^2)$. Multiplying by $\beta$ from step 1.1 gives the stated variance formula, which is nonnegative because it is $\gamma_t((M-\gamma_t(M))^2)$. [A1, step 1.1, algebra]
++2.1 Differentiate the finite-sum numerator $\sum_sM(s)e^{-\beta H_t(s)}$ and denominator $Z(t)$ by [F1, F3], then apply the quotient rule from [F3]. This gives $\frac{d}{dt}\gamma_t(M)=\beta(\gamma_t(M^2)-\gamma_t(M)^2)$. Multiplying by the factor $\beta$ in step 1.1 gives the stated second derivative, which is nonnegative because it equals $\beta^2\gamma_t((M-\gamma_t(M))^2)$. [A1, F1, F3, step 1.1]
+ 
+-3.1 For $H_t$ replaced by the temperature weight $e^{-\beta H(s)}$, the same finite-sum differentiation gives $Z'(\beta)=-\sum_sH(s)e^{-\beta H(s)}$ and $Z''(\beta)=\sum_sH(s)^2e^{-\beta H(s)}$. Applying the quotient rule to $\log Z$ yields the stated mean and variance identities. [given, A1, algebra] ∎ 
++3.1 For the inverse-temperature family, finite-sum differentiation using [F1, F3] gives $Z'(\beta)=-\sum_sH(s)e^{-\beta H(s)}$ and $Z''(\beta)=\sum_sH(s)^2e^{-\beta H(s)}$. Applying the logarithm chain rule and quotient rule from [F2, F3] yields the stated mean and variance identities. [given, A1, F1, F2, F3] ∎
+--- old/lem-csm-lattice-specification-consistency
+
++++ current/lem-csm-lattice-specification-consistency
+
+@@ -1,30 +1,4 @@
+
+ ---
+-id: lem-csm-lattice-specification-consistency
+-kind: lemma
+-title: "Conditional Gibbs kernel consistency"
+-status: draft
+-origin: pipeline
+-domain: mathematics
+-library: physics
+-dependency_level: 2
+-deps: ["def-csm-lattice-gibbs-specification", "lem-csm-finite-gibbs-variational-identity"]
+-justified_by: []
+-dependency_roles: {"def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-finite-gibbs-variational-identity": "mathematical-premise"}
+-proof_strategy: direct
+-provenance:
+-  statement: literature-derived
+-  proof: ai-altered
+-sources:
+-  scraped: []
+-  references:
+-    - title: "Sascha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction (complete author PDF, revised 2017)"
+-      url: "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf"
+-      locator: "Chapter 3, PDF pp. 127–132; Chapter 6, PDF pp. 265–289; Appendix, PDF pp. 329–332."
+-    - title: "Junior Seminar in Mathematical Physics, Proofs from the Book: Ising, DLR, Dobrushin and Peierls sections (complete 99-page seminar notes)"
+-      url: "https://web.math.princeton.edu/~js129/PDFs/Junior_Seminar_in_Mathematical_Physics__Proofs_from_the_Book.pdf"
+-      locator: "PDF pp. 20–24, 31–43, and 52–55."
+----
+---
+ id: lem-csm-lattice-specification-consistency
+ kind: lemma
+ title: "Conditional Gibbs kernel consistency"
+--- old/thm-csm-lattice-dlr-existence
+
++++ current/thm-csm-lattice-dlr-existence
+
+@@ -22,7 +22,7 @@
+
+       locator: "Chapter 3, PDF pp. 127–132; Chapter 6, PDF pp. 265–289; Appendix, PDF pp. 329–332."
+     - title: "Junior Seminar in Mathematical Physics, Proofs from the Book: Ising, DLR, Dobrushin and Peierls sections (complete 99-page seminar notes)"
+       url: "https://web.math.princeton.edu/~js129/PDFs/Junior_Seminar_in_Mathematical_Physics__Proofs_from_the_Book.pdf"
+-      locator: "PDF pp. 20–24, 31–43, and 52–55."
++      locator: "PDF pp. 20–24, 31–43, and 52–55. Its O(N)-model §3.6 (PDF pp. 16–17) says those finite-volume Gibbs laws are not Kolmogorov-consistent, while its Ising §6.2 (PDF pp. 31–32) says the Ising finite-volume family is; neither passage is used as proof here."
+ ---
+ 
+ ## Statement
+@@ -47,3 +47,7 @@
+
+ 3.1 Cylinder events form a pi-system generating the Borel sigma-algebra. The two probability measures $\mu\gamma_\Delta$ and $\mu$ agree on the generating cylinders by step 2.1. Uniqueness of measures on the cylinder-generated sigma-algebra, part of [F1], extends equality to every Borel event. Thus $\mu$ is DLR for each $\Delta$. [F1, step 2.1]
+ 
+ 4.1 Convex combinations preserve the linear identities $\mu\gamma_\Delta=\mu$. A cylinder-convergent limit of DLR laws satisfies the same local identities by the argument of step 2.1, hence is DLR. Since step 1.1 constructs at least one such law, the state set is nonempty, convex and closed. [A2, F1, step 3.1] ∎ 
++
++## Remarks
++
++The cited Princeton notes make different broad claims about projective consistency in distinct model sections: the O$(N)$ existence discussion at PDF pp. 16–17 says its finite-volume Gibbs laws do not satisfy the Kolmogorov-extension consistency hypothesis, while the Ising/DLR discussion at pp. 31–32 says the finite-volume family is consistent in that sense. Because those passages concern different model sections, they do not by themselves establish a contradiction for the finite-alphabet specification in this theorem. Neither passage is used here. This proof obtains a DLR state from a cylinder-convergent subsequence, local kernel consistency, and measure extension; it does not treat the finite-volume laws as a projectively consistent family.
+--- old/lem-csm-stationary-dlr-construction
+
++++ current/lem-csm-stationary-dlr-construction
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 3
+-deps: ["thm-csm-lattice-dlr-existence"]
++deps: ["thm-csm-lattice-dlr-existence", "def-csm-lattice-gibbs-specification", "lem-csm-lattice-specification-consistency", "def-csm-finite-range-lattice-interaction"]
+ justified_by: []
+-dependency_roles: {"thm-csm-lattice-dlr-existence": "mathematical-premise"}
++dependency_roles: {"thm-csm-lattice-dlr-existence": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-lattice-specification-consistency": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -35,9 +35,11 @@
+
+ 
+ [F1] Under Countable Choice the set of DLR states is nonempty, convex, closed in cylinder topology, and sequentially compact ([[thm-csm-lattice-dlr-existence]]).
+ 
++[A1] Set $X=A^{\mathbb Z^d}$ and $B_n=[-n,n]^d\cap\mathbb Z^d$. For $j\in\mathbb Z^d$, define the translation $\theta_j:X\to X$ by $(\theta_j\sigma)_x=\sigma_{x+j}$ and its action on measures by push-forward, $(\theta_j\mu)(C)=\mu(\theta_j^{-1}C)$.
++
+ ## Proof
+-1.1 Choose a DLR state $\mu$. Translation covariance of the interaction implies that each translate $\theta_j\mu$ is also DLR; by convexity in [F1], the cube average $\bar\mu_n=|B_n|^{-1}\sum_{j\in B_n}\theta_j\mu$ is DLR. [given, F1, choose]
++1.1 Choose a DLR state $\mu$. Translation covariance of the interaction implies that each translate $\theta_j\mu$ is also DLR; by convexity in [F1], the cube average $\bar\mu_n=|B_n|^{-1}\sum_{j\in B_n}\theta_j\mu$ is DLR. [given, F1, A1, choose]
+ 
+-2.1 For any fixed shift $k$ and bounded local $f$, cancellation of terms indexed by $B_n\cap(B_n+k)$ gives $|\bar\mu_n(f)-(\theta_k\bar\mu_n)(f)|\leq2\|f\|_\infty |B_n\triangle(B_n+k)|/|B_n|$. The symmetric-difference ratio tends to zero by direct boundary counting for cubes. [step 1.1, algebra]
++2.1 For any fixed shift $k=(k_1,\ldots,k_d)\in\mathbb Z^d$ and bounded local $f$, cancellation of terms indexed by $B_n\cap(B_n+k)$ gives $|\bar\mu_n(f)-(\theta_k\bar\mu_n)(f)|\leq2\|f\|_\infty |B_n\triangle(B_n+k)|/|B_n|$. For all sufficiently large $n$, $|B_n|=(2n+1)^d$ and $|B_n\cap(B_n+k)|=\prod_{q=1}^d(2n+1-|k_q|)$, so the ratio equals $2\left(1-\prod_{q=1}^d(1-|k_q|/(2n+1))\right)\to0$. [A1, step 1.1, algebra]
+ 
+ 3.1 By sequential compactness in [F1], a subsequence of $\bar\mu_n$ converges on cylinders to a DLR probability $\bar\mu$. Step 2.1 passes to this limit for every local $f$ and fixed $k$, so $\bar\mu$ and $\theta_k\bar\mu$ agree on all cylinders; uniqueness of measures on cylinders in [F1] gives $\theta_k\bar\mu=\bar\mu$. Thus $\bar\mu$ is stationary. [F1, step 2.1] ∎ 
+--- old/thm-csm-dobrushin-finite-range-uniqueness
+
++++ current/thm-csm-dobrushin-finite-range-uniqueness
+
+@@ -7,35 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 4
+-deps: ["lem-csm-maximal-coupling-and-heat-bath", "thm-csm-lattice-dlr-existence", "def-countable-choice", "thm-bolzano-weierstrass", "def-csm-finite-range-lattice-interaction"]
++deps: ["lem-csm-maximal-coupling-and-heat-bath", "thm-csm-lattice-dlr-existence", "def-countable-choice", "thm-bolzano-weierstrass", "def-csm-lattice-gibbs-specification", "thm-geometric-series"]
+ justified_by: []
+-dependency_roles: {"lem-csm-maximal-coupling-and-heat-bath": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "def-countable-choice": "mathematical-premise", "thm-bolzano-weierstrass": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise"}
+-proof_strategy: direct
+-provenance:
+-  statement: literature-derived
+-  proof: ai-altered
+-sources:
+-  scraped: []
+-  references:
+-    - title: "Sascha Friedli and Yvan Velenik, Statistical Mechanics of Lattice Systems: A Concrete Mathematical Introduction (complete author PDF, revised 2017)"
+-      url: "https://www.unige.ch/math/folks/velenik/smbook/Statistical_Mechanics_of_Lattice_Systems.pdf"
+-      locator: "Chapter 3, PDF pp. 127–132; Chapter 6, PDF pp. 265–289; Appendix, PDF pp. 329–332."
+-    - title: "Junior Seminar in Mathematical Physics, Proofs from the Book: Ising, DLR, Dobrushin and Peierls sections (complete 99-page seminar notes)"
+-      url: "https://web.math.princeton.edu/~js129/PDFs/Junior_Seminar_in_Mathematical_Physics__Proofs_from_the_Book.pdf"
+-      locator: "PDF pp. 20–24, 31–43, and 52–55."
+----
+---
+-id: thm-csm-dobrushin-finite-range-uniqueness
+-kind: theorem
+-title: "Finite-range Dobrushin uniqueness and boundary influence"
+-status: draft
+-origin: pipeline
+-domain: mathematics
+-library: physics
+-dependency_level: 4
+-deps: ["lem-csm-maximal-coupling-and-heat-bath", "thm-csm-lattice-dlr-existence", "def-countable-choice", "thm-bolzano-weierstrass", "def-csm-finite-range-lattice-interaction"]
+-justified_by: []
+-dependency_roles: {"lem-csm-maximal-coupling-and-heat-bath": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "def-countable-choice": "mathematical-premise", "thm-bolzano-weierstrass": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise"}
++dependency_roles: {"lem-csm-maximal-coupling-and-heat-bath": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "def-countable-choice": "mathematical-premise", "thm-bolzano-weierstrass": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "thm-geometric-series": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -53,29 +27,35 @@
+
+ 
+ ## Statement
+ 
+-Assume Countable Choice, a finite-alphabet finite-range lattice specification on $\mathbb Z^d$, and $\beta>0$. For each pair of sites define $c_{ij}$ as the supremum of the half-total-variation change in the one-site conditional law at $i$ when only exterior spin $j$ is changed, with $c_{ii}=0$. If
++Assume Countable Choice, $d\geq1$, a finite nonempty alphabet $A$, and a proper, consistent finite-range specification $\gamma$ on $X=A^{\mathbb Z^d}$ with its cylinder-generated Borel $\sigma$-algebra, using [[def-csm-lattice-gibbs-specification]]. Here consistency means $\gamma_\Lambda\gamma_\Delta=\gamma_\Lambda$ for finite $\Delta\subseteq\Lambda$, properness means $\gamma_\Lambda(C\mid\eta)=\mathbf1_C(\eta)$ whenever $C$ depends only on exterior coordinates, and finite range means each $\gamma_\Delta(\mathbf1_C\mid\cdot)$ for finite $\Delta$ and cylinder event $C$ depends on only finitely many exterior coordinates. Also assume a uniform finite integer radius $R\geq0$ such that each one-site kernel $\gamma_{\{i\}}$ depends only on exterior spins $j$ with $\|i-j\|_\infty\leq R$. For each pair of sites define $c_{ij}$ as the supremum of the half-total-variation change in the one-site conditional law at $i$ when only exterior spin $j$ is changed, where half-total variation for probability vectors $p,q$ on $A$ is $\frac12\sum_{a\in A}|p(a)-q(a)|$, and set $c_{ii}=0$. If
+ $$c=\sup_i\sum_jc_{ij}<1,$$
+-then the DLR state is unique. Moreover, for a finite region $\Lambda$, two boundary conditions $\xi,\eta$, and a nonnegative integer $r$, if site $i$ has lattice $\ell^\infty$-distance at least $r(R+1)$ from $\Lambda^c$, its stationary disagreement probability in the finite-volume heat-bath coupling is at most $c^r/(1-c)$, where $R$ is the interaction range defined by [[def-csm-finite-range-lattice-interaction]]. Consequently every local conditional expectation becomes uniformly insensitive to boundary conditions as $\Lambda\uparrow\mathbb Z^d$.
++then the DLR state is unique. Moreover, for a finite region $\Lambda$ and two exterior conditions $\xi,\zeta$, couple the random-scan finite-volume heat-bath chains by choosing the same uniformly random site and using a maximal coupling of its two single-site conditional laws. A stationary joint law of this pair chain exists. If the distance $\operatorname{dist}_\infty(i,\Lambda^c):=\inf_{j\notin\Lambda}\|i-j\|_\infty$ is at least $r(R+1)$ for a nonnegative integer $r$, then its disagreement probability at $i$ is at most $c^r/(1-c)$. Consequently every local conditional expectation becomes uniformly insensitive to boundary conditions as $\Lambda\uparrow\mathbb Z^d$.
+ 
+ ## Facts & Assumptions
+ 
+-**Given:** A finite-alphabet finite-range specification, the half-total-variation influence matrix $(c_{ij})$, the strict row-sum bound $c<1$, and Countable Choice.
++**Given:** The proper consistent finite-alphabet specification, the uniform single-site locality radius $R$, the half-total-variation influence matrix $(c_{ij})$, the strict row-sum bound $c<1$, and Countable Choice.
+ 
+ [A1] Countable Choice is used for the DLR existence and product-measure extension inputs ([[def-countable-choice]]).
+ 
+-[F1] For two finite conditional laws there is a coupling whose disagreement probability equals their half-total-variation distance; the auxiliary finite heat-bath chain has a unique stationary Gibbs marginal ([[lem-csm-maximal-coupling-and-heat-bath]]).
++[F1] For any two probability vectors on a finite alphabet there is a coupling whose disagreement probability equals their half-total-variation distance ([[lem-csm-maximal-coupling-and-heat-bath]]).
+ 
+-[F2] A DLR state exists under Countable Choice and finite-range finite-alphabet hypotheses ([[thm-csm-lattice-dlr-existence]]).
++[F2] A DLR state exists under Countable Choice for a proper consistent finite-range finite-alphabet specification ([[thm-csm-lattice-dlr-existence]]).
+ 
+-[F3] A nonzero single-site influence can occur only between sites at $\ell^\infty$-distance at most the interaction range $R$ ([[def-csm-finite-range-lattice-interaction]]).
++[F3] By the stated uniform locality radius, $c_{ij}=0$ whenever $\|i-j\|_\infty>R$.
+ 
+ [F4] Every bounded real sequence has a convergent subsequence ([[thm-bolzano-weierstrass]]).
+ 
++[F5] For $0\leq c<1$ and integer $r\geq0$, the geometric tail satisfies $\sum_{k\geq r}c^k=c^r/(1-c)$ ([[thm-geometric-series]]).
++
+ ## Proof
+-1.1 Couple the two random-scan heat-bath chains by updating the same uniformly chosen site and using the maximal coupling in [F1] for its conditional laws. For the finite pair chain, take Cesàro averages of iterated laws. The probability simplex is finite-dimensional, so [F4], applied coordinatewise, gives a convergent subsequence; the difference between an average and its one-step image is the first law minus the last law divided by the number of terms, hence tends to zero. The limit is stationary. Its marginals are stationary for the marginal chains and therefore equal their finite-volume Gibbs laws by [F1]. If $N=|\Lambda|>0$ and $q_i$ is the stationary disagreement probability at site $i$, stationarity under random scan gives $q_i$ equal to the disagreement probability conditional on updating $i$. For each pair of configurations, telescope the one-site conditional laws by changing each differing neighbor one at a time; maximal coupling and the definition of $c_{ij}$ bound the mismatch by $\sum_{j\in\Lambda}c_{ij}\mathbf1_{\{X_j\ne Y_j\}}+b_i$, where $b_i=\sum_{j\notin\Lambda}c_{ij}\mathbf1_{\{\xi_j\ne\eta_j\}}$. Averaging gives $q_i\leq\sum_{j\in\Lambda}c_{ij}q_j+b_i$. For $N=0$ there are no sites to bound. [given, F1, F4, algebra]
++1.1 Fix a finite $\Lambda$ and an exterior condition $\xi$. On $A^\Lambda$, define the random-scan heat-bath chain that chooses one site uniformly and resamples it from $\gamma_{\{i\}}(\cdot\mid x_{\Lambda\setminus\{i\}}\xi)$. Properness and consistency imply that the finite-volume law $\gamma_\Lambda(\cdot\mid\xi)$ is stationary for this chain: applying a one-site kernel to it leaves it unchanged by $\gamma_\Lambda\gamma_{\{i\}}=\gamma_\Lambda$. [given]
+ 
+-2.1 Let $C_\Lambda=(c_{ij})_{i,j\in\Lambda}$. Iterating the inequality in step 1.1 gives $q\leq C_\Lambda^n\mathbf1+\sum_{k=0}^{n-1}C_\Lambda^kb$. Every row sum of $C_\Lambda$ is at most $c<1$, so $\|C_\Lambda^n\mathbf1\|_\infty\leq c^n\to0$. A nonzero term of $(C_\Lambda^kb)_i$ is an influence path of $k$ internal edges followed by one edge to the exterior; each edge changes $\ell^\infty$-distance by at most $R$ by [F3]. For $R\geq1$ and $\operatorname{dist}_\infty(i,\Lambda^c)\geq r(R+1)$, such a path has at least $r+1$ edges, hence $k\geq r$. Since $0\leq b_i\leq c<1$, its total weight is bounded by $\sum_{k\geq r}c^k=c^r/(1-c)$. If $R=0$, all off-diagonal influences vanish and the boundary term is zero, so the same bound holds. [given, F3, step 1.1, algebra]
++1.2 Any two stationary laws for the same-boundary chain have a stationary coupling: start with any coupling of them, evolve the pair using a common random site and the maximal coupling [F1], and take a convergent subsequence of Cesàro averages using [F4]. The marginals remain the given stationary laws. If $q_i$ is the stationary disagreement probability, then stationarity makes it equal to the mismatch probability on updating $i$. Telescoping the one-site conditional laws over the finitely many differing internal spins gives $q_i\leq\sum_{j\in\Lambda}c_{ij}q_j$. Therefore $\max_iq_i\leq c\max_iq_i$, so all $q_i=0$. Thus the finite-volume Gibbs law is the unique stationary law; this proof needs no positivity assumption on the one-site conditionals. [given, F1, F4, algebra]
+ 
+-3.1 For a bounded local $f$, let $\delta_i(f)$ be its maximum change when only spin $i$ changes. Coordinate-by-coordinate coupling gives $|\gamma_\Lambda(f\mid\xi)-\gamma_\Lambda(f\mid\eta)|\leq\sum_{i\in\operatorname{supp}f}\delta_i(f)q_i$. Step 2.1 makes this bound tend to zero uniformly over the boundary conditions as $\Lambda$ exhausts the lattice. [step 2.1, algebra]
++2.1 For two boundary conditions $\xi,\zeta$, start the pair chain at the product of the two finite-volume Gibbs laws and use common-site maximal updates. Its marginal laws remain stationary by step 1.1; Cesàro averaging and [F4] therefore give a stationary coupling whose marginals are those Gibbs laws. For a current pair $X,Y$, telescoping the differing internal and exterior spins one at a time bounds the update mismatch at site $i$ by $\sum_{j\in\Lambda}c_{ij}\mathbf1_{\{X_j\ne Y_j\}}+b_i$, where $b_i=\sum_{j\notin\Lambda}c_{ij}\mathbf1_{\{\xi_j\ne\zeta_j\}}$. Under the stationary coupling, if $q_i=\Pr(X_i\ne Y_i)$, random-scan stationarity gives $q_i$ equal to the mismatch probability on updating $i$, hence $q_i\leq\sum_{j\in\Lambda}c_{ij}q_j+b_i$. For $\Lambda=\varnothing$ there are no coordinates to bound. [F1, F4, step 1.1]
+ 
+-4.1 Let $\mu,\nu$ be DLR states, which exist by [F2]. Integrate the uniform boundary difference from step 3.1 against $\mu(d\xi)\nu(d\eta)$; using $\mu\gamma_\Lambda=\mu$ and $\nu\gamma_\Lambda=\nu$ gives $\mu(f)=\nu(f)$ for every bounded local $f$. Cylinder indicators are local, so the measures agree on a generating family and hence are equal. [A1, F2, step 3.1] ∎
++2.2 Let $C_\Lambda=(c_{ij})_{i,j\in\Lambda}$. Iterating the inequality in step 2.1 gives $q\leq C_\Lambda^n\mathbf1+\sum_{k=0}^{n-1}C_\Lambda^kb$. Every row sum of $C_\Lambda$ is at most $c<1$, so $\|C_\Lambda^n\mathbf1\|_\infty\leq c^n\to0$. A nonzero term of $(C_\Lambda^kb)_i$ is an influence path of $k$ internal edges followed by one edge to the exterior; each edge changes $\ell^\infty$-distance by at most $R$ by [F3]. For $R\geq1$ and $\operatorname{dist}_\infty(i,\Lambda^c)\geq r(R+1)$, such a path has at least $r+1$ edges, hence $k\geq r$. Since $0\leq b_i\leq c<1$, its total weight is bounded by $\sum_{k\geq r}c^k=c^r/(1-c)$ by [F5]. If $R=0$, all off-diagonal influences vanish and the boundary term is zero, so the same bound holds. [given, F3, F5, step 2.1, algebra]
++
++3.1 For a bounded local $f$, let $\delta_i(f)$ be its maximum change when only spin $i$ changes. Coordinate-by-coordinate coupling gives $|\gamma_\Lambda(f\mid\xi)-\gamma_\Lambda(f\mid\zeta)|\leq\sum_{i\in\operatorname{supp}f}\delta_i(f)q_i$. Step 2.2 makes this bound tend to zero uniformly over the boundary conditions as $\Lambda$ exhausts the lattice. [step 2.2, algebra]
++
++4.1 Let $\mu,\nu$ be DLR states, which exist by [F2]. Integrate the uniform boundary difference from step 3.1 against $\mu(d\xi)\nu(d\zeta)$; using $\mu\gamma_\Lambda=\mu$ and $\nu\gamma_\Lambda=\nu$ gives $\mu(f)=\nu(f)$ for every bounded local $f$. Cylinder indicators are local, so the measures agree on a generating family and hence are equal. [A1, F2, step 3.1] ∎
+--- old/lem-csm-ising-influence-bound
+
++++ current/lem-csm-ising-influence-bound
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 1
+-deps: ["def-csm-finite-range-lattice-interaction"]
++deps: ["def-hyperbolic-functions", "thm-hyperbolic-identities-and-derivatives"]
+ justified_by: []
+-dependency_roles: {"def-csm-finite-range-lattice-interaction": "mathematical-premise"}
++dependency_roles: {"def-hyperbolic-functions": "mathematical-premise", "thm-hyperbolic-identities-and-derivatives": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -27,7 +27,11 @@
+
+ 
+ ## Statement
+ 
+-For a finite-range Ising pair interaction on $\mathbb Z^d$ with spins $s_i\in\{-1,+1\}$, energy $-\sum_{\{i,j\}}J_{ij}s_is_j-\sum_i h_i s_i$, finite couplings, and $\beta>0$, let $\gamma_i(\cdot\mid\eta)$ be the one-site conditional Gibbs law. Define $c_{ij}$ as the supremum of the half-total-variation distance between $\gamma_i(\cdot\mid\eta)$ and $\gamma_i(\cdot\mid\eta')$ over boundaries differing only at $j$. Then $c_{ij}=0$ if no interaction term joins $i$ to $j$, and otherwise
++Let $d\geq1$, let spins be $s_i\in\{-1,+1\}$, let $h_i\in\mathbb R$, and let $J_{ij}=J_{ji}\in\mathbb R$ with $J_{ii}=0$ and $J_{ij}=0$ whenever $\|i-j\|_\infty>R$ for some finite integer $R$. No translation invariance is assumed. For finite $\Lambda\subset\mathbb Z^d$ and exterior $\eta\in\{-1,+1\}^{\Lambda^c}$, define $\widehat s_i=s_i$ on $\Lambda$ and $\widehat s_i=\eta_i$ outside, and use
++$$E_\Lambda(s_\Lambda\mid\eta)=-\sum_{\{i,j\}:\{i,j\}\cap\Lambda\ne\varnothing}J_{ij}\widehat s_i\widehat s_j-\sum_{i\in\Lambda}h_i s_i,$$
++where the pair sum is over unordered distinct pairs and is finite by the range assumption. At $\beta>0$, let $\gamma_i(\cdot\mid\eta)$ be the normalized one-site Gibbs law from this energy, and define
++$$c_{ij}:=\sup_{\eta,\eta':\,\eta_k=\eta'_k\ (k\ne j)}\frac12\sum_{s\in\{-1,+1\}}|\gamma_i(s\mid\eta)-\gamma_i(s\mid\eta')|,\qquad c_{ii}:=0.$$
++Then $c_{ij}=0$ if $J_{ij}=0$, and otherwise
+ $$c_{ij}\leq\tanh(\beta|J_{ij}|).$$
+ In particular, $\sup_i\sum_j\tanh(\beta|J_{ij}|)<1$ is a sufficient Dobrushin row-sum bound for every bounded field profile $(h_i)$.
+ 
+@@ -35,11 +39,11 @@
+
+ 
+ **Given:** The finite-range interaction convention and conditional energy of [[def-csm-finite-range-lattice-interaction]], the Ising pair energy in the Statement, and $\beta>0$.
+ 
+-[F1] A finite-range interaction has only finitely many sites in each interaction neighborhood, and its conditional energy depends only on those boundary spins ([[def-csm-finite-range-lattice-interaction]]).
++[F1] The hyperbolic functions are defined by $\sinh x=(e^x-e^{-x})/2$, $\cosh x=(e^x+e^{-x})/2$, and $\tanh x=\sinh x/\cosh x$; their addition and product identities include $\tanh(x+b)-\tanh(x-b)=\sinh(2b)/(\cosh(x+b)\cosh(x-b))$ and $\cosh(x+b)\cosh(x-b)=(\cosh(2x)+\cosh(2b))/2$ ([[def-hyperbolic-functions]], [[thm-hyperbolic-identities-and-derivatives]]).
+ 
+ ## Proof
+-1.1 Fix $i$ and all boundary spins except $j$. Write $x=\beta(h_i+\sum_{k\ne j}J_{ik}\eta_k)$ and $b=\beta J_{ij}$. Direct normalization of the two weights gives $\gamma_i(+1\mid\eta)=[1+\tanh(x+b)]/2$ and $\gamma_i(+1\mid\eta')=[1+\tanh(x-b)]/2$. [given, F1, algebra]
++1.1 Fix $i$ and all boundary spins except $j$. Write $x=\beta(h_i+\sum_{k\ne j}J_{ik}\eta_k)$ and $b=\beta J_{ij}$; these sums are finite by the range condition. Direct normalization of the two weights gives $\gamma_i(+1\mid\eta)=[1+\tanh(x+b)]/2$ and $\gamma_i(+1\mid\eta')=[1+\tanh(x-b)]/2$. [given, F1, algebra]
+ 
+-2.1 For Bernoulli laws the half-total-variation distance equals the absolute difference of the probabilities of $+1$. Using $\cosh(x+b)\cosh(x-b)=(\cosh(2x)+\cosh(2b))/2\geq\cosh^2 b$, their difference is at most $|\sinh(2b)|/(2\cosh^2 b)=\tanh|b|$. If no term joins $i,j$, the conditional weights are identical and $c_{ij}=0$. [step 1.1, algebra]
++2.1 For Bernoulli laws the half-total-variation distance equals the absolute difference of the probabilities of $+1$. By [F1], $\cosh(x+b)\cosh(x-b)=(\cosh(2x)+\cosh(2b))/2\geq\cosh^2 b$, so their difference is at most $|\sinh(2b)|/(2\cosh^2 b)=\tanh|b|$. If $J_{ij}=0$, the conditional weights are identical and $c_{ij}=0$. [step 1.1, F1, algebra]
+ 
+ 3.1 Summing the bound in step 2.1 over the finite interaction neighborhood proves the stated sufficient row-sum criterion; the supremum over $i$ is the Dobrushin constant used by the uniqueness theorem. [F1, step 2.1] ∎ 
+--- old/thm-csm-ising-high-temperature-state
+
++++ current/thm-csm-ising-high-temperature-state
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 5
+-deps: ["thm-csm-dobrushin-finite-range-uniqueness", "lem-csm-ising-influence-bound", "def-countable-choice", "def-csm-lattice-gibbs-specification", "lem-csm-lattice-specification-consistency"]
++deps: ["thm-csm-dobrushin-finite-range-uniqueness", "lem-csm-ising-influence-bound", "def-countable-choice", "def-csm-lattice-gibbs-specification", "lem-csm-lattice-specification-consistency", "def-csm-finite-range-lattice-interaction"]
+ justified_by: []
+-dependency_roles: {"thm-csm-dobrushin-finite-range-uniqueness": "mathematical-premise", "lem-csm-ising-influence-bound": "mathematical-premise", "def-countable-choice": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-lattice-specification-consistency": "mathematical-premise"}
++dependency_roles: {"thm-csm-dobrushin-finite-range-uniqueness": "mathematical-premise", "lem-csm-ising-influence-bound": "mathematical-premise", "def-countable-choice": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-lattice-specification-consistency": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -27,7 +27,7 @@
+
+ 
+ ## Statement
+ 
+-Assume Countable Choice, spins $s_i\in\{-1,+1\}$, inverse temperature $\beta>0$, a constant finite field $h\in\mathbb R$, and symmetric pair couplings satisfying $J_{ij}=J_{ji}$, $J_{i+k,j+k}=J_{ij}$ for all $i,j,k\in\mathbb Z^d$, and $J_{ij}=0$ when $\|i-j\|_\infty>R$ for some finite $R$. For finite $\Lambda$, use the conditional energy
++Assume Countable Choice, spins $s_i\in\{-1,+1\}$, inverse temperature $\beta>0$, a constant finite field $h\in\mathbb R$, and symmetric pair couplings satisfying $J_{ij}=J_{ji}$, $J_{i+k,j+k}=J_{ij}$ for all $i,j,k\in\mathbb Z^d$, and $J_{ij}=0$ when $\|i-j\|_\infty>R$ for some finite integer $R\geq0$. For finite $\Lambda$, use the conditional energy
+ $$E_\Lambda(s_\Lambda\mid\eta)=-\sum_{\{i,j\}:\{i,j\}\cap\Lambda\ne\varnothing}J_{ij}\widehat s_i\widehat s_j-h\sum_{i\in\Lambda}s_i,$$
+ where $\widehat s_i=s_i$ on $\Lambda$ and $\widehat s_i=\eta_i$ outside; let $\gamma$ be the corresponding finite-alphabet Gibbs specification from [[def-csm-lattice-gibbs-specification]]. If
+ $$\sup_i\sum_j\tanh(\beta|J_{ij}|)<1,$$
+@@ -45,7 +45,9 @@
+
+ 
+ [F3] The finite-range lattice Gibbs kernels are proper, consistent and finite range under the stated hypotheses ([[lem-csm-lattice-specification-consistency]]).
+ 
++[F4] To realize the displayed pair Hamiltonian in the interaction-list convention of [[def-csm-finite-range-lattice-interaction]], choose one displacement $v$ from each pair $\{v,-v\}$ with $J_{0v}\ne0$, use shape $S_v=\{0,v\}$ and term $\Phi_v(s_0,s_v)=-J_{0v}s_0s_v$, and add the onsite shape $S_0=\{0\}$ with $\Phi_0(s_0)=-hs_0$. Every unordered pair is counted once through its unique representative and translated anchor; this finite list has uniform one-site dependence radius at most $R$.
++
+ ## Proof
+ 1.1 By [F1], $\sup_i\sum_jc_{ij}\leq\sup_i\sum_j\tanh(\beta|J_{ij}|)<1$. [given, F1, algebra]
+ 
+-2.1 By [F3], the pair interaction and constant field define a proper consistent finite-range specification. Apply [F2] with the row-sum bound from step 1.1; the compactness-based existence and uniqueness conclusion holds under Countable Choice. This criterion is sufficient only. [A1, F2, F3, step 1.1] ∎ 
++2.1 The interaction list in [F4] has exactly the conditional energy displayed in the Statement: each unordered pair occurs once, and each site contributes the single field term $-hs_i$. Thus [F3] gives its proper consistent finite-range Gibbs specification. Apply [F2] with the row-sum bound from step 1.1; the compactness-based existence and uniqueness conclusion holds under Countable Choice. This criterion is sufficient only. [A1, F2, F3, F4, step 1.1] ∎
+--- old/thm-csm-lattice-van-hove-pressure
+
++++ current/thm-csm-lattice-van-hove-pressure
+
+@@ -27,9 +27,9 @@
+
+ 
+ ## Statement
+ 
+-Let $d\geq1$, $A$ be finite nonempty, and let a bounded translation-invariant finite-range interaction on $A^{\mathbb Z^d}$ be as in [[def-csm-finite-range-lattice-interaction]]. Fix $\beta>0$. For a van Hove sequence of finite sets $\Lambda_n\subset\mathbb Z^d$, meaning $|\Lambda_n|\to\infty$ and $|\{x\in\Lambda_n:\operatorname{dist}_\infty(x,\Lambda_n^c)\leq r\}|/|\Lambda_n|\to0$ for every fixed $r$, the free-boundary pressure
++Let $d\geq1$, $A$ be finite nonempty, and let a bounded translation-invariant finite-range interaction on $A^{\mathbb Z^d}$ be as in [[def-csm-finite-range-lattice-interaction]]. Fix $\beta>0$, set $C_L=\{1,\ldots,L\}^d$ for each integer $L\geq1$, and define $Z_L=\sum_{\sigma\in A^{C_L}}e^{-\beta H_{C_L}^{\rm free}(\sigma)}$ and $p_L=|C_L|^{-1}\log Z_L$. For a van Hove sequence of finite sets $\Lambda_n\subset\mathbb Z^d$, meaning $|\Lambda_n|\to\infty$ and $|\{x\in\Lambda_n:\operatorname{dist}_\infty(x,\Lambda_n^c)\leq r\}|/|\Lambda_n|\to0$ for every fixed $r$, the free-boundary pressure
+ $$p_{\Lambda_n}=\frac{1}{|\Lambda_n|}\log\sum_{\sigma\in A^{\Lambda_n}}e^{-\beta H_{\Lambda_n}^{\rm free}(\sigma)}$$
+-converges to the same finite limit as along cubic boxes. Bounded finite-range interactions are essential; this statement does not concern continuum particles or long-range models.
++and the cubic sequence $p_L$ both converge to the same finite limit $p$. Bounded finite-range interactions are essential; this statement does not concern continuum particles or long-range models.
+ 
+ ## Facts & Assumptions
+ 
+@@ -37,7 +37,7 @@
+
+ 
+ [A1] The shape list, translated terms, range and free-volume energy are exactly those of [[def-csm-finite-range-lattice-interaction]].
+ 
+-[F1] Along cubic boxes the finite-range lattice log-partition pressure has a finite limit; an energy change bounded by a constant times the cube boundary preserves that limit ([[thm-tdmath-finite-range-lattice-pressure-limit]]).
++[F1] For a finite alphabet and bounded finite-range interaction list on supports contained in a fixed coordinate box, the free cubic log-partition density has a finite limit; a uniform energy perturbation bounded by $C_bL^{d-1}$ preserves it ([[thm-tdmath-finite-range-lattice-pressure-limit]]). The local interaction convention in [[def-csm-finite-range-lattice-interaction]] is a special case: its shapes contain $0$ and have diameter at most $R$, hence lie in $[-R,R]^d$, and its translated terms and free-volume energy have the same form. Thus [F1] supplies the limit $p$ defined in the Statement.
+ 
+ ## Proof
+ 1.1 Fix an integer block side $\ell>2R$ and tile the lattice by disjoint $\ell$-cubes. For $\Lambda_n$, retain only cubes fully contained in $\Lambda_n$ and denote their number by $m_n$; the leftover sites lie within distance at most $\ell$ of $\Lambda_n^c$, so $|\Lambda_n\setminus\text{(full cubes)}|=o(|\Lambda_n|)$ and $m_n\ell^d/|\Lambda_n|\to1$. [A1, given]
+--- old/lem-csm-stationary-lattice-entropy-energy
+
++++ current/lem-csm-stationary-lattice-entropy-energy
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 1
+-deps: ["lem-csm-finite-gibbs-variational-identity", "lem-csm-lattice-product-and-measure-compactness", "def-countable-choice"]
++deps: ["lem-csm-finite-gibbs-variational-identity", "lem-csm-lattice-product-and-measure-compactness", "def-countable-choice", "def-csm-finite-range-lattice-interaction"]
+ justified_by: []
+-dependency_roles: {"lem-csm-finite-gibbs-variational-identity": "mathematical-premise", "lem-csm-lattice-product-and-measure-compactness": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
++dependency_roles: {"lem-csm-finite-gibbs-variational-identity": "mathematical-premise", "lem-csm-lattice-product-and-measure-compactness": "mathematical-premise", "def-countable-choice": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -27,9 +27,9 @@
+
+ 
+ ## Statement
+ 
+-Assume Countable Choice and let a consistent translation-stationary family of finite-dimensional distributions on a finite alphabet lattice be given. It extends to a unique stationary probability $\mu$ on the cylinder sigma-algebra. For any such stationary $\mu$ and any bounded translation-invariant finite-range interaction, define
+-$H_n=-\sum_{\sigma\in A^{B_n}}\mu_{B_n}(\sigma)\log\mu_{B_n}(\sigma)$ and
+-$u(\mu)=\sum_{r\in\mathcal R}\mathbb E_\mu[\Phi_r]$.
++Assume Countable Choice and let $A$ be finite nonempty. A consistent translation-stationary family means probability measures $\nu_F$ on $A^F$ for every finite $F\subset\mathbb Z^d$, with $\nu_E=(\pi_E^F)_*\nu_F$ whenever $E\subseteq F$ and $\nu_{F+j}=(\tau_j)_*\nu_F$ for every $j\in\mathbb Z^d$, where $(\pi_E^F x)=x|_E$ and $(\tau_jx)_{i+j}=x_i$. This family extends to a unique translation-stationary probability $\mu$ on the cylinder sigma-algebra. Set $B_n=[-n,n]^d\cap\mathbb Z^d$ for each integer $n\geq1$. For any such stationary $\mu$ and any bounded translation-invariant finite-range interaction $(\mathcal R,(S_r,\Phi_r)_{r\in\mathcal R})$ as in [[def-csm-finite-range-lattice-interaction]], define
++$H_n=-\sum_{\sigma\in A^{B_n}}\mu_{B_n}(\sigma)\log\mu_{B_n}(\sigma)$ with $0\log0=0$, and
++$u(\mu)=\sum_{r\in\mathcal R}\sum_{a\in A^{S_r}}\mu(\sigma|_{S_r}=a)\Phi_r(a)$.
+ Then
+ $$h(\mu)=\lim_{n\to\infty}\frac{H_n}{|B_n|}=\inf_{\ell\geq1}\frac{H_\ell}{|B_\ell|}$$
+ exists in $[0,\log|A|]$, and the free-boundary interaction-energy density satisfies
+--- old/thm-csm-ising-low-temperature-coexistence
+
++++ current/thm-csm-ising-low-temperature-coexistence
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 4
+-deps: ["lem-csm-peierls-energy-injection", "thm-csm-lattice-dlr-existence", "lem-csm-stationary-dlr-construction", "def-countable-choice", "def-real-exponential-function-and-e", "lem-csm-ising-parity-contours"]
++deps: ["lem-csm-peierls-energy-injection", "thm-csm-lattice-dlr-existence", "lem-csm-stationary-dlr-construction", "def-countable-choice", "def-real-exponential-function-and-e", "lem-csm-ising-parity-contours", "def-csm-lattice-gibbs-specification", "lem-csm-lattice-specification-consistency", "def-csm-finite-range-lattice-interaction", "thm-geometric-series", "thm-termwise-differentiation-of-a-real-power-series", "thm-algebra-of-derivatives", "thm-exponential-addition-formula", "cor-exponential-reciprocal-and-positivity", "thm-exponential-is-strictly-increasing"]
+ justified_by: []
+-dependency_roles: {"lem-csm-peierls-energy-injection": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "lem-csm-stationary-dlr-construction": "mathematical-premise", "def-countable-choice": "mathematical-premise", "def-real-exponential-function-and-e": "mathematical-premise", "lem-csm-ising-parity-contours": "mathematical-premise"}
++dependency_roles: {"lem-csm-peierls-energy-injection": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "lem-csm-stationary-dlr-construction": "mathematical-premise", "def-countable-choice": "mathematical-premise", "def-real-exponential-function-and-e": "mathematical-premise", "lem-csm-ising-parity-contours": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-lattice-specification-consistency": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise", "thm-geometric-series": "mathematical-premise", "thm-termwise-differentiation-of-a-real-power-series": "mathematical-premise", "thm-algebra-of-derivatives": "mathematical-premise", "thm-exponential-addition-formula": "mathematical-premise", "cor-exponential-reciprocal-and-positivity": "mathematical-premise", "thm-exponential-is-strictly-increasing": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -47,11 +47,17 @@
+
+ 
+ [F4] The exponential is defined by its positive power series, so for $x>0$, $e^x=\sum_{n=0}^\infty x^n/n!$ ([[def-real-exponential-function-and-e]]).
+ 
++[F5] For $0<r<1$, $\sum_{k=0}^\infty r^k=(1-r)^{-1}$ ([[thm-geometric-series]]). Termwise differentiation inside its radius and the quotient rule give $\sum_{k=0}^\infty(k+1)r^k=(1-r)^{-2}$ ([[thm-termwise-differentiation-of-a-real-power-series]], [[thm-algebra-of-derivatives]]).
++
++[F6] The exponential satisfies $\exp(x+y)=\exp(x)\exp(y)$, is positive, and is strictly increasing ([[thm-exponential-addition-formula]], [[cor-exponential-reciprocal-and-positivity]], [[thm-exponential-is-strictly-increasing]]).
++
++[F7] The nearest-neighbor model is the finite-range interaction with onsite term $\Phi_0(s_0)=0$ on $\{0\}$ and pair terms $\Phi_k(s_0,s_{e_k})=-Js_0s_{e_k}$ on $\{0,e_k\}$ for $k=1,2$. Its finite conditional kernels are proper and consistent by [[lem-csm-lattice-specification-consistency]].
++
+ ## Proof
+ 1.1 Write $K=\beta J$ and $r=3e^{-2K}$. A cycle with the origin in its parity-inside has an odd number of crossings of the positive horizontal ray. Along the full horizontal line, each crossing changes the sign of a dual vertex's $y$-coordinate; after one closed traversal that sign returns to its starting value, so the total number of crossings is even. Therefore the negative ray also has a crossing. Dual vertices have half-integer coordinates, so positive-ray crossings occur on vertical dual edges at $x=j+\tfrac12$ for integers $j\geq0$. If such a cycle has length $\ell$, its horizontal coordinate range includes a negative coordinate and this $x>0$; a closed lattice walk traverses that range in both directions, so it uses at least $2x$ horizontal edges and $x\leq\ell/2$. Thus there are at most $\ell+1$ possible positive-ray crossing edges. Choose the lower endpoint of each such edge; from it there are at most $4\cdot3^{\ell-1}$ nonbacktracking walks of length $\ell$, which overcounts the simple cycles using that crossing. Hence there are at most $4(\ell+1)3^{\ell-1}$ candidate simple cycles of length $\ell$. [given, F1, construct]
+ 
+-2.1 By [F2] and the union bound, $\gamma_{B_n}^{+}(s_0=-1)\leq\frac43\sum_{\ell\geq4}(\ell+1)r^\ell =\frac43\,r^4(5-4r)/(1-r)^2=\delta(K)$, where the last equality is the geometric-series identity for $0<r<1$. [F1, F2, step 1.1, algebra]
++2.1 By [F2] and the union bound, $\gamma_{B_n}^{+}(s_0=-1)\leq\frac43\sum_{\ell\geq4}(\ell+1)r^\ell =\frac43\,r^4(5-4r)/(1-r)^2=\delta(K)$, using [F5] for $0<r<1$. [F1, F2, F5, step 1.1, algebra]
+ 
+-3.1 The first seven nonnegative terms of [F4] give $e^4>\sum_{n=0}^{6}4^n/n!=437/9>48$, hence for $K\geq2$, $r=3e^{-2K}\leq3e^{-4}<1/16$. Thus $\delta(K)<\frac43(1/16)^4\cdot5/(15/16)^2<1/2$. The same translated contour count applies to every site in the box, so the plus-boundary magnetization there is at least $m_*=1-2\delta(K)>0$. [given, F4, step 2.1, algebra]
++3.1 The first seven nonnegative terms of [F4] give $\exp(4)>\sum_{n=0}^{6}4^n/n!=437/9>48$. Since $K\geq2$, monotonicity and reciprocal positivity in [F6] imply $r=3\exp(-2K)\leq3\exp(-4)<1/16$. Thus $\delta(K)<\frac43(1/16)^4\cdot5/(15/16)^2<1/2$. The same translated contour count applies to every site in the box, so the plus-boundary magnetization there is at least $m_*=1-2\delta(K)>0$. [given, F4, F6, step 2.1, algebra]
+ 
+-4.1 Take a subsequential limit of plus-boundary laws; by [F3] it is DLR and retains $\mu(s_i)\geq m_*$ for each fixed site. The zero-field nearest-neighbor Hamiltonian is invariant under simultaneous spin reversal, so the spin-reversed law is also DLR and has one-site expectations at most $-m_*$. Translation averaging as in [F3] preserves each bound and yields stationary $\mu_+,\mu_-$. They are distinct because their one-site expectations have opposite signs. [A1, F3, step 3.1] ∎ 
++4.1 The onsite and nearest-neighbor list in [F7] realizes the stated Hamiltonian, and its specification is proper and consistent. Take a subsequential limit of plus-boundary laws; by [F3] it is DLR and retains $\mu(s_i)\geq m_*$ for each fixed site. The zero-field nearest-neighbor Hamiltonian is invariant under simultaneous spin reversal, so the spin-reversed law is also DLR and has one-site expectations at most $-m_*$. Translation averaging as in [F3] preserves each bound and yields stationary $\mu_+,\mu_-$. They are distinct because their one-site expectations have opposite signs. [A1, F3, F7, step 3.1] ∎
+--- old/thm-csm-ising-coexistence-pressure-cusp
+
++++ current/thm-csm-ising-coexistence-pressure-cusp
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 5
+-deps: ["thm-csm-ising-low-temperature-coexistence", "thm-csm-lattice-dlr-variational-pressure", "def-countable-choice"]
++deps: ["thm-csm-ising-low-temperature-coexistence", "thm-csm-lattice-dlr-variational-pressure", "thm-csm-lattice-van-hove-pressure", "def-csm-finite-range-lattice-interaction", "def-countable-choice"]
+ justified_by: []
+-dependency_roles: {"thm-csm-ising-low-temperature-coexistence": "mathematical-premise", "thm-csm-lattice-dlr-variational-pressure": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
++dependency_roles: {"thm-csm-ising-low-temperature-coexistence": "mathematical-premise", "thm-csm-lattice-dlr-variational-pressure": "mathematical-premise", "thm-csm-lattice-van-hove-pressure": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -27,7 +27,9 @@
+
+ 
+ ## Statement
+ 
+-Assume Countable Choice. For the two-dimensional nearest-neighbor ferromagnetic Ising model with $J>0$, $h=0$, and $\beta J\geq2$, the dimensionless pressure per site $p(h)$ as a function of field $h$ is not differentiable at $h=0$. More precisely, if the stationary DLR states at zero field have magnetizations at least $m_*>0$ and at most $-m_*$, then every positive-field secant slope from zero is at least $\beta m_*$ and every negative-field secant slope is at most $-\beta m_*$. This proves a sufficient coexistence cusp; it does not identify the critical coupling.
++Assume Countable Choice and fix $\beta>0$ and $J>0$ with $\beta J\geq2$. For $B_n=[-n,n]^2\cap\mathbb Z^2$, define the free-boundary field-dependent energy and partition function by
++$$H_{B_n}^{(h),\mathrm{free}}(s)=-J\sum_{\substack{x\in B_n,\ k\in\{1,2\}:\\x+e_k\in B_n}}s_xs_{x+e_k}-h\sum_{x\in B_n}s_x,\qquad Z_n(h)=\sum_{s\in\{-1,+1\}^{B_n}}e^{-\beta H_{B_n}^{(h),\mathrm{free}}(s)}.$$
++The bounded finite-range pressure theorem gives the finite limit $p(h):=\lim_{n\to\infty}|B_n|^{-1}\log Z_n(h)$ for each $h\in\mathbb R$. Here $h$ is the field energy per spin, while $h_{\rm Sh}(\mu)$ below denotes Shannon entropy per site. The dimensionless pressure $p(h)$ is not differentiable at $h=0$. More precisely, if the stationary DLR states at zero field have magnetizations at least $m_*>0$ and at most $-m_*$, then every positive-field secant slope from zero is at least $\beta m_*$ and every negative-field secant slope is at most $-\beta m_*$. This proves a sufficient coexistence cusp; it does not identify the critical coupling.
+ 
+ ## Facts & Assumptions
+ 
+@@ -37,10 +39,10 @@
+
+ 
+ [F1] At $\beta J\geq2$ there are stationary DLR states with one-site magnetizations at least $m_*>0$ and at most $-m_*$ ([[thm-csm-ising-low-temperature-coexistence]]).
+ 
+-[F2] Every stationary probability obeys the lattice pressure variational inequality; a DLR state at zero field attains equality ([[thm-csm-lattice-dlr-variational-pressure]]).
++[F2] For each fixed field $h$, every stationary law satisfies $h_{\rm Sh}(\mu)-\beta u_h(\mu)\leq p(h)$; a DLR law attains equality. Here $h_{\rm Sh}(\mu)$ denotes the entropy density $h(\mu)$ of [[thm-csm-lattice-dlr-variational-pressure]], and $u_h$ is its mean energy density with the field contribution included.
+ 
+ ## Proof
+-1.1 Under Countable Choice [A1], let $\mu_+$ and $\mu_-$ be the states in [F1], and let $m=\mu_+(s_0)\geq m_*>0$. At zero field, [F2] gives $p(0)=h(\mu_+)-\beta u_0(\mu_+)$. [A1, F1, F2]
++1.1 Under Countable Choice [A1], let $\mu_+$ and $\mu_-$ be the states in [F1], and let $m=\mu_+(s_0)\geq m_*>0$. At zero field, [F2] gives $p(0)=h_{\rm Sh}(\mu_+)-\beta u_0(\mu_+)$. [A1, F1, F2]
+ 
+ 2.1 At field $h$, the energy per site of the same stationary law is $u_h(\mu_+)=u_0(\mu_+)-h\,m$. Applying the variational inequality [F2] to $\mu_+$ yields $p(h)\geq p(0)+\beta h m\geq p(0)+\beta h m_*$. [F2, step 1.1, algebra]
+ 
+--- old/thm-csm-ising-chain-convergent-series
+
++++ current/thm-csm-ising-chain-convergent-series
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 0
+-deps: ["thm-tdmath-ising-chain-limit", "def-real-exponential-function-and-e", "thm-derivative-of-exponential", "thm-exponential-addition-formula", "cor-mean-value-theorem", "thm-logarithm-derivative-and-integral", "thm-natural-logarithm-laws"]
++deps: ["thm-tdmath-ising-chain-limit", "def-real-exponential-function-and-e", "thm-derivative-of-exponential", "thm-exponential-addition-formula", "cor-exponential-reciprocal-and-positivity", "thm-exponential-is-strictly-increasing", "cor-mean-value-theorem", "thm-logarithm-derivative-and-integral", "thm-natural-logarithm-laws", "def-hyperbolic-functions", "thm-hyperbolic-identities-and-derivatives", "thm-geometric-series"]
+ justified_by: []
+-dependency_roles: {"thm-tdmath-ising-chain-limit": "mathematical-premise", "def-real-exponential-function-and-e": "mathematical-premise", "thm-derivative-of-exponential": "mathematical-premise", "thm-exponential-addition-formula": "mathematical-premise", "cor-mean-value-theorem": "mathematical-premise", "thm-logarithm-derivative-and-integral": "mathematical-premise", "thm-natural-logarithm-laws": "mathematical-premise"}
++dependency_roles: {"thm-tdmath-ising-chain-limit": "mathematical-premise", "def-real-exponential-function-and-e": "mathematical-premise", "thm-derivative-of-exponential": "mathematical-premise", "thm-exponential-addition-formula": "mathematical-premise", "cor-exponential-reciprocal-and-positivity": "mathematical-premise", "thm-exponential-is-strictly-increasing": "mathematical-premise", "cor-mean-value-theorem": "mathematical-premise", "thm-logarithm-derivative-and-integral": "mathematical-premise", "thm-natural-logarithm-laws": "mathematical-premise", "def-hyperbolic-functions": "mathematical-premise", "thm-hyperbolic-identities-and-derivatives": "mathematical-premise", "thm-geometric-series": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -43,11 +43,17 @@
+
+ 
+ [F3] The mean value theorem gives $g(b)-g(a)=g'(c)(b-a)$ for continuous $g$ on $[a,b]$ and differentiable $g$ on $(a,b)$ ([[cor-mean-value-theorem]]).
+ 
++[F4] The hyperbolic functions are defined from the exponential, satisfy $\cosh K-1=2\sinh^2(K/2)$, and have $(\sinh x)'=\cosh x$ with $\cosh$ increasing on $[0,\infty)$ ([[def-hyperbolic-functions]], [[thm-hyperbolic-identities-and-derivatives]]).
++
++[F5] For $|q|<1$, $\sum_{j=0}^\infty q^j=(1-q)^{-1}$ ([[thm-geometric-series]]).
++
++[F6] The exponential is positive, satisfies $\exp(-x)=1/\exp x$, and is strictly increasing ([[cor-exponential-reciprocal-and-positivity]], [[thm-exponential-is-strictly-increasing]]).
++
+ ## Proof
+ 1.1 At zero field the larger transfer-matrix eigenvalue in [F1] is $\lambda_+=e^K+e^{-K}=2\cosh K$. Therefore the limiting pressure is $P(K)=\log(2\cosh K)=\log2+\log(1+w)$ with $w=\cosh K-1\geq0$. [A1, F1, F2, algebra]
+ 
+-1.2 Put $u=|K|/2<1/4$. If $u=0$, then $w=0$. If $u>0$, [F3] applied to $\sinh$ on $[0,u]$ gives $\sinh u=u\cosh\xi$ for some $0<\xi<u$, so $\sinh u<u e^u$. Also $\log(4/3)=\int_1^{4/3}dt/t>1/4$, hence monotonicity and inverse laws in [F2] give $e^u<4/3$. Thus in both cases $0\leq w=2\sinh^2u<2(4u/3)^2=8K^2/9<2/9<1/4$ when $u>0$, and the bound is immediate when $u=0$. [F2, F3, algebra]
++1.2 Put $u=|K|/2<1/4$. If $u=0$, then $w=0$. If $u>0$, [F3] applied to $\sinh$ on $[0,u]$ gives $\sinh u=u\cosh\xi$ for some $0<\xi<u$; by [F4], $\cosh\xi<\cosh u$, while [F6] and the definition of $\cosh$ give $\cosh u<e^u$, so $\sinh u<u e^u$. Also $1/t>3/4$ for $1\leq t<4/3$, so [F2] gives $\log(4/3)=\int_1^{4/3}dt/t>1/4>u$. Since $\exp$ is strictly increasing by [F6] and $\exp(\log(4/3))=4/3$ by [F2], this gives $e^u<4/3$. Thus in both cases $0\leq w=2\sinh^2u<2(4u/3)^2=8K^2/9<2/9<1/4$ when $u>0$, and the bound is immediate when $u=0$. [F2, F3, F4, F6, algebra]
+ 
+-2.1 For $0\leq t\leq w<1$, the finite geometric identity gives $\sum_{j=0}^{n}(-t)^j=(1-(-t)^{n+1})/(1+t)$; the remainder is bounded uniformly by $w^{n+1}/(1-w)$. Thus $\sum_{j\geq0}(-t)^j=(1+t)^{-1}$ uniformly on $[0,w]$. [step 1.2, algebra]
++2.1 For $0\leq t\leq w<1$, the finite geometric identity gives $\sum_{j=0}^{n}(-t)^j=(1-(-t)^{n+1})/(1+t)$; the remainder is bounded uniformly by $w^{n+1}/(1-w)$. The pointwise sum is also $(1+t)^{-1}$ by [F5], so these same remainder bounds show uniform convergence on $[0,w]$. [step 1.2, F5, algebra]
+ 
+-3.1 Integrating this uniformly convergent identity from $0$ to $w$ and using [F2] yields $\log(1+w)=\sum_{m\geq1}(-1)^{m+1}w^m/m$. If $|K|\leq r<1/2$, step 1.2 gives $0\leq w<8r^2/9<2/9=:w_r<1$. Therefore the series of absolute values is bounded uniformly by $\sum_{m\geq1}w_r^m/m<\infty$, proving absolute convergence and uniform convergence on that compact interval. [F2, step 1.2, step 2.1, algebra] ∎ 
++3.1 Integrate the finite geometric identity from $0$ to $w$. The integral of its remainder has absolute value at most $w^{n+2}$, since $1+t\geq1$ on $[0,w]$; hence these finite integrals converge to $\int_0^w(1+t)^{-1}dt=\log(1+w)$ by [F2]. Integrating each finite sum gives $\sum_{m=1}^{n+1}(-1)^{m+1}w^m/m$, so passage to the limit yields $\log(1+w)=\sum_{m\geq1}(-1)^{m+1}w^m/m$. If $|K|\leq r<1/2$, step 1.2 gives $0\leq w<8r^2/9<2/9=:w_r<1$. Therefore the series of absolute values is bounded uniformly by $\sum_{m\geq1}w_r^m/m\leq\sum_{m\geq1}w_r^m<\infty$ using [F5], proving absolute convergence and uniform convergence on that compact interval. [F2, F5, step 1.2, step 2.1, algebra] ∎
+--- old/thm-csm-chain-dlr-uniqueness
+
++++ current/thm-csm-chain-dlr-uniqueness
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 3
+-deps: ["lem-csm-chain-markov-bridge", "thm-csm-lattice-dlr-existence", "def-countable-choice"]
++deps: ["lem-csm-chain-markov-bridge", "thm-csm-lattice-dlr-existence", "def-countable-choice", "def-csm-lattice-gibbs-specification", "lem-csm-lattice-specification-consistency", "def-csm-finite-range-lattice-interaction"]
+ justified_by: []
+-dependency_roles: {"lem-csm-chain-markov-bridge": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
++dependency_roles: {"lem-csm-chain-markov-bridge": "mathematical-premise", "thm-csm-lattice-dlr-existence": "mathematical-premise", "def-countable-choice": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-lattice-specification-consistency": "mathematical-premise", "def-csm-finite-range-lattice-interaction": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -39,11 +39,13 @@
+
+ 
+ [F2] For every exhaustion and boundary sequence, subsequential finite-volume limits are DLR, and DLR laws are determined by their cylinder probabilities ([[thm-csm-lattice-dlr-existence]]).
+ 
++[F3] In $d=1$, the transfer-matrix model is realized by the interaction list with onsite shape $\{0\}$ and $\Phi_0(s_0)=-hs_0$, and pair shape $\{0,1\}$ and $\Phi_1(s_0,s_1)=-Js_0s_1$; its finite conditional kernels are proper and consistent ([[def-csm-finite-range-lattice-interaction]], [[lem-csm-lattice-specification-consistency]]).
++
+ ## Proof
+ 1.1 Let $r$ be the positive unit eigenvector of $T$ and $w$ an orthogonal unit eigenvector. By [F1] and the eigenvalue formula, $T^n/\lambda_+^n=rr^{\mathsf T}+(\lambda_-/\lambda_+)^nww^{\mathsf T}$, with $|\lambda_-/\lambda_+|<1$. Since both entries of $r$ are positive, the denominator entries have a uniform positive lower bound after division by $\lambda_+^n$. [A1, F1, algebra]
+ 
+ 2.1 Fix an interval $[-n,n]$, endpoint spins $a,b$, and a consecutive observed block $s_\ell,\ldots,s_r$. Its conditional Gibbs probability is $\frac{(T^{n+\ell+1})_{a,s_\ell}\left(\prod_{i=\ell}^{r-1}T_{s_i,s_{i+1}}\right)(T^{n-r+1})_{s_r,b}}{(T^{2n+2})_{a,b}}.$ Using the uniform spectral expansion in step 1.1, this converges uniformly in $a,b$ to $\pi_{s_\ell}\prod_{i=\ell}^{r-1}Q_{s_i,s_{i+1}}$. Finite summation over missing intermediate spins gives the same convergence for every cylinder. [F1, step 1.1, algebra]
+ 
+-3.1 The limiting cylinder law is the Markov law $\mu$ in [F1]. By [F2], a subsequential limit of the finite-volume laws is DLR; step 2.1 forces all such limits to equal $\mu$, so $\mu$ is DLR. [A1, F1, F2, step 2.1]
++3.1 The limiting cylinder law is the Markov law $\mu$ in [F1]. The specification in [F3] has the exact finite conditional energy used by the interval laws. By [F2], a subsequential limit of those finite-volume laws is DLR; step 2.1 forces every such limit to equal $\mu$, so $\mu$ is DLR. [A1, F1, F2, F3, step 2.1]
+ 
+ 4.1 If $\nu$ is any DLR state, then for every cylinder $C$, $\nu(C)=\nu\gamma_{[-n,n]}(C)$. The conditional probability inside this integral differs uniformly in the exterior endpoints from $\mu(C)$ by a quantity tending to zero by step 2.1. Thus $\nu(C)=\mu(C)$; [F2] gives $\nu=\mu$. [F2, step 2.1, step 3.1] ∎ 
+--- old/pthm-csm-ising-equilibrium-phases
+
++++ current/pthm-csm-ising-equilibrium-phases
+
+@@ -7,9 +7,9 @@
+
+ domain: physics
+ library: physics
+ dependency_level: 6
+-deps: ["post-csm-interacting-equilibrium-gibbs", "thm-csm-ising-high-temperature-state", "thm-csm-ising-low-temperature-coexistence", "thm-csm-ising-coexistence-pressure-cusp", "thm-csm-chain-dlr-uniqueness", "def-countable-choice"]
++deps: ["post-csm-interacting-equilibrium-gibbs", "def-csm-gibbs-physical-parameters", "thm-csm-ising-high-temperature-state", "thm-csm-ising-low-temperature-coexistence", "thm-csm-ising-coexistence-pressure-cusp", "thm-csm-chain-dlr-uniqueness", "def-countable-choice"]
+ justified_by: []
+-dependency_roles: {"post-csm-interacting-equilibrium-gibbs": "physical-assumption", "thm-csm-ising-high-temperature-state": "mathematical-premise", "thm-csm-ising-low-temperature-coexistence": "mathematical-premise", "thm-csm-ising-coexistence-pressure-cusp": "mathematical-premise", "thm-csm-chain-dlr-uniqueness": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
++dependency_roles: {"post-csm-interacting-equilibrium-gibbs": "physical-assumption", "def-csm-gibbs-physical-parameters": "formulation-prerequisite", "thm-csm-ising-high-temperature-state": "mathematical-premise", "thm-csm-ising-low-temperature-coexistence": "mathematical-premise", "thm-csm-ising-coexistence-pressure-cusp": "mathematical-premise", "thm-csm-chain-dlr-uniqueness": "mathematical-premise", "def-countable-choice": "mathematical-premise"}
+ proof_strategy: direct
+ physical_scope: "One-dimensional finite-temperature nearest-neighbor Ising and two-dimensional nearest-neighbor ferromagnetic Ising in the stated sufficient regimes; no measured critical point or universal phase diagram."
+ empirical_premises: []
+@@ -29,7 +29,7 @@
+
+ 
+ ## Statement
+ 
+-Assume Countable Choice and adopt [[post-csm-interacting-equilibrium-gibbs]] for the specified classical Ising model. The conditional model predictions are: (i) for a one-dimensional nearest-neighbor chain with finite $\beta>0$, $J,h\in\mathbb R$, the DLR equilibrium state is unique; (ii) for a translation-invariant finite-range Ising pair interaction with constant finite field, the sufficient condition $\sup_i\sum_j\tanh(\beta|J_{ij}|)<1$ gives a unique DLR equilibrium state; and (iii) for the two-dimensional nearest-neighbor ferromagnet at $h=0$ and $\beta J\geq2$, there are distinct stationary DLR equilibrium states with opposite nonzero magnetization and the pressure is nondifferentiable in $h$ at zero. These deductions are restricted to the stated classical model; they do not report a measured transition or infer a phase diagram between the sufficient regimes.
++Assume Countable Choice and adopt [[post-csm-interacting-equilibrium-gibbs]] for the specified classical Ising model. In the SI interpretation of [[def-csm-gibbs-physical-parameters]], $\beta=(k_BT)^{-1}$ is in $\mathrm{J}^{-1}$, $J$ is the coupling energy $J_{\rm I}$ in joules, and $h$ is an energy bias per dimensionless spin in joules, not a magnetic-field strength; hence $\beta J$ and $\beta h$ are dimensionless. The conditional model predictions are: (i) for a one-dimensional nearest-neighbor chain with finite $\beta>0$, $J,h\in\mathbb R$, the DLR equilibrium state is unique; (ii) for a translation-invariant finite-range Ising pair interaction with constant finite field, the sufficient condition $\sup_i\sum_j\tanh(\beta|J_{ij}|)<1$ gives a unique DLR equilibrium state; and (iii) for the two-dimensional nearest-neighbor ferromagnet at $h=0$ and $\beta J\geq2$, there are distinct stationary DLR equilibrium states with opposite nonzero magnetization and the pressure is nondifferentiable in $h$ at zero. These deductions are restricted to the stated classical model; they do not report a measured transition or infer a phase diagram between the sufficient regimes.
+ 
+ ## Facts & Assumptions
+ 
+--- old/pthm-csm-pressure-entropy-reference-units
+
++++ current/pthm-csm-pressure-entropy-reference-units
+
+@@ -29,9 +29,9 @@
+
+ 
+ ## Statement
+ 
+-Assume the adopted interacting Gibbs-equilibrium postulate for a bounded finite-range translation-invariant lattice model, Countable Choice, lattice spacing $a>0$ metres, and temperature $T>0$ kelvin. For any stationary DLR equilibrium state with dimensionless pressure per site $p$, entropy density $h_{\rm Sh}$ in nats per site, and mean energy $u$ in joules per site, the conditional model prediction is
+-$$\mathsf P=\frac{k_BT}{a^d}p,\qquad s=\frac{k_B}{a^d}h_{\rm Sh},\qquad f=\frac{u}{a^d}-Ts=-\frac{k_BT}{a^d}p,$$
+-where $\mathsf P$ is pressure, $s$ is reference spin entropy density, and $f$ is the free-energy density for the stated model and reference convention. This is a consequence of the bounded-lattice DLR variational identity; it makes no claim that the model describes a material.
++Assume the adopted interacting Gibbs-equilibrium postulate for a bounded finite-range translation-invariant lattice model in dimension $d\geq1$, Countable Choice, lattice spacing $a>0$ metres, and temperature $T>0$ kelvin. For any stationary DLR equilibrium state with dimensionless pressure per site $p$, Shannon entropy density $h_{\rm Sh}$ in nats per site, and mean energy $u$ in joules per site, the conditional model prediction is
++$$\mathsf P=\frac{k_BT}{a^d}p,\qquad s=\frac{k_B}{a^d}h_{\rm Sh},\qquad f=\frac{u}{a^d}-Ts=-\frac{k_BT}{a^d}p.$$
++The generalized pressure density $\mathsf P$ and free-energy density $f$ have units $\mathrm{J\,m}^{-d}$; for $d=3$, $\mathsf P$ is in pascals ($\mathrm{Pa}=\mathrm{J\,m}^{-3}$). The reference spin entropy density $s$ has units $\mathrm{J\,K}^{-1}\mathrm{m}^{-d}$. This is a consequence of the bounded-lattice DLR variational identity; it makes no claim that the model describes a material.
+ 
+ ## Facts & Assumptions
+ 
+--- old/cex-csm-gibbs-marginals-not-free
+
++++ current/cex-csm-gibbs-marginals-not-free
+
+@@ -7,9 +7,9 @@
+
+ domain: mathematics
+ library: physics
+ dependency_level: 3
+-deps: ["lem-csm-lattice-specification-consistency", "def-csm-lattice-gibbs-specification", "lem-csm-finite-gibbs-variational-identity"]
++deps: ["lem-csm-lattice-specification-consistency", "def-csm-lattice-gibbs-specification", "lem-csm-finite-gibbs-variational-identity", "def-real-exponential-function-and-e", "cor-exponential-reciprocal-and-positivity", "thm-exponential-is-strictly-increasing"]
+ justified_by: []
+-dependency_roles: {"lem-csm-lattice-specification-consistency": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-finite-gibbs-variational-identity": "mathematical-premise"}
++dependency_roles: {"lem-csm-lattice-specification-consistency": "mathematical-premise", "def-csm-lattice-gibbs-specification": "mathematical-premise", "lem-csm-finite-gibbs-variational-identity": "mathematical-premise", "def-real-exponential-function-and-e": "mathematical-premise", "cor-exponential-reciprocal-and-positivity": "mathematical-premise", "thm-exponential-is-strictly-increasing": "mathematical-premise"}
+ proof_strategy: direct
+ provenance:
+   statement: literature-derived
+@@ -33,11 +33,13 @@
+
+ 
+ **Given:** A three-site zero-field Ising chain with spins $s_1,s_2,s_3\in\{-1,+1\}$, open-chain Hamiltonian $H=-J(s_1s_2+s_2s_3)$, $\beta>0$, and $J\ne0$.
+ 
++[A1] Put $K=\beta J$ and define $\sinh K:=(e^K-e^{-K})/2$, $\cosh K:=(e^K+e^{-K})/2$, and $\tanh K:=\sinh K/\cosh K=(e^K-e^{-K})/(e^K+e^{-K})$. The denominator is positive by positivity of the exponential; since $K\ne0$, strict increase gives $e^K\ne e^{-K}$, so $\tanh K\ne0$ ([[def-real-exponential-function-and-e]], [[cor-exponential-reciprocal-and-positivity]], [[thm-exponential-is-strictly-increasing]]).
++
+ [A2] The specification uses conditional laws given the exterior; it does not identify them with unconditional finite marginals ([[def-csm-lattice-gibbs-specification]]).
+ 
+ [F1] The finite Gibbs weights are proportional to $e^{-\beta H}$ and have positive finite normalizer ([[lem-csm-finite-gibbs-variational-identity]]).
+ 
+ ## Counterexample
+-1.1 Put $K=\beta J$. Summing over the middle spin gives $Z=2(2\cosh K)^2$ and $\mathbb E(s_1s_3)=\frac{2(2\sinh K)^2}{2(2\cosh K)^2}=\tanh^2K>0$. Thus the endpoint marginal is correlated. [given, F1, algebra]
++1.1 With $K$, $\sinh K$, $\cosh K$, and $\tanh K$ as in [A1], summing over the middle spin gives $Z=2(2\cosh K)^2$ and $\mathbb E(s_1s_3)=\frac{2(2\sinh K)^2}{2(2\cosh K)^2}=\tanh^2K>0$. Thus the endpoint marginal is correlated. [given, A1, F1, algebra]
+ 
+ 2.1 The only interaction terms are on bonds $\{1,2\}$ and $\{2,3\}$, so no term is wholly supported on the retained endpoint set $\{1,3\}$. The claimed retained-term free law therefore has zero energy and assigns independent uniform endpoint spins, with correlation zero. This contradicts step 1.1, refuting the statement. [A2, F1, step 1.1, algebra] ∎ 
+--- old/ex-csm-chain-analytic-interacting-model
+
++++ current/ex-csm-chain-analytic-interacting-model
+
+@@ -28,7 +28,7 @@
+
+ 
+ ## Example
+ 
+-For a one-dimensional zero-field nearest-neighbor Ising chain with $J>0$ and $\beta>0$, let $K=\beta J$. The thermodynamic pressure is $p(K)=\log(2\cosh K)$, the infinite-volume DLR law is a stationary Markov chain, and for $K<1/2$ its pressure has the convergent series from [[thm-csm-ising-chain-convergent-series]]. Under the adopted Gibbs-equilibrium postulate this is a conditional model example, not an experimental observation.
++For a one-dimensional zero-field nearest-neighbor Ising chain with coupling energy $J=J_{\rm I}>0$ joules and temperature $T>0$ kelvin, let $\beta=(k_BT)^{-1}$ in $\mathrm{J}^{-1}$ and $K=\beta J$, which is dimensionless. The thermodynamic pressure is $p(K)=\log(2\cosh K)$, the infinite-volume DLR law is a stationary Markov chain, and for $0<K<1/2$ its pressure has the convergent series from [[thm-csm-ising-chain-convergent-series]]. Under the adopted Gibbs-equilibrium postulate this is a conditional model example, not an experimental observation.
+ 
+ ## Facts & Assumptions
+ 
+--- old/ex-csm-high-low-temperature-regimes
+
++++ current/ex-csm-high-low-temperature-regimes
+
+@@ -28,7 +28,7 @@
+
+ 
+ ## Example
+ 
+-For the two-dimensional nearest-neighbor ferromagnetic Ising model, write $K=\beta J$ with $J>0$. The results on this page give a sufficient high-temperature uniqueness regime $4\tanh K<1$ and a sufficient low-temperature coexistence regime $K\geq2$. Parameters satisfying neither displayed sufficient condition are not classified by these bounds. These are conditional model predictions, not measured transition temperatures.
++For the two-dimensional nearest-neighbor ferromagnetic Ising model, take coupling energy $J=J_{\rm I}>0$ joules and temperature $T>0$ kelvin, set $\beta=(k_BT)^{-1}$ in $\mathrm{J}^{-1}$, and write $K=\beta J$ (dimensionless). The results on this page give a sufficient high-temperature uniqueness regime $4\tanh K<1$ and a sufficient low-temperature coexistence regime $K\geq2$. Parameters satisfying neither displayed sufficient condition are not classified by these bounds. These are conditional model predictions, not measured transition temperatures.
+ 
+ ## Facts & Assumptions
+ 

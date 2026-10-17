@@ -9,9 +9,224 @@
     "companion": "tgr-mhs04-examples",
     "requires": [
       "orthonormal-bases-parseval-and-fourier-series",
-      "qsm-bose-fermi-gases"
+      "qsm-bose-fermi-gases",
+      "qm-math-orbital-and-spin"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "lem-tgr-photon-box-shell-summability",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Exponential mode sums for the periodic photon box",
+        "reference": "local prerequisite expansion: items/lem-tgr-photon-box-shell-summability.md",
+        "design_state": "Batch 76 local intermediate result added after prerequisite inspection; its complete proof and contract are on the assigned A page.",
+        "dependency_level": 0,
+        "deps": [],
+        "dependency_roles": {},
+        "inventory_expansion_required": true,
+        "statement": "Let $L,\\beta,\\hbar,c>0$ be real parameters, set $a=2\\pi\\hbar c/L$, and for\n$n\\in\\mathbb Z^3\\setminus\\{0\\}$ define\n$$\\epsilon_n=a|n|,\\qquad q_n=e^{-\\beta\\epsilon_n},$$\nwhere $|\\cdot|$ is the Euclidean norm. For $j\\ge1$, the integer max-norm shell\n$$\\{n\\in\\mathbb Z^3:|n|_\\infty=j\\}$$\nhas $24j^2+2$ points. Consequently\n$$\\sup_{n\\ne0}q_n=e^{-\\beta a}<1,\\qquad \\sum_{n\\ne0}q_n<\\infty,\\qquad \\sum_{n\\ne0}\\epsilon_n^p q_n<\\infty$$\nfor every integer $p\\ge0$. In particular, the positive mode-energy sum\n$$\\sum_{n\\ne0}\\frac{\\epsilon_n}{e^{\\beta\\epsilon_n}-1}$$\nis finite. Repeating each mode twice for two polarization labels preserves all\nthese conclusions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333 Statistical Mechanics I, Lecture 20, photon-gas section",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/368b2180e6efa1417ab336d79b2df6db_MIT8_333F13_Lec20.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "1.1 The number of integer vectors with $|n|_\\infty=j$ is $(2j+1)^3-(2j-1)^3=24j^2+2$. On this shell $j\\le |n|\\le\\sqrt3j$, so $q_n\\le e^{-\\beta a j}$ and $\\epsilon_n^p q_n\\le (a\\sqrt3)^p j^p e^{-\\beta a j}$. The shell contributions are bounded by $C_p j^{p+2}e^{-\\beta a j}$ for a finite constant $C_p$; the ratio of consecutive terms tends to $e^{-\\beta a}<1$, so their series converges. [given, A1, algebra]",
+        "proof_strategy": "direct",
+        "verification": {}
+      },
+      {
+        "id": "lem-tgr-planck-integrals",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Planck integrals from Fourier Parseval",
+        "reference": "local prerequisite expansion: items/lem-tgr-planck-integrals.md",
+        "design_state": "Batch 76 local intermediate result added after prerequisite inspection; its complete proof and contract are on the assigned A page.",
+        "dependency_level": 0,
+        "deps": [
+          "def-countable-choice",
+          "def-nonnegative-lebesgue-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-fourier-basis-and-parseval-on-the-n-torus"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Assume the Axiom of Countable Choice. The following improper integrals\nconverge and have the exact values\n$$\\int_0^\\infty\\frac{x^3}{e^x-1}\\,dx=\\frac{\\pi^4}{15},\\qquad \\int_0^\\infty x^2[-\\log(1-e^{-x})]\\,dx=\\frac{\\pi^4}{45}.$$",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "University of Mississippi PHY 727 course notes, Lecture 18: The Photon Gas",
+              "url": "https://www.phy.olemiss.edu/~luca/phys727/Topics/L18_photons.pdf"
+            },
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333 Statistical Mechanics I, Lecture 20, photon-gas section",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/368b2180e6efa1417ab336d79b2df6db_MIT8_333F13_Lec20.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "1.1 On $[-\\tfrac12,\\tfrac12]$ define the continuous periodic representative $F(y)=(2\\pi y)^2$. Its normalized Fourier coefficients are $c_n=(2\\pi)^{-1}\\int_{-\\pi}^{\\pi}x^2e^{-inx}\\,dx$ after the change $x=2\\pi y$. Direct integration gives $c_0=\\pi^2/3$; for $n\\ne0$, two integrations by parts give $c_n=2(-1)^n/n^2$ because the first boundary term cancels at $x=\\pm\\pi$ and $\\int_{-\\pi}^{\\pi}e^{-inx}\\,dx=0$. [given, algebra]",
+        "proof_strategy": "direct",
+        "verification": {}
+      },
+      {
+        "id": "lem-tgr-photon-box-riemann-limits",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Photon-box energy and singular entropy Riemann limits",
+        "reference": "local prerequisite expansion: items/lem-tgr-photon-box-riemann-limits.md",
+        "design_state": "Batch 76 local intermediate result added after prerequisite inspection; its complete proof and contract are on the assigned A page.",
+        "dependency_level": 1,
+        "deps": [
+          "def-countable-choice",
+          "lem-tgr-photon-box-shell-summability",
+          "lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "lem-tgr-photon-box-shell-summability": "mathematical-premise",
+          "lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$) as defined in [[def-countable-choice]]. For $r>0$ define $f(r)=r/(e^r-1)$ and $g(r)=f(r)-\\log(1-e^{-r})$, with $f(0)=1$. Let $|n|$ be the Euclidean norm on $\\mathbb Z^3$. Then, as the dimensionless mesh $d\\downarrow0$,\n$$d^3\\sum_{n\\ne0}f(d|n|)\\longrightarrow\\int_{\\mathbb R^3}f(|x|)\\,d^3x,$$\n$$d^3\\sum_{n\\ne0}g(d|n|)\\longrightarrow\\int_{\\mathbb R^3}g(|x|)\\,d^3x<\\infty.$$\nBoth sums converge absolutely for each $d>0$. In addition, for every continuous compactly supported $\\psi:[0,\\infty)\\to\\mathbb R$,\n$$d^3\\sum_{n\\ne0}\\psi(d|n|)\\longrightarrow4\\pi\\int_0^\\infty r^2\\psi(r)\\,dr.$$",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333 Statistical Mechanics I, Lecture 20, photon-gas section",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/368b2180e6efa1417ab336d79b2df6db_MIT8_333F13_Lec20.pdf"
+            },
+            {
+              "title": "University of Mississippi PHY 727 course notes, Lecture 18: The Photon Gas",
+              "url": "https://www.phy.olemiss.edu/~luca/phys727/Topics/L18_photons.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "1.1 For a continuous compactly supported $h:\\mathbb R^3\\to\\mathbb R$, the cubes $Q_{n,d}=dn+[-d/2,d/2]^3$ tile $\\mathbb R^3$ up to boundaries of volume zero. Uniform continuity of $h$ bounds $|d^3\\sum_nh(dn)-\\int h|$ by the volume of one fixed enlarged support box times the modulus of continuity at $\\sqrt3d/2$, which tends to zero. Taking $h(x)=\\psi(|x|)$ proves the compactly supported radial limit; applying [F2] and $\\sigma(S^2)=4\\pi$ from [F3] rewrites its integral as $4\\pi\\int_0^\\infty r^2\\psi(r)\\,dr$. Omitting $n=0$ changes the sum by $d^3\\psi(0)\\to0$. [given, F2, F3, algebra]",
+        "proof_strategy": "direct",
+        "verification": {}
+      },
+      {
+        "id": "thm-tgr-photon-planck-flux",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Actual photon box trace and Planck energy/entropy flux",
+        "reference": "research/plan-thermodynamics-and-general-relativity-track.md#actual-photon-box-trace-and-planck-energyentropy-flux",
+        "design_state": "Batch 76 assigned inventory item; complete conditional argument and proof contract are recorded in batch evidence.",
+        "dependency_level": 3,
+        "deps": [
+          "def-countable-choice",
+          "lem-qsm-fock-occupation-basis-and-car-relations",
+          "lem-qsm-models-diagonal-occupation-trace",
+          "lem-tgr-photon-box-shell-summability",
+          "lem-tgr-planck-integrals",
+          "lem-tgr-photon-box-riemann-limits",
+          "lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "lem-qsm-fock-occupation-basis-and-car-relations": "mathematical-premise",
+          "lem-qsm-models-diagonal-occupation-trace": "mathematical-premise",
+          "lem-tgr-photon-box-shell-summability": "mathematical-premise",
+          "lem-tgr-planck-integrals": "mathematical-premise",
+          "lem-tgr-photon-box-riemann-limits": "mathematical-premise",
+          "lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "lem-finite-rank-operators-are-compact": "mathematical-premise",
+          "thm-norm-limit-of-compact-operators-is-compact": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume Countable Choice ($\\mathrm{AC}_\\omega$) as defined in [[def-countable-choice]]. Fix $L,T,\\hbar,c,k_B>0$ with SI units respectively metre, kelvin, joule-second, metre per second, and joule per kelvin. Let $\\beta=(k_BT)^{-1}$ in inverse joules. The mathematical periodic-box mode set is $I=(\\mathbb Z^3\\setminus\\{0\\})\\times\\{1,2\\}$, with two polarization labels and the enumeration by increasing max-norm shells and then lexicographic order; within each shell use lexicographic order on $(n,s)$. For $i=(n,s)$ set $\\epsilon_i=\\hbar c(2\\pi/L)|n|$ in joules and $\\omega_n=2\\pi c|n|/L$ in inverse seconds. The zero wavevector is excluded and no zero-point energy is included.\n\nLet $\\Omega_B$ be the finite-support maps $m:I\\to\\mathbb N_0$, set $E(m)=\\sum_{i\\in I}\\epsilon_i m_i$, and let $\\mathcal H_B=\\ell^2(\\Omega_B,\\mathbb C)$ with its occupation basis. Define the nonnegative diagonal multiplier $H$ by $(Ha)_m=E(m)a_m$ on $D(H)=\\{a\\in\\ell^2(\\Omega_B,\\mathbb C):\\sum_m E(m)^2|a_m|^2<\\infty\\}$, so $H|m\\rangle=E(m)|m\\rangle$. For each $\\gamma>0$ in inverse joules define the bounded positive diagonal multiplier $e^{-\\gamma H}$ by $e^{-\\gamma H}|m\\rangle=e^{-\\gamma E(m)}|m\\rangle$, and set $Z_L(\\gamma)=\\sum_{m\\in\\Omega_B}e^{-\\gamma E(m)}$; the proof shows this sum is finite and equals the operator trace $\\operatorname{Tr}(e^{-\\gamma H})$. Set $q_n=e^{-\\beta\\epsilon_{(n,1)}}$, $Z_L=Z_L(\\beta)$, $\\rho_L=Z_L^{-1}e^{-\\beta H}$, and $p_m=e^{-\\beta E(m)}/Z_L$. Define the diagonal-state entropy by $S_L=-k_B\\sum_{m\\in\\Omega_B}p_m\\log p_m$, where $\\log$ is the natural logarithm.\n\nThe finite-box trace, energy and entropy are actual diagonal sums, not continuum mode integrals. The partition function $Z_L$ and occupations $q_n$ are dimensionless, $\\rho_L$ has trace one, energy and $U_L$ have units joules, and $S_L$ has units joules per kelvin. The sums satisfy $Z_L=\\prod_{n\\ne0}(1-q_n)^{-2}<\\infty$, $\\rho_L$ is a positive trace-one trace-class operator, and every nonnegative integer energy moment under $\\rho_L$ is finite. Define the everywhere-defined diagonal operator $B_L$ by\n$(B_La)_m=p_mE(m)a_m$ for $a\\in\\mathcal H_B$. The proof shows that it\nis bounded, positive and trace class, agrees with $\\rho_LH$ on $D(H)$,\nand equals $H\\rho_L$ on all of $\\mathcal H_B$. The notation\n$\\operatorname{Tr}(\\rho_LH)$ means $\\operatorname{Tr}(B_L)$, the trace\nof that unique bounded extension. Moreover,\n$$U_L=\\operatorname{Tr}(\\rho_LH)=2\\sum_{n\\ne0}\\frac{\\epsilon_{(n,1)}}{e^{\\beta\\epsilon_{(n,1)}}-1}<\\infty.$$\nThe entropy is\n$$S_L=k_B(\\log Z_L+\\beta U_L)=2k_B\\sum_{n\\ne0}\\left[-\\log(1-q_n)+\\frac{\\beta\\epsilon_{(n,1)}q_n}{1-q_n}\\right]<\\infty.$$\n\nWith $u_L=U_L/L^3$ and $s_L=S_L/L^3$ in joules per cubic metre and joules per kelvin per cubic metre, respectively, their thermodynamic-volume limits at fixed $T$ exist. For every continuous compactly supported $\\psi:[0,\\infty)\\to\\mathbb R$, the limiting spectral energy measure is\n$$\\lim_{L\\to\\infty}\\frac{2}{L^3}\\sum_{n\\ne0}\\frac{\\hbar\\omega_n}{e^{\\beta\\hbar\\omega_n}-1}\\psi(\\omega_n)=\\frac{\\hbar}{\\pi^2c^3}\\int_0^\\infty\\frac{\\omega^3\\psi(\\omega)}{e^{\\beta\\hbar\\omega}-1}\\,d\\omega.$$\nThe integrated limits are\n$$u=\\lim_{L\\to\\infty}u_L=\\frac{\\pi^2k_B^4T^4}{15\\hbar^3c^3},\\qquad s=\\lim_{L\\to\\infty}s_L=\\frac{4u}{3T}.$$\n\nIn a separately specified isotropic freely streaming ray model, directions have uniform angular density $u/(4\\pi)$ for energy and $s/(4\\pi)$ for this coarse mode entropy on the unit sphere; each ray has velocity $c\\hat n$. Define one-sided flux through a plane by integrating the outward normal velocity component over the outward hemisphere. Then $F=cu/4=\\sigma T^4$ and $F_S=cs/4=(4/3)F/T$, where $F$ is in watts per square metre, $F_S$ in joules per kelvin per square metre per second, and $\\sigma=\\pi^2k_B^4/(60\\hbar^3c^2)$ in watts per square metre per kelvin to the fourth power. This is a mathematical model deduction; it does not assert an observed blackbody, an equilibration mechanism, or a horizon-emission law.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333 Statistical Mechanics I, Lecture 20, photon-gas section",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/368b2180e6efa1417ab336d79b2df6db_MIT8_333F13_Lec20.pdf"
+            },
+            {
+              "title": "University of Mississippi PHY 727 course notes, Lecture 18: The Photon Gas",
+              "url": "https://www.phy.olemiss.edu/~luca/phys727/Topics/L18_photons.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "1.1 For $i=(n,s)$ with $n\\ne0$, $|n|\\ge1$, so $\\epsilon_i\\ge2\\pi\\hbar c/L>0$. Thus $q_i\\le e^{-2\\pi\\beta\\hbar c/L}<1$, and [F3] gives $\\sum_{i\\in I}q_i<\\infty$ with the required strict supremum bound. [given, F3, algebra]",
+        "proof_strategy": "direct",
+        "verification": {}
+      },
+      {
+        "id": "prop-tgr-ideal-evaporation-accounting",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Exact ideal emitter mass ODE and entropy accounting",
+        "reference": "research/plan-thermodynamics-and-general-relativity-track.md#actual-photon-box-trace-and-planck-energyentropy-flux",
+        "design_state": "Batch 76 assigned inventory item; complete conditional argument and proof contract are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "thm-tgr-photon-planck-flux"
+        ],
+        "dependency_roles": {
+          "thm-tgr-photon-planck-flux": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the exact Planck energy and coarse entropy flux formulas of [[thm-tgr-photon-planck-flux]]. Fix model constants $G,c,\\hbar,k_B>0$ in SI units, with units respectively $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, $\\mathrm{m\\,s^{-1}}$, $\\mathrm{J\\,s}$, and $\\mathrm{J\\,K^{-1}}$. Fix a normalization of the asymptotic time and energy reference, a dimensionless fraction $0<\\eta\\le1$, an initial mass $M_0>0$ in kilograms, a cutoff $0<M_{\\min}<M_0$, and an entropy offset $S_0\\in\\mathbb R$ in joules per kelvin. Let $M(t)>0$ be a $C^1$ mass function on an interval containing $0$ and its first cutoff time, with $M(0)=M_0$. For each $M>0$ define the model quantities\n$$r_H=\\frac{2GM}{c^2},\\qquad A_H=4\\pi r_H^2,\\qquad \\kappa=\\frac{c^2}{4GM},\\qquad T_\\infty=\\frac{\\hbar c\\kappa}{2\\pi k_B},\\qquad S_B(M)=\\frac{k_Bc^3A_H}{4G\\hbar}+S_0.$$\nHere $r_H$ is in metres, $A_H$ in square metres, $\\kappa$ is the fixed-reference inverse-length parameter in inverse metres, $T_\\infty$ is in kelvins, and $S_0$ is a fixed entropy offset in joules per kelvin. Adopt an effective far-field emitter with area $A_{\\rm eff}=\\eta A_H$ and power $P=A_{\\rm eff}\\sigma T_\\infty^4$ in watts, where $\\sigma$ is the coefficient in [[thm-tgr-photon-planck-flux]]. Adopt the mass-balance equation $c^2M'(t)=-P(t)$, with $t$ in seconds measured by the fixed asymptotic time parameter; terminate the model at the first time $M(t)=M_{\\min}$. Then the exact solution until that cutoff is\n$$M(t)=(M_0^3-3\\alpha t)^{1/3},\\qquad \\alpha=\\frac{\\eta\\hbar c^4}{15360\\pi G^2},\\qquad \\tau=\\frac{M_0^3-M_{\\min}^3}{3\\alpha}.$$\nThe parameter $\\alpha$ has units $\\mathrm{kg^3\\,s^{-1}}$. The model exports energy $c^2(M_0-M_{\\min})$ in joules through cutoff. Define its coarse exported entropy by $S_{\\rm rad}(t)=\\int_0^t(4/3)P(t')/T_\\infty(t')\\,dt'$, in joules per kelvin. Then\n$$S_B(M_0)-S_B(M_{\\min})>0.$$\n$$S_{\\rm rad}(\\tau)=\\frac43[S_B(M_0)-S_B(M_{\\min})].$$\n$$\\Delta(S_B+S_{\\rm rad})=\\frac13[S_B(M_0)-S_B(M_{\\min})]\\ge0,$$\nwhere $\\Delta(S_B+S_{\\rm rad})=S_B(M_{\\min})+S_{\\rm rad}(\\tau)-S_B(M_0)$ and $S_{\\rm rad}(0)=0$. This is an exact conditional calculation in the fixed-reference effective-area model. It is not a theorem about a material patch of a null horizon, an exact time-dependent Einstein solution, quantum backreaction, reference-independent Stefan emission, or a universal generalized second law.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mehran Kardar, MIT OpenCourseWare 8.333 Statistical Mechanics I, Lecture 20, photon-gas section",
+              "url": "https://ocw.mit.edu/courses/8-333-statistical-mechanics-i-statistical-mechanics-of-particles-fall-2013/368b2180e6efa1417ab336d79b2df6db_MIT8_333F13_Lec20.pdf"
+            },
+            {
+              "title": "University of Mississippi PHY 727 course notes, Lecture 18: The Photon Gas",
+              "url": "https://www.phy.olemiss.edu/~luca/phys727/Topics/L18_photons.pdf"
+            }
+          ]
+        },
+        "library": "mathematics",
+        "strategy": "1.1 Substitution of $r_H=2GM/c^2$ gives $A_H=16\\pi G^2M^2/c^4$, $\\kappa=c^2/(4GM)$, $T_\\infty=\\hbar c^3/(8\\pi GMk_B)$, and $S_B(M)=4\\pi k_BG M^2/(\\hbar c)+S_0$. Differentiating the last expression yields $T_\\infty\\,dS_B/dM=c^2$. [given, A2, algebra]",
+        "proof_strategy": "direct",
+        "verification": {}
+      }
+    ]
   },
   {
     "order": 650,
@@ -24,6 +239,71 @@
     "requires": [
       "tgr-mhs04"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "cex-tgr-photon-zero-mode-trace",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "Zero-energy bosonic mode trace obstruction",
+        "reference": "research/plan-thermodynamics-and-general-relativity-track.md#actual-photon-box-trace-and-planck-energyentropy-flux",
+        "design_state": "Batch 76 assigned inventory item; complete conditional argument and proof contract are recorded in batch evidence.",
+        "dependency_level": 4,
+        "deps": [
+          "def-countable-choice",
+          "def-trace-class-operator",
+          "lem-qsm-fock-occupation-basis-and-car-relations",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "thm-tgr-photon-planck-flux"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "lem-qsm-fock-occupation-basis-and-car-relations": "mathematical-premise",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null": "mathematical-premise",
+          "thm-tgr-photon-planck-flux": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For a periodic bosonic box, deleting the zero wavevector only in the continuum\nmode integral is sufficient to leave the actual finite-box Gibbs trace finite\neven if the zero-energy mode remains in the discrete occupation space.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "library": "mathematics",
+        "strategy": "1.1 For each integer $r\\ge0$, let $m^{(r)}\\in\\Omega'_B$ have occupation $r$ at $0_\\star$ and occupation zero at every $i\\in I_0$. These are distinct finite-support configurations, so [F1] makes $|m^{(r)}\\rangle$ an orthonormal sequence in $\\mathcal H'$. [given, A1, F1, F3, F4]",
+        "proof_strategy": "direct",
+        "verification": {},
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-tgr-ideal-cutoff-entropy",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Half-mass cutoff and exact coarse entropy export",
+        "reference": "research/plan-thermodynamics-and-general-relativity-track.md#actual-photon-box-trace-and-planck-energyentropy-flux",
+        "design_state": "Batch 76 assigned inventory item; complete conditional argument and proof contract are recorded in batch evidence.",
+        "dependency_level": 5,
+        "deps": [
+          "prop-tgr-ideal-evaporation-accounting"
+        ],
+        "dependency_roles": {
+          "prop-tgr-ideal-evaporation-accounting": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "In the fixed-reference effective-area model of [[prop-tgr-ideal-evaporation-accounting]], with its stated positive constants (in particular $G>0$), choose the positive cutoff $M_{\\min}=M_0/2$. Then the model stops at $\\tau=(7/8)t_*$, where $t_*=M_0^3/(3\\alpha)$, exports energy $c^2M_0/2$, and has\n$$S_B(M_0)-S_B(M_0/2)=\\frac{3\\pi k_BG M_0^2}{\\hbar c},\\quad S_{\\rm rad}(\\tau)=\\frac{4\\pi k_BG M_0^2}{\\hbar c},\\quad \\Delta(S_B+S_{\\rm rad})=\\frac{\\pi k_BG M_0^2}{\\hbar c}.$$\nThe entropy offset cancels. This calculation stops at positive mass and asserts no endpoint at $M=0$ or physical generalized second law.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "library": "mathematics",
+        "strategy": "1.1 Substituting $M_{\\min}=M_0/2$ into the cutoff time gives $\\tau=(1-1/8)M_0^3/(3\\alpha)=(7/8)t_*$. The integrated energy is $c^2(M_0-M_0/2)=c^2M_0/2$. [given, F1, algebra]",
+        "proof_strategy": "direct",
+        "verification": {},
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
   }
 ]

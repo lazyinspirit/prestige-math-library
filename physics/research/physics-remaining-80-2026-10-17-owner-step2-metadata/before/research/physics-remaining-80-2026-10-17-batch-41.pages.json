@@ -1,0 +1,370 @@
+[
+  {
+    "order": 579,
+    "id": "qsm-kms-equilibrium",
+    "kind": "A",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Physical-time KMS strip equilibrium condition",
+    "companion": "qsm-kms-equilibrium-examples",
+    "requires": [
+      "analyticity-liouville-and-morera",
+      "goursat-and-cauchys-theorem-in-a-convex-domain",
+      "qsm-finite-range-spin-dynamics",
+      "the-identity-theorem-and-the-open-mapping-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-qsm-kms-state",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Physical-time KMS strip equilibrium condition",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i5",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 7,
+        "deps": [
+          "def-c-star-algebra",
+          "def-qsm-infinite-algebraic-state",
+          "def-qsm-quasilocal-spin-algebra",
+          "thm-qsm-finite-range-spin-dynamics"
+        ],
+        "dependency_roles": {
+          "def-c-star-algebra": "mathematical-premise",
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "thm-qsm-finite-range-spin-dynamics": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Here a complex C$^*$-algebra is a complex Banach algebra with associative bilinear multiplication, submultiplicative norm, and a conjugate-linear involution satisfying $\\|A^*A\\|=\\|A\\|^2$; **unital** means that it has a nonzero identity $I$ ([[def-c-star-algebra]]). A $*$-automorphism is a bijective complex-linear map preserving multiplication and involution. Let $t\\mapsto\\alpha_t$ be a one-parameter group of such automorphisms, so $\\alpha_0$ is the identity and $\\alpha_s\\alpha_t=\\alpha_{s+t}$. It is **strongly continuous** when $t\\mapsto\\alpha_t(A)$ is norm-continuous for each fixed $A\\in\\mathcal A$. A **state** is a bounded complex-linear functional $\\omega:\\mathcal A\\to\\mathbb C$ with $\\omega(I)=1$ and $\\omega(A^*A)\\ge0$ for every $A\\in\\mathcal A$; this is the state convention of [[def-qsm-infinite-algebraic-state]].\n\nFix absolute temperature $T>0$ in kelvins and Boltzmann's constant $k_B>0$ in J K$^{-1}$; the inverse-temperature parameter is $\\beta:=(k_BT)^{-1}>0$, measured in J$^{-1}$. Let the reduced Planck constant $\\hbar>0$ have units J s. Write $b:=\\beta\\hbar$, measured in seconds, and\n\n$$S_b:=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\},\\qquad S_b^\\circ:=\\{z\\in\\mathbb C:0<\\operatorname{Im}z<b\\}.$$\n\nA state $\\omega$ is a **$\\beta$-KMS state for $\\alpha$ in physical time** when for every $A,B\\in\\mathcal A$ there is a bounded function $F_{A,B}:S_b\\to\\mathbb C$ (that is, $\\sup_{z\\in S_b}|F_{A,B}(z)|<\\infty$) that is continuous on $S_b$, complex-differentiable at every point of $S_b^\\circ$, and satisfies\n\n$$F_{A,B}(t)=\\omega\\!\\left(A\\alpha_t(B)\\right),\\qquad F_{A,B}(t+ib)=\\omega\\!\\left(\\alpha_t(B)A\\right)\\quad(t\\in\\mathbb R).$$\n\nFor the assigned quantum spin model, $\\mathcal A$ is the norm-completed quasi-local algebra of [[def-qsm-quasilocal-spin-algebra]] and $\\alpha$ is the thermodynamic dynamics of [[thm-qsm-finite-range-spin-dynamics]], under that theorem's stated hypotheses. The strip width is $\\beta\\hbar$ in physical seconds; setting $\\hbar=1$ is a separate natural-unit convention. This is a mathematical equilibrium criterion for the specified algebra and dynamics. It does not assert that a model describes a material, that a system has dynamically relaxed, or that all stationary states are KMS.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, Definition 3.4.4, pp. 74–75",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7, pp. 13–14",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics"
+      },
+      {
+        "id": "lem-qsm-kms-strip-uniqueness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Bounded KMS strip norm and zero-edge uniqueness",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i5",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 8,
+        "deps": [
+          "def-qsm-kms-state",
+          "thm-hadamard-three-lines"
+        ],
+        "dependency_roles": {
+          "def-qsm-kms-state": "mathematical-premise",
+          "thm-hadamard-three-lines": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Let $b>0$ and $S_b=\\{z\\in\\mathbb C:0\\le\\operatorname{Im}z\\le b\\}$, with interior $S_b^\\circ=\\{z:0<\\operatorname{Im}z<b\\}$. Let $F:S_b\\to\\mathbb C$ be bounded (so $\\sup_{z\\in S_b}|F(z)|<\\infty$), continuous, and complex-differentiable at every point of $S_b^\\circ$, and set\n\n$$M_0:=\\sup_{t\\in\\mathbb R}|F(t)|,\\qquad M_1:=\\sup_{t\\in\\mathbb R}|F(t+ib)|.$$\n\nFor $0<s<b$,\n\n$$\\sup_{t\\in\\mathbb R}|F(t+is)|\\le M_0^{1-s/b}M_1^{s/b},$$\n\nwhere each exponent is positive and $0^r=0$ for $r>0$. In particular, if $M_0,M_1\\le C$ then $|F(z)|\\le C$ on $S_b$. If two bounded continuous functions on $S_b$, holomorphic inside, have the same lower boundary values, then they agree on all of $S_b$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, Proposition 3.4.5, pp. 74–75",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7, p. 13",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-qsm-gibbs-strip-limit",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Uniform local Gibbs strip limits",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i6",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 9,
+        "deps": [
+          "def-countable-choice",
+          "def-qsm-bounded-finite-range-interaction",
+          "def-qsm-infinite-algebraic-state",
+          "def-qsm-kms-state",
+          "def-qsm-local-spin-algebras",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-consistent-local-states",
+          "lem-qsm-finite-gibbs-kms",
+          "lem-qsm-kms-strip-uniqueness",
+          "lem-qsm-local-generator-domain",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "lem-qsm-spin-state-compactness",
+          "thm-qsm-finite-range-spin-dynamics",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "thm-nested-interval-property",
+          "thm-recursion"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-qsm-bounded-finite-range-interaction": "mathematical-premise",
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "def-qsm-kms-state": "mathematical-premise",
+          "def-qsm-local-spin-algebras": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "lem-qsm-finite-gibbs-kms": "mathematical-premise",
+          "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+          "lem-qsm-local-generator-domain": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "lem-qsm-spin-state-compactness": "mathematical-premise",
+          "thm-qsm-finite-range-spin-dynamics": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "thm-nested-interval-property": "mathematical-premise",
+          "thm-recursion": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Let $\\Gamma=\\mathbb Z^d$, $d\\ge1$, with finite on-site spin dimension $q\\ge1$, local matrix algebras $\\mathcal A_\\Lambda$, and quasi-local algebra $\\mathcal A$ as in [[def-qsm-local-spin-algebras]] and [[def-qsm-quasilocal-spin-algebra]]. Let $\\Phi$ be a uniformly bounded finite-range interaction as in [[def-qsm-bounded-finite-range-interaction]], with free-boundary Hamiltonians $H_{\\Lambda_n}$ on any increasing finite exhaustion $\\Lambda_n\\uparrow\\Gamma$. Fix $\\hbar>0$ and $\\beta>0$, and let $\\alpha_t$ be the thermodynamic dynamics of [[thm-qsm-finite-range-spin-dynamics]].\n\nFor each $n$, let $\\rho_n=e^{-\\beta H_{\\Lambda_n}}/\\operatorname{Tr}_{\\Lambda_n}(e^{-\\beta H_{\\Lambda_n}})$ be the finite Gibbs density. For each finite $X\\subseteq\\Gamma$, define its extension density by adjoining the normalized trace density $q^{-1}I$ at every site of $X\\setminus\\Lambda_n$ and taking the partial trace from $X\\cup\\Lambda_n$ to $X$. Assume the finite-matrix C$^*$-identity and the finite-matrix state/density-norm interface recorded in Facts [A1]–[A2]. The resulting consistent local densities define algebraic states $\\omega_n$ on $\\mathcal A$.\n\nAt least one subsequence $\\omega_{n_k}$ converges pointwise on $\\mathcal A$ to an algebraic state $\\omega$. For every pointwise-convergent subsequence and its limit $\\omega$, and for every fixed pair of strictly local observables $A,B\\in\\mathcal A_{\\mathrm{loc}}$, there is a bounded function $F_{A,B}$, continuous on $S_{\\beta\\hbar}$ and holomorphic inside, whose boundaries are\n\n$$F_{A,B}(t)=\\omega(A\\alpha_t(B)),\\qquad F_{A,B}(t+i\\beta\\hbar)=\\omega(\\alpha_t(B)A)\\quad(t\\in\\mathbb R).$$\n\nThis is the local-pair boundary conclusion for a pointwise limit of finite Gibbs states.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, pp. 74–77",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7, pp. 13–14; Chapter 2 §6, pp. 24–25",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-qsm-kms-invariance",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "KMS states are invariant under their dynamics",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i5a",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 9,
+        "deps": [
+          "def-qsm-kms-state",
+          "lem-qsm-kms-strip-uniqueness",
+          "thm-goursat-triangle-theorem",
+          "thm-liouville-bounded-entire-function",
+          "thm-morera-triangle-theorem"
+        ],
+        "dependency_roles": {
+          "def-qsm-kms-state": "mathematical-premise",
+          "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+          "thm-goursat-triangle-theorem": "mathematical-premise",
+          "thm-liouville-bounded-entire-function": "mathematical-premise",
+          "thm-morera-triangle-theorem": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Let $\\omega$ be a $\\beta$-KMS state for a strongly continuous group $\\alpha_t$ as in [[def-qsm-kms-state]], with $b=\\beta\\hbar>0$. Then\n\n$$\\omega(\\alpha_t(B))=\\omega(B)\\qquad(B\\in\\mathcal A,\\ t\\in\\mathbb R).$$\n\nThus invariance is a consequence of the full bounded-strip KMS condition; it is not an extra clause in the definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, KMS discussion, pp. 74–75",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7, pp. 13–14",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-qsm-finite-kms-gibbs-characterization",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite KMS condition exactly determines the Gibbs density",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i5",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 9,
+        "deps": [
+          "def-qsm-kms-state",
+          "lem-qsm-kms-strip-uniqueness",
+          "lem-qsm-finite-gibbs-kms",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-finite-matrix-cstar-and-state-duality"
+        ],
+        "dependency_roles": {
+          "def-qsm-kms-state": "mathematical-premise",
+          "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+          "lem-qsm-finite-gibbs-kms": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Let $\\mathcal H$ be a nonzero finite-dimensional complex Hilbert space, let $H=H^*$ on $\\mathcal H$ with energy units J, let $\\hbar>0$ have units J s, and let $\\beta>0$ have units J$^{-1}$. Write $\\operatorname{Tr}$ for the ordinary finite-dimensional trace. Assume the finite spectral-calculus and unital C$^*$-algebra clauses [A1]–[A2] below. Define the finite-matrix Heisenberg group\n\n$$\\alpha_t^H(X):=e^{itH/\\hbar}Xe^{-itH/\\hbar}\\qquad(X\\in\\mathcal B(\\mathcal H),\\ t\\in\\mathbb R).$$\n\nA state $\\omega$ on the unital C$^*$-algebra $\\mathcal B(\\mathcal H)$ satisfies the $\\beta$-KMS strip condition of [[def-qsm-kms-state]] for $\\alpha^H$ if and only if\n\n$$\\omega(X)=\\frac{\\operatorname{Tr}(e^{-\\beta H}X)}{\\operatorname{Tr}(e^{-\\beta H})}\\qquad(X\\in\\mathcal B(\\mathcal H)).$$\n\nHere $\\beta$ has units J$^{-1}$, $H$ has units J, and the physical-time strip has width $\\beta\\hbar$ seconds. The result is finite-dimensional and makes no infinite-volume or relaxation claim.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, finite Gibbs/KMS discussion, pp. 76–77",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7 and Chapter 2 §6, pp. 13–14 and 24–25",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-qsm-infinite-spin-kms-existence",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-range interacting quantum spin KMS existence",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i6",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 10,
+        "deps": [
+          "def-qsm-infinite-algebraic-state",
+          "def-qsm-kms-state",
+          "def-qsm-quasilocal-spin-algebra",
+          "lem-qsm-consistent-local-states",
+          "lem-qsm-finite-gibbs-kms",
+          "lem-qsm-gibbs-strip-limit",
+          "lem-qsm-kms-strip-uniqueness",
+          "lem-qsm-quasilocal-completion",
+          "lem-qsm-finite-matrix-cstar-and-state-duality",
+          "lem-qsm-matrix-state-calculus",
+          "lem-qsm-spin-state-compactness",
+          "thm-qsm-finite-range-spin-dynamics",
+          "thm-weierstrass-convergence-holomorphic-functions"
+        ],
+        "dependency_roles": {
+          "def-qsm-infinite-algebraic-state": "mathematical-premise",
+          "def-qsm-kms-state": "mathematical-premise",
+          "def-qsm-quasilocal-spin-algebra": "mathematical-premise",
+          "lem-qsm-consistent-local-states": "mathematical-premise",
+          "lem-qsm-finite-gibbs-kms": "mathematical-premise",
+          "lem-qsm-gibbs-strip-limit": "mathematical-premise",
+          "lem-qsm-kms-strip-uniqueness": "mathematical-premise",
+          "lem-qsm-quasilocal-completion": "mathematical-premise",
+          "lem-qsm-finite-matrix-cstar-and-state-duality": "mathematical-premise",
+          "lem-qsm-matrix-state-calculus": "mathematical-premise",
+          "lem-qsm-spin-state-compactness": "mathematical-premise",
+          "thm-qsm-finite-range-spin-dynamics": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Let $\\Gamma=\\mathbb Z^d$, $d\\ge1$, have finite on-site spin dimension $q\\ge1$ and quasi-local spin algebra $\\mathcal A$. Let $\\Phi$ be a uniformly bounded finite-range interaction with free-boundary finite-volume Hamiltonians, and let $\\alpha_t$ be the strongly continuous thermodynamic dynamics of [[thm-qsm-finite-range-spin-dynamics]]. Fix $\\beta>0$ and $\\hbar>0$. Assume Countable Choice, the finite-matrix C$^*$-identity, and the finite-matrix state/density-norm interface exactly as stated in Facts [A1]–[A2].\n\nFor any increasing finite exhaustion $\\Lambda_n\\uparrow\\Gamma$, extend each finite Gibbs density on $\\mathcal A_{\\Lambda_n}$ by normalized trace densities on the outside sites, as in [[lem-qsm-gibbs-strip-limit]]. Every pointwise convergent subsequence of these algebraic states has a limit $\\omega$ that is a $\\beta$-KMS state for $\\alpha$ in physical time, with strip width $\\beta\\hbar$. At least one such subsequential limit exists under [A1]–[A2].\n\nThe conclusion is a conditional mathematical existence result for bounded finite-dimensional spin interactions. It does not assert uniqueness, clustering, phase classification, a global infinite-volume Gibbs density matrix, or dynamical relaxation to equilibrium.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, Corollary 3.4.9 and proof discussion, pp. 76–77; §4.2, pp. 101–102",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 2 §6, pp. 24–25",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 580,
+    "id": "qsm-kms-equilibrium-examples",
+    "kind": "B",
+    "category": "quantum-statistical-mechanics",
+    "library": "physics",
+    "title": "Physical-time KMS strip equilibrium condition — Examples",
+    "companion": "qsm-kms-equilibrium",
+    "requires": [
+      "qsm-kms-equilibrium"
+    ],
+    "items": [
+      {
+        "id": "ex-qsm-kms-two-level-gibbs-boundary",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two-level Gibbs state has the physical-time KMS boundary factor",
+        "reference": "research/extended-frameworks-2026-10-03/quantum-statistical-mechanics/workers/infinite-equilibrium/proof-modules.md#i5",
+        "design_state": "Current assigned draft; exact supplier status and disposition are recorded in batch-41 evidence.",
+        "dependency_level": 10,
+        "deps": [
+          "def-qsm-kms-state",
+          "lem-qsm-finite-gibbs-kms",
+          "thm-qsm-finite-kms-gibbs-characterization"
+        ],
+        "dependency_roles": {
+          "def-qsm-kms-state": "mathematical-premise",
+          "lem-qsm-finite-gibbs-kms": "mathematical-premise",
+          "thm-qsm-finite-kms-gibbs-characterization": "mathematical-premise"
+        },
+        "physical_scope": null,
+        "empirical_premises": [],
+        "statement": "Let $\\mathcal H=\\mathbb C^2$ with orthonormal basis $|0\\rangle,|1\\rangle$, and let $H=\\varepsilon|1\\rangle\\langle1|$ for an energy $\\varepsilon>0$ in joules. For $\\beta>0$ in J$^{-1}$, the finite Gibbs state has\n\n$$Z=1+e^{-\\beta\\varepsilon},\\qquad p_0=Z^{-1},\\qquad p_1=e^{-\\beta\\varepsilon}Z^{-1}.$$\n\nDefine $S_+=|1\\rangle\\langle0|$ and $S_-=|0\\rangle\\langle1|$. With $\\alpha_t(X)=e^{itH/\\hbar}Xe^{-itH/\\hbar}$, the correlation for $A=S_-$ and $B=S_+$ is\n\n$$F_{S_-,S_+}(z)=p_0e^{i\\varepsilon z/\\hbar}.$$\n\nAt the upper strip edge $z=t+i\\beta\\hbar$, the exponential contributes $e^{-\\beta\\varepsilon}$, so the boundary value is $p_1e^{i\\varepsilon t/\\hbar}$, exactly the reversed-order Gibbs expectation. The full two-level Gibbs state is KMS for every matrix pair by [[thm-qsm-finite-kms-gibbs-characterization]]; this example checks the physical-time sign and strip-width convention on a nontrivial pair. No measurement or material parameter is being reported.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pieter Naaijkens, Quantum Spin Systems on Infinite Lattices, §3.4, finite Gibbs/KMS discussion, pp. 76–77",
+              "url": "https://arxiv.org/pdf/1311.2717"
+            },
+            {
+              "title": "David Ruelle, Topics in Quantum Statistical Mechanics and Operator Algebras, Chapter 1 §7 and Chapter 2 §6, pp. 13–14 and 24–25",
+              "url": "https://arxiv.org/pdf/math-ph/0107009"
+            }
+          ]
+        },
+        "library": "physics",
+        "strategy": "direct"
+      }
+    ]
+  }
+]

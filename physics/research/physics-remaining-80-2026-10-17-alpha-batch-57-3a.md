@@ -1,0 +1,48 @@
+# Batch 57 Step 3a adjudication
+
+Run: `physics-remaining-80-2026-10-17`. Group: `batch-57`. Scope: batch 57 only.
+
+## Completed first item: Cattaneo risk review
+
+`lem-tgr-cattaneo-stability-causality` (CRITICAL, score 11) is unchanged at raw SHA-256 `5c9d4eb0bd06aa39683cb58a60f68778fe752eaed03f109b32008c34bba74979`, matching both reader snapshots. It owes a risk review, not a carrier decision. All eight proof steps have been checked; the owning contract records the specific complete Alpha risk review.
+
+The local entropy and Lyapunov identities, four-component symmetrizer and damping calculation, longitudinal/transverse eigenvalues, and flux bound are valid for the explicitly stipulated smooth constant-coefficient system. Periodic Fourier recovery follows from the stated product Fejer argument; the unit-width lattice shells have O(n^2) points. The r>3/2 weighted sum and the C|theta_hat|^2 part of the norm yield the explicit temperature estimate. Zero data and zero flux cause no division problem; strict positivity requires the stated strict smallness and forward time. Both speed-threshold directions include equality. Positive C, kappa and tau exclude singular degeneracies. Only the conditional evolution clause carries AC_omega.
+
+Read the complete current draft evolution supplier `items/lem-tgr-constant-linear-energy-causality.md` and exact Statements/Facts of its five Fourier/divergence suppliers. Its modewise matrix exponential, polynomial derivative bounds, periodic construction, inverse transform, contraction and moving-ball argument support the exact use here. The periodic coefficient uniqueness step implicitly uses Fourier uniqueness; the owned consumer explicitly proves Fourier recovery, so there is no missing prerequisite in this use. This does not certify the supplier or any transitive published proof graph. Global evolution remains expressly conditional on its current draft interface.
+
+Sources checked: [Andersson–Comer](https://arxiv.org/pdf/0908.1707), section 4, equations (4.9)–(4.11), PDF page 7, including the footnote restricting constant parameters; [Lander–Andersson](https://arxiv.org/pdf/1804.01520), section 2.1, equations (1)–(3), PDF page 2. Both supply context, not observations or evidence for a particular material. The latter PDF title page identifies S. K. Lander and N. Andersson (the current URL serves v2), whereas the untouched carrier reference title says N. Andersson and G. L. Comer and v1. Owner bibliographic-maintenance alert: reconcile these author/version labels; the URL, equations and conditional mathematical argument remain identifiable. No out-of-route carrier edit was made.
+
+## Radiation decision and risk review
+
+Sole owed obligation: `touched:57:lem-tgr-radiation-state-balance`, verdict `amended_repair`, repair confidence 1. There are no reader/refuter finding or page obligations. The HIGH (score 7) review is complete in the owning contract.
+
+The recovered exact pre-reader archive is `research/physics-remaining-80-2026-10-17-owner-step2-batch56-cycle1/reviewed/lem-tgr-radiation-state-balance.md`, raw SHA-256 `e63e74079f7df6a8b3d7a1de2b794827c4f879241f6d12fbb0530c8c56c5a08f`, matching the pre snapshot. The reader-result item hash `4c2c17398d824abf0eac14e48e8d8afa26400853418b025db73814fe63fcf615` matched the current item on entry. The diff adds the smooth normalized one-parameter family, variation operator, differentiated balance, explicit coefficient matrices and symmetrizer definition, and the normalization/stress first variations in proof 3.2. This is a sound clarification of previously undefined variation notation, classified nonfatal: the original first-order calculation and conclusions were already correct. Historical delta is known from exact bytes.
+
+Every current proof step and all five direct suppliers were independently read: `def-tgr-entropy-only-radiation-state`, `def-schwartz-space-and-its-seminorms`, `def-countable-choice`, `thm-gr-nondegenerate-levi-civita-and-tensor-derivative` (complete Statement), and the complete draft `lem-tgr-constant-linear-energy-causality`. Explicit positive state maps are mutually inverse, epsilon prime equals T times entropy prime, h=Ts>0 and dp/d epsilon=1/3. Metric compatibility and normalization give u_b divergence(T)^b = -D epsilon-h div(u). The chain rule and T>0 therefore give entropy-current conservation without particle-number conservation. At rest, normalization differentiates to -2c delta u^0=0; the stress variations are delta T^00=r, delta T^0i=h_*w^i, delta T^ij=(r/3)delta^ij. With partial_0=c^-1 partial_t these give both stated PDE coefficients. The symmetric product M_*A_j and directional block yield two zero transverse modes and longitudinal speeds +/-c/sqrt(3). B=S=0 meets the draft evolution hypotheses exactly. The global clauses retain their conditional draft status and AC_omega; the local identities use no measured inputs or claim about nature. Positive-temperature and positive-parameter domains exclude every division degeneracy; zero perturbations are admitted. The entropy implication is one-way, with no converse claimed.
+
+A focused render check found nested inline dollar delimiters around j inside the new coefficient-matrix display. Alpha replaced them with ordinary display-math j and synchronized the stale manifest Statement. Final item raw SHA-256: `b42805c55555203d0fcabe0442c256348419df9b19fb10ed9ae2c47ed94db082`. This is the only Alpha item edit. No mathematical formula, proof step, dependency, title or public conclusion was changed by this markup correction. Existing ai-altered provenance remains accurate; no judge stamp existed or was added. The manifest and risk-review bookkeeping make the final carrier differ from both snapshots, hence amended_repair. The mechanical render failure has no separate defect row.
+
+Closed defect ledger row: `physics-remaining-80-2026-10-17-batch57-explicit-linearization`, subject `lem-tgr-radiation-state-balance`, nonfatal missing-hypothesis/definition precision, fixed at `3a-adjudicate`, referenced by the sole decision. It records the retained reader repair and manifest synchronization.
+
+The item/link consumer search found only `pthm-tgr-radiation-local-properties` and its A-page placement. Read the entire physical consumer: F1 uses the local entropy conclusion, F2 the same frozen system, F3 the same spectrum. Proof 1.1 uses U=cu, so g(U,U)=-c^2; proof 2.2 has w=delta U/c=delta u. The newly explicit normalized smooth variation imposes no incompatible assumption. Its Statement and actual uses remain sound; no outside repair or further propagation is needed. Stable IDs and placements are preserved.
+
+Radiation source passages checked: [Gourgoulhon](https://arxiv.org/pdf/gr-qc/0603009), section 4.3 equations (4.10)–(4.14) and sections 5.2–5.3 equations (5.4)–(5.9); [Borghini](https://www.physik.uni-bielefeld.de/~borghini/Teaching/Hydrodynamics22/Hydrodynamics2022.pdf), X.3.2(a), equation (X.22) and its proof, PDF pages 160–161, and XI.2 equations (XI.17)–(XI.19) and following scaling discussion, PDF pages 178–179. The general charge terms are comparison context; the local proof supplies the entropy-only specialization. The sources do not fix a_R or supply empirical validation of the stipulated state maps.
+
+## Dependency status, owner alerts and limits
+
+The owned item-use records remain verified as scoped interface checks in `research/physics-remaining-80-2026-10-17-batch-57.cross-batch-dependencies.json`. Both consume only the exact draft constant-linear supplier. The page edge tgr-mc04 to tgr-mc03 is still recorded open; preserve the original operational observation and its already-appended current-context qualification. The owner context artifact `research/physics-remaining-80-2026-10-17-owner-tgr-batch57-current-page-context.json` reports the historical readiness hold superseded, expressly without scientific approval. This dispatch does not promote that observation into page-wide proof acceptance or close another batch's page obligations. No current in-scope substantial prerequisite blocker was found.
+
+The bibliographic author/version alert above is outside the risk-only carrier's routed edit scope and is referred to the owner. No defective published supplier was established in the inspected uses, so the published-consumer ledger was not changed. Published mathematical suppliers and all other batches remain read-only. No withdrawal, new item, new page, agent, judge cycle, hash stamp or engine gate was initiated.
+
+## Local validation
+
+The required initial risk report identified radiation HIGH 7 and Cattaneo CRITICAL 11. After both complete Alpha reviews, the required `--require-reviewed` rerun passed with zero errors for all four batch items. Final validation results are recorded below after execution.
+
+- Final precheck on both reviewed lemmas: 2 checked, 0 failing (exit 0).
+- Final rendercheck on both lemmas: 2 files, all YAML and KaTeX valid (exit 0). The earlier nested-dollar diagnostic was repaired before this rerun.
+- Strict proof-contract check on the owning batch contract: 4/4 items, 0 errors, 0 warnings (exit 0).
+- Final required risk report with `--require-reviewed`: 4 items, 0 errors (exit 0).
+- After the final item edit, one batched proof-layout invocation on both reviewed lemmas: 2 items, 15 steps, 0 defects (exit 0).
+- Manifest Statement equals the final radiation carrier; decisions JSON has exactly the sole scope-owed obligation. Ledger append succeeded and regenerated its view.
+
+Local review is complete. Owner follow-up retains the bibliographic-maintenance alert and the separately owned page-edge disposition. Engine hash stamping and the gate battery remain engine work.

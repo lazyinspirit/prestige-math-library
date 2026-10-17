@@ -1,0 +1,43 @@
+// Owner current readiness after a released proof-only repair. No gate/audit.
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {readItem} from '../../tools/physics-support/physics-content.mjs';
+import {loadStep1Record,itemInputPaths} from '../../tools/physics-support/frontier-snapshot.mjs';
+import {recordStep1Batch,step1Decision} from '../../tools/physics-support/step1-decisions.mjs';
+const root=fileURLToPath(new URL('../',import.meta.url)),run='physics-remaining-80-2026-10-17';
+const out=join(root,'research',run+'-owner-noether-readiness-10'),json=p=>JSON.parse(readFileSync(p)),sha=b=>createHash('sha256').update(b).digest('hex');
+if(existsSync(join(out,'completion.json')))throw Error('Already recorded; preserve history');
+const reportPath=join(root,'research',run+'-owner-noether-local-tests-round1.json'),report=json(reportPath);
+for(const b of [report.source_before,report.source_after,report.worksheet_before,report.worksheet_after,...report.support])if(sha(readFileSync(join(root,b.path)))!==b.raw_sha256)throw Error('Released binding changed '+b.path);
+const before=readItem(join(root,report.source_before.path)),after=readItem(join(root,report.source_after.path));
+if(before.raw.slice(0,before.raw.indexOf('\n---',4))!==after.raw.slice(0,after.raw.indexOf('\n---',4)))throw Error('Frontmatter changed');
+const statement=x=>x.body.split('## Statement\n')[1].split('\n## Facts & Assumptions')[0];
+if(statement(before)!==statement(after))throw Error('Statement changed');
+const oldContract=json(join(root,report.worksheet_before.path)),newContract=json(join(root,report.worksheet_after.path));
+if(!oldContract.contracts?.[report.subject]||!newContract.contracts?.[report.subject])throw Error('Unknown worksheet shape');
+delete oldContract.contracts[report.subject];delete newContract.contracts[report.subject];
+if(JSON.stringify(oldContract)!==JSON.stringify(newContract))throw Error('Unrelated worksheet mutation');
+const state=json(join(root,'.physics-autopilot',run,'state.json'));
+const stable=new Set(Object.values(state.dispatches).filter(x=>x.stage==='1-scaffold'&&x.endedAt&&x.lastExitOk===true).map(x=>String(x.covers[0])));
+const s=loadStep1Record(root,run),records=[],subjects=[];
+for(const [id,home] of s.items){
+ if(!stable.has(String(home.page.batch)))continue;
+ subjects.push(id);const path=join(root,'research',run+'-step1-'+id+'.json'),old=json(path),decision=step1Decision(s,id);
+ if(old.decision!=='ready')throw Error('Unresolved escalation '+id);
+ if(decision.closed)continue;
+ if(!itemInputPaths(s,id,old.dependencies).includes(join(root,'items',report.subject+'.md')))throw Error('Unrelated stale input '+id);
+ const source=readItem(join(root,'items',id+'.md')),claim=home.item;
+ if(['id','kind','title','domain','dependency_level'].some(k=>source[k]!==claim[k])||JSON.stringify([...source.deps].sort())!==JSON.stringify([...claim.deps].sort()))throw Error('Metadata mismatch '+id);
+ records.push({item:id,decision:'ready',dependencies:old.dependencies,reason:'Current native readiness after exact proof-only Noether local-test repair; full Statement and frontmatter unchanged. Scientific evidence: research/'+run+'-owner-noether-local-tests-round1.json. Existing authoring rationale retained: '+old.reason+'. No new independent review or gate acceptance.'});
+}
+if(!records.some(x=>x.item===report.subject))throw Error('Repaired subject not selected');
+records.sort((a,b)=>s.items.get(a.item).item.dependency_level-s.items.get(b.item).item.dependency_level);
+mkdirSync(join(out,'before'),{recursive:true});
+for(const row of records)writeFileSync(join(out,'before',row.item+'.json'),readFileSync(join(root,'research',run+'-step1-'+row.item+'.json')));
+writeFileSync(join(out,'request.json'),JSON.stringify({run,at:new Date().toISOString(),scientific_report_sha256:sha(readFileSync(reportPath)),records,stable_batches:[...stable],stable_subjects:subjects.length},null,2)+'\n');
+const rows=recordStep1Batch(root,{run,records,owner:true}),fresh=loadStep1Record(root,run);
+for(const id of subjects)if(!step1Decision(fresh,id).closed)throw Error('Fresh stable native readiness open '+id);
+const completion={run,at:new Date().toISOString(),authoring_readiness_only:true,proof_only_repair:report.subject,rebound_subjects:rows.length,verified_stable_subjects:subjects.length,verified_stable_batches:stable.size,all_fresh_stable_records_closed:true};
+writeFileSync(join(out,'completion.json'),JSON.stringify(completion,null,2)+'\n');console.log(JSON.stringify(completion));

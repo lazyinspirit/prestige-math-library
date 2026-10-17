@@ -1,0 +1,48 @@
+---
+id: rem-emg-maximal-is-not-complete
+kind: remark
+title: "Maximality of the Einstein–Maxwell GHD does not assert geodesic completeness"
+status: draft
+origin: pipeline
+domain: mathematics
+library: mathematics
+dependency_level: 9
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+deps:
+  - def-gr-development-and-data-fixing-isometry
+  - thm-emg-sourcefree-smooth-maximal-development
+  - thm-gr-smooth-maximal-globally-hyperbolic-development
+dependency_roles:
+  def-gr-development-and-data-fixing-isometry: mathematical-premise
+  thm-emg-sourcefree-smooth-maximal-development: mathematical-premise
+  thm-gr-smooth-maximal-globally-hyperbolic-development: mathematical-premise
+sources:
+  references:
+    - title: "J. Sbierski, On the Existence of a Maximal Cauchy Development for the Einstein Equations — a Dezornification, arXiv:1309.7591v3 (2015), Definitions and Theorems 2.6–2.8, printed pp. 10–12, and complete proofs §§3.1–3.3, printed pp. 12–24."
+      url: "https://arxiv.org/pdf/1309.7591"
+    - title: "M. Alcubierre, J. C. Degollado and M. Salgado, The Einstein-Maxwell system in 3+1 form and initial data for multiple charged black holes, arXiv:0907.1151v2 (2009), §II.C, printed pp. 8–9."
+      url: "https://arxiv.org/pdf/0907.1151"
+verification:
+  precheck: pending
+---
+
+## Statement
+
+For the maximal smooth globally hyperbolic development in [[thm-emg-sourcefree-smooth-maximal-development]], maximality means that every development of the same complete source-free data admits a data-fixing development embedding into it, in the sense of [[def-gr-development-and-data-fixing-isometry]]. Geodesic completeness means that every inextendible affinely parametrized geodesic has parameter domain all of $\mathbb R$. The maximality conclusion by itself asserts no geodesic-completeness property. This remark does not claim that a particular Einstein–Maxwell maximal development is geodesically incomplete.
+
+## Facts & Assumptions
+
+**Given:** The maximal development and the definitions of development embedding and maximality.
+
+[F1] [[def-gr-development-and-data-fixing-isometry]] defines maximality solely by the existence of a data-fixing development embedding from every development of the same data. Its definition imposes no condition on affine parameters of geodesics.
+
+[F2] [[thm-emg-sourcefree-smooth-maximal-development]] supplies the maximal smooth globally hyperbolic Einstein–Maxwell development within that definition. The original source [[thm-gr-smooth-maximal-globally-hyperbolic-development]] is Sbierski's smooth global gluing theorem after its local model obligations are discharged; Sbierski's statement has no geodesic-completeness conclusion.
+
+## Proof
+
+1.1 By [F1], the maximality predicate quantifies over extensions that are themselves developments of the same initial data and asks for data-fixing embeddings. Its clauses do not quantify over geodesics, affine parameters, or endpoint behavior. [given, F1]
+
+2.1 Geodesic completeness, as defined in the Statement, is a separate assertion about the parameter domain of every inextendible affinely parametrized geodesic. Neither [F1]'s maximality definition nor the conclusion [F2] supplies such an assertion. Therefore maximality alone yields no completeness conclusion; because no explicit incomplete Einstein–Maxwell development is constructed here, none is claimed. [step 1.1, F1, F2, algebra] ∎

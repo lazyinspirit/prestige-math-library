@@ -1,0 +1,825 @@
+[
+  {
+    "order": 493,
+    "id": "csm-full-phase-local-equivalence",
+    "kind": "A",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Conditional entropy chain and disjoint-block bounds",
+    "companion": "csm-full-phase-local-equivalence-examples",
+    "scaffold": "research/plan-classical-statistical-mechanics-track.md",
+    "requires": [
+      "csm-gibbs-lattice",
+      "td-math-interacting-ensemble-geometry",
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "stationary-markov-chains-and-ergodic-limits"
+    ],
+    "items": [
+      {
+        "id": "lem-csm-kl-chain-disjoint",
+        "title": "Conditional entropy chain and disjoint-block bounds",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-borel-space",
+          "def-tdmath-finite-region-relative-entropy",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-standard-borel-space": "mathematical-premise",
+          "def-tdmath-finite-region-relative-entropy": "mathematical-premise",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "statement": "Assume AC. Let $X_1,\\ldots,X_m$ be standard-Borel spaces, let $Q_i$ be probability measures on $X_i$, and let $P$ be a probability on $\\prod_{i=1}^mX_i$. Write $P_i$ for its $i$th marginal and use the directional extended relative entropy $D(\\cdot\\Vert\\cdot)$ of [[def-tdmath-finite-region-relative-entropy]]. Then\n$$D(P\\Vert Q_1\\otimes\\cdots\\otimes Q_m)\\geq\\sum_{i=1}^mD(P_i\\Vert Q_i).$$\nIf the left side is finite, the conditional chain rule gives the stronger equality\n$$D(P\\Vert\\textstyle\\bigotimes_iQ_i)=D(P_1\\Vert Q_1)+\\sum_{i=2}^m E_P\\,D(P_{X_i\\mid X_1,\\ldots,X_{i-1}}\\Vert Q_i),$$\nand each conditional increment is at least $D(P_i\\Vert Q_i)$. If the left side is infinite, the displayed inequality is understood in the extended order and is automatic. This applies to finitely many disjoint spatial blocks after their particle counts and positions have been fixed; zero-occupancy blocks contribute zero.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C1",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Section 2.3, printed p.184 / PDF viewer p.8: relative entropy and conditional chain rule; complete paper inspected."
+            },
+            {
+              "title": "H.-O. Georgii, Probabilistic aspects of entropy, in Entropy",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/Dresden.pdf",
+              "locator": "Sections 3–4, PDF viewer pp.5–6: relative entropy and its variational formula; Section 6, PDF viewer pp.10–12: specific entropy density and conditioning."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-csm-gaussian-mark-moments",
+        "title": "Gaussian mark normalization, moments, and exponential controls",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "thm-dominated-convergence",
+          "thm-gaussian-integral",
+          "thm-integration-by-parts",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-gaussian-integral": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "statement": "Let $d\\ge1$, mass $m>0$ in kilograms, reference momentum $p_*>0$ in kg m s$^{-1}$, energy scale $E_0>0$ in joules, and dimensionless inverse temperature $b>0$. On $\\mathbb R^d$ use $r(dp)=dp/p_*^d$ and $K(p)=|p|^2/(2mE_0)$. Then\n$$\\kappa_b:=\\int e^{-bK(p)}r(dp)=\\left(\\frac{2\\pi mE_0}{bp_*^2}\\right)^{d/2},\\qquad \\nu_b(dp)=\\kappa_b^{-1}e^{-bK(p)}r(dp)$$\nis a probability with $E_{\\nu_b}p_i=0$, $E_{\\nu_b}p_ip_j=(mE_0/b)\\delta_{ij}$, and $E_{\\nu_b}K=d/(2b)$. For each $g$ among $K,p_i,p_ip_j$, and tilt parameter $t$ in reciprocal units to $g$, the centered logarithmic moment-generating function\n$$c_g(t):=\\log E_{\\nu_b}\\exp(t(g-E_{\\nu_b}g))$$\nis finite and twice continuously differentiable on a neighborhood of $0$, with $c_g(0)=c'_g(0)=0$. In particular $c_g(t)=O(t^2)$ as $t\\to0$. Here $p_i$ has momentum units, $K$ is energy in units of $E_0$, and $b=E_0/(k_BT)$ when physical temperature $T$ is used.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C0",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "§4.2, printed pp.192–198 / PDF viewer pp.220–226, complete classical phase-space measure and Gaussian momentum factors."
+            },
+            {
+              "title": "David Tong, Statistical Physics, complete author-hosted lecture notes",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+              "locator": "§§1.2–1.3, canonical phase-space density and Maxwell momentum law."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-csm-information-contraction-pinsker",
+        "title": "Measurable information contraction and Pinsker bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-kullback-leibler-divergence",
+          "def-total-variation-distance-for-probability-laws",
+          "lem-csm-kl-chain-disjoint",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules",
+          "thm-pinsker"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-kullback-leibler-divergence": "mathematical-premise",
+          "def-total-variation-distance-for-probability-laws": "mathematical-premise",
+          "lem-csm-kl-chain-disjoint": "mathematical-premise",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules": "mathematical-premise",
+          "thm-pinsker": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "statement": "Assume AC. Let $P,Q$ be probability measures on a measurable space and let $T$ be a measurable map to another measurable space. Then\n$$D(T_*P\\Vert T_*Q)\\leq D(P\\Vert Q),\\qquad \\|P-Q\\|_{\\rm TV}:=\\sup_A|P(A)-Q(A)|\\leq\\sqrt{D(P\\Vert Q)/2}.$$\nThe entropy convention is the directional KL definition of [[def-kullback-leibler-divergence]], and the total-variation convention is the event-supremum convention of [[def-total-variation-distance-for-probability-laws]]. The inequality remains valid when $D=+\\infty$.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C1",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Section 2.3, printed p.184 / PDF viewer p.8: entropy variational identity and data processing."
+            },
+            {
+              "title": "Philippe Rigollet and Jan-Christian Hütter, High-Dimensional Statistics: Lecture Notes, Chapter 4, Lemma 4.8",
+              "url": "https://arxiv.org/pdf/2310.19244v1",
+              "locator": "Full 168-page PDF retrieved; Chapter 4 §4.2, Lemma 4.8 and its proof inspected. That lemma gives a weaker constant; the current imported theorem supplies the exact event-supremum convention and coefficient used here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-csm-full-marked-model",
+        "title": "Interacting marked phase-space and reference measures",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-stable-superstable-continuum-interaction",
+          "def-csm-statistical-state-observable",
+          "def-tdmath-poisson-configuration-reference",
+          "def-tdmath-superstable-regular-interaction",
+          "lem-csm-gaussian-mark-moments",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-stable-superstable-continuum-interaction": "mathematical-premise",
+          "def-csm-statistical-state-observable": "mathematical-premise",
+          "def-tdmath-poisson-configuration-reference": "mathematical-premise",
+          "def-tdmath-superstable-regular-interaction": "mathematical-premise",
+          "lem-csm-gaussian-mark-moments": "mathematical-premise",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "statement": "Assume AC. Fix $d\\geq1$ and let $\\phi:\\mathbb R^d\\to\\mathbb R\\cup\\{+\\infty\\}$ be the numerical even Borel pair potential. Assume the stability, cell-superstability, lower-regularity, and decreasing-integrable-tail conditions of [[def-csm-stable-superstable-continuum-interaction]], with its fixed cell side $\\ell$, and the superstable regular interaction, unit-coordinate, and periodic-image conventions of [[def-tdmath-superstable-regular-interaction]]. These are model hypotheses; the definitions do not prove that a particular material satisfies them. Use the finite-region phase-space and statistical-state conventions of [[def-csm-statistical-state-observable]].\n\nLet $E_0>0$ joules be the energy unit, $\\ell_0>0$ metres the length unit, $m>0$ kilograms the particle mass, and $p_*>0$ kg m s$^{-1}$ the momentum reference. Positions $x=q/\\ell_0$ are dimensionless numerical coordinates; write $V_L=L^d$ for numerical volume. The dimensionless positional energy $U_{L,bc}$ is the physical pair energy divided by $E_0$, with $bc\\in\\{\\mathrm{free},\\mathrm{per}\\}$ and the exact image convention above. If $T>0$ kelvin, put $\\beta_{\\rm phys}=1/(k_BT)$ in J$^{-1}$ and $b=\\beta_{\\rm phys}E_0=E_0/(k_BT)>0$.\n\nLet $Q_L$ be the unit-intensity Poisson probability on positional configurations in $\\Lambda_L=[0,L)^d$, defined by [[def-tdmath-poisson-configuration-reference]]. Its $N$-particle conditional law $Q_{L,N}$ is uniform on the unordered simple $N$-point configurations; in labelled coordinates it is $L^{-dN}dx_1\\cdots dx_N$ on the no-collision set. On an $N$-point configuration, attach one momentum $p_x\\in\\mathbb R^d$ to each point and use the symmetric product reference $r^{\\otimes q}$ with $r(dp)=dp/p_*^d$. The finite phase reference is\n$$R_{L,N}(dq,dp):=Q_L(dq)\\,r^{\\otimes q}(dp)\\,1_{\\{N(q)=N\\}}.$$\nIt is sigma-finite; the factor $e^{-V_L}/N!$ from the Poisson sector is retained. In physical coordinates the corresponding one-particle product scale is $h_{\\rm ref}^d=\\ell_0^dp_*^d$, an action to the power $d$; it is a reference convention, not a derived quantum constant.\n\nFor a marked configuration define the total dimensionless energy\n$$\\mathcal H_{L,bc}(q,p)=U_{L,bc}(q)+\\sum_{x\\in q}K(p_x),\\qquad K(p)=\\frac{|p|^2}{2mE_0}.$$\nFor $b>0$, [[lem-csm-gaussian-mark-moments]] gives $\\kappa_b=\\int e^{-bK}r(dp)=(2\\pi mE_0/(bp_*^2))^{d/2}$ and the probability kernel $\\nu_b(dp)=\\kappa_b^{-1}e^{-bK(p)}r(dp)$. Whenever the positional canonical partition is finite and positive, nonnegative product integration [[thm-tonelli-theorem-for-sigma-finite-product-spaces]] gives exact identities\n$$Z^{\\rm ph}_{Q,L,N,bc}(b)=\\int e^{-b\\mathcal H_{L,bc}}dR_{L,N}=\\kappa_b^N Z^{\\rm pos}_{Q,L,N,bc}(b),\\qquad C^{\\rm ph}_{L,N,bc}=C^{\\rm pos}_{L,N,bc}\\,\\nu_b^{\\otimes q}.$$\nHere $Z^{\\rm pos}_{Q,L,N,bc}=E_{Q_L}[1_{\\{N(q)=N\\}}e^{-bU_{L,bc}}]$ and the canonical probabilities are the normalized respective integrands. Under a full grand preparation of activity $z_{\\rm ph}$, integrating each momentum changes the positional activity to $z=z_{\\rm ph}\\kappa_b$; thus a positional activity $z=e^\\alpha$ corresponds to $z_{\\rm ph}=e^\\alpha/\\kappa_b$. These are exact definitions and normalizations; they do not assert dynamical equilibration or finite-volume grand convergence. For periodic boundary conditions, simultaneous translation of all positions modulo the period preserves $R_{L,N}$ and $\\mathcal H_{L,\\mathrm{per}}$: the conditional position law is uniform on the torus, the mark reference is invariant under relabelling points, and the image energy depends only on pair displacements. Hence normalized canonical and finite band restrictions are torus-translation invariant.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C0",
+        "design_state": "draft-authoring",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+              "locator": "Sections 2–3, printed pp.172–178 / PDF pp.2–8, positional finite-volume reference, pair energy and superstability."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "§§4.2–4.5, printed pp.192–215 / PDF viewer pp.220–243, classical microcanonical, canonical, and grand-canonical phase references."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-csm-marked-periodic-continuation",
+        "title": "Marked periodic continuation and local restriction",
+        "kind": "definition",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-countable-choice",
+          "def-csm-full-marked-model",
+          "def-tdmath-poisson-configuration-reference",
+          "def-tdmath-periodized-empirical-field"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-tdmath-poisson-configuration-reference": "mathematical-premise",
+          "def-tdmath-periodized-empirical-field": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C0",
+        "design_state": "draft-authoring",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "statement": "Let $\\Omega$ be the positional configuration space of [[def-tdmath-poisson-configuration-reference]]. The **marked configuration space** $\\Omega^{\\rm mark}$ consists of marked point sets $\\xi\\subseteq\\mathbb R^d\\times\\mathbb R^d$ with spatial projection $q=\\{x\\in\\mathbb R^d:\\exists p\\in\\mathbb R^d,\\ (x,p)\\in\\xi\\}$ that is simple and locally finite, and with exactly one mark $p_x$ paired to each $x\\in q$. Its sigma-algebra is generated by the marked counts $N_{A\\times C}(\\xi)=\\#\\{(x,p)\\in\\xi:x\\in A,\\ p\\in C\\}$ for bounded Borel $A\\subseteq\\mathbb R^d$ and Borel $C\\subseteq\\mathbb R^d$. The positional projection is $\\pi(\\xi)=q\\in\\Omega$. For a bounded Borel set $\\Delta$, the **marked local restriction** is $\\xi_\\Delta=\\{(x,p)\\in\\xi:x\\in\\Delta\\}$ with the induced count sigma-algebra; write $N_\\Delta(\\xi)=\\#\\xi_\\Delta$. A **marked-local observable on $\\Delta$** is a real measurable function of $\\xi_\\Delta$; it is bounded when its supremum norm is finite.\n\nLet $d\\geq1$, $L>0$, and $\\Lambda_L=[0,L)^d$. A finite marked configuration consists of a finite simple set of positions $q\\subseteq\\Lambda_L$ and a mark map $p:q\\to\\mathbb R^d$, as in [[def-csm-full-marked-model]]. Its **marked periodic continuation** is\n$$\\omega^{\\mathrm{per}}_{L,q,p}:=\\{(x+Lk,p_x):x\\in q,\\ k\\in\\mathbb Z^d\\}.$$\nThe spatial positions in this set are distinct: if $x+Lk=y+Lj$ for $x,y\\in[0,L)^d$, then coordinatewise $x-y=L(j-k)$ forces $j=k$ and $x=y$. Every bounded spatial region meets finitely many lattice translates of the finite set $q$, so the continuation has a locally finite spatial projection.\n\nFor a bounded Borel set $\\Delta\\subseteq\\mathbb R^d$, define its **marked local restriction** by\n$$\\omega^{\\mathrm{per}}_{L,q,p}|_\\Delta:=\\{(y,p_x)\\in\\omega^{\\mathrm{per}}_{L,q,p}:y\\in\\Delta\\}.$$\nThis is an element of $\\Omega^{\\rm mark}$, with the induced sigma-algebra of marked counts above. If $\\Delta\\subseteq\\Lambda_L$, the restriction is exactly the original marked points with positions in $\\Delta$.",
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Section 2.2, periodic continuation and marked empirical fields; the finite marked restriction is defined explicitly here."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-csm-gaussian-marked-lift-existence",
+        "title": "Existence of the independent Gaussian-marked positional lift",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-full-marked-model",
+          "def-csm-marked-periodic-continuation",
+          "def-tdmath-poisson-configuration-reference",
+          "lem-csm-gaussian-mark-moments",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-csm-marked-periodic-continuation": "mathematical-premise",
+          "def-tdmath-poisson-configuration-reference": "mathematical-premise",
+          "lem-csm-gaussian-mark-moments": "mathematical-premise",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces": "mathematical-premise",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "statement": "Assume AC. Let $P$ be any probability law on the simple locally finite positional configuration space $\\Omega$ of [[def-tdmath-poisson-configuration-reference]], and let $\\nu$ be a probability on the momentum mark space $\\mathbb R^d$. Use the marked configuration space $\\Omega^{\\rm mark}$ and local restrictions $\\xi_\\Delta$ of [[def-csm-marked-periodic-continuation]]. Define translations by $T_yq=\\{x+y:x\\in q\\}$ and $T_y^{\\rm mark}\\xi=\\{(x+y,p):(x,p)\\in\\xi\\}$. Then there is a unique probability law $P^{\\rm mark}$ on $\\Omega^{\\rm mark}$ whose positional projection is $P$ and whose marks, conditional on the entire positional configuration, are independent with common law $\\nu$. If $P$ is translation invariant, meaning $(T_y)_\\#P=P$ for every $y\\in\\mathbb R^d$, then $(T_y^{\\rm mark})_\\#P^{\\rm mark}=P^{\\rm mark}$ for every $y$. For the Gaussian $\\nu_b$ of [[def-csm-full-marked-model]], this is the independent Gaussian-marked positional lift. This is a mathematical marking construction, not a physical preparation or a convergence result.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C0",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Sections 2.1–2.2, PDF viewer pp.6–7, marked point fields and periodic empirical fields; the present lift is constructed explicitly below."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "Section 4.2, printed pp.192–198 / PDF viewer pp.220–226, classical marked phase-space coordinates; context only."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-csm-total-canonical-window",
+        "title": "Total-energy concentration and controlled canonical windows",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-csm-full-marked-model",
+          "def-csm-stable-superstable-continuum-interaction",
+          "def-hahn-banach-extension-principle-relative",
+          "def-tdmath-superstable-regular-interaction",
+          "def-ultrafilter-extension-principle",
+          "lem-csm-gaussian-mark-moments",
+          "thm-tdmath-periodic-fixed-n-limit"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-csm-stable-superstable-continuum-interaction": "mathematical-premise",
+          "def-hahn-banach-extension-principle-relative": "mathematical-premise",
+          "def-tdmath-superstable-regular-interaction": "mathematical-premise",
+          "def-ultrafilter-extension-principle": "mathematical-premise",
+          "lem-csm-gaussian-mark-moments": "mathematical-premise",
+          "thm-tdmath-periodic-fixed-n-limit": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "statement": "Assume AC, the ultrafilter extension principle, DC, and HB. Use the model and dimensionless energy $\\mathcal H_{L,\\mathrm{per}}$ of [[def-csm-full-marked-model]]. Let $L_n\\to\\infty$, $V_n=L_n^d$, and integers $N_n$ satisfy $N_n/V_n\\to\\rho>0$, where $\\rho$ is an interior attainable density for the positional canonical rate. Fix $b>0$. Assume $F_b(\\rho)$ is the periodic exact-particle log-partition rate supplied by [[thm-tdmath-periodic-fixed-n-limit]] for every $b'$ in a neighborhood of $b$, and is differentiable at $b$. Write $C_n^{\\rm ph}$ for the full fixed-$N_n$ canonical law, and define\n$$e_b(\\rho)=-\\partial_bF_b(\\rho)+\\frac{d\\rho}{2b}.$$\nThen, for each fixed $\\varepsilon>0$, there exist $c_\\varepsilon>0$ and $n_0$ such that\n$$C_n^{\\rm ph}\\!\\left(\\left|\\mathcal H_{L_n,\\mathrm{per}}/V_n-e_b(\\rho)\\right|>\\varepsilon\\right)\\le 2e^{-c_\\varepsilon V_n}\\quad(n\\ge n_0).$$\nConsequently there is a nonincreasing sequence $\\delta_n\\downarrow0$ for which the full phase band\n$$A_n=\\{N=N_n,\\ |\\mathcal H_{L_n,\\mathrm{per}}/V_n-e_b(\\rho)|\\le\\delta_n\\}$$\nhas $C_n^{\\rm ph}(A_n)\\to1$. It has positive finite phase-reference measure for all sufficiently large $n$. This constructs a controlled shrinking window; it makes no claim about every prescribed shell width or an exact energy surface.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C2",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+              "locator": "Sections 2–3, printed pp.172–178 / PDF pp.2–8, canonical energy and pressure conventions."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "§§4.2 and 4.4, printed pp.192–198 and 205–210 / PDF viewer pp.220–226 and 233–238: phase-space shells and canonical partition functions."
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-csm-fullphase-interacting-preparations",
+        "title": "Classical full-phase interacting ensemble preparations",
+        "kind": "postulate",
+        "domain": "physics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-csm-full-marked-model",
+          "post-csm-counting-and-physical-observables",
+          "post-csm-canonical-preparation",
+          "post-csm-grand-preparation",
+          "thm-csm-total-canonical-window"
+        ],
+        "dependency_roles": {
+          "def-csm-full-marked-model": "formulation-prerequisite",
+          "post-csm-counting-and-physical-observables": "formulation-prerequisite",
+          "post-csm-canonical-preparation": "formulation-prerequisite",
+          "post-csm-grand-preparation": "formulation-prerequisite",
+          "thm-csm-total-canonical-window": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "statement": "Fix the model, physical reference conventions, mass, potential and energy window specified by [[def-csm-full-marked-model]] and [[thm-csm-total-canonical-window]]. Identify the action reference a_0 of [[post-csm-counting-and-physical-observables]] with h_ref=ℓ_0p_* from the marked model. Adopt the following alternative preparations whenever their normalizations are finite and positive:\n\n1. At fixed exact particle number $N$, controls and $T>0$, use the canonical density proportional to $e^{-\\beta H}$ relative to the declared phase reference, as in [[post-csm-canonical-preparation]].\n2. For a sequence satisfying all hypotheses of [[thm-csm-total-canonical-window]]—including AC, the ultrafilter extension principle, DC, HB, an interior attainable density, the periodic exact-particle log-rate hypothesis near $b$, and differentiability at $b$—at fixed exact $N_n$ use the uniform full-phase reference law restricted to its constructed band $A_n$. “Uniform” means normalized restriction of that finite reference measure; it is an energy-window preparation, not a zero-width surface measure. This postulate makes no existence claim for that specific band when those theorem hypotheses fail.\n3. For particle exchange, use the countable-sector grand preparation of [[post-csm-grand-preparation]]. Its full dimensionless activity is the fugacity $z_{\\rm ph}:=e^{\\beta_{\\rm phys}\\mu}>0$, where $\\beta_{\\rm phys}=1/(k_BT)$ in J$^{-1}$ and the chemical potential $\\mu$ is in J per particle. When matching positional activity $z=e^\\alpha$ at inverse temperature $b$, choose $z_{\\rm ph}=z/\\kappa_b$, as in [[def-csm-full-marked-model]].\n\nThese laws are adopted statistical preparations. They do not follow from Hamiltonian energy conservation, do not assert that any isolated dynamics reaches these distributions, and do not encode an experimental observation. The band sequence is the particular controlled shrinking window constructed conditionally by [[thm-csm-total-canonical-window]].",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C7",
+        "design_state": "draft-authoring",
+        "physical_scope": "Adopted classical massive-particle preparations for a specified superstable regular pair model; no assertion of dynamical equilibration, measured accuracy, or finite-volume grand convergence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete author-hosted lecture notes",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+              "locator": "§§1.2–1.4: microcanonical, canonical, and grand-canonical ensembles as statistical preparations."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "§§4.2, 4.4, and 4.5, printed pp.192–198, 205–215 / PDF viewer pp.220–226, 233–243."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-csm-uniform-phase-shell-entropy",
+        "title": "Full uniform phase shell has vanishing specific canonical KL",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-full-marked-model",
+          "def-tdmath-finite-region-relative-entropy",
+          "lem-csm-kl-chain-disjoint",
+          "thm-csm-total-canonical-window"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-tdmath-finite-region-relative-entropy": "mathematical-premise",
+          "lem-csm-kl-chain-disjoint": "mathematical-premise",
+          "thm-csm-total-canonical-window": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "statement": "Assume AC and the hypotheses and notation of [[thm-csm-total-canonical-window]]. Let $R_n=R_{L_n,N_n}$ be the finite phase reference of [[def-csm-full-marked-model]], let $A_n$ be the constructed band, and set $M_n^{\\rm ph}(E)=R_n(E\\cap A_n)/R_n(A_n)$. Let $C_n^{\\rm ph}$ be the full fixed-$N_n$ canonical probability. Then $D_n=D(M_n^{\\rm ph}\\Vert C_n^{\\rm ph})$ satisfies $D_n/V_n\\to0$. This is a mathematical statement about a normalized measure restriction; it does not assert $D_n\\to0$ or global total-variation convergence.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C2",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Sections 2.3–3, printed pp.184–190 / PDF viewer pp.8–14: finite-region entropy and conditional laws."
+            },
+            {
+              "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+              "locator": "Sections 3–5, printed pp.178–187 / PDF pp.8–17: canonical entropy-energy bounds and energy windows."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-csm-full-shell-positional-minimizer",
+        "title": "Full phase shell marginal satisfies the positional variational bound",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel",
+          "lem-borel-subspaces-admit-polish-presentations",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-axiom-of-choice",
+          "def-dependent-choice",
+          "def-csm-full-marked-model",
+          "def-tdmath-local-tame-topology",
+          "def-tdmath-poisson-configuration-reference",
+          "thm-tdmath-poisson-reference-count-properties",
+          "def-tdmath-superstable-regular-interaction",
+          "def-hahn-banach-extension-principle-relative",
+          "lem-tdmath-integrable-tail-diagonal-gap",
+          "lem-tdmath-superstable-cell-energy-bound",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules",
+          "thm-csm-uniform-phase-shell-entropy",
+          "thm-tdmath-canonical-grand-duality",
+          "thm-tdmath-continuum-variational-pressure",
+          "thm-tdmath-local-tame-entropy-compactness",
+          "thm-tdmath-periodic-fixed-n-limit",
+          "thm-tdmath-specific-entropy-density",
+          "thm-csm-total-canonical-window",
+          "def-tdmath-periodized-empirical-field",
+          "lem-tdmath-periodized-empirical-field-stationary-density",
+          "def-ultrafilter-extension-principle"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-tdmath-local-tame-topology": "mathematical-premise",
+          "def-tdmath-poisson-configuration-reference": "mathematical-premise",
+          "thm-tdmath-poisson-reference-count-properties": "mathematical-premise",
+          "def-tdmath-superstable-regular-interaction": "mathematical-premise",
+          "def-hahn-banach-extension-principle-relative": "mathematical-premise",
+          "lem-tdmath-integrable-tail-diagonal-gap": "mathematical-premise",
+          "lem-tdmath-superstable-cell-energy-bound": "mathematical-premise",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules": "mathematical-premise",
+          "thm-csm-uniform-phase-shell-entropy": "mathematical-premise",
+          "thm-tdmath-canonical-grand-duality": "mathematical-premise",
+          "thm-tdmath-continuum-variational-pressure": "mathematical-premise",
+          "thm-tdmath-local-tame-entropy-compactness": "mathematical-premise",
+          "thm-tdmath-periodic-fixed-n-limit": "mathematical-premise",
+          "thm-tdmath-specific-entropy-density": "mathematical-premise",
+          "thm-csm-total-canonical-window": "mathematical-premise",
+          "def-tdmath-periodized-empirical-field": "mathematical-premise",
+          "lem-tdmath-periodized-empirical-field-stationary-density": "mathematical-premise",
+          "def-ultrafilter-extension-principle": "mathematical-premise",
+          "lem-finite-products-of-standard-borel-spaces-are-standard-borel": "mathematical-premise",
+          "lem-borel-subspaces-admit-polish-presentations": "mathematical-premise",
+          "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces": "mathematical-premise",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique": "mathematical-premise"
+        },
+        "dependency_level": 5,
+        "statement": "Assume AC, the ultrafilter extension principle, DC and HB, the exact superstable regular pair interaction and periodic-image convention of [[def-csm-full-marked-model]], and integer side lengths $L_n\\to\\infty$ with exact particle numbers $N_n/V_n\\to\\rho>0$ at an interior attainable density. Fix $b>0$. Assume the positional canonical log rate is $F_b(\\rho)$, and choose finite $\\alpha$ with\n$$P_{\\rm Leb}(α,b)=F_b(ρ)+αρ,$$\nwhere $P_{\\rm Leb}$ is the grand pressure per numerical volume with Lebesgue $1/N!$ normalization. Let the positional grand variational minimizer of [[thm-tdmath-continuum-variational-pressure]] at activity $\\exp(\\alpha)$ and inverse temperature $b$ be the singleton $\\{P_*\\}$. Let $R_n=R_{L_n,N_n}$ be the phase reference of [[def-csm-full-marked-model]], let $A_n$ be the band of [[thm-csm-total-canonical-window]], set $M_n^{\\rm ph}(E)=R_n(E\\cap A_n)/R_n(A_n)$, and let $B_n$ be its positional marginal. For any local-tame test $f$, write $B_n[f]=E_{B_n}f(\\omega^{(L_n)})$ and $C_n^{\\rm pos}[f]=E_{C_n^{\\rm pos}}f(\\omega^{(L_n)})$, where $\\omega^{(L_n)}$ is the periodic continuation. Let $\\bar B_n$ be the barycenter of $R_{L_n,\\omega}$ under $B_n$. Then $\\bar B_n$ converges to $P_*$ in $\\tau_L$, equivalently $B_n[f]\\to P_*(f)$ for every local-tame $f$; also $C_n^{\\rm pos}[f]\\to P_*(f)$ for every such $f$. The periodized empirical fields of the exact-$N_n$ canonical laws converge in probability in $\\tau_L$ to $P_*$ by [[thm-tdmath-periodic-fixed-n-limit]], and $P_*$ has intensity $\\rho$. Here $P_*$ is an infinite-volume positional variational state; no finite-volume grand-canonical local convergence or DLR identification is asserted.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C3",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+              "locator": "Lemma 4.3, Theorems 1–2 and Sections 4–5, printed pp.178–187 / PDF pp.8–17: cell bounds, positional variational rate, and periodic/free corridor estimates; full 25-page source inspected."
+            },
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Sections 2.3, 3 and 5, printed pp.184–195 and 197–204 / complete 28-page PDF: Poisson-reference entropy, entropy compactness and conditional finite-block laws."
+            },
+            {
+              "title": "D. Ruelle, Superstable Interactions in Classical Statistical Mechanics",
+              "url": "https://www.ihes.fr/~ruelle/PUBLICATIONS/%5B28%5D.pdf",
+              "locator": "Sections 1–3, printed pp.131–145 / PDF viewer pp.5–19: superstability, cell control and regular tails."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-csm-local-mark-kl-bound",
+        "title": "Spatial random-occupation conditional mark entropy bound",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-full-marked-model",
+          "def-csm-marked-periodic-continuation",
+          "def-tdmath-poisson-configuration-reference",
+          "lem-csm-kl-chain-disjoint",
+          "lem-csm-information-contraction-pinsker",
+          "thm-csm-full-shell-positional-minimizer",
+          "thm-csm-uniform-phase-shell-entropy"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-csm-marked-periodic-continuation": "mathematical-premise",
+          "def-tdmath-poisson-configuration-reference": "mathematical-premise",
+          "lem-csm-kl-chain-disjoint": "mathematical-premise",
+          "lem-csm-information-contraction-pinsker": "mathematical-premise",
+          "thm-csm-full-shell-positional-minimizer": "mathematical-premise",
+          "thm-csm-uniform-phase-shell-entropy": "mathematical-premise"
+        },
+        "dependency_level": 6,
+        "statement": "Assume AC and the hypotheses of [[thm-csm-full-shell-positional-minimizer]]. Let $M_n^{\\rm ph}$ be the normalized phase-reference restriction to $A_n$, and let $B_n$ be its positional marginal. Given the full position configuration $q$, let $b_{n,A}(\\cdot|q)$ be the shell conditional law of marks on the marked local restriction of [[def-csm-marked-periodic-continuation]]. By torus translation invariance, represent any bounded Borel region $\\Delta$ by a fixed translate inside $\\Lambda_{L_n}$ for all sufficiently large $n$. Choose an axis-parallel half-open cube $C\\supseteq\\Delta$ of side $\\ell>0$, independent of $n$, and pack $L_n^{\\rm pack}=\\lfloor L_n/\\ell\\rfloor^d$ disjoint translates of $C$ into the periodic cube, so $L_n^{\\rm pack}/V_n\\to1/|C|$. For the independent Gaussian mark reference $\\nu_b$ of [[def-csm-full-marked-model]],\n$$E_{B_n}D(b_{n,\\Delta}(\\cdot|q)||\\nu_b^{\\otimes N_\\Delta(q)})\\leq D(M_n^{\\rm ph}||C_n^{\\rm ph})/L_n^{\\rm pack}.$$\nThus the left side tends to zero. When $\\Delta$ itself is an axis-parallel half-open cube, take $C=\\Delta$ to obtain the stated packing rate $1/|\\Delta|$. Occupancy $N_\\Delta(q)$ is random; the comparison is for the full spatially selected set of particles, not a fixed set of labels.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C4",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Sections 2.3–3, printed pp.184–195 / PDF viewer pp.8–19, and Section 5, printed pp.197–204 / PDF viewer pp.21–28: marked conditional laws, entropy chain rules and local restrictions."
+            },
+            {
+              "title": "H.-O. Georgii, Probabilistic aspects of entropy, in Entropy",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/Dresden.pdf",
+              "locator": "Section 6, PDF viewer pp.10–12: stationary entropy density and local conditioning context."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-csm-local-full-phase-equivalence",
+        "title": "Full interacting shell, canonical, and variational-grand local marked equivalence",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-full-marked-model",
+          "def-csm-marked-periodic-continuation",
+          "def-tdmath-local-tame-topology",
+          "lem-csm-information-contraction-pinsker",
+          "lem-csm-gaussian-marked-lift-existence",
+          "thm-tdmath-continuum-variational-pressure",
+          "thm-csm-full-shell-positional-minimizer",
+          "thm-csm-local-mark-kl-bound"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-csm-marked-periodic-continuation": "mathematical-premise",
+          "def-tdmath-local-tame-topology": "mathematical-premise",
+          "lem-csm-information-contraction-pinsker": "mathematical-premise",
+          "lem-csm-gaussian-marked-lift-existence": "mathematical-premise",
+          "thm-tdmath-continuum-variational-pressure": "mathematical-premise",
+          "thm-csm-full-shell-positional-minimizer": "mathematical-premise",
+          "thm-csm-local-mark-kl-bound": "mathematical-premise"
+        },
+        "dependency_level": 7,
+        "statement": "Assume AC and the hypotheses and notation of [[thm-csm-full-shell-positional-minimizer]], including its AC, ultrafilter extension principle, DC, and HB assumptions. Fix a bounded Borel region $\\Delta$ and use the marked periodic continuation and local restriction defined in [[def-csm-marked-periodic-continuation]]. By translating $\\Delta$ and the spatial argument of $G$ together, take a representative with $\\Delta\\subseteq[0,\\infty)^d$; then $\\Delta\\subseteq\\Lambda_{L_n}$ for all sufficiently large $n$. This translation preserves the expectations because the finite laws are torus-translation invariant and the limiting independent mark lift of the stationary positional state is stationary. Let $M_n^{\\rm ph}$ be the uniform full-phase band law, $C_n^{\\rm ph}$ the exact-$N_n$ full canonical law, and $P_*$ the singleton positional grand variational minimizer. Give points of $P_*$ independent marks with kernel $\\nu_b$ of [[def-csm-full-marked-model]], and denote the resulting infinite marked law by $P_*^{\\rm mark}$, whose existence is supplied by [[lem-csm-gaussian-marked-lift-existence]]. For finite-volume expectations, evaluate $G$ on the restriction $\\omega^{\\rm per}_{L_n,q,p}|_\\Delta$; under $P_*^{\\rm mark}$, evaluate it on $\\xi_\\Delta$. Then for every bounded marked-local observable $G$ on $\\Delta$ in the sense of [[def-csm-marked-periodic-continuation]],\n$$E_{M_n^{ph}}G\\to E_{P_*^{mark}}G,\\qquad E_{C_n^{ph}}G\\to E_{P_*^{mark}}G.$$\nThe matched full grand activity is $\\exp(\\alpha)/\\kappa_b$ by the normalization identity in [[def-csm-full-marked-model]]; $P_*^{\\rm mark}$ is the independent-Gaussian marked lift associated with that positional variational minimizer. If additionally $|G|\\leq C(1+N_\\Delta)$, shell convergence also holds for $G$. This is fixed-region convergence, not uniform over growing regions or arbitrary unbounded momentum observables. No finite-volume grand-canonical convergence or DLR converse is asserted.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C4",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Sections 2.3, 3 and 5, printed pp.184–195 and 197–204 / complete 28-page PDF: marked restrictions, conditional entropy and local laws."
+            },
+            {
+              "title": "H.-O. Georgii, Large deviations and the equivalence of ensembles for Gibbsian particle systems with superstable interaction",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/LDPsuperstable.pdf",
+              "locator": "Theorem 3.3 and proof, Sections 6–7, printed pp.187–195 / PDF pp.17–25: positional empirical-field minimizers and local ensemble limits."
+            },
+            {
+              "title": "David Tong, Statistical Physics, complete author-hosted lecture notes",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+              "locator": "Sections 1.2–1.4: canonical and grand-canonical preparation conventions; context, not proof of this theorem."
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-csm-local-momentum-moments",
+        "title": "Local kinetic energy and first and second momentum expectations",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-full-marked-model",
+          "lem-csm-gaussian-marked-lift-existence",
+          "lem-csm-gaussian-mark-moments",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules",
+          "thm-csm-full-shell-positional-minimizer",
+          "thm-csm-total-canonical-window",
+          "thm-csm-local-mark-kl-bound"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "lem-csm-gaussian-marked-lift-existence": "mathematical-premise",
+          "lem-csm-gaussian-mark-moments": "mathematical-premise",
+          "lem-tdmath-relative-entropy-variational-and-chain-rules": "mathematical-premise",
+          "thm-csm-full-shell-positional-minimizer": "mathematical-premise",
+          "thm-csm-total-canonical-window": "mathematical-premise",
+          "thm-csm-local-mark-kl-bound": "mathematical-premise"
+        },
+        "dependency_level": 7,
+        "statement": "Assume AC and the hypotheses of [[thm-csm-local-mark-kl-bound]]. Fix a bounded half-open cube $\\Delta\\subseteq[0,\\infty)^d$; then $\\Delta\\subseteq\\Lambda_{L_n}$ for all sufficiently large $n$. By torus translation invariance this placement gives the same limits as any fixed translate of the cube. Let $N_\\Delta(q)=\\#(q\\cap\\Delta)$. For $b>0$ and $K(p)=|p|^2/(2mE_0)$, the full shell law satisfies\n$$E_{M_n^{ph}}\\sum_{x\\in q\\cap\\Delta}K(p_x)\\to dρ|Δ|/(2b),\\quad E_{M_n^{ph}}\\sum_{x\\in q\\cap\\Delta}p_{x,i}\\to0,$$\n$$E_{M_n^{ph}}\\sum_{x\\in q\\cap\\Delta}p_{x,i}p_{x,j}\\to(mE_0ρ|Δ|/b)\\delta_{ij}.$$\nThe corresponding canonical and marked variational-grand laws have the same limits by their independent Gaussian marking. Momentum is in kg m s^-1, E_0K is in joules, and b=E_0/(k_BT) is dimensionless. These conclusions concern only the named moments, not every unbounded mark observable.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C5",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Sections 2.3–3, printed pp.184–195 / PDF viewer pp.8–19, and Section 5, printed pp.197–204 / PDF viewer pp.21–28: marked conditional laws and entropy estimates."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "Section 4.2, printed pp.192–198 / PDF viewer pp.220–226: Maxwellian momentum law and Gaussian moments."
+            }
+          ]
+        }
+      },
+      {
+        "id": "pthm-csm-full-interacting-phase-equivalence",
+        "title": "Physical interacting local phase-space ensemble bridge",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-csm-full-marked-model",
+          "def-dependent-choice",
+          "def-hahn-banach-extension-principle-relative",
+          "post-csm-fullphase-interacting-preparations",
+          "thm-csm-local-full-phase-equivalence",
+          "thm-csm-local-momentum-moments",
+          "def-ultrafilter-extension-principle"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-csm-full-marked-model": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-hahn-banach-extension-principle-relative": "mathematical-premise",
+          "post-csm-fullphase-interacting-preparations": "physical-assumption",
+          "thm-csm-local-full-phase-equivalence": "mathematical-premise",
+          "thm-csm-local-momentum-moments": "mathematical-premise",
+          "def-ultrafilter-extension-principle": "mathematical-premise"
+        },
+        "dependency_level": 8,
+        "statement": "Under the hypotheses and adopted preparations below, shell and exact-N canonical expectations of every fixed bounded marked-local observable converge to the same Gaussian-marked positional variational state. The shell also has the kinetic-energy, first-momentum and second-momentum expectation limits stated in [[thm-csm-local-momentum-moments]]. This is a conditional deduction from the model assumptions, not an observation or an equilibration claim.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C7",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "physical_scope": "Conditional predictions for fixed marked local observables and the named momentum moments in the adopted classical preparation model; no equilibration, experiment, material fit, finite-volume grand limit, or universal shell-width claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Statistical Physics, complete author-hosted lecture notes",
+              "url": "https://davidtong.org/teaching/statistical-physics/statmechhtml/S1",
+              "locator": "Sections 1.2–1.4: ensemble preparation conventions; context only, the interacting limit is proved conditionally here."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "Sections 4.2 and 4.4–4.5, printed pp.192–198 and 205–215 / PDF viewer pp.220–226 and 233–243: phase-space, canonical and grand-canonical conventions."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 494,
+    "id": "csm-full-phase-local-equivalence-examples",
+    "kind": "B",
+    "category": "classical-statistical-mechanics",
+    "library": "physics",
+    "title": "Conditional entropy chain and disjoint-block bounds — Examples",
+    "companion": "csm-full-phase-local-equivalence",
+    "scaffold": "research/plan-classical-statistical-mechanics-track.md",
+    "requires": [
+      "csm-full-phase-local-equivalence"
+    ],
+    "items": [
+      {
+        "id": "cex-csm-energy-concentration-not-local",
+        "title": "Energy concentration without local equivalence",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [],
+        "dependency_roles": {},
+        "dependency_level": 0,
+        "statement": "Fix $0<\\theta<1$ and $\\epsilon>0$. The refuted claim is: every sequence of laws $A_N$ on $\\{0,1\\}^N$ for the reference energy $H_N(x)=\\epsilon\\sum_i x_i$ whose energy density converges deterministically to $\\epsilon\\theta$ has first-coordinate marginals converging in event-supremum total variation to the Bernoulli-$\\theta$ first-coordinate marginal of the product reference. Use $\\|P-Q\\|_{\\rm TV}=\\sup_A|P(A)-Q(A)|$. This is a finite-model claim, not an experimental assertion.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C6",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii and H. Zessin, Large deviations and the maximum entropy principle for marked point random fields",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/GiiZess.pdf",
+              "locator": "Section 3, printed pp.186–190 / PDF viewer pp.10–14, conditional concentration context; the Bernoulli counterexample is constructed locally."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "Section 4.2, printed pp.192–198 / PDF viewer pp.220–226: finite-volume energy and ensemble context only; the Bernoulli counterexample is proved locally."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-csm-specific-entropy-not-local",
+        "title": "Small entropy density without homogeneous local convergence",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "library": "physics",
+        "status": "draft",
+        "deps": [
+          "def-axiom-of-choice",
+          "cex-csm-energy-concentration-not-local",
+          "lem-csm-kl-chain-disjoint"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "cex-csm-energy-concentration-not-local": "mathematical-premise",
+          "lem-csm-kl-chain-disjoint": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "statement": "Assume AC. Fix $0<\\theta<1$ and $\\epsilon>0$, and let $P_N,H_N$ be the reference and energy of [[cex-csm-energy-concentration-not-local]]. The refuted implication is: for every sequence of laws $Q_N\\ll P_N$, if $N^{-1}D(Q_N\\Vert P_N)\\to0$, $H_N/N\\to\\epsilon\\theta$ in $Q_N$-probability, and $N^{-1}H_{\\rm Sh}(Q_N)\\to h(\\theta)$, then the first-coordinate marginal of $Q_N$ converges in event-supremum total variation to Bernoulli$(\\theta)$. Here $H_{\\rm Sh}(Q_N)=-\\sum_xQ_N(x)\\log Q_N(x)$ and $h(\\theta)=-\\theta\\log\\theta-(1-\\theta)\\log(1-\\theta)$ use natural logarithms.",
+        "reference": "research/extended-frameworks-2026-10-03/classical-statistical-mechanics/full-phase-equivalence.md#C6",
+        "design_state": "draft-authoring",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H.-O. Georgii, Probabilistic aspects of entropy, in Entropy",
+              "url": "https://www.mathematik.uni-muenchen.de/~georgii/papers/Dresden.pdf",
+              "locator": "Sections 3–4, PDF viewer pp.5–6: relative entropy and its variational formula; Section 6, PDF viewer pp.10–12: specific entropy density; this finite example is proved locally."
+            },
+            {
+              "title": "Daniel Arovas, Lecture Notes on Thermodynamics and Statistical Mechanics, complete course text",
+              "url": "https://courses.physics.ucsd.edu/2025/Spring/physics210a/LECTURES/STATMECH.pdf",
+              "locator": "Section 4.2, printed pp.192–198 / PDF viewer pp.220–226: canonical entropy and phase-space context only; the Bernoulli countermodel is proved locally."
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

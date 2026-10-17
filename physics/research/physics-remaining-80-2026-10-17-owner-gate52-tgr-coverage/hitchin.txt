@@ -1,0 +1,4390 @@
+
+PDF PAGE 1
+DIFFERENTIABLE MANIFOLDS
+Course C3.3b 2014
+Nigel Hitchin
+hitchin@maths.ox.ac.uk
+1
+
+
+PDF PAGE 2
+Contents
+1
+Introduction
+4
+2
+Manifolds
+6
+2.1
+Coordinate charts . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+2.2
+The deﬁnition of a manifold . . . . . . . . . . . . . . . . . . . . . . .
+9
+2.3
+Further examples of manifolds . . . . . . . . . . . . . . . . . . . . . .
+11
+2.4
+Maps between manifolds . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+3
+Tangent vectors and cotangent vectors
+14
+3.1
+Existence of smooth functions . . . . . . . . . . . . . . . . . . . . . .
+14
+3.2
+The derivative of a function
+. . . . . . . . . . . . . . . . . . . . . . .
+16
+3.3
+Derivatives of smooth maps
+. . . . . . . . . . . . . . . . . . . . . . .
+20
+4
+Vector ﬁelds
+22
+4.1
+The tangent bundle . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+4.2
+Vector ﬁelds as derivations . . . . . . . . . . . . . . . . . . . . . . . .
+26
+4.3
+One-parameter groups of diﬀeomorphisms
+. . . . . . . . . . . . . . .
+28
+4.4
+The Lie bracket revisited . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+5
+Tensor products
+33
+5.1
+The exterior algebra
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+34
+6
+Diﬀerential forms
+38
+6.1
+The bundle of p-forms
+. . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+6.2
+Partitions of unity
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+6.3
+Working with diﬀerential forms
+. . . . . . . . . . . . . . . . . . . . .
+41
+6.4
+The exterior derivative . . . . . . . . . . . . . . . . . . . . . . . . . .
+43
+6.5
+The Lie derivative of a diﬀerential form . . . . . . . . . . . . . . . . .
+47
+6.6
+de Rham cohomology . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50
+2
+
+
+PDF PAGE 3
+7
+Integration of forms
+57
+7.1
+Orientation
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+57
+7.2
+Stokes’ theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+62
+8
+The degree of a smooth map
+68
+8.1
+de Rham cohomology in the top dimension . . . . . . . . . . . . . . .
+68
+9
+Riemannian metrics
+76
+9.1
+The metric tensor . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+76
+9.2
+The geodesic ﬂow . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+80
+10 APPENDIX: Technical results
+86
+10.1
+The inverse function theorem . . . . . . . . . . . . . . . . . . . . . .
+86
+10.2 Existence of solutions of ordinary diﬀerential equations . . . . . . . .
+88
+10.3 Smooth dependence . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+89
+10.4
+Partitions of unity on general manifolds . . . . . . . . . . . . . . . .
+92
+10.5
+Sard’s theorem (special case) . . . . . . . . . . . . . . . . . . . . . .
+93
+3
+
+
+PDF PAGE 4
+1
+Introduction
+This is an introductory course on diﬀerentiable manifolds. These are higher dimen-
+sional analogues of surfaces like this:
+This is the image to have, but we shouldn’t think of a manifold as always sitting
+inside a ﬁxed Euclidean space like this one, but rather as an abstract object. One of
+the historical driving forces of the theory was General Relativity, where the manifold
+is four-dimensional spacetime, wormholes and all:
+Spacetime is not part of a bigger Euclidean space, it just exists, but we need to learn
+how to do analysis on it, which is what this course is about.
+Another input to the subject is from mechanics – the dynamics of complicated me-
+chanical systems involve spaces with many degrees of freedom. Just think of the
+diﬀerent conﬁgurations that an Anglepoise lamp can be put into:
+4
+
+
+PDF PAGE 5
+How many degrees of freedom are there? How do we describe the dynamics of this if
+we hit it?
+The ﬁrst idea we shall meet is really the deﬁning property of a manifold – to be able
+to describe points locally by n real numbers, local coordinates. Then we shall need
+to deﬁne analytical objects (vector ﬁelds, diﬀerential forms for example) which are
+independent of the choice of coordinates. This has a double advantage: on the one
+hand it enables us to discuss these objects on topologically non-trivial manifolds like
+spheres, and on the other it also provides the language for expressing the equations
+of mathematical physics in a coordinate-free form, one of the fundamental principles
+of relativity.
+The most basic example of analytical techniques on a manifold is the theory of dif-
+ferential forms and the exterior derivative. This generalizes the grad, div and curl of
+ordinary three-dimensional calculus. A large part of the course will be occupied with
+this. It provides a very natural generalization of the theorems of Green and Stokes
+in three dimensions and also gives rise to de Rham cohomology which is an analytical
+way of approaching the algebraic topology of the manifold. This has been important
+in an enormous range of areas from algebraic geometry to theoretical physics.
+More reﬁned use of analysis requires extra data on the manifold and we shall simply
+deﬁne and describe some basic features of Riemannian metrics.
+These generalize
+the ﬁrst fundamental form of a surface and, in their Lorentzian guise, provide the
+substance of general relativity. A more complete story demands a much longer course,
+but here we shall consider just two aspects which draw on the theory of diﬀerential
+forms: the study of geodesics via a vector ﬁeld, the geodesic ﬂow, on the cotangent
+bundle, and some basic properties of harmonic forms.
+Certain standard technical results which we shall require are proved in the Appendix
+5
+
+
+PDF PAGE 6
+so as not to interrupt the development of the theory.
+A good book to accompany the course is: An Introduction to Diﬀerential Manifolds
+by Dennis Barden and Charles Thomas (Imperial College Press £22 (paperback)).
+2
+Manifolds
+2.1
+Coordinate charts
+The concept of a manifold is a bit complicated, but it starts with deﬁning the notion
+of a coordinate chart.
+Deﬁnition 1 A coordinate chart on a set X is a subset U ⊆X together with a
+bijection
+ϕ : U →ϕ(U) ⊆Rn
+onto an open set ϕ(U) in Rn.
+Thus we can parametrize points x of U by n coordinates ϕ(x) = (x1, . . . , xn).
+We now want to consider the situation where X is covered by such charts and satisﬁes
+some consistency conditions. We have
+Deﬁnition 2 An n-dimensional atlas on X is a collection of coordinate charts {Uα, ϕα}α∈I
+such that
+• X is covered by the {Uα}α∈I
+• for each α, β ∈I, ϕα(Uα ∩Uβ) is open in Rn
+• the map
+ϕβϕ−1
+α : ϕα(Uα ∩Uβ) →ϕβ(Uα ∩Uβ)
+is C∞with C∞inverse.
+Recall that F(x1, . . . , xn) ∈Rn is C∞if it has derivatives of all orders. We shall also
+say that F is smooth in this case. It is perfectly possible to develop the theory of
+manifolds with less diﬀerentiability than this, but this is the normal procedure.
+6
+
+
+PDF PAGE 7
+Examples:
+1. Let X = Rn and take U = X with ϕ = id. We could also take X to be any open
+set in Rn.
+2. Let X be the set of straight lines in the plane:
+Each such line has an equation Ax + By + C = 0 where if we multiply A, B, C by a
+non-zero real number we get the same line. Let U0 be the set of non-vertical lines.
+For each line ℓ∈U0 we have the equation
+y = mx + c
+where m, c are uniquely determined. So ϕ0(ℓ) = (m, c) deﬁnes a coordinate chart
+ϕ0 : U0 →R2. Similarly if U1 consists of the non-horizontal lines with equation
+x = ˜my + ˜c
+we have another chart ϕ1 : U1 →R2.
+Now U0 ∩U1 is the set of lines y = mx + c which are not horizontal, so m̸ = 0. Thus
+ϕ0(U0 ∩U1) = {(m, c) ∈R2 : m̸ = 0}
+which is open. Moreover, y = mx + c implies x = m−1y −cm−1 and so
+ϕ1ϕ−1
+0 (m, c) = (m−1, −cm−1)
+which is smooth with smooth inverse. Thus we have an atlas on the space of lines.
+3. Consider R as an additive group, and the subgroup of integers Z ⊂R. Let X be
+the quotient group R/Z and p : R →R/Z the quotient homomorphism.
+Set U0 = p(0, 1) and U1 = p(−1/2, 1/2). Since any two elements in the subset p−1(a)
+diﬀer by an integer, p restricted to (0, 1) or (−1/2, 1/2) is injective and so we have
+coordinate charts
+ϕ0 = p−1 : U0 →(0, 1),
+ϕ1 = p−1 : U1 →(−1/2, 1/2).
+7
+
+
+PDF PAGE 8
+Clearly U0 and U1 cover R/Z since the integer 0 ∈U1.
+We check:
+ϕ0(U0 ∩U1) = (0, 1/2) ∪(1/2, 1),
+ϕ1(U0 ∩U1) = (−1/2, 0) ∪(0, 1/2)
+which are open sets.
+Finally, if x ∈(0, 1/2), ϕ1ϕ−1
+0 (x) = x and if x ∈(1/2, 1),
+ϕ1ϕ−1
+0 (x) = x −1. These maps are certainly smooth with smooth inverse so we have
+an atlas on X = R/Z.
+4. Let X be the extended complex plane X = C ∪{∞}. Let U0 = C with ϕ0(z) =
+z ∈C ∼= R2. Now take
+U1 = C\{0} ∪{∞}
+and deﬁne ϕ1(˜z) = ˜z−1 ∈C if ˜z̸ = ∞and ϕ1(∞) = 0. Then
+ϕ0(U0 ∩U1) = C\{0}
+which is open, and
+ϕ1ϕ−1
+0 (z) = z−1 =
+x
+x2 + y2 −i
+y
+x2 + y2.
+This is a smooth and invertible function of (x, y). We now have a 2-dimensional atlas
+for X, the extended complex plane.
+5.
+Let X be n-dimensional real projective space, the set of 1-dimensional vector
+subspaces of Rn+1. Each subspace is spanned by a non-zero vector v, and we deﬁne
+Ui ⊂RPn to be the subset for which the i-th component of v ∈Rn+1 is non-zero.
+Clearly X is covered by U1, . . . , Un+1. In Ui we can uniquely choose v such that the
+ith component is 1, and then Ui is in one-to-one correspondence with the hyperplane
+xi = 1 in Rn+1, which is a copy of Rn. This is therefore a coordinate chart
+ϕi : Ui →Rn.
+The set ϕi(Ui ∩Uj) is the subset for which xj̸ = 0 and is therefore open. Furthermore
+ϕiϕ−1
+j
+: {x ∈Rn+1 : xj = 1, xi̸ = 0} →{x ∈Rn+1 : xi = 1, xj̸ = 0}
+is
+v 7→1
+xi
+v
+which is smooth with smooth inverse. We therefore have an atlas for RPn.
+8
+
+
+PDF PAGE 9
+2.2
+The deﬁnition of a manifold
+All the examples above are actually manifolds, and the existence of an atlas is suf-
+ﬁcient to establish that, but there is a minor subtlety in the actual deﬁnition of a
+manifold due to the fact that there are lots of choices of atlases. If we had used a
+diﬀerent basis for R2, our charts on the space X of straight lines would be diﬀerent,
+but we would like to think of X as an object independent of the choice of atlas. That’s
+why we make the following deﬁnitions:
+Deﬁnition 3 Two atlases {(Uα, ϕα)}, {(Vi, ψi)} are compatible if their union is an
+atlas.
+What this deﬁnition means is that all the extra maps ψiϕ−1
+α
+must be smooth. Com-
+patibility is clearly an equivalence relation, and we then say that:
+Deﬁnition 4 A diﬀerentiable structure on X is an equivalence class of atlases.
+Finally we come to the deﬁnition of a manifold:
+Deﬁnition 5 An n-dimensional diﬀerentiable manifold is a space X with a diﬀeren-
+tiable structure.
+The upshot is this: to prove something is a manifold, all you need is to ﬁnd one atlas.
+The deﬁnition of a manifold takes into account the existence of many more atlases.
+Many books give a slightly diﬀerent deﬁnition – they start with a topological space,
+and insist that the coordinate charts are homeomorphisms. This is ﬁne if you see the
+world as a hierarchy of more and more sophisticated structures but it suggests that
+in order to prove something is a manifold you ﬁrst have to deﬁne a topology. As we’ll
+see now, the atlas does that for us.
+First recall what a topological space is: a set X with a distinguished collection of
+subsets V called open sets such that
+1. ∅and X are open
+2. an arbitrary union of open sets is open
+3. a ﬁnite intersection of open sets is open
+9
+
+
+PDF PAGE 10
+Now suppose M is a manifold. We shall say that a subset V ⊆M is open if, for each
+α, ϕα(V ∩Uα) is an open set in Rn. One thing which is immediate is that V = Uβ is
+open, from Deﬁnition 2.
+We need to check that this gives a topology. Condition 1 holds because ϕα(∅) = ∅
+and ϕα(M ∩Uα) = ϕα(Uα) which is open by Deﬁnition 1. For the other two, if Vi is
+a collection of open sets then because ϕα is bijective
+ϕα((∪Vi) ∩Uα) = ∪ϕα(Vi ∩Uα)
+ϕα((∩Vi) ∩Uα) = ∩ϕα(Vi ∩Uα)
+and then the right hand side is a union or intersection of open sets. Slightly less
+obvious is the following:
+Proposition 2.1 With the topology above ϕα : Uα →ϕα(Uα) is a homeomorphism.
+Proof:
+If V ⊆Uα is open in the induced topology on Uα then since Uα itself is open,
+V is open in M. Then ϕα(V ) = ϕα(V ∩Uα) is open by the deﬁnition of the topology,
+so ϕ−1
+α
+is certainly continuous.
+Now let W ⊂ϕα(Uα) be open, then ϕ−1
+α (W) ⊆Uα so we need to prove that ϕ−1
+α (W)
+is open in M. But
+ϕβ(ϕ−1
+α (W) ∩Uβ) = ϕβϕ−1
+α (W ∩ϕα(Uα ∩Uβ))
+(1)
+From Deﬁnition 2 the set ϕα(Uα ∩Uβ) is open and hence its intersection with the
+open set W is open. Now ϕβϕ−1
+α
+is C∞with C∞inverse and so certainly a homeo-
+morphism, and it follows that the right hand side of (1) is open. Thus the left hand
+side ϕβ(ϕ−1
+α W ∩Uβ) is open and by the deﬁnition of the topology this means that
+ϕ−1
+α (W) is open, i.e. ϕα is continuous.
+2
+To make any reasonable further progress, we have to make two assumptions about
+this topology which will hold for the rest of these notes:
+• the manifold topology is Hausdorﬀ
+• in this topology we have a countable basis of open sets
+Without these assumptions, manifolds are not even metric spaces, and there is not
+much analysis that can reasonably be done on them.
+10
+
+
+PDF PAGE 11
+2.3
+Further examples of manifolds
+We need better ways of recognizing manifolds than struggling to ﬁnd explicit coordi-
+nate charts. For example, the sphere is a manifold
+and although we can use stereographic projection to get an atlas:
+there are other ways. Here is one.
+Theorem 2.2 Let F : U →Rm be a C∞function on an open set U ⊆Rn+m and
+take c ∈Rm. Assume that for each a ∈F −1(c), the derivative
+DFa : Rn+m →Rm
+is surjective. Then F −1(c) has the structure of an n-dimensional manifold which is
+Hausdorﬀand has a countable basis of open sets.
+Proof:
+Recall that the derivative of F at a is the linear map DFa : Rn+m →Rm
+such that
+F(a + h) = F(a) + DFa(h) + R(a, h)
+11
+
+
+PDF PAGE 12
+where R(a, h)/∥h∥→0 as h →0.
+If we write F(x1, . . . , xn+m) = (F1, . . . , Fm) the derivative is the Jacobian matrix
+∂Fi
+∂xj
+(a)
+1 ≤i ≤m, 1 ≤j ≤n + m
+Now we are given that this is surjective, so the matrix has rank m. Therefore by
+reordering the coordinates x1, . . . , xn+m we may assume that the square matrix
+∂Fi
+∂xj
+(a)
+1 ≤i ≤m, 1 ≤j ≤m
+is invertible.
+Now deﬁne
+G : U →Rn+m
+by
+G(x1, . . . , xn+m) = (F1, . . . , Fm, xm+1, . . . , xn+m).
+(2)
+Then DGa is invertible.
+We now apply the inverse function theorem to G, a proof of which is given in the
+Appendix. It tells us that there is a neighbourhood V of a, and W of G(a) such
+that G : V →W is invertible with smooth inverse. Moreover, the formula (2) shows
+that G maps V ∩F −1(c) to the intersection of W with the copy of Rn given by
+{x ∈Rn+m : xi = ci, 1 ≤i ≤m}. This is therefore a coordinate chart ϕ.
+If we take two such charts ϕα, ϕβ, then ϕαϕ−1
+β
+is a map from an open set in {x ∈
+Rn+m : xi = ci, 1 ≤i ≤m} to another one which is the restriction of the map GαG−1
+β
+of (an open set in) Rn+m to itself. But this is an invertible C∞map and so we have
+the requisite conditions for an atlas.
+Finally, in the induced topology from Rn+m, Gα is a homeomorphism, so open sets
+in the manifold topology are the same as open sets in the induced topology. Since
+Rn+m is Hausdorﬀwith a countable basis of open sets, so is F −1(c).
+Eﬀectively, (2) gives a coordinate chart on Rn+m such that F −1(c) is a linear subspace
+there: we are treating Rn+m as a manifold in its own right.
+2
+We can now give further examples of manifolds:
+Examples:
+1. Let
+Sn = {x ∈Rn+1 :
+n+1
+X
+1
+x2
+i = 1}
+12
+
+
+PDF PAGE 13
+be the unit n-sphere. Deﬁne F : Rn+1 →R by
+F(x) =
+n+1
+X
+1
+x2
+i .
+This is a C∞map and
+DFa(h) = 2
+X
+i
+aihi
+is non-zero (and hence surjective in the 1-dimensional case) so long as a is not iden-
+tically zero. If F(a) = 1, then
+n+1
+X
+1
+a2
+i = 1̸ = 0
+so a̸ = 0 and we can apply Theorem 2.2 and deduce that the sphere is a manifold.
+2. Let O(n) be the space of n × n orthogonal matrices: AAT = I. Take the vector
+space Mn of dimension n2 of all real n × n matrices and deﬁne the function
+F(A) = AAT
+to the vector space of symmetric n × n matrices. This has dimension n(n + 1)/2.
+Then O(n) = F −1(I).
+Diﬀerentiating F we have
+DFA(H) = HAT + AHT
+and putting H = KA this is
+KAAT + AATKT = K + KT
+if AAT = I, i.e. if A ∈F −1(I). But given any symmetric matrix S, taking K = S/2
+shows that DFI is surjective and so, applying Theorem 2.2 we ﬁnd that O(n) is a
+manifold. Its dimension is
+n2 −n(n + 1)/2 = n(n −1)/2.
+2.4
+Maps between manifolds
+We need to know what a smooth map between manifolds is. Here is the deﬁnition:
+13
+
+
+PDF PAGE 14
+Deﬁnition 6 A map F : M →N of manifolds is a smooth map if for each point
+x ∈M and chart (Uα, ϕα) in M with x ∈Uα and chart (Vi, ψi) of N with F(x) ∈Vi,
+the set F −1(Vi) is open and the composite function
+ψiFϕ−1
+α
+on ϕα(F −1(Vi) ∩Uα) is a C∞function.
+Note that it is enough to check that the above holds for one atlas – it will follow from
+the fact that ϕαϕ−1
+β
+is C∞that it then holds for all compatible atlases.
+Exercise 2.3 Show that a smooth map is continuous in the manifold topology.
+The natural notion of equivalence between manifolds is the following:
+Deﬁnition 7 A diﬀeomorphism F : M →N is a smooth map with smooth inverse.
+Example:
+Take two of our examples above – the quotient group R/Z and the
+1-sphere, the circle, S1. We shall show that these are diﬀeomorphic. First we deﬁne
+a map
+G : R/Z →S1
+by
+G(x) = (cos 2πx, sin 2πx).
+This is clearly a bijection. Take x ∈U0 ⊂R/Z then we can represent the point by
+x ∈(0, 1). Within the range (0, 1/2), sin 2πx̸ = 0, so with F = x2
+1 + x2
+2, we have
+∂F/∂x2̸ = 0. The use of the inverse function theorem in Theorem 2.2 then says that
+x1 is a local coordinate for S1, and in fact on the whole of (0, 1/2) cos 2πx is smooth
+and invertible. We proceed by taking the other similar open sets to check fully that
+G is a smooth, bijective map. To prove that its inverse is smooth, we can rely on the
+inverse function theorem, since sin 2πx̸ = 0 in the interval.
+3
+Tangent vectors and cotangent vectors
+3.1
+Existence of smooth functions
+The most fundamental type of map between manifolds is a smooth map
+f : M →R.
+14
+
+
+PDF PAGE 15
+We can add these and multiply by constants so they form a vector space C∞(M), the
+space of C∞functions on M. In fact, under multiplication it is also a commutative
+ring. So far, all we can assert is that the constant functions lie in this space, so let’s
+see why there are lots and lots of global C∞functions. We shall use bump functions
+and the Hausdorﬀproperty.
+First note that the following function of one variable is C∞:
+f(t)
+=
+e−1/t
+t > 0
+=
+0
+t ≤0
+Now form
+g(t) =
+f(t)
+f(t) + f(1 −t)
+so that g is identically 1 when t ≥1 and vanishes if t ≤0. Next write
+h(t) = g(t + 2)g(2 −t).
+This function vanishes if |t| ≥2 and is 1 where |t| ≤1: it is completely ﬂat on top.
+Finally make an n-dimensional version
+k(x1, . . . , xn) = h(x1)h(x2) . . . h(xn).
+In the sup norm, this is 1 if |x| ≤1, so k(r−1x) is identically 1 in a ball of radius r
+and 0 outside a ball of radius 2r.
+We shall use this construction several times later on. For the moment, let M be
+any manifold and (U, ϕU) a coordinate chart. Choose a function k of the type above
+whose support (remember supp f = {x : f(x)̸ = 0}) lies in ϕU(U) and deﬁne
+f : M →R
+by
+f(x)
+=
+k ◦ϕU(x)
+x ∈U
+=
+0
+x ∈M\U.
+15
+
+
+PDF PAGE 16
+Is this a smooth function? The answer is yes: by deﬁnition f is smooth for points
+in the coordinate neighbourhood U. But supp k is closed and bounded in Rn and so
+compact and since ϕU is a homeomorphism, f is zero on the complement of a compact
+set in M. But a compact set in a Hausdorﬀspace is closed, so its complement is open.
+If y̸ = U then there is a neighbourhood of y on which f is identically zero, in which
+case clearly f is smooth at y.
+3.2
+The derivative of a function
+Smooth functions exist in abundance. The question now is: we know what a diﬀer-
+entiable function is – so what is its derivative? We need to give some coordinate-
+independent deﬁnition of derivative and this will involve some new concepts. The
+derivative at a point a ∈M will lie in a vector space T ∗
+a called the cotangent space.
+First let’s address a simpler question – what does it mean for the derivative to vanish?
+This is more obviously a coordinate-invariant notion because on a compact manifold
+any function has a maximum, and in any coordinate system in a neighbourhood of
+that point, its derivative must vanish. We can check that: if f : M →R is smooth
+then the composition
+g = fϕ−1
+α
+is a C∞function of x1, . . . , xn. Suppose its derivative vanishes at ϕα(a) = (x1(a), . . . , xn(a))
+and now take a diﬀerent chart ϕβ with h = fϕ−1
+β . Then
+g = fϕ−1
+α = fϕ−1
+β ϕβϕ−1
+α = hϕβϕ−1
+α .
+But from the deﬁnition of an atlas, ϕβϕ−1
+α
+is smooth with smooth inverse, so
+g(x1, . . . , xn) = h(y1(x), . . . , yn(x))
+and by the chain rule
+∂g
+∂xi
+=
+X
+j
+∂h
+∂yj
+(y(x))∂yj
+∂xi
+(x).
+Since y(x) is invertible, its Jacobian matrix is invertible, so that Dgx(a) = 0 if and
+only if Dhy(a) = 0. We have checked then that the vanishing of the derivative at a
+point a is independent of the coordinate chart. We let Za ⊂C∞(M) be the subset of
+functions whose derivative vanishes at a. Since Dfa is linear in f the subset Za is a
+vector subspace.
+Deﬁnition 8 The cotangent space T ∗
+a at a ∈M is the quotient space
+T ∗
+a = C∞(M)/Za.
+16
+
+
+PDF PAGE 17
+The derivative of a function f at a is its image in this space and is denoted (df)a.
+Here we have simply deﬁned the derivative as all functions modulo those whose deriva-
+tive vanishes. It’s almost a tautology, so to get anywhere we have to prove something
+about T ∗
+a . First note that if ψ is a smooth function on a neighbourhood of x, we
+can multiply it by a bump function to extend it to M and then look at its image in
+T ∗
+a = C∞(M)/Za. But its derivative in a coordinate chart around a is independent of
+the bump function, because all such functions are identically 1 in a neighbourhood
+of a. Hence we can actually deﬁne the derivative at a of smooth functions which
+are only deﬁned in a neighbourhood of a. In particular we could take the coordinate
+functions x1, . . . , xn. We then have
+Proposition 3.1 Let M be an n-dimensional manifold, then
+• the cotangent space T ∗
+a at a ∈M is an n-dimensional vector space
+• if (U, ϕ) is a coordinate chart around x with coordinates x1, . . . , xn, then the
+elements (dx1)a, . . . (dxn)a form a basis for T ∗
+a
+• if f ∈C∞(M) and in the coordinate chart, fϕ−1 = φ(x1, . . . , xn) then
+(df)a =
+X
+i
+∂φ
+∂xi
+(ϕ(a))(dxi)a
+(3)
+Proof:
+If f ∈C∞(M), with fϕ−1 = φ(x1, . . . , xn) then
+f −
+X ∂φ
+∂xi
+(ϕ(a))xi
+is a (locally deﬁned) smooth function whose derivative vanishes at a, so
+(df)a =
+X ∂f
+∂xi
+(ϕ(a))(dxi)a
+and (dx1)a, . . . (dxn)a span T ∗
+a .
+If P
+i λi(dxi)a = 0 then P
+i λixi has vanishing derivative at a and so λi = 0 for all i.
+2
+17
+
+
+PDF PAGE 18
+Remark:
+It is rather heavy handed to give two symbols f, φ for a function and its
+representation in a given coordinate system, so often in what follows we shall use just
+f. Then we can write (3) as
+df =
+X ∂f
+∂xi
+dxi.
+With a change of coordinates (x1, . . . , xn) →(y1(x), . . . , yn(x)) the formalism gives
+df =
+X
+j
+∂f
+∂yj
+dyj =
+X
+i,j
+∂f
+∂yj
+∂yj
+∂xi
+dxi.
+Deﬁnition 9 The tangent space Ta at a ∈M is the dual space of the cotangent space
+T ∗
+a .
+This is admittedly a roundabout way of deﬁning Ta, but since the double dual (V ∗)∗
+of a ﬁnite dimensional vector space is naturally isomorphic to V the notation is
+consistent. If x1, . . . , xn is a local coordinate system at a and (dx1)a, . . . , (dxn)a the
+basis of T ∗
+a deﬁned in (3.1) then the dual basis for the tangent space Ta is denoted
+ ∂
+∂x1
+
+a
+, . . . ,
+ ∂
+∂xn
+
+a
+.
+This deﬁnition at ﬁrst sight seems far away from our intuition about the tangent
+space to a surface in R3:
+The problem arises because our manifold M does not necessarily sit in Euclidean
+space and we have to deﬁne a tangent space intrinsically. There are two ways around
+this: one would be to consider functions f : R →M and equivalence classes of these,
+instead of functions the other way f : M →R. Another, perhaps more useful, one is
+provided by the notion of directional derivative. If f is a function on a surface in R3,
+then for every tangent direction u at a we can deﬁne the derivative of f at a in the
+direction u, which is a real number: u · ∇f(a) or Dfa(u). Imitating this gives the
+following:
+18
+
+
+PDF PAGE 19
+Deﬁnition 10 A tangent vector at a point a ∈M is a linear map Xa : C∞(M) →R
+such that
+Xa(fg) = f(a)Xag + g(a)Xaf.
+This is the formal version of the Leibnitz rule for diﬀerentiating a product.
+Now if ξ ∈Ta, it lies in the dual space of T ∗
+a = C∞(M)/Za and so
+f 7→ξ((df)a)
+is a linear map from C∞(M) to R. Moreover from (3),
+d(fg)a = f(a)(dg)a + g(a)(df)a
+and so
+Xa(f) = ξ((df)a)
+is a tangent vector at a. In fact, any tangent vector is of this form, but the price paid
+for the nice algebraic deﬁnition in (10) which is the usual one in textbooks is that we
+need a lemma to prove it.
+Lemma 3.2 Let Xa be a tangent vector at a and f a smooth function whose derivative
+at a vanishes. Then Xaf = 0.
+Proof:
+Use a coordinate system near a. By the fundamental theorem of calculus,
+f(x) −f(a)
+=
+Z 1
+0
+∂
+∂tf(a + t(x −a))dt
+=
+X
+i
+(xi −ai)
+Z 1
+0
+∂f
+∂xi
+(a + t(x −a))dt.
+If (df)a = 0 then
+gi(x) =
+Z 1
+0
+∂f
+∂xi
+(a + t(x −a))dt
+vanishes at x = a, as does hi(x) = xi −ai. Now although these functions are deﬁned
+locally, using a bump function we can extend them to M, so that
+f = f(a) +
+X
+i
+gihi
+(4)
+where gi(a) = hi(a) = 0.
+19
+
+
+PDF PAGE 20
+By the Leibnitz rule
+Xa(1) = Xa(1.1) = 2Xa(1)
+which shows that Xa annihilates constant functions. Applying the rule to (4)
+Xa(f) = Xa(
+X
+i
+gihi) =
+X
+i
+(gi(a)Xahi + hi(a)Xagi) = 0.
+This means that Xa : C∞(M) →R annihilates Za.
+2
+Now if V ⊂W are vector spaces then the annihilator of V in the dual space W ∗is
+naturally the dual of W/V . So a tangent vector, which lies in the dual of C∞(M) is
+naturally a subspace of (C∞(M)/Za)∗which is, by our deﬁnition, the tangent space
+Ta.
+The vectors in the tangent space are therefore the tangent vectors as deﬁned by (10).
+Locally, in coordinates, we can write
+Xa =
+n
+X
+i
+ci
+ ∂
+∂xi
+
+a
+and then
+Xa(f) =
+X
+i
+ci
+∂f
+∂xi
+(a)
+(5)
+3.3
+Derivatives of smooth maps
+Suppose F : M →N is a smooth map and f ∈C∞(N). Then f ◦F is a smooth
+function on M.
+Deﬁnition 11 The derivative at a ∈M of the smooth map F : M →N is the
+homomorphism of tangent spaces
+DFa : TaM →TF(a)N
+deﬁned by
+DFa(Xa)(f) = Xa(f ◦F).
+This is an abstract, coordinate-free deﬁnition. Concretely, we can use (5) to see that
+DFa
+ ∂
+∂xi
+
+a
+(f)
+=
+∂
+∂xi
+(f ◦F)(a)
+=
+X
+j
+∂Fj
+∂xi
+(a) ∂f
+∂yj
+(F(a)) =
+X
+j
+∂Fj
+∂xi
+(a)
+ ∂
+∂yj
+
+F(a)
+f
+20
+
+
+PDF PAGE 21
+Thus the derivative of F is an invariant way of deﬁning the Jacobian matrix.
+With this deﬁnition we can give a generalization of Theorem 2.2 – the proof is virtually
+the same and is omitted.
+Theorem 3.3 Let F : M →N be a smooth map and c ∈N be such that at each
+point a ∈F −1(c) the derivative DFa is surjective. Then F −1(c) is a smooth manifold
+of dimension dim M −dim N.
+In the course of the proof, it is easy to see that the manifold structure on F −1(c)
+makes the inclusion
+ι : F −1(c) ⊂M
+a smooth map, whose derivative is injective and maps isomorphically to the kernel of
+DF. So when we construct a manifold like this, its tangent space at a is
+Ta ∼= Ker DFa.
+This helps to understand tangent spaces for the case where F is deﬁned on Rn:
+Examples:
+1. The sphere Sn is F −1(1) where F : Rn+1 →R is given by
+F(x) =
+X
+i
+x2
+i .
+So here
+DFa(x) = 2
+X
+i
+xiai
+and the kernel of DFa consists of the vectors orthogonal to a, which is our usual
+vision of the tangent space to a sphere.
+2. The orthogonal matrices O(n) are given by F −1(I) where F(A) = AAT. At A = I,
+the derivative is
+DFI(H) = H + HT
+so the tangent space to O(n) at the identity matrix is Ker DFI, the space of skew-
+symmetric matrices H = −HT.
+The examples above are of manifolds F −1(c) sitting inside M and are examples of
+submanifolds. Here we shall adopt the following deﬁnition of a submanifold, which is
+often called an embedded submanifold:
+21
+
+
+PDF PAGE 22
+Deﬁnition 12 A manifold M is a submanifold of N if there is an inclusion map
+ι : M →N
+such that
+• ι is smooth
+• Dιx is injective for each x ∈M
+• the manifold topology of M is the induced topology from N
+Remark:
+The topological assumption avoids a situation like this:
+ι(t) = (t2 −1, t(t2 −1)) ∈R2
+for t ∈(−1, ∞). This is smooth and injective with injective derivative: it is the part
+of the singular cubic y2 = x2(x + 1) consisting of the left hand loop and the part in
+the ﬁrst quadrant. Any open set in R2 containing 0 intersects the curve in a t-interval
+(−1, −1 + δ) and an interval (1 −δ′, 1 + δ′). Thus (1 −δ′, 1 + δ′) on its own is not
+open in the induced topology.
+4
+Vector ﬁelds
+4.1
+The tangent bundle
+Think of the wind velocity at each point of the earth.
+22
+
+
+PDF PAGE 23
+This is an example of a vector ﬁeld on the 2-sphere S2. Since the sphere sits inside
+R3, this is just a smooth map X : S2 →R3 such that X(x) is tangential to the sphere
+at x.
+Our problem now is to deﬁne a vector ﬁeld intrinsically on a general manifold M,
+without reference to any ambient space. We know what a tangent vector at a ∈M
+is – a vector in Ta – but we want to describe a smoothly varying family of these. To
+do this we need to ﬁt together all the tangent spaces as a ranges over M into a single
+manifold called the tangent bundle. We have n degrees of freedom for a ∈M and n
+for each tangent space Ta so we expect to have a 2n-dimensional manifold. So the set
+to consider is
+TM =
+[
+x∈M
+Tx
+the disjoint union of all the tangent spaces.
+First let (U, ϕU) be a coordinate chart for M. Then for x ∈U the tangent vectors
+ ∂
+∂x1
+
+x
+, . . . ,
+ ∂
+∂xn
+
+x
+provide a basis for each Tx. So we have a bijection
+ψU : U × Rn →
+[
+x∈U
+Tx
+deﬁned by
+ψU(x, y1, . . . , yn) =
+n
+X
+1
+yi
+ ∂
+∂xi
+
+x
+.
+Thus
+ΦU = (ϕU, id) ◦ψ−1
+U :
+[
+x∈U
+Tx →ϕU(U) × Rn
+23
+
+
+PDF PAGE 24
+is a coordinate chart for
+V =
+[
+x∈U
+Tx.
+Given Uα, Uβ coordinate charts on M, clearly
+Φα(Vα ∩Vβ) = ϕα(Uα ∩Uβ) × Rn
+which is open in R2n. Also, if (x1, . . . , xn) are coordinates on Uα and (˜x1, . . . , ˜xn) on
+Uβ then
+ ∂
+∂xi
+
+x
+=
+X
+j
+∂˜xj
+∂xi
+ ∂
+∂˜xj
+
+x
+the dual of (3). It follows that
+ΦβΦ−1
+α (x1, . . . , xn, y1 . . . , yn) = (˜x1, . . . , ˜xn,
+X
+i
+∂˜x1
+∂xi
+yi, . . . ,
+X
+i
+∂˜xn
+∂xi
+yi).
+and since the Jacobian matrix is smooth in x, linear in y and invertible, ΦβΦ−1
+α
+is
+smooth with smooth inverse and so (Vα, Φα) deﬁnes an atlas on TM.
+Deﬁnition 13 The tangent bundle of a manifold M is the 2n-dimensional diﬀeren-
+tiable structure on TM deﬁned by the above atlas.
+The construction brings out a number of properties. First of all the projection map
+p : TM →M
+which assigns to Xa ∈TaM the point a is smooth with surjective derivative, because
+in our local coordinates it is deﬁned by
+p(x1, . . . , xn, y1, . . . , yn) = (x1, . . . , xn).
+The inverse image p−1(a) is the vector space Ta and is called a ﬁbre of the projection.
+Finally, TM is Hausdorﬀbecause if Xa, Xb lie in diﬀerent ﬁbres, since M is Hausdorﬀ
+we can separate a, b ∈M by open sets U, U ′ and then the open sets p−1(U), p−1(U ′)
+separate Xa, Xb in TM. If Xa, Ya are in the same tangent space then they lie in a
+coordinate neighbourhood which is homeomorphic to an open set of R2n and so can
+be separated there. Since M has a countable basis of open sets and Rn does, it is
+easy to see that TM also has a countable basis.
+We can now deﬁne a vector ﬁeld:
+24
+
+
+PDF PAGE 25
+Deﬁnition 14 A vector ﬁeld on a manifold is a smooth map
+X : M →TM
+such that
+p ◦X = idM.
+This is a clear global deﬁnition. What does it mean? We just have to spell things
+out in local coordinates. Since p ◦X = idM,
+X(x1, . . . , xn) = (x1, . . . , xn, y1(x), . . . , yn(x))
+where yi(x) are smooth functions. Thus the tangent vector X(x) is given by
+X(x) =
+X
+i
+yi(x)
+ ∂
+∂xi
+
+x
+which is a smoothly varying ﬁeld of tangent vectors.
+Remark:
+We shall meet other manifolds Q with projections p : Q →M and the
+general terminology is that a smooth map s : M →Q for which p◦s = idM is called a
+section. When Q = TM is the tangent bundle we always have the zero section given
+by the vector ﬁeld X = 0. Using a bump function ψ we can easily construct other
+vector ﬁelds by taking a coordinate system, some locally deﬁned smooth functions
+yi(x) and writing
+X(x) =
+X
+i
+yi(x)
+ ∂
+∂xi
+
+x
+.
+Multiplying by ψ and extending gives a global vector ﬁeld.
+Remark:
+Clearly we can do a similar construction using the cotangent spaces T ∗
+a
+instead of the tangent spaces Ta, and using the basis
+(dx1)x, . . . , (dxn)x
+instead of the dual basis
+ ∂
+∂x1
+
+x
+, . . . ,
+ ∂
+∂x1
+
+x
+.
+This way we form the cotangent bundle T ∗M. The derivative of a function f is then
+a map df : M →T ∗M satisfying p ◦df = idM, though not every such map of this
+form is a derivative.
+25
+
+
+PDF PAGE 26
+Perhaps we should say here that the tangent bundle and cotangent bundle are exam-
+ples of vector bundles. Here is the general deﬁnition:
+Deﬁnition 15 A real vector bundle of rank m on a manifold M is a manifold E with
+a smooth projection p : E →M such that
+• each ﬁbre p−1(x) has the structure of an m-dimensional real vector space
+• each point x ∈M has a neighbourhood U and a diﬀeomorphism
+ψU : p−1(U) ∼= U × Rm
+such that ψU is a linear isomorphism from the vector space p−1(x) to the vector
+space {x} × Rm
+• on the intersection U ∩V
+ψUψ−1
+V
+: U ∩V × Rm →U ∩V × Rm
+is of the form
+(x, v) 7→(x, gUV (x)v)
+where gUV (x) is a smooth function on U ∩V with values in the space of invertible
+m × m matrices.
+For the tangent bundle gUV is the Jacobian matrix of a change of coordinates and for
+the cotangent bundle, its inverse transpose.
+4.2
+Vector ﬁelds as derivations
+The algebraic deﬁnition of tangent vector in Deﬁnition 10 shows that a vector ﬁeld
+X maps a C∞function to a function on M:
+X(f)(x) = Xx(f)
+and the local expression for X means that
+X(f)(x) =
+X
+i
+yi(x)
+ ∂
+∂xi
+
+x
+(f) =
+X
+i
+yi(x) ∂f
+∂xi
+(x).
+Since the yi(x) are smooth, X(f) is again smooth and satisﬁes the Leibnitz property
+X(fg) = f(Xg) + g(Xf).
+In fact, any linear transformation with this property (called a derivation of the algebra
+C∞(M)) is a vector ﬁeld:
+26
+
+
+PDF PAGE 27
+Proposition 4.1 Let X : C∞(M) →C∞(M) be a linear map which satisﬁes
+X(fg) = f(Xg) + g(Xf).
+Then X is a vector ﬁeld.
+Proof:
+For each a ∈M, Xa(f) = X(f)(a) satisﬁes the conditions for a tangent
+vector at a, so X deﬁnes a map X : M →TM with p ◦X = idM, and so locally can
+be written as
+Xx =
+X
+i
+yi(x)
+ ∂
+∂xi
+
+x
+.
+We just need to check that the yi(x) are smooth, and for this it suﬃces to apply
+X to a coordinate function xi extended by using a bump function in a coordinate
+neighbourhood. We get
+Xxi = yi(x)
+and since by assumption X maps smooth functions to smooth functions, this is
+smooth.
+2
+The characterization of vector ﬁelds given by Proposition 4.1 immediately leads to a
+way of combining two vector ﬁelds X, Y to get another. Consider both X and Y as
+linear maps from C∞(M) to itself and compose them. Then
+XY (fg)
+=
+X(f(Y g) + g(Y f)) = (Xf)(Y g) + f(XY g) + (Xg)(Y f) + g(XY f)
+Y X(fg)
+=
+Y (f(Xg) + g(Xf)) = (Y f)(Xg) + f(Y Xg) + (Y g)(Xf) + g(Y Xf)
+and subtracting and writing [X, Y ] = XY −Y X we have
+[X, Y ](fg) = f([X, Y ]g) + g([X, Y ]f)
+which from Proposition 4.1 means that [X, Y ] is a vector ﬁeld.
+Deﬁnition 16 The Lie bracket of two vector ﬁelds X, Y is the vector ﬁeld [X, Y ].
+Example:
+If M = R then X = fd/dx, Y = gd/dx and so
+[X, Y ] = (fg′ −gf ′) d
+dx.
+We shall later see that there is a geometrical origin for the Lie bracket.
+27
+
+
+PDF PAGE 28
+4.3
+One-parameter groups of diﬀeomorphisms
+Think of wind velocity (assuming it is constant in time) on the surface of the earth
+as a vector ﬁeld on the sphere S2. There is another interpretation we can make. A
+particle at position x ∈S2 moves after time t seconds to a position ϕt(x) ∈S2. After
+a further s seconds it is at
+ϕt+s(x) = ϕs(ϕt(x)).
+What we get this way is a homomorphism of groups: from the additive group R to
+the group of diﬀeomorphisms of S2 under the operation of composition. The technical
+deﬁnition is the following:
+Deﬁnition 17 A one-parameter group of diﬀeomorphisms of a manifold M is a
+smooth map
+ϕ : M × R →M
+such that (writing ϕt(x) = ϕ(x, t))
+• ϕt : M →M is a diﬀeomorphism
+• ϕ0 = id
+• ϕs+t = ϕs ◦ϕt.
+We shall show that vector ﬁelds generate one-parameter groups of diﬀeomorphisms,
+but only under certain hypotheses. If instead of the whole surface of the earth our
+manifold is just the interior of the UK and the wind is blowing East-West, clearly after
+however short a time, some particles will be blown oﬀshore, so we cannot hope for
+ϕt(x) that works for all x and t. The fact that the earth is compact is one reason why it
+works there, and this is one of the results below. The idea, nevertheless, works locally
+and is a useful way of understanding vector ﬁelds as “inﬁnitesimal diﬀeomorphisms”
+rather than as abstract derivations of functions.
+To make the link with vector ﬁelds, suppose ϕt is a one-parameter group of diﬀeo-
+morphisms and f a smooth function. Then
+f(ϕt(a))
+is a smooth function of t and we write
+∂
+∂tf(ϕt(a))|t=0 = Xa(f).
+28
+
+
+PDF PAGE 29
+It is straightforward to see that, since ϕ0(a) = a the Leibnitz rule holds and this is a
+tangent vector at a, and so as a = x varies we have a vector ﬁeld. In local coordinates
+we have
+ϕt(x1, . . . , xn) = (y1(x, t), . . . , yn(x, t))
+and
+∂
+∂tf(y1, . . . , yn)
+=
+X
+i
+∂f
+∂yi
+(y)∂yi
+∂t (x)|t=0
+=
+X
+i
+ci(x) ∂f
+∂xi
+(x)
+which yields the vector ﬁeld
+X =
+X
+i
+ci(x) ∂
+∂xi
+.
+We now want to reverse this: go from the vector ﬁeld to the diﬀeomorphism. The
+ﬁrst point is to track that “trajectory” of a single particle.
+Deﬁnition 18 An integral curve of a vector ﬁeld X is a smooth map ϕ : (α, β) ⊂
+R →M such that
+Dϕt
+ d
+dt
+
+= Xϕ(t).
+Example:
+Suppose M = R2 with coordinates (x, y) and X = ∂/∂x. The derivative
+Dϕ of the smooth function ϕ(t) = (x(t), y(t)) is
+Dϕ
+ d
+dt
+
+= dx
+dt
+∂
+∂x + dy
+dt
+∂
+∂y
+so the equation for an integral curve of X is
+dx
+dt
+=
+1
+dy
+dt
+=
+0
+which gives
+ϕ(t) = (t + a1, a2).
+In our wind analogy, the particle at (a1, a2) is transported to (t + a1, a2).
+29
+
+
+PDF PAGE 30
+In general we have:
+Theorem 4.2 Given a vector ﬁeld X on a manifold M and a ∈M there exists a
+maximal integral curve of X through a.
+By “maximal” we mean that the interval (α, β) is maximal – as we saw above it may
+not be the whole of the real numbers.
+Proof:
+First consider a coordinate chart (Uγ, ψγ) around a then if
+X =
+X
+i
+ci(x) ∂
+∂xi
+the equation
+Dϕt
+ d
+dt
+
+= Xϕ(t)
+can be written as the system of ordinary diﬀerential equations
+dxi
+dt = ci(x1, . . . , xn).
+The existence and uniqueness theorem for ODE’s (see Appendix) asserts that there
+is some interval on which there is a unique solution with initial condition
+(x1(0), . . . , xn(0)) = ψγ(a).
+Suppose ϕ : (α, β) →M is any integral curve with ϕ(0) = a. For each x ∈(α, β)
+the subset ϕ([0, x]) ⊂M is compact, so it can be covered by a ﬁnite number of
+coordinate charts, in each of which we can apply the existence and uniqueness theorem
+to intervals [0, α1], [α1, α2], . . . , [αn, x]. Uniqueness implies that these local solutions
+agree with ϕ on any subinterval containing 0.
+We then take the maximal open interval on which we can deﬁne ϕ.
+2
+To ﬁnd the one-parameter group of diﬀeomorphisms we now let a ∈M vary. In the
+example above, the integral curve through (a1, a2) was t 7→(t+a1, a2) and this deﬁnes
+the group of diﬀeomorphisms
+ϕt(x1, x2) = (t + x1, x2).
+Theorem 4.3 Let X be a vector ﬁeld on a manifold M and for (t, x) ∈R × M, let
+ϕ(t, x) = ϕt(x) be the maximal integral curve of X through x. Then
+30
+
+
+PDF PAGE 31
+• the map (t, x) 7→ϕt(x) is smooth
+• ϕt ◦ϕs = ϕt+s wherever the maps are deﬁned
+• if M is compact, then ϕt(x) is deﬁned on R × M and gives a one-parameter
+group of diﬀeomorphisms.
+Proof:
+The previous theorem tells us that for each a ∈M we have an open interval
+(α(a), β(a)) on which the maximal integral curve is deﬁned.
+The local existence
+theorem also gives us that there is a solution for initial conditions in a neighbourhood
+of a so the set
+{(t, x) ∈R × M : t ∈(α(x), β(x))}
+is open. This is the set on which ϕt(x) is maximally deﬁned.
+The theorem (see Appendix) on smooth dependence on initial conditions tells us that
+(t, x) 7→ϕt(x) is smooth.
+Consider ϕt ◦ϕs(x). If we ﬁx s and vary t, then this is the unique integral curve of X
+through ϕs(x). But ϕt+s(x) is an integral curve which at t = 0 passes through ϕs(x).
+By uniqueness they must agree so that ϕt ◦ϕs = ϕt+s. (Note that ϕt ◦ϕ−t = id shows
+that we have a diﬀeomorphism wherever it is deﬁned).
+Now consider the case where M is compact. For each x ∈M, we have an open
+interval (α(x), β(x)) containing 0 and an open set Ux ⊆M on which ϕt(x) is deﬁned.
+Cover M by {Ux}x∈M and take a ﬁnite subcovering Ux1, . . . , UxN, and set
+I =
+N
+\
+1
+(α(xi), β(xi))
+which is an open interval containing 0. By construction, for t ∈I we get
+ϕt : I × M →M
+which deﬁnes an integral curve (though not necessarily maximal) through each point
+x ∈M and with ϕ0(x) = x. We need to extend to all real values of t.
+If s, t ∈R, choose n such that (|s| + |t|)/n ∈I and deﬁne (where multiplication is
+composition)
+ϕt = (ϕt/n)n,
+ϕs = (ϕs/n)n.
+Now because t/n, s/n and (s + t)/n lie in I we have
+ϕt/nϕs/n = ϕ(s+t)/n = ϕs/nϕt/n
+31
+
+
+PDF PAGE 32
+and so because ϕt/n and ϕs/n commute, we also have
+ϕtϕs
+=
+(ϕt/n)n(ϕs/n)n
+=
+(ϕ(s+t)/n)n
+=
+ϕs+t
+which completes the proof.
+2
+4.4
+The Lie bracket revisited
+All the objects we shall consider will have the property that they can be transformed
+naturally by a diﬀeomorphism, and the link between vector ﬁelds and diﬀeomorphisms
+we have just observed provides an “inﬁnitesimal’ version of this.
+Given a diﬀeomorphism F : M →M and a smooth function f we get the transformed
+function f ◦F. When F = ϕt, generated according to the theorems above by a vector
+ﬁeld X, we then saw that
+∂
+∂tf(ϕt)|t=0 = X(f).
+So: the natural action of diﬀeomorphisms on functions specializes through one-parameter
+groups to the derivation of a function by a vector ﬁeld.
+Now suppose Y is a vector ﬁeld, considered as a map Y : M →TM.
+With a
+diﬀeomorphism F : M →M, its derivative DFx : Tx →TF(x) gives
+DFx(Yx) ∈TF(x).
+This deﬁnes a new vector ﬁeld ˜Y by
+YF(x) = DFx(˜Yx)
+(6)
+Thus for a function f,
+(˜Y )(f ◦F) = (Y f) ◦F
+(7)
+Now if F = ϕt for a one-parameter group, we have ˜Yt and we can diﬀerentiate to get
+˙Y = ∂
+∂t
+˜Yt
+
+t=0
+From (7) this gives
+˙Y f + Y (Xf) = XY f
+so that ˙Y = XY −Y X is the natural derivative deﬁned above. Thus the natural
+action of diﬀeomorphisms on vector ﬁelds specializes through one-parameter groups
+to the Lie bracket [X, Y ].
+32
+
+
+PDF PAGE 33
+5
+Tensor products
+We have so far encountered vector ﬁelds and the derivatives of smooth functions as
+analytical objects on manifolds. These are examples of a general class of objects
+called tensors which we shall encounter in more generality. The starting point is pure
+linear algebra.
+Let V, W be two ﬁnite-dimensional vector spaces over R. We are going to deﬁne a
+new vector space V ⊗W with two properties:
+• if v ∈V and w ∈W then there is a product v ⊗w ∈V ⊗W
+• the product is bilinear:
+(λv1 + µv2) ⊗w
+=
+λv1 ⊗w + µv2 ⊗w
+v ⊗(λw1 + µw2)
+=
+λv ⊗w1 + µv ⊗w2
+In fact, it is the properties of the vector space V ⊗W which are more important
+than what it is (and after all what is a real number? Do we always think of it as an
+equivalence class of Cauchy sequences of rationals?).
+Proposition 5.1 The tensor product V ⊗W has the universal property that if B :
+V × W →U is a bilinear map to a vector space U then there is a unique linear map
+β : V ⊗W →U
+such that B(v, w) = β(v ⊗w).
+There are various ways to deﬁne V ⊗W. In the ﬁnite-dimensional case we can say
+that V ⊗W is the dual space of the space of bilinear forms on V × W: i.e. maps
+B : V × W →R such that
+B(λv1 + µv2, w)
+=
+λB(v1, w) + µB(v2, w)
+B(v, λw1 + µw2)
+=
+λB(v, w1) + µB(v, w2)
+Given v, w ∈V, W we then deﬁne v ⊗w ∈V ⊗W as the map
+(v ⊗w)(B) = B(v, w).
+This satisﬁes the universal property because given B : V ×W →U and ξ ∈U ∗, ξ ◦B
+is a bilinear form on V × W and deﬁnes a linear map from U ∗to the space of bilinear
+forms. The dual map is the required homomorphism β from V ⊗W to (U ∗)∗= U.
+33
+
+
+PDF PAGE 34
+A bilinear form B is uniquely determined by its values B(vi, wj) on basis vectors
+v1, . . . , vm for V and w1, . . . wn for W which means the dimension of the vector space
+of bilinear forms is mn, as is its dual space V ⊗W. In fact, we can easily see that
+the mn vectors
+vi ⊗wj
+form a basis for V ⊗W. It is important to remember though that a typical element
+of V ⊗W can only be written as a sum
+X
+i,j
+aijvi ⊗wj
+and not as a pure product v ⊗w.
+Taking W = V we can form multiple tensor products
+V ⊗V,
+V ⊗V ⊗V = ⊗3V,
+. . .
+We can think of ⊗pV as the dual space of the space of p-fold multilinear forms on V .
+Mixing degrees we can even form the tensor algebra:
+T(V ) = ⊕∞
+k=0(⊗kV ).
+An element of T(V ) is a ﬁnite sum
+λ1 + v0 +
+X
+vi ⊗vj + . . . +
+X
+vi1 ⊗vi2 . . . ⊗vip
+of products of vectors vi ∈V . The obvious multiplication process is based on extend-
+ing by linearity the product
+(v1 ⊗. . . ⊗vp)(u1 ⊗. . . ⊗uq) = v1 ⊗. . . ⊗vp ⊗u1 ⊗. . . ⊗uq
+It is associative, but noncommutative.
+For the most part we shall be interested in only a quotient of this algebra, called the
+exterior algebra.
+5.1
+The exterior algebra
+Let T(V ) be the tensor algebra of a real vector space V and let I(V ) be the ideal
+generated by elements of the form
+v ⊗v
+where v ∈V . So I(V ) consists of all sums of multiples by T(V ) on the left and right
+of these generators.
+34
+
+
+PDF PAGE 35
+Deﬁnition 19 The exterior algebra of V is the quotient
+Λ∗V = T(V )/I(V ).
+If π : T(V ) →Λ∗V is the quotient projection then we set
+ΛpV = π(⊗pV )
+and call this the p-fold exterior power of V . We can think of this as the dual space of
+the space of multilinear forms M(v1, . . . , vp) on V which vanish if any two arguments
+coincide – the so-called alternating multilinear forms. If a ∈⊗pV, b ∈⊗qV then
+a ⊗b ∈⊗p+qV and taking the quotient we get a product called the exterior product:
+Deﬁnition 20 The exterior product of α = π(a) ∈ΛpV and β = π(b) ∈ΛqV is
+α ∧β = π(a ⊗b).
+Remark:
+If v1, . . . , vp ∈V then we deﬁne an element of the dual space of the space
+of alternating multilinear forms by
+v1 ∧v2 ∧. . . ∧vp(M) = M(v1, . . . , vp).
+The key properties of the exterior algebra follow:
+Proposition 5.2 If α ∈ΛpV, β ∈ΛqV then
+α ∧β = (−1)pqβ ∧α.
+Proof:
+Because for v ∈V , v ⊗v ∈I(V ), it follows that v ∧v = 0 and hence
+0 = (v1 + v2) ∧(v1 + v2) = 0 + v1 ∧v2 + v2 ∧v1 + 0.
+So interchanging any two entries from V in an expression like
+v1 ∧. . . ∧vk
+changes the sign.
+Write α as a linear combination of terms v1 ∧. . . ∧vp and β as a linear combination
+of w1 ∧. . . ∧wq and then, applying this rule to bring w1 to the front we see that
+(v1 ∧. . . ∧vp) ∧(w1 ∧. . . ∧wq) = (−1)pw1 ∧v1 ∧. . . vp ∧w2 ∧. . . ∧wq.
+For each of the q wi’s we get another factor (−1)p so that in the end
+(w1 ∧. . . ∧wq)(v1 ∧. . . ∧vp) = (−1)pq(v1 ∧. . . ∧vp)(w1 ∧. . . ∧wq).
+2
+35
+
+
+PDF PAGE 36
+Proposition 5.3 If dim V = n then dim ΛnV = 1.
+Proof:
+Let w1, . . . , wn be n vectors in V and relative to some basis let M be the
+square matrix whose columns are w1, . . . , wn. then
+B(w1, . . . , wn) = det M
+is a non-zero n-fold multilinear form on V . Moreover, if any two of the wi coincide,
+the determinant is zero, so this is a non-zero alternating n-linear form – an element
+in the dual space of ΛnV .
+On the other hand, choose a basis v1, . . . , vn for V , then anything in ⊗nV is a linear
+combination of terms like vi1 ⊗. . . ⊗vin and so anything in ΛnV is, after using
+Proposition 5.2, a linear combination of v1 ∧. . . ∧vn.
+Thus ΛnV is non-zero and at most one-dimensional hence is one-dimensional.
+2
+Proposition 5.4 let v1, . . . , vn be a basis for V , then the
+n
+p
+
+elements vi1∧vi2∧. . .∧vip
+for i1 < i2 < . . . < ip form a basis for ΛpV .
+Proof:
+By reordering and changing the sign we can get any exterior product of the
+vi’s so these elements clearly span ΛpV . Suppose then that
+X
+ai1...ipvi1 ∧vi2 ∧. . . ∧vip = 0.
+Because i1 < i2 < . . . < ip, each term is uniquely indexed by the subset {i1, i2, . . . , ip} =
+I ⊆{1, 2, . . . , n}, and we can write
+X
+I
+aIvI = 0
+(8)
+If I and J have a number in common, then vI ∧vJ = 0, so if J has n −p elements,
+vI ∧vJ = 0 unless J is the complementary subset I′ in which case the product is a
+multiple of v1 ∧v2 . . . ∧vn and by Proposition 5.3 this is non-zero. Thus, multiplying
+(8) by each term vI′ we deduce that each coeﬃcient aI = 0 and so we have linear
+independence.
+2
+Proposition 5.5 The vector v is linearly dependent on the linearly independent vec-
+tors v1, . . . , vp if and only if v1 ∧v2 ∧. . . ∧vp ∧v = 0.
+36
+
+
+PDF PAGE 37
+Proof:
+If v is linearly dependent on v1, . . . , vp then v = P aivi and expanding
+v1 ∧v2 ∧. . . ∧vp ∧v = v1 ∧v2 ∧. . . ∧vp ∧(
+p
+X
+1
+aivi)
+gives terms with repeated vi, which therefore vanish. If not, then v1, v2 . . . , vp, v can
+be extended to a basis and Proposition 5.4 tells us that the product is non-zero.
+2
+Proposition 5.6 If A : V →W is a linear transformation, then there is an induced
+linear transformation
+ΛpA : ΛpV →ΛpW
+such that
+ΛpA(v1 ∧. . . ∧vp) = Av1 ∧Av2 ∧. . . ∧Avp.
+Proof:
+From Proposition 5.4 the formula
+ΛpA(v1 ∧. . . ∧vp) = Av1 ∧Av2 ∧. . . ∧Avp
+actually deﬁnes what ΛpA is on basis vectors but doesn’t prove it is independent of
+the choice of basis. But the universal property of tensor products gives us
+⊗pA : ⊗pV →⊗pW
+and ⊗pA maps the ideal I(V ) to I(W) so deﬁnes ΛpA invariantly.
+2
+Proposition 5.7 If dim V = n, then the linear transformation ΛnA : ΛnV →ΛnV is
+given by det A.
+Proof:
+From Proposition 5.3, ΛnV is one-dimensional and so ΛnA is multiplication
+by a real number λ(A). So with a basis v1, . . . , vn,
+ΛnA(v1 ∧. . . ∧vn) = Av1 ∧Av2 ∧. . . Avn = λ(A)v1 ∧. . . ∧vn.
+But
+Avi =
+X
+j
+Ajivj
+and so
+Av1 ∧Av2 ∧. . . ∧Avn
+=
+X
+Aj1,1vj1 ∧Aj2,2vj2 ∧. . . ∧Ajn,nvjn
+=
+X
+σ∈Sn
+Aσ1,1vσ1 ∧Aσ2,2vσ2 ∧. . . ∧Aσn,nvσn
+37
+
+
+PDF PAGE 38
+where the sum runs over all permutations σ. But if σ is a transposition then the term
+vσ1 ∧vσ2 . . . ∧vσn changes sign, so
+Av1 ∧Av2 ∧. . . ∧Avn =
+X
+σ∈Sn
+sgn σAσ1,1Aσ2,2 . . . Aσn,nv1 ∧. . . ∧vn
+which is the deﬁnition of (det A)v1 ∧. . . ∧vn.
+2
+6
+Diﬀerential forms
+6.1
+The bundle of p-forms
+Now let M be an n-dimensional manifold and T ∗
+x the cotangent space at x. We form
+the p-fold exterior power
+ΛpT ∗
+x
+and, just as we did for the tangent bundle and cotangent bundle, we shall make
+ΛpT ∗M =
+[
+x∈M
+ΛpT ∗
+x
+into a vector bundle and hence a manifold.
+If x1, . . . , xn are coordinates for a chart (U, ϕU) then for x ∈U, the elements
+dxi1 ∧dxi2 ∧. . . ∧dxip
+for i1 < i2 < . . . < ip form a basis for ΛpT ∗
+x. The
+n
+p
+
+coeﬃcients of α ∈ΛpT ∗
+x then
+give a coordinate chart ΨU mapping to the open set
+ϕU(U) × ΛpRn ⊆Rn × R(n
+p).
+When p = 1 this is just the coordinate chart we used for the cotangent bundle:
+ΦU(x,
+X
+yidxi) = (x1, . . . , xn, y1, . . . , yn)
+and on two overlapping coordinate charts we there had
+ΦβΦ−1
+α (x1, . . . , xn, y1 . . . , yn) = (˜x1, . . . , ˜xn,
+X
+j
+∂˜xi
+∂x1
+yi, . . . ,
+X
+i
+∂˜xi
+∂xn
+yi).
+38
+
+
+PDF PAGE 39
+For the p-th exterior power we need to replace the Jacobian matrix
+J = ∂˜xi
+∂xj
+by its induced linear map
+ΛpJ : ΛpRn →ΛpRn.
+It’s a long and complicated expression if we write it down in a basis but it is invertible
+and each entry is a polynomial in C∞functions and hence gives a smooth map with
+smooth inverse. In other words,
+ΨβΨ−1
+α
+satisﬁes the conditions for a manifold of dimension n +
+n
+p
+
+.
+Deﬁnition 21 The bundle of p-forms of a manifold M is the diﬀerentiable structure
+on ΛpT ∗M deﬁned by the above atlas. There is a natural projection p : ΛpT ∗M →M
+and a section is called a diﬀerential p-form
+Examples:
+1. A zero-form is a section of Λ0T ∗which by convention is just a smooth function f.
+2. A 1-form is a section of the cotangent bundle T ∗. From our deﬁnition of the
+derivative of a function, it is clear that df is an example of a 1-form. We can write
+in a coordinate system
+df =
+X
+j
+∂f
+∂xj
+dxj.
+By using a bump function we can extend a locally-deﬁned p-form like dx1 ∧dx2 ∧
+. . . ∧dxp to the whole of M, so sections always exist. In fact, it will be convenient
+at various points to show that any function, form, or vector ﬁeld can be written as a
+sum of these local ones. This involves the concept of partition of unity.
+6.2
+Partitions of unity
+Deﬁnition 22 A partition of unity on M is a collection {ϕi}i∈I of smooth functions
+such that
+• ϕi ≥0
+39
+
+
+PDF PAGE 40
+• {supp ϕi : i ∈I} is locally ﬁnite
+• P
+i ϕi = 1
+Here locally ﬁnite means that for each x ∈M there is a neighbourhood U which
+intersects only ﬁnitely many supports supp ϕi.
+In the appendix, the following general theorem is proved:
+Theorem 6.1 Given any open covering {Vα} of a manifold M there exists a partition
+of unity {ϕi} on M such that supp ϕi ⊂Vα(i) for some α(i).
+We say that such a partition of unity is subordinate to the given covering.
+Here let us just note that in the case when M is compact, life is much easier: for each
+point x ∈{Vα} we take a coordinate neighbourhood Ux ⊂{Vα} and a bump function
+which is 1 on a neighbourhood Vx of x and whose support lies in Ux. Compactness says
+we can extract a ﬁnite subcovering of the {Vx}x∈X and so we get smooth functions
+ψi ≥0 for i = 1, . . . , N and equal to 1 on Vxi. In particular the sum is positive, and
+deﬁning
+ϕi =
+ψi
+PN
+1 ψi
+gives the partition of unity.
+Now, not only can we create global p-forms by taking local ones, multiplying by ϕi
+and extending by zero, but conversely if α is any p-form, we can write it as
+α = (
+X
+i
+ϕi)α =
+X
+i
+(ϕiα)
+which is a sum of extensions of locally deﬁned ones.
+At this point, it may not be clear why we insist on introducing these complicated
+exterior algebra objects, but there are two motivations. One is that the algebraic
+theory of determinants is, as we have seen, part of exterior algebra, and multiple
+integrals involve determinants. We shall later be able to integrate p-forms over p-
+dimensional manifolds.
+The other is the appearance of the skew-symmetric cross product in ordinary three-
+dimensional calculus, giving rise to the curl diﬀerential operator taking vector ﬁelds
+to vector ﬁelds.
+As we shall see, to do this in a coordinate-free way, and in all
+dimensions, we have to dispense with vector ﬁelds and work with diﬀerential forms
+instead.
+40
+
+
+PDF PAGE 41
+6.3
+Working with diﬀerential forms
+We deﬁned a diﬀerential form in Deﬁnition 21 as a section of a vector bundle. In a
+local coordinate system it looks like this:
+α =
+X
+i1<i2<...<ip
+ai1i2...ip(x)dxi1 ∧dxi2 . . . ∧dxip
+(9)
+where the coeﬃcients are smooth functions. If x(y) is a diﬀerent coordinate system,
+then we write the derivatives
+dxik =
+X
+j
+∂xik
+∂yj
+dyj
+and substitute in (9) to get
+α =
+X
+j1<j2<...<jp
+˜aj1j2...jp(y)dyj1 ∧dyj2 . . . ∧dyjp.
+Example:
+Let M = R2 and consider the 2-form ω = dx1 ∧dx2. Now change to
+polar coordinates on the open set (x1, x2)̸ = (0, 0):
+x1 = r cos θ,
+x2 = r sin θ.
+We have
+dx1
+=
+cos θdr −r sin θdθ
+dx2
+=
+sin θdr + r cos θdθ
+so that
+ω = (cos θdr −r sin θdθ) ∧(sin θdr + r cos θdθ) = rdr ∧dθ.
+We shall often write
+Ωp(M)
+as the inﬁnite-dimensional vector space of all p-forms on M.
+Although we ﬁrst introduced vector ﬁelds as a means of starting to do analysis on
+manifolds, in many ways diﬀerential forms are better behaved. For example, suppose
+we have a smooth map
+F : M →N.
+41
+
+
+PDF PAGE 42
+The derivative of this gives at each point x ∈M a linear map
+DFx : TxM →TF(x)N
+but if we have a section of the tangent bundle TM – a vector ﬁeld X – then DFx(Xx)
+doesn’t in general deﬁne a vector ﬁeld on N – it doesn’t tell us what to choose in
+TaN if a ∈N is not in the image of F.
+On the other hand suppose α is a section of ΛpT ∗N – a p-form on N. Then the dual
+map
+DF ′
+x : T ∗
+F(x)N →T ∗
+xM
+deﬁnes
+Λp(DF ′
+x) : ΛpT ∗
+F(x)N →ΛpT ∗
+xM
+and then
+Λp(DF ′
+x)(αF(x))
+is deﬁned for all x and is a section of ΛpT ∗M – a p-form on M.
+Deﬁnition 23 The pull-back of a p-form α ∈Ωp(N) by a smooth map F : M →N
+is the p-form F ∗α ∈Ωp(M) deﬁned by
+(F ∗α)x = Λp(DF ′
+x)(αF(x)).
+Examples:
+1. The pull-back of a 0-form f ∈C∞(N) is just the composition f ◦F.
+2. By the deﬁnition of the dual map DF ′
+x we have DF ′
+x(α)(Xx) = αF(x)(DFx(Xx)),
+so if α = df, DF ′
+x(df)(Xx) = dfF(x)(DFx(Xx)) = Xx(f ◦F) by the deﬁnition of DFx.
+This means that F ∗(df) = d(f ◦F).
+3. Let F : R3 →R2 be given by
+F(x1, x2, x3) = (x1x2, x2 + x3) = (x, y)
+and take
+α = xdx ∧dy.
+Then, using the deﬁnition of Λp(DF ′
+x) and the previous example,
+F ∗α
+=
+(x ◦F)d(x ◦F) ∧d(y ◦F)
+=
+x1x2d(x1x2) ∧d(x2 + x3)
+=
+x1x2(x1dx2 + x2dx1) ∧d(x2 + x3)
+=
+x2
+1x2dx2 ∧dx3 + x1x2
+2dx1 ∧dx2 + x1x2
+2dx1 ∧dx3
+42
+
+
+PDF PAGE 43
+From the algebraic properties of the maps
+ΛpA : ΛpV →ΛpV
+we have the following straightforward properties of the pull-back:
+• (F ◦G)∗α = G∗(F ∗α)
+• F ∗(α + β) = F ∗α + F ∗β
+• F ∗(α ∧β) = F ∗α ∧F ∗β
+6.4
+The exterior derivative
+We now come to the construction of the basic diﬀerential operator on forms – the
+exterior derivative which generalizes the grads, divs and curls of three-dimensional
+calculus. The key feature it has is that it is deﬁned naturally by the manifold structure
+without any further assumptions.
+Theorem 6.2 On any manifold M there is a natural linear map
+d : Ωp(M) →Ωp+1(M)
+called the exterior derivative such that
+1. if f ∈Ω0(M), then df ∈Ω1(M) is the derivative of f
+2. d2 = 0
+3. d(α ∧β) = dα ∧β + (−1)pα ∧dβ if α ∈Ωp(M)
+Examples:
+Before proving the theorem, let’s look at M = R3, following the rules
+of the theorem, to see d in all cases p = 0, 1, 2.
+p = 0: by deﬁnition
+df = ∂f
+∂x1
+dx1 + ∂f
+∂x2
+dx2 + ∂f
+∂x3
+dx3
+which we normally would write as grad f.
+p = 1: take a 1-form
+α = a1dx1 + a2dx2 + a3dx3
+43
+
+
+PDF PAGE 44
+then applying the rules we have
+d(a1dx1 + a2dx2 + a3dx3)
+=
+da1 ∧dx1 + da2 ∧dx2 + da3 ∧dx3
+=
+∂a1
+∂x1
+dx1 + ∂a1
+∂x2
+dx2 + ∂a1
+∂x3
+dx3
+
+∧dx1 + . . .
+=
+∂a1
+∂x3
+−∂a3
+∂x1
+
+dx3 ∧dx1 +
+∂a2
+∂x1
+−∂a1
+∂x2
+
+dx1 ∧dx2 +
+∂a3
+∂x2
+−∂a2
+∂x3
+
+dx2 ∧dx3.
+The coeﬃcients of this deﬁne what we would call the curl of the vector ﬁeld a but
+a has now become a 1-form α and not a vector ﬁeld and dα is a 2-form, not a
+vector ﬁeld. The geometrical interpretation has changed. Note nevertheless that the
+invariant statement d2 = 0 is equivalent to curl grad f = 0.
+p = 2: now we have a 2-form
+β = b1dx2 ∧dx3 + b2dx3 ∧dx1 + b3dx1 ∧dx2
+and
+dβ
+=
+∂b1
+∂x1
+dx1 ∧dx2 ∧dx3 + ∂b2
+∂x2
+dx1 ∧dx2 ∧dx3 + ∂b3
+∂x3
+dx1 ∧dx2 ∧dx3
+=
+ ∂b1
+∂x1
++ ∂b2
+∂x2
++ ∂b3
+∂x3
+
+dx1 ∧dx2 ∧dx3
+which would be the divergence of a vector ﬁeld b but in our case is applied to a 2-form
+β. Again d2 = 0 is equivalent to div curl b = 0.
+Here we see familiar formulas, but acting on unfamiliar objects. The fact that we can
+pull diﬀerential forms around by smooth maps will give us a lot more power, even in
+three dimensions, than if we always considered these things as vector ﬁelds.
+Let us return to the Theorem 6.2 now and give its proof.
+Proof:
+We shall deﬁne dα by ﬁrst breaking up α as a sum of terms with support in
+a local coordinate system (using a partition of unity), deﬁne a local d operator using
+a coordinate system, and then show that the result is independent of the choice.
+So, to begin with, write a p-form locally as
+α =
+X
+i1<i2<...<ip
+ai1i2...ip(x)dxi1 ∧dxi2 ∧. . . ∧dxip
+44
+
+
+PDF PAGE 45
+and deﬁne
+dα =
+X
+i1<i2<...<ip
+dai1i2...ip ∧dxi1 ∧dxi2 ∧. . . ∧dxip.
+When p = 0, this is just the derivative, so the ﬁrst property of the theorem holds.
+For the second part, we expand
+dα =
+X
+j,i1<i2<...<ip
+∂ai1i2...ip
+∂xj
+dxj ∧dxi1 ∧dxi2 ∧. . . ∧dxip
+and then calculate
+d2α =
+X
+j,k,i1<i2<...<ip
+∂2ai1i2...ip
+∂xj∂xk
+dxk ∧dxj ∧dxi1 ∧dxi2 . . . ∧dxip.
+The term
+∂2ai1i2...ip
+∂xj∂xk
+is symmetric in j, k but it multiplies dxk ∧dxj in the formula which is skew-symmetric
+in j and k, so the expression vanishes identically and d2α = 0 as required.
+For the third part, we check on decomposable forms
+α
+=
+fdxi1 ∧. . . ∧dxip = fdxI
+β
+=
+gdxj1 ∧. . . ∧dxjq = gdxJ
+and extend by linearity. So
+d(α ∧β)
+=
+d(fgdxI ∧dxJ)
+=
+d(fg) ∧dxI ∧dxJ
+=
+(fdg + gdf) ∧dxI ∧dxJ
+=
+(−1)pfdxI ∧dg ∧dxJ + df ∧dxI ∧gdxJ
+=
+(−1)pα ∧dβ + dα ∧β
+So, using one coordinate system we have deﬁned an operation d which satisﬁes the
+three conditions of the theorem. Now represent α in coordinates y1, . . . , yn:
+α =
+X
+i1<i2<...<ip
+bi1i2...ipdyi1 ∧dyi2 ∧. . . ∧dyip
+45
+
+
+PDF PAGE 46
+and deﬁne in the same way
+d′α =
+X
+i1<i2<...<ip
+dbi1i2...ip ∧dyi1 ∧dyi2 ∧. . . ∧dyip.
+We shall show that d = d′ by using the three conditions.
+From (1) and (3),
+dα = d(
+X
+bi1i2...ipdyi1 ∧dyi2 . . . ∧dyip) =
+X
+dbi1i2...ip ∧dyi1 ∧dyi2 ∧. . . ∧dyip +
+X
+bi1i2...ipd(dyi1 ∧dyi2 ∧. . . ∧dyip)
+and from (3)
+d(dyi1 ∧dyi2 ∧. . . ∧dyip) = d(dyi1) ∧dyi2 ∧. . . ∧dyip −dyi1 ∧d(dyi2 ∧. . . ∧dyip).
+From (1) and (2) d2yi1 = 0 and continuing similarly with the right hand term, we get
+zero in all terms.
+Thus on each coordinate neighbourhood U dα = P
+i1<i2<...<ip dbi1i2...ip ∧dyi1 ∧dyi2 ∧
+. . . ∧dyip = d′α and dα is thus globally well-deﬁned.
+2
+One important property of the exterior derivative is the following:
+Proposition 6.3 Let F : M →N be a smooth map and α ∈Ωp(N). then
+d(F ∗α) = F ∗(dα).
+Proof:
+Recall that the derivative DFx : TxM →TF(x)N was deﬁned in (11) by
+DFx(Xx)(f) = Xx(f ◦F)
+so that the dual map DF ′
+x : T ∗
+F(x)N →T ∗
+xM satisﬁes
+DF ′
+x(df)F(x) = d(f ◦F)x.
+From the deﬁnition of pull-back this means that
+F ∗(df) = d(f ◦F) = d(F ∗f)
+(10)
+46
+
+
+PDF PAGE 47
+Now if
+α =
+X
+i1<i2<...<ip
+ai1i2...ip(x)dxi1 ∧dxi2 ∧. . . ∧dxip,
+F ∗α =
+X
+i1<i2<...<ip
+ai1i2...ip(F(x))F ∗dxi1 ∧F ∗dxi2 ∧. . . ∧F ∗dxip
+by the multiplicative property of pull-back and then using the properties of d and
+(10)
+d(F ∗α)
+=
+X
+i1<i2<...<ip
+d(ai1i2...ip(F(x))) ∧F ∗dxi1 ∧F ∗dxi2 ∧. . . ∧F ∗dxip
+=
+X
+i1<i2<...<ip
+F ∗dai1i2...ip ∧F ∗dxi1 ∧F ∗dxi2 ∧. . . ∧F ∗dxip
+=
+F ∗(dα).
+2
+6.5
+The Lie derivative of a diﬀerential form
+Suppose ϕt is the one-parameter (locally deﬁned) group of diﬀeomorphisms deﬁned
+by a vector ﬁeld X. Then there is a naturally deﬁned Lie derivative
+LXα = ∂
+∂tϕ∗
+tα
+
+t=0
+of a p-form α by X. It is again a p-form. We shall give a useful formula for this
+involving the exterior derivative.
+Proposition 6.4 Given a vector ﬁeld X on a manifold M, there is a linear map
+iX : Ωp(M) →Ωp−1(M)
+(called the interior product) such that
+• iXdf = X(f)
+• iX(α ∧β) = iXα ∧β + (−1)pα ∧iXβ if α ∈Ωp(M)
+47
+
+
+PDF PAGE 48
+The proposition tells us exactly how to work out an interior product: if
+X =
+X
+i
+ai
+∂
+∂xi
+,
+and α = dx1 ∧dx2 ∧. . . ∧dxp is a basic p-form then
+iXα = a1dx2 ∧. . . ∧dxp −a2dx1 ∧dx3 ∧. . . ∧dxp + . . .
+(11)
+In particular
+iX(iXα) = a1a2dx3 ∧. . . ∧dxp −a2a1dx3 ∧. . . ∧dxp + . . . = 0.
+Example:
+Suppose
+α = dx ∧dy,
+X = x ∂
+∂x + y ∂
+∂y
+then
+iXα = xdy −ydx.
+The interior product is just a linear algebra construction. Above we have seen how
+to work it out when we write down a form as a sum of basis vectors. We just need to
+prove that it is well-deﬁned and independent of the way we do that, which motivates
+the following more abstract proof:
+Proof:
+In Remark 5.1 we deﬁned ΛpV as the dual space of the space of alternating
+p-multilinear forms on V . If M is an alternating (p −1)-multilinear form on V and
+ξ a linear form on V then
+(ξM)(v1, . . . , vp) = ξ(v1)M(v2, . . . , vp) −ξ(v2)M(v1, v3, . . . , vp) + . . .
+(12)
+is an alternating p-multilinear form. So if α ∈ΛpV we can deﬁne iξα ∈Λp−1V by
+(iξα)(M) = α(ξM).
+Taking V = T ∗and ξ = X ∈V ∗= (T ∗)∗= T gives the interior product. Equation
+(12) gives us the rule (11) for working out interior products.
+2
+Here then is the formula for the Lie derivative:
+Proposition 6.5 The Lie derivative LXα of a p-form α is given by
+LXα = d(iXα) + iXdα.
+48
+
+
+PDF PAGE 49
+Proof:
+Consider the right hand side
+RX(α) = d(iXα) + iXdα.
+Now iX reduces the degree p by 1 but d increases it by 1, so RX maps p-forms to
+p-forms. Also,
+d(d(iXα) + iXdα) = diXdα = (diX + iXd)dα
+because d2 = 0, so RX commutes with d. Finally, because
+iX(α ∧β)
+=
+iXα ∧β + (−1)pα ∧iXβ
+d(α ∧β)
+=
+dα ∧β + (−1)pα ∧dβ
+we have
+RX(α ∧β) = (RXα) ∧β + α ∧RX(β).
+On the other hand
+ϕ∗
+t(dα) = d(ϕ∗
+tα)
+so diﬀerentiating at t = 0, we get
+LXdα = d(LXα)
+and
+ϕ∗
+t(α ∧β) = ϕ∗
+tα ∧ϕ∗
+tβ
+and diﬀerentiating this, we have
+LX(α ∧β) = LXα ∧β + α ∧LXβ.
+Thus both LX and RX preserve degree, commute with d and satisfy the same Leibnitz
+identity. Hence, if we write a p-form as
+α =
+X
+i1<i2<...<ip
+ai1i2...ip(x)dxi1 ∧dxi2 ∧. . . ∧dxip
+LX and RX will agree so long as they agree on functions. But
+RXf = iXdf = X(f) = ∂
+∂tf(ϕt)
+
+t=0
+= LXf
+so they do agree.
+2
+49
+
+
+PDF PAGE 50
+6.6
+de Rham cohomology
+In textbooks on vector calculus, you may read not only that curl grad f = 0, but also
+that if a vector ﬁeld a satisﬁes curl a = 0, then it can be written as a = grad f for
+some function f. Sometimes the statement is given with the proviso that the open
+set of R3 on which a is deﬁned satisﬁes the topological condition that it is simply
+connected (any closed path can be contracted to a point).
+In the language of diﬀerential forms on a manifold, the analogue of the above state-
+ment would say that if a 1-form α satisﬁes dα = 0, and M is simply-connected, there
+is a function f such that df = α.
+While this is true, the criterion of simply connectedness is far too strong. We want
+to know when the kernel of
+d : Ω1(M) →Ω2(M)
+is equal to the image of
+d : Ω0(M) →Ω1(M).
+Since d2f = 0, the second vector space is contained in the ﬁrst and what we shall do
+is simply to study the quotient, which becomes a topological object in its own right,
+with an algebraic structure which can be used to say many things about the global
+topology of a manifold.
+Deﬁnition 24 The p-th de Rham cohomology group of a manifold M is the quotient
+vector space:
+Hp(M) = Ker d : Ωp(M) →Ωp+1(M)
+Im d : Ωp−1(M) →Ωp(M)
+Remark:
+1. Although we call it the cohomology group, it is simply a real vector space. There
+are analogous structures in algebraic topology where the additive group structure is
+more interesting.
+2. Since there are no forms of degree −1, the group H0(M) is the space of functions
+f such that df = 0. Now each connected component Mi of M is an open set of M
+and hence a manifold. The mean value theorem tells us that on any open ball in a
+coordinate neighbourhood of Mi, df = 0 implies that f is equal to a constant c, and
+the subset of Mi on which f = c is open and closed and hence equal to Mi.
+Thus if M is connected, the de Rham cohomology group H0(M) is naturally isomor-
+phic to R: the constant value c of the function f. In general H0(M) is the vector
+space of real valued functions on the set of components. Our assumption that M
+50
+
+
+PDF PAGE 51
+has a countable basis of open sets means that there are at most countably many
+components. When M is compact, there are only ﬁnitely many, since components
+provide an open covering. In fact, the cohomology groups of a compact manifold are
+ﬁnite-dimensional vector spaces for all p, though we shall not prove that here.
+It is convenient in discussing the exterior derivative to introduce the following termi-
+nology:
+Deﬁnition 25 A form α ∈Ωp(M) is closed if dα = 0.
+Deﬁnition 26 A form α ∈Ωp(M) is exact if α = dβ for some β ∈Ωp−1(M).
+The de Rham cohomology group Hp(M) is by deﬁnition the quotient of the space of
+closed p-forms by the subspace of exact p-forms. Under the quotient map, a closed
+p-form α deﬁnes a cohomology class [α] ∈Hp(M), and [α′] = [α] if and only if
+α′ −α = dβ for some β.
+Here are some basic features of the de Rham cohomology groups:
+Proposition 6.6 The de Rham cohomology groups of a manifold M of dimension n
+have the following properties:
+• Hp(M) = 0 if p > n
+• for a ∈Hp(M), b ∈Hq(M) there is a bilinear product ab ∈Hp+q(M) which
+satisﬁes
+ab = (−1)pqba
+• if F : M →N is a smooth map, it deﬁnes a natural linear map
+F ∗: Hp(N) →Hp(M)
+which commutes with the product.
+Proof:
+The ﬁrst part is clear since ΛpT ∗= 0 for p > n.
+For the product, this comes directly from the exterior product of forms. If a = [α], b =
+[β] we deﬁne
+ab = [α ∧β]
+51
+
+
+PDF PAGE 52
+but we need to check that this really does deﬁne a cohomology class. Firstly, since
+α, β are closed,
+d(α ∧β) = dα ∧β + (−1)pα ∧dβ = 0
+so there is a class deﬁned by α ∧β. Suppose we now choose a diﬀerent representative
+α′ = α + dγ for a. Then
+α′ ∧β = (α + dγ) ∧β = α ∧β + d(γ ∧β)
+using dβ = 0, so d(γ ∧β) = dγ ∧β. Thus α′ ∧β and α ∧β diﬀer by an exact form
+and deﬁne the same cohomology class. Changing β gives the same result.
+The last part is just the pull-back operation on forms. Since
+dF ∗α = F ∗dα
+F ∗deﬁnes a map of cohomology groups. And since
+F ∗(α ∧β) = F ∗α ∧F ∗β
+it respects the product.
+2
+Perhaps the most important property of the de Rham cohomology, certainly the
+one that links it to algebraic topology, is the deformation invariance of the induced
+maps F. We show that if Ft is a smooth family of smooth maps, then the eﬀect on
+cohomology is independent of t. As a matter of terminology (because we have only
+deﬁned smooth maps of manifolds) we shall say that a map
+F : M × [a, b] →N
+is smooth if it is the restriction of a smooth map on the product with some slightly
+bigger open interval M × (a −ϵ, b + ϵ).
+Theorem 6.7 Let F : M × [0, 1] →N be a smooth map. Set Ft(x) = F(x, t) and
+consider the induced map on de Rham cohomology F ∗
+t : Hp(N) →Hp(M). Then
+F ∗
+1 = F ∗
+0 .
+Proof:
+Represent a ∈Hp(N) by a closed p-form α and consider the pull-back form
+F ∗α on M × [0, 1]. We can decompose this uniquely in the form
+F ∗α = β + dt ∧γ
+(13)
+52
+
+
+PDF PAGE 53
+where β is a p-form on M (also depending on t) and γ is a (p−1)-form on M, depending
+on t. In a coordinate system it is clear how to do this, but more invariantly, the form
+β is just F ∗
+t α. To get γ in an invariant manner, we can think of
+(x, s) 7→(x, s + t)
+as a local one-parameter group of diﬀeomorphisms of M × (a, b) which generates a
+vector ﬁeld X = ∂/∂t. Then
+γ = iXF ∗α.
+Now α is closed, so from (13),
+0 = dMβ + dt ∧∂β
+∂t −dt ∧dMγ
+where dM is the exterior derivative in the variables of M. It follows that
+∂β
+∂t = dMγ.
+Now integrating with respect to the parameter t, and using
+∂
+∂tF ∗
+t α = ∂β
+∂t
+we obtain
+F ∗
+1 α −F ∗
+0 α =
+Z 1
+0
+∂
+∂tF ∗
+t α dt = d
+Z 1
+0
+γ dt.
+So the closed forms F ∗
+1 α and F ∗
+0 α diﬀer by an exact form and
+F ∗
+1 (a) = F ∗
+0 (a).
+2
+Here is an immediate corollary:
+Proposition 6.8 The de Rham cohomology groups of M = Rn are zero for p > 0.
+Proof:
+Deﬁne F : Rn × [0, 1] →Rn by
+F(x, t) = tx.
+Then F1(x) = x which is the identity map, and so
+F ∗
+1 : Hp(Rn) →Hp(Rn)
+53
+
+
+PDF PAGE 54
+is the identity.
+But F0(x) = 0 which is a constant map. In particular the derivative vanishes, so the
+pull-back of any p-form of degree greater than zero is the zero map. So for p > 0
+F ∗
+0 : Hp(Rn) →Hp(Rn)
+vanishes.
+From Theorem 6.7 F ∗
+0 = F ∗
+1 and we deduce that Hp(Rn) vanishes for p > 0. Of
+course Rn is connected so H0(Rn) ∼= R.
+2
+Exercise 6.9 Show that the previous proposition holds for a star shaped region in
+Rn: an open set U with a point a ∈U such that for each x ∈U the straight-line
+segment ax ⊂U. This is usually called the Poincar´e lemma.
+The same argument above can be used for the map Ft : M × Rn →M × Rn given by
+Ft(a, x) = (a, tx) to show that Hp(M × Rn) ∼= Hp(M).
+We are in no position yet to calculate many other de Rham cohomology groups, but
+here is a ﬁrst non-trivial example. Consider the case of R/Z, diﬀeomorphic to the
+circle. In the atlas given earlier, we had ϕ1ϕ−1
+0 (x) = x or ϕ1ϕ−1
+0 (x) = x −1 so the
+1-form dx = d(x −1) is well-deﬁned, and nowhere zero. It is not the derivative of
+a function, however, since R/Z is compact and any function must have a minimum
+where df = 0. We deduce that
+H1(R/Z)̸ = 0.
+On the other hand, suppose that α = g(x)dx is any 1-form (necessarily closed because
+it is the top degree). Then g is a periodic function: g(x + 1) = g(x). To solve df = α
+means solving f ′(x) = g(x) which is easily done on R by:
+f(x) =
+Z x
+0
+g(s)ds.
+But we want f(x + 1) = f(x) which will only be true if
+Z 1
+0
+g(x)dx = 0.
+Thus in general
+α = g(x)dx =
+Z 1
+0
+g(s)ds
+
+dx + df
+and any 1-form is of the form cdx + df. Thus H1(R/Z) ∼= R.
+54
+
+
+PDF PAGE 55
+We can use this in fact to start an inductive calculation of the de Rham cohomology
+of the n-sphere.
+Theorem 6.10 For n > 0, Hp(Sn) ∼= R if p = 0 or p = n and is zero otherwise.
+Proof:
+We have already calculated the case of n = 1 so suppose that n > 1.
+Clearly the group vanishes when p > n, the dimension of Sn, and for n > 0, Sn is
+connected and so H0(Sn) ∼= R.
+Decompose Sn into open sets U, V , the complement of closed balls around the North
+and South poles respectively. By stereographic projection these are diﬀeomorphic to
+open balls in Rn. If α is a closed p-form for 1 < p < n, then by the Poincar´e lemma
+α = du on U and α = dv on V for some (p−1) forms u, v. On the intersection U ∩V ,
+d(u −v) = α −α = 0
+so (u −v) is closed. But
+U ∩V ∼= Sn−1 × R
+so
+Hp−1(U ∩V ) ∼= Hp−1(Sn−1)
+and by induction this vanishes, so on U ∩V , u −v = dw.
+Now look at U ∩V as a product with a ﬁnite open interval: Sn−1 × (−2, 2). We can
+ﬁnd a bump function ϕ(s) which is 1 for s ∈(−1, 1) and has support in (−2, 2). Take
+slightly smaller sets U ′ ⊂U, V ′ ⊂V such that U ′ ∩V ′ = Sn−1 × (−1, 1). Then ϕw
+extends by zero to deﬁne a form on Sn and we have u on U ′ and v + d(ϕw) on V ′
+with u = v + dw = v + d(ϕw) on U ′ ∩V ′. Thus we have deﬁned a (p −1) form β
+on Sn such that β = u on U ′ and v + d(ϕw) on V ′ and α = dβ on U ′ and V ′ and so
+globally α = dβ. Thus the cohomology class of α is zero.
+This shows that we have vanishing of Hp(Sn) for 1 < p < n.
+When p = 1, in the argument above u−v is a function on U ∩V and since d(u−v) = 0
+it is a constant c if U ∩V is connected, which it is for n > 1. Then d(v + c) = α
+and the pair of functions u on U and v + c on V agree on the overlap and deﬁne a
+function f such that df = α.
+When p = n the form u−v deﬁnes a class in Hn−1(U ∩V ) ∼= Hn−1(Sn−1) ∼= R. So let
+ω be an (n −1) form on Sn−1 whose cohomology class is non-trivial and pull it back
+55
+
+
+PDF PAGE 56
+to Sn−1 × (−2, 2) by the projection onto the ﬁrst factor. Then Hn−1(Sn−1 × (−2, 2))
+is generated by [ω] and we have
+u −v = λω + dw
+for some λ ∈R. If λ = 0 we repeat the process above, so Hn(Sn) is at most one-
+dimensional. Note that λ is linear in α and is independent of the choice of u and v
+– if we change u by a closed form then it is exact since Hp−1(U) = 0 and we can
+incorporate it into w.
+All we need now is to ﬁnd a class in Hn(Sn) for which λ̸ = 0. To do this consider
+ϕdt ∧ω
+extended by zero outside U ∩V . Then
+Z t
+−2
+ϕ(s)ds
+
+ω
+vanishes for t < −2 and so extends by zero to deﬁne a form u on U such that du = α.
+When t > 2 this is non-zero but we can change this to
+v =
+Z t
+−2
+ϕ(s)ds
+
+ω −
+Z 2
+−2
+ϕ(s)ds
+
+ω
+which does extend by zero to V and still satisﬁes dv = α. Thus taking the diﬀerence,
+λ above is the positive number
+λ =
+Z 2
+−2
+ϕ(s)ds.
+2
+To get more information on de Rham cohomology we need to study the other aspect
+of diﬀerential forms: integration.
+56
+
+
+PDF PAGE 57
+7
+Integration of forms
+7.1
+Orientation
+Recall the change of variables formula in a multiple integral:
+Z
+f(y1, . . . , yn)dy1dy2 . . . dyn =
+Z
+f(y1(x), . . . , yn(x))| det ∂yi/∂xj|dx1dx2 . . . dxn
+and compare to the change of coordinates for an n-form on an n-dimensional manifold:
+θ
+=
+f(y1, . . . , yn)dy1 ∧dy2 ∧. . . ∧dyn
+=
+f(y1(x), . . . , yn(x))
+X
+i
+∂y1
+∂xi
+dxi ∧. . . ∧
+X
+p
+∂yn
+∂xp
+dxp
+=
+f(y1(x), . . . , yn(x))(det ∂yi/∂xj)dx1 ∧dx2 . . . ∧dxn
+The only diﬀerence is the absolute value, so that if we can sort out a consistent sign,
+then we should be able to assign a coordinate-independent value to the integral of an
+n-form over an n-dimensional manifold. The sign question is one of orientation.
+Deﬁnition 27 An n-dimensional manifold is said to be orientable if it has an ev-
+erywhere non-vanishing n-form ω.
+Deﬁnition 28 Let M be an n-dimensional orientable manifold. An orientation on
+M is an equivalence class of non-vanishing n-forms ω where ω ∼ω′ if ω′ = fω with
+f > 0.
+Clearly a connected orientable manifold has two orientations: the equivalence classes
+of ±ω.
+Example:
+1. Let M ⊂Rn+1 be deﬁned by f(x) = c, with df(a)̸ = 0 if f(a) = c. By Theorem
+2.2, M is a manifold and moreover, if ∂f/∂xi̸ = 0, x1, . . . , xi−1, xi+1, xn+1 are local
+coordinates. Consider, on such a coordinate patch,
+ω = (−1)i
+1
+∂f/∂xi
+dx1 ∧. . . ∧dxi−1 ∧dxi+1 . . . ∧dxn+1
+(14)
+57
+
+
+PDF PAGE 58
+This is non-vanishing.
+Now M is deﬁned by f(x) = c so that on M
+X
+j
+∂f
+∂xj
+dxj = 0
+and if ∂f/∂xj̸ = 0
+dxj = −
+1
+∂f/∂xj
+(∂f/∂xidxi + . . .).
+Substituting in (14) we get
+ω = (−1)j
+1
+∂f/∂xj
+dx1 ∧. . . ∧dxj−1 ∧dxj+1 . . . ∧dxn+1.
+The formula (14) therefore deﬁnes for all coordinate charts a non-vanishing n-form,
+so M is orientable.
+The obvious example is the sphere Sn with
+ω = (−1)i 1
+xi
+dx1 ∧. . . ∧dxi−1 ∧dxi+1 . . . ∧dxn+1.
+2. Consider real projective space RPn and the smooth map
+p : Sn →RPn
+which maps a unit vector in Rn+1 to the one-dimensional subspace it spans. Con-
+cretely, if x1̸ = 0, we use x = (x2, . . . , xn+1) as coordinates on Sn and the usual
+coordinates (x2/x1, . . . , xn+1/x1) on RPn, then
+p(x) =
+1
+p
+1 −∥x∥2x.
+(15)
+This is smooth with smooth inverse
+q(y) =
+1
+p
+1 + ∥y∥2y
+so we can use (x2, . . . , xn+1) as local coordinates on RPn.
+Let σ : Sn →Sn be the diﬀeomorphism σ(x) = −x. Then
+σ∗ω = (−1)i 1
+−xi
+d(−x1) ∧. . . ∧d(−xi−1) ∧d(−xi+1) . . . ∧d(−xn+1) = (−1)n−1ω.
+58
+
+
+PDF PAGE 59
+Suppose RPn is orientable, then it has a non-vanishing n-form θ. Since the map
+(15) has a local smooth inverse, the derivative of p is invertible, so that p∗θ is a
+non-vanishing n-form on Sn and so
+p∗θ = fω
+for some non-vanishing smooth function f. But p ◦σ = p so that
+fω = p∗θ = σ∗p∗θ = (f ◦σ)(−1)n−1ω.
+Thus, if n is even,
+f ◦σ = −f
+and if f(a) > 0, f(−a) < 0. But Sn is connected. This means that f must vanish
+somewhere, which is a contradiction.
+Hence RP2m is not orientable.
+There is a more sophisticated way of seeing the non-vanishing form on Sn which gives
+many more examples. First note that a non-vanishing n-form on an n-dimensional
+manifold is a non-vanishing section of the rank 1 vector bundle ΛnT ∗M. The top
+exterior power has a special property: suppose U ⊂V is an m-dimensional vector
+subspace of an n-dimensional space V , then V/U has dimension n−m. There is then
+a natural isomorphism
+ΛmU ⊗Λn−m(V/U) ∼= ΛnV.
+(16)
+To see this let u1, . . . , um be a basis of U and v1, . . . , vn−m vectors in V/U.
+By
+deﬁnition there exist vectors ˜v1, . . . , ˜vn−m such that vi = ˜vi + U. Consider
+u1 ∧u2 . . . ∧um ∧˜v1 ∧. . . ∧˜vn−m.
+This is independent of the choice of ˜vi since any two choices diﬀer by a linear combi-
+nation of ui, which is annihilated by u1 ∧. . . um. This map deﬁnes the isomorphism.
+Because it is natural it extends to the case of vector bundles.
+Suppose now that M of dimension n is deﬁned as the subset f −1(c) of Rn where
+f : Rn →Rm has surjective derivative on M. This means that the 1-forms df1, . . . dfm
+are linearly independent at the points of M ⊂Rn. We saw that in this situation, the
+tangent space TaM of M at a is the subspace of TaRn annihilated by the derivative
+of f, or equivalently the 1-forms dfi. Another way of saying this is that the cotangent
+space T ∗
+a M is the quotient of T ∗
+a Rn by the subspace U spanned by df1, . . . , dfm. From
+(16) we have an isomorphism
+ΛmU ⊗Λn−m(T ∗M) ∼= ΛnT ∗Rn.
+59
+
+
+PDF PAGE 60
+Now df1 ∧df2 ∧. . . ∧dfm is a non-vanishing section of ΛmU, and dx1 ∧. . . ∧dxn is a
+non-vanishing section of ΛnT ∗Rn so the isomorphism deﬁnes a non-vanishing section
+ω of Λn−mT ∗M.
+All such manifolds, and not just the sphere, are therefore orientable. In the case
+m = 1, where M is deﬁned by a single real-valued function f, we have
+df ∧ω = dx1 ∧dx2 . . . ∧dxn.
+If ∂f/∂xn̸ = 0, then x1, . . . , xn−1 are local coordinates and so from this formula we
+see that
+ω = (−1)n−1
+1
+∂f/∂xn
+dx1 ∧. . . ∧dxn−1
+as above.
+Remark:
+Any compact manifold M m can be embedded in RN for some N, but
+the argument above shows that M is not always cut out by N −m globally deﬁned
+functions with linearly independent derivatives, because it would then have to be
+orientable.
+Orientability helps in integration through the following:
+Proposition 7.1 A manifold is orientable if and only if it has a covering by coordi-
+nate charts such that
+det
+ ∂yi
+∂xj
+
+> 0
+on the intersection.
+Proof: Assume M is orientable, and let ω be a non-vanishing n-form. In a coordinate
+chart
+ω = f(x1, . . . , xn)dx1 ∧. . . dxn.
+After possibly making a coordinate change x1 7→c −x1, we have coordinates such
+that f > 0.
+Look at two such overlapping sets of coordinates. Then
+ω
+=
+g(y1, . . . , yn)dy1 ∧. . . ∧dyn
+=
+g(y1(x), . . . , yn(x))(det ∂yi/∂xj)dx1 ∧dx2 . . . ∧dxn
+=
+f(x1, . . . , xn)dx1 ∧. . . dxn
+60
+
+
+PDF PAGE 61
+Since f > 0 and g > 0, the determinant det ∂yi/∂xj is also positive.
+Conversely, suppose we have such coordinates. Take a partition of unity {ϕα} subor-
+dinate to the coordinate covering and put
+ω =
+X
+ϕαdyα
+1 ∧dyα
+2 ∧. . . ∧dyα
+n.
+Then on a coordinate neighbourhood Uβ with coordinates x1, . . . , xn we have
+ω|Uβ =
+X
+ϕα det(∂yα
+i /∂xj)dx1 ∧. . . dxn.
+Since ϕα ≥0 and det(∂yα
+i /∂xj) is positive, this is non-vanishing.
+2
+Now suppose M is orientable and we have chosen an orientation. We shall deﬁne the
+integral
+Z
+M
+θ
+of any n-form θ of compact support on M.
+We ﬁrst choose a coordinate covering as in Proposition 7.1.
+On each coordinate
+neighbourhood Uα we have
+θ|Uα = fα(x1, . . . , xn)dx1 ∧. . . ∧dxn.
+Take a partition of unity ϕi subordinate to this covering. Then
+ϕiθ|Uα = gi(x1, . . . , xn)dx1 ∧. . . ∧dxn
+where gi is a smooth function of compact support on the whole of Rn. We then deﬁne
+Z
+M
+θ =
+X
+i
+Z
+M
+ϕiθ =
+X
+i
+Z
+Rn gi(x1, . . . , xn)dx1dx2 . . . dxn.
+Note that since θ has compact support, its support is covered by ﬁnitely many open
+sets on which ϕi̸ = 0, so the above is a ﬁnite sum.
+The integral is well-deﬁned precisely because of the change of variables formula in
+integration, and the consistent choice of sign from the orientation.
+61
+
+
+PDF PAGE 62
+7.2
+Stokes’ theorem
+The theorems of Stokes and Green in vector calculus are special cases of a single result
+in the theory of diﬀerential forms, which by convention is called Stokes’ theorem. We
+begin with a simple version of it:
+Theorem 7.2 Let M be an oriented n-dimensional manifold and ω ∈Ωn−1(M) be
+of compact support. Then
+Z
+M
+dω = 0.
+Proof:
+Use a partition of unity subordinate to a coordinate covering to write
+ω =
+X
+ϕiω.
+Then on a coordinate neighbourhood
+ϕiω = a1dx2 ∧. . . ∧dxn −a2dx1 ∧dx3 ∧. . . ∧dxn + . . .
+and
+d(ϕiω) =
+∂a1
+∂x1
++ . . . + ∂an
+∂xn
+
+dx1 ∧dx2 ∧. . . ∧dxn.
+From the deﬁnition of the integral, we need to sum each
+Z
+Rn
+∂a1
+∂x1
++ . . . + ∂an
+∂xn
+
+dx1dx2 . . . dxn.
+Consider
+Z
+Rn
+∂a1
+∂x1
+dx1dx2 . . . dxn.
+By Fubini’s theorem we evaluate this as a repeated integral
+Z
+R
+Z
+R
+. . .
+Z ∂a1
+∂x1
+dx1
+
+dx2dx3 . . . dxn.
+But a1 has compact support, so vanishes if |x1| ≥N and thus
+Z
+R
+∂a1
+∂x1
+dx1 = [a1]N
+−N = 0.
+The other terms vanish in a similar way.
+2
+62
+
+
+PDF PAGE 63
+Theorem 7.2 has an immediate payoﬀfor de Rham cohomology:
+Proposition 7.3 Let M be a compact orientable n-dimensional manifold. Then the
+de Rham cohomology group Hn(M) is non-zero.
+Proof:
+Since M is orientable, it has a non-vanishing n-form θ. Because there are
+no n + 1-forms, it is closed, and deﬁnes a cohomology class [θ] ∈Hn(M).
+Choose the orientation deﬁned by θ and integrate: we get
+Z
+M
+θ =
+X Z
+fidx1dx2 . . . dxn
+which is positive since each fi ≥0 and is positive somewhere.
+Now if the cohomology class [θ] = 0, θ = dω, but then Theorem 7.2 gives
+Z
+M
+θ =
+Z
+M
+dω = 0
+a contradiction.
+2
+Here is a topological result which follows directly from the proof of the above fact:
+Theorem 7.4 Every vector ﬁeld on an even-dimensional sphere S2m vanishes some-
+where.
+Proof:
+Suppose for a contradiction that there is a non-vanishing vector ﬁeld. For
+the sphere, sitting inside R2m+1, we can think of a vector ﬁeld as a smooth map
+v : S2m →R2m+1
+such that (x, v(x)) = 0 and if v is non-vanishing we can normalize it to be a unit
+vector. So assume (v(x), v(x)) = 1.
+Now deﬁne Ft : S2m →R2m+1 by
+Ft(x) = cos t x + sin t v(x).
+Since (x, v(x)) = 0, we have
+(cos t x + sin t v(x), cos t x + sin t v(x)) = 1
+63
+
+
+PDF PAGE 64
+so that Ft maps the unit sphere to itself. Moreover,
+F0(x) = x,
+Fπ(x) = −x.
+Now let ω be the standard orientation form on S2m:
+ω = dx1 ∧dx2 ∧. . . ∧dx2m/x2m+1.
+We see that
+F ∗
+0 ω = ω,
+F ∗
+πω = −ω.
+But by Theorem 6.7, the maps F ∗
+0 , F ∗
+π on H2m(S2m) are equal. We deduce that the
+de Rham cohomology class of ω is equal to its negative and so must be zero, but this
+contradicts that fact that its integral is positive. Thus the vector ﬁeld must have a
+zero.
+2
+Green’s theorem relates a surface integral to a volume integral, and the full version of
+Stokes’ theorem does something similar for manifolds. The manifolds we have deﬁned
+are analogues of a surface – the sphere for example. We now need to ﬁnd analogues
+of the solid ball that the sphere bounds. These are still called manifolds, but with a
+boundary.
+Deﬁnition 29 An n-dimensional manifold with boundary is a set M with a collec-
+tion of subsets Uα and maps
+ϕα : Uα →(Rn)+ = {(x1, . . . , xn) ∈Rn : xn ≥0}
+such that
+• M = ∪αUα
+• ϕα : Uα →ϕα(Uα) is a bijection onto an open set of (Rn)+ and ϕα(Uα ∩Uβ) is
+open for all α, β,
+• ϕβϕ−1
+α
+: ϕα(Uα ∩Uβ) →ϕβ(Uα ∩Uβ) is the restriction of a C∞map from a
+neighbourhood of ϕα(Uα ∩Uβ) ⊆(Rn)+ ⊂Rn to Rn.
+The boundary ∂M of M is deﬁned as
+∂M = {x ∈M : ϕα(x) ∈{(x1, . . . , xn−1, 0) ∈Rn}
+and these charts deﬁne the structure of an (n −1)-manifold on ∂M.
+64
+
+
+PDF PAGE 65
+Example:
+1. The model space (Rn)+ is a manifold with boundary xn = 0.
+2. The unit ball {x ∈Rn : ∥x∥≤1} is a manifold with boundary Sn−1.
+3. The M¨obius band is a 2-dimensional manifold with boundary the circle:
+4. The cylinder I × S1 is a 2-dimensional manifold with boundary the union of two
+circles – a manifold with two components.
+We can deﬁne diﬀerential forms etc. on manifolds with boundary in a straightforward
+way. Locally, they are just the restrictions of smooth forms on some open set in Rn
+to (Rn)+. A form on M restricts to a form on its boundary.
+Proposition 7.5 If a manifold M with boundary is oriented, there is an induced
+orientation on its boundary.
+Proof:
+We choose local coordinate systems such that ∂M is deﬁned by xn = 0 and
+det(∂yi/∂xj) > 0. So, on overlapping neighbourhoods,
+yi = yi(x1, . . . , xn),
+yn(x1, . . . , xn−1, 0) = 0.
+Then the Jacobian matrix has the form
+
+
+
+
+
+
+∂y1/∂x1
+∂y1/∂x2
+∂y1/∂xn
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+0
+0
+0
+∂yn/∂xn
+
+
+
+
+
+
+(17)
+65
+
+
+PDF PAGE 66
+From the deﬁnition of manifold with boundary, ϕβϕ−1
+α
+maps xn > 0 to yn > 0, so yn
+has the property that if xn = 0, yn = 0 and if xn > 0, yn > 0. It follows that
+∂yn
+∂xn
+
+xn=0
+> 0.
+From (17) the determinant of the Jacobian for ∂M is given by
+det(J∂M) ∂yn
+∂xn
+
+xn=0
+= det(JM)
+so if det(JM) > 0 so is det(J∂M).
+2
+Remark:
+The boundary of an oriented manifold has an induced orientation, but
+there is a convention about which one to choose: for a surface in R3 this is the choice
+of an “inward” or “outward” normal. Our choice will be that if dx1 ∧. . .∧dxn deﬁnes
+the orientation on M with xn ≥0 deﬁning M locally, then (−1)ndx1∧. . .∧dxn−1 (the
+“outward” normal) is the induced orientation on ∂M. The boundary of the cylinder
+gives opposite orientations on the two circles. The M¨obius band is not orientable,
+though its boundary the circle of course is.
+We can now state the full version of Stokes’ theorem:
+Theorem 7.6 (Stokes’ theorem) Let M be an n-dimensional oriented manifold with
+boundary ∂M and let ω ∈Ωn−1(M) be a form of compact support. Then, using the
+induced orientation
+Z
+M
+dω =
+Z
+∂M
+ω.
+Proof:
+We write again
+ω =
+X
+ϕiω
+and then
+Z
+M
+dω =
+X Z
+M
+d(ϕiω).
+We work as in the previous version of the theorem, with
+ϕiω = a1dx2∧. . .∧dxn−a2dx1∧dx3∧. . .∧dxn+. . .+(−1)n−1andx1∧dx2∧. . .∧dxn−1
+66
+
+
+PDF PAGE 67
+(7.2), but now there are two types of open sets. For those which do not intersect ∂M
+the integral is zero by Theorem 7.2. For those which do, we have
+Z
+M
+d(ϕiω)
+=
+Z
+xn≥0
+∂a1
+∂x1
++ . . . + ∂an
+∂xn
+
+dx1dx2 . . . dxn
+=
+Z
+Rn−1[an]∞
+0 dx1 . . . dxn−1
+= −
+Z
+Rn−1 an(x1, x2, . . . , xn−1, 0)dx1 . . . dxn−1
+=
+Z
+∂M
+ϕiω
+2
+where the last line follows since
+ϕiω|∂M = (−1)n−1andx1 ∧dx2 ∧. . . ∧dxn−1
+and we use the induced orientation (−1)ndx1 ∧. . . ∧dxn−1.
+An immediate corollary is the following classical result, called the Brouwer ﬁxed point
+theorem.
+Theorem 7.7 Let B be the unit ball {x ∈Rn : ∥x∥≤1} and let F : B →B be a
+smooth map from B to itself. Then F has a ﬁxed point.
+Proof:
+Suppose there is no ﬁxed point, so that F(x)̸ = x for all x ∈B. For each
+x ∈B, extend the straight line segment F(x)x until it meets the boundary sphere of
+B in the point f(x). Then we have a smooth function
+f : B →∂B
+such that if x ∈∂B, f(x) = x.
+Let ω be the standard non-vanishing (n −1)-form on Sn−1 = ∂B, with
+Z
+∂B
+ω = 1.
+Then
+1 =
+Z
+∂B
+ω =
+Z
+∂B
+f ∗ω
+67
+
+
+PDF PAGE 68
+since f is the identity on Sn−1. But by Stokes’ theorem,
+Z
+∂B
+f ∗ω =
+Z
+B
+d(f ∗ω) =
+Z
+B
+f ∗(dω) = 0
+since dω = 0 as ω is in the top dimension on Sn−1.
+The contradiction 1 = 0 means that there must be a ﬁxed point.
+2
+8
+The degree of a smooth map
+By using integration of forms we have seen that for a compact orientable manifold of
+dimension n the de Rham cohomology group Hn(M) is non-zero, and that this fact
+enabled us to prove some global topological results about such manifolds. We shall
+now reﬁne this result, and show that the group is (for a compact, connected, orientable
+manifold) just one-dimensional. This gives us a concrete method of determining the
+cohomology class of an n-form: it is exact if and only if its integral is zero.
+8.1
+de Rham cohomology in the top dimension
+First a lemma:
+Lemma 8.1 Let U n = {x ∈Rn : |xi| < 1} and let ω ∈Ωn(Rn) be a form with
+support in U n such that
+Z
+Un ω = 0.
+Then there exists β ∈Ωn−1(Rn) with support in U n such that ω = dβ.
+Proof:
+We prove the result by induction on the dimension n, but we make the
+inductive assumption that ω and β depend smoothly on a parameter λ ∈Rm, and
+also that if ω vanishes identically for some λ, so does β.
+Consider the case n = 1, so ω = f(x, λ)dx. Clearly taking
+β(x, λ) =
+Z x
+−1
+f(u, λ)du
+(18)
+gives us a function with dβ = ω. But also, since f has support in U, there is a δ > 0
+such that f vanishes for x > 1 −δ or x < −1 + δ. Thus
+Z x
+−1
+f(u, λ)du =
+Z 1
+−1
+f(u, λ)du = 0
+68
+
+
+PDF PAGE 69
+for x > 1 −δ and similarly for x < −1 + δ which means that β itself has support in
+U. If f(x, λ) = 0 for all x, then from the integration (18) so does β(x, λ).
+Now assume the result for dimensions less than n and let
+ω = f(x1, . . . , xn, λ)dx1 ∧. . . ∧dxn
+be the given form. Fix xn = t and consider
+f(x1, . . . , xn−1, t, λ)dx1 ∧. . . ∧dxn−1
+as a form on Rn−1, depending smoothly on t and λ. Its integral is no longer zero,
+but if σ is a bump function on U n−1 such that the integral of σdx1 ∧. . . ∧dxn−1 is 1,
+then putting
+g(t, λ) =
+Z
+Un−1 f(x1, . . . , xn−1, t, λ)dx1 ∧. . . ∧dxn−1
+we have a form
+f(x1, . . . , xn−1, t, λ)dx1 ∧. . . ∧dxn−1 −g(t, λ)σdx1 ∧. . . ∧dxn−1
+with support in U n−1 and zero integral. Apply induction to this and we can write it
+as dγ where γ has support in U n−1.
+Now put t = xn, and consider d(γ ∧dxn). The xn-derivative of γ doesn’t contribute
+because of the dxn factor, and σ is independent of xn, so we get
+d(γ ∧dxn) = f(x1, . . . , xn−1, xn, λ)dx1 ∧. . . ∧dxn −g(xn, λ)σdx1 ∧. . . ∧dxn.
+Putting
+ξ(x1, . . . , xn, λ) = (−1)n−1(
+Z xn
+−1
+g(t, λ)dt)σdx1 ∧. . . ∧dxn−1
+also gives
+dξ = g(xn, λ)σdx1 ∧. . . ∧dxn.
+We can therefore write
+f(x1, . . . , xn−1, xn, λ)dx1 ∧. . . ∧dxn = d(γ ∧dxn + ξ) = dβ.
+Now by construction β has support in |xi| < 1 for 1 ≤i ≤n −1, but what about
+the xn direction? Since f(x1, . . . , xn−1, t, λ) vanishes for t > 1 −δ or t < −1 + δ, the
+69
+
+
+PDF PAGE 70
+inductive assumption tells us that γ does also for xn > 1 −δ. As for ξ, if t > 1 −δ,
+Z t
+−1
+g(s, λ)ds
+=
+Z t
+−1
+Z
+Un−1 f(x1, . . . , xn−1, t, λ)dx1 ∧. . . ∧dxn−1
+
+dt
+=
+Z 1
+−1
+Z
+Un−1 f(x1, . . . , xn−1, t, λ)dx1 ∧. . . ∧dxn−1
+
+dt
+=
+Z
+Un f (x1, . . . , xn, λ) dx1 ∧. . . ∧dxn
+=
+0
+by assumption. Thus the support of ξ is in U n. Again, examining the integrals, if
+f(x, λ) is identically zero for some λ, so is β.
+2
+Using the lemma, we prove:
+Theorem 8.2 If M is a compact, connected orientable n-dimensional manifold, then
+Hn(M) ∼= R.
+Proof:
+Take a covering by coordinate neighbourhoods which map to U n = {x ∈
+Rn : |xi| < 1} and a corresponding partition of unity {ϕi}. By compactness, we can
+assume we have a ﬁnite number U1, . . . , UN of open sets. Using a bump function, ﬁx
+an n-form α0 with support in U1 and
+Z
+M
+α0 = 1.
+Thus, by Theorem 7.3 the cohomology class [α0] is non-zero. To prove the theorem
+we want to show that for any n-form α,
+[α] = c[α0]
+i.e. that α = cα0 + dγ.
+Given α use the partition of unity to write
+α =
+X
+ϕiα
+then by linearity it is suﬃcient to prove the result for each ϕiα, so we may assume
+that the support of α lies in a coordinate neighbourhood Um. Because M is connected
+70
+
+
+PDF PAGE 71
+we can connect p ∈U1 and q ∈Um by a path and by the connectedeness of open
+intervals we can assume that the path is covered by a sequence of Ui’s, each of which
+intersects the next: i.e. renumbering, we have
+p ∈U1,
+Ui ∩Ui+1̸ = ∅,
+q ∈Um.
+Now for 1 ≤i ≤m −1 choose an n-form αi with support in Ui ∩Ui+1 and integral 1.
+On U1 we have
+Z
+(α0 −α1) = 0
+and so applying Lemma 8.1, there is a form β0 with support in U1 such that
+α0 −α1 = dβ1.
+Continuing, we get altogether
+α0 −α1
+=
+dβ1
+α1 −α2
+=
+dβ2
+. . .
+=
+. . .
+αm−2 −αm−1
+=
+dβm−1
+and adding, we ﬁnd
+α0 −αm−1 = d(
+X
+i
+βi)
+(19)
+On Um, we have
+Z
+α = c =
+Z
+cαm−1
+and applying the Lemma again, we get α −cαm−1 = dβ and so from (19)
+α = cαm−1 + dβ = cα0 + d(β −c
+X
+i
+βi)
+as required.
+2
+Theorem 8.2 tells us that for a compact connected oriented n-dimensional manifold,
+Hn(M) is one-dimensional. Take a form ωM whose integral over M is 1, then [ωM] is
+a natural basis element for Hn(M). Suppose
+F : M →N
+71
+
+
+PDF PAGE 72
+is a smooth map of compact connected oriented manifolds of the same dimension n.
+Then we have the induced map
+F ∗: Hn(N) →Hn(M)
+and relative to our bases
+F ∗[ωN] = k[ωM]
+(20)
+for some real number k. We now show that k is an integer.
+Theorem 8.3 Let M, N be oriented, compact, connected manifolds of the same di-
+mension n, and F : M →N a smooth map. There exists an integer, called the degree
+of F such that
+• if ω ∈Ωn(N) then
+Z
+M
+F ∗ω = deg F
+Z
+N
+ω
+• if a is a regular value of F then
+deg F =
+X
+x∈F −1(a)
+sgn(det DFx)
+Remark:
+1. A regular value for a smooth map F : M →N is a point a ∈N such that for each
+x ∈F −1(a), the derivative DFx is surjective. When dim M = dim N this means that
+DFx is invertible. Sard’s theorem (a proof of which is in the Appendix) shows that
+for any smooth map most points in N are regular values.
+2. The expression sgn(det DFx) in the theorem can be interpreted in two ways, but
+depends crucially on the notion of orientation – consistently associating the right
+sign for all the points x ∈F −1(a). The straightforward approach uses Proposition
+7.1 to associate to an orientation a class of coordinates whose Jacobians have positive
+determinant. If det DFx is written as a Jacobian matrix in such a set of coordinates
+for M and N, then sgn(det DFx) is just the sign of the determinant. More invariantly,
+DFx : TxM 7→TaN deﬁnes a linear map
+Λn(DF ′
+x) : ΛT ∗Na →ΛT ∗
+xM.
+Orientations on M and N are deﬁned by non-vanishing forms ωM, ωN and
+Λn(DF ′
+x)(ωN) = λωM.
+Then sgn(det DFx) is the sign of λ.
+3. Note the immediate corollary of the theorem: if F is not surjective, then deg F = 0.
+72
+
+
+PDF PAGE 73
+Proof:
+For the ﬁrst part of the theorem, the cohomology class of ω is [ω] = c[ωN]
+and so integrating (and using Proposition 7.2),
+Z
+N
+ω = c
+Z
+N
+ωN = c.
+Using the number k in (20),
+F ∗[ω] = cF ∗[ωN] = ck[ωM]
+and integrating,
+Z
+M
+F ∗ω = ck
+Z
+M
+ωM = ck = k
+Z
+N
+ω.
+For the second part, since DFx is an isomorphism at all points in F −1(a), from
+Theorem 3.3, F −1(a) is a zero-dimensional manifold.
+Since it is compact (closed
+inside a compact space M) it is a ﬁnite set of points. The inverse function theorem
+applied to these m points shows that there is a coordinate neighbourhood U of a ∈N
+such that F −1(U) is a disjoint union of m open sets Ui such that
+F : Ui →U
+is a diﬀeomorphism.
+Let σ be an n-form supported in U with
+R
+N σ = 1 and consider the diﬀeomorphism
+F : Ui →U. Then by the coordinate invariance of integration of forms, and using
+the orientations on M and N,
+Z
+Ui
+F ∗σ = sgn DFxi
+Z
+U
+σ = sgn DFxi.
+Hence, summing
+Z
+M
+F ∗σ =
+X
+i
+sgn DFxi
+and this is from the ﬁrst part
+k = k
+Z
+N
+σ =
+Z
+M
+F ∗σ
+which gives
+k =
+X
+i
+sgn DFxi.
+2
+73
+
+
+PDF PAGE 74
+Example:
+Let M be the extended complex plane: M = C ∪{∞}.
+This is a
+compact, connected, orientable 2-manifold. In fact it is the 2-sphere. Consider the
+map F : M →M deﬁned by
+F(z)
+=
+zk + a1zk−1 + . . . + ak,
+z̸ = ∞
+F(∞)
+=
+∞
+This is smooth because in coordinates near z = ∞, F is deﬁned (for w = 1/z) by
+w 7→
+wk
+1 + a1w + . . . akwk .
+To ﬁnd the degree of F, consider
+Ft(z) = zk + t(a1zk−1 + . . . + ak).
+This is a smooth map for all t and by Theorem 6.7 the action on cohomology is
+independent of t, so
+deg F = deg F0
+where F0(z) = zk.
+We can calculate this degree by taking a 2-form, with |z| = r and z = x + iy
+f(r)dx ∧dy = f(r)rdr ∧dθ
+with f(r) of compact support. Then the degree is given by
+deg F0
+Z
+R2 f(r)rdr ∧dθ =
+Z
+R2 f(rk)rkd(rk)kdθ = k
+Z
+R2 f(r)rdr ∧dθ.
+Thus deg F = k. If k > 0 this means in particular that F is surjective and therefore
+takes the value 0 somewhere, so that
+zk + a1zk−1 + . . . + ak = 0
+has a solution. This is the fundamental theorem of algebra.
+Example:
+Take two smooth maps f1, f2 : S1 →R3. These give two circles in R3 –
+suppose they are disjoint. Deﬁne
+F : S1 × S1 →S2
+74
+
+
+PDF PAGE 75
+by
+F(s, t) =
+f1(s) −f2(t)
+∥f1(s) −f2(t)∥.
+The degree of this map is called the linking number.
+Example:
+Let M ⊂R3 be a compact surface and n its unit normal. The Gauss
+map is the map
+F : M →S2
+deﬁned by F(x) = n(x).
+If we work out the degree by integration, we take the
+standard 2-form ω on S2. Then one ﬁnds that
+Z
+M
+F ∗ω =
+Z
+M
+K
+√
+EG −F 2dudv
+where K is the Gaussian curvature. The Gauss-Bonnet theorem tells us that the
+degree is half the Euler characteristic of M.
+75
+
+
+PDF PAGE 76
+9
+Riemannian metrics
+Diﬀerential forms and the exterior derivative provide one piece of analysis on mani-
+folds which, as we have seen, links in with global topological questions. There is much
+more one can do when one introduces a Riemannian metric. Since the whole subject
+of Riemannian geometry is a huge one, we shall here look at only two aspects which
+relate to the use of diﬀerential forms: the study of harmonic forms and of geodesics.
+In particular, we ignore completely here questions related to curvature.
+9.1
+The metric tensor
+In informal terms, a Riemannian metric on a manifold M is a smoothly varying
+positive deﬁnite inner product on the tangent spaces Tx. To make global sense of
+this, note that an inner product is a bilinear form, so at each point x we want a
+vector in the tensor product
+T ∗
+x ⊗T ∗
+x.
+We can put, just as we did for the exterior forms, a vector bundle structure on
+T ∗M ⊗T ∗M =
+[
+x∈M
+T ∗
+x ⊗T ∗
+x.
+The conditions we need to satisfy for a vector bundle are provided by two facts we
+used for the bundle of p-forms:
+• each coordinate system x1, . . . , xn deﬁnes a basis dx1, . . . , dxn for each T ∗
+x in the
+coordinate neighbourhood and the n2 elements
+dxi ⊗dxj,
+1 ≤i, j ≤n
+give a corresponding basis for T ∗
+x ⊗T ∗
+x
+• the Jacobian of a change of coordinates deﬁnes an invertible linear transforma-
+tion J : T ∗
+x →T ∗
+x and we have a corresponding invertible linear transformation
+J ⊗J : T ∗
+x ⊗T ∗
+x →T ∗
+x ⊗T ∗
+x.
+Given this, we deﬁne:
+Deﬁnition 30 A Riemannian metric
+on a manifold M is a section g of T ∗⊗T ∗
+which at each point is symmetric and positive deﬁnite.
+76
+
+
+PDF PAGE 77
+In a local coordinate system we can write
+g =
+X
+i,j
+gij(x)dxi ⊗dxj
+where gij(x) = gji(x) and is a smooth function, with gij(x) positive deﬁnite. Often
+the tensor product symbol is omitted and one simply writes
+g =
+X
+i,j
+gij(x)dxidxj.
+Example:
+1. The Euclidean metric on Rn is deﬁned by
+g =
+X
+dxi ⊗dxi.
+So
+g( ∂
+∂xi
+, ∂
+∂xj
+) = δij.
+2. A submanifold of Rn has an induced Riemannian metric: the tangent space at x
+can be thought of as a subspace of Rn and we take the Euclidean inner product on
+Rn.
+Given a smooth map F : M →N and a metric g on N, we can pull back g to a
+section F ∗g of T ∗M ⊗T ∗M:
+(F ∗g)x(X, Y ) = gF(x)(DFx(X), DFx(Y )).
+If DFx is invertible, this will again be positive deﬁnite, so in particular if F is a
+diﬀeomorphism.
+Deﬁnition 31 A diﬀeomorphism F : M →N between two Riemannian manifolds is
+an isometry if F ∗gN = gM.
+Example:
+Let M = {(x, y) ∈R2 : y > 0} and
+g = dx2 + dy2
+y2
+.
+If z = x + iy and
+F(z) = az + b
+cz + d
+77
+
+
+PDF PAGE 78
+with a, b, c, d real and ad −bc > 0, then
+F ∗dz = (ad −bc)
+dz
+(cz + d)2
+and
+F ∗y = y ◦F = 1
+i
+az + b
+cz + d −a¯z + b
+c¯z + d
+
+= ad −bc
+|cz + d|2y.
+Then
+F ∗g = (ad −bc)2 dx2 + dy2
+|(cz + d)2|2
+|cz + d|4
+(ad −bc)2y2 = dx2 + dy2
+y2
+= g.
+So these M¨obius transformations are isometries of a Riemannian metric on the upper
+half-plane.
+We have learned in Section 4.3 that a one-parameter group ϕt of diﬀeomorphisms
+deﬁnes a vector ﬁeld X.
+Then we can deﬁne the Lie derivative of a Riemannian
+metric by
+LXg = d
+dtϕ∗
+tg|t=0.
+If this is a group of isometries then since ϕ∗
+tg = g, we have LXg = 0. Such a vector
+ﬁeld is called a Killing vector ﬁeld or an inﬁnitesimal isometry.
+The Lie derivative obeys the usual derivation rules, and commutes with d. Since
+LXf = Xf we have
+LX
+X
+i
+gijdxi ⊗dxj =
+X
+i
+(Xgij)dxi ⊗dxj +
+X
+i
+gijd(Xxi)⊗dxj +
+X
+i
+gijdxi ⊗d(Xxj).
+Example:
+Take the Euclidean metric g = P
+i dxi ⊗dxi, and a vector ﬁeld of the
+form
+X =
+X
+i,j
+Aijxi
+∂
+∂xj
+where Aij is a constant matrix.
+This is a Killing vector ﬁeld if and only if
+0 =
+X
+k,i
+d(Akixk) ⊗dxi + dxi ⊗d(Akixk) =
+X
+k,i
+(Aki + Aik)dxi ⊗dxk.
+In other words if A is skew-symmetric.
+With a Riemannian metric one can deﬁne the length of a curve:
+78
+
+
+PDF PAGE 79
+Deﬁnition 32 Let M be a Riemannian manifold and γ : [0, 1] →M a smooth map
+(i.e. a smooth curve in M). The length of the curve is
+ℓ(γ) =
+Z 1
+0
+p
+g(γ′, γ′)dt
+where γ′(t) = Dγt(d/dt).
+With this deﬁnition, any Riemannian manifold is a metric space: deﬁne
+d(x, y) = inf{ℓ(γ) ∈R : γ(0) = x, γ(1) = y}.
+In fact a metric deﬁnes an inner product on T ∗as well as on T, for the map
+X 7→g(X, −)
+deﬁnes an isomorphism from T to T ∗. In concrete terms, if g∗is the inner product
+on T ∗, then
+g∗(
+X
+j
+gijdxj,
+X
+k
+gkldxl) = gik
+which means that
+g∗(dxj, dxk) = gjk
+where gjk denotes the inverse matrix to gjk.
+We can also deﬁne an inner product on the exterior product spaces ΛpT ∗.
+(α1 ∧α2 ∧. . . ∧αp, β1 ∧β2 ∧. . . ∧βp) = det g∗(αi, βj)
+(21)
+In particular, on an n-manifold there is an inner product on each ﬁbre of the bundle
+ΛnT ∗. Since each ﬁbre is one-dimensional there are only two unit vectors ±u.
+Deﬁnition 33 Let M be an oriented Riemannian manifold, then the volume form is
+the unique n-form ω of unit length in the equivalence class deﬁned by the orientation.
+In local coordinates,the deﬁnition of the inner product (21) gives
+(dx1 ∧. . . ∧dxn, dx1 ∧. . . ∧dxn) = det g∗
+ij = (det gij)−1
+Thus if dx1 ∧. . . ∧dxn deﬁnes the orientation,
+ω =
+p
+det gijdx1 ∧. . . ∧dxn.
+On a compact manifold we can integrate this to obtain the total volume – so a metric
+deﬁnes not only lengths but also volumes.
+Are Riemannian manifolds special? No, because:
+79
+
+
+PDF PAGE 80
+Proposition 9.1 Any manifold admits a Riemannian metric.
+Proof:
+Take a covering by coordinate neighbourhoods and a partition of unity
+subordinate to the covering. On each open set Uα we have a metric
+gα =
+X
+i
+dx2
+i
+in the local coordinates. Deﬁne
+g =
+X
+ϕigα(i).
+This sum is well-deﬁned because the supports of ϕi are locally ﬁnite. Since ϕi ≥0
+at each point every term in the sum is positive deﬁnite or zero, but at least one is
+positive deﬁnite so the sum is positive deﬁnite.
+2
+9.2
+The geodesic ﬂow
+Consider any manifold M and its cotangent bundle T ∗M, with projection to the base
+p : T ∗M →M. Let X be tangent vector to T ∗M at the point ξa ∈T ∗
+a . Then
+Dpξa(X) ∈TaM
+so
+θ(X) = ξa(Dpξa(X))
+deﬁnes a canonical 1-form θ on T ∗M. In coordinates (x, y) 7→P
+i yidxi, the projection
+p is
+p(x, y) = x
+so if
+X =
+X
+ai
+∂
+∂xi
++
+X
+bi
+∂
+∂yi
+then
+θ(X) =
+X
+i
+yidxi(DpξaX) =
+X
+i
+yiai
+which gives
+θ =
+X
+i
+yidxi.
+We now take the exterior derivative
+ω = −dθ =
+X
+dxi ∧dyi
+80
+
+
+PDF PAGE 81
+which is the canonical 2-form on the cotangent bundle. It is non-degenerate, so that
+the map
+X 7→iXω
+from the tangent bundle of T ∗M to its cotangent bundle is an isomorphism.
+Now suppose f is a smooth function on T ∗M. Its derivative is a 1-form df. Because
+of the isomorphism above, there is a unique vector ﬁeld X on T ∗M such that
+iXω = df.
+If g is another function with vector ﬁeld Y , then
+Y (f) = df(Y ) = iY iXω = −iXiY ω = −X(g)
+(22)
+On a Riemannian manifold there is a natural function on T ∗M given by the induced
+inner product: we consider the function on T ∗M deﬁned by
+H(ξa) = 1
+2g∗(ξa, ξa).
+In local coordinates this is
+H(x, y) = 1
+2
+X
+ij
+gij(x)yiyj.
+Deﬁnition 34 The vector ﬁeld X on T ∗M given by iXω = dH is called the geodesic
+ﬂow of the metric g.
+Deﬁnition 35 If γ : (a, b) →T ∗M is an integral curve of the geodesic ﬂow, then the
+curve p(γ) in M is called a geodesic.
+In local coordinates, if the geodesic ﬂow is
+X =
+X
+ai
+∂
+∂xi
++
+X
+bi
+∂
+∂yi
+then
+iXω =
+X
+k
+(akdyk −bkdxk) = dH = 1
+2
+X
+ij
+∂gij
+∂xk
+dxkyiyj +
+X
+ij
+gijyidyj.
+81
+
+
+PDF PAGE 82
+Thus the integral curves are solutions of
+dxk
+dt
+=
+X
+j
+gkjyj
+(23)
+dyk
+dt
+=
+−1
+2
+X
+ij
+∂gij
+∂xk
+yiyj
+(24)
+Before we explain why this is a geodesic, just note the qualitative behaviour of these
+curves.
+For each point a ∈M, choose a point ξa ∈T ∗
+a and consider the unique
+integral curve starting at ξa. Equation (23) tells us that the projection of the integral
+curve is parallel at a to the tangent vector Xa such that g(Xa, −) = ξa. Thus these
+curves have the property that through each point and in each direction there passes
+one geodesic.
+Geodesics are normally thought of as curves of shortest length, so next we shall link
+up this idea with the deﬁnition above. Consider the variational problem of looking
+for critical points of the length functional
+ℓ(γ) =
+Z 1
+0
+p
+g(γ′, γ′)dt
+for curves with ﬁxed end-points γ(0) = a, γ(1) = b. For simplicity assume a, b are in
+the same coordinate neighbourhood. If
+F(x, z) =
+X
+ij
+gij(x)zizj
+then the ﬁrst variation of the length is
+δℓ
+=
+Z 1
+0
+1
+2F −1/2
+∂F
+∂xi
+˙xi + ∂F
+∂zi
+d ˙xi
+dt
+
+dt
+=
+Z 1
+0
+1
+2F −1/2 ∂F
+∂xi
+˙xi −d
+dt
+1
+2F −1/2∂F
+∂zi
+
+˙xidt.
+on integrating by parts with ˙xi(0) = ˙xi(1) = 0. Thus a critical point of the functional
+is given by
+1
+2F −1/2 ∂F
+∂xi
+−d
+dt
+1
+2F −1/2∂F
+∂zi
+
+= 0
+If we parametrize this critical curve by arc length:
+s =
+Z t
+0
+p
+g(γ′, γ′)dt
+82
+
+
+PDF PAGE 83
+then F = 1, and the equation simpliﬁes to
+∂F
+∂xi
+−d
+ds
+∂F
+∂zi
+
+= 0.
+But this is
+X ∂gjk
+∂xi
+dxj
+ds
+dxk
+ds −d
+ds
+
+2gik
+dxk
+ds
+
+= 0
+(25)
+But now deﬁne yi by
+dxk
+dt =
+X
+j
+gkjyj
+as in the ﬁrst equation for the geodesic ﬂow (23) and substitute in (25) and we get
+X ∂gjk
+∂xi
+gjayagkbyb −d
+dt
+2gikgkaya
+
+= 0
+and using
+X
+j
+gijgjk = δi
+k
+this yields
+−∂gjk
+∂xi
+yjyk = dyi
+dt
+which is the second equation for the geodesic ﬂow. (Here we have used the formula
+for the derivative of the inverse of a matrix G: D(G−1) = −G−1DGG−1).
+The formalism above helps to solve the geodesic equations when there are isometries
+of the metric. If F : M →M is a diﬀeomorphism of M then its natural action on
+1-forms induces a diﬀeomorphism of T ∗M. Similarly with a one-parameter group ϕt.
+Diﬀerentiating at t = 0 this means that a vector ﬁeld X on M induces a vector ﬁeld ˜X
+on T ∗M. Moreover, the 1-form θ on T ∗M is canonically deﬁned and hence invariant
+under the induced action of any diﬀeomorphism. This means that
+L ˜
+Xθ = 0
+and therefore, using (6.5) that
+i ˜
+Xdθ + d(i ˜
+Xθ) = 0
+so since ω = −dθ
+i ˜
+Xω = df
+where f = i ˜
+Xθ.
+83
+
+
+PDF PAGE 84
+Proposition 9.2 The function f above is f(ξx) = ξx(Xx).
+Proof:
+Write in coordinates
+˜X =
+X
+ai
+∂
+∂xi
++
+X
+bi
+∂
+∂yi
+where θ = P
+i yidxi. Since ˜X projects to the vector ﬁeld X on M, then
+X =
+X
+ai
+∂
+∂xi
+and
+i ˜
+Xθ =
+X
+i
+aiyi = ξx(Xx)
+by the deﬁnition of θ.
+2
+Now let M be a Riemannian manifold and H the function on T ∗M deﬁned by the
+metric as above.
+If ϕt is a one-parameter group of isometries, then the induced
+diﬀeomorphisms of T ∗M will preserve the function H and so the vector ﬁeld ˜Y will
+satisfy
+˜Y (H) = 0.
+But from (22) this means that X(f) = 0 where X is the geodesic ﬂow and f the
+function i ˜Y θ. This function is constant along the geodesic ﬂow, and is therefore a
+constant of integration of the geodesic equations.
+To see what this constant is, we note that ˜Y is the natural lift of a Killing vector ﬁeld
+Y =
+X
+i
+ai
+∂
+∂xi
+so the function f is f = P
+i aiyi.
+The ﬁrst geodesic equation is
+dxk
+dt =
+X
+j
+gkjyj
+so
+X
+k
+gjk
+dxk
+dt = yj
+and
+f =
+X
+k
+gjkaj
+dxk
+dt = g(γ′, X).
+84
+
+
+PDF PAGE 85
+Sometimes this observation enables us to avoid solving any diﬀerential equations as
+in this example:
+Example:
+Consider the metric
+g = dx2
+1 + dx2
+2
+x2
+2
+on the upper half plane and its geodesic ﬂow X.
+The map (x1, x2) 7→(x1 + t, x2) is clearly a one-parameter group of isometries (the
+M¨obius transformations z 7→z + t) and deﬁnes the vector ﬁeld
+Y =
+∂
+∂x1
+.
+On the cotangent bundle this gives the function
+f(x, y) = y1
+which is constant on the integral curve.
+The map z 7→etz is also an isometry with vector ﬁeld
+Z = x1
+∂
+∂x1
++ x2
+∂
+∂x2
+so that
+g(x, y) = x1y1 + x2y2
+is constant.
+We also have automatically that H = x2
+2(y2
+1 + y2
+2)/2 is constant since
+X(H) = iXiXω = 0.
+We therefore have three equations for the integral curves of the geodesic ﬂow:
+y1
+=
+c1
+x1y1 + x2y2
+=
+c2
+x2
+2(y2
+1 + y2
+2)
+=
+c3
+Eliminating y1, y2 gives the geodesics:
+(c1x1 −c2)2 + c2
+1x2
+2 = c3.
+If c1̸ = 0, this is a semicircle with centre at (x1, x2) = (c2/c1, 0). If c1 = 0 then y1 = 0
+and the geodesic equation gives x1 = const. Together, these are the straight lines of
+non-Euclidean geometry.
+85
+
+
+PDF PAGE 86
+10
+APPENDIX: Technical results
+10.1
+The inverse function theorem
+Lemma 10.1 (Contraction mapping principle) Let M be a complete metric space
+and suppose T : M →M is a map such that
+d(Tx, Ty) ≤kd(x, y)
+where k < 1. Then T has a unique ﬁxed point.
+Proof:
+Choose any point x0, then
+d(T mx0, T nx0)
+≤
+kmd(x0, T n−mx0)
+for
+n ≥m
+≤
+km(d(x0, Tx0) + d(Tx0, T 2x0) + . . . + d(T n−m−1x0, T n−mx0))
+≤
+km(1 + k + . . . + kn−m−1)d(x0, Tx0)
+≤
+km
+1 −kd(x0, Tx0)
+This is a Cauchy sequence, so completeness of M implies that it converges to x. Thus
+x = lim T nx0 and so by continuity of T,
+Tx = lim T n+1x0 = x
+For uniqueness, if Tx = x and Ty = y, then
+d(x, y) = d(Tx, Ty) ≤kd(x, y)
+and so k < 1 implies d(x, y) = 0.
+2
+Theorem 10.2 (Inverse function theorem) Let U ⊆Rn be an open set and f :
+U →Rn a C∞function such that Dfa is invertible at a ∈U. Then there exist
+neighbourhoods V, W of a and f(a) respectively such that f(V ) = W and f has a C∞
+inverse on W.
+Proof:
+By an aﬃne transformation x 7→Ax + b we can assume that a = 0 and
+Dfa = I. Now consider g(x) = x −f(x). By construction Dg0 = 0 so by continuity
+there exists r > 0 such that if ∥x∥< 2r,
+∥Dgx∥< 1
+2
+86
+
+
+PDF PAGE 87
+It follows from the mean value theorem that
+∥g(x)∥≤1
+2∥x∥
+and so g maps the closed ball ¯B(0, r) to ¯B(0, r/2). Now consider
+gy(x) = y + x −f(x)
+(The choice of gy is made so that a ﬁxed point gy(x) = x solves f(x) = y).
+If now ∥y∥≤r/2 and ∥x∥≤r, then
+∥gy(x)∥≤1
+2r + ∥g(x)∥≤1
+2r + 1
+2r = r
+so gy maps the complete metric space M = ¯B(0, r) to itself. Moreover
+∥gy(x1) −gy(x2)∥= ∥g(x1) −g(x2)∥≤1
+2∥x1 −x2∥
+if x1, x2 ∈¯B(0, r), and so gy is a contraction mapping. Applying Lemma 1 we have a
+unique ﬁxed point and hence an inverse ϕ = f −1.
+We need to show ﬁrst that ϕ is continuous and secondly that it has derivatives of all
+orders. From the deﬁnition of g and the mean value theorem,
+∥x1 −x2∥
+≤
+∥f(x1) −f(x2)∥+ ∥g(x1) −g(x2)∥
+≤
+∥f(x1) −f(x2)∥+ 1
+2∥x1 −x2∥
+so
+∥x1 −x2∥≤2∥f(x1) −f(x2)∥
+which is continuity for ϕ. It follows also from this inequality that if y1 = f(x1) and
+y2 = f(x2) where y1, y2 ∈B(0, r/2) then x1, x2 ∈¯B(0, r), and so
+∥ϕ(y1) −ϕ(y2) −(Dfx2)−1(y1 −y2)∥
+=
+∥x1 −x2 −(Dfx2)−1(f(x1) −f(x2))∥
+≤
+∥(Dfx2)−1∥∥Dfx2(x1 −x2) −f(x1) + f(x2)∥
+≤
+A∥x1 −x2∥R
+where A is a bound on ∥(Dfx2)−1∥and the function ∥x1 −x2∥R is the remainder
+term in the deﬁnition of diﬀerentiability of f. But ∥x1 −x2∥≤2∥y1 −y2∥so as
+y1 →y2, x1 →x2 and hence R →0, so ϕ is diﬀerentiable and moreover its derivative
+is (Df)−1.
+Now we know the derivative of ϕ:
+Dϕ = (Df)−1
+so we see that it is continuous and has as many derivatives as f itself, so ϕ is C∞. 2
+87
+
+
+PDF PAGE 88
+10.2
+Existence of solutions of ordinary diﬀerential equations
+Lemma 10.3 Let M be a complete metric space and T : M →M a map. If
+T n is
+a contraction mapping, then T has a unique ﬁxed point.
+Proof:
+By the contraction mapping principle, T n has a unique ﬁxed point x. We
+also have
+T n(Tx) = T n+1x = T(T nx) = Tx
+so Tx is also a ﬁxed point of T n. By uniqueness Tx = x.
+2
+Theorem 10.4 Let f(t, x) be a continuous function on |t−t0| ≤a, ∥x−x0∥≤b and
+suppose f satisﬁes a Lipschitz condition
+∥f(t, x1) −f(t, x2)∥≤∥x1 −x2∥.
+If M = sup |f(t, x)| and h = min(a, b/M), then the diﬀerential equation
+dx
+dt = f(t, x),
+x(t0) = x0
+has a unique solution for |t −t0| ≤h.
+Proof:
+Let
+(Tx)(t) = x0 +
+Z t
+t0
+f(s, x(s))ds
+Then Tx is diﬀerentiable since f and x are continuous and if Tx = x, x satisﬁes the
+diﬀerential equation (diﬀerentiate the deﬁnition). We use the metric space
+X = {x ∈C([t0 −h, t0 + h], Rn) : ∥x(t) −x0∥≤Mh}
+with the uniform metric
+d(x1, x2) =
+sup
+|t−t0|≤h
+∥x1(t) −x2(t)∥
+which makes it complete. If x ∈M, then Tx ∈M and we claim
+|T kx1(t) −T kx2(t)∥≤ck
+k!|t −t0|kd(x1, x2)
+88
+
+
+PDF PAGE 89
+For k = 0 this is clear, and in general we use induction to establish:
+∥T kx1(t) −T kx2(t)∥
+≤
+Z t
+t0
+∥f(s, T k−1x1(s) −f(s, T k−1x2(s)∥ds
+≤
+c
+Z t
+t0
+∥T k−1x1(s) −T k−1x2(s)∥ds
+≤
+(ck/(k −1)!)
+Z t
+t0
+|s −t0|k−1ds d(x1, x2)
+≤
+(ck/k!)|t −t0|kd(x1, x2)
+So T n is a contraction mapping for large enough N, and the result follows.
+2
+Theorem 10.5 The solution above depends continuously on the initial data x0.
+Proof:
+Take h1 ≤h and δ > 0 such that Mh + δ ≤b, and let
+Y = {y ∈C([t0 −h1, t0 + h1] × ¯B(x0, δ); Rn : ∥y(t, x) −x∥≤Mh, y(t0, x) = x}
+which is a complete metric space as before. Now set
+(Ty)(t, x) = x +
+Z t
+t0
+f(s, y(s, x))ds
+Since Mh1 + δ ≤b, T maps Y to Y and just as before T n is a contraction mapping
+with a unique ﬁxed point which satisﬁes
+∂y
+∂t = f(t, y),
+y(t0, x) = x
+Since y is continuous in t and x this is what we need.
+2
+If f(t, x) is smooth then we need more work to prove that the solution to the equation
+is smooth and smoothly dependent on parameters.
+10.3
+Smooth dependence
+Lemma 10.6 Let A(t, x), B(t, x) be continuous matrix-valued functions and take
+M ≥supt,x ∥B∥. The solutions of the linear diﬀerential equations
+dξ(t, x)
+dt
+=
+A(t, x)ξ(t, x),
+ξ(t0, x) = a(x)
+dη(t, x)
+dt
+=
+B(t, x)η(t, x),
+η(t0, x) = b(x)
+89
+
+
+PDF PAGE 90
+satisfy
+sup
+x ∥ξ(t, x) −η(t, x)∥≤C∥A −B∥eM|t−t0| −1
+M
++ ∥a −b∥eM|t−t0|
+where C is a constant depending only on A and a.
+Proof:
+By the existence theorem we know how to ﬁnd solutions as limits of ξn, ηn
+where
+ξk
+=
+a +
+Z t
+t0
+Aξk−1ds
+ηk
+=
+b +
+Z t
+t0
+Bηk−1ds
+Let gk(t) = supx ∥ξk(t, x) −ηk(t, x)∥and C = supk,x,t ∥ξk∥. Then
+gn(t) ≤∥a −b∥+ C∥A −B∥|t −t0| + M
+Z t
+t0
+gn−1(s)ds
+Now deﬁne fn by f0(t) = ∥a −b∥and then inductively by
+fn(t) = ∥a −b∥+ C∥A −B∥|t −t0| + M
+Z t
+t0
+fn−1(s)ds
+Comparing these two we see that fn ≥gn. This is a contraction mapping, so that
+fn →f with
+f(t) = ∥a −b∥+ C∥A −B∥|t −t0| + M
+Z t
+t0
+f(s)ds
+and solving the corresponding diﬀerential equation we get
+f(t) = ∥a −b∥eM|t−t0| + C∥A −B∥eM|t−t0| −1
+M
+As gn(t) ≤fn(t),
+sup
+x ∥ξn(t, x) −ηn(t, x)∥≤fn(t)
+and the theorem follows by letting n →∞.
+2
+Theorem 10.7 If f is Ck and
+d
+dtα(t, x) = f(t, α(t, x)),
+α(0, x) = x
+then α is also Ck.
+90
+
+
+PDF PAGE 91
+Proof:
+The hardest bit is k = 1. Assume f is C1 so that ∂f/∂t and ∂f/∂xi exist
+and are continuous. We must show that α is C1 in all variables. If that were true,
+then the matrix valued function λ where (λi = ∂α/∂xi) would be the solution of the
+diﬀerential equation
+dλ
+dt = Dxf(t, α)λ
+(26)
+so we shall solve this equation by the existence theorem and prove that the solution
+is the derivative of α. Let F(s) = f(t, a + s(b −a)). Then
+dF
+ds = Dxf(t, a + s(b −a))(b −a)
+so
+f(t, b) −f(t, a) =
+Z 1
+0
+Dxf(t, a + s(b −a))(b −a)ds
+But then
+d
+dt(α(t, x + y) −α(t, x))
+=
+f(t, α(t, x + y)) −f(t, α(t, x))
+=
+Z 1
+0
+Dxf(t, α(t, x) + s(α(t, x + y) −α(t, x)))(α(t, x + y) −α(t, x))ds
+Let A(t, x) = Dxf(t, α(t, x)) and ξ(t, x) = λ(t, x)y and
+By(t, x) =
+Z 1
+0
+Dxf(t, α(t, x)+s(α(t, x+y)−α(t, x)))ds,
+ηy(t, x) = α(t, x+y)−α(t, x).
+The mean value theorem for a function g gives
+∥g(x + h) −g(x) −Dg(x)h∥≤K∥h∥
+sup
+∥y∥≤∥h∥
+∥Dg(x + y) −Dg(x)∥.
+Use this estimate for g(x) = f(t, α(t, x)), apply the previous lemma and use the
+continuity of the derivative of f and we get
+sup
+|t|≤ϵ
+∥λ(t, x)y −(α(t, x + y) −α(x))∥= o(∥y∥)
+and so Dxα = λ, which is continuous in (t, x). Since also dα/dt = f(t, α) this means
+that α is C1 in all variables.
+To continue, suppose inductively that the theorem is true for k −1, and f is Ck.
+Then A(t, x) = Dxf(t, α(t, x)) is Ck−1 but since
+dλ
+dt = Aλ
+we have λ is Ck−1. Now Dxα = λ so the xi-derivatives of α are Ck−1. But also
+dα/dt = f(t, α) is Ck−1 too, so α is Ck.
+2
+91
+
+
+PDF PAGE 92
+10.4
+Partitions of unity on general manifolds
+Deﬁnition 36 A partition of unity on M is a collection {ϕi}i∈I of smooth functions
+such that
+• ϕi ≥0
+• {supp ϕi : i ∈I} is locally ﬁnite
+• P
+i ϕi = 1
+Here locally ﬁnite means that for each x ∈M there is a neighbourhood U which
+intersects only ﬁnitely many supports supp ϕi.
+Theorem 10.8 Given any open covering {Vα} of M there exists a partition of unity
+{ϕi} on M such that supp ϕi ⊂Vα(i) for some α(i).
+Proof:
+(by exhaustion – !)
+1. M is locally compact since each x ∈M has a neighbourhood homeomorphic to,
+say, the open unit ball in Rn. So take U homeomorphic to a smaller ball, then ¯U
+is compact. Since M is Hausdorﬀ, ¯U is closed (compact implies closed in Hausdorﬀ
+spaces).
+2. M has a countable basis of open sets {Uj}j∈N, so x ∈Uj ⊂U and ¯Uj ⊂¯U is
+compact so M has a countable basis of open sets with ¯Uj compact.
+3. Put G1 = U1. Then
+¯G1 ⊂
+∞
+[
+j=1
+Uj
+so by compactness there is k > 1 such that
+¯G1 ⊂
+k[
+j=1
+Uj = G2
+Now take the closure of G2 and do the same. We get compact sets ¯Gj with
+¯Gj ⊂Gj+1
+M =
+∞
+[
+j=1
+Uj
+92
+
+
+PDF PAGE 93
+4. By construction we have
+¯Gj\Gj−1 ⊂Gj+1\ ¯Gj−2
+and the set on the left is compact and the one on the right open. Now take the given
+open covering {Vα}. The sets Vα ∩(Gj+1\ ¯Gj−2) cover ¯Gj\Gj−1. This latter set is
+compact so take a ﬁnite subcovering, and then proceed replacing j with j + 1. This
+process gives a countable locally ﬁnite reﬁnement of {Vα}, i.e. each Vα ∩(Gj+1\ ¯Gj−2)
+is an open subset of Vα. It is locally ﬁnite because
+Gj+1\ ¯Gj−2 ∩Gj+4\ ¯Gj+1 = ∅
+5. For each x ∈M let j be the largest natural number such that x ∈M\ ¯Gj. Then
+x ∈Vα ∩(Gj+2\ ¯Gj−1). Take a coordinate system within this open set and a bump
+function f which is identically 1 in a neighbourhood Wx of x.
+6. The Wx cover ¯Gj+1\Gj and so as x ranges over the points of Gj+2\ ¯Gj−1 we get
+an open covering and so by compactness can extract a ﬁnite subcovering. Do this
+for each j and we get a countable collection of smooth functions ψi such that ψi ≥0
+and, since the set of supports is locally ﬁnite,
+ψ =
+X
+ψi
+is well-deﬁned as a smooth function on M. Moreover
+supp ψi ⊂Vα ∩(Gm\ ¯Gm−3) ⊂Vα
+so each support is contained in a Vα. Finally deﬁne
+ϕi = ψi
+ψ
+then this is the required partition of unity.
+2
+10.5
+Sard’s theorem (special case)
+Theorem 10.9 Let M and N be diﬀerentiable manifolds of the same dimension n
+and suppose F : M →N is a smooth map. Then the set of critical values of F has
+measure zero in N. In particular, every smooth surjective map F has at least one
+regular value.
+93
+
+
+PDF PAGE 94
+Proof:
+Since a countable union of null sets (=sets of measure zero) is null, and M
+and N have a countable basis of open sets, it suﬃces to consider the local case of
+F : U →Rn. Moreover since U is a countable union of compact cubes we need only
+prove that the image of the set of critical points in the compact cube K = {x ∈Rn :
+|xi| ≤1} is of measure zero.
+Now suppose a ∈K is a critical point, so that the image of DFa is contained in a
+proper subspace of Rn, and so is annihilated by a linear form f. Let H ⊂Rn be the
+hyperplane f(x −F(a)) = 0. Then
+d(F(x), H) ≤∥F(x) −(F(a) + DFa(x −a))∥
+(27)
+On the other hand since F is C∞, from Taylor’s theorem we have a constant C such
+that
+∥F(x) −F(y) −DFy(x −y)∥≤C∥x −y∥2
+for all x, y ∈K, since K is compact. Substituting in (27) this yields
+d(F(x), H) ≤C∥x −a∥2
+If ∥x −a∥≤η, then d(F(x), H) ≤Cη2. Let M = sup{∥DFx∥: x ∈K}, then by the
+mean value theorem
+∥F(x) −F(a)∥≤M∥x −a∥
+for x, a ∈K and so d(F(x), F(a)) ≤Mη. Thus F(x) lies in the intersection of a slab
+of thickness 2Cη2 around H and a ball of radius Mη centred on F(a). Putting the
+ball in a cube of side 2Mη, the volume of this intersection is less than
+2Cη2(2Mη)n−1 = 2nCM n−1ηn+1
+Now subdivide the cube into N n cubes of side 1/N, and repeat the argument for each
+cube. Since now ∥x −y∥≤√n/N, critical points in this cube lie in a volume less
+than
+2nCM n−1
+√n
+N
+n+1
+Since there are at most N n such volumes, the total is less than
+2nM n−1Cn(n+1)/2
+N −1
+which tends to zero as N →∞.
+Thus the set of critical values is of measure zero.
+2
+94

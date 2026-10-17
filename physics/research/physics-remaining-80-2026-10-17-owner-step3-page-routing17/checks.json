@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "changed_files": {
+    "tools/physics-support/step3-scope.mjs": "9cd171d4223acbe4ddb112b1b6dd185557bcbe989737f0963b70db925de88b7f",
+    "tools/physics-support/step3-published-pages.mjs": "bcc74647878024465da275adea3dd5b3d7ef5311fc5f413ac2e56c194ac43de3",
+    "tools/physics-support/step3-published-pages.test.mjs": "9e617694a07692ad2afff7ff9519f34a69ed43f93652fcb0cedb2134f899a093",
+    "physics/WORKFLOW.md": "d0610b1f321af36512ae106e1b3875b873ab5005f78d431bb01e4904a1f81045"
+  },
+  "checks": [
+    {
+      "command": "node --test tools/physics-support/step3-published-pages.test.mjs",
+      "passed": 11,
+      "failed": 0
+    },
+    {
+      "command": "node tools/tsx-run.mjs --test --test-name-pattern 'published|reader findings|in-run|producer|collect|exact refuter|batch decisions' tools/physics-autopilot/test/step3-routing.test.mts",
+      "passed": 16,
+      "failed": 0
+    },
+    {
+      "command": "node tools/tsx-run.mjs --test tools/physics-autopilot/test/step3-routing.test.mts",
+      "passed": 36,
+      "failed": 6,
+      "failures": "Stage/profile expectations outside changed routing: first test expects Sol high versus current medium; four expect absent legacy stages or their properties; one expects refuter.pattern to be a RegExp rather than current function."
+    },
+    {
+      "command": "node --check tools/physics-support/step3-scope.mjs; node --check tools/physics-support/step3-published-pages.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check -- tools/physics-support/step3-scope.mjs physics/WORKFLOW.md",
+      "exit_code": 0
+    }
+  ],
+  "native_mutations": false,
+  "source_mutations": false,
+  "retry_units": [
+    "3a-split:split-17",
+    "3a-split:split-1"
+  ],
+  "transient_failure_acknowledgement": "Caller import briefly preceded dependency creation; native split-1 exhausted three attempts. Existing native events retained exactly. Parent requested native pause; no counters or state modified by this agent."
+}

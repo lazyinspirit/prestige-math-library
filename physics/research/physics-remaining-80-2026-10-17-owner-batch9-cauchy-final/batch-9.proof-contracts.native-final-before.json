@@ -1,0 +1,838 @@
+{
+  "version": 1,
+  "run": "physics-remaining-80-2026-10-17",
+  "batch": "9",
+  "level": 4,
+  "scope": [
+    "post-emg-strict-charged-fluid-model",
+    "pthm-emg-local-charged-fluid-model",
+    "ex-emg-adopted-linear-eos-model"
+  ],
+  "contracts": {
+    "post-emg-strict-charged-fluid-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Postulate states the smooth fields, strict barotropic EOS inequalities, EOS-defined positive N, matter stress, convective current, Lorentz-force balance and advected Z equation with SI units."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "The physical_scope and Postulate restrict adoption to smooth classical strict-interior matter, exclude shocks, vacuum boundaries, finite conductivity and point charges, and deny a universal material law or matter action."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Inspected the full 300-page Choquet-Bruhat book at §§IX.3–IX.4 and IX.13.1–IX.13.2, all 16 pages of Pausader notes at §§1.3–1.5 and 2.1.1–2.2.1, and the relevant Pugliese–Valiente Kroon paper sections. Per-item support and limits are recorded in batch-9.coverage.json; source-fetch-check --stamp passed 5/5 active references."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "This is an adopted physical material model with no Proof section and proof provenance not-applicable. The text states that sources motivate general structures but do not establish this exact EOS normalization, advected Z choice or physical applicability."
+        }
+      },
+      "supplier_excerpts": [
+        {
+          "supplier": "def-emg-strict-charged-barotropic-system",
+          "carrier": "items/def-emg-strict-charged-barotropic-system.md",
+          "status": "Current batch-8 draft definition; exact EOS integral and tensor/current conventions inspected.",
+          "source_section": "Definition",
+          "exact_statement": "j^a=cN(\\epsilon)Z u^a",
+          "relevant_hypotheses_and_conventions": "The strict smooth fluid system used in the example.",
+          "supplier_proof_status": "Current batch-8 draft definition; exact EOS integral and tensor/current conventions inspected.",
+          "consumer_use": "The strict smooth fluid system used in the example."
+        },
+        {
+          "supplier": "def-emg-geometry-units",
+          "carrier": "items/def-emg-geometry-units.md",
+          "status": "Current draft definition; exact observer, x^0=ct, tensor-type and SI unit conventions inspected. The current math-import pin matches the owner-refreshed original; the prior prerequisite record is left unchanged.",
+          "source_section": "Definition",
+          "exact_statement": "In a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected.",
+          "relevant_hypotheses_and_conventions": "Length-coordinate SI dimensions and tensor conventions.",
+          "supplier_proof_status": "Current draft definition; exact observer, x^0=ct, tensor-type and SI unit conventions inspected. The current math-import pin matches the owner-refreshed original; the prior prerequisite record is left unchanged.",
+          "consumer_use": "Length-coordinate SI dimensions and tensor conventions."
+        }
+      ]
+    },
+    "pthm-emg-local-charged-fluid-model": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-emg-einstein-maxwell-equations",
+          "source_section": "Postulate",
+          "quote": "Let $M$ be the smooth, boundaryless, oriented and time-oriented Lorentzian\nfour-manifold of [[def-emg-geometry-units]], with metric $g$ of signature\n$(-,+,+,+)$ and the curvature convention of\n[[def-emg-lorentzian-forms]]. Let $U\\subseteq M$ be open. Take a smooth real\ntwo-form $F$ and smooth current vector $j$ on $U$, with\n$dF=0$ and $\\nabla_aF^{ab}=-\\mu_0j^b$ under the adopted convention of\n[[post-emg-covariant-maxwell]]. A chosen smooth matter model supplies a smooth\nsymmetric covariant tensor $T^m_{ab}$ on $U$ and the current $j$; this postulate\ndoes not assert that arbitrary independently prescribed $T^m$ and $j$ arise\nfrom a matter model.\n\nDefine the Einstein tensor by $G_{ab}:=\\operatorname{Ric}_{ab}\n-\\tfrac12 Rg_{ab}$, using the curvature contractions of\n[[def-emg-lorentzian-forms]], and define the smooth-field electromagnetic\nstress tensor by\n\n$$T^{\\mathrm{EM}}_{ab}:=\\frac1{\\mu_0}\\left(F_{ac}F_b{}^c-\\frac14g_{ab}F_{cd}F^{cd}\\right).$$\n\nFor constant cosmological parameter $\\Lambda\\in\\mathbb R$ and\n$\\kappa_E:=8\\pi G_N/c^4$, adopt the additional equation-based gravitational\nfield law\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa_E\\left(T^{\\mathrm{EM}}_{ab}+T^m_{ab}\\right).$$\n\nHere $c>0$, $G_N>0$, and $\\mu_0>0$ have the SI roles and units fixed in\n[[def-emg-geometry-units]]; in length coordinates, $G_{ab}$ and\n$\\Lambda g_{ab}$ have units $\\mathrm{m^{-2}}$, $T^{\\mathrm{EM}}$ and $T^m$\nhave units $\\mathrm{J\\,m^{-3}}$, and $\\kappa_E$ has units\n$\\mathrm{m\\,J^{-1}}$. The source-free and sourced Maxwell equations remain\nsmooth-field postulates: point or sheet sources, distribution-valued products,\nmaterial excitation laws, and a global potential are outside this scope.\n\nThis is an equation-based adoption. It does not assume or imply the existence\nof a matter action and is not derived from an action principle. The sources give\nformulations in their own conventions; they motivate comparison but do not\nestablish a physical law or a solution-existence theorem.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-emg-strict-charged-fluid-model",
+          "source_section": "Postulate",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, metric-selected\nconnection, signature $(-,+,+,+)$, two-form field, and SI conventions stated in\n[[def-emg-geometry-units]] and [[def-emg-strict-charged-barotropic-system]].\nOn an open set $U$ of that spacetime, let $\\epsilon:U\\to J$ be a smooth\nrest-energy-density scalar, let $u$ be a smooth future-directed vector field\nwith $g(u,u)=-1$, and let $Z:U\\to\\mathbb R$ be a smooth charge-per-particle\nscalar. Here $J\\subseteq\\mathbb R$ is an open interval, $\\epsilon$ and\n$p(\\epsilon)$ have units J m$^{-3}$ = Pa, $u$ is dimensionless, and $Z$ has\nunits C. In this adopted model, the word *barotropic* means that pressure is a\nfunction of rest-energy density alone.\n\nAdopt a smooth equation of state $p:J\\to\\mathbb R$ satisfying\n$$\\epsilon+p(\\epsilon)>0,\\qquad 0<p'(\\epsilon)<1$$\nfor every $\\epsilon\\in J$. The dimensionless derivative gives the model's\nbarotropic characteristic speed $c_{\\mathrm s}:=c\\sqrt{p'(\\epsilon)}$, so\nthis selection requires $0<c_{\\mathrm s}<c$. Fix $\\epsilon_*\\in J$ and a\npositive normalization $N_*>0$ with units m$^{-3}$, and define\n$$N(\\epsilon):=N_*\\exp\\!\\left(\\int_{\\epsilon_*}^{\\epsilon} \\frac{dz}{z+p(z)}\\right).$$\nFor each $\\epsilon\\in J$, the closed segment between $\\epsilon_*$ and\n$\\epsilon$ is compact and contained in $J$; the smooth integrand is finite\nthere. Its integral is dimensionless, so $N(\\epsilon)>0$ has units m$^{-3}$.\nWithin this model, $N$ is the EOS-defined number-density variable and $N_*$\nis its chosen normalization. This definition makes no claim that a microscopic\nparticle theory derives $N$ for every EOS.\n\nAdopt the charged-fluid current and matter stress tensor\n$$j^a:=cN(\\epsilon)Zu^a,\\qquad T_{m,ab}:=(\\epsilon+p(\\epsilon))u_a u_b+p(\\epsilon)g_{ab},$$\nand the material balance and advection equations\n$$\\nabla^aT_{m,ab}=F_{bc}j^c,\\qquad u^a\\nabla_aZ=0.$$\nThus $j$ is a smooth four-current with components in A m$^{-2}$, and $T_m$\nhas components in Pa in length coordinates $x^0=ct$. The balance law adopts\nthe Lorentz-force density with the same field and current conventions as the\nchosen Einstein-Maxwell formulation. Charge-per-particle is carried along the\nfluid flow. Current conservation is not an additional adopted material law.\n\nThis is a physical postulate for smooth classical matter in the strict interior\nregime only. It excludes shocks, vacuum interfaces, free boundaries, degenerate\nor superluminal sound speed, finite-conductivity and dissipative currents,\npoint-charge sources, and arbitrary currents chosen independently of the\nfluid. The cited treatments motivate the perfect-fluid and charged-current\nstructures in their own conventions; they do not establish this exact EOS\nnormalization, the $Z$ transport choice, or the physical applicability of this\nmodel. No matter action, experiment, or universal material law is asserted.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-emg-local-charged-barotropic-development",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice $\\mathrm{AC}_\\omega$ and Dependent Choice. Use the model, stress tensors, constants, $(-,+,+,+)$ signature, Maxwell signs, and $K(X,Y)=g(\\nabla_Xn,Y)$ convention of [[def-emg-strict-charged-barotropic-system]]. Let $\\kappa>0$, $\\mu_0>0$, $c>0$, $\\Lambda\\in\\mathbb R$, let $p=p(\\epsilon)$ be smooth on an open interval $J$, and assume $\\epsilon+p(\\epsilon)>0$ and $0<p'(\\epsilon)<1$ on a compact interval $K_\\epsilon\\Subset J$ containing the initial density values.\n\nFor smooth Cauchy data on a smooth oriented three-manifold $\\Sigma$ without boundary, let $h$ be a Riemannian metric and $K\\in\\Gamma(\\operatorname{Sym}^2T^*\\Sigma)$. Let $\\mathfrak n$ be the future unit normal in the initial bundle $\\mathcal V=\\mathbb R\\mathfrak n\\oplus T\\Sigma$ with metric $g_0(a\\mathfrak n+X,b\\mathfrak n+Y)=-ab+h(X,Y)$. Take $\\epsilon_0,Z_0\\in C^\\infty(\\Sigma,\\mathbb R)$, $u_0\\in C^\\infty(\\Sigma,\\mathcal V)$, and $e,b\\in\\Gamma(T\\Sigma)$; $e,b$ are the spatial electric and magnetic fields in the $e=E/c$, $b=B$ convention, with units tesla, while $\\epsilon_0$ has units J m$^{-3}$, $Z_0$ coulomb, $K$ m$^{-1}$, $u_0$ dimensionless, and $j_0$ A m$^{-2}$, as in [[def-emg-strict-charged-barotropic-system]]. Require $g_0(u_0,u_0)=-1$, $u_0$ future-directed, and $\\epsilon_0(\\Sigma)\\subset K_\\epsilon$. Define the unique initial two-form $F_0\\in\\Gamma(\\Lambda^2\\mathcal V^*)$ by $e_i=F_0(\\mathsf e_i,\\mathfrak n)$ and $b_i=\\tfrac12\\varepsilon_i{}^{jk}F_0(\\mathsf e_j,\\mathsf e_k)$ in every oriented $h$-orthonormal frame $(\\mathsf e_i)$; existence and uniqueness follow from [[lem-emg-observer-field-decomposition]]. Put $T_0=T_{m,0}+T_{\\mathrm{EM},0}$ and $j_0=cN(\\epsilon_0)Z_0u_0$ using the same definition. Assume the Einstein constraints\n\n$$R(h)+(\\operatorname{tr}_hK)^2-|K|_h^2=2\\Lambda+2\\kappa T_0(\\mathfrak n,\\mathfrak n),\\qquad (\\operatorname{div}_hK)(X)-D_X\\operatorname{tr}_hK=\\kappa T_0(\\mathfrak n,X)$$\n\nfor every $X\\in T\\Sigma$, where $D$ is the Levi-Civita connection of $h$, and the sourced Maxwell constraints\n\n$$\\operatorname{div}_h e=-\\mu_0g(j_0,\\mathfrak n),\\qquad \\operatorname{div}_h b=0.$$\n\nThen:\n\n**(a) Torus Sobolev branch.** If $\\Sigma=\\mathbb T^3_{2\\pi}$ ([[def-gr-periodic-torus-and-sobolev-spaces]]), $s\\ge5$ is an integer, $h\\in H^{s+1}$, and $K,e,b,\\epsilon_0,u_0,Z_0\\in H^s$ (with the same strict compact admissibility), there is $T>0$ and a solution of the full Einstein–Maxwell–fluid equations on $(-T,T)\\times\\mathbb T^3$ in harmonic gauge. In periodic charts, $g\\in L^\\infty H^{s+1}\\cap C^0H^s$, $\\partial_tg\\in L^\\infty H^s\\cap C^0H^{s-1}$, and $F,\\epsilon,u,Z\\in L^\\infty H^s\\cap C^0H^{s-1}$. The fields satisfy the equations classically; uniqueness holds for the corresponding reduced system on common intervals with common compact admissible bounds.\n\n**(b) Smooth geometric branch.** For the smooth data on arbitrary $\\Sigma$ above, there is a smooth time-oriented local development on an open variable-width neighborhood of $\\{0\\}\\times\\Sigma$, solving the full coupled equations and inducing exactly $(h,K,F_0,\\epsilon_0,u_0,Z_0)$. It is unique near the initial surface up to a data-fixing time-orientation-preserving isometry matching $F,\\epsilon,u,Z$. No uniform time width for noncompact $\\Sigma$, global existence, shock continuation, vacuum/free-boundary solution, or empirical validity is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gr-constraint-equations-in-normal-frame",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, and let $\\Sigma\\subseteq M$ be a smooth spacelike embedded hypersurface with future unit normal $n$, induced Riemannian metric $h$ and second fundamental form $K(X,Y)=g(\\nabla_Xn,Y)$ ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]], [[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]]). Write $D$ for the Levi-Civita connection of $h$, $R^h$ for its curvature operator in the same operator convention as the ambient curvature, and $S_h$ for its scalar curvature. Explicitly distinguish the lowered tensor from the operator pairing by setting\n$$\\mathcal R^g(A,B,C,D):=g(R^g(C,D)B,A),\\qquad \\mathcal R^h(A,B,C,D):=h(R^h(C,D)B,A).$$\nThus $\\mathcal R^g_{abcd}=R_{abcd}$ in [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $g(R^g(X,Y)Z,W)=\\mathcal R^g(W,Z,X,Y)$. Let $G$ be the Einstein tensor defined there. At every $p\\in\\Sigma$ and for all $X,Y,Z,W\\in T_p\\Sigma$:\n\n**(a) Gauss equation.**\n$$\\mathcal R^g(X,Y,Z,W)=\\mathcal R^h(X,Y,Z,W)+K(X,Z)K(Y,W)-K(X,W)K(Y,Z).$$\nEquivalently, in operator order,\n$$g(R^g(X,Y)Z,W)=h(R^h(X,Y)Z,W)+K(Y,Z)K(X,W)-K(X,Z)K(Y,W).$$\n\n**(b) Codazzi equation.**\n$$g(R^g(X,Y)Z,n)=(D_YK)(X,Z)-(D_XK)(Y,Z).$$\n\n**(c) Normal projections.** Define $(\\operatorname{div}_hK)(Y)=h^{ij}(D_{e_i}K)(e_j,Y)$, $\\tau=\\operatorname{tr}_hK=h^{ij}K_{ij}$ and $|K|_h^2=h^{ik}h^{jl}K_{ij}K_{kl}$. Then\n$$G(n,n)=\\tfrac12(S_h+\\tau^2-|K|_h^2),\\qquad G(n,Y)=(\\operatorname{div}_hK)(Y)-D_Y\\tau.$$\n\n**(d) Constraint equations.** If the tensor equation $G+\\Lambda g=\\kappa T$ holds at $p$, for a smooth symmetric covariant $2$-tensor $T$ and real constants $\\kappa,\\Lambda$, then\n$$S_h+\\tau^2-|K|_h^2=2\\Lambda+2\\kappa T(n,n),\\qquad (\\operatorname{div}_hK)(Y)-D_Y\\tau=\\kappa T(n,Y).$$\nWith $\\rho=T(n,n)$ and $j(Y)=-T(n,Y)$, the second equation is $(\\operatorname{div}_hK)(Y)-D_Y\\tau=-\\kappa j(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-emg-observer-field-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq M$ be an open set with smooth observer congruence $n$, let $F$ be a smooth real two-form on $U$, and let $c>0$ be the coordinate conversion parameter of [[def-emg-lorentzian-forms]]. Define covectors\n\n$$E_a:=cF_{ab}n^b,\\qquad B_a:=-({\\star_gF})_{ab}n^b.$$\n\nHere $c$ is the positive coordinate-conversion parameter of [[def-emg-lorentzian-forms]], with SI unit $\\mathrm m\\,\\mathrm s^{-1}$ in its length-coordinate convention. The names electric and magnetic distinguish these two covectors; for arbitrary mathematical $F$ no physical field unit or measurement is assigned.\n\nFor each $p\\in U$, define the **rest covector space** by\n\n$$\\mathcal R^*_{n,p}:=\\{\\alpha\\in T_p^*M:\\alpha(n_p)=0\\}.$$\n\nThe musical isomorphism $\\flat_p$ maps the vector rest space $n_p^\\perp$ onto $\\mathcal R^*_{n,p}$: $\\alpha\\in\\mathcal R^*_{n,p}$ iff $g_p(\\sharp_p\\alpha,n_p)=\\alpha(n_p)=0$. Moreover, $g_p^{-1}(v^\\flat,w^\\flat)=g_p(v,w)$, so the restriction of $g_p^{-1}$ to $\\mathcal R^*_{n,p}$ is positive definite by [[lem-gr-observer-projection-decomposition]]. The covectors $E_p$ and $B_p$ annihilate $n_p$; define $\\langle E,B\\rangle_n(p):=g_p^{-1}(E_p,B_p)$. Then\n\n$$F=n^\\flat\\wedge E/c+\\star_g(n^\\flat\\wedge B),$$\n\n$$F_{ab}F^{ab}=2\\bigl(\\langle B,B\\rangle_n-\\langle E,E\\rangle_n/c^2\\bigr),\\qquad F\\wedge F=-\\frac{2}{c}\\langle E,B\\rangle_n\\,\\mathrm{vol}_g.$$\n\nEquivalently, in any positively oriented future tetrad with $E_0=n$, and with $\\epsilon_{123}=+1$ in its oriented spatial triad, the components satisfy $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$. These are pointwise mathematical decompositions of an arbitrary two-form; no Maxwell equation or physical observation is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-emg-geometry-units",
+          "source_section": "Definition",
+          "quote": "Adopt SI units and the following model-local quantity roles. Here the selected Einstein–Maxwell framework combines the stated Lorentzian geometry with a classical electromagnetic two-form and current; this definition itself supplies no gravitational equation, matter action, or empirical claim. A primitive is an input or independent field variable of this formulation; a derived quantity is fixed by a stated construction from its inputs. Neither label is universal across physical theories, and unit choice alone does not determine it.\n\nThe spacetime data are a smooth, Hausdorff, second-countable, boundaryless four-manifold $M$, a smooth Lorentzian metric $g$ of signature $(-,+,+,+)$, a smooth time-orientation field, and an independent orientation, exactly as in [[def-emg-lorentzian-forms]]. The metric, its time orientation, and the manifold orientation are separate data. An observer at $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g(n,n)=-1$. A smooth observer congruence is a smooth field of such vectors. A local tetrad is a smooth basis $(e_0,e_1,e_2,e_3)$ with metric matrix $\\operatorname{diag}(-1,1,1,1)$; an observer congruence, a coordinate chart, and a tetrad are different objects. Tetrads and observer fields need only exist locally; this definition assumes no global inertial chart, global tetrad, or hypersurface-orthogonal congruence.\n\nThe electromagnetic field-strength variable $F$ is a smooth real two-form, hence an alternating covariant tensor of type $(0,2)$, on an open subset of $M$, as in [[def-emg-lorentzian-forms]]. It is primitive in this formulation. For an observer congruence $n$, its electric and magnetic observer covectors are derived by\n\n$$E_a:=cF_{ab}n^b,\\qquad B_a:=-({\\star_gF})_{ab}n^b.$$\n\nHere $\\star_g$ is the unique Hodge map characterized pointwise by $\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, using the metric and independent orientation, as in [[lem-emg-lorentz-hodge-calculus]]. Both covectors annihilate $n$ and lie in the rest covector space $\\{\\alpha\\in T_p^*M:\\alpha(n)=0\\}$, whose induced metric is positive definite. In a positively oriented future orthonormal tetrad with $e_0=n$ and $\\epsilon_{123}=+1$, their spatial components obey the fixed dictionary $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$ from [[lem-emg-observer-field-decomposition]]. Thus $E$ and $B$ are observer-dependent derived fields, not globally defined observer-independent three-vectors on a curved spacetime. Their tetrad components have units $\\mathrm{V\\,m^{-1}}$ and tesla (T), respectively; the components of $F$ in a length-coordinate chart have unit T. No global potential is assumed; when a local potential $A_a$ is used, its components have unit $\\mathrm{T\\,m}$ and a scalar potential $\\varphi$ has unit V.\n\nFor any chosen observer $n$, a smooth four-current is a vector field $j$ whose local decomposition is $j=c\\rho\\,n+J$, where $\\rho:=-g(n,j)/c$ is the observer charge density and $J:=j-c\\rho n$ is orthogonal to $n$. In the associated positively oriented orthonormal tetrad its components are $j^0=c\\rho$ and $j^i=J^i$. The units are $[\\rho]=\\mathrm{C\\,m^{-3}}$, $[J^i]=[j^a]=\\mathrm{A\\,m^{-2}}$, and $[q]=\\mathrm C$ for a charge parameter supplied by a matter model. The current is a prescribed input or is supplied by an explicitly stated matter model; it is not inferred from the Maxwell equation alone.\n\nThe SI constants and coordinate units are fixed as follows. The speed of ideal vacuum light $c>0$ is the exact SI defining constant $299\\,792\\,458\\ \\mathrm{m\\,s^{-1}}$; identifying it with the shared ideal-light and clock conversion constant is the adopted Minkowski model of [[post-em-minkowski-physical-model]], not a consequence of its unit definition. The elementary charge $e$ is exactly $1.602\\,176\\,634\\times10^{-19}\\ \\mathrm C$. These unit definitions do not imply that charge is quantized. The magnetic constant $\\mu_0>0$ has unit $\\mathrm{N\\,A^{-2}}$ and is experimentally determined in the revised SI, so no exact numerical value for $\\mu_0$ is adopted. Define the electric constant (vacuum permittivity) $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$; hence $\\varepsilon_0\\mu_0c^2=1$, and $\\varepsilon_0$ has the same relative standard uncertainty as $\\mu_0$ because $c$ is exact. The exact component equation $\\nabla_aF^{ab}=-\\mu_0j^b$ is dimensionally consistent: both sides have unit $\\mathrm{T\\,m^{-1}}$ in a length-coordinate frame.\n\nIn a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected. This is local coordinate bookkeeping, not a global inertial-coordinate claim. In such a chart $g_{ab}$ is dimensionless, the Levi-Civita coefficients $\\Gamma^a{}_{bc}$ have unit $\\mathrm{m^{-1}}$, and curvature components have unit $\\mathrm{m^{-2}}$, as in [[def-emg-lorentzian-forms]]. Components in other coordinate units transform by their Jacobians.\n\nFor the gravitational sector, take Newton's gravitational constant $G_N>0$ with unit $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$ and the cosmological constant parameter $\\Lambda\\in\\mathbb R$ with unit $\\mathrm{m^{-2}}$ as primitive parameters of the selected model; no numerical value for either is used here. The coupling normalization $\\kappa_E:=8\\pi G_N/c^4$ is derived from these parameters and has unit $\\mathrm{m\\,J^{-1}}$. This definition records the convention for a later Einstein equation; it asserts no Einstein equation. A separate positive normalization $\\kappa_0$ with unit weber (Wb) is a chosen flux conversion reserved for a later explicitly specified $U(1)$ formulation, where $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$ under multiplication. It is not $\\kappa_E$, an electric charge, $\\mu_0$, or Planck's constant, and it implies no charge quantization. Test-particle rest mass $m>0$ in kg and charge $q$ in C are externally supplied matter parameters, not quantities derived by classical electromagnetism.\n\nThese are SI and model-definition conventions only. They neither assert empirical measurements beyond the stated SI defining constants and measured status of $\\mu_0$, nor identify similarly named quantities in another framework.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-gr-periodic-torus-and-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]) for the quotient, product-measure and integration\nclauses below, as in [[def-the-one-dimensional-torus-and-normalized-haar-integral]].\n\n**(a) The 2 pi-periodic torus.** Let $\\mathbb T_{2\\pi}:=\\mathbb R/2\\pi\\mathbb Z$\ncarry the quotient topology, and let\n$$\\mathbb T^3_{2\\pi}:=\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}$$\nwith the product topology; write $q:\\mathbb R^3\\to\\mathbb T^3_{2\\pi}$ for the\nquotient map and $[x]:=(x^1+2\\pi\\mathbb Z,x^2+2\\pi\\mathbb Z,x^3+2\\pi\\mathbb Z)$.\nThe map $[0,2\\pi)^3\\to\\mathbb T^3_{2\\pi}$, $x\\mapsto[x]$, is a bijection. The\nnormalized product measure $\\mu$ is $\\mu_{\\mathbb T}\\otimes\\mu_{\\mathbb T}\\otimes\\mu_{\\mathbb T}$,\nwhere $\\mu_{\\mathbb T}$ is the normalized measure of\n[[def-the-one-dimensional-torus-and-normalized-haar-integral]] transported by\n$t\\mapsto2\\pi t$; it is a probability measure on the Borel sets of\n$\\mathbb T^3_{2\\pi}$ and $\\int f\\,d\\mu=(2\\pi)^{-3}\\int_{[0,2\\pi)^3}f\\circ q\\,d\\lambda_3$\nfor bounded measurable $f$ ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).\n\n**(b) Test functions and continuous classes.** For $N\\ge1$ let\n$C^\\infty(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ be the set of maps\n$u:\\mathbb T^3_{2\\pi}\\to\\mathbb R^N$ whose pullbacks\n$\\widetilde u:=u\\circ q:\\mathbb R^3\\to\\mathbb R^N$ are smooth;\nthese are the **smooth test functions** (real-valued when $N=1$).\nEquivalently every smooth map $\\widetilde u:\\mathbb R^3\\to\\mathbb R^N$\nthat is $2\\pi$-periodic in each coordinate descends to the unique map\n$u([x])=\\widetilde u(x)$, since periodicity makes this value independent of\n$x$ in its equivalence class. For an integer $m\\ge0$, define\n$C^m(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ similarly by requiring\n$\\widetilde u\\in C^m(\\mathbb R^3;\\mathbb R^N)$\n([[def-c-r-and-smooth-maps-between-smooth-manifolds]]), and define\n$D^\\alpha u([x]):=D^\\alpha\\widetilde u(x)$ for $|\\alpha|\\le m$.\nDerivatives of a periodic $C^m$ map are periodic, so these values are\nwell-defined, with\n$$\\|u\\|_{C^m}:=\\max_{|\\alpha|\\le m}\\ \\sup_{x\\in\\mathbb T^3_{2\\pi}}|(D^\\alpha u)(x)|,$$\nwhere the multi-index derivative is that of\n[[def-ck-and-multi-index-notation-in-several-variables]].\n\n**(c) The Hilbert space $L^2$.** For $N\\ge1$ let\n$L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ be the quotient of the set of measurable\n$u$ with $\\int|u|^2\\,d\\mu<\\infty$ by the $\\mu$-a.e. zero functions\n([[def-l-p-space-as-a-quotient-by-null-functions]],\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]),\nwith inner product $\\langle u,v\\rangle_2=\\int u\\cdot v\\,d\\mu$ and norm\n$\\|u\\|_2=\\langle u,u\\rangle_2^{1/2}$; it is a real Hilbert space\n([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]). For\n$u\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ and $k\\in\\mathbb Z^3$ the\n**$k$-th Fourier coefficient** is the vector\n$$\\widehat u(k):=\\int_{\\mathbb T^3_{2\\pi}}u(x)\\,e^{-ik\\cdot x}\\,d\\mu(x)\\in\\mathbb C^N ,$$\nwhere $e^{-ik\\cdot x}:=\\chi_{-k}$ with $\\chi_k([x]):=\\exp(i\\,k\\cdot x)$; here\n$u$ is read through any representative. Write $\\chi_k:\\mathbb T^3_{2\\pi}\\to\\mathbb C$,\n$k\\in\\mathbb Z^3$, for these **characters**; under the identification\n$x=2\\pi y$ they are the characters $\\exp(2\\pi i\\,k\\cdot y)$ of\n[[thm-fourier-basis-and-parseval-on-the-n-torus]], so $(\\chi_k)_{k\\in\\mathbb Z^3}$\nis an orthonormal basis of the complex space $L^2(\\mathbb T^3_{2\\pi};\\mathbb C)$.\n\n**(d) Weak derivatives and the periodic Sobolev spaces.** For\n$u,v\\in L^1(\\mathbb T^3_{2\\pi};\\mathbb R)$ and $\\alpha\\in\\mathbb N_0^3$ say that\n$v$ is the **weak derivative** $D^\\alpha u$ if\n$$\\int_{\\mathbb T^3_{2\\pi}}u\\,D^\\alpha\\varphi\\,d\\mu=(-1)^{|\\alpha|}\\int_{\\mathbb T^3_{2\\pi}}v\\,\\varphi\\,d\\mu$$\nfor every $\\varphi\\in C^\\infty(\\mathbb T^3_{2\\pi};\\mathbb R)$, where $D^\\alpha\\varphi$\nis the multi-index derivative of the periodic representative\n([[def-weak-derivative-of-a-locally-integrable-function]] records the\nEuclidean analogue). For an integer $s\\ge0$ let\n$$H^s(\\mathbb T^3_{2\\pi};\\mathbb R^N):=\\Bigl\\{u\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N):\\ \\text{for every }|\\alpha|\\le s\\text{ there is }v_\\alpha\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)\\text{ with }v_\\alpha=D^\\alpha u\\Bigr\\},$$\nthe vector-valued weak derivative being componentwise, and put\n$$\\|u\\|_{H^s}:=\\Bigl(\\sum_{|\\alpha|\\le s}\\|D^\\alpha u\\|_2^2\\Bigr)^{1/2}.$$\nThe classes $L^2\\subseteq L^1$ on the probability space, so the integrals in the\ntest identity are finite: $|\\int u\\,D^\\alpha\\varphi\\,d\\mu|\\le\\|u\\|_2\\|D^\\alpha\\varphi\\|_2$\nby Cauchy--Schwarz. The definition asserts neither that the weak derivative\nexists nor that the two norms compared in the next item are equivalent; those\nare proved in [[lem-gr-periodic-fourier-differentiation-and-norm-equivalence]].\n\n**(e) Conventions.** $O\\subseteq\\mathbb R^m$ open, $I\\subseteq\\mathbb R$ an\ninterval and maps $F:I\\times\\mathbb T^3_{2\\pi}\\times O\\to\\mathbb R^{m'}$ are\ncalled smooth when the representative $G(t,x,u):=F(t,q(x),u)$ is\nlocally the restriction of a smooth Euclidean map: for every\n$(t,x,u)\\in I\\times\\mathbb R^3\\times O$ there are an open neighborhood\n$V\\subseteq\\mathbb R^{4+m}$ and $\\widetilde G\\in C^\\infty(V;\\mathbb R^{m'})$\nwith $\\widetilde G=G$ on $V\\cap(I\\times\\mathbb R^3\\times O)$.\nFor open $I$ this is the ordinary Euclidean definition. For nonopen $I$\nit is the local extension convention at included endpoints, also admitting\na singleton interval. On a nondegenerate interval endpoint time derivatives\nare the limits of interior derivatives; on a singleton no time derivative\nis specified without choosing an extension. Throughout this page the torus is always this\n$2\\pi$-periodic one; a statement \"for every $x$\" means for every point of\n$\\mathbb T^3_{2\\pi}$, and \"a.e.\" means $\\mu$-a.e.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-gr-harmonic-gauge-and-reduced-equations",
+          "source_section": "Definition",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection $\\nabla$\n([[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]) and let\n$U\\subseteq M$ be an open set carrying a fixed smooth **background metric**\n$\\bar g$ with Levi-Civita connection $\\bar\\nabla$\n([[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), whose Christoffel\nsymbols in any chart are $\\bar\\Gamma^a{}_{bc}$\n([[def-christoffel-symbols-of-an-affine-connection]]); the same symbol\n$\\Gamma^a{}_{bc}$ denotes those of $g$. Let $\\kappa>0$ and $\\Lambda\\in\\mathbb R$\nbe constants and let $T$ be a smooth symmetric covariant $2$-tensor field on $U$\n([[def-gr-smooth-covariant-two-tensor-field]]), the **matter stress-energy\ntensor**, with $T=g^{ab}T_{ab}$ its metric trace\n([[def-gr-inverse-metric-and-musical-isomorphisms]]).\n\n**(a) Gauge vector.** The **harmonic-gauge vector field** of the pair\n$(g,\\bar g)$ is the smooth vector field\n$$H^a:=g^{bc}\\bigl(\\Gamma^a{}_{bc}-\\bar\\Gamma^a{}_{bc}\\bigr) .$$\nThe difference of the connection coefficients is a $(1,2)$-tensor, so $H$ is a\nwell-defined smooth vector field independent of the chart used to express the\nsymbols ([[def-gr-tensor-fields-and-components]]).\n\n**(b) Reduced Einstein equation.** The **reduced Einstein equation** for the\npair $(g,T)$ with respect to $\\bar g$ is the second-order quasilinear system\n$$\\operatorname{Ric}_{ab}-\\nabla_{(a}H_{b)}=\\kappa\\bigl(T_{ab}-\\tfrac12Tg_{ab}\\bigr)+\\Lambda g_{ab},$$\nwhere $\\operatorname{Ric}_{ab}$ is the Ricci tensor of $g$\n([[def-gr-curvature-tensor-and-derived-tensors]]),\n$H_b=g_{bc}H^c$ and $\\nabla_{(a}H_{b)}=\\tfrac12(\\nabla_aH_b+\\nabla_bH_a)$.\n\n**(c) Reduced solutions.** A **reduced solution** on $U$ is a pair $(g,T)$ of a\nsmooth Lorentzian metric and a smooth symmetric $2$-tensor on $U$ satisfying\n(b) for the fixed background $\\bar g$.\n\n**(d) Einstein residual.** The **Einstein residual** of a pair $(g,T)$ is the\nsmooth symmetric $2$-tensor\n$$E_{ab}:=G_{ab}+\\Lambda g_{ab}-\\kappa T_{ab},\\qquad G_{ab}=\\operatorname{Ric}_{ab}-\\tfrac12Sg_{ab},$$\nwith $S=g^{ab}\\operatorname{Ric}_{ab}$ the scalar curvature\n([[def-gr-curvature-tensor-and-derived-tensors]]). The pair solves the Einstein\nequation exactly when $E=0$.\n\n**(e) Constraint equations.** If $g$ is defined on a neighborhood of a spacelike\nhypersurface $\\Sigma$ with future unit normal field $\\mathfrak n$ and tangential\nframe $(e_i)$ ([[def-gr-spacelike-initial-data-and-constraints]]), the\n**constraint residuals** are the functions $E(\\mathfrak n,\\mathfrak n)$ and\n$E(\\mathfrak n,e_i)$ on $\\Sigma$; that these are the normal and\nnormal-tangential projections of the field equation, and that they agree with\nthe Hamiltonian and momentum constraint equations of the initial data, is\nrecorded in [[lem-gr-constraint-projections]] and\n[[def-gr-spacelike-initial-data-and-constraints]].\n\nThe definition introduces the objects only. The principal part of (b), its\nfirst-order symmetric hyperbolic reduction, the identity expressing $E$ through\n$H$, the wave equation satisfied by $H$ and the propagation of the constraint\nresiduals are proved in [[lem-gr-reduced-einstein-principal-part]],\n[[thm-gr-reduced-einstein-local-existence]],\n[[lem-gr-einstein-residual-and-subsidiary-identity]] and\n[[thm-gr-harmonic-constraint-propagation]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-emg-fieldstrength-positive-symmetric-reduction",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R\\times\\Sigma$ be a coordinate neighborhood in an oriented smooth Lorentzian four-manifold of signature $(-,+,+,+)$, foliated by spacelike $s$-levels. Write\n$$g=-\\alpha^2ds^2+h_{ij}(dx^i+\\beta^i ds)(dx^j+\\beta^j ds),\\qquad \\alpha>0,\\qquad h=(h_{ij})>0,$$\nand let $n=\\alpha^{-1}(\\partial_s-\\beta^i\\partial_i)$ be the future unit normal. On a smaller neighborhood choose a positively oriented orthonormal spatial frame $(\\mathsf e_1,\\mathsf e_2,\\mathsf e_3)$ by Gram–Schmidt. Let $D$ be the Levi-Civita derivative of $h$, define $\\operatorname{div}_h v:=D_iv^i$ and $(\\operatorname{curl}_h v)_i:=\\epsilon_i{}^{jk}D_jv_k$, and define the spatial cross product by $(u\\times v)_i=\\epsilon_{ijk}u_jv_k$ in this frame. For a smooth real two-form $F$, define the real spatial components $e_i:=F(\\mathsf e_i,n)$ and $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathsf e_j,\\mathsf e_k)$, with $\\epsilon_{123}=1$; thus $F_{0i}=-e_i$ and $F_{ij}=\\epsilon_{ijk}b_k$ in the adapted tetrad. Assume the source-free model of draft definition [[def-emg-electrovacuum-cauchy-system]], whose actual equations are $dF=0$ and $d\\star_gF=0$; its draft status and manifest omission are recorded in [L1].\n\nThe six evolution equations for $(e,b)$ have principal part\n$$n(e)-\\operatorname{curl}_h b=\\text{terms with no derivatives of }(e,b),\\qquad n(b)+\\operatorname{curl}_h e=\\text{terms with no derivatives of }(e,b).$$\nFor a spatial covector $\\xi$, let $C(\\xi)v:=\\xi^\\sharp\\times v$ in the oriented orthonormal frame. Set $\\theta^0:=\\alpha ds=-g(n,\\cdot)$ and decompose any spacetime covector as $\\zeta=\\zeta(n)\\theta^0+\\zeta_\\perp$, where $\\zeta_\\perp(n)=0$ and $|\\zeta_\\perp|_h$ is its spatial norm. The spatial principal block is the linear map on $\\mathbb R^3\\oplus\\mathbb R^3$ defined by $S(\\xi)(u,v)=(-C(\\xi)v,C(\\xi)u)$. It is real symmetric, has eigenvalues $0,0,|\\xi|,|\\xi|,-|\\xi|,-|\\xi|$, and satisfies $\\|S(\\xi)\\|=|\\xi|$. Therefore the principal symbol $P(\\zeta)=\\zeta(n)I_6+S(\\zeta_\\perp)$ is positive definite for every covector with $\\zeta(n)>|\\zeta_\\perp|_h$. In the adapted coordinates its time matrix is $\\alpha^{-1}I_6$, and every coordinate spatial matrix is symmetric. Derivatives of the frame and metric enter only as smooth lower-order coefficients depending on $(g,g^{-1},\\partial g,e,b)$; in a first-order metric state they are zero-order terms. The remaining two Maxwell equations are the constraints $\\operatorname{div}_h e=0$ and $\\operatorname{div}_h b=0$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-emg-maxwell-stress-conservation",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a smooth real two-form on a smooth oriented Lorentzian four-manifold of signature $(-,+,+,+)$, with the connection, Hodge star, and tensor $Q_{ab}=F_{ac}F_b{}^c-\\tfrac14g_{ab}F_{cd}F^{cd}$ of [[def-emg-electrovacuum-cauchy-system]]. For a smooth vector field $J$, suppose\n\n$$dF=0,\\qquad \\nabla_aF^{ab}=-\\mu_0J^b.$$\n\nThen $Q_{ab}$ is symmetric and trace-free, and the SI-normalized stress tensor $T^{\\rm EM}_{ab}=\\mu_0^{-1}Q_{ab}$ satisfies\n\n$$\\nabla^aT^{\\rm EM}_{ab}=-F_{bc}J^c.$$\n\nIn the source-free case $J=0$, $\\nabla^aT^{\\rm EM}_{ab}=0$. If $n$ is a future unit normal and $(\\mathfrak e_1,\\mathfrak e_2,\\mathfrak e_3)$ a positively oriented orthonormal spatial triad, put $e_i:=F(\\mathfrak e_i,n)$, $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathfrak e_j,\\mathfrak e_k)$, and $(e\\times b)_i:=\\epsilon_{ijk}e_jb_k$. Then\n\n$$T^{\\rm EM}(n,n)=\\frac{|e|^2+|b|^2}{2\\mu_0},\\qquad T^{\\rm EM}(n,\\mathfrak e_i)=-\\frac{(e\\times b)_i}{\\mu_0}.$$\n\nThese are pointwise tensor identities. In the SI interpretation $e=E/c$ and $b=B$ have units tesla; no measurement or physical applicability claim is included.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The equation-based postulate [F1] supplies the Einstein equation, sourced\nMaxwell sign and electromagnetic stress used by the local mathematical result;\nthe material postulate [F2] supplies exactly its $T_m$, $j$, Lorentz-force\nbalance and advected $Z$ equation. The postulates are assumptions, not\nconsequences of one another.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The given bundle, smoothness, EOS interval, field reconstruction and four\nconstraint equations match the current Statement of [F3]; [F4] fixes the\nsecond-fundamental-form and constraint signs, [F5] fixes the six initial\nMaxwell components, [F6] fixes the length-coordinate convention, [F7] fixes\nthe torus and Sobolev conventions, and [F8] defines the gauge used in branch\n(a). The use of [F3] remains conditional on its actual draft inputs [L1] and\n[L2], which are not certified here.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F3] under [A1] and [A2] gives its torus Sobolev branch when the\ntorus and Sobolev hypotheses hold, and its smooth geometric branch for the\nsmooth data stated here. Interpreting the resulting fields through [F1] and\n[F2] gives a local solution of the adopted equation-based Einstein-Maxwell-\nfluid model, with exactly the stated initial data. The deduction is conditional\non [F3], [L1] and [L2]; it is not an empirical validation or a claim of global\nevolution.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F3",
+            "L1",
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item is a local development theorem for specified smooth initial data and makes no empty-state-set assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strict inequalities exclude zero enthalpy and degenerate sound speed, while material charge Z may vanish; the neutral case is allowed by the Statement and step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem contains no one-element counting or singleton classification assertion; its fields range over the stated manifold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires epsilon+p>0 and 0<p′<1 throughout K_epsilon, excluding zero and unit sound-speed degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires K_epsilon compactly contained in open J and imposes the strict EOS bounds on the entire interval, including its endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only AC_omega and dependent choice are explicit in [A1] and [A2], and steps 2.1 and 3.1 apply those exact premises; no full AC premise is claimed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way local-existence result and contains no equivalence or reverse implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a one-way local-existence result and contains no equivalence or reverse implication."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-emg-einstein-maxwell-equations",
+          "carrier": "items/post-emg-einstein-maxwell-equations.md",
+          "status": "Current draft physical postulate; used only as an adopted equation-based premise, with no inference of empirical validity.",
+          "source_section": "Postulate",
+          "exact_statement": "G_{ab}+\\Lambda g_{ab}=\\kappa_E\\left(T^{\\mathrm{EM}}_{ab}+T^m_{ab}\\right)",
+          "relevant_hypotheses_and_conventions": "The adopted Einstein and sourced-Maxwell equations.",
+          "supplier_proof_status": "Current draft physical postulate; used only as an adopted equation-based premise, with no inference of empirical validity.",
+          "consumer_use": "The adopted Einstein and sourced-Maxwell equations."
+        },
+        {
+          "supplier": "post-emg-strict-charged-fluid-model",
+          "carrier": "items/post-emg-strict-charged-fluid-model.md",
+          "status": "Current draft physical postulate; the exact smooth strict-interior closure is an assumption, not a proved material law.",
+          "source_section": "Postulate",
+          "exact_statement": "j^a:=cN(\\epsilon)Zu^a",
+          "relevant_hypotheses_and_conventions": "The adopted material stress, current, force balance and advected charge.",
+          "supplier_proof_status": "Current draft physical postulate; the exact smooth strict-interior closure is an assumption, not a proved material law.",
+          "consumer_use": "The adopted material stress, current, force balance and advected charge."
+        },
+        {
+          "supplier": "thm-emg-local-charged-barotropic-development",
+          "carrier": "items/thm-emg-local-charged-barotropic-development.md",
+          "status": "Current draft theorem with pending precheck; exact local branches and constraints match, but its proof is conditional on CP01/CP02 draft suppliers.",
+          "source_section": "Statement",
+          "exact_statement": "there is a smooth time-oriented local development on an open variable-width neighborhood of $\\{0\\}\\times\\Sigma$",
+          "relevant_hypotheses_and_conventions": "The exact conditional local-development statement applied to identical data.",
+          "supplier_proof_status": "Current draft theorem with pending precheck; exact local branches and constraints match, but its proof is conditional on CP01/CP02 draft suppliers.",
+          "consumer_use": "The exact conditional local-development statement applied to identical data."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published definition; exact AC_omega formulation inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "relevant_hypotheses_and_conventions": "The explicit AC_omega premise.",
+          "supplier_proof_status": "Published definition; exact AC_omega formulation inspected.",
+          "consumer_use": "The explicit AC_omega premise."
+        },
+        {
+          "supplier": "def-dependent-choice",
+          "carrier": "items/def-dependent-choice.md",
+          "status": "Published definition; exact prescribed-start DC formulation inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For every nonempty set $X$, every relation $R$ entire on $X$, and every",
+          "relevant_hypotheses_and_conventions": "The explicit dependent-choice premise.",
+          "supplier_proof_status": "Published definition; exact prescribed-start DC formulation inspected.",
+          "consumer_use": "The explicit dependent-choice premise."
+        },
+        {
+          "supplier": "def-emg-geometry-units",
+          "carrier": "items/def-emg-geometry-units.md",
+          "status": "Current draft definition; exact observer, x^0=ct, tensor-type and SI unit conventions inspected. The current math-import pin matches the owner-refreshed original; the prior prerequisite record is left unchanged.",
+          "source_section": "Definition",
+          "exact_statement": "In a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected.",
+          "relevant_hypotheses_and_conventions": "Length-coordinate SI dimensions and tensor conventions.",
+          "supplier_proof_status": "Current draft definition; exact observer, x^0=ct, tensor-type and SI unit conventions inspected. The current math-import pin matches the owner-refreshed original; the prior prerequisite record is left unchanged.",
+          "consumer_use": "Length-coordinate SI dimensions and tensor conventions."
+        },
+        {
+          "supplier": "thm-gr-constraint-equations-in-normal-frame",
+          "carrier": "items/thm-gr-constraint-equations-in-normal-frame.md",
+          "status": "Published mathematical theorem; complete proof and the selected second-fundamental-form sign inspected.",
+          "source_section": "Statement",
+          "exact_statement": "G(n,n)=\\tfrac12(S_h+\\tau^2-|K|_h^2),\\qquad G(n,Y)=(\\operatorname{div}_hK)(Y)-D_Y\\tau.",
+          "relevant_hypotheses_and_conventions": "The Einstein constraint projections under the chosen K convention.",
+          "supplier_proof_status": "Published mathematical theorem; complete proof and the selected second-fundamental-form sign inspected.",
+          "consumer_use": "The Einstein constraint projections under the chosen K convention."
+        },
+        {
+          "supplier": "lem-emg-observer-field-decomposition",
+          "carrier": "items/lem-emg-observer-field-decomposition.md",
+          "status": "Published mathematical lemma; complete component reconstruction and orientation convention inspected.",
+          "source_section": "Statement",
+          "exact_statement": "F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k",
+          "relevant_hypotheses_and_conventions": "Reconstruction of the initial two-form from e and b.",
+          "supplier_proof_status": "Published mathematical lemma; complete component reconstruction and orientation convention inspected.",
+          "consumer_use": "Reconstruction of the initial two-form from e and b."
+        },
+        {
+          "supplier": "lem-emg-fieldstrength-positive-symmetric-reduction",
+          "carrier": "items/lem-emg-fieldstrength-positive-symmetric-reduction.md",
+          "status": "Current draft lemma with pending precheck; its exact six-field principal symbol is used conditionally.",
+          "source_section": "Statement",
+          "exact_statement": "Therefore the principal symbol $P(\\zeta)=\\zeta(n)I_6+S(\\zeta_\\perp)$ is positive definite for every covector with $\\zeta(n)>|\\zeta_\\perp|_h$.",
+          "relevant_hypotheses_and_conventions": "The conditional positive symmetric Maxwell principal block.",
+          "supplier_proof_status": "Current draft lemma with pending precheck; its exact six-field principal symbol is used conditionally.",
+          "consumer_use": "The conditional positive symmetric Maxwell principal block."
+        },
+        {
+          "supplier": "lem-emg-maxwell-stress-conservation",
+          "carrier": "items/lem-emg-maxwell-stress-conservation.md",
+          "status": "Current draft lemma with pending precheck; its exact stress-exchange sign is used conditionally.",
+          "source_section": "Statement",
+          "exact_statement": "\\nabla^aT^{\\rm EM}_{ab}=-F_{bc}J^c",
+          "relevant_hypotheses_and_conventions": "The conditional Maxwell stress-force exchange sign.",
+          "supplier_proof_status": "Current draft lemma with pending precheck; its exact stress-exchange sign is used conditionally.",
+          "consumer_use": "The conditional Maxwell stress-force exchange sign."
+        },
+        {
+          "supplier": "def-gr-periodic-torus-and-sobolev-spaces",
+          "carrier": "items/def-gr-periodic-torus-and-sobolev-spaces.md",
+          "status": "Published mathematical definition; quotient torus and integer-order periodic Sobolev spaces inspected.",
+          "source_section": "Definition",
+          "exact_statement": "$\\mathbb T^3_{2\\pi}:=\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}$",
+          "relevant_hypotheses_and_conventions": "The exact torus and Sobolev spaces used by the conditional Cauchy branch.",
+          "supplier_proof_status": "Published mathematical definition; exact quotient and function-space definition inspected.",
+          "consumer_use": "The quotient torus notation and topology in branch (a)."
+        },
+        {
+          "supplier": "def-gr-harmonic-gauge-and-reduced-equations",
+          "carrier": "items/def-gr-harmonic-gauge-and-reduced-equations.md",
+          "status": "Published mathematical definition; exact gauge-vector definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "H^a:=g^{bc}(\\Gamma^a{}_{bc}-\\bar\\Gamma^a{}_{bc})",
+          "relevant_hypotheses_and_conventions": "A fixed smooth background metric bar g; harmonic gauge sets H=0.",
+          "supplier_proof_status": "Published mathematical definition; exact gauge-vector definition inspected.",
+          "consumer_use": "Definition of the harmonic gauge in the torus local branch."
+        },
+        {
+          "supplier": "def-gr-periodic-torus-and-sobolev-spaces",
+          "carrier": "items/def-gr-periodic-torus-and-sobolev-spaces.md",
+          "status": "Published mathematical definition; integer-order weak-derivative Sobolev spaces inspected.",
+          "source_section": "Definition",
+          "exact_statement": "$H^s(\\mathbb T^3_{2\\pi};\\mathbb R^N):=\\{u\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N):\\text{ for every }|\\alpha|\\le s\\text{ there is }v_\\alpha\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)\\text{ with }v_\\alpha=D^\\alpha u\\}$",
+          "relevant_hypotheses_and_conventions": "Integer s≥0; weak derivatives are componentwise and periodic.",
+          "supplier_proof_status": "Published mathematical definition; exact Sobolev space definition inspected.",
+          "consumer_use": "The H^s regularity hypotheses and solution classes in branch (a)."
+        }
+      ]
+    },
+    "ex-emg-adopted-linear-eos-model": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ ([[def-power-set]], [[def-cartesian-product]], [[def-axiom-schema-of-separation]]); a natural is the set of its predecessors ([[lem-nat-order-is-membership]]). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ ([[lem-nat-nonzero-is-successor]]); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction ([[thm-induction-principle]]), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-emg-strict-charged-barotropic-system",
+          "source_section": "Definition",
+          "quote": "Use the oriented, time-oriented smooth Lorentzian four-manifold, metric-selected Levi-Civita connection, signature $(-,+,+,+)$, two-form $F$, Einstein tensor $G$, and SI tensor conventions of [[def-emg-electrovacuum-cauchy-system]]. In particular, $F$ is a smooth real section of $\\Lambda^2T^*M$, $x^0=ct$ is a length coordinate, the electromagnetic stress is\n\n$$T_{\\mathrm{EM},ab}=\\mu_0^{-1}\\left(F_{ac}F_b{}^c-\\tfrac14 g_{ab}F_{cd}F^{cd}\\right),$$\n\nand the sourced Maxwell convention is $dF=0$ and $d\\star_gF=\\mu_0\\iota_j\\operatorname{vol}_g$, equivalently $\\nabla_aF^{ab}=-\\mu_0j^b$. These are mathematical model equations, not claims that the model describes nature.\n\nChoose an open real interval $J$ and a smooth equation of state $p:J\\to\\mathbb R$ such that $\\epsilon+p(\\epsilon)>0$ and $0<p'(\\epsilon)<1$ for every $\\epsilon\\in J$. The rest-energy density $\\epsilon:M\\to J$ and pressure $p(\\epsilon)$ have SI units J m$^{-3}$=Pa; $p$ depends only on $\\epsilon$, which is the meaning of *barotropic* here. Fix $\\epsilon_*\\in J$ and a constant $N_*>0$ with units m$^{-3}$ and define the positive EOS scalar\n\n$$N(\\epsilon)=N_*\\exp\\!\\left(\\int_{\\epsilon_*}^{\\epsilon}\\frac{dz}{z+p(z)}\\right).$$\n\nFor each $\\epsilon\\in J$, the closed interval between $\\epsilon_*$ and $\\epsilon$ is a compact subset of $J$, so the smooth integrand has a finite ordinary integral there. The exponent is dimensionless and $N(\\epsilon)>0$. This is an EOS-defined number-density variable and normalization, not a microscopic particle derivation.\n\nLet $u$ be a smooth future-directed vector field with $g(u,u)=-1$, and let $Z:M\\to\\mathbb R$ be a smooth scalar with units coulomb, interpreted within this model as charge per number-density unit. Define the current and matter stress by\n\n$$j^a=cN(\\epsilon)Z u^a,\\qquad T_{m,ab}=(\\epsilon+p(\\epsilon))u_a u_b+p(\\epsilon)g_{ab}.$$\n\nHere $u$ is dimensionless, $j$ has SI component units A m$^{-2}$, and $T_m$ has units Pa in the $x^0=ct$ convention. The *strict charged barotropic system* is the smooth tensor system\n\n$$\\nabla^aT_{m,ab}=F_{bc}j^c,\\qquad u^a\\nabla_aZ=0,$$\n\ncoupled to the stated sourced Maxwell equations and\n\n$$G_{ab}+\\Lambda g_{ab}=\\kappa(T_{m,ab}+T_{\\mathrm{EM},ab}),\\qquad \\kappa=8\\pi G_N/c^4>0,\\quad \\Lambda\\in\\mathbb R.$$\n\nThe first equation is the charged-fluid energy-momentum balance; its Lorentz-force term is orthogonal to $u$ by antisymmetry of $F$. The second transports the charge-per-particle scalar along the fluid flow. No independent current continuity law is added: it is derived in [[lem-emg-charged-fluid-current-conservation]]. No dust, shock, vacuum interface, free boundary, degenerate sound speed, superluminal sound speed, finite-conductivity law, or point-charge source is included.",
+          "uses": [
+            "1.1",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-emg-charged-fluid-positive-symmetric-reduction",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice for the enthalpy integral. Let smooth fields satisfy [[def-emg-strict-charged-barotropic-system]], with $\\epsilon\\in J$, $u$ future unit timelike, and $0<p'(\\epsilon)<1$. Put $c_s=\\sqrt{p'(\\epsilon)}$ and use the enthalpy coordinate\n\n$$r(\\epsilon)=\\int_{\\epsilon_*}^{\\epsilon}\\frac{\\sqrt{p'(z)}}{z+p(z)}\\,dz.$$\n\nOn a local chart with a smooth frame $e_1,e_2,e_3$ for the positive-definite subbundle $u^\\perp$, the energy and momentum equations are equivalent to\n\n$$u^a\\nabla_a r+c_s\\nabla_a u^a=0,\\qquad u^a\\nabla_a u_b+c_s(\\delta_b{}^a+u_bu^a)\\nabla_a r=\\frac{F_{bc}j^c}{\\epsilon+p},\\qquad u^a\\nabla_aZ=0.$$\n\nIn smooth local coordinates on the unit-velocity hyperboloid, the principal bilinear form on fluid variations $(a,v,z)$ and $(a',v',z')$, with $v,v'\\in u^\\perp$, is\n\n$$Q_\\zeta((a,v,z),(a',v',z'))=\\zeta(u)\\bigl(aa'+g(v,v')+zz'\\bigr)+c_s\\bigl(a\\zeta(v')+a'\\zeta(v)\\bigr).$$\n\nIt is symmetric and positive definite for every timelike covector $\\zeta$ with $\\zeta(u)>0$. The Lorentz-force term is algebraic in $(g,F,\\epsilon,u,Z)$ and therefore changes only the lower-order term. The transport equation for $Z$ contributes the positive scalar block $\\zeta(u)$ and has no principal cross terms.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-gr-periodic-torus-and-sobolev-spaces",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]) for the quotient, product-measure and integration\nclauses below, as in [[def-the-one-dimensional-torus-and-normalized-haar-integral]].\n\n**(a) The 2 pi-periodic torus.** Let $\\mathbb T_{2\\pi}:=\\mathbb R/2\\pi\\mathbb Z$\ncarry the quotient topology, and let\n$$\\mathbb T^3_{2\\pi}:=\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}$$\nwith the product topology; write $q:\\mathbb R^3\\to\\mathbb T^3_{2\\pi}$ for the\nquotient map and $[x]:=(x^1+2\\pi\\mathbb Z,x^2+2\\pi\\mathbb Z,x^3+2\\pi\\mathbb Z)$.\nThe map $[0,2\\pi)^3\\to\\mathbb T^3_{2\\pi}$, $x\\mapsto[x]$, is a bijection. The\nnormalized product measure $\\mu$ is $\\mu_{\\mathbb T}\\otimes\\mu_{\\mathbb T}\\otimes\\mu_{\\mathbb T}$,\nwhere $\\mu_{\\mathbb T}$ is the normalized measure of\n[[def-the-one-dimensional-torus-and-normalized-haar-integral]] transported by\n$t\\mapsto2\\pi t$; it is a probability measure on the Borel sets of\n$\\mathbb T^3_{2\\pi}$ and $\\int f\\,d\\mu=(2\\pi)^{-3}\\int_{[0,2\\pi)^3}f\\circ q\\,d\\lambda_3$\nfor bounded measurable $f$ ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).\n\n**(b) Test functions and continuous classes.** For $N\\ge1$ let\n$C^\\infty(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ be the set of maps\n$u:\\mathbb T^3_{2\\pi}\\to\\mathbb R^N$ whose pullbacks\n$\\widetilde u:=u\\circ q:\\mathbb R^3\\to\\mathbb R^N$ are smooth;\nthese are the **smooth test functions** (real-valued when $N=1$).\nEquivalently every smooth map $\\widetilde u:\\mathbb R^3\\to\\mathbb R^N$\nthat is $2\\pi$-periodic in each coordinate descends to the unique map\n$u([x])=\\widetilde u(x)$, since periodicity makes this value independent of\n$x$ in its equivalence class. For an integer $m\\ge0$, define\n$C^m(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ similarly by requiring\n$\\widetilde u\\in C^m(\\mathbb R^3;\\mathbb R^N)$\n([[def-c-r-and-smooth-maps-between-smooth-manifolds]]), and define\n$D^\\alpha u([x]):=D^\\alpha\\widetilde u(x)$ for $|\\alpha|\\le m$.\nDerivatives of a periodic $C^m$ map are periodic, so these values are\nwell-defined, with\n$$\\|u\\|_{C^m}:=\\max_{|\\alpha|\\le m}\\ \\sup_{x\\in\\mathbb T^3_{2\\pi}}|(D^\\alpha u)(x)|,$$\nwhere the multi-index derivative is that of\n[[def-ck-and-multi-index-notation-in-several-variables]].\n\n**(c) The Hilbert space $L^2$.** For $N\\ge1$ let\n$L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ be the quotient of the set of measurable\n$u$ with $\\int|u|^2\\,d\\mu<\\infty$ by the $\\mu$-a.e. zero functions\n([[def-l-p-space-as-a-quotient-by-null-functions]],\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]),\nwith inner product $\\langle u,v\\rangle_2=\\int u\\cdot v\\,d\\mu$ and norm\n$\\|u\\|_2=\\langle u,u\\rangle_2^{1/2}$; it is a real Hilbert space\n([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]). For\n$u\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)$ and $k\\in\\mathbb Z^3$ the\n**$k$-th Fourier coefficient** is the vector\n$$\\widehat u(k):=\\int_{\\mathbb T^3_{2\\pi}}u(x)\\,e^{-ik\\cdot x}\\,d\\mu(x)\\in\\mathbb C^N ,$$\nwhere $e^{-ik\\cdot x}:=\\chi_{-k}$ with $\\chi_k([x]):=\\exp(i\\,k\\cdot x)$; here\n$u$ is read through any representative. Write $\\chi_k:\\mathbb T^3_{2\\pi}\\to\\mathbb C$,\n$k\\in\\mathbb Z^3$, for these **characters**; under the identification\n$x=2\\pi y$ they are the characters $\\exp(2\\pi i\\,k\\cdot y)$ of\n[[thm-fourier-basis-and-parseval-on-the-n-torus]], so $(\\chi_k)_{k\\in\\mathbb Z^3}$\nis an orthonormal basis of the complex space $L^2(\\mathbb T^3_{2\\pi};\\mathbb C)$.\n\n**(d) Weak derivatives and the periodic Sobolev spaces.** For\n$u,v\\in L^1(\\mathbb T^3_{2\\pi};\\mathbb R)$ and $\\alpha\\in\\mathbb N_0^3$ say that\n$v$ is the **weak derivative** $D^\\alpha u$ if\n$$\\int_{\\mathbb T^3_{2\\pi}}u\\,D^\\alpha\\varphi\\,d\\mu=(-1)^{|\\alpha|}\\int_{\\mathbb T^3_{2\\pi}}v\\,\\varphi\\,d\\mu$$\nfor every $\\varphi\\in C^\\infty(\\mathbb T^3_{2\\pi};\\mathbb R)$, where $D^\\alpha\\varphi$\nis the multi-index derivative of the periodic representative\n([[def-weak-derivative-of-a-locally-integrable-function]] records the\nEuclidean analogue). For an integer $s\\ge0$ let\n$$H^s(\\mathbb T^3_{2\\pi};\\mathbb R^N):=\\Bigl\\{u\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N):\\ \\text{for every }|\\alpha|\\le s\\text{ there is }v_\\alpha\\in L^2(\\mathbb T^3_{2\\pi};\\mathbb R^N)\\text{ with }v_\\alpha=D^\\alpha u\\Bigr\\},$$\nthe vector-valued weak derivative being componentwise, and put\n$$\\|u\\|_{H^s}:=\\Bigl(\\sum_{|\\alpha|\\le s}\\|D^\\alpha u\\|_2^2\\Bigr)^{1/2}.$$\nThe classes $L^2\\subseteq L^1$ on the probability space, so the integrals in the\ntest identity are finite: $|\\int u\\,D^\\alpha\\varphi\\,d\\mu|\\le\\|u\\|_2\\|D^\\alpha\\varphi\\|_2$\nby Cauchy--Schwarz. The definition asserts neither that the weak derivative\nexists nor that the two norms compared in the next item are equivalent; those\nare proved in [[lem-gr-periodic-fourier-differentiation-and-norm-equivalence]].\n\n**(e) Conventions.** $O\\subseteq\\mathbb R^m$ open, $I\\subseteq\\mathbb R$ an\ninterval and maps $F:I\\times\\mathbb T^3_{2\\pi}\\times O\\to\\mathbb R^{m'}$ are\ncalled smooth when the representative $G(t,x,u):=F(t,q(x),u)$ is\nlocally the restriction of a smooth Euclidean map: for every\n$(t,x,u)\\in I\\times\\mathbb R^3\\times O$ there are an open neighborhood\n$V\\subseteq\\mathbb R^{4+m}$ and $\\widetilde G\\in C^\\infty(V;\\mathbb R^{m'})$\nwith $\\widetilde G=G$ on $V\\cap(I\\times\\mathbb R^3\\times O)$.\nFor open $I$ this is the ordinary Euclidean definition. For nonopen $I$\nit is the local extension convention at included endpoints, also admitting\na singleton interval. On a nondegenerate interval endpoint time derivatives\nare the limits of interior derivatives; on a singleton no time derivative\nis specified without choosing an extension. Throughout this page the torus is always this\n$2\\pi$-periodic one; a statement \"for every $x$\" means for every point of\n$\\mathbb T^3_{2\\pi}$, and \"a.e.\" means $\\mu$-a.e.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-emg-local-charged-fluid-model",
+          "source_section": "Statement",
+          "quote": "Adopt the equation-based Einstein-Maxwell field postulate\n[[post-emg-einstein-maxwell-equations]] and the smooth material closure of\n[[post-emg-strict-charged-fluid-model]], with the SI, signature, and coordinate\nconventions of [[def-emg-geometry-units]]. Thus the spacetime field equations\nare $dF=0$, $\\nabla_aF^{ab}=-\\mu_0j^b$, and\n$$G_{ab}+\\Lambda g_{ab}=\\kappa(T_{m,ab}+T_{\\mathrm{EM},ab}),\\qquad \\kappa=8\\pi G_N/c^4,$$\nwhile the fluid contributes exactly its adopted $T_m,j$ and material balance\nequations. No matter action is assumed.\n\nAssume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ and Dependent Choice.\nLet $p=p(\\epsilon)$ be smooth on an open interval $J$, and let\n$K_\\epsilon\\Subset J$ be a compact interval containing the initial density\nvalues, on which $\\epsilon+p(\\epsilon)>0$ and $0<p'(\\epsilon)<1$. Take\n$\\kappa>0$, $\\mu_0>0$, $c>0$, and $\\Lambda\\in\\mathbb R$.\n\nLet $\\Sigma$ be a smooth oriented three-manifold without boundary, and let\n$\\mathfrak n$ be its future unit normal. Let $h$ be a Riemannian metric and\nlet $K\\in\\Gamma(\\operatorname{Sym}^2T^*\\Sigma)$ use the second fundamental\nform convention\n$$K(X,Y):=g(\\nabla_X\\mathfrak n,Y).$$\nThe initial normal bundle is\n$\\mathcal V:=\\mathbb R\\mathfrak n\\oplus T\\Sigma$ with\n$$g_0(a\\mathfrak n+X,b\\mathfrak n+Y):=-ab+h(X,Y).$$\nLet $\\epsilon_0,Z_0$ be smooth scalar fields, $u_0$ a smooth future unit\ntimelike section of $\\mathcal V$ satisfying $g_0(u_0,u_0)=-1$, and $e,b$\nsmooth spatial vector fields\nrepresenting $E/c$ and $B$ in an oriented orthonormal frame. Their units are\nJ m$^{-3}$, C, dimensionless, and tesla, respectively; $K$ has units m$^{-1}$.\nThe components of the smooth initial two-form $F_0$ are defined in every\npositively oriented $h$-orthonormal frame $(\\mathsf e_i)$ by\n$$e_i=F_0(\\mathsf e_i,\\mathfrak n),\\qquad b_i=\\tfrac12\\varepsilon_i{}^{jk}F_0(\\mathsf e_j,\\mathsf e_k), \\qquad \\varepsilon_{123}=1.$$\nThis fixes all six independent components of $F_0$. Set\n$j_0=cN(\\epsilon_0)Z_0u_0$ and $T_0=T_{m,0}+T_{\\mathrm{EM},0}$ from the\nadopted model.\n\nWrite $D$ for the Levi-Civita connection of $h$,\n$\\tau:=\\operatorname{tr}_hK=h^{ij}K_{ij}$,\n$|K|_h^2:=h^{ik}h^{jl}K_{ij}K_{kl}$,\n$(\\operatorname{div}_hK)_j:=h^{ik}(D_iK)_{kj}$, and $R(h)$ for the scalar\ncurvature of $h$. Assume the complete Einstein and sourced Maxwell initial\nconstraints\n$$R(h)+\\tau^2-|K|_h^2=2\\Lambda+2\\kappa T_0(\\mathfrak n,\\mathfrak n),\\qquad (\\operatorname{div}_hK)(X)-D_X\\tau=\\kappa T_0(\\mathfrak n,X)$$\nfor every tangent vector $X$, and\n$$\\operatorname{div}_h e=-\\mu_0g_0(j_0,\\mathfrak n),\\qquad \\operatorname{div}_h b=0.$$\n\nThen the adopted equation-based fluid model has the following conditional\nlocal developments.\n\n**(a) Torus Sobolev branch.** If\n$\\Sigma=\\mathbb T^3_{2\\pi}=\\mathbb R^3/(2\\pi\\mathbb Z)^3$ with the periodic\nSobolev spaces of [[def-gr-periodic-torus-and-sobolev-spaces]], assigning each\nspatial period length $2\\pi\\,\\mathrm m$ in the length-coordinate convention of\n[F6]. Assume $s\\ge5$ is an integer, $h\\in H^{s+1}$ and\n$K,e,b,\\epsilon_0,u_0,Z_0\\in H^s$, with the same strict compact\nadmissibility. Then there is $T>0$ and a solution on\n$(-T,T)\\times\\mathbb T^3$ in the harmonic gauge of\n[[def-gr-harmonic-gauge-and-reduced-equations]], relative to the fixed\nbackground used by [[thm-emg-local-charged-barotropic-development]]. In\nperiodic charts,\n$g\\in L^\\infty H^{s+1}\\cap C^0H^s$,\n$\\partial_tg\\in L^\\infty H^s\\cap C^0H^{s-1}$, and\n$F,\\epsilon,u,Z\\in L^\\infty H^s\\cap C^0H^{s-1}$. The equations hold\nclassically, and the reduced solution is unique on common intervals with common\ncompact admissible bounds.\n\n**(b) Smooth geometric branch.** For smooth data on any $\\Sigma$ above, there\nis a smooth time-oriented solution on an open variable-width neighborhood of\n$\\{0\\}\\times\\Sigma$, inducing exactly $(h,K,F_0,\\epsilon_0,u_0,Z_0)$. It is\nunique near the initial surface up to a data-fixing time-orientation-preserving\nisometry matching $F,\\epsilon,u,Z$. No uniform time width for noncompact\n$\\Sigma$, global existence, shock continuation, vacuum/free-boundary solution,\nor empirical validity is asserted.\n\nThis is a model deduction. It does not assert that the postulates describe\nnature.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-gr-constraint-equations-in-normal-frame",
+          "source_section": "Statement",
+          "quote": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, and let $\\Sigma\\subseteq M$ be a smooth spacelike embedded hypersurface with future unit normal $n$, induced Riemannian metric $h$ and second fundamental form $K(X,Y)=g(\\nabla_Xn,Y)$ ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]], [[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]]). Write $D$ for the Levi-Civita connection of $h$, $R^h$ for its curvature operator in the same operator convention as the ambient curvature, and $S_h$ for its scalar curvature. Explicitly distinguish the lowered tensor from the operator pairing by setting\n$$\\mathcal R^g(A,B,C,D):=g(R^g(C,D)B,A),\\qquad \\mathcal R^h(A,B,C,D):=h(R^h(C,D)B,A).$$\nThus $\\mathcal R^g_{abcd}=R_{abcd}$ in [[def-gr-curvature-tensor-and-derived-tensors]]; in particular $g(R^g(X,Y)Z,W)=\\mathcal R^g(W,Z,X,Y)$. Let $G$ be the Einstein tensor defined there. At every $p\\in\\Sigma$ and for all $X,Y,Z,W\\in T_p\\Sigma$:\n\n**(a) Gauss equation.**\n$$\\mathcal R^g(X,Y,Z,W)=\\mathcal R^h(X,Y,Z,W)+K(X,Z)K(Y,W)-K(X,W)K(Y,Z).$$\nEquivalently, in operator order,\n$$g(R^g(X,Y)Z,W)=h(R^h(X,Y)Z,W)+K(Y,Z)K(X,W)-K(X,Z)K(Y,W).$$\n\n**(b) Codazzi equation.**\n$$g(R^g(X,Y)Z,n)=(D_YK)(X,Z)-(D_XK)(Y,Z).$$\n\n**(c) Normal projections.** Define $(\\operatorname{div}_hK)(Y)=h^{ij}(D_{e_i}K)(e_j,Y)$, $\\tau=\\operatorname{tr}_hK=h^{ij}K_{ij}$ and $|K|_h^2=h^{ik}h^{jl}K_{ij}K_{kl}$. Then\n$$G(n,n)=\\tfrac12(S_h+\\tau^2-|K|_h^2),\\qquad G(n,Y)=(\\operatorname{div}_hK)(Y)-D_Y\\tau.$$\n\n**(d) Constraint equations.** If the tensor equation $G+\\Lambda g=\\kappa T$ holds at $p$, for a smooth symmetric covariant $2$-tensor $T$ and real constants $\\kappa,\\Lambda$, then\n$$S_h+\\tau^2-|K|_h^2=2\\Lambda+2\\kappa T(n,n),\\qquad (\\operatorname{div}_hK)(Y)-D_Y\\tau=\\kappa T(n,Y).$$\nWith $\\rho=T(n,n)$ and $j(Y)=-T(n,Y)$, the second equation is $(\\operatorname{div}_hK)(Y)-D_Y\\tau=-\\kappa j(Y)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "post-emg-strict-charged-fluid-model",
+          "source_section": "Postulate",
+          "quote": "Use the smooth oriented, time-oriented Lorentzian four-manifold, metric-selected\nconnection, signature $(-,+,+,+)$, two-form field, and SI conventions stated in\n[[def-emg-geometry-units]] and [[def-emg-strict-charged-barotropic-system]].\nOn an open set $U$ of that spacetime, let $\\epsilon:U\\to J$ be a smooth\nrest-energy-density scalar, let $u$ be a smooth future-directed vector field\nwith $g(u,u)=-1$, and let $Z:U\\to\\mathbb R$ be a smooth charge-per-particle\nscalar. Here $J\\subseteq\\mathbb R$ is an open interval, $\\epsilon$ and\n$p(\\epsilon)$ have units J m$^{-3}$ = Pa, $u$ is dimensionless, and $Z$ has\nunits C. In this adopted model, the word *barotropic* means that pressure is a\nfunction of rest-energy density alone.\n\nAdopt a smooth equation of state $p:J\\to\\mathbb R$ satisfying\n$$\\epsilon+p(\\epsilon)>0,\\qquad 0<p'(\\epsilon)<1$$\nfor every $\\epsilon\\in J$. The dimensionless derivative gives the model's\nbarotropic characteristic speed $c_{\\mathrm s}:=c\\sqrt{p'(\\epsilon)}$, so\nthis selection requires $0<c_{\\mathrm s}<c$. Fix $\\epsilon_*\\in J$ and a\npositive normalization $N_*>0$ with units m$^{-3}$, and define\n$$N(\\epsilon):=N_*\\exp\\!\\left(\\int_{\\epsilon_*}^{\\epsilon} \\frac{dz}{z+p(z)}\\right).$$\nFor each $\\epsilon\\in J$, the closed segment between $\\epsilon_*$ and\n$\\epsilon$ is compact and contained in $J$; the smooth integrand is finite\nthere. Its integral is dimensionless, so $N(\\epsilon)>0$ has units m$^{-3}$.\nWithin this model, $N$ is the EOS-defined number-density variable and $N_*$\nis its chosen normalization. This definition makes no claim that a microscopic\nparticle theory derives $N$ for every EOS.\n\nAdopt the charged-fluid current and matter stress tensor\n$$j^a:=cN(\\epsilon)Zu^a,\\qquad T_{m,ab}:=(\\epsilon+p(\\epsilon))u_a u_b+p(\\epsilon)g_{ab},$$\nand the material balance and advection equations\n$$\\nabla^aT_{m,ab}=F_{bc}j^c,\\qquad u^a\\nabla_aZ=0.$$\nThus $j$ is a smooth four-current with components in A m$^{-2}$, and $T_m$\nhas components in Pa in length coordinates $x^0=ct$. The balance law adopts\nthe Lorentz-force density with the same field and current conventions as the\nchosen Einstein-Maxwell formulation. Charge-per-particle is carried along the\nfluid flow. Current conservation is not an additional adopted material law.\n\nThis is a physical postulate for smooth classical matter in the strict interior\nregime only. It excludes shocks, vacuum interfaces, free boundaries, degenerate\nor superluminal sound speed, finite-conductivity and dissipative currents,\npoint-charge sources, and arbitrary currents chosen independently of the\nfluid. The cited treatments motivate the perfect-fluid and charged-current\nstructures in their own conventions; they do not establish this exact EOS\nnormalization, the $Z$ transport choice, or the physical applicability of this\nmodel. No matter action, experiment, or universal material law is asserted.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-emg-geometry-units",
+          "source_section": "Definition",
+          "quote": "Adopt SI units and the following model-local quantity roles. Here the selected Einstein–Maxwell framework combines the stated Lorentzian geometry with a classical electromagnetic two-form and current; this definition itself supplies no gravitational equation, matter action, or empirical claim. A primitive is an input or independent field variable of this formulation; a derived quantity is fixed by a stated construction from its inputs. Neither label is universal across physical theories, and unit choice alone does not determine it.\n\nThe spacetime data are a smooth, Hausdorff, second-countable, boundaryless four-manifold $M$, a smooth Lorentzian metric $g$ of signature $(-,+,+,+)$, a smooth time-orientation field, and an independent orientation, exactly as in [[def-emg-lorentzian-forms]]. The metric, its time orientation, and the manifold orientation are separate data. An observer at $p\\in M$ is a future unit timelike vector $n\\in T_pM$ with $g(n,n)=-1$. A smooth observer congruence is a smooth field of such vectors. A local tetrad is a smooth basis $(e_0,e_1,e_2,e_3)$ with metric matrix $\\operatorname{diag}(-1,1,1,1)$; an observer congruence, a coordinate chart, and a tetrad are different objects. Tetrads and observer fields need only exist locally; this definition assumes no global inertial chart, global tetrad, or hypersurface-orthogonal congruence.\n\nThe electromagnetic field-strength variable $F$ is a smooth real two-form, hence an alternating covariant tensor of type $(0,2)$, on an open subset of $M$, as in [[def-emg-lorentzian-forms]]. It is primitive in this formulation. For an observer congruence $n$, its electric and magnetic observer covectors are derived by\n\n$$E_a:=cF_{ab}n^b,\\qquad B_a:=-({\\star_gF})_{ab}n^b.$$\n\nHere $\\star_g$ is the unique Hodge map characterized pointwise by $\\alpha\\wedge\\star_g\\beta=\\langle\\alpha,\\beta\\rangle_g\\,\\mathrm{vol}_g$, using the metric and independent orientation, as in [[lem-emg-lorentz-hodge-calculus]]. Both covectors annihilate $n$ and lie in the rest covector space $\\{\\alpha\\in T_p^*M:\\alpha(n)=0\\}$, whose induced metric is positive definite. In a positively oriented future orthonormal tetrad with $e_0=n$ and $\\epsilon_{123}=+1$, their spatial components obey the fixed dictionary $F_{0i}=-E_i/c$ and $F_{ij}=\\epsilon_{ijk}B_k$ from [[lem-emg-observer-field-decomposition]]. Thus $E$ and $B$ are observer-dependent derived fields, not globally defined observer-independent three-vectors on a curved spacetime. Their tetrad components have units $\\mathrm{V\\,m^{-1}}$ and tesla (T), respectively; the components of $F$ in a length-coordinate chart have unit T. No global potential is assumed; when a local potential $A_a$ is used, its components have unit $\\mathrm{T\\,m}$ and a scalar potential $\\varphi$ has unit V.\n\nFor any chosen observer $n$, a smooth four-current is a vector field $j$ whose local decomposition is $j=c\\rho\\,n+J$, where $\\rho:=-g(n,j)/c$ is the observer charge density and $J:=j-c\\rho n$ is orthogonal to $n$. In the associated positively oriented orthonormal tetrad its components are $j^0=c\\rho$ and $j^i=J^i$. The units are $[\\rho]=\\mathrm{C\\,m^{-3}}$, $[J^i]=[j^a]=\\mathrm{A\\,m^{-2}}$, and $[q]=\\mathrm C$ for a charge parameter supplied by a matter model. The current is a prescribed input or is supplied by an explicitly stated matter model; it is not inferred from the Maxwell equation alone.\n\nThe SI constants and coordinate units are fixed as follows. The speed of ideal vacuum light $c>0$ is the exact SI defining constant $299\\,792\\,458\\ \\mathrm{m\\,s^{-1}}$; identifying it with the shared ideal-light and clock conversion constant is the adopted Minkowski model of [[post-em-minkowski-physical-model]], not a consequence of its unit definition. The elementary charge $e$ is exactly $1.602\\,176\\,634\\times10^{-19}\\ \\mathrm C$. These unit definitions do not imply that charge is quantized. The magnetic constant $\\mu_0>0$ has unit $\\mathrm{N\\,A^{-2}}$ and is experimentally determined in the revised SI, so no exact numerical value for $\\mu_0$ is adopted. Define the electric constant (vacuum permittivity) $\\varepsilon_0:=(\\mu_0c^2)^{-1}$ in $\\mathrm{F\\,m^{-1}}$; hence $\\varepsilon_0\\mu_0c^2=1$, and $\\varepsilon_0$ has the same relative standard uncertainty as $\\mu_0$ because $c$ is exact. The exact component equation $\\nabla_aF^{ab}=-\\mu_0j^b$ is dimensionally consistent: both sides have unit $\\mathrm{T\\,m^{-1}}$ in a length-coordinate frame.\n\nIn a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected. This is local coordinate bookkeeping, not a global inertial-coordinate claim. In such a chart $g_{ab}$ is dimensionless, the Levi-Civita coefficients $\\Gamma^a{}_{bc}$ have unit $\\mathrm{m^{-1}}$, and curvature components have unit $\\mathrm{m^{-2}}$, as in [[def-emg-lorentzian-forms]]. Components in other coordinate units transform by their Jacobians.\n\nFor the gravitational sector, take Newton's gravitational constant $G_N>0$ with unit $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$ and the cosmological constant parameter $\\Lambda\\in\\mathbb R$ with unit $\\mathrm{m^{-2}}$ as primitive parameters of the selected model; no numerical value for either is used here. The coupling normalization $\\kappa_E:=8\\pi G_N/c^4$ is derived from these parameters and has unit $\\mathrm{m\\,J^{-1}}$. This definition records the convention for a later Einstein equation; it asserts no Einstein equation. A separate positive normalization $\\kappa_0$ with unit weber (Wb) is a chosen flux conversion reserved for a later explicitly specified $U(1)$ formulation, where $U(1):=\\{z\\in\\mathbb C:|z|=1\\}$ under multiplication. It is not $\\kappa_E$, an electric charge, $\\mu_0$, or Planck's constant, and it implies no charge quantization. Test-particle rest mass $m>0$ in kg and charge $q$ in C are externally supplied matter parameters, not quantities derived by classical electromagnetism.\n\nThese are SI and model-definition conventions only. They neither assert empirical measurements beyond the stated SI defining constants and measured status of $\\mu_0$, nor identify similarly named quantities in another framework.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-emg-fieldstrength-positive-symmetric-reduction",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R\\times\\Sigma$ be a coordinate neighborhood in an oriented smooth Lorentzian four-manifold of signature $(-,+,+,+)$, foliated by spacelike $s$-levels. Write\n$$g=-\\alpha^2ds^2+h_{ij}(dx^i+\\beta^i ds)(dx^j+\\beta^j ds),\\qquad \\alpha>0,\\qquad h=(h_{ij})>0,$$\nand let $n=\\alpha^{-1}(\\partial_s-\\beta^i\\partial_i)$ be the future unit normal. On a smaller neighborhood choose a positively oriented orthonormal spatial frame $(\\mathsf e_1,\\mathsf e_2,\\mathsf e_3)$ by Gram–Schmidt. Let $D$ be the Levi-Civita derivative of $h$, define $\\operatorname{div}_h v:=D_iv^i$ and $(\\operatorname{curl}_h v)_i:=\\epsilon_i{}^{jk}D_jv_k$, and define the spatial cross product by $(u\\times v)_i=\\epsilon_{ijk}u_jv_k$ in this frame. For a smooth real two-form $F$, define the real spatial components $e_i:=F(\\mathsf e_i,n)$ and $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathsf e_j,\\mathsf e_k)$, with $\\epsilon_{123}=1$; thus $F_{0i}=-e_i$ and $F_{ij}=\\epsilon_{ijk}b_k$ in the adapted tetrad. Assume the source-free model of draft definition [[def-emg-electrovacuum-cauchy-system]], whose actual equations are $dF=0$ and $d\\star_gF=0$; its draft status and manifest omission are recorded in [L1].\n\nThe six evolution equations for $(e,b)$ have principal part\n$$n(e)-\\operatorname{curl}_h b=\\text{terms with no derivatives of }(e,b),\\qquad n(b)+\\operatorname{curl}_h e=\\text{terms with no derivatives of }(e,b).$$\nFor a spatial covector $\\xi$, let $C(\\xi)v:=\\xi^\\sharp\\times v$ in the oriented orthonormal frame. Set $\\theta^0:=\\alpha ds=-g(n,\\cdot)$ and decompose any spacetime covector as $\\zeta=\\zeta(n)\\theta^0+\\zeta_\\perp$, where $\\zeta_\\perp(n)=0$ and $|\\zeta_\\perp|_h$ is its spatial norm. The spatial principal block is the linear map on $\\mathbb R^3\\oplus\\mathbb R^3$ defined by $S(\\xi)(u,v)=(-C(\\xi)v,C(\\xi)u)$. It is real symmetric, has eigenvalues $0,0,|\\xi|,|\\xi|,-|\\xi|,-|\\xi|$, and satisfies $\\|S(\\xi)\\|=|\\xi|$. Therefore the principal symbol $P(\\zeta)=\\zeta(n)I_6+S(\\zeta_\\perp)$ is positive definite for every covector with $\\zeta(n)>|\\zeta_\\perp|_h$. In the adapted coordinates its time matrix is $\\alpha^{-1}I_6$, and every coordinate spatial matrix is symmetric. Derivatives of the frame and metric enter only as smooth lower-order coefficients depending on $(g,g^{-1},\\partial g,e,b)$; in a first-order metric state they are zero-order terms. The remaining two Maxwell equations are the constraints $\\operatorname{div}_h e=0$ and $\\operatorname{div}_h b=0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-emg-maxwell-stress-conservation",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a smooth real two-form on a smooth oriented Lorentzian four-manifold of signature $(-,+,+,+)$, with the connection, Hodge star, and tensor $Q_{ab}=F_{ac}F_b{}^c-\\tfrac14g_{ab}F_{cd}F^{cd}$ of [[def-emg-electrovacuum-cauchy-system]]. For a smooth vector field $J$, suppose\n\n$$dF=0,\\qquad \\nabla_aF^{ab}=-\\mu_0J^b.$$\n\nThen $Q_{ab}$ is symmetric and trace-free, and the SI-normalized stress tensor $T^{\\rm EM}_{ab}=\\mu_0^{-1}Q_{ab}$ satisfies\n\n$$\\nabla^aT^{\\rm EM}_{ab}=-F_{bc}J^c.$$\n\nIn the source-free case $J=0$, $\\nabla^aT^{\\rm EM}_{ab}=0$. If $n$ is a future unit normal and $(\\mathfrak e_1,\\mathfrak e_2,\\mathfrak e_3)$ a positively oriented orthonormal spatial triad, put $e_i:=F(\\mathfrak e_i,n)$, $b_i:=\\tfrac12\\epsilon_i{}^{jk}F(\\mathfrak e_j,\\mathfrak e_k)$, and $(e\\times b)_i:=\\epsilon_{ijk}e_jb_k$. Then\n\n$$T^{\\rm EM}(n,n)=\\frac{|e|^2+|b|^2}{2\\mu_0},\\qquad T^{\\rm EM}(n,\\mathfrak e_i)=-\\frac{(e\\times b)_i}{\\mu_0}.$$\n\nThese are pointwise tensor identities. In the SI interpretation $e=E/c$ and $b=B$ have units tesla; no measurement or physical applicability claim is included.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $J=(0,\\infty)$, $p'=w\\in(0,1)$ and\n$\\epsilon+p=(1+w)\\epsilon>0$. By [F1] and [F3],\n$$N(\\epsilon)=N_*\\exp\\!\\left(\\frac1{1+w} \\int_{\\epsilon_*}^{\\epsilon}\\frac{dz}{z}\\right) =N_*\\exp\\!\\left(\\frac{\\log(\\epsilon/\\epsilon_*)}{1+w}\\right) =N_*\\left(\\frac{\\epsilon}{\\epsilon_*}\\right)^{1/(1+w)}.$$\nThe ratio in the logarithm is dimensionless.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Since $\\sqrt{p'(z)}=\\sqrt w$, [F2] and [F3] give\n$$r(\\epsilon)=\\frac{\\sqrt w}{1+w}\\log\\!\\left(\\frac{\\epsilon}{\\epsilon_*}\\right), \\qquad r'(\\epsilon)=\\frac{\\sqrt w}{(1+w)\\epsilon}>0,$$\nso this is the strictly increasing enthalpy coordinate of [F2]. By [F7], the\nadopted physical characteristic speed is $c_{\\mathrm s}=c\\sqrt w\\in(0,c)$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The definition [F4] identifies the torus as the quotient by translations\nin $(2\\pi\\mathbb Z)^3$. For any point of $\\mathbb R^3$, an open ball of radius\nless than $\\pi$ is disjoint from each of its nontrivial lattice translates;\nthe quotient map therefore gives local smooth charts with transition maps that\nare translations, so the quotient is a smooth three-manifold without boundary.\nThe translations preserve both the Euclidean orientation and metric, so these\ndescend to an orientation and the flat metric $h=\\delta$. The continuous\nquotient map sends the compact cube $[0,2\\pi]^3$ onto the torus, hence the torus\nis compact. In these local quotient charts $h$ has constant Euclidean\ncoefficients, so its Levi-Civita derivative vanishes and its curvature is zero.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F8",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For the data in the Example, $j_0=0$ because $Z_0=0$. Also\n$T_{m,0}(\\mathfrak n,\\mathfrak n)\n=(\\epsilon_*+p(\\epsilon_*))(-1)^2\n+p(\\epsilon_*)g_0(\\mathfrak n,\\mathfrak n)=\\epsilon_*$,\nand $T_{m,0}(\\mathfrak n,X)=0$ for every tangent $X$. The electromagnetic\nstress vanishes because $e=b=0$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By step 1.3 the flat torus has $R(h)=0$ and $D h=0$. In three dimensions,\n$\\tau=\\operatorname{tr}_h(Hh)=3H$ and $|K|_h^2=3H^2$, so the Hamiltonian\nleft side is $9H^2-3H^2=6H^2$. Its right side is\n$2\\Lambda+2\\kappa T_0(\\mathfrak n,\\mathfrak n)=2\\kappa\\epsilon_*=6H^2$\nby the choice of $\\epsilon_*$. The density units are\n$[3H^2/\\kappa]=\\mathrm{m}^{-2}/(\\mathrm{m\\,J}^{-1})=\\mathrm{J\\,m}^{-3}$\nby the stated units and [F8]. Both sides of the momentum constraint vanish\nbecause $H$ is constant and $T_0(\\mathfrak n,X)=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "step 1.4",
+            "step 1.3",
+            "given",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The two Maxwell constraints reduce to $\\operatorname{div}_h0=0$ and\n$-\\mu_0g_0(j_0,\\mathfrak n)=0$, so both hold. The fields are smooth, and\ntheir density range $\\{\\epsilon_*\\}$ is contained in the compact interval\n$K_\\epsilon=[\\epsilon_*/2,3\\epsilon_*/2]\\Subset J$. All strict EOS\ninequalities hold on $K_\\epsilon$ by step 1.1. Thus the complete\nsmooth-data hypotheses of [F5] hold.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.1",
+            "step 1.3",
+            "step 1.4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Applying [F5] under [A1] and [A2] gives the smooth local development for\nthese exact constrained data. The conclusion remains conditional on the actual\ncurrent draft mathematical interfaces [L1] and [L2]; neither their pending\nstatus nor this example is evidence that the model describes nature.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F5",
+            "L1",
+            "L2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty flat torus and a positive energy density; it makes no empty-manifold or empty-state assertion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The neutral boundary Z=0 and vanishing e=b=0 are substituted in step 1.4 and the Maxwell constraints in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses one arbitrary w in (0,1) and positive H, N_* and kappa; steps 1.1 and 1.2 hold for every such choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses 0<w<1, so degenerate endpoints w=0 and w=1 are excluded and epsilon+p remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 chooses K_epsilon=[epsilon_*/2,3epsilon_*/2] compactly inside J=(0,infinity), so both endpoints obey the strict EOS bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses only the explicit AC_omega and dependent-choice premises required by the local theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example constructs one compatible sector and draws a one-way conditional conclusion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example constructs one compatible sector and draws a one-way conditional conclusion; it asserts no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "flat-torus-Einstein-Maxwell-constraint-substitution",
+          "steps": [
+            "1.4",
+            "2.1",
+            "2.2"
+          ],
+          "calculation": "tau=3H; |K|_h^2=3H^2; R(h)=0; T_0(n,n)=epsilon_*=3H^2/kappa; Hamiltonian left and right sides are both 6H^2; momentum, electric Gauss and magnetic Gauss residuals are zero.",
+          "disposition": "Checked algebraically in the displayed proof; no numerical measurement or external script output is asserted."
+        }
+      ],
+      "supplier_excerpts": [
+        {
+          "supplier": "post-emg-strict-charged-fluid-model",
+          "carrier": "items/post-emg-strict-charged-fluid-model.md",
+          "status": "Current draft physical postulate; the exact speed formula is an adopted model convention.",
+          "source_section": "Postulate",
+          "exact_statement": "The dimensionless derivative gives the model's barotropic characteristic speed $c_{\\mathrm s}:=c\\sqrt{p'(\\epsilon)}$.",
+          "relevant_hypotheses_and_conventions": "The strict barotropic regime 0<p′(epsilon)<1 and SI c.",
+          "supplier_proof_status": "Current draft adopted postulate, not an empirically established universal material law.",
+          "consumer_use": "The example’s physical characteristic-speed conclusion."
+        },
+        {
+          "supplier": "pthm-emg-local-charged-fluid-model",
+          "carrier": "items/pthm-emg-local-charged-fluid-model.md",
+          "status": "Current assigned draft theorem; its smooth local branch is cited as the physical consequence being checked.",
+          "source_section": "Statement",
+          "exact_statement": "there is a smooth time-oriented solution on an open variable-width neighborhood of $\\{0\\}\\times\\Sigma$",
+          "relevant_hypotheses_and_conventions": "The local development conclusion applied to the exact example data.",
+          "supplier_proof_status": "Current assigned draft theorem; its smooth local branch is cited as the physical consequence being checked.",
+          "consumer_use": "The local development conclusion applied to the exact example data."
+        },
+        {
+          "supplier": "def-emg-strict-charged-barotropic-system",
+          "carrier": "items/def-emg-strict-charged-barotropic-system.md",
+          "status": "Current batch-8 draft definition; exact EOS integral and tensor/current conventions inspected.",
+          "source_section": "Definition",
+          "exact_statement": "j^a=cN(\\epsilon)Z u^a",
+          "relevant_hypotheses_and_conventions": "The strict smooth fluid system used in the example.",
+          "supplier_proof_status": "Current batch-8 draft definition; exact EOS integral and tensor/current conventions inspected.",
+          "consumer_use": "The strict smooth fluid system used in the example."
+        },
+        {
+          "supplier": "lem-emg-charged-fluid-positive-symmetric-reduction",
+          "carrier": "items/lem-emg-charged-fluid-positive-symmetric-reduction.md",
+          "status": "Current batch-8 draft lemma with pending precheck; exact enthalpy formula inspected.",
+          "source_section": "Statement",
+          "exact_statement": "$r(\\epsilon)=\\int_{\\epsilon_*}^{\\epsilon}\\frac{\\sqrt{p'(z)}}{z+p(z)}\\,dz.$",
+          "relevant_hypotheses_and_conventions": "Strict EOS conditions and the stated reference density epsilon_*.",
+          "supplier_proof_status": "Draft mathematical lemma with pending precheck; the example uses the formula conditionally.",
+          "consumer_use": "The enthalpy coordinate evaluation in verification step 1.2."
+        },
+        {
+          "supplier": "def-gr-periodic-torus-and-sobolev-spaces",
+          "carrier": "items/def-gr-periodic-torus-and-sobolev-spaces.md",
+          "status": "Published mathematical definition; quotient torus and flat metric convention inspected.",
+          "source_section": "Definition",
+          "exact_statement": "\\mathbb T^3_{2\\pi}:=\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}\\times\\mathbb T_{2\\pi}",
+          "relevant_hypotheses_and_conventions": "The flat periodic slice.",
+          "supplier_proof_status": "Published mathematical definition; quotient torus and flat metric convention inspected.",
+          "consumer_use": "The flat periodic slice."
+        },
+        {
+          "supplier": "def-countable-choice",
+          "carrier": "items/def-countable-choice.md",
+          "status": "Published definition; exact AC_omega formulation inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "relevant_hypotheses_and_conventions": "The explicit AC_omega premise.",
+          "supplier_proof_status": "Published definition; exact AC_omega formulation inspected.",
+          "consumer_use": "The explicit AC_omega premise."
+        },
+        {
+          "supplier": "def-dependent-choice",
+          "carrier": "items/def-dependent-choice.md",
+          "status": "Published definition; exact prescribed-start DC formulation inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For every nonempty set $X$, every relation $R$ entire on $X$, and every",
+          "relevant_hypotheses_and_conventions": "The explicit dependent-choice premise.",
+          "supplier_proof_status": "Published definition; exact prescribed-start DC formulation inspected.",
+          "consumer_use": "The explicit dependent-choice premise."
+        },
+        {
+          "supplier": "def-natural-logarithm",
+          "carrier": "items/def-natural-logarithm.md",
+          "status": "Published mathematical definition; positive-domain inverse-exponential definition inspected.",
+          "source_section": "Definition",
+          "exact_statement": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$.",
+          "relevant_hypotheses_and_conventions": "The natural logarithm definition.",
+          "supplier_proof_status": "Published mathematical definition; positive-domain inverse-exponential definition inspected.",
+          "consumer_use": "The natural logarithm definition."
+        },
+        {
+          "supplier": "thm-logarithm-derivative-and-integral",
+          "carrier": "items/thm-logarithm-derivative-and-integral.md",
+          "status": "Published mathematical theorem; integral representation and derivative inspected.",
+          "source_section": "Statement",
+          "exact_statement": "\\log x=\\int_1^x\\frac{dt}{t}",
+          "relevant_hypotheses_and_conventions": "The integral evaluation of the positive EOS and enthalpy formulas.",
+          "supplier_proof_status": "Published mathematical theorem; integral representation and derivative inspected.",
+          "consumer_use": "The integral evaluation of the positive EOS and enthalpy formulas."
+        },
+        {
+          "supplier": "thm-natural-logarithm-laws",
+          "carrier": "items/thm-natural-logarithm-laws.md",
+          "status": "Published mathematical theorem; quotient law for positive arguments inspected.",
+          "source_section": "Statement",
+          "exact_statement": "\\log(x/y)=\\log x-\\log y",
+          "relevant_hypotheses_and_conventions": "The quotient identity simplifying logarithms.",
+          "supplier_proof_status": "Published mathematical theorem; quotient law for positive arguments inspected.",
+          "consumer_use": "The quotient identity simplifying logarithms."
+        },
+        {
+          "supplier": "lem-emg-fieldstrength-positive-symmetric-reduction",
+          "carrier": "items/lem-emg-fieldstrength-positive-symmetric-reduction.md",
+          "status": "Current draft lemma with pending precheck; its exact six-field principal symbol is used conditionally.",
+          "source_section": "Statement",
+          "exact_statement": "Therefore the principal symbol $P(\\zeta)=\\zeta(n)I_6+S(\\zeta_\\perp)$ is positive definite for every covector with $\\zeta(n)>|\\zeta_\\perp|_h$.",
+          "relevant_hypotheses_and_conventions": "The conditional positive symmetric Maxwell principal block.",
+          "supplier_proof_status": "Current draft lemma with pending precheck; its exact six-field principal symbol is used conditionally.",
+          "consumer_use": "The conditional positive symmetric Maxwell principal block."
+        },
+        {
+          "supplier": "lem-emg-maxwell-stress-conservation",
+          "carrier": "items/lem-emg-maxwell-stress-conservation.md",
+          "status": "Current draft lemma with pending precheck; its exact stress-exchange sign is used conditionally.",
+          "source_section": "Statement",
+          "exact_statement": "\\nabla^aT^{\\rm EM}_{ab}=-F_{bc}J^c",
+          "relevant_hypotheses_and_conventions": "The conditional Maxwell stress-force exchange sign.",
+          "supplier_proof_status": "Current draft lemma with pending precheck; its exact stress-exchange sign is used conditionally.",
+          "consumer_use": "The conditional Maxwell stress-force exchange sign."
+        },
+        {
+          "supplier": "thm-gr-constraint-equations-in-normal-frame",
+          "carrier": "items/thm-gr-constraint-equations-in-normal-frame.md",
+          "status": "Published mathematical theorem; complete proof and selected K-sign convention inspected.",
+          "source_section": "Statement",
+          "exact_statement": "G(n,n)=\\tfrac12(S_h+\\tau^2-|K|_h^2),\\qquad G(n,Y)=(\\operatorname{div}_hK)(Y)-D_Y\\tau.",
+          "relevant_hypotheses_and_conventions": "For the chosen future unit normal and K(X,Y)=g(nabla_X n,Y), the normal projections give the Hamiltonian and momentum constraints.",
+          "supplier_proof_status": "Published mathematical theorem; complete proof inspected.",
+          "consumer_use": "Exact substitution of the flat torus stress and K=Hh in step 2.2."
+        },
+        {
+          "supplier": "def-emg-geometry-units",
+          "carrier": "items/def-emg-geometry-units.md",
+          "status": "Current draft physical definition; exact SI gravitational coupling and unit convention inspected.",
+          "source_section": "Definition",
+          "exact_statement": "$\\kappa_E:=8\\pi G_N/c^4$ has unit $\\mathrm{m\\,J^{-1}}$.",
+          "relevant_hypotheses_and_conventions": "Length-coordinate SI convention x^0=ct and the defined gravitational coupling.",
+          "supplier_proof_status": "Current draft formulation definition; its current exact statement is used without treating draft status as proof approval.",
+          "consumer_use": "The definition and units of the coupling in the initial-data construction."
+        },
+        {
+          "supplier": "post-emg-strict-charged-fluid-model",
+          "carrier": "items/post-emg-strict-charged-fluid-model.md",
+          "status": "Current draft physical postulate; exact smooth strict-interior material closure inspected.",
+          "source_section": "Postulate",
+          "exact_statement": "$j^a:=cN(\\epsilon)Zu^a,\\qquad T_{m,ab}:=(\\epsilon+p(\\epsilon))u_au_b+p(\\epsilon)g_{ab}$",
+          "relevant_hypotheses_and_conventions": "Smooth strict-interior fields, positive EOS normalization, and the adopted force balance and advected-Z equation.",
+          "supplier_proof_status": "Current draft adopted postulate, not a proved universal material law.",
+          "consumer_use": "The example’s charged-fluid closure and its neutral specialization Z=0."
+        },
+        {
+          "supplier": "def-emg-geometry-units",
+          "carrier": "items/def-emg-geometry-units.md",
+          "status": "Current draft physical definition; exact length-coordinate convention inspected.",
+          "source_section": "Definition",
+          "exact_statement": "In a length-coordinate chart all four coordinate values are assigned metres, with $x^0=ct$ when a time coordinate $t$ in seconds is selected.",
+          "relevant_hypotheses_and_conventions": "The numerical period 2 pi is assigned the SI coordinate length 2 pi metres.",
+          "supplier_proof_status": "Current draft formulation definition; its exact coordinate convention is used without treating draft status as proof approval.",
+          "consumer_use": "The spatial period units of the flat-torus initial-data example."
+        }
+      ]
+    }
+  }
+}

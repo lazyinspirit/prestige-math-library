@@ -11,7 +11,7 @@ Read `research/physics-remaining-80-2026-10-17-owner-authoring-direction.md` bef
 | A page | `qsm-states-ensembles` · order **569** · `quantum-statistical-mechanics` |
 | B page | `qsm-states-ensembles-examples` |
 | title | Normal density states and spectral moments |
-| requires | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`, `qm-math-fock-and-equilibrium`, `spectral-measures-and-borel-functional-calculus`, `td-math-ensembles-and-limits`, `unbounded-self-adjoint-operators-and-stones-theorem` |
+| requires | `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`, `qm-math-fock-and-equilibrium`, `spectral-measures-and-borel-functional-calculus`, `td-math-ensembles-and-limits`, `unbounded-self-adjoint-operators-and-stones-theorem`, `pure-and-mixed-states-ensembles-and-schmidt-decomposition`, `registers-tensor-products-and-partial-trace`, `quantum-optimization-sdp-and-variational-algorithms`, `trace-distance-fidelity-and-information-limits`, `finite-dimensional-complex-inner-product-spaces-and-matrix-interfaces` |
 | design | `research/plan-quantum-statistical-mechanics-track.md` L24 |
 
 - Read the complete design section; preserve its scope, conventions, warnings and proof route.
