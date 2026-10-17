@@ -31,6 +31,11 @@ retry limits and blockers, and native refreshes continue. Once all owed authorin
 has coverage and every writer drains, the full artifact, readiness, stalemate and
 gate paths run normally. This defaults off and is invalid for other stage policies;
 common mathematics stages do not enable it.
+The optional `owner-supervised-construction.mts` stage table composes the owner
+boundary wrapper with this construction-only option. Select it through the exact
+run-local configuration to preserve live parallel authoring; other runs retain
+their selected tables. Native artifact/readiness and gate checks still run after
+all initial authors have coverage and every writer drains.
 
 The same opt-in grants a fresh capability only to initial priority graph checks
 and plan generation, including startup/hot-reload validation of that initial

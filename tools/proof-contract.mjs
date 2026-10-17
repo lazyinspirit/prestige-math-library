@@ -301,6 +301,7 @@ function loadItem(id) {
   const { fm, body } = split(source);
   return {
     id,
+    kind: scalar(fm, 'kind'),
     body,
     deps: list(fm, 'deps'),
     justified: list(fm, 'justified_by'),
@@ -312,6 +313,10 @@ function loadItem(id) {
 // Declarations, not `const` aliases: the main loop above runs at module load,
 // before these lines, and a `const` would still be in its temporal dead zone.
 function split(source) { return splitFrontmatter(source); }
+function scalar(fm, key) {
+  const match = fm.match(new RegExp('^' + key + ':[ \\t]*(.*)$', 'm'));
+  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
+}
 function nested(fm, parent, child) {
   const start = fm.search(new RegExp('^' + parent + ':[ \\t]*(?:#.*)?$', 'm'));
   if (start < 0) return undefined;
