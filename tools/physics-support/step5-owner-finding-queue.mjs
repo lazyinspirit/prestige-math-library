@@ -20,6 +20,7 @@ const evidenceRow = row => row && reason(row.reason) && row.uncertain === false
   && (row.source_urls.length > 0 || row.familiar === true);
 const key = row => [row?.id, row?.model, row?.context_sha256].join('\0');
 const lanes = ['1', '2', '3'];
+const adjudicationStage = phase => phase === 'initial' ? '5.1-adjudicate' : phase === 'repeat' ? '5.5-adjudicate' : null;
 const queuePhase = phase => 'owner-finding-correction-' + phase;
 const assignmentsFor = entries => Object.fromEntries(lanes.map(lane =>
   [lane, entries.filter(entry => entry.owner_lane === lane).map(entry => entry.subject)]));
@@ -64,24 +65,25 @@ function nativeOutcome(root, run, phase, round, ref, evidence, bound) {
 }
 function checkStage(root, run, phase, round, dir, statePath) {
   const state = read(statePath);
-  need(phase === 'repeat' && state.run === run && state.stage === '5.5-adjudicate'
-    && !state.finishedAt && !state.stages?.['5.5-adjudicate']?.doneAt,
+  const stage = adjudicationStage(phase);
+  need(stage && state.run === run && state.stage === stage
+    && !state.finishedAt && !state.stages?.[stage]?.doneAt,
     'queue is outside its live pre-collection native stage');
   need(state.dispatches && typeof state.dispatches === 'object' && !Array.isArray(state.dispatches)
     && Object.values(state.dispatches).every(row => row && (!row.startedAt || row.endedAt)), 'native writers have not drained');
   need(!existsSync(join(root, '.physics-autopilot', 'step5-shared-write.lock')), 'shared metadata writer active');
   need(!existsSync(join(dir, phase + '-' + round + '-collected.json'))
-    && !existsSync(join(dir, 'certification-impact-repeat-' + round + '.json')), 'parent collection or certification is already immutable');
+    && !existsSync(join(dir, 'certification-impact-' + phase + '-' + round + '.json')), 'parent collection or certification is already immutable');
   const latest = join(dir, 'certification.json');
   if (existsSync(latest)) {
     const cert = read(latest);
-    need(cert.phase !== 'impact-repeat' || cert.round !== round, 'round already certified');
+    need(cert.phase !== 'impact-' + phase || cert.round !== round, 'round already certified');
   }
 }
 
 export function ownerFindingRequest(root, run, phase, round,
   { items, current, statements, dir, allowCompletedContinuation = false, currentReviewCallback = null }) {
-  if (phase !== 'repeat') return null;
+  if (!adjudicationStage(phase)) return null;
   root = resolve(root); dir = resolve(dir);
   need(dir === join(root, 'research', run + '-step5-v2'), 'wrong workflow directory');
   const pointerPath = join(dir, 'owner-finding-queue-request.json');
@@ -196,7 +198,7 @@ export function ownerFindingCompletion(pack, reports, current, currentReviewCall
     && hash(readFileSync(queue.request.path)) === queue.request.sha256
     && equal(read(queue.request.path), request), 'queue pack lacks its exact immutable root request');
   const root = resolve(dirname(queue.request.path), '../..');
-  need(request?.version === 1 && request.reviewer === '/root' && request.phase === 'repeat'
+  need(request?.version === 1 && request.reviewer === '/root' && adjudicationStage(request.phase)
     && pack.version === 2 && pack.run === request.run && pack.phase === queuePhase(request.phase)
     && pack.round === request.round && pack.repair_scope === 'frontier' && !pack.rejected
     && equal(pack.units, lanes) && equal(pack.assignments, assignmentsFor(request.entries)), 'wrong frozen native queue assignment');

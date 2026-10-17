@@ -389,7 +389,7 @@ the genuine correction receipt, and the ordinary full gate battery and later
 consumer maintenance still apply. Root alone closes the canonical finding.
 
 Several distinct confirmed findings can instead receive an explicit native
-owner queue before repeat collection. Root advertises an immutable
+owner queue before initial or repeat collection. Root advertises an immutable
 `owner-finding-queue-ID.json` through `owner-finding-queue-request.json` in the
 same workflow directory. Each entry binds one unique unsuperseded OPEN canonical
 owner finding, its original-frontier subject and owner lane, genuine current
@@ -403,9 +403,12 @@ no tuple identity, file binding, assignment or certification authority. The disc
 the named original scientific owner's final discovery and current snapshot;
 its native outcome is context only and supplies no invented edge or rejection.
 
+Intake requires the exact live pre-collection stage (`5.1-adjudicate` for
+`initial`, `5.5-adjudicate` for `repeat`), with every native writer drained,
+no shared metadata lock, and no immutable parent collection or impact certificate.
 After all writers drain, the engine freezes
-`owner-finding-correction-repeat-ROUND.json` with disjoint lanes 1, 2 and 3 and
-binds its exact tasks in `owner-finding-correction-repeat-ROUND-progress.json`.
+`owner-finding-correction-PHASE-ROUND.json` with disjoint lanes 1, 2 and 3 and
+binds its exact tasks in `owner-finding-correction-PHASE-ROUND-progress.json`.
 Every entry must receive an actual source repair, fresh current native review
 and explicit typed root-finding resolution. No new prerequisite or ordinary
 judge tuple is permitted. Distinct repairs on a correctly false-positive subject

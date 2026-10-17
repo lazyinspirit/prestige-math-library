@@ -547,7 +547,7 @@ function advanceScientificAdjudication(root,run,phase,round) {
 }
 
 function ownerFindingContext(root,run,phase,round) {
-  if(phase!=='repeat')return null;
+  if(!['initial','repeat'].includes(phase))return null;
   const dir=workflowDir(root,run);
   if(!existsSync(join(dir,'owner-finding-queue-request.json')))return null;
   const items=readLibraryItems(root),progress=ownerFindingProgressPath(root,run,phase,round);
