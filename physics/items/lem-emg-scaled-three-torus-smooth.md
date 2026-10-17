@@ -2,7 +2,7 @@
 id: lem-emg-scaled-three-torus-smooth
 kind: lemma
 title: "The scaled three-torus as a smooth compact flat spatial manifold"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

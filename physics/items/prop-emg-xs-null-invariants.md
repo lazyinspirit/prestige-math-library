@@ -2,7 +2,7 @@
 id: prop-emg-xs-null-invariants
 kind: proposition
 title: Null wave curvature and zero quadratic invariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

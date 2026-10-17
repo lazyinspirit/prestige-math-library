@@ -2,7 +2,7 @@
 id: ex-tgr-ideal-cutoff-entropy
 kind: example
 title: Half-mass cutoff and exact coarse entropy export
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

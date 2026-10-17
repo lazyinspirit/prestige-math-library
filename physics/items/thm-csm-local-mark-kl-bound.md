@@ -2,7 +2,7 @@
 id: thm-csm-local-mark-kl-bound
 kind: theorem
 title: Spatial random-occupation conditional mark entropy bound
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

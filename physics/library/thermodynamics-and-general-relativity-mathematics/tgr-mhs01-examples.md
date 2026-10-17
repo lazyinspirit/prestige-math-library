@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs01-examples
 title: Smooth null screen and KN parameter family — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgr-mhs01

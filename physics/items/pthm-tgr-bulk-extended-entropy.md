@@ -2,7 +2,7 @@
 id: pthm-tgr-bulk-extended-entropy
 kind: physics-theorem
 title: Exact entropy identity in the selected bulk branch
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: lem-emg-positive-square-root-smoothness
 kind: lemma
 title: The positive square-root branch is smooth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

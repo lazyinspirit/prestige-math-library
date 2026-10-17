@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs04-examples
 title: Actual photon box trace and Planck energy/entropy flux — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - tgr-mhs04

@@ -1,7 +1,7 @@
 ---
 page: tgr-mc04-examples
 title: "Separate entropy-only radiation state maps — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

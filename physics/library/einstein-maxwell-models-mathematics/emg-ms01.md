@@ -1,7 +1,7 @@
 ---
 page: emg-ms01
 title: Geometric electrovac equations and flux normalization
-status: draft
+status: published
 library: mathematics
 requires:
 - emg-mg03

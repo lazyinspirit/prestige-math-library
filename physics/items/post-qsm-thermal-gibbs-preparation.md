@@ -2,7 +2,7 @@
 id: post-qsm-thermal-gibbs-preparation
 kind: postulate
 title: Canonical quantum thermal preparation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

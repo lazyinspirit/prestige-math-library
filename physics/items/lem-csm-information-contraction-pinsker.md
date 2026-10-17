@@ -2,7 +2,7 @@
 id: lem-csm-information-contraction-pinsker
 kind: lemma
 title: Measurable information contraction and Pinsker bound
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

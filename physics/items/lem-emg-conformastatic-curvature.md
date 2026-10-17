@@ -2,7 +2,7 @@
 id: lem-emg-conformastatic-curvature
 kind: lemma
 title: "Arbitrary-positive-H conformastatic Ricci and Einstein components"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

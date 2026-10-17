@@ -2,7 +2,7 @@
 id: pthm-emg-charged-scalar-coupling
 kind: physics-theorem
 title: "Field equations and balances of the selected scalar coupling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

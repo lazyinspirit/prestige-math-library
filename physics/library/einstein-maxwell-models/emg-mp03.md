@@ -1,7 +1,7 @@
 ---
 page: emg-mp03
 title: "Separately adopted fixed-background Maxwell and charged probes"
-status: draft
+status: published
 library: physics
 items:
   - post-emg-background-maxwell-test

@@ -2,7 +2,7 @@
 id: cex-qsm-dt-transpose-not-cp
 kind: counterexample
 title: Transpose positivity fails ancillary positivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

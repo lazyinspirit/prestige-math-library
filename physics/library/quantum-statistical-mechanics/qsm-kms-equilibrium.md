@@ -1,7 +1,7 @@
 ---
 page: qsm-kms-equilibrium
 title: Physical-time KMS strip equilibrium condition
-status: draft
+status: published
 library: physics
 items:
   - def-qsm-kms-state

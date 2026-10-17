@@ -2,7 +2,7 @@
 id: ex-tgr-regular-central-pressure-family
 kind: example
 title: "Local regular-center central-pressure family"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

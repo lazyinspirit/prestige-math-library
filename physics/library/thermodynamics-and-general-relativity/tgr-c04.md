@@ -1,7 +1,7 @@
 ---
 page: tgr-c04
 title: Supported-rest effective Cattaneo thermal model
-status: draft
+status: published
 library: physics
 requires:
   - tgr-i01

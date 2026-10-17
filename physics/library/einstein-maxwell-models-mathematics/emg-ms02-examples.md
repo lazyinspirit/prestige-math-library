@@ -1,7 +1,7 @@
 ---
 page: emg-ms02-examples
 title: "Selected ingoing RN extension and time orientation — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms02

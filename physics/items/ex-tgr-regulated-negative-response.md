@@ -2,7 +2,7 @@
 id: ex-tgr-regulated-negative-response
 kind: example
 title: "Regulated Kepler branch has negative volume response"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

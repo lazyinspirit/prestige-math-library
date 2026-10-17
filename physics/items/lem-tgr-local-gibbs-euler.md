@@ -2,7 +2,7 @@
 id: lem-tgr-local-gibbs-euler
 kind: lemma
 title: "Local Gibbs, Euler, parcel first law and response identities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

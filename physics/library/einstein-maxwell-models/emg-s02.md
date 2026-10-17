@@ -1,7 +1,7 @@
 ---
 page: emg-s02
 title: Harmonic static multicenter electrovac model
-status: draft
+status: published
 library: physics
 items:
   - pthm-emg-xs-geometric-to-si-model

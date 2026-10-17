@@ -1,7 +1,7 @@
 ---
 page: tgr-phs03-examples
 title: Restricted reversible horizon entropy bridge — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-phs03

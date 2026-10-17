@@ -2,7 +2,7 @@
 id: def-emg-matter-formal-systems
 kind: definition
 title: Smooth formal matter, EM tensors and observer quantities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

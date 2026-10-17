@@ -2,7 +2,7 @@
 id: texp-tgr-two-accelerations
 kind: thought-experiment
 title: Two model acceleration thermometers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

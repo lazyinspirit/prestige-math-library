@@ -1,7 +1,7 @@
 ---
 page: emg-mg02-examples
 title: "Local potentials and smooth circle-bundle connection data — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

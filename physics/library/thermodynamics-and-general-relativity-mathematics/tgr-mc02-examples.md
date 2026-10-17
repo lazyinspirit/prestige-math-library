@@ -1,7 +1,7 @@
 ---
 page: tgr-mc02-examples
 title: "Perfect stress and particle balances with entropy identity — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

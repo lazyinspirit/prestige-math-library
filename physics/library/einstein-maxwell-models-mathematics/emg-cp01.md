@@ -1,7 +1,7 @@
 ---
 page: emg-cp01
 title: Electrovacuum tensor Cauchy system
-status: draft
+status: published
 library: mathematics
 items:
 - def-emg-electrovacuum-cauchy-system

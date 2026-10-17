@@ -2,7 +2,7 @@
 id: post-qsm-local-ensemble-preparations
 kind: postulate
 title: Adopted finite canonical and band preparation rules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

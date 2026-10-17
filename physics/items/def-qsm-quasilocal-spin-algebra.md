@@ -2,7 +2,7 @@
 id: def-qsm-quasilocal-spin-algebra
 kind: definition
 title: Norm-completed quasi-local quantum spin algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

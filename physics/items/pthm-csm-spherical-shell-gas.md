@@ -2,7 +2,7 @@
 id: pthm-csm-spherical-shell-gas
 kind: physics-theorem
 title: "Finite spherical-shell gas and its exact marginal"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

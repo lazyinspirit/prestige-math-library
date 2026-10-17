@@ -2,7 +2,7 @@
 id: pthm-tgr-supported-redshift-heat-relaxation
 kind: physics-theorem
 title: Conditional redshift heat relaxation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

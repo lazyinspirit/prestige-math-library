@@ -2,7 +2,7 @@
 id: ex-csm-tonks-rod-ensemble
 kind: example
 title: "Packing boundary and exact truncated virial error"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

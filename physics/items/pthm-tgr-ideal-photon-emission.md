@@ -2,7 +2,7 @@
 id: pthm-tgr-ideal-photon-emission
 kind: physics-theorem
 title: Conditional ideal Planck emission and entropy accounting
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

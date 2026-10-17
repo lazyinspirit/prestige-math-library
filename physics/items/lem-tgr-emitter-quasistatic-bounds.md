@@ -2,7 +2,7 @@
 id: lem-tgr-emitter-quasistatic-bounds
 kind: lemma
 title: Exact quasistatic and finite-interval mass-change bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

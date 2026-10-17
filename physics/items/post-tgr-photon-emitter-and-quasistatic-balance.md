@@ -2,7 +2,7 @@
 id: post-tgr-photon-emitter-and-quasistatic-balance
 kind: postulate
 title: Ideal photon reservoir and active-area mass-balance model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

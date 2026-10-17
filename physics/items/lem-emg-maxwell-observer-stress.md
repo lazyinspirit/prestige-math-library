@@ -2,7 +2,7 @@
 id: lem-emg-maxwell-observer-stress
 kind: lemma
 title: "Maxwell stress tensor in an observer frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

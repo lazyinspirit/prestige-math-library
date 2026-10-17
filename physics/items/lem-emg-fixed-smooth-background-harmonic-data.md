@@ -2,7 +2,7 @@
 id: lem-emg-fixed-smooth-background-harmonic-data
 kind: lemma
 title: Harmonic initial data relative to a fixed smooth background
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

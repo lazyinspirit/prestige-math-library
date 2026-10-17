@@ -2,7 +2,7 @@
 id: def-csm-lattice-gibbs-specification
 kind: definition
 title: "Lattice Gibbs kernels and DLR states"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

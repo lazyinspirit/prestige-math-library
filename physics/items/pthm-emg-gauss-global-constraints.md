@@ -2,7 +2,7 @@
 id: pthm-emg-gauss-global-constraints
 kind: physics-theorem
 title: "Global Gauss flux and compact-slice neutrality"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-tgr-spectral-thermometer
 kind: lemma
 title: Exact defined Markov thermometer and switched coefficient bound
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

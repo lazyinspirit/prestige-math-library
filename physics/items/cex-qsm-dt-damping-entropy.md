@@ -2,7 +2,7 @@
 id: cex-qsm-dt-damping-entropy
 kind: counterexample
 title: Amplitude damping can decrease system entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

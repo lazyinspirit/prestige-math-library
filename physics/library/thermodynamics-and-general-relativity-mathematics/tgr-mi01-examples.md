@@ -1,7 +1,7 @@
 ---
 page: tgr-mi01-examples
 title: Finite spacelike slab and normal flux charge — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

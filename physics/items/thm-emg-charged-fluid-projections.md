@@ -2,7 +2,7 @@
 id: thm-emg-charged-fluid-projections
 kind: theorem
 title: Perfect-fluid exchange projections and conduction heating
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

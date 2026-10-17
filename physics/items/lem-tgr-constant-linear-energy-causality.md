@@ -2,7 +2,7 @@
 id: lem-tgr-constant-linear-energy-causality
 kind: lemma
 title: Complete symmetrized constant-coefficient evolution
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

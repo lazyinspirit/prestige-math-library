@@ -1,7 +1,7 @@
 ---
 page: csm-collision-transport-examples
 title: "Cutoff elastic-reflection collision measure and gain — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

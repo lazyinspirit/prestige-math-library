@@ -2,7 +2,7 @@
 id: thm-emg-xs-rn-near-horizon
 kind: theorem
 title: Extremal RN to Bertotti-Robinson in C-infinity local scaling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

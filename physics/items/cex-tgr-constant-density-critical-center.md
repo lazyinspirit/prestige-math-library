@@ -2,7 +2,7 @@
 id: cex-tgr-constant-density-critical-center
 kind: counterexample
 title: "Constant-density limiting center loses regularity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

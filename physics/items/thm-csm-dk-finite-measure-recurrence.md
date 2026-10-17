@@ -2,7 +2,7 @@
 id: thm-csm-dk-finite-measure-recurrence
 kind: theorem
 title: Hamiltonian recurrence under the exact finite-measure hypothesis
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

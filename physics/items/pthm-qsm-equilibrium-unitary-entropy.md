@@ -2,7 +2,7 @@
 id: pthm-qsm-equilibrium-unitary-entropy
 kind: physics-theorem
 title: Unitary entropy and Gibbs equilibrium identities
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-tgr-gravitational-canonical-response
 kind: theorem
 title: "Nonnegative fixed-Hamiltonian canonical heat capacity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

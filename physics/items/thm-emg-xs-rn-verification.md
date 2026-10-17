@@ -2,7 +2,7 @@
 id: thm-emg-xs-rn-verification
 kind: theorem
 title: Full dyonic Reissner-Nordström electrovac verification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

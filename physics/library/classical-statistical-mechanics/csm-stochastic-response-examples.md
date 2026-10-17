@@ -1,7 +1,7 @@
 ---
 page: csm-stochastic-response-examples
 title: "Finite reversible stochastic rate model and thermal coupling — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-csm-dk-hidden-state-rate-obstruction

@@ -1,7 +1,7 @@
 ---
 page: tgr-mc03-examples
 title: "Complete symmetrized constant-coefficient evolution — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

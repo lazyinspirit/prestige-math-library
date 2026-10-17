@@ -2,7 +2,7 @@
 id: def-tgr-emitter-quasistatic-diagnostic
 kind: definition
 title: Quasistatic diagnostic for the ideal emitter model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

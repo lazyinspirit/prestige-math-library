@@ -2,7 +2,7 @@
 id: def-emg-local-potentials-and-circle-data
 kind: definition
 title: "Local potentials and smooth circle-bundle connection data"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 physical_scope: null

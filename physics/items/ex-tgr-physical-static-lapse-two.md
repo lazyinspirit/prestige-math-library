@@ -2,7 +2,7 @@
 id: ex-tgr-physical-static-lapse-two
 kind: example
 title: "Fixed lapse two gas normalization"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-tgr-tov-regular-center-local-existence
 kind: theorem
 title: "Regular-center TOV local existence and dependence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

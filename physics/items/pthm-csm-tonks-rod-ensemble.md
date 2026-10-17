@@ -2,7 +2,7 @@
 id: pthm-csm-tonks-rod-ensemble
 kind: physics-theorem
 title: "Exact Tonks hard-rod pressure and convergent virial series"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

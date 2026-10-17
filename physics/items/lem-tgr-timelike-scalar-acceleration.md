@@ -2,7 +2,7 @@
 id: lem-tgr-timelike-scalar-acceleration
 kind: lemma
 title: Constructed timelike smear and massless accelerated spectrum
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: thm-emg-symmetric-hyperbolic-research-supplier
 kind: theorem
 title: Exact periodic positive symmetric-hyperbolic supplier
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

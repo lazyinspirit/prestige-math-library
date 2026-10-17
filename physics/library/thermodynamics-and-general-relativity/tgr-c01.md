@@ -1,7 +1,7 @@
 ---
 page: tgr-c01
 title: "Smooth perfect local material balance model"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-i01

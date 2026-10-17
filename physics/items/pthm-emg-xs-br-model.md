@@ -2,7 +2,7 @@
 id: pthm-emg-xs-br-model
 kind: physics-theorem
 title: Constant-radius charged product model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

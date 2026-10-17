@@ -1,7 +1,7 @@
 ---
 page: emg-pcp02
 title: "Adopted strict charged barotropic fluid model"
-status: draft
+status: published
 library: physics
 items:
   - post-emg-strict-charged-fluid-model

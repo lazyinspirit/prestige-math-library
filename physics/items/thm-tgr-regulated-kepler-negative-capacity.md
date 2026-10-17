@@ -2,7 +2,7 @@
 id: thm-tgr-regulated-kepler-negative-capacity
 kind: theorem
 title: "Negative Gibbs-volume capacity in a finite regulated shell"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

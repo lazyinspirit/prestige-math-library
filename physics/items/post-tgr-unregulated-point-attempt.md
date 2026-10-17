@@ -2,7 +2,7 @@
 id: post-tgr-unregulated-point-attempt
 kind: postulate
 title: "Distinct unregulated point-gravity attempted sampling"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

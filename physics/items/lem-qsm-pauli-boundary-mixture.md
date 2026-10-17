@@ -2,7 +2,7 @@
 id: lem-qsm-pauli-boundary-mixture
 kind: lemma
 title: "Explicit separable state at the Pauli dimer boundary"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

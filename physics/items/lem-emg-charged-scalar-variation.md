@@ -2,7 +2,7 @@
 id: lem-emg-charged-scalar-variation
 kind: lemma
 title: "Classical charged-scalar action, current and stress variation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

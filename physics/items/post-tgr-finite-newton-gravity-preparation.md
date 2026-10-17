@@ -2,7 +2,7 @@
 id: post-tgr-finite-newton-gravity-preparation
 kind: postulate
 title: "Finite regulated Newtonian gravitational canonical preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

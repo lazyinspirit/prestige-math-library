@@ -2,7 +2,7 @@
 id: thm-csm-dk-compact-iid-propagation-of-chaos
 kind: theorem
 title: Compact iid empirical convergence and propagation of chaos
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

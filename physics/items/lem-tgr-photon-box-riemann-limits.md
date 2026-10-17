@@ -2,7 +2,7 @@
 id: lem-tgr-photon-box-riemann-limits
 kind: lemma
 title: Photon-box energy and singular entropy Riemann limits
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

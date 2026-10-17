@@ -2,7 +2,7 @@
 id: def-emg-xs-geometric-electrovac
 kind: definition
 title: Geometric electrovac equations and flux normalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -1,7 +1,7 @@
 ---
 page: emg-cp03
 title: Strict charged barotropic tensor system
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-cp02

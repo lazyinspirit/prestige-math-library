@@ -2,7 +2,7 @@
 id: lem-tgr-even-radial-center-regularity
 kind: lemma
 title: "Even radial coefficients give a C² Cartesian center"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: pthm-emg-matter-symmetry-charges
 kind: physics-theorem
 title: "Selected total-stress/Killing charges"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

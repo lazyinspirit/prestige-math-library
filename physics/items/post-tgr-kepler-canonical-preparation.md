@@ -2,7 +2,7 @@
 id: post-tgr-kepler-canonical-preparation
 kind: postulate
 title: "Relative-shell canonical comparison preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

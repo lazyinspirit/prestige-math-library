@@ -2,7 +2,7 @@
 id: def-csm-gibbs-physical-parameters
 kind: definition
 title: "Classical Gibbs quantities and SI reference conventions"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

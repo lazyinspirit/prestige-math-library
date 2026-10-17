@@ -2,7 +2,7 @@
 id: ex-tgr-chiral-generator-rescaling
 kind: example
 title: Chiral covariance and generator reference rescaling
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

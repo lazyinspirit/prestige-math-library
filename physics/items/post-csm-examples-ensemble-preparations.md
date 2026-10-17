@@ -2,7 +2,7 @@
 id: post-csm-examples-ensemble-preparations
 kind: postulate
 title: "Declared example preparations and thermodynamic interpretation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

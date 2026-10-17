@@ -1,7 +1,7 @@
 ---
 page: tgr-mc01-examples
 title: "Rest fluid state, frame and geometric current definitions — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - tgr-mc01

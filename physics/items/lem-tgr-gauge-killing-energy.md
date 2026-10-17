@@ -2,7 +2,7 @@
 id: lem-tgr-gauge-killing-energy
 kind: lemma
 title: Gauge-compensated charged Killing energy
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

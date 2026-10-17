@@ -2,7 +2,7 @@
 id: post-emg-background-maxwell-test
 kind: postulate
 title: Separately adopted fixed-background Maxwell and charged probes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

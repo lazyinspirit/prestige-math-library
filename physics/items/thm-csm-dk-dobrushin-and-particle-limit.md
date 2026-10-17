@@ -2,7 +2,7 @@
 id: thm-csm-dk-dobrushin-and-particle-limit
 kind: theorem
 title: Dobrushin coupling estimate and actual particle-to-Vlasov limit
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

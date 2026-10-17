@@ -2,7 +2,7 @@
 id: texp-emg-xs-photon-radius
 kind: thought-experiment
 title: RN circular null orbit example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

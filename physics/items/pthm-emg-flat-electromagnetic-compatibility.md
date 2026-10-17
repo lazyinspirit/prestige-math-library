@@ -2,7 +2,7 @@
 id: pthm-emg-flat-electromagnetic-compatibility
 kind: physics-theorem
 title: "Flat electromagnetic conventions agree with the published Maxwell model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

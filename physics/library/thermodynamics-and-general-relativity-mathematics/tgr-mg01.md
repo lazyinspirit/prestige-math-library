@@ -1,7 +1,7 @@
 ---
 page: tgr-mg01
 title: "Finite gravitational phase and entropy reference"
-status: draft
+status: published
 items:
   - def-tgr-gravitating-phase-reference
   - lem-tgr-finite-gaussian-moment-envelope

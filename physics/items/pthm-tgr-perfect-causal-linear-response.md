@@ -2,7 +2,7 @@
 id: pthm-tgr-perfect-causal-linear-response
 kind: physics-theorem
 title: "Causal stable perfect-material linear response"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

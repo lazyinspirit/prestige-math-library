@@ -1,7 +1,7 @@
 ---
 page: emg-mm03-examples
 title: "Finite WKB Maxwell residual, null rays and polarization quotient — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mm03

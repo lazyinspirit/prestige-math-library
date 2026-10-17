@@ -2,7 +2,7 @@
 id: lem-qsm-finite-range-commutator-path-bound
 kind: lemma
 title: Volume-independent finite-range commutator path bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

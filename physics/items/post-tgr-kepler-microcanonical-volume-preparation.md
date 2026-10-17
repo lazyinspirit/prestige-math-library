@@ -2,7 +2,7 @@
 id: post-tgr-kepler-microcanonical-volume-preparation
 kind: postulate
 title: "Confined relative Kepler shell and volume entropy preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

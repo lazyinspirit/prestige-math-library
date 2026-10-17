@@ -2,7 +2,7 @@
 id: lem-tgr-static-gas-finite-normalization
 kind: lemma
 title: "Static relativistic finite gas normalization and hydrostatics"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

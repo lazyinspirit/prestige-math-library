@@ -2,7 +2,7 @@
 id: def-qsm-dt-channel-definition
 kind: definition
 title: Finite completely positive trace-preserving maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: pthm-emg-xs-dyonic-model
 kind: physics-theorem
 title: Dyonic rotating model and gauge obstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

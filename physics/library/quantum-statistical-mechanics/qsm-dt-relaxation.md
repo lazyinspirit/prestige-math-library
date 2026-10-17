@@ -1,7 +1,7 @@
 ---
 page: qsm-dt-relaxation
 title: Specified finite GNS detailed balance
-status: draft
+status: published
 library: physics
 items:
   - def-qsm-dt-gns-detailed-balance

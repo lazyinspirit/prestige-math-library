@@ -1,7 +1,7 @@
 ---
 page: qsm-interacting-exact-models-examples
 title: "Finite Pauli dimer spectrum and exact separability threshold — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - qsm-interacting-exact-models

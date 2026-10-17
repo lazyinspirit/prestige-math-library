@@ -1,7 +1,7 @@
 ---
 page: emg-g04
 title: "Independent equation-based Einstein–Maxwell coupling"
-status: draft
+status: published
 library: physics
 items:
   - post-emg-einstein-maxwell-equations

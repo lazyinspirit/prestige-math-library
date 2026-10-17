@@ -2,7 +2,7 @@
 id: thm-qsm-dt-detailed-balance-gap
 kind: theorem
 title: Faithful scalar-kernel detailed balance gives a relaxation gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

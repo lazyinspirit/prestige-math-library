@@ -1,7 +1,7 @@
 ---
 page: emg-cp02-examples
 title: Positive symmetric Maxwell field-strength reduction — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

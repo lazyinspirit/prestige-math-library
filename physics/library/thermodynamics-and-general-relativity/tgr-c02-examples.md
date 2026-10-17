@@ -1,7 +1,7 @@
 ---
 page: tgr-c02-examples
 title: Restricted gradient constitutive dissipative model — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-c02

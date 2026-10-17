@@ -1,7 +1,7 @@
 ---
 page: emg-g04-examples
 title: "Independent equation-based Einstein–Maxwell coupling — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

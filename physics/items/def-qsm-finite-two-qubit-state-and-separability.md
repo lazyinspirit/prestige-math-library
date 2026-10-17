@@ -2,7 +2,7 @@
 id: def-qsm-finite-two-qubit-state-and-separability
 kind: definition
 title: "Finite two-qubit density matrices and separability"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

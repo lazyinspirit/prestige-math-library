@@ -1,7 +1,7 @@
 ---
 page: emg-pcp03
 title: "Adopted trivial-potential classical charged scalar model"
-status: draft
+status: published
 library: physics
 items:
   - post-emg-trivial-classical-charged-scalar-model

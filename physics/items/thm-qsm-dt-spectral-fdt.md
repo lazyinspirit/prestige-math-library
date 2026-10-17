@@ -2,7 +2,7 @@
 id: thm-qsm-dt-spectral-fdt
 kind: theorem
 title: Finite spectral balance and distributional fluctuation response
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

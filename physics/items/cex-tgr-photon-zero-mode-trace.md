@@ -2,7 +2,7 @@
 id: cex-tgr-photon-zero-mode-trace
 kind: counterexample
 title: Zero-energy bosonic mode trace obstruction
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

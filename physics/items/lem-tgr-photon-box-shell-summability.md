@@ -2,7 +2,7 @@
 id: lem-tgr-photon-box-shell-summability
 kind: lemma
 title: Exponential mode sums for the periodic photon box
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

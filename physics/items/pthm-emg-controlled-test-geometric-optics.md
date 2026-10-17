@@ -2,7 +2,7 @@
 id: pthm-emg-controlled-test-geometric-optics
 kind: physics-theorem
 title: Controlled test-wave rays, polarization and Maxwell residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

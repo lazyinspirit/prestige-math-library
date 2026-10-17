@@ -2,7 +2,7 @@
 id: thm-tgr-finite-current-production-balance
 kind: theorem
 title: "Complete finite-slab production and outward-flux balance"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

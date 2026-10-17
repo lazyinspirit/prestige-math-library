@@ -2,7 +2,7 @@
 id: thm-emg-charged-dust-projection
 kind: theorem
 title: Charged dust balance equivalence and advected charge ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

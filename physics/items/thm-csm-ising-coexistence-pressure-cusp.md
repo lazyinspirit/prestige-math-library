@@ -2,7 +2,7 @@
 id: thm-csm-ising-coexistence-pressure-cusp
 kind: theorem
 title: "Coexistence implies an Ising pressure cusp"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

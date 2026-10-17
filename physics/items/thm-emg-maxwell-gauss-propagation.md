@@ -2,7 +2,7 @@
 id: thm-emg-maxwell-gauss-propagation
 kind: theorem
 title: "Maxwell Gauss constraints propagate by form transport"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

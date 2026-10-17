@@ -1,7 +1,7 @@
 ---
 page: qsm-commuting-quantum-phases-examples
 title: Diagonal quantum Ising interaction and classical conditional energies — Examples
-status: draft
+status: published
 library: physics
 requires:
   - qsm-commuting-quantum-phases

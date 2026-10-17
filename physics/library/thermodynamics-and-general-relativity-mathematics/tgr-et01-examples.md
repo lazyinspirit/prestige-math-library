@@ -1,7 +1,7 @@
 ---
 page: tgr-et01-examples
 title: "Stationary thermal geometric data — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: lem-emg-c2-curve-covariant-acceleration-well-defined
 kind: lemma
 title: "The covariant acceleration formula is well-defined along a $C^2$ curve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

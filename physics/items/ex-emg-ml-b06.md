@@ -2,7 +2,7 @@
 id: ex-emg-ml-b06
 kind: example
 title: Quantitative dilute comparison of actual coupled solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

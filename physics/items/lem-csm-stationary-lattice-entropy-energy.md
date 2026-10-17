@@ -2,7 +2,7 @@
 id: lem-csm-stationary-lattice-entropy-energy
 kind: lemma
 title: "Stationary lattice entropy and energy densities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

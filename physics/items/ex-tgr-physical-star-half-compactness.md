@@ -2,7 +2,7 @@
 id: ex-tgr-physical-star-half-compactness
 kind: example
 title: "Half-compactness constant-density Einstein star"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

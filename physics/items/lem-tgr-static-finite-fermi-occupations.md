@@ -2,7 +2,7 @@
 id: lem-tgr-static-finite-fermi-occupations
 kind: lemma
 title: "Supplied static finite-mode Fermi occupation identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

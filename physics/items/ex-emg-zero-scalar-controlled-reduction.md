@@ -2,7 +2,7 @@
 id: ex-emg-zero-scalar-controlled-reduction
 kind: example
 title: "Zero scalar with V(0)=0 reduces to electrovacuum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

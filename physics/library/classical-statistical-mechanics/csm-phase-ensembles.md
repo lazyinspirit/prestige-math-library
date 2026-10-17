@@ -1,7 +1,7 @@
 ---
 page: csm-phase-ensembles
 title: "Classical configuration, phase and reference spaces"
-status: draft
+status: published
 library: physics
 requires:
   - cm-math-canonical

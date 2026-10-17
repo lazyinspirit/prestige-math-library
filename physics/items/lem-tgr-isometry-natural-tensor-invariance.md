@@ -2,7 +2,7 @@
 id: lem-tgr-isometry-natural-tensor-invariance
 kind: lemma
 title: Natural tensors under Killing isometries
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

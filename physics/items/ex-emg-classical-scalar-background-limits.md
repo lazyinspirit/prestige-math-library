@@ -2,7 +2,7 @@
 id: ex-emg-classical-scalar-background-limits
 kind: example
 title: "Background scalar wave versus coupled source equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

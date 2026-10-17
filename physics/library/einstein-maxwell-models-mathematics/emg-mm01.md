@@ -1,7 +1,7 @@
 ---
 page: emg-mm01
 title: "Smooth formal matter, EM tensors and observer quantities"
-status: draft
+status: published
 library: mathematics
 requires:
   - countability-and-uncountability

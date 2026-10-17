@@ -2,7 +2,7 @@
 id: thm-qsm-models-lattice-riemann-bose-bound
 kind: theorem
 title: "Lattice Gaussian Riemann limits and the singular Bose endpoint"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: pthm-csm-bernoulli-fluctuation-bounds
 kind: physics-theorem
 title: "Finite Bernoulli fluctuations and matching exponential rates"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

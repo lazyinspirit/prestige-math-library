@@ -2,7 +2,7 @@
 id: def-csm-dk-kinetic-macroscopic-fields
 kind: definition
 title: "Kinetic density, velocity, covariance stress and heat flux"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

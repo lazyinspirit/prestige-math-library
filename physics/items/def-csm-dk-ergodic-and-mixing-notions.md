@@ -2,7 +2,7 @@
 id: def-csm-dk-ergodic-and-mixing-notions
 kind: definition
 title: Ergodicity and mixing for a selected probability map
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

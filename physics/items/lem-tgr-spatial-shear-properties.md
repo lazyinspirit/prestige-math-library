@@ -2,7 +2,7 @@
 id: lem-tgr-spatial-shear-properties
 kind: lemma
 title: Spatial shear properties and nonnegative norm
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

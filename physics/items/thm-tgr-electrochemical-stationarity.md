@@ -2,7 +2,7 @@
 id: thm-tgr-electrochemical-stationarity
 kind: theorem
 title: Global electrochemical redshift from charged Liouville stationarity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

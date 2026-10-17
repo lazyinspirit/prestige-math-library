@@ -2,7 +2,7 @@
 id: pthm-csm-canonical-response-identities
 kind: physics-theorem
 title: "Canonical energy and fluctuation responses"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

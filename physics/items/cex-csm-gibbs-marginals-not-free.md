@@ -2,7 +2,7 @@
 id: cex-csm-gibbs-marginals-not-free
 kind: counterexample
 title: "Interacting marginals are not free Gibbs laws"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

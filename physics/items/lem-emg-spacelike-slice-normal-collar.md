@@ -2,7 +2,7 @@
 id: lem-emg-spacelike-slice-normal-collar
 kind: lemma
 title: "Local normal collar charts at a smooth spacelike hypersurface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

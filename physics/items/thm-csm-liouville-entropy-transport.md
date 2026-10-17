@@ -2,7 +2,7 @@
 id: thm-csm-liouville-entropy-transport
 kind: theorem
 title: "Liouville transport and fine-grained entropy invariance"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

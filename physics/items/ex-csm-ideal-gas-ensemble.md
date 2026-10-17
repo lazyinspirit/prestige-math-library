@@ -2,7 +2,7 @@
 id: ex-csm-ideal-gas-ensemble
 kind: example
 title: "Maxwell speed marginal and Poisson number example"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

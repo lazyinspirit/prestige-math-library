@@ -2,7 +2,7 @@
 id: thm-tgr-finite-gravitational-entropy-optimum
 kind: theorem
 title: "Unique finite gravitational Gibbs variational optimum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

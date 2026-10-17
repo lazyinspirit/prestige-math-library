@@ -1,7 +1,7 @@
 ---
 page: qsm-local-ensemble-bridge-examples
 title: Finite tensor density, observable and measurement language — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

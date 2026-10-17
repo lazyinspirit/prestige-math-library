@@ -2,7 +2,7 @@
 id: pthm-csm-dk-qualified-hamiltonian-statistical-predictions
 kind: physics-theorem
 title: Conditional Hamiltonian ensemble and response predictions
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

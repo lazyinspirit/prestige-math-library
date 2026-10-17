@@ -2,7 +2,7 @@
 id: post-tgr-local-entropy-admissibility
 kind: postulate
 title: "Local entropy-current admissibility in a separately defined model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

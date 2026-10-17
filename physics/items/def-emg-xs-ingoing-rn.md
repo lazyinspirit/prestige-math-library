@@ -2,7 +2,7 @@
 id: def-emg-xs-ingoing-rn
 kind: definition
 title: Selected ingoing RN extension and time orientation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

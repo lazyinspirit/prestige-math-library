@@ -1,7 +1,7 @@
 ---
 page: emg-g02-examples
 title: "Selected classical field topology and optional circle normalization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-emg-classical-flux-versus-normalization

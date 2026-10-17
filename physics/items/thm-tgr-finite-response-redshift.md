@@ -2,7 +2,7 @@
 id: thm-tgr-finite-response-redshift
 kind: theorem
 title: Finite response and spectral clock redshift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

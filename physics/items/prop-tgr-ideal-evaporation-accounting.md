@@ -2,7 +2,7 @@
 id: prop-tgr-ideal-evaporation-accounting
 kind: proposition
 title: Exact ideal emitter mass ODE and entropy accounting
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

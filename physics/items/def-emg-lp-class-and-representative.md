@@ -2,7 +2,7 @@
 id: def-emg-lp-class-and-representative
 kind: definition
 title: "Lp classes and explicit representatives"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

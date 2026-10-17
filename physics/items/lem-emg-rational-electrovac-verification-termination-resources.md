@@ -2,7 +2,7 @@
 id: lem-emg-rational-electrovac-verification-termination-resources
 kind: lemma
 title: Termination and separate algebraic resource account for rational tensor verification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

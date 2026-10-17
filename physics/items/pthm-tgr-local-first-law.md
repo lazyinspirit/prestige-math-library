@@ -2,7 +2,7 @@
 id: pthm-tgr-local-first-law
 kind: physics-theorem
 title: "Local Gibbs and parcel first law in the adopted material"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: ex-emgmath-ml-b02
 kind: example
 title: Explicit local conduction-energy calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

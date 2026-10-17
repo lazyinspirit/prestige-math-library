@@ -2,7 +2,7 @@
 id: pthm-emg-matter-energy-conditions
 kind: physics-theorem
 title: "Observer energy conditions for selected matter plus EM"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

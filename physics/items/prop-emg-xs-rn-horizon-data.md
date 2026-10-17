@@ -2,7 +2,7 @@
 id: prop-emg-xs-rn-horizon-data
 kind: proposition
 title: RN roots, Killing horizons and surface gravity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: ex-tgr-reference-wall-normalization
 kind: example
 title: "Reference-wall normalization preserves proper thermal and particle ratios"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

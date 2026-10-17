@@ -2,7 +2,7 @@
 id: def-csm-dk-hamiltonian-flow-measure
 kind: definition
 title: Hamiltonian phase, complete-domain flow and reference measure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

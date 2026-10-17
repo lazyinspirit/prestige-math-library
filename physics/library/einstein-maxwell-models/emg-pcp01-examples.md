@@ -1,7 +1,7 @@
 ---
 page: emg-pcp01-examples
 title: "Local evolution of the adopted electrovacuum model — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

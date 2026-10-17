@@ -2,7 +2,7 @@
 id: post-tgr-exponential-current-and-spectral-thermometer
 kind: postulate
 title: Reduced exponential current and defined spectral detector adoption
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

@@ -2,7 +2,7 @@
 id: lem-csm-peierls-energy-injection
 kind: lemma
 title: "Peierls contour probability bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

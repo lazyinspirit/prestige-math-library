@@ -2,7 +2,7 @@
 id: def-emg-topological-sector
 kind: definition
 title: "Selected classical field topology and optional circle normalization"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

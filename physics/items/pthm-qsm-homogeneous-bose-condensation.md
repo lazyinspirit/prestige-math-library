@@ -2,7 +2,7 @@
 id: pthm-qsm-homogeneous-bose-condensation
 kind: physics-theorem
 title: "Dimension-restricted fixed-mean-density Bose condensation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

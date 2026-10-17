@@ -2,7 +2,7 @@
 id: lem-qsm-consistent-local-states
 kind: lemma
 title: Consistent local densities extend to an algebraic state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: lem-csm-ising-influence-bound
 kind: lemma
 title: "Ising influence bounded by hyperbolic tangent"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: lem-tgr-mass-shell-polynomial-rigidity
 kind: lemma
 title: Mass-shell polynomial rigidity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

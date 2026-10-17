@@ -2,7 +2,7 @@
 id: def-emg-xs-kn-full-sphere-exterior
 kind: definition
 title: Full-sphere exterior extension of the Kerr-Newman datum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

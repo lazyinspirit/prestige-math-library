@@ -1,7 +1,7 @@
 ---
 page: emg-mp01
 title: "Smooth matter quantities, current and observer observables"
-status: draft
+status: published
 library: physics
 items:
   - def-emg-matter-observables

@@ -2,7 +2,7 @@
 id: rem-emg-maximal-is-not-complete
 kind: remark
 title: "Maximality of the Einstein–Maxwell GHD does not assert geodesic completeness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

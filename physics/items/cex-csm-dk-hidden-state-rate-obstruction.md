@@ -2,7 +2,7 @@
 id: cex-csm-dk-hidden-state-rate-obstruction
 kind: counterexample
 title: "Reversible finite chain with hidden-state exit-rate obstruction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

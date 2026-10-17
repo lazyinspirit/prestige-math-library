@@ -1,7 +1,7 @@
 ---
 page: csm-hamiltonian-statistics
 title: "Hamiltonian phase, complete-domain flow and reference measure"
-status: draft
+status: published
 library: physics
 requires:
   - euclidean-ordinary-differential-equations-with-smooth-dependence

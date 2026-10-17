@@ -1,7 +1,7 @@
 ---
 page: qsm-states-ensembles-examples
 title: Normal density states and spectral moments — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

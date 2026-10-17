@@ -2,7 +2,7 @@
 id: pthm-qsm-periodic-ideal-occupation
 kind: physics-theorem
 title: "Finite spectral periodic Bose/Fermi gas"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

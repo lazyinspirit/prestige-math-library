@@ -2,7 +2,7 @@
 id: thm-qsm-dt-monitored-transport
 kind: theorem
 title: Stationary monitored-chain transport variance coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

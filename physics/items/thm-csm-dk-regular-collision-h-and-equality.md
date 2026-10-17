@@ -2,7 +2,7 @@
 id: thm-csm-dk-regular-collision-h-and-equality
 kind: theorem
 title: "H theorem and Maxwellian equality for the regular cutoff model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

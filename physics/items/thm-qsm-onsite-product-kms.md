@@ -2,7 +2,7 @@
 id: thm-qsm-onsite-product-kms
 kind: theorem
 title: Unique onsite product Gibbs KMS state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

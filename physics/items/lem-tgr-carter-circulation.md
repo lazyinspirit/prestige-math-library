@@ -2,7 +2,7 @@
 id: lem-tgr-carter-circulation
 kind: lemma
 title: "Enthalpy vorticity and restricted material circulation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

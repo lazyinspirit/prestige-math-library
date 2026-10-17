@@ -1,7 +1,7 @@
 ---
 page: tgr-phs01
 title: Restricted smooth horizon Einstein/NEC adoption
-status: draft
+status: published
 library: physics
 requires:
   - emg-s01

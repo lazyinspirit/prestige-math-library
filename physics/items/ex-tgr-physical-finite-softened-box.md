@@ -2,7 +2,7 @@
 id: ex-tgr-physical-finite-softened-box
 kind: example
 title: "Prepared finite softened two-body ensemble"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

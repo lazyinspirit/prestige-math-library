@@ -1,7 +1,7 @@
 ---
 page: tgr-mg02
 title: "Smooth static spherical geometry and state domain"
-status: draft
+status: published
 library: mathematics
 items:
   - def-tgr-spherical-static-state-domain

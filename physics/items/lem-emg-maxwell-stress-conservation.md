@@ -2,7 +2,7 @@
 id: lem-emg-maxwell-stress-conservation
 kind: lemma
 title: Maxwell stress algebra and covariant conservation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: thm-csm-dk-compact-hamiltonian-linear-response
 kind: theorem
 title: Exact finite-time response on a compact Hamiltonian phase
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

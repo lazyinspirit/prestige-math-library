@@ -2,7 +2,7 @@
 id: pthm-emg-xs-kn-horizons
 kind: physics-theorem
 title: Rotating model horizons and selected causal escape
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

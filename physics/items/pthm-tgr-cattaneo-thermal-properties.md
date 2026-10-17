@@ -2,7 +2,7 @@
 id: pthm-tgr-cattaneo-thermal-properties
 kind: physics-theorem
 title: "Conditional thermal entropy, stability, and finite propagation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

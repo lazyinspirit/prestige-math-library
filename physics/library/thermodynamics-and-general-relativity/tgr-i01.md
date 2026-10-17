@@ -1,7 +1,7 @@
 ---
 page: tgr-i01
 title: Thermodynamics-GR fields, currents, reference normalization and units
-status: draft
+status: published
 library: physics
 requires:
   - tgr-mc01

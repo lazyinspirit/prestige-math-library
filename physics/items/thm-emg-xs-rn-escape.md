@@ -2,7 +2,7 @@
 id: thm-emg-xs-rn-escape
 kind: theorem
 title: Outer RN escape boundary in selected model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

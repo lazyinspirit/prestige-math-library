@@ -2,7 +2,7 @@
 id: thm-qsm-dt-normal-state-kubo
 kind: theorem
 title: Trace-class bounded-observable response
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

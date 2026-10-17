@@ -2,7 +2,7 @@
 id: ex-emg-ml-b03
 kind: example
 title: "Pure magnetic anisotropic stress and null-flux equality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

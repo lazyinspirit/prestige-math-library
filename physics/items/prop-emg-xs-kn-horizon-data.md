@@ -2,7 +2,7 @@
 id: prop-emg-xs-kn-horizon-data
 kind: proposition
 title: KN Killing generators, surface gravity, area and potential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

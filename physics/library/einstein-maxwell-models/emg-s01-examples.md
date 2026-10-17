@@ -1,7 +1,7 @@
 ---
 page: emg-s01-examples
 title: "SI and geometric solution parameter identifications — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

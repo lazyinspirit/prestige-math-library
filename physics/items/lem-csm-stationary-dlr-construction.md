@@ -2,7 +2,7 @@
 id: lem-csm-stationary-dlr-construction
 kind: lemma
 title: "Translation-averaged stationary Gibbs state"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

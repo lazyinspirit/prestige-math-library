@@ -2,7 +2,7 @@
 id: post-tgr-equilibrium-particle-exchange
 kind: postulate
 title: Specified equilibrium particle exchange
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

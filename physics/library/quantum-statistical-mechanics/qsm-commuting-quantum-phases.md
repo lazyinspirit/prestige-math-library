@@ -1,7 +1,7 @@
 ---
 page: qsm-commuting-quantum-phases
 title: Diagonal quantum Ising interaction and classical conditional energies
-status: draft
+status: published
 library: physics
 requires:
   - csm-gibbs-lattice

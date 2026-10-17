@@ -2,7 +2,7 @@
 id: cex-csm-dk-weak-mixing-not-strong-mixing
 kind: counterexample
 title: Weak mixing need not imply strong mixing
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

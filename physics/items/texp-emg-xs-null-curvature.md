@@ -2,7 +2,7 @@
 id: texp-emg-xs-null-curvature
 kind: thought-experiment
 title: Nonzero null-wave field and curvature with four specified scalar contractions vanishing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

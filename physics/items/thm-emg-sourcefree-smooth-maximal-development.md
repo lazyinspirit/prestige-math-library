@@ -2,7 +2,7 @@
 id: thm-emg-sourcefree-smooth-maximal-development
 kind: theorem
 title: "Source-free smooth maximal globally hyperbolic Einstein–Maxwell development"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

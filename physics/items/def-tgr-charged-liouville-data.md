@@ -2,7 +2,7 @@
 id: def-tgr-charged-liouville-data
 kind: definition
 title: Charged particle and Liouville data on a stationary Lorentzian domain
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

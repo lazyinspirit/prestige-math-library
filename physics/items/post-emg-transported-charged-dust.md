@@ -2,7 +2,7 @@
 id: post-emg-transported-charged-dust
 kind: postulate
 title: "Selected transported charged-dust Einstein–Maxwell model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

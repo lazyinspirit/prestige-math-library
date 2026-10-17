@@ -1,7 +1,7 @@
 ---
 page: qsm-finite-range-spin-dynamics
 title: Uniformly bounded finite-range quantum spin interaction
-status: draft
+status: published
 library: physics
 items:
   - def-qsm-bounded-finite-range-interaction

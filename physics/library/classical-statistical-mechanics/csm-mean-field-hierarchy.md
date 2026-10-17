@@ -1,7 +1,7 @@
 ---
 page: csm-mean-field-hierarchy
 title: "Smooth periodic finite-N and scaled mean-field phase data"
-status: draft
+status: published
 library: physics
 requires:
   - cm-math-dynamics

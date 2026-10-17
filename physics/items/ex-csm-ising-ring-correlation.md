@@ -2,7 +2,7 @@
 id: ex-csm-ising-ring-correlation
 kind: example
 title: "Exact finite-ring correlations and limiting correlation length at a chosen coupling"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

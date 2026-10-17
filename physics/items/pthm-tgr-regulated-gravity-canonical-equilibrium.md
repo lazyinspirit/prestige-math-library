@@ -2,7 +2,7 @@
 id: pthm-tgr-regulated-gravity-canonical-equilibrium
 kind: physics-theorem
 title: "Constructed finite canonical gravitational equilibrium"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

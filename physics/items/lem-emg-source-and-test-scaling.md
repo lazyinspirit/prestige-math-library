@@ -2,7 +2,7 @@
 id: lem-emg-source-and-test-scaling
 kind: lemma
 title: Smooth source/dust scaling and test-backreaction obstructions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

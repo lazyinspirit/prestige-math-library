@@ -2,7 +2,7 @@
 id: post-qsm-band-and-grand-preparation
 kind: postulate
 title: Energy-band and grand quantum preparations
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

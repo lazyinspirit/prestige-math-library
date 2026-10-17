@@ -2,7 +2,7 @@
 id: def-csm-continuum-dlr-kernels
 kind: definition
 title: Finite-range continuum Gibbs kernels and DLR notion
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

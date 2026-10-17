@@ -1,7 +1,7 @@
 ---
 page: csm-stochastic-response
 title: "Finite reversible stochastic rate model and thermal coupling"
-status: draft
+status: published
 requires:
   - csm-collision-transport
   - csm-mean-field-hierarchy

@@ -2,7 +2,7 @@
 id: pthm-emg-xs-rn-model
 kind: physics-theorem
 title: Dyonic RN as adopted Einstein–Maxwell model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

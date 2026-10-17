@@ -2,7 +2,7 @@
 id: lem-csm-lattice-product-and-measure-compactness
 kind: lemma
 title: "Finite-alphabet product and probability compactness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

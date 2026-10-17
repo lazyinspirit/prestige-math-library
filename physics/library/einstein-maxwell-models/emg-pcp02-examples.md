@@ -1,7 +1,7 @@
 ---
 page: emg-pcp02-examples
 title: "Adopted strict charged barotropic fluid model — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: ex-csm-chain-analytic-interacting-model
 kind: example
 title: "Analytic interacting chain and its Gibbs state"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

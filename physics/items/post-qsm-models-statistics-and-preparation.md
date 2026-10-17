@@ -2,7 +2,7 @@
 id: post-qsm-models-statistics-and-preparation
 kind: postulate
 title: "Quantum statistics and model equilibrium preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

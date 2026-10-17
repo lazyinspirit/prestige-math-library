@@ -2,7 +2,7 @@
 id: cex-qsm-local-local-global-distinction
 kind: counterexample
 title: Fixed marginals do not determine global trace-norm convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

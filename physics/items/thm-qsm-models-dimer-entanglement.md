@@ -2,7 +2,7 @@
 id: thm-qsm-models-dimer-entanglement
 kind: theorem
 title: "Finite Pauli dimer spectrum and exact separability threshold"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

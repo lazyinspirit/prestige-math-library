@@ -2,7 +2,7 @@
 id: ex-tgr-static-cosine-heat-relaxation
 kind: example
 title: Static cosine relaxation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

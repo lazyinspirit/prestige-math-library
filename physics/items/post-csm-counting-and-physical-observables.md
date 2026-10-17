@@ -2,7 +2,7 @@
 id: post-csm-counting-and-physical-observables
 kind: postulate
 title: "Classical particle counting and physical observables"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

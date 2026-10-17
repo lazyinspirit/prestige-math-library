@@ -2,7 +2,7 @@
 id: lem-csm-kl-chain-disjoint
 kind: lemma
 title: Conditional entropy chain and disjoint-block bounds
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

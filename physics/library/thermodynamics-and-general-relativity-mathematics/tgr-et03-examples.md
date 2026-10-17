@@ -1,7 +1,7 @@
 ---
 page: tgr-et03-examples
 title: Constructed independent cell Gibbs states — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

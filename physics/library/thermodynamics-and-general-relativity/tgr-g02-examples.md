@@ -1,7 +1,7 @@
 ---
 page: tgr-g02-examples
 title: "Static isotropic Einstein-fluid and supplied EOS model — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-g02

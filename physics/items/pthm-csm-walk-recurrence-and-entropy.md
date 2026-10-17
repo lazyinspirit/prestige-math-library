@@ -2,7 +2,7 @@
 id: pthm-csm-walk-recurrence-and-entropy
 kind: physics-theorem
 title: "Diffusion-scale walk and recurrence/coarse-entropy counterexamples"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

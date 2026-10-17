@@ -2,7 +2,7 @@
 id: ex-qsm-finite-range-nearest-neighbor-ising
 kind: example
 title: Nearest-neighbor Ising interaction satisfies the finite-range bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

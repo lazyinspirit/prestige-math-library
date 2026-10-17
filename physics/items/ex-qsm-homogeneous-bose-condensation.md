@@ -2,7 +2,7 @@
 id: ex-qsm-homogeneous-bose-condensation
 kind: example
 title: "Grand condensate variance remains macroscopic"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

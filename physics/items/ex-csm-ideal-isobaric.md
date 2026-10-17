@@ -2,7 +2,7 @@
 id: ex-csm-ideal-isobaric
 kind: example
 title: "Exact finite ideal-gas volume fluctuations"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-csm-regular-shell-coarea
 kind: theorem
 title: "Coarea and invariant probability on compact regular phase shells"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

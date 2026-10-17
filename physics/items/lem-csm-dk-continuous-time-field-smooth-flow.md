@@ -2,7 +2,7 @@
 id: lem-csm-dk-continuous-time-field-smooth-flow
 kind: lemma
 title: Smooth state flow for continuous-time smooth-state force fields
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

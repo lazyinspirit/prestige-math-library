@@ -2,7 +2,7 @@
 id: def-tgr-gravitating-phase-reference
 kind: definition
 title: "Finite gravitational phase and entropy reference"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

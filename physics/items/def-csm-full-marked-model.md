@@ -2,7 +2,7 @@
 id: def-csm-full-marked-model
 kind: definition
 title: Interacting marked phase-space and reference measures
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

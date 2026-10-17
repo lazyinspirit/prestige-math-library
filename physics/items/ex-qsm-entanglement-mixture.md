@@ -2,7 +2,7 @@
 id: ex-qsm-entanglement-mixture
 kind: example
 title: Pure entanglement and correlated mixtures
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

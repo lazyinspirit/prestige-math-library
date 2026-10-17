@@ -2,7 +2,7 @@
 id: ex-tgr-constant-density-positive-branch
 kind: example
 title: "Positive regular constant-density branch"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

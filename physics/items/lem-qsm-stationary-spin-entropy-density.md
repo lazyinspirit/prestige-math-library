@@ -2,7 +2,7 @@
 id: lem-qsm-stationary-spin-entropy-density
 kind: lemma
 title: Stationary quantum spin entropy and energy densities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

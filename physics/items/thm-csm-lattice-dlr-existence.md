@@ -2,7 +2,7 @@
 id: thm-csm-lattice-dlr-existence
 kind: theorem
 title: "Finite-range lattice DLR existence and closed convex state set"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

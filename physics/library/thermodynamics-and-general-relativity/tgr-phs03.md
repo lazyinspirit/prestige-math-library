@@ -1,7 +1,7 @@
 ---
 page: tgr-phs03
 title: Restricted reversible horizon entropy bridge
-status: draft
+status: published
 library: physics
 requires:
   - tgr-phs01

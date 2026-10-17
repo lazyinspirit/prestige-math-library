@@ -2,7 +2,7 @@
 id: cex-qsm-local-empty-exact-band
 kind: counterexample
 title: A centered exact band can be empty
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

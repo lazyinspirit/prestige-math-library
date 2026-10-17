@@ -1,7 +1,7 @@
 ---
 page: tgr-g01-examples
 title: "Finite regulated Newtonian gravitational canonical preparation — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-g01

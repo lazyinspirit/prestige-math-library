@@ -2,7 +2,7 @@
 id: thm-qsm-local-independent-shell-equivalence
 kind: theorem
 title: Fixed-subsystem equivalence for independent finite energy shells
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

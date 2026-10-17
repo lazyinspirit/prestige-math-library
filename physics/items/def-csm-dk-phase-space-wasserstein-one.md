@@ -2,7 +2,7 @@
 id: def-csm-dk-phase-space-wasserstein-one
 kind: definition
 title: Wasserstein-1 coupling cost on dimensionless phase space
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

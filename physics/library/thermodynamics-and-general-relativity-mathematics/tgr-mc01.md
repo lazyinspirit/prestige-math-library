@@ -1,7 +1,7 @@
 ---
 page: tgr-mc01
 title: "Rest fluid state, frame and geometric current definitions"
-status: draft
+status: published
 library: mathematics
 requires:
   - gr-connections-and-free-fall

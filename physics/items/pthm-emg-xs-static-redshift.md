@@ -2,7 +2,7 @@
 id: pthm-emg-xs-static-redshift
 kind: physics-theorem
 title: Stationary RN observer frequency ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

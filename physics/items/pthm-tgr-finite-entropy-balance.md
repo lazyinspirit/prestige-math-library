@@ -2,7 +2,7 @@
 id: pthm-tgr-finite-entropy-balance
 kind: physics-theorem
 title: "Conditional finite entropy balance with explicit boundary flux"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

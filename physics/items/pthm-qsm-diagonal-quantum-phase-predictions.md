@@ -2,7 +2,7 @@
 id: pthm-qsm-diagonal-quantum-phase-predictions
 kind: physics-theorem
 title: Conditional quantum Ising uniqueness and phase predictions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

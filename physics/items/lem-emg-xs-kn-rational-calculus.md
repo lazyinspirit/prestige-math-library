@@ -2,7 +2,7 @@
 id: lem-emg-xs-kn-rational-calculus
 kind: lemma
 title: Exact rational Kerr-Newman component derivation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

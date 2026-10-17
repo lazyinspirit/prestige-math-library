@@ -2,7 +2,7 @@
 id: lem-qsm-dt-trace-gibbs-correlation-series
 kind: lemma
 title: Absolute convergence of trace-Gibbs bounded correlation series
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: post-tgr-local-material-thermodynamics
 kind: postulate
 title: "Restricted local equilibrium parcel with adopted material state function"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

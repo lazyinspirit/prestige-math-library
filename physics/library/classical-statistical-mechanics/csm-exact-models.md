@@ -1,7 +1,7 @@
 ---
 page: csm-exact-models
 title: "Gaussian and gamma product tools"
-status: draft
+status: published
 library: physics
 requires:
   - csm-phase-ensembles

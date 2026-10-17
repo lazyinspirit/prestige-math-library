@@ -2,7 +2,7 @@
 id: post-csm-microcanonical-preparation
 kind: postulate
 title: "Regular full-shell or finite-band preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

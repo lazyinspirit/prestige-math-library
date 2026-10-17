@@ -2,7 +2,7 @@
 id: ex-csm-ideal-canonical-grand
 kind: example
 title: "Exact ideal-gas canonical and grand laws"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: post-tgr-static-spherical-fluid-preparation
 kind: postulate
 title: "Static spherical Einstein-fluid model with a supplied equation of state"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

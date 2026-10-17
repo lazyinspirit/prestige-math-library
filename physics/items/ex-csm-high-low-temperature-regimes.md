@@ -2,7 +2,7 @@
 id: ex-csm-high-low-temperature-regimes
 kind: example
 title: "Sufficient Ising uniqueness and coexistence regimes"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs03
 title: Constructed timelike smear and massless accelerated spectrum
-status: draft
+status: published
 requires:
   - qft-mf02
   - tempered-distributions-and-the-fourier-transform

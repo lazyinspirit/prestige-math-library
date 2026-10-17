@@ -2,7 +2,7 @@
 id: cex-emg-xs-ergo-is-not-horizon
 kind: counterexample
 title: Equatorial rotating ergosurface differs from horizon
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

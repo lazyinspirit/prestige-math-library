@@ -2,7 +2,7 @@
 id: lem-tgr-killing-energy-normalization
 kind: lemma
 title: "Finite Killing energy current and reference normalization"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-tgr-coordinate-boxes-are-compact-jordan
 kind: lemma
 title: "Finite coordinate boxes and their faces are compact Jordan sets"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

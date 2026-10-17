@@ -2,7 +2,7 @@
 id: pthm-emg-local-charged-fluid-model
 kind: physics-theorem
 title: "Local evolution of the adopted strict charged-fluid model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

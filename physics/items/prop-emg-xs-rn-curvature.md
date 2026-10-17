@@ -2,7 +2,7 @@
 id: prop-emg-xs-rn-curvature
 kind: proposition
 title: RN curvature invariants and the C2 extension obstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

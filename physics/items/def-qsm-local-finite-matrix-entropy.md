@@ -2,7 +2,7 @@
 id: def-qsm-local-finite-matrix-entropy
 kind: definition
 title: Dimensionless entropy of a finite density matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: lem-tgr-null-screen-quotient-positive
 kind: lemma
 title: The null screen quotient is a smooth positive two-plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

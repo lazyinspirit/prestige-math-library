@@ -2,7 +2,7 @@
 id: def-tgr-stationary-thermal-carriers
 kind: definition
 title: Stationary thermal geometric data
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

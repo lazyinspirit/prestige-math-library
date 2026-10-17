@@ -2,7 +2,7 @@
 id: def-qsm-local-coercive-regulated-model
 kind: definition
 title: Finite coercive regulated polynomial model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

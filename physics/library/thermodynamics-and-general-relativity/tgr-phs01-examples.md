@@ -1,7 +1,7 @@
 ---
 page: tgr-phs01-examples
 title: Restricted smooth horizon Einstein/NEC adoption — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-phs01

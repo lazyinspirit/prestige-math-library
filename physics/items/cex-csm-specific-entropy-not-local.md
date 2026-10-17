@@ -3,7 +3,7 @@
 id: cex-csm-specific-entropy-not-local
 kind: counterexample
 title: Small entropy density without homogeneous local convergence
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

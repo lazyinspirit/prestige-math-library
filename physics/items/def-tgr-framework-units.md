@@ -2,7 +2,7 @@
 id: def-tgr-framework-units
 kind: definition
 title: "Thermodynamics-GR fields, currents, reference normalization and units"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

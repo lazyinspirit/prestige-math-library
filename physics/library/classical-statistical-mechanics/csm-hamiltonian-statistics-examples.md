@@ -1,7 +1,7 @@
 ---
 page: csm-hamiltonian-statistics-examples
 title: "Hamiltonian phase, complete-domain flow and reference measure — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-hamiltonian-statistics

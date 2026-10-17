@@ -2,7 +2,7 @@
 id: pthm-emg-potentials-and-topological-limits
 kind: physics-theorem
 title: "Local potentials and explicit global obstruction in the model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

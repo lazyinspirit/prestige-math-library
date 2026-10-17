@@ -1,7 +1,7 @@
 ---
 page: emg-g03
 title: "Observer Maxwell equations and conserved source charge"
-status: draft
+status: published
 items:
   - pthm-emg-observer-maxwell-current
   - pthm-emg-gauss-global-constraints

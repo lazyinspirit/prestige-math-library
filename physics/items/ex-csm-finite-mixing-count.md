@@ -2,7 +2,7 @@
 id: ex-csm-finite-mixing-count
 kind: example
 title: "Finite-size mixing and distinguishability conventions"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

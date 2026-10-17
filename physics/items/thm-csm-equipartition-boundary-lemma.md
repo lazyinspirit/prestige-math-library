@@ -2,7 +2,7 @@
 id: thm-csm-equipartition-boundary-lemma
 kind: theorem
 title: "Equipartition identity with explicit integrated boundary terms"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

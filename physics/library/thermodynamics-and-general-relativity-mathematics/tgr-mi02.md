@@ -1,7 +1,7 @@
 ---
 page: tgr-mi02
 title: Classical first-law product leaves entropy-temperature calibration free
-status: draft
+status: published
 library: mathematics
 items:
   - lem-tgr-first-law-calibration-freedom

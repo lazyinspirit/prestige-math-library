@@ -2,7 +2,7 @@
 id: pthm-tgr-static-constant-density-star
 kind: physics-theorem
 title: "Verified constant-density static star and vacuum exterior"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

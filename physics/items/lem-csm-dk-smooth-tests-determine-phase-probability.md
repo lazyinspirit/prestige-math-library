@@ -2,7 +2,7 @@
 id: lem-csm-dk-smooth-tests-determine-phase-probability
 kind: lemma
 title: Smooth compact tests determine phase-space probabilities
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

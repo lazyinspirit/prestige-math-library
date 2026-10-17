@@ -2,7 +2,7 @@
 id: def-tgr-local-fluid-state
 kind: definition
 title: "Rest fluid state, frame and geometric current definitions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

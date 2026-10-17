@@ -2,7 +2,7 @@
 id: lem-emg-conformastatic-chart-is-lorentzian
 kind: lemma
 title: "The positive-scalar conformastatic chart tensor is Lorentzian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

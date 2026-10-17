@@ -2,7 +2,7 @@
 id: post-tgr-cattaneo-thermal-model
 kind: postulate
 title: "Supported-rest effective Cattaneo thermal model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

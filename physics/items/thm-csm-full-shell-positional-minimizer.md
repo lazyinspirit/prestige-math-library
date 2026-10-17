@@ -3,7 +3,7 @@
 id: thm-csm-full-shell-positional-minimizer
 kind: theorem
 title: Full phase shell marginal satisfies the positional variational bound
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

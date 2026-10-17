@@ -2,7 +2,7 @@
 id: thm-qsm-dt-finite-kubo
 kind: theorem
 title: Finite-time Kubo formula with norm remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

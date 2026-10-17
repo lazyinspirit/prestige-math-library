@@ -1,7 +1,7 @@
 ---
 page: emg-ms03-examples
 title: Positive harmonic conformastatic electrovac data — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms03

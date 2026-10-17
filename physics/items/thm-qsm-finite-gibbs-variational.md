@@ -2,7 +2,7 @@
 id: thm-qsm-finite-gibbs-variational
 kind: theorem
 title: Finite Gibbs free-energy and entropy optimization
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

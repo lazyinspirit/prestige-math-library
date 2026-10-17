@@ -2,7 +2,7 @@
 id: thm-qsm-trace-gibbs-variational
 kind: theorem
 title: Self-adjoint trace-Gibbs normalization and form-energy optimization
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -1,7 +1,7 @@
 ---
 page: emg-cp01-examples
 title: Electrovacuum tensor Cauchy system — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

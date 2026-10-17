@@ -2,7 +2,7 @@
 id: lem-qsm-pauli-separable-correlation-bound
 kind: lemma
 title: "Pauli exchange expectation bound for separable states"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

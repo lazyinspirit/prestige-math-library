@@ -2,7 +2,7 @@
 id: ex-emgmath-compact-neutrality
 kind: example
 title: "Compact boundaryless Gauss neutrality"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

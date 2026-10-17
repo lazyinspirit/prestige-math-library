@@ -2,7 +2,7 @@
 id: cex-csm-dk-recurrent-hamiltonian-nonergodicity
 kind: counterexample
 title: Two oscillators are recurrent but nonergodic on their total shell
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

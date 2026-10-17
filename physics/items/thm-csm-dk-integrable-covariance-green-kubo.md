@@ -2,7 +2,7 @@
 id: thm-csm-dk-integrable-covariance-green-kubo
 kind: theorem
 title: Green–Kubo covariance limit under absolute integrability
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

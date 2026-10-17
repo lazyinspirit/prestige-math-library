@@ -2,7 +2,7 @@
 id: pthm-emg-total-matter-field-exchange
 kind: physics-theorem
 title: "Electromagnetic and matter stress exchange"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

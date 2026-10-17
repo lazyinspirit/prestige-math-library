@@ -2,7 +2,7 @@
 id: pthm-emg-charged-dust-balance
 kind: physics-theorem
 title: "Charged-dust current and stress balance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

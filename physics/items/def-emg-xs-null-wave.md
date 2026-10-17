@@ -2,7 +2,7 @@
 id: def-emg-xs-null-wave
 kind: definition
 title: Smooth null electrovac wave candidate data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

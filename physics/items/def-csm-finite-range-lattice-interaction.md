@@ -2,7 +2,7 @@
 id: def-csm-finite-range-lattice-interaction
 kind: definition
 title: "Finite-range lattice interaction and conditional energy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

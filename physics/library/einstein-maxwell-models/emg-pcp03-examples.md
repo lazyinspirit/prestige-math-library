@@ -1,7 +1,7 @@
 ---
 page: emg-pcp03-examples
 title: "Adopted trivial-potential classical charged scalar model — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

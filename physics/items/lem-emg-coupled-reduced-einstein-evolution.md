@@ -2,7 +2,7 @@
 id: lem-emg-coupled-reduced-einstein-evolution
 kind: lemma
 title: "Coupled reduced Einstein–Maxwell local evolution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

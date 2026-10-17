@@ -1,7 +1,7 @@
 ---
 page: emg-g02
 title: "Selected classical field topology and optional circle normalization"
-status: draft
+status: published
 items:
   - def-emg-topological-sector
   - pthm-emg-potentials-and-topological-limits

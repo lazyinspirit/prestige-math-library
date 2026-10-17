@@ -2,7 +2,7 @@
 id: thm-tgr-constant-density-star-verified
 kind: theorem
 title: "Exact regular constant-density solution with verified matching"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

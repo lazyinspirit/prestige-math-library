@@ -2,7 +2,7 @@
 id: ex-emgmath-ml-b08
 kind: example
 title: Constant magnetic slow-orbit error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

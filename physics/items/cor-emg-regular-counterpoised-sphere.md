@@ -2,7 +2,7 @@
 id: cor-emg-regular-counterpoised-sphere
 kind: corollary
 title: "Globally regular sphere, proper integrals and dilute bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

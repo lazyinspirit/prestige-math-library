@@ -2,7 +2,7 @@
 id: def-tgr-spherical-static-state-domain
 kind: definition
 title: "Smooth static spherical geometry and state domain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

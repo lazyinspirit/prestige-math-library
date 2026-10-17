@@ -2,7 +2,7 @@
 id: lem-emg-metric-axioms-imply-nonnegativity
 kind: lemma
 title: Metric nonnegativity from the three axioms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

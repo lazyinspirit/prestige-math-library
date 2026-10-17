@@ -2,7 +2,7 @@
 id: post-csm-dk-mean-field-particle-and-iid-model
 kind: postulate
 title: Selected mean-field particle model and iid preparation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 2

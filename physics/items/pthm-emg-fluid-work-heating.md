@@ -2,7 +2,7 @@
 id: pthm-emg-fluid-work-heating
 kind: physics-theorem
 title: "Convective/Ohmic comoving mechanical work prediction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

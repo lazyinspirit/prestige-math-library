@@ -1,7 +1,7 @@
 ---
 page: qsm-quasilocal-states-examples
 title: Local spin matrix algebras and isometric inclusions — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

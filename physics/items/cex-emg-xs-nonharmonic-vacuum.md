@@ -2,7 +2,7 @@
 id: cex-emg-xs-nonharmonic-vacuum
 kind: counterexample
 title: Nonharmonic conformastatic data fail the electrovac equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

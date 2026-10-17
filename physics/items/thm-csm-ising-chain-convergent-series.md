@@ -2,7 +2,7 @@
 id: thm-csm-ising-chain-convergent-series
 kind: theorem
 title: "Exact convergent Ising-chain high-temperature series"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

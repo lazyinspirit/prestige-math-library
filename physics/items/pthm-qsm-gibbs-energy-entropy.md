@@ -2,7 +2,7 @@
 id: pthm-qsm-gibbs-energy-entropy
 kind: physics-theorem
 title: Gibbs energy, entropy and potential identities
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

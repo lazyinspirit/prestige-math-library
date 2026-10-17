@@ -2,7 +2,7 @@
 id: lem-csm-maximal-coupling-and-heat-bath
 kind: lemma
 title: "Finite maximal coupling and heat-bath stationary law"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

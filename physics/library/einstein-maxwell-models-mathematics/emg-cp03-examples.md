@@ -1,7 +1,7 @@
 ---
 page: emg-cp03-examples
 title: Strict charged barotropic tensor system — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-cp03

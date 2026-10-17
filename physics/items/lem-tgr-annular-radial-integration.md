@@ -2,7 +2,7 @@
 id: lem-tgr-annular-radial-integration
 kind: lemma
 title: "Radial integration over a bounded Euclidean shell"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

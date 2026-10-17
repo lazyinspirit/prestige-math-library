@@ -2,7 +2,7 @@
 id: lem-emg-local-potential-construction
 kind: lemma
 title: "Radial primitives for closed one- and two-forms"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 physical_scope: null

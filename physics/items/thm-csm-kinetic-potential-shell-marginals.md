@@ -2,7 +2,7 @@
 id: thm-csm-kinetic-potential-shell-marginals
 kind: theorem
 title: "Kinetic-plus-potential shell marginals and moments"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -1,7 +1,7 @@
 ---
 page: tgr-phs04
 title: Ideal photon reservoir and active-area mass balance
-status: draft
+status: published
 library: physics
 requires:
   - tgr-mhs04

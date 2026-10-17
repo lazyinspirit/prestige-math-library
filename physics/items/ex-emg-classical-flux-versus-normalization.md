@@ -2,7 +2,7 @@
 id: ex-emg-classical-flux-versus-normalization
 kind: example
 title: "Classical real flux versus selected circle sector"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

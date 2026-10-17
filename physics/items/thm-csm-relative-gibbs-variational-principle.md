@@ -2,7 +2,7 @@
 id: thm-csm-relative-gibbs-variational-principle
 kind: theorem
 title: "Reference-relative entropy and Gibbs variational inequality"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

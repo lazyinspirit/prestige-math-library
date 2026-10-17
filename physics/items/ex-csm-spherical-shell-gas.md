@@ -2,7 +2,7 @@
 id: ex-csm-spherical-shell-gas
 kind: example
 title: "Finite shell support versus canonical Gaussian tails"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-csm-dk-global-cutoff-collision-evolution
 kind: theorem
 title: "Global finite-energy cutoff collision evolution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

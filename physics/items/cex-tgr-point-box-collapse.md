@@ -2,7 +2,7 @@
 id: cex-tgr-point-box-collapse
 kind: counterexample
 title: "Finite box fails to cure point gravitational collapse"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

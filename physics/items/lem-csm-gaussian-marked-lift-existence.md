@@ -2,7 +2,7 @@
 id: lem-csm-gaussian-marked-lift-existence
 kind: lemma
 title: Existence of the independent Gaussian-marked positional lift
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

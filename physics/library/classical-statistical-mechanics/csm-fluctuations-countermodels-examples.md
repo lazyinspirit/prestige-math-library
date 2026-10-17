@@ -1,7 +1,7 @@
 ---
 page: csm-fluctuations-countermodels-examples
 title: "Finite Bernoulli fluctuations and matching exponential rates — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-fluctuations-countermodels

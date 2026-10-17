@@ -2,7 +2,7 @@
 id: thm-csm-lattice-dlr-variational-pressure
 kind: theorem
 title: "DLR states attain the bounded lattice pressure variational principle"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

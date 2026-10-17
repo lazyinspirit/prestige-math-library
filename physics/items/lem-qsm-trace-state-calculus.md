@@ -2,7 +2,7 @@
 id: lem-qsm-trace-state-calculus
 kind: lemma
 title: Trace-state cyclicity and spectral probability calculus
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

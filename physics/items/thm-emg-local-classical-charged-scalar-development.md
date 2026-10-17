@@ -2,7 +2,7 @@
 id: thm-emg-local-classical-charged-scalar-development
 kind: theorem
 title: "Local classical Einstein–Maxwell–charged-scalar development"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

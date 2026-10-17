@@ -1,7 +1,7 @@
 ---
 page: emg-mg04
 title: Gauge/diffeomorphism matter identity and field exchange
-status: draft
+status: published
 library: mathematics
 requires:
 - emg-mg03

@@ -2,7 +2,7 @@
 id: pthm-qsm-local-regulated-interacting-gibbs
 kind: physics-theorem
 title: Trace-Gibbs predictions for coercive finite regulators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

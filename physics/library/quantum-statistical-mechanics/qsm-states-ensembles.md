@@ -1,7 +1,7 @@
 ---
 page: qsm-states-ensembles
 title: Normal density states and spectral moments
-status: draft
+status: published
 library: physics
 items:
 - def-qsm-density-trace-state

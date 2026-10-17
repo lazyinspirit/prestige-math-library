@@ -2,7 +2,7 @@
 id: def-tgr-regulated-kepler-shell-law
 kind: definition
 title: "Regulated relative Kepler phase volume and shell law"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

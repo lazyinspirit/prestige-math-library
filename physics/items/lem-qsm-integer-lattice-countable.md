@@ -2,7 +2,7 @@
 id: lem-qsm-integer-lattice-countable
 kind: lemma
 title: Countability of every finite-dimensional integer lattice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

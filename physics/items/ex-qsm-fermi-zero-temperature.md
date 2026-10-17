@@ -2,7 +2,7 @@
 id: ex-qsm-fermi-zero-temperature
 kind: example
 title: "Fermi sea energy and ideal degeneracy pressure"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

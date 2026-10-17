@@ -2,7 +2,7 @@
 id: thm-emg-charged-symmetry-current
 kind: theorem
 title: Killing exchange current and gauge-compensated charged first integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

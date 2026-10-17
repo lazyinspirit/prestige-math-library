@@ -2,7 +2,7 @@
 id: lem-tgr-mass-shell-measure-tetrad-invariance
 kind: lemma
 title: Tetrad invariance of the future massive mass-shell measure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: thm-qsm-finite-gibbs-circuit-marginal-error
 kind: theorem
 title: Finite Gibbs circuit marginal and trace-distance error
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

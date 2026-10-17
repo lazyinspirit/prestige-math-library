@@ -2,7 +2,7 @@
 id: pthm-qsm-local-qualified-shell-measurements
 kind: physics-theorem
 title: Fixed-block measurement predictions under independent shell preparation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

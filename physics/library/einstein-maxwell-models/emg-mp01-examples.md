@@ -1,7 +1,7 @@
 ---
 page: emg-mp01-examples
 title: "Smooth matter quantities, current and observer observables — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

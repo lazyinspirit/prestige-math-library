@@ -2,7 +2,7 @@
 id: pthm-tgr-perfect-entropy-circulation
 kind: physics-theorem
 title: "Perfect entropy advection and restricted circulation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

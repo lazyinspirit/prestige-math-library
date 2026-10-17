@@ -2,7 +2,7 @@
 id: def-qsm-diagonal-ising-interaction
 kind: definition
 title: Diagonal quantum Ising interaction and classical conditional energies
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

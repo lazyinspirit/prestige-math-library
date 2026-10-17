@@ -2,7 +2,7 @@
 id: cex-emg-uniform-one-sign-torus-charge
 kind: counterexample
 title: "A uniform one-sign charged fluid cannot satisfy Gauss on a compact torus"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

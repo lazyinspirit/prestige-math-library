@@ -2,7 +2,7 @@
 id: lem-tgr-eckart-entropy-specialization
 kind: lemma
 title: Heat and viscous entropy specialization
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

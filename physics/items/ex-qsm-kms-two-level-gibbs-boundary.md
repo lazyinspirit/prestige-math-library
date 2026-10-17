@@ -2,7 +2,7 @@
 id: ex-qsm-kms-two-level-gibbs-boundary
 kind: example
 title: Two-level Gibbs state has the physical-time KMS boundary factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

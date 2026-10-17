@@ -2,7 +2,7 @@
 id: lem-tgr-regulated-kepler-shell-law-normalization
 kind: lemma
 title: "Finite regulated Kepler shell measure is normalized"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-qsm-dt-banach-volterra-dyson
 kind: lemma
 title: Banach-space Volterra and Dyson series with a norm remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

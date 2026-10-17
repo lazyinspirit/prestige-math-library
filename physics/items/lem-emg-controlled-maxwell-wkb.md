@@ -2,7 +2,7 @@
 id: lem-emg-controlled-maxwell-wkb
 kind: lemma
 title: Finite WKB Maxwell residual, null rays and polarization quotient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

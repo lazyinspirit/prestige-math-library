@@ -2,7 +2,7 @@
 id: cex-qsm-invariant-not-kms
 kind: counterexample
 title: Stationarity alone does not give quantum thermal equilibrium
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

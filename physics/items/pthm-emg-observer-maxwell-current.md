@@ -2,7 +2,7 @@
 id: pthm-emg-observer-maxwell-current
 kind: physics-theorem
 title: "Observer Maxwell equations and conserved source charge"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 2

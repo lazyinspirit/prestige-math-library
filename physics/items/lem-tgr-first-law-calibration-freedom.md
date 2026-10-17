@@ -2,7 +2,7 @@
 id: lem-tgr-first-law-calibration-freedom
 kind: lemma
 title: Classical first-law product leaves entropy-temperature calibration free
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

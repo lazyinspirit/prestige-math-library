@@ -2,7 +2,7 @@
 id: thm-emg-local-high-sobolev-electrovacuum
 kind: theorem
 title: "Local high-Sobolev and smooth electrovacuum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

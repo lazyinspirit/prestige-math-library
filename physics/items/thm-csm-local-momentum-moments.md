@@ -3,7 +3,7 @@
 id: thm-csm-local-momentum-moments
 kind: theorem
 title: Local kinetic energy and first and second momentum expectations
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

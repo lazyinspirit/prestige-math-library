@@ -1,7 +1,7 @@
 ---
 page: emg-g03-examples
 title: "Observer Maxwell equations and conserved source charge — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-emg-electric-stress

@@ -2,7 +2,7 @@
 id: thm-tgr-juttner-partition-and-moments
 kind: theorem
 title: Jüttner partition, probability, and perfect-fluid moments
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

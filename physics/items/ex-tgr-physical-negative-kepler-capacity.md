@@ -2,7 +2,7 @@
 id: ex-tgr-physical-negative-kepler-capacity
 kind: example
 title: "Confined negative-capacity Kepler preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

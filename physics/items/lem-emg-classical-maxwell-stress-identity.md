@@ -2,7 +2,7 @@
 id: lem-emg-classical-maxwell-stress-identity
 kind: lemma
 title: "Maxwell stress divergence for classical fields"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

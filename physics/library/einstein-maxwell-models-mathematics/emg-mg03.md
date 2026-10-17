@@ -1,7 +1,7 @@
 ---
 page: emg-mg03
 title: Sourced Maxwell sign and current conservation
-status: draft
+status: published
 library: mathematics
 requires:
 - emg-mg02

@@ -1,7 +1,7 @@
 ---
 page: emg-cp04
 title: Trivial-potential classical charged scalar system
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-cp02

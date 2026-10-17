@@ -2,7 +2,7 @@
 id: post-tgr-linearized-material-model
 kind: postulate
 title: "Specified small-perturbation material dynamics"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

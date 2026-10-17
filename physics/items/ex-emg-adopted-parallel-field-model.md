@@ -2,7 +2,7 @@
 id: ex-emg-adopted-parallel-field-model
 kind: example
 title: "Adopted parallel-field initial state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

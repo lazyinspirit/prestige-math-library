@@ -1,7 +1,7 @@
 ---
 page: emg-cp02
 title: Positive symmetric Maxwell field-strength reduction
-status: draft
+status: published
 library: mathematics
 items:
   - lem-emg-classical-maxwell-stress-identity

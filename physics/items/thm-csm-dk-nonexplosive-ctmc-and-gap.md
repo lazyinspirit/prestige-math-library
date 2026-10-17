@@ -2,7 +2,7 @@
 id: thm-csm-dk-nonexplosive-ctmc-and-gap
 kind: theorem
 title: "Nonexplosive finite continuous-time chain and reversible spectral gap"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: rem-emg-classical-scalar-bundle-limit
 kind: remark
 title: "Classical scalar sector and bundle limitation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

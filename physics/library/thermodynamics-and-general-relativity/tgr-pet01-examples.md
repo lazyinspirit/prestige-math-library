@@ -1,7 +1,7 @@
 ---
 page: tgr-pet01-examples
 title: Selected stationary thermal equilibrium — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

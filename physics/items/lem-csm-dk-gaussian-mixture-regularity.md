@@ -2,7 +2,7 @@
 id: lem-csm-dk-gaussian-mixture-regularity
 kind: lemma
 title: "Regularity and invariance of the cutoff Gaussian-mixture class"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

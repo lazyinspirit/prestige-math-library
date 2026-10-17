@@ -2,7 +2,7 @@
 id: def-qsm-vacuum-spin-representation
 kind: definition
 title: Finite-excitation vacuum spin representation and normality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

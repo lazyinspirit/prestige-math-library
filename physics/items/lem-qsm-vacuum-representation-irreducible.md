@@ -2,7 +2,7 @@
 id: lem-qsm-vacuum-representation-irreducible
 kind: lemma
 title: Faithful irreducible finite-excitation representation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

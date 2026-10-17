@@ -1,7 +1,7 @@
 ---
 page: tgr-phs02
 title: Reduced exponential current and defined spectral detector adoption
-status: draft
+status: published
 library: physics
 companion: tgr-phs02-examples
 requires:

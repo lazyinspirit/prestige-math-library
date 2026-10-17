@@ -2,7 +2,7 @@
 id: def-emg-classical-charged-scalar-finite-regularity-system
 kind: definition
 title: "Classical finite-regularity charged-scalar system and relative action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

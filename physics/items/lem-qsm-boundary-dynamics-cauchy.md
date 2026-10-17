@@ -2,7 +2,7 @@
 id: lem-qsm-boundary-dynamics-cauchy
 kind: lemma
 title: Boundary Duhamel estimate for thermodynamic spin dynamics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

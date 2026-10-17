@@ -1,7 +1,7 @@
 ---
 page: tgr-i01-examples
 title: "Thermodynamics-GR fields, currents, reference normalization and units — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-i01

@@ -2,7 +2,7 @@
 id: ex-tgr-schwarzschild-static-bath
 kind: example
 title: Schwarzschild supported thermal bath
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

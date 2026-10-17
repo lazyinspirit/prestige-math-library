@@ -2,7 +2,7 @@
 id: post-tgr-smooth-horizon-energy-condition
 kind: postulate
 title: Restricted smooth horizon Einstein/NEC adoption
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

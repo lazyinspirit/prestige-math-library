@@ -2,7 +2,7 @@
 id: thm-csm-dk-finite-rate-fluctuation-response
 kind: theorem
 title: "Finite-rate fluctuation response and Green–Kubo inverse"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

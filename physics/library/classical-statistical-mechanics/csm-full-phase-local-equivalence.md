@@ -1,7 +1,7 @@
 ---
 page: csm-full-phase-local-equivalence
 title: "Conditional entropy chain and disjoint-block bounds"
-status: draft
+status: published
 library: physics
 requires:
   - csm-gibbs-lattice

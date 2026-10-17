@@ -2,7 +2,7 @@
 id: texp-tgr-classical-schwarzschild-work
 kind: thought-experiment
 title: Classical Schwarzschild SI family work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

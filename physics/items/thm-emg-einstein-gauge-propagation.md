@@ -2,7 +2,7 @@
 id: thm-emg-einstein-gauge-propagation
 kind: theorem
 title: "Einstein harmonic gauge propagation with Maxwell on shell"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

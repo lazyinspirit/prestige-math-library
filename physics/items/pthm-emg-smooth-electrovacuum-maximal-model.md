@@ -2,7 +2,7 @@
 id: pthm-emg-smooth-electrovacuum-maximal-model
 kind: physics-theorem
 title: "Maximal smooth Cauchy development of adopted electrovacuum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

@@ -2,7 +2,7 @@
 id: lem-emg-charged-scalar-subsidiary-chain
 kind: lemma
 title: "Charged-scalar compatibility, Maxwell constraints and Einstein gauge propagation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

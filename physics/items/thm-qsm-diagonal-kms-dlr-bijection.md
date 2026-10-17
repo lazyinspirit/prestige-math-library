@@ -2,7 +2,7 @@
 id: thm-qsm-diagonal-kms-dlr-bijection
 kind: theorem
 title: Full-algebra quantum Ising KMS–DLR correspondence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

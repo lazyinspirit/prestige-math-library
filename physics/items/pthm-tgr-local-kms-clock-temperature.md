@@ -2,7 +2,7 @@
 id: pthm-tgr-local-kms-clock-temperature
 kind: physics-theorem
 title: Conditional local KMS clock temperature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

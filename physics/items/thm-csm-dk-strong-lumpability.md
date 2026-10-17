@@ -2,7 +2,7 @@
 id: thm-csm-dk-strong-lumpability
 kind: theorem
 title: "Exact all-preparations coarse Markov criterion"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-tgr-smooth-null-area
 kind: theorem
 title: Null focusing and a restricted smooth future area theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

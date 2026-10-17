@@ -2,7 +2,7 @@
 id: lem-csm-finite-gibbs-variational-identity
 kind: lemma
 title: "Finite Gibbs relative entropy and free-energy minimum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

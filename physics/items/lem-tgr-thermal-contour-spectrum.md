@@ -2,7 +2,7 @@
 id: lem-tgr-thermal-contour-spectrum
 kind: lemma
 title: Single-pole thermal contour and exact detailed balance
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

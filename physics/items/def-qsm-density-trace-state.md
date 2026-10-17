@@ -2,7 +2,7 @@
 id: def-qsm-density-trace-state
 kind: definition
 title: Trace-class normal density states
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

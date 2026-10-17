@@ -2,7 +2,7 @@
 id: def-csm-finite-variance
 kind: definition
 title: "Variance of a finite real random variable"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

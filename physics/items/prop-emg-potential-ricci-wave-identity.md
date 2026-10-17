@@ -2,7 +2,7 @@
 id: prop-emg-potential-ricci-wave-identity
 kind: proposition
 title: Lorenz potential wave contains Ricci coupling
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

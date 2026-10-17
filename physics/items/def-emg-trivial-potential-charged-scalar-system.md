@@ -2,7 +2,7 @@
 id: def-emg-trivial-potential-charged-scalar-system
 kind: definition
 title: "Trivial-potential classical charged-scalar Einstein–Maxwell system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

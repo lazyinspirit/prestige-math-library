@@ -2,7 +2,7 @@
 id: cex-tgr-ingoing-null-cone-area
 kind: counterexample
 title: Flat focusing cone without future smooth completeness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

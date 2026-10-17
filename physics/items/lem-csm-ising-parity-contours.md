@@ -2,7 +2,7 @@
 id: lem-csm-ising-parity-contours
 kind: lemma
 title: "Square-lattice even graphs and parity contour separation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

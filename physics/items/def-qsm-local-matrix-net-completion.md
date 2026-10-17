@@ -2,7 +2,7 @@
 id: def-qsm-local-matrix-net-completion
 kind: definition
 title: Quasilocal completion of finite matrix registers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

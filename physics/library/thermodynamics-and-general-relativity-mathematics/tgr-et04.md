@@ -1,7 +1,7 @@
 ---
 page: tgr-et04
 title: "Heat and viscous entropy specialization"
-status: draft
+status: published
 library: mathematics
 items:
   - lem-tgr-spatial-shear-properties

@@ -2,7 +2,7 @@
 id: lem-qsm-dt-lorentzian-distribution-limits
 kind: lemma
 title: Lorentzian kernels converge to delta and principal-value distributions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

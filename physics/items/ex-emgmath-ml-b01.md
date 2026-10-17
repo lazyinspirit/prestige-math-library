@@ -2,7 +2,7 @@
 id: ex-emgmath-ml-b01
 kind: example
 title: Advected nonconstant charge ratio without Maxwell closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: post-csm-fullphase-interacting-preparations
 kind: postulate
 title: Classical full-phase interacting ensemble preparations
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

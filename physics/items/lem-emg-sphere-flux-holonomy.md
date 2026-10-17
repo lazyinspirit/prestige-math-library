@@ -2,7 +2,7 @@
 id: lem-emg-sphere-flux-holonomy
 kind: lemma
 title: "Sphere winding, nonexact curvature and flat holonomy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 physical_scope: null

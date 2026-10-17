@@ -2,7 +2,7 @@
 id: def-tgr-entropy-only-radiation-state
 kind: definition
 title: "Separate entropy-only radiation state maps"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

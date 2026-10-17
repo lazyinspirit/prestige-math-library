@@ -2,7 +2,7 @@
 id: texp-tgr-insulated-entropy-region
 kind: thought-experiment
 title: "Entropy-impermeable finite-slab prediction"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

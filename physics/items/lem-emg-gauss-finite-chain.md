@@ -2,7 +2,7 @@
 id: lem-emg-gauss-finite-chain
 kind: lemma
 title: "Gauss charge and finite-chain flux balance"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

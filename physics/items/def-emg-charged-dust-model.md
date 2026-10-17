@@ -2,7 +2,7 @@
 id: def-emg-charged-dust-model
 kind: definition
 title: "Restricted smooth charged-dust model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

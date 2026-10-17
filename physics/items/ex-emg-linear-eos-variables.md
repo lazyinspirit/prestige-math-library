@@ -2,7 +2,7 @@
 id: ex-emg-linear-eos-variables
 kind: example
 title: "Linear barotropic equation of state and its enthalpy coordinates"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

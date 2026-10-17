@@ -2,7 +2,7 @@
 id: pthm-tgr-static-tov-local-branch
 kind: physics-theorem
 title: "Constructed regular-center local static TOV branch"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: pthm-emg-xs-br-limit
 kind: physics-theorem
 title: Local SI model limit from extremal RN to Bertotti–Robinson
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

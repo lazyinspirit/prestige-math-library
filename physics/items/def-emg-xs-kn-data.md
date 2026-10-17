@@ -2,7 +2,7 @@
 id: def-emg-xs-kn-data
 kind: definition
 title: Kerr-Newman metric and potential on the exact Boyer-Lindquist domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: post-csm-isobaric-preparation
 kind: postulate
 title: "Isothermal-isobaric joint preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

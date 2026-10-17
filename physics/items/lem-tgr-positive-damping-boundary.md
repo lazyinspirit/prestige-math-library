@@ -2,7 +2,7 @@
 id: lem-tgr-positive-damping-boundary
 kind: lemma
 title: Positive smooth damping preserves the double-pole boundary
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

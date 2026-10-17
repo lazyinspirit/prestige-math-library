@@ -2,7 +2,7 @@
 id: ex-qsm-oscillator-spin-ensembles
 kind: example
 title: "Zero-point energy and ground-degeneracy entropy"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

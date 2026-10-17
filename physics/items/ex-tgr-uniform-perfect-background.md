@@ -2,7 +2,7 @@
 id: ex-tgr-uniform-perfect-background
 kind: example
 title: "Uniform prescribed-background perfect material"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

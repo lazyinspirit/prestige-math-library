@@ -1,7 +1,7 @@
 ---
 page: emg-g01
 title: "Einstein–Maxwell primitive quantities and SI conventions"
-status: draft
+status: published
 library: physics
 items:
   - def-emg-geometry-units

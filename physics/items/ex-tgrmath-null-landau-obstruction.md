@@ -2,7 +2,7 @@
 id: ex-tgrmath-null-landau-obstruction
 kind: example
 title: "An explicit null-dust tensor without a timelike Landau frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

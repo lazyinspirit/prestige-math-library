@@ -2,7 +2,7 @@
 id: lem-csm-examples-gamma-gaussian-tools
 kind: lemma
 title: "Gaussian, gamma and beta product integrals"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

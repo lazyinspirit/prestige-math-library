@@ -2,7 +2,7 @@
 id: ex-tgr-finite-bath-stabilization
 kind: example
 title: "Finite bath can stabilize negative heat capacity exchange"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-qsm-local-subsystem-trace-tests
 kind: lemma
 title: Subsystem expectations and reduced finite tensor densities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

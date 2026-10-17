@@ -1,7 +1,7 @@
 ---
 page: csm-mean-field-hierarchy-examples
 title: "Smooth periodic finite-N and scaled mean-field phase data — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-mean-field-hierarchy

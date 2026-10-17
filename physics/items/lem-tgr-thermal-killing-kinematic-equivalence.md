@@ -2,7 +2,7 @@
 id: lem-tgr-thermal-killing-kinematic-equivalence
 kind: lemma
 title: Exact thermal Killing kinematic equivalence
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

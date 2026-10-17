@@ -2,7 +2,7 @@
 id: def-qsm-relative-entropy-domain
 kind: definition
 title: Quantum spectral entropy and relative-entropy domains
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: ex-tgr-two-first-law-calibrations
 kind: example
 title: Two entropy-temperature calibrations preserve the same energy differential
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

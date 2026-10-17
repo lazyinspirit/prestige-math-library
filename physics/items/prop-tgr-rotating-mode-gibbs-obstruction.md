@@ -2,7 +2,7 @@
 id: prop-tgr-rotating-mode-gibbs-obstruction
 kind: proposition
 title: Rotating mode Gibbs obstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

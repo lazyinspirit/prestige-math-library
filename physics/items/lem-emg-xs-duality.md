@@ -2,7 +2,7 @@
 id: lem-emg-xs-duality
 kind: lemma
 title: Classical electrovac dual rotation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: thm-emg-xs-br-verification
 kind: theorem
 title: Product electrovacuum equations from full factor Ricci
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

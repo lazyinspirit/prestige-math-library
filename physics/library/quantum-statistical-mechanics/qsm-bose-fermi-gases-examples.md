@@ -1,7 +1,7 @@
 ---
 page: qsm-bose-fermi-gases-examples
 title: Explicit diagonal Fock domains and occupation trace — Examples
-status: draft
+status: published
 library: physics
 requires:
   - qsm-bose-fermi-gases

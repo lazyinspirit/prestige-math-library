@@ -1,7 +1,7 @@
 ---
 page: tgr-pet03
 title: Supported static heat model
-status: draft
+status: published
 library: physics
 requires:
   - tgr-c02

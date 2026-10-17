@@ -2,7 +2,7 @@
 id: thm-csm-ising-low-temperature-coexistence
 kind: theorem
 title: "Two-dimensional Ising Gibbs coexistence at low temperature"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

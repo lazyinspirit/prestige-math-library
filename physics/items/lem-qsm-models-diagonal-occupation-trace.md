@@ -2,7 +2,7 @@
 id: lem-qsm-models-diagonal-occupation-trace
 kind: lemma
 title: "Explicit diagonal Fock domains and occupation trace"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

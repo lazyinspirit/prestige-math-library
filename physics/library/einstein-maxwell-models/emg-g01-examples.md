@@ -1,7 +1,7 @@
 ---
 page: emg-g01-examples
 title: "Einstein–Maxwell primitive quantities and SI conventions — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

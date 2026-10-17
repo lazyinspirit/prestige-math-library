@@ -2,7 +2,7 @@
 id: thm-emg-smooth-counterpoised-dust
 kind: theorem
 title: "Exact smooth superharmonic counterpoised dust family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

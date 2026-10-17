@@ -2,7 +2,7 @@
 id: cex-qsm-finite-gibbs-unique-infinite-not
 kind: counterexample
 title: Finite Gibbs uniqueness does not imply infinite KMS uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

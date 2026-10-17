@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs03-examples
 title: Constructed timelike smear and massless accelerated spectrum — Examples
-status: draft
+status: published
 requires:
   - tgr-mhs03
 items: []

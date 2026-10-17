@@ -1,7 +1,7 @@
 ---
 page: tgr-pet01
 title: Selected stationary thermal equilibrium
-status: draft
+status: published
 library: physics
 items:
   - post-tgr-stationary-equilibrium

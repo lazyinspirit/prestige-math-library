@@ -1,7 +1,7 @@
 ---
 page: emg-mp02
 title: Exact smooth coupled counterpoised dust and observables
-status: draft
+status: published
 items:
   - pthm-emg-counterpoised-smooth-sphere
 examples: []

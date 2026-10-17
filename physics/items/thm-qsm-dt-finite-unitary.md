@@ -2,7 +2,7 @@
 id: thm-qsm-dt-finite-unitary
 kind: theorem
 title: Finite unitary dynamics and stationary Gibbs states
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

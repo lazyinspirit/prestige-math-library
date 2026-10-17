@@ -2,7 +2,7 @@
 id: pthm-csm-ensemble-potentials
 kind: physics-theorem
 title: "Ensemble entropy and potential identities"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

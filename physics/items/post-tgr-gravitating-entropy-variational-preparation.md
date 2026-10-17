@@ -2,7 +2,7 @@
 id: post-tgr-gravitating-entropy-variational-preparation
 kind: postulate
 title: "Supplied thermodynamic chart and gravitational entropy variation model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

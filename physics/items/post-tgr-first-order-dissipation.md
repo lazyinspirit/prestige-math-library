@@ -2,7 +2,7 @@
 id: post-tgr-first-order-dissipation
 kind: postulate
 title: Restricted gradient constitutive dissipative model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

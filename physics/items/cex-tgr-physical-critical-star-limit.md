@@ -2,7 +2,7 @@
 id: cex-tgr-physical-critical-star-limit
 kind: counterexample
 title: "Central pressure is unbounded at the constant-density branch limit"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: cex-tgr-entropy-type-identification
 kind: counterexample
 title: A fixed scalar label and zero energy do not determine finite spectral entropy
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

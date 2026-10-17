@@ -2,7 +2,7 @@
 id: thm-emg-xs-rn-crossing
 kind: theorem
 title: Regular RN crossings and local bifurcation extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

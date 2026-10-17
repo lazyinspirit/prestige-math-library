@@ -2,7 +2,7 @@
 id: ex-tgrmath-parcel-rest-shift
 kind: example
 title: "Parcel derivatives and rest-energy shift"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

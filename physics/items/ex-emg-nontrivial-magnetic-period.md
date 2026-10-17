@@ -2,7 +2,7 @@
 id: ex-emg-nontrivial-magnetic-period
 kind: example
 title: Magnetic period obstructs a global potential
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

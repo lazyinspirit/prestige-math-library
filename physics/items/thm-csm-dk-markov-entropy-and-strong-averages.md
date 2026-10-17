@@ -2,7 +2,7 @@
 id: thm-csm-dk-markov-entropy-and-strong-averages
 kind: theorem
 title: "Markov relative entropy decay and almost-sure time averages"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

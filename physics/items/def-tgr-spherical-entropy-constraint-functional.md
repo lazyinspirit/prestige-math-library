@@ -2,7 +2,7 @@
 id: def-tgr-spherical-entropy-constraint-functional
 kind: definition
 title: "Proper spherical entropy and particle constrained functionals"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

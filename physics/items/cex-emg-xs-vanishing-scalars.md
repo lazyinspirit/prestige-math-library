@@ -2,7 +2,7 @@
 id: cex-emg-xs-vanishing-scalars
 kind: counterexample
 title: Zero quadratic invariants need not mean flatness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

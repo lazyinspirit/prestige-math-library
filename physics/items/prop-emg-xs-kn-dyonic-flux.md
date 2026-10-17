@@ -2,7 +2,7 @@
 id: prop-emg-xs-kn-dyonic-flux
 kind: proposition
 title: Dyonic Kerr-Newman parameters and conserved electric/magnetic flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

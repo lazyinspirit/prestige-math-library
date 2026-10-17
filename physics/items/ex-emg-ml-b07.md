@@ -2,7 +2,7 @@
 id: ex-emg-ml-b07
 kind: example
 title: Exact finite-frequency transverse Maxwell wave
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

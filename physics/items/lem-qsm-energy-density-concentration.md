@@ -2,7 +2,7 @@
 id: lem-qsm-energy-density-concentration
 kind: lemma
 title: Quantum spectral energy concentration at a differentiable pressure point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

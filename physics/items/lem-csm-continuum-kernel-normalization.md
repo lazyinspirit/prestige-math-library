@@ -2,7 +2,7 @@
 id: lem-csm-continuum-kernel-normalization
 kind: lemma
 title: Stable finite-range continuum specification normalization and consistency
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

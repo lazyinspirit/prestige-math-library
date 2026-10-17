@@ -1,7 +1,7 @@
 ---
 page: tgr-c04-examples
 title: Supported-rest effective Cattaneo thermal model — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-c04

@@ -2,7 +2,7 @@
 id: lem-emg-maxwell-action-variation
 kind: lemma
 title: "Compact potential and metric variation of the Maxwell action"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

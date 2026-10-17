@@ -2,7 +2,7 @@
 id: lem-tgr-spherical-einstein-tov-reduction
 kind: lemma
 title: "Complete spherical Einstein and conservation reduction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

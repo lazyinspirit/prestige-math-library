@@ -2,7 +2,7 @@
 id: pthm-csm-pressure-entropy-reference-units
 kind: physics-theorem
 title: "Gibbs pressure and entropy with physical reference units"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

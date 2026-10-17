@@ -1,7 +1,7 @@
 ---
 page: qsm-quasilocal-states
 title: Local spin matrix algebras and isometric inclusions
-status: draft
+status: published
 library: physics
 items:
 - lem-qsm-integer-lattice-countable

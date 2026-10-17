@@ -1,7 +1,7 @@
 ---
 page: emg-mm01-examples
 title: "Smooth formal matter, EM tensors and observer quantities — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mm01

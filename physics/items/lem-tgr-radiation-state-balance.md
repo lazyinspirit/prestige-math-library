@@ -2,7 +2,7 @@
 id: lem-tgr-radiation-state-balance
 kind: lemma
 title: "Radiation Gibbs and perfect linear sound deduction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

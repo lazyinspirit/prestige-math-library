@@ -1,7 +1,7 @@
 ---
 page: tgr-et01
 title: "Stationary thermal geometric data"
-status: draft
+status: published
 library: mathematics
 items:
   - def-tgr-stationary-thermal-carriers

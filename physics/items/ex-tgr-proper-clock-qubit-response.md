@@ -2,7 +2,7 @@
 id: ex-tgr-proper-clock-qubit-response
 kind: example
 title: Proper clock two-level response
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

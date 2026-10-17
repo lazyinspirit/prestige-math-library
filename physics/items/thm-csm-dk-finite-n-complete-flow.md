@@ -2,7 +2,7 @@
 id: thm-csm-dk-finite-n-complete-flow
 kind: theorem
 title: Complete finite-N flow and permutation-invariant Liouville law
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

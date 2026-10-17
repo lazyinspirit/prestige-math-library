@@ -1,7 +1,7 @@
 ---
 page: tgr-mi03
 title: Finite Killing energy current and reference normalization
-status: draft
+status: published
 library: mathematics
 items:
   - lem-tgr-killing-energy-normalization

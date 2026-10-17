@@ -2,7 +2,7 @@
 id: pthm-csm-ising-equilibrium-phases
 kind: physics-theorem
 title: "Conditional Ising equilibrium phase predictions"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

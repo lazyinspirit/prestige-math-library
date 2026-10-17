@@ -2,7 +2,7 @@
 id: prop-emg-xs-kn-invariants
 kind: proposition
 title: Kerr-Newman Maxwell and Ricci invariants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

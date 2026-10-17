@@ -2,7 +2,7 @@
 id: cex-tgr-open-region-entropy-export
 kind: counterexample
 title: "Zero divergence with decreasing slice charge in an open region"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

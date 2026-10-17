@@ -2,7 +2,7 @@
 id: thm-qsm-dt-gibbs-jump
 kind: theorem
 title: Connected Gibbs jump generators satisfy detailed balance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

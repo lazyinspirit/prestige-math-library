@@ -2,7 +2,7 @@
 id: def-csm-dk-reflection-collision-gain
 kind: definition
 title: "Cutoff elastic-reflection collision measure and gain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: lem-qsm-finite-matrix-cstar-and-state-duality
 kind: lemma
 title: Finite matrix C-star algebra and density-state duality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

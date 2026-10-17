@@ -2,7 +2,7 @@
 id: post-tgr-radiation-fluid-model
 kind: postulate
 title: "Separate no-conserved-number radiation fluid branch"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

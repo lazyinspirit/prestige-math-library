@@ -2,7 +2,7 @@
 id: post-tgr-selected-gibbs-kms-preparation
 kind: postulate
 title: Actually constructed Gibbs/KMS preparation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

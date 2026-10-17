@@ -2,7 +2,7 @@
 id: pthm-csm-ising-ring-correlation
 kind: physics-theorem
 title: "Finite periodic Ising-ring correlations and exact decay"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

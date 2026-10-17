@@ -2,7 +2,7 @@
 id: pthm-csm-isobaric-response-identities
 kind: physics-theorem
 title: "Isobaric volume and enthalpy fluctuations"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -1,7 +1,7 @@
 ---
 page: qsm-nonnormal-thermal-states-examples
 title: Finite-excitation vacuum spin representation and normality — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

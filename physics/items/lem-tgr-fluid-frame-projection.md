@@ -2,7 +2,7 @@
 id: lem-tgr-fluid-frame-projection
 kind: lemma
 title: "Observer projections, pointwise Eckart vector and local C¹ Landau field"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

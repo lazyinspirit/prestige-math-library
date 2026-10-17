@@ -1,7 +1,7 @@
 ---
 page: tgr-mc02
 title: "Perfect stress and particle balances with entropy identity"
-status: draft
+status: published
 library: mathematics
 items:
   - lem-tgr-perfect-fluid-projection

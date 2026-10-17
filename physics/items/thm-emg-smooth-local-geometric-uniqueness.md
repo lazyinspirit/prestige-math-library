@@ -2,7 +2,7 @@
 id: thm-emg-smooth-local-geometric-uniqueness
 kind: theorem
 title: "Smooth local geometric existence and uniqueness for source-free Einstein–Maxwell data"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

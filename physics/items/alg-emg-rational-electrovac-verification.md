@@ -2,7 +2,7 @@
 id: alg-emg-rational-electrovac-verification
 kind: algorithm
 title: Finite exact rational electrovac tensor verification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

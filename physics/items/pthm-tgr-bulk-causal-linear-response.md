@@ -2,7 +2,7 @@
 id: pthm-tgr-bulk-causal-linear-response
 kind: physics-theorem
 title: "Causal stable bulk-relaxation linear response"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

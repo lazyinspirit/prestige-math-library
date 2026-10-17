@@ -1,7 +1,7 @@
 ---
 page: tgr-c02
 title: Restricted gradient constitutive dissipative model
-status: draft
+status: published
 library: physics
 requires:
   - tgr-i01

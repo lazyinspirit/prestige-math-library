@@ -2,7 +2,7 @@
 id: pthm-tgr-free-vacuum-acceleration-temperature
 kind: physics-theorem
 title: Free-vacuum effective acceleration thermometer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

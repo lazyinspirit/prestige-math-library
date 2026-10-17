@@ -2,7 +2,7 @@
 id: ex-tgr-softened-box-normalization
 kind: example
 title: "Finite softened two-body box"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

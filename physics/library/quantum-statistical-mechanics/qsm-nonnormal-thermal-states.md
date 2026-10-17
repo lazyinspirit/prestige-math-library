@@ -1,7 +1,7 @@
 ---
 page: qsm-nonnormal-thermal-states
 title: Finite-excitation vacuum spin representation and normality
-status: draft
+status: published
 library: physics
 items:
   - def-qsm-vacuum-spin-representation

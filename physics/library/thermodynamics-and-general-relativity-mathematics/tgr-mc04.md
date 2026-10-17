@@ -1,7 +1,7 @@
 ---
 page: tgr-mc04
 title: "Separate entropy-only radiation state maps"
-status: draft
+status: published
 library: mathematics
 items:
   - def-tgr-entropy-only-radiation-state

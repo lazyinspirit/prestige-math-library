@@ -2,7 +2,7 @@
 id: def-qsm-pauli-two-qubit-conventions
 kind: definition
 title: "Pauli matrices and the two-qubit exchange operator"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

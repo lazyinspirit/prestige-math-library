@@ -1,7 +1,7 @@
 ---
 page: tgr-mi01
 title: Finite spacelike slab and normal flux charge
-status: draft
+status: published
 library: mathematics
 items:
   - lem-tgr-coordinate-boxes-are-compact-jordan

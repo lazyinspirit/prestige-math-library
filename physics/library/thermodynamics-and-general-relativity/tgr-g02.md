@@ -1,7 +1,7 @@
 ---
 page: tgr-g02
 title: "Static isotropic Einstein-fluid and supplied EOS model"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-g01

@@ -2,7 +2,7 @@
 id: thm-csm-exponential-normalization-covariance
 kind: theorem
 title: "Dominated exponential normalization and covariance"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-csm-chain-dlr-uniqueness
 kind: theorem
 title: "All-positive-temperature one-dimensional Ising DLR uniqueness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: cex-emg-flat-nonzero-field-coupling
 kind: counterexample
 title: "A flat Maxwell field need not solve the coupled Einstein equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

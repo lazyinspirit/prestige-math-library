@@ -2,7 +2,7 @@
 id: ex-csm-bernoulli-fluctuation-bounds
 kind: example
 title: "A finite Bernoulli model at n=100 and p=1/4"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

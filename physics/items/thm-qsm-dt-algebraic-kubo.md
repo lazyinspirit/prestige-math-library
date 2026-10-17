@@ -2,7 +2,7 @@
 id: thm-qsm-dt-algebraic-kubo
 kind: theorem
 title: Bounded C-star Dyson response for finite-range spin dynamics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: cex-csm-dk-coarse-entropy-returns
 kind: counterexample
 title: Coarse Shannon entropy rises and falls in a reversible rotor
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

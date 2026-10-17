@@ -1,7 +1,7 @@
 ---
 page: tgr-g01
 title: Finite regulated Newtonian gravitational canonical preparation
-status: draft
+status: published
 library: physics
 requires:
   - tgr-i01

@@ -1,7 +1,7 @@
 ---
 page: qsm-dt-channels
 title: Finite completely positive trace-preserving maps
-status: draft
+status: published
 library: physics
 items:
   - lem-qsm-dt-finite-trace-pairing-cyclicity

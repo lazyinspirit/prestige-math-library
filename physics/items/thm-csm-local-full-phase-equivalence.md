@@ -3,7 +3,7 @@
 id: thm-csm-local-full-phase-equivalence
 kind: theorem
 title: Full interacting shell, canonical, and variational-grand local marked equivalence
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

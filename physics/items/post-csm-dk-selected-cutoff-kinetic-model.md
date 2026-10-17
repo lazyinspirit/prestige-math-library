@@ -2,7 +2,7 @@
 id: post-csm-dk-selected-cutoff-kinetic-model
 kind: postulate
 title: "Selected phenomenological cutoff collision model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

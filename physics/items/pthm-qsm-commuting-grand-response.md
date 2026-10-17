@@ -2,7 +2,7 @@
 id: pthm-qsm-commuting-grand-response
 kind: physics-theorem
 title: Commuting quantum grand responses
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

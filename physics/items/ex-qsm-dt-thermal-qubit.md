@@ -2,7 +2,7 @@
 id: ex-qsm-dt-thermal-qubit
 kind: example
 title: Solved Gibbs qubit relaxation and finite response coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

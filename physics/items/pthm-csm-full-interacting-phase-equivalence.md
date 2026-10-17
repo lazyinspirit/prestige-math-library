@@ -2,7 +2,7 @@
 id: pthm-csm-full-interacting-phase-equivalence
 kind: physics-theorem
 title: Physical interacting local phase-space ensemble bridge
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

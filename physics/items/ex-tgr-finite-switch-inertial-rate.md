@@ -2,7 +2,7 @@
 id: ex-tgr-finite-switch-inertial-rate
 kind: example
 title: Quantitative switched coefficient and inertial rate
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

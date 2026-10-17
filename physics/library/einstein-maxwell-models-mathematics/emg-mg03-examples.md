@@ -1,7 +1,7 @@
 ---
 page: emg-mg03-examples
 title: "Sourced Maxwell sign and current conservation — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mg03

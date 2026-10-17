@@ -2,7 +2,7 @@
 id: pthm-qsm-dt-bath-relaxation
 kind: physics-theorem
 title: Conditional specified thermal bath relaxation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

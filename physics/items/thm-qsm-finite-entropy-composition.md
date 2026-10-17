@@ -2,7 +2,7 @@
 id: thm-qsm-finite-entropy-composition
 kind: theorem
 title: Finite mixing, product entropy, and bipartite subadditivity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

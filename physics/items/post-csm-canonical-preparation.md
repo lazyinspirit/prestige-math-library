@@ -2,7 +2,7 @@
 id: post-csm-canonical-preparation
 kind: postulate
 title: "Canonical thermal preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: prop-emg-local-sobolev-stability-continuation
 kind: proposition
 title: "Local Sobolev stability and continuation for the reduced electrovacuum system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

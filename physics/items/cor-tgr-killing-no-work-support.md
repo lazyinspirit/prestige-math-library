@@ -2,7 +2,7 @@
 id: cor-tgr-killing-no-work-support
 kind: corollary
 title: "Zero Killing contraction makes the sourced Killing current divergence-free"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

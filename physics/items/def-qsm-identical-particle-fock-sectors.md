@@ -2,7 +2,7 @@
 id: def-qsm-identical-particle-fock-sectors
 kind: definition
 title: "Symmetric and antisymmetric identical-particle Fock spaces"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

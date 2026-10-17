@@ -1,7 +1,7 @@
 ---
 page: qsm-dt-channels-examples
 title: Finite completely positive trace-preserving maps — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

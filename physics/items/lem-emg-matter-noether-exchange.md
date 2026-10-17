@@ -2,7 +2,7 @@
 id: lem-emg-matter-noether-exchange
 kind: lemma
 title: "Gauge/diffeomorphism matter identity and field exchange"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

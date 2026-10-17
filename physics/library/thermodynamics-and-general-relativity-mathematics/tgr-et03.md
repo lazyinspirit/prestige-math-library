@@ -1,7 +1,7 @@
 ---
 page: tgr-et03
 title: Constructed independent cell Gibbs states
-status: draft
+status: published
 library: mathematics
 items:
   - thm-tgr-finite-cell-gibbs-factorization

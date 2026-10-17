@@ -1,7 +1,7 @@
 ---
 page: emg-mg04-examples
 title: "Gauge/diffeomorphism matter identity and field exchange — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mg04

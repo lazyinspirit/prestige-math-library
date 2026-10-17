@@ -2,7 +2,7 @@
 id: ex-tgr-thermal-damped-model
 kind: example
 title: "Supported thermal finite-speed damped mode"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

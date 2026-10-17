@@ -2,7 +2,7 @@
 id: lem-csm-chain-markov-bridge
 kind: lemma
 title: "Positive Ising transfer matrix and stationary Markov law"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

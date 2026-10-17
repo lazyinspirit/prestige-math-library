@@ -1,7 +1,7 @@
 ---
 page: csm-collision-transport
 title: "Cutoff elastic-reflection collision measure and gain"
-status: draft
+status: published
 library: physics
 items:
   - def-csm-dk-reflection-collision-gain

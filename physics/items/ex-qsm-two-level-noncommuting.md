@@ -2,7 +2,7 @@
 id: ex-qsm-two-level-noncommuting
 kind: example
 title: Two-level Gibbs and noncommuting susceptibility
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: ex-emg-ml-b05
 kind: example
 title: Everywhere regular counterpoised sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

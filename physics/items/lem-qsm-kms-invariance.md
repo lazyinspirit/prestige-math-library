@@ -2,7 +2,7 @@
 id: lem-qsm-kms-invariance
 kind: lemma
 title: KMS states are invariant under their dynamics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

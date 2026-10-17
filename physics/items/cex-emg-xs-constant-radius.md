@@ -2,7 +2,7 @@
 id: cex-emg-xs-constant-radius
 kind: counterexample
 title: Bertotti-Robinson has no non-null areal-radius coordinate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

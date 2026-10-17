@@ -1,7 +1,7 @@
 ---
 page: tgr-pet03-examples
 title: Supported static heat model — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-pet03

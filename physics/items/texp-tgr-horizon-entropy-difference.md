@@ -2,7 +2,7 @@
 id: texp-tgr-horizon-entropy-difference
 kind: thought-experiment
 title: Entropy difference with unfixed entropy zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

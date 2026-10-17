@@ -2,7 +2,7 @@
 id: lem-csm-dk-reflection-measure-and-gain-identities
 kind: lemma
 title: "Well-defined elastic reflection gain and collision identities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: alg-qsm-finite-gibbs-state-preparation
 kind: algorithm
 title: Sparse-oracle finite Gibbs purification procedure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

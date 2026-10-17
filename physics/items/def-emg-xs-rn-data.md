@@ -2,7 +2,7 @@
 id: def-emg-xs-rn-data
 kind: definition
 title: Dyonic Reissner-Nordström metric and field domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

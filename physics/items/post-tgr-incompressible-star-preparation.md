@@ -2,7 +2,7 @@
 id: post-tgr-incompressible-star-preparation
 kind: postulate
 title: "Specified constant-density star and vacuum boundary model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

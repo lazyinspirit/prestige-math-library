@@ -2,7 +2,7 @@
 id: prop-emg-xs-rn-local-gauges
 kind: proposition
 title: Dyonic RN gauges and global exactness obstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

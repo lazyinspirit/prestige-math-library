@@ -2,7 +2,7 @@
 id: ex-csm-nonadditive-phase-countermodel
 kind: example
 title: "The middle sector at N=4 and the transition point"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

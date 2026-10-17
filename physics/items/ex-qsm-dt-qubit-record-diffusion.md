@@ -2,7 +2,7 @@
 id: ex-qsm-dt-qubit-record-diffusion
 kind: example
 title: Exact centered qubit-record displacement variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

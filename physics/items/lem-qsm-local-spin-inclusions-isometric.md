@@ -2,7 +2,7 @@
 id: lem-qsm-local-spin-inclusions-isometric
 kind: lemma
 title: Local spin factor inclusions preserve the operator norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

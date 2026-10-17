@@ -2,7 +2,7 @@
 id: pthm-tgr-static-gas-local-equilibrium
 kind: physics-theorem
 title: "Constructed static gas redshift and hydrostatics"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

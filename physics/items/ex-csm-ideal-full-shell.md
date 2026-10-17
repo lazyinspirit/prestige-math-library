@@ -2,7 +2,7 @@
 id: ex-csm-ideal-full-shell
 kind: example
 title: "Full ideal-gas shell moments and entropy conventions"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

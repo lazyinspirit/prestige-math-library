@@ -2,7 +2,7 @@
 id: cex-qsm-global-spin-thermal-trace-diverges
 kind: counterexample
 title: Infinite spin thermal trace diverges despite a unique KMS state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

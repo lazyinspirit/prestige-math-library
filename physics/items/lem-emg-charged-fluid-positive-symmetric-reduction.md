@@ -2,7 +2,7 @@
 id: lem-emg-charged-fluid-positive-symmetric-reduction
 kind: lemma
 title: "Strict charged-fluid symmetric reduction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

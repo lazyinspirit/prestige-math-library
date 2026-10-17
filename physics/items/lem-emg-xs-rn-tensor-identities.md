@@ -2,7 +2,7 @@
 id: lem-emg-xs-rn-tensor-identities
 kind: lemma
 title: Exact Reissner-Nordström Ricci and curvature identities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

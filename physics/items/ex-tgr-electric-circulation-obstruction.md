@@ -2,7 +2,7 @@
 id: ex-tgr-electric-circulation-obstruction
 kind: example
 title: Electric circulation obstructs a global charged equilibrium scalar
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

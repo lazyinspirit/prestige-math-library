@@ -2,7 +2,7 @@
 id: thm-csm-examples-spherical-marginal
 kind: theorem
 title: "Exact spherical-shell coordinate marginal and fixed-block Gaussian limit"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

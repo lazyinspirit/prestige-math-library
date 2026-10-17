@@ -2,7 +2,7 @@
 id: ex-tgr-schwarzschild-family-data
 kind: example
 title: Schwarzschild and charged endpoint algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

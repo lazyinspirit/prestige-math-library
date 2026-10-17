@@ -2,7 +2,7 @@
 id: thm-csm-ising-high-temperature-state
 kind: theorem
 title: "Unique interacting Ising state at sufficient high temperature"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

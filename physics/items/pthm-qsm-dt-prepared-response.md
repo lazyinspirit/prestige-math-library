@@ -2,7 +2,7 @@
 id: pthm-qsm-dt-prepared-response
 kind: physics-theorem
 title: Conditional prepared finite quantum control response
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

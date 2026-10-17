@@ -2,7 +2,7 @@
 id: pthm-csm-qualified-continuum-equilibrium-limits
 kind: physics-theorem
 title: Qualified interacting continuum thermodynamic and positional ensemble limits
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

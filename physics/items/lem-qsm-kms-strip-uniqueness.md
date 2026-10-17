@@ -2,7 +2,7 @@
 id: lem-qsm-kms-strip-uniqueness
 kind: lemma
 title: Bounded KMS strip norm and zero-edge uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

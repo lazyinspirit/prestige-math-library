@@ -2,7 +2,7 @@
 id: pthm-csm-dk-ou-green-kubo-einstein
 kind: physics-theorem
 title: "Conditional Langevin Green–Kubo and Einstein relation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

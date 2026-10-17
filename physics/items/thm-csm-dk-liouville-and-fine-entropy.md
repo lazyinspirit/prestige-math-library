@@ -2,7 +2,7 @@
 id: thm-csm-dk-liouville-and-fine-entropy
 kind: theorem
 title: Liouville probability transport and constant fine entropy
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

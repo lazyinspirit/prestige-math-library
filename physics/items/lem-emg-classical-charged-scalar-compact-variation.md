@@ -2,7 +2,7 @@
 id: lem-emg-classical-charged-scalar-compact-variation
 kind: lemma
 title: "Compact charged-scalar action variations at classical finite regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

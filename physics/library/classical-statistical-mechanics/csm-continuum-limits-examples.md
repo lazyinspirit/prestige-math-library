@@ -1,7 +1,7 @@
 ---
 page: csm-continuum-limits-examples
 title: Finite-range continuum Gibbs kernels and DLR notion — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-csm-finite-range-attraction-collapse

@@ -2,7 +2,7 @@
 id: pthm-csm-dk-qualified-kinetic-entropy
 kind: physics-theorem
 title: "Conditional one-particle kinetic entropy production"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

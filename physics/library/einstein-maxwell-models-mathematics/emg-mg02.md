@@ -1,7 +1,7 @@
 ---
 page: emg-mg02
 title: Local potentials and smooth circle-bundle connection data
-status: draft
+status: published
 library: mathematics
 items:
 - def-emg-finite-real-supremum-domain

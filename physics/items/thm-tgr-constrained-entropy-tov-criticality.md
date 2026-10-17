@@ -2,7 +2,7 @@
 id: thm-tgr-constrained-entropy-tov-criticality
 kind: theorem
 title: "Constrained entropy criticality, Tolman–Klein equivalence and TOV consequence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

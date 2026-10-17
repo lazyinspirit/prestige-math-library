@@ -1,7 +1,7 @@
 ---
 page: emg-pcp01
 title: "Local evolution of the adopted electrovacuum model"
-status: draft
+status: published
 library: physics
 items:
   - lem-emg-spacelike-slice-normal-collar

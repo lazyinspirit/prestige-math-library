@@ -1,7 +1,7 @@
 ---
 page: qsm-local-ensemble-bridge
 title: Finite tensor density, observable and measurement language
-status: draft
+status: published
 library: physics
 items:
   - lem-qsm-local-hermitian-diagonalization

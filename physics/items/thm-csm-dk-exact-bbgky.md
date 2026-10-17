@@ -2,7 +2,7 @@
 id: thm-csm-dk-exact-bbgky
 kind: theorem
 title: Exact normalized BBGKY hierarchy
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

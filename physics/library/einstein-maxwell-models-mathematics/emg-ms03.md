@@ -1,7 +1,7 @@
 ---
 page: emg-ms03
 title: Positive harmonic conformastatic electrovac data
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mm02

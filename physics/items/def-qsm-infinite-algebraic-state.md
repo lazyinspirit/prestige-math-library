@@ -2,7 +2,7 @@
 id: def-qsm-infinite-algebraic-state
 kind: definition
 title: Infinite algebraic state and finite-region restrictions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

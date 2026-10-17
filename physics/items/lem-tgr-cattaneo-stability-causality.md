@@ -2,7 +2,7 @@
 id: lem-tgr-cattaneo-stability-causality
 kind: lemma
 title: "Fixed-coefficient Cattaneo entropy and propagation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

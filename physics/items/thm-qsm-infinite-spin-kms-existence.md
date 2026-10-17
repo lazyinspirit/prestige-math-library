@@ -2,7 +2,7 @@
 id: thm-qsm-infinite-spin-kms-existence
 kind: theorem
 title: Finite-range interacting quantum spin KMS existence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

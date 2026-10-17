@@ -1,7 +1,7 @@
 ---
 page: emg-mp02-examples
 title: Exact smooth coupled counterpoised dust and observables — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-emg-ml-b05

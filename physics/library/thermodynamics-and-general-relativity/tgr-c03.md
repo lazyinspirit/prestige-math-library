@@ -1,7 +1,7 @@
 ---
 page: tgr-c03
 title: "Specified small-perturbation material dynamics"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-c01

@@ -2,7 +2,7 @@
 id: thm-qsm-dt-time-dependent-gksl
 kind: theorem
 title: Continuous finite GKSL channel propagators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

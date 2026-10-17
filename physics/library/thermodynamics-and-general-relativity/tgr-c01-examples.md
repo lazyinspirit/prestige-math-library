@@ -1,7 +1,7 @@
 ---
 page: tgr-c01-examples
 title: "Smooth perfect local material balance model — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - tgr-c01

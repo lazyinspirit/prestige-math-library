@@ -2,7 +2,7 @@
 id: pthm-qsm-fermi-zero-temperature
 kind: physics-theorem
 title: "Ideal Fermi continuum and zero-temperature endpoint"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

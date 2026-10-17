@@ -2,7 +2,7 @@
 id: cex-tgr-volume-surface-entropy-response
 kind: counterexample
 title: "Bound relative Kepler entropies give different heat capacities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

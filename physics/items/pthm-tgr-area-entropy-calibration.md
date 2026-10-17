@@ -2,7 +2,7 @@
 id: pthm-tgr-area-entropy-calibration
 kind: physics-theorem
 title: Conditional area entropy coefficient with free offset
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

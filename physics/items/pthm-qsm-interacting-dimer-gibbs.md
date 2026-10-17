@@ -2,7 +2,7 @@
 id: pthm-qsm-interacting-dimer-gibbs
 kind: physics-theorem
 title: "Interacting Heisenberg dimer Gibbs model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

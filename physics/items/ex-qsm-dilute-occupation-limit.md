@@ -2,7 +2,7 @@
 id: ex-qsm-dilute-occupation-limit
 kind: example
 title: "Quantum occupation fluctuations and the classical approximation boundary"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

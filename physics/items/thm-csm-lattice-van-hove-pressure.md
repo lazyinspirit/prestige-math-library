@@ -2,7 +2,7 @@
 id: thm-csm-lattice-van-hove-pressure
 kind: theorem
 title: "Bounded lattice pressure on van Hove sets"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

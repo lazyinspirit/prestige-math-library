@@ -2,7 +2,7 @@
 id: lem-emg-temporal-scalar-positive-symmetric-reduction
 kind: lemma
 title: "Temporal-gauge first-order reduction of the charged scalar equation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -1,7 +1,7 @@
 ---
 page: tgr-pet02-examples
 title: Actually constructed Gibbs/KMS preparation — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

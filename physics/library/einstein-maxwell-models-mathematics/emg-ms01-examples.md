@@ -1,7 +1,7 @@
 ---
 page: emg-ms01-examples
 title: "Geometric electrovac equations and flux normalization — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms01

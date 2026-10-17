@@ -3,7 +3,7 @@
 id: thm-csm-uniform-phase-shell-entropy
 kind: theorem
 title: Full uniform phase shell has vanishing specific canonical KL
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

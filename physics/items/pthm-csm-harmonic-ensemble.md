@@ -2,7 +2,7 @@
 id: pthm-csm-harmonic-ensemble
 kind: physics-theorem
 title: "Confined coupled quadratic canonical systems"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

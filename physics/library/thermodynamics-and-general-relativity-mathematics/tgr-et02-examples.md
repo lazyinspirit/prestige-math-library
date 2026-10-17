@@ -1,7 +1,7 @@
 ---
 page: tgr-et02-examples
 title: Gauge-compensated charged Killing energy — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-tgr-electric-circulation-obstruction

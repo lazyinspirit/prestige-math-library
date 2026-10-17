@@ -1,7 +1,7 @@
 ---
 page: qsm-dt-response
 title: Trace-class bounded-observable response
-status: draft
+status: published
 library: physics
 items:
   - lem-qsm-dt-banach-volterra-dyson

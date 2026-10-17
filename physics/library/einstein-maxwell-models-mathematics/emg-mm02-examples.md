@@ -1,7 +1,7 @@
 ---
 page: emg-mm02-examples
 title: "Arbitrary-positive-H conformastatic Ricci and Einstein components — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mm02

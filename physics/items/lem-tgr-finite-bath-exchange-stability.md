@@ -2,7 +2,7 @@
 id: lem-tgr-finite-bath-exchange-stability
 kind: lemma
 title: "Finite-bath entropy curvature and specified exchange stability"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

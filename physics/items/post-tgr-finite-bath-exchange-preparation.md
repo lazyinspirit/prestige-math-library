@@ -2,7 +2,7 @@
 id: post-tgr-finite-bath-exchange-preparation
 kind: postulate
 title: "Selected finite bath and effective energy-exchange preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

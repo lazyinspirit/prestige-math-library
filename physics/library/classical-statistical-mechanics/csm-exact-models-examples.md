@@ -1,7 +1,7 @@
 ---
 page: csm-exact-models-examples
 title: "Gaussian and gamma product tools — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-exact-models

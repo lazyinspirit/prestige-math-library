@@ -2,7 +2,7 @@
 id: pthm-tgr-tolman-klein
 kind: physics-theorem
 title: Conditional Tolman–Klein relation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

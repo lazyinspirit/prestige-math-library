@@ -2,7 +2,7 @@
 id: ex-csm-harmonic-ensemble
 kind: example
 title: "Unpinned translation zero-mode divergence"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

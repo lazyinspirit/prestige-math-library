@@ -2,7 +2,7 @@
 id: ex-tgrmath-bulk-speed-parameters
 kind: example
 title: Positive relaxation parameters can give superluminal characteristic speed
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

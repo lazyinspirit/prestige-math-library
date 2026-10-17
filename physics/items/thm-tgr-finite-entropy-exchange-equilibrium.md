@@ -2,7 +2,7 @@
 id: thm-tgr-finite-entropy-exchange-equilibrium
 kind: theorem
 title: Independent finite entropy-exchange equilibrium
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: ex-emgmath-scalar-plane-wave
 kind: example
 title: "Exact background scalar plane wave and derived current"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

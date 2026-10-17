@@ -2,7 +2,7 @@
 id: lem-tgr-finite-static-mode-occupation-trace
 kind: lemma
 title: "Finite static fermion-mode trace and occupation identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

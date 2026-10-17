@@ -1,7 +1,7 @@
 ---
 page: emg-s02-examples
 title: Harmonic static multicenter electrovac model — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

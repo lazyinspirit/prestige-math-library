@@ -2,7 +2,7 @@
 id: lem-qsm-dt-finite-trace-pairing-cyclicity
 kind: lemma
 title: Finite matrix trace cyclicity and nondegeneracy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

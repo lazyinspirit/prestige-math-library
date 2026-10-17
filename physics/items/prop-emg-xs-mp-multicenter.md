@@ -2,7 +2,7 @@
 id: prop-emg-xs-mp-multicenter
 kind: proposition
 title: Finite positive multicenter MP exterior and fluxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

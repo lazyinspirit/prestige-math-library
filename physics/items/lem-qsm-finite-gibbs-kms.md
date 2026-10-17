@@ -2,7 +2,7 @@
 id: lem-qsm-finite-gibbs-kms
 kind: lemma
 title: Finite unitary dynamics and Gibbs KMS identity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

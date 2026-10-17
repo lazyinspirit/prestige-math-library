@@ -2,7 +2,7 @@
 id: post-tgr-supported-static-heat-model
 kind: postulate
 title: Supported static heat model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

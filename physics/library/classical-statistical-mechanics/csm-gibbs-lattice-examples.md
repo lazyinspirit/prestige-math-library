@@ -1,7 +1,7 @@
 ---
 page: csm-gibbs-lattice-examples
 title: "Finite-range lattice interaction and conditional energy — Examples"
-status: draft
+status: published
 library: physics
 requires: ["csm-gibbs-lattice"]
 items: []

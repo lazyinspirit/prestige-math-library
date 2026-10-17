@@ -2,7 +2,7 @@
 id: post-qsm-infinite-spin-equilibrium
 kind: postulate
 title: KMS equilibrium and local Born quantum spin model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

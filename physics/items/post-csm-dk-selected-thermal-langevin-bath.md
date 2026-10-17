@@ -2,7 +2,7 @@
 id: post-csm-dk-selected-thermal-langevin-bath
 kind: postulate
 title: "Adopted inertial velocity Langevin bath"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

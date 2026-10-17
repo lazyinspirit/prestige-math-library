@@ -1,7 +1,7 @@
 ---
 page: qsm-dt-response-examples
 title: Trace-class bounded-observable response — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

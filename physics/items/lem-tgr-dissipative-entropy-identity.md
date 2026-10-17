@@ -2,7 +2,7 @@
 id: lem-tgr-dissipative-entropy-identity
 kind: lemma
 title: "Frame-qualified dissipative entropy cancellation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

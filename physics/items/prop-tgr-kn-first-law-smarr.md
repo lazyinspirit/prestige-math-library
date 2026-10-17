@@ -2,7 +2,7 @@
 id: prop-tgr-kn-first-law-smarr
 kind: proposition
 title: Verified Kerr-Newman family first law and Smarr identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

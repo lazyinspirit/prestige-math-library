@@ -2,7 +2,7 @@
 id: thm-tgr-kms-orbit-time-rescaling
 kind: theorem
 title: KMS orbit clock rescaling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

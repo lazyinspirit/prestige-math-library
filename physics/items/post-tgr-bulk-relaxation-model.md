@@ -2,7 +2,7 @@
 id: post-tgr-bulk-relaxation-model
 kind: postulate
 title: Specified bulk extended entropy and relaxation law
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

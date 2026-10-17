@@ -2,7 +2,7 @@
 id: def-csm-statistical-state-observable
 kind: definition
 title: "Statistical states, densities, observables and expectations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

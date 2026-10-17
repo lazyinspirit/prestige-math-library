@@ -2,7 +2,7 @@
 id: lem-qsm-pauli-dimer-spectrum
 kind: lemma
 title: "Spectrum of the two-qubit Pauli exchange matrix"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

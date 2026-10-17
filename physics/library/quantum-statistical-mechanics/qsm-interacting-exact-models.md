@@ -1,7 +1,7 @@
 ---
 page: qsm-interacting-exact-models
 title: "Finite Pauli dimer spectrum and exact separability threshold"
-status: draft
+status: published
 library: physics
 requires:
   - csm-fluctuations-countermodels

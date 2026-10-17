@@ -2,7 +2,7 @@
 id: lem-qsm-dt-stationary-variance-integral-identity
 kind: lemma
 title: Stationary-state covariance identity for time-integrated observables
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

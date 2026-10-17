@@ -2,7 +2,7 @@
 id: lem-emg-closed-two-form-exact-on-cauchy-product
 kind: lemma
 title: "Closed two-forms agreeing on a Cauchy slice differ by an exact form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

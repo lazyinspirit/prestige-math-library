@@ -2,7 +2,7 @@
 id: cex-qsm-dt-finite-bath-memory
 kind: counterexample
 title: Finite-bath dephasing revival violates semigroup
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

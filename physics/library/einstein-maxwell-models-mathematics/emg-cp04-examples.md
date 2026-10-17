@@ -1,7 +1,7 @@
 ---
 page: emg-cp04-examples
 title: Trivial-potential classical charged scalar system — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-cp04

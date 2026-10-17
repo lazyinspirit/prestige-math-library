@@ -2,7 +2,7 @@
 id: thm-emg-selected-matter-energy-conditions
 kind: theorem
 title: EM, dust and perfect-fluid energy inequalities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

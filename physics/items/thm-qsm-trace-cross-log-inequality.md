@@ -2,7 +2,7 @@
 id: thm-qsm-trace-cross-log-inequality
 kind: theorem
 title: Trace-class cross-log entropy inequality
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

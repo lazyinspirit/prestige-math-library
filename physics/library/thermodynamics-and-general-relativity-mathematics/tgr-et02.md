@@ -1,7 +1,7 @@
 ---
 page: tgr-et02
 title: Gauge-compensated charged Killing energy
-status: draft
+status: published
 items:
   - thm-tgr-finite-entropy-exchange-equilibrium
   - def-tgr-charged-liouville-data

@@ -2,7 +2,7 @@
 id: ex-emg-adopted-zero-classical-scalar
 kind: example
 title: "Adopted zero-scalar model sector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

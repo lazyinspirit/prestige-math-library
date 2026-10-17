@@ -2,7 +2,7 @@
 id: def-qsm-finite-gibbs-purification
 kind: definition
 title: Finite Gibbs density and its canonical purification
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

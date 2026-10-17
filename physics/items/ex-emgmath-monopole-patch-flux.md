@@ -2,7 +2,7 @@
 id: ex-emgmath-monopole-patch-flux
 kind: example
 title: "Nonexact sphere flux and circle winding"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 physical_scope: null

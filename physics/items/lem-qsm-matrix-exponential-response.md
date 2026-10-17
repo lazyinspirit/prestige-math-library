@@ -2,7 +2,7 @@
 id: lem-qsm-matrix-exponential-response
 kind: lemma
 title: Duhamel derivative and finite Kubo–Mori response
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

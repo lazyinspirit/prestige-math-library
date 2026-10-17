@@ -2,7 +2,7 @@
 id: pthm-tgr-gravitating-entropy-criticality
 kind: physics-theorem
 title: "Constrained entropy criticality yields scoped TOV and Tolman–Klein relations"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

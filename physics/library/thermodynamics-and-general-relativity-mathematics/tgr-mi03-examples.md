@@ -1,7 +1,7 @@
 ---
 page: tgr-mi03-examples
 title: Finite Killing energy current and reference normalization — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

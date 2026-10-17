@@ -2,7 +2,7 @@
 id: thm-csm-dk-mixing-hierarchy
 kind: theorem
 title: Mixing hierarchy for a selected probability-preserving map
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

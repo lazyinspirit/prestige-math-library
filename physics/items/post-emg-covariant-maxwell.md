@@ -2,7 +2,7 @@
 id: post-emg-covariant-maxwell
 kind: postulate
 title: "Smooth curved vacuum Maxwell constitutive adoption"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

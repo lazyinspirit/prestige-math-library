@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs01
 title: Smooth null screen and KN parameter family
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-ms02

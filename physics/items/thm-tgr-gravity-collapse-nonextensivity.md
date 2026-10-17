@@ -2,7 +2,7 @@
 id: thm-tgr-gravity-collapse-nonextensivity
 kind: theorem
 title: "Point collapse and unscaled gravity nonextensivity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

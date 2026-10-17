@@ -2,7 +2,7 @@
 id: post-csm-interacting-equilibrium-gibbs
 kind: postulate
 title: "Interacting classical Gibbs equilibrium adoption"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-tgr-supported-static-heat-evolution
 kind: theorem
 title: Constructed supported static heat evolution
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

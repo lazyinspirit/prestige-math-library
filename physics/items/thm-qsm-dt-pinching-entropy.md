@@ -2,7 +2,7 @@
 id: thm-qsm-dt-pinching-entropy
 kind: theorem
 title: Pinching raises finite entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

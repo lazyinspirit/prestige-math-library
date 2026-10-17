@@ -2,7 +2,7 @@
 id: post-tgr-fixed-static-gas-preparation
 kind: postulate
 title: "Fixed static ideal gas or finite fermion regulator preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

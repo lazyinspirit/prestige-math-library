@@ -2,7 +2,7 @@
 id: pthm-tgr-regulated-ensemble-response-inequivalence
 kind: physics-theorem
 title: "Regulated gravitational preparations have different responses"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

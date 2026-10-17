@@ -2,7 +2,7 @@
 id: thm-qsm-local-classical-diagonal-embedding
 kind: theorem
 title: Consistent finite classical laws define a quasilocal C-star state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

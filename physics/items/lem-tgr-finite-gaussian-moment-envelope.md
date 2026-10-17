@@ -2,7 +2,7 @@
 id: lem-tgr-finite-gaussian-moment-envelope
 kind: lemma
 title: "Finite-dimensional Gaussian normalization and moment envelope"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

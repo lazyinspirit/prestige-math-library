@@ -2,7 +2,7 @@
 id: lem-tgr-first-order-model-limits
 kind: lemma
 title: "Positive first-order residual and actual instability/tail counterexamples"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

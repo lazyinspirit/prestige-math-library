@@ -2,7 +2,7 @@
 id: ex-qsm-ising-phase-regimes
 kind: example
 title: Controlled diagonal quantum Ising regimes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

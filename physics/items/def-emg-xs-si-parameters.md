@@ -2,7 +2,7 @@
 id: def-emg-xs-si-parameters
 kind: definition
 title: SI and geometric solution parameter identifications
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

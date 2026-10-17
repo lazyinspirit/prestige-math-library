@@ -1,7 +1,7 @@
 ---
 page: tgr-phs04-examples
 title: Ideal photon reservoir and active-area mass balance — Examples
-status: draft
+status: published
 library: physics
 requires:
   - tgr-phs04

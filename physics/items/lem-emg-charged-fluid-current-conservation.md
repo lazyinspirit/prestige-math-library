@@ -2,7 +2,7 @@
 id: lem-emg-charged-fluid-current-conservation
 kind: lemma
 title: "Charged-fluid current and total stress conservation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

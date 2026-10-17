@@ -2,7 +2,7 @@
 id: pthm-csm-static-gauge-canonical-partition-invariance
 kind: physics-theorem
 title: "Finite canonical partition is invariant under static electromagnetic gauge changes"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

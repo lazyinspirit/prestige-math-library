@@ -2,7 +2,7 @@
 id: thm-tgr-massive-juttner-stationarity
 kind: theorem
 title: Massive Jüttner stationarity and normalization
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

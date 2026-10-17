@@ -2,7 +2,7 @@
 id: pthm-qsm-static-quantum-response
 kind: physics-theorem
 title: Static finite quantum response and covariance
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

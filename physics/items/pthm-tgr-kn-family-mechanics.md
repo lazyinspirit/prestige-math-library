@@ -2,7 +2,7 @@
 id: pthm-tgr-kn-family-mechanics
 kind: physics-theorem
 title: Physical KN family work and constancy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

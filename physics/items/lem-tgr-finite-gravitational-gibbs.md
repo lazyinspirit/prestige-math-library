@@ -2,7 +2,7 @@
 id: lem-tgr-finite-gravitational-gibbs
 kind: lemma
 title: "Finite gravitational Gibbs normalization and differentiable moments"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

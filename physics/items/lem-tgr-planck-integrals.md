@@ -2,7 +2,7 @@
 id: lem-tgr-planck-integrals
 kind: lemma
 title: Planck integrals from Fourier Parseval
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

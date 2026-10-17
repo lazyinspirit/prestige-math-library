@@ -2,7 +2,7 @@
 id: pthm-qsm-commuting-lattice-countermodels
 kind: physics-theorem
 title: "Commuting quantum Ising and nonadditive phase countermodel"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

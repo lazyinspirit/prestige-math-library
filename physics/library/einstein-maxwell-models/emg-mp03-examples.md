@@ -1,7 +1,7 @@
 ---
 page: emg-mp03-examples
 title: "Separately adopted fixed-background Maxwell and charged probes — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

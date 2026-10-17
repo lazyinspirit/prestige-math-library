@@ -2,7 +2,7 @@
 id: pthm-tgr-radiation-local-properties
 kind: physics-theorem
 title: "Radiation entropy balance and causal linear sound"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

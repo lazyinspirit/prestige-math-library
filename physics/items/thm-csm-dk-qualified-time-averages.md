@@ -2,7 +2,7 @@
 id: thm-csm-dk-qualified-time-averages
 kind: theorem
 title: Conditional sampled and continuous-time averages
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

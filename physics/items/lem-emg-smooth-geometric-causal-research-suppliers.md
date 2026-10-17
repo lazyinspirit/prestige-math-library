@@ -2,7 +2,7 @@
 id: lem-emg-smooth-geometric-causal-research-suppliers
 kind: lemma
 title: "Causal and Cauchy-surface inputs for smooth electrovacuum developments"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

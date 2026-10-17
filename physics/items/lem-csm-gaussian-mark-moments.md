@@ -2,7 +2,7 @@
 id: lem-csm-gaussian-mark-moments
 kind: lemma
 title: Gaussian mark normalization, moments, and exponential controls
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

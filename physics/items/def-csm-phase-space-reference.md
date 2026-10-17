@@ -2,7 +2,7 @@
 id: def-csm-phase-space-reference
 kind: definition
 title: "Classical configuration, cotangent phase and reference measures"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

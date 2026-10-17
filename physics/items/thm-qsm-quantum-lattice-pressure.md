@@ -2,7 +2,7 @@
 id: thm-qsm-quantum-lattice-pressure
 kind: theorem
 title: Bounded quantum lattice pressure on cubes and van Hove sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

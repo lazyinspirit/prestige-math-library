@@ -2,7 +2,7 @@
 id: pthm-qsm-dt-record-transport
 kind: physics-theorem
 title: Conditional instrument-record diffusion coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

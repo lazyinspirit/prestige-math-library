@@ -1,7 +1,7 @@
 ---
 page: qsm-spin-thermodynamic-limits
 title: Bounded quantum lattice pressure on cubes and van Hove sets
-status: draft
+status: published
 library: physics
 items:
   - def-qsm-translation-invariant-spin-interaction

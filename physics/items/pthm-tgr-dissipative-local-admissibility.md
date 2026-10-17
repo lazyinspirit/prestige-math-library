@@ -2,7 +2,7 @@
 id: pthm-tgr-dissipative-local-admissibility
 kind: physics-theorem
 title: Conditional gradient-model entropy production
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

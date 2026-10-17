@@ -2,7 +2,7 @@
 id: pthm-qsm-onsite-interacting-atoms
 kind: physics-theorem
 title: "Exact onsite Bose and Fermi interacting atoms"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: pthm-tgr-negative-capacity-exchange-stability
 kind: physics-theorem
 title: "Finite bath stabilizes the selected negative-capacity exchange model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: ex-tgr-homogeneous-bulk-entropy
 kind: example
 title: Actual homogeneous bulk relaxation entropy production
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

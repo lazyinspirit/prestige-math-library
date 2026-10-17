@@ -2,7 +2,7 @@
 id: ex-qsm-onsite-interacting-atoms
 kind: example
 title: "Repulsive Fermi covariance and zero-temperature Bose occupation step"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

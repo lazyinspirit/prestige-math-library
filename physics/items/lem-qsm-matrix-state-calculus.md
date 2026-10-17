@@ -2,7 +2,7 @@
 id: lem-qsm-matrix-state-calculus
 kind: lemma
 title: Finite matrix spectral and state calculus
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

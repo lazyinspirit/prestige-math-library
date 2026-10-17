@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs04
 title: Actual photon box trace and Planck energy/entropy flux
-status: draft
+status: published
 library: mathematics
 requires:
   - orthonormal-bases-parseval-and-fourier-series

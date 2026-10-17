@@ -1,7 +1,7 @@
 ---
 page: emg-ms02
 title: Selected ingoing RN extension and time orientation
-status: draft
+status: published
 library: mathematics
 requires:
 - emg-ms01

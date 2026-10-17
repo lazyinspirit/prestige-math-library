@@ -2,7 +2,7 @@
 id: pthm-csm-nonadditive-phase-countermodel
 kind: physics-theorem
 title: "Explicit nonadditive transition and ensemble inequivalence"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

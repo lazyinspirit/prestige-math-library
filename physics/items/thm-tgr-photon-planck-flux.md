@@ -2,7 +2,7 @@
 id: thm-tgr-photon-planck-flux
 kind: theorem
 title: Actual photon box trace and Planck energy/entropy flux
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

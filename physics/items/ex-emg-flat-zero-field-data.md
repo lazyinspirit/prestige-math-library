@@ -2,7 +2,7 @@
 id: ex-emg-flat-zero-field-data
 kind: example
 title: Flat zero-field data and Minkowski development
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

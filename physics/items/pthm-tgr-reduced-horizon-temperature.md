@@ -2,7 +2,7 @@
 id: pthm-tgr-reduced-horizon-temperature
 kind: physics-theorem
 title: Reduced quantum horizon temperature calibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

@@ -1,7 +1,7 @@
 ---
 page: emg-s01
 title: "SI and geometric solution parameter identifications"
-status: draft
+status: published
 library: physics
 items:
   - def-emg-xs-si-parameters

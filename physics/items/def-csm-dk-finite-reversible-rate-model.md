@@ -2,7 +2,7 @@
 id: def-csm-dk-finite-reversible-rate-model
 kind: definition
 title: "Finite reversible stochastic rate model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

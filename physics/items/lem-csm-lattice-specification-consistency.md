@@ -2,7 +2,7 @@
 id: lem-csm-lattice-specification-consistency
 kind: lemma
 title: "Conditional Gibbs kernel consistency"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

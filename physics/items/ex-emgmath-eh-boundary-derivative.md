@@ -2,7 +2,7 @@
 id: ex-emgmath-eh-boundary-derivative
 kind: example
 title: "Zero boundary metric value does not kill EH derivative flux"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

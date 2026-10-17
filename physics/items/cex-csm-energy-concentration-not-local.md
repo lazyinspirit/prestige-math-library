@@ -2,7 +2,7 @@
 id: cex-csm-energy-concentration-not-local
 kind: counterexample
 title: Energy concentration without local equivalence
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

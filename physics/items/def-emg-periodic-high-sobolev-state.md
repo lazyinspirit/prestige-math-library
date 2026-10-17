@@ -2,7 +2,7 @@
 id: def-emg-periodic-high-sobolev-state
 kind: definition
 title: Periodic high-Sobolev state spaces
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

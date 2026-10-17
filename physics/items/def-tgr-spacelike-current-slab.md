@@ -2,7 +2,7 @@
 id: def-tgr-spacelike-current-slab
 kind: definition
 title: "Finite spacelike slab and normal flux charge"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

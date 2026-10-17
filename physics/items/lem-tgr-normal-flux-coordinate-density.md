@@ -2,7 +2,7 @@
 id: lem-tgr-normal-flux-coordinate-density
 kind: lemma
 title: "Normal slice charge equals its coordinate density integral"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

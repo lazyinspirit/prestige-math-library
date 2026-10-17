@@ -2,7 +2,7 @@
 id: pthm-emg-counterpoised-smooth-sphere
 kind: physics-theorem
 title: Exact smooth coupled counterpoised dust and observables
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

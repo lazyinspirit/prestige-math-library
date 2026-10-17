@@ -2,7 +2,7 @@
 id: pthm-csm-grand-response-identities
 kind: physics-theorem
 title: "Grand responses in beta and chemical potential"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

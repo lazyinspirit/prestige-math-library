@@ -2,7 +2,7 @@
 id: def-emg-extended-pointwise-product
 kind: definition
 title: "Extended pointwise product with zero at infinite factors"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

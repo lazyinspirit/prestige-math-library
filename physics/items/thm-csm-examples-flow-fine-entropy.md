@@ -2,7 +2,7 @@
 id: thm-csm-examples-flow-fine-entropy
 kind: theorem
 title: "Fine entropy under a specified incompressible periodic flow"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

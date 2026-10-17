@@ -2,7 +2,7 @@
 id: lem-qsm-local-generator-domain
 kind: lemma
 title: Local observables lie in the closed generator domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: def-csm-dk-periodic-mean-field-model
 kind: definition
 title: Smooth periodic finite-N and scaled mean-field phase data
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

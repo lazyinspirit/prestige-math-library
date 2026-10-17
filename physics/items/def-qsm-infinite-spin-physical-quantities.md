@@ -2,7 +2,7 @@
 id: def-qsm-infinite-spin-physical-quantities
 kind: definition
 title: Infinite quantum spin physical quantities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

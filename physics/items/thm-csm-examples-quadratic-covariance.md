@@ -2,7 +2,7 @@
 id: thm-csm-examples-quadratic-covariance
 kind: theorem
 title: "Gaussian covariance for positive quadratic forms and a boundary counterexample"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

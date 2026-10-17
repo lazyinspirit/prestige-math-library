@@ -2,7 +2,7 @@
 id: cex-csm-bulk-field-changes-pressure
 kind: counterexample
 title: A uniform one-body energy changes fixed-activity ideal-gas pressure
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: def-emg-charged-scalar-functional
 kind: definition
 title: "Classical complex-scalar connection derivative and action"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

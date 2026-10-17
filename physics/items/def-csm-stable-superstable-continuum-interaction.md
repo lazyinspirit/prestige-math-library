@@ -2,7 +2,7 @@
 id: def-csm-stable-superstable-continuum-interaction
 kind: definition
 title: "Stability, superstability and regular tails"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

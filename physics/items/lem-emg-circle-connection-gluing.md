@@ -2,7 +2,7 @@
 id: lem-emg-circle-connection-gluing
 kind: lemma
 title: "Circle gluing, curvature and connection variations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 physical_scope: null

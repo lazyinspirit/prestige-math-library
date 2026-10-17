@@ -1,7 +1,7 @@
 ---
 page: qsm-infinite-spin-physical-models
 title: Infinite quantum spin quantities and physical adoption
-status: draft
+status: published
 library: physics
 requires:
   - qsm-commuting-quantum-phases

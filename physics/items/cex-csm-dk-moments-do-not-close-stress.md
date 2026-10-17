@@ -2,7 +2,7 @@
 id: cex-csm-dk-moments-do-not-close-stress
 kind: counterexample
 title: "Equal number density, mean velocity, and scalar energy do not determine covariance stress"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

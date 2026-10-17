@@ -2,7 +2,7 @@
 id: lem-tgr-perfect-linear-causality
 kind: lemma
 title: Perfect sound characteristic and actual stable causal linear branch
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

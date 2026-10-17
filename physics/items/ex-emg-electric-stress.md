@@ -2,7 +2,7 @@
 id: ex-emg-electric-stress
 kind: example
 title: "Pure electric and magnetic observer stress"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 6

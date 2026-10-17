@@ -2,7 +2,7 @@
 id: thm-csm-dk-ou-velocity-diffusion-response
 kind: theorem
 title: "Exact OU velocity response, diffusion and Gaussian scaling"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

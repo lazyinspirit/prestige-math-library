@@ -2,7 +2,7 @@
 id: cex-tgr-physical-unregulated-collapse
 kind: counterexample
 title: "Point-particle preparation has no finite-box canonical law"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

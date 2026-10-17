@@ -2,7 +2,7 @@
 id: texp-emg-xs-two-center-model
 kind: thought-experiment
 title: Two-center ideal static charged configuration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

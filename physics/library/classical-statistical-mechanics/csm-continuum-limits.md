@@ -1,7 +1,7 @@
 ---
 page: csm-continuum-limits
 title: Finite-range continuum Gibbs kernels and DLR notion
-status: draft
+status: published
 items:
   - def-csm-continuum-dlr-kernels
   - lem-csm-continuum-kernel-normalization

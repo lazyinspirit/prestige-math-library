@@ -2,7 +2,7 @@
 id: lem-emg-fieldstrength-positive-symmetric-reduction
 kind: lemma
 title: "Positive symmetric Maxwell field-strength reduction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

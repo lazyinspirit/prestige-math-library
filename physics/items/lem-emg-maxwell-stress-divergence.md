@@ -2,7 +2,7 @@
 id: lem-emg-maxwell-stress-divergence
 kind: lemma
 title: "Curved electromagnetic stress divergence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

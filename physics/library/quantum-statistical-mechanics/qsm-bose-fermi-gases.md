@@ -1,7 +1,7 @@
 ---
 page: qsm-bose-fermi-gases
 title: Explicit diagonal Fock domains and occupation trace
-status: draft
+status: published
 library: physics
 requires:
   - csm-exact-models

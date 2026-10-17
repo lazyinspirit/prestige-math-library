@@ -2,7 +2,7 @@
 id: post-csm-grand-preparation
 kind: postulate
 title: "Grand canonical particle-exchange preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

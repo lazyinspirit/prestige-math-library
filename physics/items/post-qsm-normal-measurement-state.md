@@ -2,7 +2,7 @@
 id: post-qsm-normal-measurement-state
 kind: postulate
 title: Normal-state quantum measurement interpretation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

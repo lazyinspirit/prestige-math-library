@@ -2,7 +2,7 @@
 id: thm-csm-dk-exact-kinetic-moments
 kind: theorem
 title: "Exact kinetic moment balances and unclosed fluxes"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

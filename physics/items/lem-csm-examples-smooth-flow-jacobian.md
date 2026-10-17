@@ -2,7 +2,7 @@
 id: lem-csm-examples-smooth-flow-jacobian
 kind: lemma
 title: "Jacobian identity for a specified smooth diffeomorphic flow"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

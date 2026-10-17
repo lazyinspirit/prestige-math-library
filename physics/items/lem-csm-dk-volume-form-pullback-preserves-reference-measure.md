@@ -2,7 +2,7 @@
 id: lem-csm-dk-volume-form-pullback-preserves-reference-measure
 kind: lemma
 title: A volume-preserving diffeomorphism preserves its induced Borel measure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

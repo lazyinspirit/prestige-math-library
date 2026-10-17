@@ -2,7 +2,7 @@
 id: post-csm-dk-selected-hamiltonian-dynamics
 kind: postulate
 title: Adopted classical Hamiltonian dynamics and preparation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-qsm-ising-kms-coexistence
 kind: theorem
 title: Two-dimensional diagonal quantum Ising KMS coexistence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

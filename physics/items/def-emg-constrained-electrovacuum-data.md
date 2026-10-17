@@ -2,7 +2,7 @@
 id: def-emg-constrained-electrovacuum-data
 kind: definition
 title: Constrained electrovacuum initial data
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

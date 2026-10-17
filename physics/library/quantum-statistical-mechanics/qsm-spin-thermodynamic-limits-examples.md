@@ -1,7 +1,7 @@
 ---
 page: qsm-spin-thermodynamic-limits-examples
 title: Bounded quantum lattice pressure on cubes and van Hove sets — Examples
-status: draft
+status: published
 library: physics
 items:
   - ex-qsm-uniform-onsite-pressure

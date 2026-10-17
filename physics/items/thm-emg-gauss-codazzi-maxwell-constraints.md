@@ -2,7 +2,7 @@
 id: thm-emg-gauss-codazzi-maxwell-constraints
 kind: theorem
 title: Gauss-Codazzi and Maxwell initial constraints
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-tgr-killing-thermal-normalization
 kind: lemma
 title: Killing temperature normalization and rigidity
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

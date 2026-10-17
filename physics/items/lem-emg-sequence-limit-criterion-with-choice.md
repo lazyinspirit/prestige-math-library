@@ -2,7 +2,7 @@
 id: lem-emg-sequence-limit-criterion-with-choice
 kind: lemma
 title: Sequence-limit criterion with explicit choice use
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

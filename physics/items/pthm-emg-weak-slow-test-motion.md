@@ -2,7 +2,7 @@
 id: pthm-emg-weak-slow-test-motion
 kind: physics-theorem
 title: Finite-time weak/slow charged probe correspondence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

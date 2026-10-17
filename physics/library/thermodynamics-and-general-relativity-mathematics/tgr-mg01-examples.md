@@ -1,7 +1,7 @@
 ---
 page: tgr-mg01-examples
 title: "Finite gravitational phase and entropy reference — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-tgr-volume-surface-entropy-response

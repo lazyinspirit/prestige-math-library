@@ -2,7 +2,7 @@
 id: cex-csm-finite-range-attraction-collapse
 kind: counterexample
 title: Finite range alone does not imply stability
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

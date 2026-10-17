@@ -2,7 +2,7 @@
 id: ex-emg-adopted-linear-eos-model
 kind: example
 title: "A neutral, constraint-compatible linear-EOS sector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

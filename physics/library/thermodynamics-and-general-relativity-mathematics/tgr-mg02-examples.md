@@ -1,7 +1,7 @@
 ---
 page: tgr-mg02-examples
 title: "Smooth static spherical geometry and state domain — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

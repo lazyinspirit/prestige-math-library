@@ -1,7 +1,7 @@
 ---
 page: qsm-dt-relaxation-examples
 title: Specified finite GNS detailed balance — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

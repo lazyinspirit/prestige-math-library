@@ -2,7 +2,7 @@
 id: thm-csm-dk-global-lipschitz-vlasov
 kind: theorem
 title: Complete global bounded-Lipschitz mean-field characteristic evolution
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-tgr-perfect-neutral-modes
 kind: example
 title: "Perfect sound and neutral perturbation modes"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

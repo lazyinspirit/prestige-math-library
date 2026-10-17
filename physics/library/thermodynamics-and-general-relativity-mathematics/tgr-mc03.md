@@ -1,7 +1,7 @@
 ---
 page: tgr-mc03
 title: "Complete symmetrized constant-coefficient evolution"
-status: draft
+status: published
 library: mathematics
 items:
   - lem-tgr-constant-linear-energy-causality

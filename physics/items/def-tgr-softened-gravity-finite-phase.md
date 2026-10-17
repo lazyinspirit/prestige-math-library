@@ -2,7 +2,7 @@
 id: def-tgr-softened-gravity-finite-phase
 kind: definition
 title: "Finite softened gravitational Hamiltonian and domain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

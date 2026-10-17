@@ -2,7 +2,7 @@
 id: post-csm-dk-selected-reversible-bath-rates
 kind: postulate
 title: "Adopted finite reversible bath rates and field coupling"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

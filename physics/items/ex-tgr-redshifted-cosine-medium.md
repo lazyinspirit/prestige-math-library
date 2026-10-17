@@ -2,7 +2,7 @@
 id: ex-tgr-redshifted-cosine-medium
 kind: example
 title: Redshifted cosine medium
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

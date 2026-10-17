@@ -2,7 +2,7 @@
 id: ex-qsm-periodic-ideal-occupation
 kind: example
 title: "A fixed-number constraint removes independent occupations"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

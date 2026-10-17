@@ -2,7 +2,7 @@
 id: ex-emgmath-ml-b03
 kind: example
 title: Anisotropic magnetic stress and null energy-current vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

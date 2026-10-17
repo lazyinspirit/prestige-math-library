@@ -2,7 +2,7 @@
 id: def-csm-marked-periodic-continuation
 kind: definition
 title: Marked periodic continuation and local restriction
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

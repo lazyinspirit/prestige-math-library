@@ -2,7 +2,7 @@
 id: def-qsm-local-additive-spectral-ensembles
 kind: definition
 title: Additive spectral Hamiltonian and normalized ensembles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

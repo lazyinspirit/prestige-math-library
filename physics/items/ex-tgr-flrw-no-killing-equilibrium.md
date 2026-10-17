@@ -2,7 +2,7 @@
 id: ex-tgr-flrw-no-killing-equilibrium
 kind: example
 title: No massive Killing equilibrium in a spatially flat expanding FLRW metric
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

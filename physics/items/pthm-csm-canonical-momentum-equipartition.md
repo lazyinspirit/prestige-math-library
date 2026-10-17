@@ -2,7 +2,7 @@
 id: pthm-csm-canonical-momentum-equipartition
 kind: physics-theorem
 title: "Canonical momentum distribution and equipartition"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

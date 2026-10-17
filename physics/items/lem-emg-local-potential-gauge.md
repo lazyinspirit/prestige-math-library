@@ -2,7 +2,7 @@
 id: lem-emg-local-potential-gauge
 kind: lemma
 title: Local potential homotopy and Lorenz gauge reachability
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

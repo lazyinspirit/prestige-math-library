@@ -2,7 +2,7 @@
 id: thm-csm-dobrushin-finite-range-uniqueness
 kind: theorem
 title: "Finite-range Dobrushin uniqueness and boundary influence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

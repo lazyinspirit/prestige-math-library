@@ -2,7 +2,7 @@
 id: thm-emg-local-charged-barotropic-development
 kind: theorem
 title: "Local charged Einstein–Maxwell–barotropic development"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

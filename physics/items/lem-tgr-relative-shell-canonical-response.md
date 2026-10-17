@@ -2,7 +2,7 @@
 id: lem-tgr-relative-shell-canonical-response
 kind: lemma
 title: "Exact relative-shell canonical normalization and response"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

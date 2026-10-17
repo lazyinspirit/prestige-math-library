@@ -2,7 +2,7 @@
 id: thm-qsm-chain-kms-uniqueness
 kind: theorem
 title: Unique one-dimensional Ising KMS state at every positive temperature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

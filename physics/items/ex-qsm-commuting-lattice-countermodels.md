@@ -2,7 +2,7 @@
 id: ex-qsm-commuting-lattice-countermodels
 kind: example
 title: "Finite analyticity versus the global-model cusp and shell inequivalence"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

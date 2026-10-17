@@ -2,7 +2,7 @@
 id: def-emg-xs-br-products
 kind: definition
 title: Constant-radius Bertotti-Robinson product data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

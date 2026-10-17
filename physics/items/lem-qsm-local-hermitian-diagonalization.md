@@ -2,7 +2,7 @@
 id: lem-qsm-local-hermitian-diagonalization
 kind: lemma
 title: Finite Hermitian diagonalization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

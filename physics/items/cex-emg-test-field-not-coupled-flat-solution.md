@@ -2,7 +2,7 @@
 id: cex-emg-test-field-not-coupled-flat-solution
 kind: counterexample
 title: Nonzero flat test field is not a coupled flat solution
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

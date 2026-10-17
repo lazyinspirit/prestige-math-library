@@ -2,7 +2,7 @@
 id: lem-csm-gibbs-response-covariance
 kind: lemma
 title: "Finite Gibbs response and covariance identities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

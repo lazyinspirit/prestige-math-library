@@ -2,7 +2,7 @@
 id: def-csm-static-gauge-coupled-particle-model
 kind: definition
 title: "Static electromagnetic coupling and typed canonical momentum"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

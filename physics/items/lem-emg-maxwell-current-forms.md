@@ -2,7 +2,7 @@
 id: lem-emg-maxwell-current-forms
 kind: lemma
 title: "Sourced Maxwell sign and current conservation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

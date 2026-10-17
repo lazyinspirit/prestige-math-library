@@ -2,7 +2,7 @@
 id: prop-emg-xs-charged-ring-obstruction
 kind: proposition
 title: Charged KN ring regularity obstruction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

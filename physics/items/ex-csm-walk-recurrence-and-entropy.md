@@ -2,7 +2,7 @@
 id: ex-csm-walk-recurrence-and-entropy
 kind: example
 title: "A diffusive time step and a four-state entropy reversal"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

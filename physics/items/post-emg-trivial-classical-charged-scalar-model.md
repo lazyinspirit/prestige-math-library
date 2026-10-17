@@ -2,7 +2,7 @@
 id: post-emg-trivial-classical-charged-scalar-model
 kind: postulate
 title: "Adopted trivial-potential classical charged scalar model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

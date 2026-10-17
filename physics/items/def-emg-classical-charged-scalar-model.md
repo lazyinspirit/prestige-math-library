@@ -2,7 +2,7 @@
 id: def-emg-classical-charged-scalar-model
 kind: definition
 title: "Specified classical charged complex-scalar model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

@@ -2,7 +2,7 @@
 id: rem-csm-dk-hard-limit-dispositions
 kind: remark
 title: "Scope of the selected finite stochastic and kinetic models"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

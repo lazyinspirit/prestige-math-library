@@ -2,7 +2,7 @@
 id: texp-tgr-half-mass-emitter
 kind: thought-experiment
 title: Ideal active-area half-mass cutoff interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

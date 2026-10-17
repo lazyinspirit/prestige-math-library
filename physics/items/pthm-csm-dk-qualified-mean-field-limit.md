@@ -2,7 +2,7 @@
 id: pthm-csm-dk-qualified-mean-field-limit
 kind: physics-theorem
 title: Conditional mean-field particle distribution limit
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

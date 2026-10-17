@@ -2,7 +2,7 @@
 id: def-emg-set-size-and-class-schema
 kind: definition
 title: Set-sized objects and definable-class schemas
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

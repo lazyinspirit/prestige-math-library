@@ -2,7 +2,7 @@
 id: lem-tgr-bulk-linear-causality
 kind: lemma
 title: Bulk linear relaxation energy, stability and causal speed
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

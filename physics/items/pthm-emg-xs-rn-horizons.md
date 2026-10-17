@@ -2,7 +2,7 @@
 id: pthm-emg-xs-rn-horizons
 kind: physics-theorem
 title: RN horizon and escape deductions for specified model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

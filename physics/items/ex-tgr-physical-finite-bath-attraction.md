@@ -2,7 +2,7 @@
 id: ex-tgr-physical-finite-bath-attraction
 kind: example
 title: "Half-capacity bath attracts the selected exchange state"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

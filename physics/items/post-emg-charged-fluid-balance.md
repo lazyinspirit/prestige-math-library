@@ -2,7 +2,7 @@
 id: post-emg-charged-fluid-balance
 kind: postulate
 title: "Selected charged perfect-fluid exchange/Ohmic branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

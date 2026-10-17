@@ -2,7 +2,7 @@
 id: cex-tgr-incompressible-causal-transport
 kind: counterexample
 title: "Constant-density profile has unequal pressures at equal energy density"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

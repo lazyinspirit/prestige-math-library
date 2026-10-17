@@ -2,7 +2,7 @@
 id: ex-emg-nonzero-parallel-field-data
 kind: example
 title: "Nonzero parallel Maxwell fields satisfy torus constraints with isotropic initial curvature"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

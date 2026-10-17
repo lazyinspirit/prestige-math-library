@@ -2,7 +2,7 @@
 id: cex-qsm-dt-correlated-marginal
 kind: counterexample
 title: Correlated preparations with identical marginals diverge
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

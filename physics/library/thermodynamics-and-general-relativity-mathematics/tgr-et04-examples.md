@@ -1,7 +1,7 @@
 ---
 page: tgr-et04-examples
 title: "Heat and viscous entropy specialization — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

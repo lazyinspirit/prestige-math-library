@@ -1,7 +1,7 @@
 ---
 page: qsm-kms-equilibrium-examples
 title: Physical-time KMS strip equilibrium condition — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

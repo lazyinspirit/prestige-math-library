@@ -2,7 +2,7 @@
 id: thm-qsm-finite-kms-gibbs-characterization
 kind: theorem
 title: Finite KMS condition exactly determines the Gibbs density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

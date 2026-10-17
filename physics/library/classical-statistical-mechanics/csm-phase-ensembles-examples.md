@@ -1,7 +1,7 @@
 ---
 page: csm-phase-ensembles-examples
 title: "Classical configuration, phase and reference spaces — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-phase-ensembles

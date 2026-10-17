@@ -2,7 +2,7 @@
 id: lem-emg-einstein-action-variation
 kind: lemma
 title: "Compact Einstein–Hilbert variation and SI coupling"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

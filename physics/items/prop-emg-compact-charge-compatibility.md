@@ -2,7 +2,7 @@
 id: prop-emg-compact-charge-compatibility
 kind: proposition
 title: "Compact no-boundary normal charge compatibility"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

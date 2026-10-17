@@ -1,7 +1,7 @@
 ---
 page: csm-fluctuations-countermodels
 title: "Finite Bernoulli fluctuations and matching exponential rates"
-status: draft
+status: published
 library: physics
 requires:
   - csm-exact-models

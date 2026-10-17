@@ -2,7 +2,7 @@
 id: lem-qsm-fock-occupation-basis-and-car-relations
 kind: lemma
 title: "Occupation bases and actual CCR/CAR domains"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

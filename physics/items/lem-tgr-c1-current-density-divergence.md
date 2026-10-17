@@ -2,7 +2,7 @@
 id: lem-tgr-c1-current-density-divergence
 kind: lemma
 title: "Metric divergence density identity for a C¹ current"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

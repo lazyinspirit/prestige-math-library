@@ -2,7 +2,7 @@
 id: cex-csm-stable-not-superstable
 kind: counterexample
 title: Stability does not imply cell superstability
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

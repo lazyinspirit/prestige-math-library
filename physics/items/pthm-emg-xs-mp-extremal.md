@@ -2,7 +2,7 @@
 id: pthm-emg-xs-mp-extremal
 kind: physics-theorem
 title: Single-center extremal charged model correspondence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

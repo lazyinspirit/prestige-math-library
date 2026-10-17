@@ -2,7 +2,7 @@
 id: prop-emg-xs-mp-extremal-rn
 kind: proposition
 title: Single-center MP is extremal Reissner-Nordström exterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

@@ -2,7 +2,7 @@
 id: ex-emg-xs-zero-rotation
 kind: example
 title: Zero-rotation and zero-charge metric substitutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

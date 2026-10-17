@@ -1,7 +1,7 @@
 ---
 page: tgr-mhs02-examples
 title: Positive chiral current and exponential test-coordinate model — Examples
-status: draft
+status: published
 library: mathematics
 companion: tgr-mhs02
 requires:

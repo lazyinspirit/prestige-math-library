@@ -2,7 +2,7 @@
 id: ex-csm-dk-product-law-develops-correlations
 kind: example
 title: Finite pair dynamics immediately creates correlations
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: ex-qsm-interacting-dimer-gibbs
 kind: example
 title: "Entanglement threshold versus thermodynamic singularity"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

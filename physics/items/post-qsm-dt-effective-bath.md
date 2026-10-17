@@ -2,7 +2,7 @@
 id: post-qsm-dt-effective-bath
 kind: postulate
 title: Specified effective GKSL bath and instrument assumption
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

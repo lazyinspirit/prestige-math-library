@@ -2,7 +2,7 @@
 id: thm-csm-dk-invariant-hamiltonian-and-shell-measures
 kind: theorem
 title: Invariant energy-weighted and regular-shell probabilities
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

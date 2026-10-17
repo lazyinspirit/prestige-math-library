@@ -2,7 +2,7 @@
 id: pthm-emg-on-shell-electromagnetic-conservation
 kind: physics-theorem
 title: "Electromagnetic conservation in source-free curved spacetime"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

@@ -2,7 +2,7 @@
 id: lem-tgr-perfect-fluid-projection
 kind: lemma
 title: "Perfect stress and particle balances with entropy identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

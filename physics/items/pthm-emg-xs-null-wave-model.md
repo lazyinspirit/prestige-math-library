@@ -2,7 +2,7 @@
 id: pthm-emg-xs-null-wave-model
 kind: physics-theorem
 title: Exact coupled electromagnetic null-wave model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

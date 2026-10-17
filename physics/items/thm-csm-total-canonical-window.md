@@ -3,7 +3,7 @@
 id: thm-csm-total-canonical-window
 kind: theorem
 title: Total-energy concentration and controlled canonical windows
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: lem-tgr-exponential-current
 kind: lemma
 title: Positive chiral current and exponential test-coordinate model
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

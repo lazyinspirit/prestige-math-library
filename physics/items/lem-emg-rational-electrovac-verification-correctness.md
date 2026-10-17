@@ -2,7 +2,7 @@
 id: lem-emg-rational-electrovac-verification-correctness
 kind: lemma
 title: Correctness of finite rational tensor verification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

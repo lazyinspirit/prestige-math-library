@@ -2,7 +2,7 @@
 id: lem-qsm-gibbs-strip-limit
 kind: lemma
 title: Uniform local Gibbs strip limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

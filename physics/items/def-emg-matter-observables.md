@@ -2,7 +2,7 @@
 id: def-emg-matter-observables
 kind: definition
 title: "Smooth matter quantities, current and observer observables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

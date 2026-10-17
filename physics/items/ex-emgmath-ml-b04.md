@@ -2,7 +2,7 @@
 id: ex-emgmath-ml-b04
 kind: example
 title: Static electrostatic test-energy first integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

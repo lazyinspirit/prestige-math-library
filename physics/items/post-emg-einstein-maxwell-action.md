@@ -2,7 +2,7 @@
 id: post-emg-einstein-maxwell-action
 kind: postulate
 title: "Interior stationary Einstein–Maxwell–matter action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

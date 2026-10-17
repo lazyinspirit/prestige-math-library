@@ -2,7 +2,7 @@
 id: thm-qsm-dt-open-kubo
 kind: theorem
 title: Fixed-dissipator finite response and integrable kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

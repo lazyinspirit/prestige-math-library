@@ -2,7 +2,7 @@
 id: ex-emg-observer-static-field
 kind: example
 title: "Prescribed constant observer fields"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

@@ -1,7 +1,7 @@
 ---
 page: csm-full-phase-local-equivalence-examples
 title: "Conditional entropy chain and disjoint-block bounds — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - csm-full-phase-local-equivalence

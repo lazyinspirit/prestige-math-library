@@ -2,7 +2,7 @@
 id: ex-emg-xs-topological-charge
 kind: example
 title: Nonbounding sphere carries source-free charge flux
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

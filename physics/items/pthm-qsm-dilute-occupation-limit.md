@@ -2,7 +2,7 @@
 id: pthm-qsm-dilute-occupation-limit
 kind: physics-theorem
 title: "Controlled dilute Bose/Fermi occupation limit"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

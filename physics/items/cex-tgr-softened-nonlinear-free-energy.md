@@ -2,7 +2,7 @@
 id: cex-tgr-softened-nonlinear-free-energy
 kind: counterexample
 title: "Fixed softening does not guarantee finite extensive free energy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

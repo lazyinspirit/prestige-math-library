@@ -2,7 +2,7 @@
 id: pthm-csm-ideal-gas-ensemble
 kind: physics-theorem
 title: "Exact canonical and grand ideal-gas preparations"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

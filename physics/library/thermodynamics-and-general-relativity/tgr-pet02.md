@@ -1,7 +1,7 @@
 ---
 page: tgr-pet02
 title: Actually constructed Gibbs/KMS preparation
-status: draft
+status: published
 library: physics
 items:
   - post-tgr-selected-gibbs-kms-preparation

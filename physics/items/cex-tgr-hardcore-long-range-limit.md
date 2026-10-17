@@ -2,7 +2,7 @@
 id: cex-tgr-hardcore-long-range-limit
 kind: counterexample
 title: "Hard-core exclusion does not guarantee a finite unscaled-gravity limit"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

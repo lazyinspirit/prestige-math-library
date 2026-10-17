@@ -1,7 +1,7 @@
 ---
 page: emg-mm02
 title: "Arbitrary-positive-H conformastatic Ricci and Einstein components"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-mm01

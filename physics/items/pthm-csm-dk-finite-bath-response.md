@@ -2,7 +2,7 @@
 id: pthm-csm-dk-finite-bath-response
 kind: physics-theorem
 title: "Conditional finite-state equilibration and fluctuation response"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

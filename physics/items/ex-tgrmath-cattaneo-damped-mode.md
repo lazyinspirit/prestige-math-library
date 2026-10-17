@@ -2,7 +2,7 @@
 id: ex-tgrmath-cattaneo-damped-mode
 kind: example
 title: "Damped Cattaneo Fourier mode"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

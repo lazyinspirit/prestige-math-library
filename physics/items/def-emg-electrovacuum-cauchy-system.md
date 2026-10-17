@@ -2,7 +2,7 @@
 id: def-emg-electrovacuum-cauchy-system
 kind: definition
 title: Electrovacuum tensor Cauchy system
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

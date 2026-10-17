@@ -2,7 +2,7 @@
 id: def-qsm-dt-gns-detailed-balance
 kind: definition
 title: Specified finite GNS detailed balance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

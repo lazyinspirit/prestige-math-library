@@ -2,7 +2,7 @@
 id: post-tgr-perfect-fluid-model
 kind: postulate
 title: "Smooth perfect local material balance model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

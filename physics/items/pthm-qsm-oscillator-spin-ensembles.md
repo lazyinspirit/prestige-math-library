@@ -2,7 +2,7 @@
 id: pthm-qsm-oscillator-spin-ensembles
 kind: physics-theorem
 title: "Exact quantum oscillator and spin ensembles"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

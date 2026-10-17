@@ -2,7 +2,7 @@
 id: pthm-emg-classical-charged-scalar-model-evolution
 kind: physics-theorem
 title: "Local evolution of the adopted classical charged scalar model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: physics

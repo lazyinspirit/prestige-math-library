@@ -1,7 +1,7 @@
 ---
 page: emg-mm03
 title: "Finite WKB Maxwell residual, null rays and polarization quotient"
-status: draft
+status: published
 library: mathematics
 requires:
   - emg-c01

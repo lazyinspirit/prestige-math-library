@@ -1,7 +1,7 @@
 ---
 page: qsm-infinite-spin-physical-models-examples
 title: Infinite quantum spin quantities and physical adoption — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

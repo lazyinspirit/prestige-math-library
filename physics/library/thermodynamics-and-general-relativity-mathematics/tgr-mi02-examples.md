@@ -1,7 +1,7 @@
 ---
 page: tgr-mi02-examples
 title: Classical first-law product leaves entropy-temperature calibration free — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

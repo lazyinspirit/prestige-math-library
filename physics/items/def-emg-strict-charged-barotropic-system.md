@@ -2,7 +2,7 @@
 id: def-emg-strict-charged-barotropic-system
 kind: definition
 title: "Strict charged barotropic tensor system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

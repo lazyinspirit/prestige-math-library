@@ -2,7 +2,7 @@
 id: def-tgr-horizon-screen-family
 kind: definition
 title: Smooth null screen and subextremal Kerr–Newman parameter family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

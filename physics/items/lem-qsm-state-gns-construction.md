@@ -2,7 +2,7 @@
 id: lem-qsm-state-gns-construction
 kind: lemma
 title: Cyclic representation of a quasi-local state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

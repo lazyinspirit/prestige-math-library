@@ -2,7 +2,7 @@
 id: def-tgr-future-mass-shell-measure
 kind: definition
 title: Canonical future massive mass-shell measure
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

@@ -2,7 +2,7 @@
 id: lem-tgr-bulk-relaxation-entropy
 kind: lemma
 title: Corrected bulk relaxation and exact extended entropy
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics

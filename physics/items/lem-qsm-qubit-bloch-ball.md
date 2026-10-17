@@ -2,7 +2,7 @@
 id: lem-qsm-qubit-bloch-ball
 kind: lemma
 title: "Bloch-ball representation of a qubit density matrix"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics

@@ -2,7 +2,7 @@
 id: thm-emg-weak-slow-test-lorentz-limit
 kind: theorem
 title: Controlled weak/slow charged test trajectory comparison
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-remaining-80-2026-10-17
 domain: mathematics

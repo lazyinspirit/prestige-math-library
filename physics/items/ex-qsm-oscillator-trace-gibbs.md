@@ -2,7 +2,7 @@
 id: ex-qsm-oscillator-trace-gibbs
 kind: example
 title: Oscillator trace Gibbs and divergent normalization
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics

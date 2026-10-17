@@ -2,7 +2,7 @@
 id: lem-tgr-charged-liouville-preserves-mass-shell
 kind: lemma
 title: Charged Liouville transport preserves the future massive shell
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
