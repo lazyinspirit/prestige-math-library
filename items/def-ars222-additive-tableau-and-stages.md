@@ -2,7 +2,7 @@
 id: def-ars222-additive-tableau-and-stages
 kind: definition
 title: "The ARS(2,2,2) additive tableau and its three stages"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

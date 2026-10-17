@@ -2,7 +2,7 @@
 id: def-ctrl1-lqr-adjoint-equation
 kind: definition
 title: "Continuous adjoint equation for the linear-quadratic ODE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

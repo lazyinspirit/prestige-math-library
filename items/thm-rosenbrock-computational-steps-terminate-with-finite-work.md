@@ -2,7 +2,7 @@
 id: thm-rosenbrock-computational-steps-terminate-with-finite-work
 title: "The Rosenbrock factorization and stage procedures terminate with finite work"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-arnoldi-exponential-action-error-bound
 kind: theorem
 title: "Arnoldi action error is the semigroup-weighted residual integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

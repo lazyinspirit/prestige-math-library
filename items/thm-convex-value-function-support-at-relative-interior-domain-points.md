@@ -2,7 +2,7 @@
 id: thm-convex-value-function-support-at-relative-interior-domain-points
 kind: theorem
 title: A finite-dimensional convex value function has a support at relative-interior points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

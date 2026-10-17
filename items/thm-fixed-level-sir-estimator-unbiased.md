@@ -2,7 +2,7 @@
 id: thm-fixed-level-sir-estimator-unbiased
 kind: theorem
 title: Fixed-level full-resampling SIR splitting is unbiased
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

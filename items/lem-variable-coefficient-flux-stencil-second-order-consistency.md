@@ -2,7 +2,7 @@
 id: lem-variable-coefficient-flux-stencil-second-order-consistency
 kind: lemma
 title: Second-order consistency of the variable-coefficient flux stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

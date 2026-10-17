@@ -2,7 +2,7 @@
 id: ex-implicit-stiff-decay-parameter-fit
 kind: example
 title: Backward Euler differentiates a stiff scalar decay fit on its exact branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

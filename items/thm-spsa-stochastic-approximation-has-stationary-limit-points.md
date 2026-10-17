@@ -2,7 +2,7 @@
 id: thm-spsa-stochastic-approximation-has-stationary-limit-points
 kind: theorem
 title: "Summably biased SPSA has convergent objective values and zero gradient liminf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

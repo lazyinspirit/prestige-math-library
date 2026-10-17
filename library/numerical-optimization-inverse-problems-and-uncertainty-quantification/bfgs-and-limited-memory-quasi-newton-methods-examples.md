@@ -1,7 +1,7 @@
 ---
 page: bfgs-and-limited-memory-quasi-newton-methods-examples
 title: "Bfgs and limited memory quasi newton methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bfgs-secant-on-a-strongly-convex-quadratic

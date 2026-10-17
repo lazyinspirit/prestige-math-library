@@ -2,7 +2,7 @@
 id: thm-chebyshev-gauss-lobatto-differentiation-is-exact
 kind: theorem
 title: "Chebyshev–Gauss–Lobatto differentiation is exact on the interpolant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

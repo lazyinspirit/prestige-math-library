@@ -2,7 +2,7 @@
 id: alg-certified-scf-with-diis-safeguard
 kind: algorithm
 title: Finite-budget certified SCF with safeguarded DIIS and a contractive fallback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: numerical-optimization-globalization-and-inexact-certificates
 title: Numerical optimization globalization and inexact certificates
-status: draft
+status: published
 items:
   - alg-exact-gradient-line-search-step
   - lem-hessian-lower-bound-strong-convexity-gradient-gap

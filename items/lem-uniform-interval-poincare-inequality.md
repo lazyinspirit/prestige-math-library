@@ -2,7 +2,7 @@
 id: lem-uniform-interval-poincare-inequality
 kind: lemma
 title: Sharp Poincare bound for the uniform law on an interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

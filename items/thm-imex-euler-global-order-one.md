@@ -2,7 +2,7 @@
 id: thm-imex-euler-global-order-one
 kind: theorem
 title: "IMEX Euler is first-order convergent on a common compact tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

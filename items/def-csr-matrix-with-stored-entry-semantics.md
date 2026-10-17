@@ -2,7 +2,7 @@
 id: def-csr-matrix-with-stored-entry-semantics
 kind: definition
 title: "Compressed sparse row matrices with stored-entry semantics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: lem-bounded-lipschitz-discrepancy-dominated-by-weighted-total-variation
 kind: lemma
 title: Weighted total variation bounds bounded-Lipschitz discrepancy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-inexact-proximal-gradient-one-step-estimate
 kind: lemma
 title: "One-step estimate for a certified inexact proximal call"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

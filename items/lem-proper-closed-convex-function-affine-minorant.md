@@ -2,7 +2,7 @@
 id: lem-proper-closed-convex-function-affine-minorant
 kind: lemma
 title: "A proper closed convex function has an affine minorant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

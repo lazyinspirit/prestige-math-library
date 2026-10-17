@@ -2,7 +2,7 @@
 id: ex-stiff-reversible-explicit-leap-mean-amplification
 kind: example
 title: "A stiff reversible system exposes explicit tau-leap mean instability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

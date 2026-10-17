@@ -2,7 +2,7 @@
 id: thm-modified-patankar-euler-global-first-order-error
 kind: theorem
 title: "Modified Patankar Euler converges globally with first-order error on a positive tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

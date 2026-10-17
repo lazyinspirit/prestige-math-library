@@ -2,7 +2,7 @@
 id: alg-ctrl1-runge-kutta-shooting-and-collocation-transcription
 kind: algorithm
 title: "Finite-horizon shooting and Runge–Kutta collocation transcription"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

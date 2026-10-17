@@ -2,7 +2,7 @@
 id: lem-na-chebyshev-integral-moments
 kind: lemma
 title: "Exact integrals of Chebyshev polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

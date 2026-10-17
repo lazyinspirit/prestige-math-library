@@ -2,7 +2,7 @@
 id: thm-tikhonov-source-condition-rate-and-qualification-saturation
 kind: theorem
 title: Tikhonov source-condition rates balance noise at qualification one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

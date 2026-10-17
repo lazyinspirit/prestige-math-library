@@ -2,7 +2,7 @@
 id: thm-poincare-bound-for-total-sobol-effect
 kind: theorem
 title: Coordinate Poincare inequalities bound total Sobol effects
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

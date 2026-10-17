@@ -2,7 +2,7 @@
 id: lem-inexact-newton-krylov-finite-budget-checked-return
 kind: lemma
 title: "Safeguarded inexact Newton has a finite checked-return bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

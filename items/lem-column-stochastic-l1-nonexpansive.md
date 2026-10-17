@@ -2,7 +2,7 @@
 id: lem-column-stochastic-l1-nonexpansive
 kind: lemma
 title: "Column-stochastic matrices preserve mass and contract ℓ1"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

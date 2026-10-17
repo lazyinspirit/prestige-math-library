@@ -2,7 +2,7 @@
 id: ex-constant-mortality-and-age-localized-fertility
 kind: example
 title: Constant mortality with age-localized fertility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

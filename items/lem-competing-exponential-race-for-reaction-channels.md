@@ -2,7 +2,7 @@
 id: lem-competing-exponential-race-for-reaction-channels
 kind: lemma
 title: "Competing exponential clocks give the reaction event law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

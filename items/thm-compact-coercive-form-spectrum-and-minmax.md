@@ -2,7 +2,7 @@
 id: thm-compact-coercive-form-spectrum-and-minmax
 kind: theorem
 title: Discrete spectrum and min–max principle for a compact coercive form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

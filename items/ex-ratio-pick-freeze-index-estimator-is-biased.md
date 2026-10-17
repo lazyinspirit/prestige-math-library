@@ -2,7 +2,7 @@
 id: ex-ratio-pick-freeze-index-estimator-is-biased
 kind: example
 title: A pick-freeze ratio can be biased at finite sample size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

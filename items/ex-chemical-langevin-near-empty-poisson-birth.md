@@ -2,7 +2,7 @@
 id: ex-chemical-langevin-near-empty-poisson-birth
 kind: example
 title: "A CLE can assign negative density near an empty population"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

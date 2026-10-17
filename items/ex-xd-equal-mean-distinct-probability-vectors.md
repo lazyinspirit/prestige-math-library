@@ -2,7 +2,7 @@
 id: ex-xd-equal-mean-distinct-probability-vectors
 kind: example
 title: "Equal mean trajectories do not determine a master-equation state"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

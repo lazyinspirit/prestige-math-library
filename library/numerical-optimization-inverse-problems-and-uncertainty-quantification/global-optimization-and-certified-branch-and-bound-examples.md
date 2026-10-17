@@ -1,7 +1,7 @@
 ---
 page: global-optimization-and-certified-branch-and-bound-examples
 title: "Global optimization and certified branch and bound — Examples"
-status: draft
+status: published
 requires:
   - global-optimization-and-certified-branch-and-bound
 items: []

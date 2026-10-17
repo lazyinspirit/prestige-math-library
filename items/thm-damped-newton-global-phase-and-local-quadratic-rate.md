@@ -2,7 +2,7 @@
 id: thm-damped-newton-global-phase-and-local-quadratic-rate
 kind: theorem
 title: "Damped Newton reaches its local quadratic phase in finitely many continued updates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

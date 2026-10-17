@@ -2,7 +2,7 @@
 id: thm-conforming-galerkin-eigenspace-gap-under-isolated-cluster
 kind: theorem
 title: Conforming Galerkin invariant subspaces converge across an isolated cluster
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

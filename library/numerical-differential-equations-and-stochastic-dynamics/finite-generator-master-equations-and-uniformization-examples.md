@@ -1,7 +1,7 @@
 ---
 page: finite-generator-master-equations-and-uniformization-examples
 title: "Finite generator master equations and uniformization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-xd-two-state-gating-uniformization

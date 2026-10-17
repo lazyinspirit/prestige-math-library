@@ -2,7 +2,7 @@
 id: thm-computed-full-rank-least-squares-backward-stability
 kind: theorem
 title: "Computed reduced QR least squares is backward stable for full column rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

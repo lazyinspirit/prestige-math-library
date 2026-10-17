@@ -2,7 +2,7 @@
 id: ex-euler-midpoint-rk4-fixed-time-error-slopes
 kind: example
 title: "Fixed-time error slopes for Euler, midpoint, and classical RK4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

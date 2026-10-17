@@ -2,7 +2,7 @@
 id: thm-na-dct-ii-chebyshev-coefficient-extraction
 kind: theorem
 title: "DCT-II samples extract Chebyshev coefficients at first-kind roots"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

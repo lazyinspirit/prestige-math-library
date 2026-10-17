@@ -2,7 +2,7 @@
 id: thm-slater-strong-duality-and-dual-attainment
 kind: theorem
 title: Slater gives zero duality gap and an attained dual certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

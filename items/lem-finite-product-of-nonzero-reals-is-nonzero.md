@@ -2,7 +2,7 @@
 id: lem-finite-product-of-nonzero-reals-is-nonzero
 kind: lemma
 title: "A finite product of nonzero reals is nonzero"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

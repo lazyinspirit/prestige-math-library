@@ -2,7 +2,7 @@
 id: ex-nelder-mead-flat-plateau-stagnation
 kind: example
 title: "Nelder–Mead can stop on a nonminimizing flat plateau"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

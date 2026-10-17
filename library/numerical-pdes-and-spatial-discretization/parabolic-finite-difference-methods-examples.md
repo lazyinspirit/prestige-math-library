@@ -1,7 +1,7 @@
 ---
 page: parabolic-finite-difference-methods-examples
 title: Parabolic finite-difference methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth

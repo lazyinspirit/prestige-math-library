@@ -2,7 +2,7 @@
 id: ex-periodic-fourier-collocation-exactness-and-nyquist-mode
 kind: example
 title: "Four-point Fourier collocation differentiates the Nyquist cosine at its nodes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: spectral-collocation-and-galerkin-methods-examples

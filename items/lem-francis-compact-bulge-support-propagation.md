@@ -2,7 +2,7 @@
 id: lem-francis-compact-bulge-support-propagation
 kind: lemma
 title: "A compact Francis bulge chase preserves Hessenberg form and the initial direction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

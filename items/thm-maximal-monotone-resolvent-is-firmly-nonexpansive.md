@@ -2,7 +2,7 @@
 id: thm-maximal-monotone-resolvent-is-firmly-nonexpansive
 kind: theorem
 title: "A maximal-monotone resolvent is everywhere-defined and firmly nonexpansive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-pde-box-control-set
 kind: definition
 title: Closed pointwise box of L2 controls
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

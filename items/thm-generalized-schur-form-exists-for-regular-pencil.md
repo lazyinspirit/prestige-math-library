@@ -2,7 +2,7 @@
 id: thm-generalized-schur-form-exists-for-regular-pencil
 kind: theorem
 title: "Every regular real or complex pencil has a generalized Schur form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

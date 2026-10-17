@@ -2,7 +2,7 @@
 id: thm-stiefel-grassmann-tangent-projections
 kind: theorem
 title: Tangent spaces and Frobenius projections on Stiefel and Grassmann
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

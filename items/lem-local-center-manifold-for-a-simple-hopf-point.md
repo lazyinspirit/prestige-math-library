@@ -2,7 +2,7 @@
 id: lem-local-center-manifold-for-a-simple-hopf-point
 kind: lemma
 title: A parameterized C5 center manifold exists at a simple Hopf spectral split
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

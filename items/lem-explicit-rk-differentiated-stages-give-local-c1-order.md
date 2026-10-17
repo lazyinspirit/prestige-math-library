@@ -2,7 +2,7 @@
 id: lem-explicit-rk-differentiated-stages-give-local-c1-order
 kind: lemma
 title: "Differentiated explicit RK stages give local C1 order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

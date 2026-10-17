@@ -2,7 +2,7 @@
 id: ex-ula-and-baoab-have-distinct-harmonic-variance-bias
 kind: example
 title: "Overdamped ULA and underdamped BAOAB have different harmonic variance errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-reaction-counts-have-compensators-brackets-and-isometry
 kind: theorem
 title: "Compensators, brackets, and jump-integral isometry for reaction counts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: def-certified-ivp-approximation-and-sensitivity-interface
 kind: definition
 title: "Certified differentiable IVP approximation interface for shooting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

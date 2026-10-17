@@ -2,7 +2,7 @@
 id: thm-second-strang-lemma-for-nonconforming-galerkin
 kind: theorem
 title: Second Strang estimate with a bounded extension to the comparison space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

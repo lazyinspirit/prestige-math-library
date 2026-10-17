@@ -2,7 +2,7 @@
 id: lem-periodic-advection-amplification-symbols
 kind: lemma
 title: Amplification symbols for periodic scalar advection stencils
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

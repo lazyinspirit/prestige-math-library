@@ -2,7 +2,7 @@
 id: def-mccormick-bilinear-box-envelope
 kind: definition
 title: McCormick envelope for a bilinear term on a box
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

@@ -2,7 +2,7 @@
 id: lem-irlgnm-one-step-error-recurrence
 kind: lemma
 title: One-step error recurrence for the assigned nonlinear regularized Gauss–Newton step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

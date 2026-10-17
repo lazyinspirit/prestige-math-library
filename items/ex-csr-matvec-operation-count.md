@@ -2,7 +2,7 @@
 id: ex-csr-matvec-operation-count
 kind: example
 title: "An exact CSR product and its stored-entry count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

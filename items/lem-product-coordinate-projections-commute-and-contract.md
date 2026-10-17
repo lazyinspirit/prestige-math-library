@@ -2,7 +2,7 @@
 id: lem-product-coordinate-projections-commute-and-contract
 kind: lemma
 title: Product-coordinate projections commute and contract in L2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

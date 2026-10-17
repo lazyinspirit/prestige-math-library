@@ -2,7 +2,7 @@
 id: ex-poisson-tau-leap-negative-population-pure-death
 kind: example
 title: "A Poisson leap can make a pure-death population negative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

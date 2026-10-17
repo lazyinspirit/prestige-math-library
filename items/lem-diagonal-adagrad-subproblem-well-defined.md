@@ -2,7 +2,7 @@
 id: lem-diagonal-adagrad-subproblem-well-defined
 kind: lemma
 title: Diagonal AdaGrad subproblem has a unique minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

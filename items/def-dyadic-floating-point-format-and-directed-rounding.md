@@ -2,7 +2,7 @@
 id: def-dyadic-floating-point-format-and-directed-rounding
 kind: definition
 title: Dyadic floating-point format and directed rounding
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

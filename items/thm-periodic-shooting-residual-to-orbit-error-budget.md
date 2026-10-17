@@ -2,7 +2,7 @@
 id: thm-periodic-shooting-residual-to-orbit-error-budget
 kind: theorem
 title: "A certified shooting residual gives an explicit local periodic-orbit error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

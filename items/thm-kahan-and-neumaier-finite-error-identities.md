@@ -2,7 +2,7 @@
 id: thm-kahan-and-neumaier-finite-error-identities
 kind: theorem
 title: "Kahan and Neumaier summation satisfy explicit finite data-dependent error bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

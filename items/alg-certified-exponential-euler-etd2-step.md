@@ -2,7 +2,7 @@
 id: alg-certified-exponential-euler-etd2-step
 kind: algorithm
 title: Certified-action implementation of exponential Euler and ETD2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

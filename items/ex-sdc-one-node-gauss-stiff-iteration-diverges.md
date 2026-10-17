@@ -2,7 +2,7 @@
 id: ex-sdc-one-node-gauss-stiff-iteration-diverges
 kind: example
 title: An explicit SDC sweep diverges on a stiff scalar mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: thm-parabolic-theta-scheme-global-error-bound
 kind: theorem
 title: Global weighted L2 error from the complete parabolic residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

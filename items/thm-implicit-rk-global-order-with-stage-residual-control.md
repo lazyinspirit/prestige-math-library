@@ -2,7 +2,7 @@
 id: thm-implicit-rk-global-order-with-stage-residual-control
 title: "Backward Euler, the selected SDIRK, and two-stage Radau IIA converge at their stated orders under controlled stage residuals"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

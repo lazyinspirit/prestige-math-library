@@ -1,7 +1,7 @@
 ---
 page: numerical-identifiability-and-optimal-experiment-design
 title: "Numerical identifiability and optimal experiment design"
-status: draft
+status: published
 requires:
   - response-surfaces-and-optimal-design
   - inequality-kkt-duality-and-optimality-certificates

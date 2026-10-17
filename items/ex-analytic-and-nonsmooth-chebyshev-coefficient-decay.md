@@ -2,7 +2,7 @@
 id: ex-analytic-and-nonsmooth-chebyshev-coefficient-decay
 kind: example
 title: "Analytic and nonsmooth data have geometric and algebraic Chebyshev coefficient decay"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: spectral-collocation-and-galerkin-methods-examples

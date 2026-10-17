@@ -2,7 +2,7 @@
 id: ex-finite-budget-crossing-misses-between-grid-times
 kind: example
 title: A finite grid can miss a continuous-time crossing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

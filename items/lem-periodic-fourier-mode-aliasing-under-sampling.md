@@ -2,7 +2,7 @@
 id: lem-periodic-fourier-mode-aliasing-under-sampling
 kind: lemma
 title: "Periodic Fourier modes alias modulo the grid size"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

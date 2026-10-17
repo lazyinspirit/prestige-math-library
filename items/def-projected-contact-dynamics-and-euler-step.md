@@ -2,7 +2,7 @@
 id: def-projected-contact-dynamics-and-euler-step
 kind: definition
 title: Projected contact dynamics and explicit projection Euler step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

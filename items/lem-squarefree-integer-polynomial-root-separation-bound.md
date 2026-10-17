@@ -2,7 +2,7 @@
 id: lem-squarefree-integer-polynomial-root-separation-bound
 kind: lemma
 title: An explicit root-separation bound for squarefree integer polynomials
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

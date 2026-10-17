@@ -2,7 +2,7 @@
 id: alg-corrected-stationary-residual-certificate
 kind: algorithm
 title: "Correct and certify a finite-chain stationary candidate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

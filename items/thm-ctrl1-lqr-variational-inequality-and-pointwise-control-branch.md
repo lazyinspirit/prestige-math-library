@@ -2,7 +2,7 @@
 id: thm-ctrl1-lqr-variational-inequality-and-pointwise-control-branch
 kind: theorem
 title: "LQR minimizers satisfy a feasible-set variational inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

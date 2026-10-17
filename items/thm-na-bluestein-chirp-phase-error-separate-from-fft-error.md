@@ -2,7 +2,7 @@
 id: thm-na-bluestein-chirp-phase-error-separate-from-fft-error
 kind: theorem
 title: "Bluestein chirp-phase error is bounded separately from FFT-convolution error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

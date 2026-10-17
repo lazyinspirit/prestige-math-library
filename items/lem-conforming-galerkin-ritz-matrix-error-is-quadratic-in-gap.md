@@ -2,7 +2,7 @@
 id: lem-conforming-galerkin-ritz-matrix-error-is-quadratic-in-gap
 kind: lemma
 title: The conforming Ritz matrix differs quadratically in the eigenspace gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

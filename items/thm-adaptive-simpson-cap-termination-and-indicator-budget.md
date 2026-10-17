@@ -2,7 +2,7 @@
 id: thm-adaptive-simpson-cap-termination-and-indicator-budget
 kind: theorem
 title: Termination and indicator bookkeeping for capped adaptive Simpson
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-stable-linear-noise-lyapunov-covariance
 kind: example
 title: "A stable linear noise covariance balance has a positive solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-nonsmooth-exchange-correlation-functional-breaks-c2
 kind: example
 title: "A cusp in a chosen exchange-correlation term violates the C2 hypothesis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

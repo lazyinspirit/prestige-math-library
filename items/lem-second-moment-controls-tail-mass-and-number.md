@@ -2,7 +2,7 @@
 id: lem-second-moment-controls-tail-mass-and-number
 kind: lemma
 title: A second moment controls the discarded mass and number tails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

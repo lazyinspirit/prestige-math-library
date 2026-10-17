@@ -2,7 +2,7 @@
 id: def-scalar-neutral-delay-equation-and-segment-shift
 kind: definition
 title: "Scalar neutral delay equations and the derivative-segment shift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

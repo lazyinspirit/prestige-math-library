@@ -2,7 +2,7 @@
 id: lem-dirichlet-forcing-coefficients-exceed-the-generator-domain
 kind: lemma
 title: "Constant Dirichlet forcing is square summable but outside the heat-generator domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: alg-rational-bernoulli-rejection-from-fair-bits
 kind: algorithm
 title: "Unbiased rational Bernoulli sampling by bit rejection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

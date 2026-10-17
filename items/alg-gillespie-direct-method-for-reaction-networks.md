@@ -2,7 +2,7 @@
 id: alg-gillespie-direct-method-for-reaction-networks
 kind: algorithm
 title: "Gillespie direct method with horizon and budget statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

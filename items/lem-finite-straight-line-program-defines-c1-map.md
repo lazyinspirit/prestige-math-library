@@ -2,7 +2,7 @@
 id: lem-finite-straight-line-program-defines-c1-map
 kind: lemma
 title: "A finite straight-line C1 program defines a C1 map on each fixed strict branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, def-c-one-map-and-local-inverse, thm-chain-rule-for-total-derivatives, thm-total-differentiability-gives-a-local-linear-bound-and-continuity]

@@ -2,7 +2,7 @@
 id: ex-revised-simplex-phase-one-infeasible
 kind: example
 title: "An infeasible Phase I problem and its Farkas certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

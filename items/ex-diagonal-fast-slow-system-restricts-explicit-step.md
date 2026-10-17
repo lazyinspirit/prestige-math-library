@@ -2,7 +2,7 @@
 id: ex-diagonal-fast-slow-system-restricts-explicit-step
 kind: example
 title: "A fast component restricts the forward-Euler step in a diagonal fast-slow system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

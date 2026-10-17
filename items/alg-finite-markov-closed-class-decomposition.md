@@ -2,7 +2,7 @@
 id: alg-finite-markov-closed-class-decomposition
 kind: algorithm
 title: "Finite Markov closed-class graph decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

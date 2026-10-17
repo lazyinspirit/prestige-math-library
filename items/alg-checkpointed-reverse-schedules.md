@@ -2,7 +2,7 @@
 id: alg-checkpointed-reverse-schedules
 kind: algorithm
 title: "Uniform-block and binomial checkpoint schedules for reverse sweeps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, alg-reverse-mode-automatic-differentiation]

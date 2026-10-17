@@ -2,7 +2,7 @@
 id: lem-affine-pullback-weak-derivatives-and-scaling
 kind: lemma
 title: Affine pullback of weak derivatives and Sobolev seminorms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

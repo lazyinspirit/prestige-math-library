@@ -2,7 +2,7 @@
 id: alg-one-dimensional-first-impact-with-restitution
 kind: algorithm
 title: First-impact step for a one-dimensional unilateral contact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

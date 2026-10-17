@@ -2,7 +2,7 @@
 id: lem-composite-simpson-asymptotic-error-expansion
 kind: lemma
 title: Leading composite Simpson error coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

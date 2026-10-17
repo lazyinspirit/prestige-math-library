@@ -2,7 +2,7 @@
 id: cor-aubin-nitsche-h-r-plus-s-rate-under-primal-and-dual-approximation
 kind: corollary
 title: The h^(r+s) L² rate under primal and dual approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

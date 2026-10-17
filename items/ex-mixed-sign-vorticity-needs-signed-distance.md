@@ -2,7 +2,7 @@
 id: ex-mixed-sign-vorticity-needs-signed-distance
 kind: example
 title: A mixed-sign vorticity is not a probability for W1
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

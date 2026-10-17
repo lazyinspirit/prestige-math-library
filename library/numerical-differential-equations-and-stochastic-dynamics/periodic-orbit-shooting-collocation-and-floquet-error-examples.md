@@ -1,7 +1,7 @@
 ---
 page: periodic-orbit-shooting-collocation-and-floquet-error-examples
 title: Periodic orbit shooting collocation and Floquet error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-coarse-euler-variational-step-gives-spurious-instability

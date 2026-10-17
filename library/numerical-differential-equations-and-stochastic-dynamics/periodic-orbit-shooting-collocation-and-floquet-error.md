@@ -1,7 +1,7 @@
 ---
 page: periodic-orbit-shooting-collocation-and-floquet-error
 title: Periodic orbit shooting collocation and Floquet error
-status: draft
+status: published
 items:
   - def-verified-flow-variational-range-oracle
   - lem-positive-convex-polygon-winding-index

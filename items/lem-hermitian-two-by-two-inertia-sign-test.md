@@ -2,7 +2,7 @@
 id: lem-hermitian-two-by-two-inertia-sign-test
 kind: lemma
 title: A Hermitian two-by-two pivot inertia is determined by determinant and trace signs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

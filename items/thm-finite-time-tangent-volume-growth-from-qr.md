@@ -2,7 +2,7 @@
 id: thm-finite-time-tangent-volume-growth-from-qr
 kind: theorem
 title: Positive-diagonal QR factors give the exact finite-time tangent-volume change
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

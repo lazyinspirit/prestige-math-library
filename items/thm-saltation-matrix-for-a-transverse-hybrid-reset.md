@@ -2,7 +2,7 @@
 id: thm-saltation-matrix-for-a-transverse-hybrid-reset
 kind: theorem
 title: "The saltation matrix gives the first-order variation across a transverse hybrid reset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

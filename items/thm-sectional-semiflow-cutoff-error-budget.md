@@ -2,7 +2,7 @@
 id: thm-sectional-semiflow-cutoff-error-budget
 kind: theorem
 title: Sectional size discretization separates grid and cutoff errors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

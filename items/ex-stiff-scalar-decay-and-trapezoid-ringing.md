@@ -2,7 +2,7 @@
 id: ex-stiff-scalar-decay-and-trapezoid-ringing
 title: "Trapezoidal ringing on a stiff scalar decay equation"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

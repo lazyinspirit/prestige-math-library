@@ -2,7 +2,7 @@
 id: ex-wave-cfl-endpoint-and-energy-breakdown
 kind: example
 title: The Nyquist mode at and beyond the leapfrog CFL endpoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

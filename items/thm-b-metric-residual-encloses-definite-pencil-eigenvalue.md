@@ -2,7 +2,7 @@
 id: thm-b-metric-residual-encloses-definite-pencil-eigenvalue
 kind: theorem
 title: "A B-dual residual bounds distance to the spectrum of a Hermitian-definite pencil"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

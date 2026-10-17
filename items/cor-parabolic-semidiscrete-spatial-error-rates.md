@@ -2,7 +2,7 @@
 id: cor-parabolic-semidiscrete-spatial-error-rates
 kind: corollary
 title: Semidiscrete parabolic energy and L2 rates from elliptic approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

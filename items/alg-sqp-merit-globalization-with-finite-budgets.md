@@ -2,7 +2,7 @@
 id: alg-sqp-merit-globalization-with-finite-budgets
 kind: algorithm
 title: "L1 merit globalization with finite penalty and backtracking budgets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-mprk22-1-positive-tube-local-error-and-stability
 kind: lemma
 title: "MPRK22(1) has a uniform second-order defect and one-step bound on positive tubes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

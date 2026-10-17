@@ -1,7 +1,7 @@
 ---
 page: riemannian-optimization-on-stiefel-and-grassmann-manifolds
 title: Riemannian optimization on stiefel and grassmann manifolds
-status: draft
+status: published
 items:
   - def-stiefel-grassmann-optimization-conventions
   - def-complex-stiefel-grassmann-optimization-conventions

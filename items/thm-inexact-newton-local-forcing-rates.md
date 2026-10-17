@@ -2,7 +2,7 @@
 id: thm-inexact-newton-local-forcing-rates
 kind: theorem
 title: "Forcing residuals determine local inexact-Newton rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

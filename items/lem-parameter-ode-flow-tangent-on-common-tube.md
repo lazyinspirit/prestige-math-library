@@ -2,7 +2,7 @@
 id: lem-parameter-ode-flow-tangent-on-common-tube
 kind: lemma
 title: Parameter-dependent ODE flows have the variational tangent on a common tube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

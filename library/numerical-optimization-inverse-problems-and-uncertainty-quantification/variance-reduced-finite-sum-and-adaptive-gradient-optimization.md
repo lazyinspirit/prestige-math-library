@@ -1,7 +1,7 @@
 ---
 page: variance-reduced-finite-sum-and-adaptive-gradient-optimization
 title: Variance reduced finite sum and adaptive gradient optimization
-status: draft
+status: published
 requires:
   - variance-reduction-and-randomized-integration
   - proximal-gradient-and-accelerated-composite-optimization

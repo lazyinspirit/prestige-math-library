@@ -2,7 +2,7 @@
 id: thm-index-one-dae-backward-euler-first-order-with-residuals
 title: "Coupled backward Euler is first order for a regular index-one DAE"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

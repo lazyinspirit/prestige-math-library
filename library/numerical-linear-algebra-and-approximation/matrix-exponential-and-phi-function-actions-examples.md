@@ -1,7 +1,7 @@
 ---
 page: matrix-exponential-and-phi-function-actions-examples
 title: "Matrix exponential and phi function actions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-phi-one-at-zero-without-division

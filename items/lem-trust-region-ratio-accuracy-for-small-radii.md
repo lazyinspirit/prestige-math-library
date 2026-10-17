@@ -2,7 +2,7 @@
 id: lem-trust-region-ratio-accuracy-for-small-radii
 kind: lemma
 title: "The actual-to-predicted ratio approaches one at small radii away from stationarity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

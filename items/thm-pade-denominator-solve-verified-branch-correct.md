@@ -2,7 +2,7 @@
 id: thm-pade-denominator-solve-verified-branch-correct
 kind: theorem
 title: "An exact residual check certifies the Padé denominator solve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

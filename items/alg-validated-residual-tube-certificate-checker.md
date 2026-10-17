@@ -2,7 +2,7 @@
 id: alg-validated-residual-tube-certificate-checker
 kind: algorithm
 title: "Finite checker for rational residual-tube certificates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

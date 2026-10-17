@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-finite-difference-methods-examples
 title: "Hyperbolic finite-difference methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-wave-cfl-endpoint-and-energy-breakdown

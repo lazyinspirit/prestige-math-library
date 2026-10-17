@@ -2,7 +2,7 @@
 id: thm-point-verified-linear-system-certifier-soundness
 kind: theorem
 title: The point linear solve certifier returns a sound solution ball on success
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

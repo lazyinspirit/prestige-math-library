@@ -2,7 +2,7 @@
 id: thm-smolyak-polynomial-multi-degree-exactness
 kind: theorem
 title: Smolyak polynomial exactness from actual one-dimensional levels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

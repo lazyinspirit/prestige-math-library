@@ -2,7 +2,7 @@
 id: lem-logarithmic-norm-bounds-the-matrix-exponential
 kind: lemma
 title: "The logarithmic norm bounds forward and reverse matrix exponentials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

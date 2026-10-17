@@ -2,7 +2,7 @@
 id: ex-robertson-reaction-system-newton-work
 title: "One Robertson reaction step: Newton work and the chord reuse tradeoff"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: alg-implicit-stiff-time-stepper-with-consistent-starts
 title: "Implicit stiff time stepping with a branch and residual ledger"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

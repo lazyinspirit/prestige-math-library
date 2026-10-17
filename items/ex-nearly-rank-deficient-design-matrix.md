@@ -2,7 +2,7 @@
 id: ex-nearly-rank-deficient-design-matrix
 kind: example
 title: "A nearly rank-deficient two-column design changes numerical rank with tolerance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

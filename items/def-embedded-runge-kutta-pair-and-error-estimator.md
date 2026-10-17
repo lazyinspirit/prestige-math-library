@@ -2,7 +2,7 @@
 id: def-embedded-runge-kutta-pair-and-error-estimator
 kind: definition
 title: "Embedded Runge–Kutta pair and difference estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

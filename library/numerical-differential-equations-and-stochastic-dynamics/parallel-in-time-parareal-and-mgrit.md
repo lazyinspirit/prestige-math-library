@@ -1,7 +1,7 @@
 ---
 page: parallel-in-time-parareal-and-mgrit
 title: Parallel in time parareal and mgrit
-status: draft
+status: published
 items:
   - def-parareal-propagator-pair
   - alg-parareal-correction-sweeps

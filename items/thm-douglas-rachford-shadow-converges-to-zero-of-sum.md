@@ -2,7 +2,7 @@
 id: thm-douglas-rachford-shadow-converges-to-zero-of-sum
 kind: theorem
 title: "Douglas–Rachford shadows converge to a zero of the operator sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

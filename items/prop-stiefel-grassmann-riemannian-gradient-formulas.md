@@ -2,7 +2,7 @@
 id: prop-stiefel-grassmann-riemannian-gradient-formulas
 kind: proposition
 title: Projected Euclidean gradients are the Stiefel and Grassmann gradients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

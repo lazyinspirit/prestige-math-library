@@ -2,7 +2,7 @@
 id: thm-reverse-mode-work-and-tape-storage-bound
 kind: theorem
 title: "Reverse-mode work is a fixed multiple of primal work under explicit primitive-cost bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, alg-reverse-mode-automatic-differentiation]

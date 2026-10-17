@@ -1,7 +1,7 @@
 ---
 page: implicit-stiff-time-stepping-and-algebraic-error-examples
 title: Implicit stiff time stepping and algebraic error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-newton-budget-exhaustion-with-a-unique-backward-euler-root

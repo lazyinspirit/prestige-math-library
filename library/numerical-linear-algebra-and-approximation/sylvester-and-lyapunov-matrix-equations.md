@@ -1,7 +1,7 @@
 ---
 page: sylvester-and-lyapunov-matrix-equations
 title: Sylvester and lyapunov matrix equations
-status: draft
+status: published
 items:
   - lem-sylvester-vectorization-isometry-and-kronecker-identity
   - lem-small-block-determinant-separation-lower-bound

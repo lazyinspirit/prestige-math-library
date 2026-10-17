@@ -2,7 +2,7 @@
 id: lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound
 kind: lemma
 title: "Invertibility and a norm bound for the pseudo-arclength bordered matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

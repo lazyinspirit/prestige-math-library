@@ -2,7 +2,7 @@
 id: thm-safeguarded-pr-plus-gradient-norms-converge
 kind: theorem
 title: "Safeguarded PR+ converges in gradient norm under strong Wolfe"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

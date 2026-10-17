@@ -2,7 +2,7 @@
 id: alg-rosenbrock-shifted-qr-solver-with-residual-certificate
 title: "Reusable Householder QR solve for a shifted matrix with residual status"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

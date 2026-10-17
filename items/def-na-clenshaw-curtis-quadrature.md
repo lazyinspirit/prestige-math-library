@@ -2,7 +2,7 @@
 id: def-na-clenshaw-curtis-quadrature
 kind: definition
 title: "Clenshaw–Curtis quadrature with the midpoint zero-degree case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

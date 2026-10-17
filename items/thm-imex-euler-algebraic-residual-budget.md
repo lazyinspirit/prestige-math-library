@@ -2,7 +2,7 @@
 id: thm-imex-euler-algebraic-residual-budget
 kind: theorem
 title: "IMEX Euler preserves first-order convergence under per-step residuals of order h squared"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

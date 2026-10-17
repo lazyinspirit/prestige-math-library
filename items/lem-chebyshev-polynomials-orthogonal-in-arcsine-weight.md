@@ -2,7 +2,7 @@
 id: lem-chebyshev-polynomials-orthogonal-in-arcsine-weight
 kind: lemma
 title: "Chebyshev polynomials are orthogonal for the arcsine weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: direct-transcription-and-numerical-ode-optimal-control-examples
 title: Direct transcription and numerical ode optimal control — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-ctrl1-bounded-actuator-lqr

@@ -1,7 +1,7 @@
 ---
 page: spectral-collocation-and-galerkin-methods-examples
 title: Spectral collocation and Galerkin methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-periodic-fourier-collocation-exactness-and-nyquist-mode

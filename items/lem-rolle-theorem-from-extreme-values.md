@@ -2,7 +2,7 @@
 id: lem-rolle-theorem-from-extreme-values
 kind: lemma
 title: Rolle's theorem from attained extrema
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

@@ -2,7 +2,7 @@
 id: lem-parabolic-measurable-form-operators-and-inverse
 kind: lemma
 title: Measurable actions and inverse actions of parabolic forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

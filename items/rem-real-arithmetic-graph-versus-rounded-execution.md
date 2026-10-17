@@ -2,7 +2,7 @@
 id: rem-real-arithmetic-graph-versus-rounded-execution
 kind: remark
 title: "Real-arithmetic graph derivatives and rounded execution are different objects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, thm-graph-gradient-error-from-local-jacobian-perturbations, lem-certified-linear-solve-jacobian-and-pullback-error, def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma]

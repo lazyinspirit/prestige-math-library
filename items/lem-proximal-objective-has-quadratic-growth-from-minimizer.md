@@ -2,7 +2,7 @@
 id: lem-proximal-objective-has-quadratic-growth-from-minimizer
 kind: lemma
 title: "A quadratic regularization has quadratic growth from its minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

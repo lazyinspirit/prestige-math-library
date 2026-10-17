@@ -2,7 +2,7 @@
 id: thm-collocation-global-order-m
 kind: theorem
 title: M-node collocation has global order M
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-lcg-full-period-and-adjacent-dependence
 kind: theorem
 title: "The power-of-two mixed LCG has full period but dependent adjacent states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

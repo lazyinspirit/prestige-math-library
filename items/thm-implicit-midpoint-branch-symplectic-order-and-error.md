@@ -2,7 +2,7 @@
 id: thm-implicit-midpoint-branch-symplectic-order-and-error
 kind: theorem
 title: The admitted implicit midpoint branch is symplectic and second order
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

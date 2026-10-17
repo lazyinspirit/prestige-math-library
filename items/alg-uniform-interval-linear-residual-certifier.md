@@ -2,7 +2,7 @@
 id: alg-uniform-interval-linear-residual-certifier
 kind: algorithm
 title: Uniform interval linear residual certificate with inconclusive status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

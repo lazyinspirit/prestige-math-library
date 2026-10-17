@@ -2,7 +2,7 @@
 id: thm-real-elementary-range-enclosures
 kind: theorem
 title: Certified real elementary-function evaluations enclose their ranges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

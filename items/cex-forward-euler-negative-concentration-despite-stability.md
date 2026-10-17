@@ -2,7 +2,7 @@
 id: cex-forward-euler-negative-concentration-despite-stability
 kind: counterexample
 title: "A stable forward Euler step can still make a concentration negative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

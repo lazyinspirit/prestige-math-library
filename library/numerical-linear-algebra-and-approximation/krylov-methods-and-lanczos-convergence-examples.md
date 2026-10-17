@@ -1,7 +1,7 @@
 ---
 page: krylov-methods-and-lanczos-convergence-examples
 title: "Krylov methods and Lanczos convergence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-unrestarted-and-restarted-gmres-on-a-diagonal-system

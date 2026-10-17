@@ -2,7 +2,7 @@
 id: alg-distributed-delay-composite-midpoint-rule
 kind: algorithm
 title: "Composite midpoint quadrature for a distributed delay history"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

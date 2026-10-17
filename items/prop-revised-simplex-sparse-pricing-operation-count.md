@@ -2,7 +2,7 @@
 id: prop-revised-simplex-sparse-pricing-operation-count
 kind: proposition
 title: "Sparse reduced-cost pricing operation count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: lem-logdet-information-perturbation-bound
 kind: lemma
 title: "A uniform positive eigenvalue floor controls log-determinant error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

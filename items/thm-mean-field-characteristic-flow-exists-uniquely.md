@@ -2,7 +2,7 @@
 id: thm-mean-field-characteristic-flow-exists-uniquely
 kind: theorem
 title: Global characteristic flow for a globally Lipschitz mean-field kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

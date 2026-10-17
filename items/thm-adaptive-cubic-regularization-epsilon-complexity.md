@@ -2,7 +2,7 @@
 id: thm-adaptive-cubic-regularization-epsilon-complexity
 kind: theorem
 title: "Adaptive cubic regularization reaches first-order accuracy in O(ε⁻³ᐟ²) evaluations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

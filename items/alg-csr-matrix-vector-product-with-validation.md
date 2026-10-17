@@ -2,7 +2,7 @@
 id: alg-csr-matrix-vector-product-with-validation
 kind: algorithm
 title: "Validated compressed sparse row matrix-vector product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

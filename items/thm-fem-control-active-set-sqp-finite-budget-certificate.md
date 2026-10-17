@@ -2,7 +2,7 @@
 id: thm-fem-control-active-set-sqp-finite-budget-certificate
 kind: theorem
 title: Finite SQP status is sound and the exact local branch inherits OPT6 conditions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

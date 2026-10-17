@@ -1,7 +1,7 @@
 ---
 page: nonlinear-equations-and-newton-methods
 title: "Nonlinear equations and Newton methods"
-status: draft
+status: published
 items:
   - alg-fixed-point-iteration
   - lem-finite-budget-fixed-point-iteration-work

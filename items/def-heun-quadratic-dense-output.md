@@ -2,7 +2,7 @@
 id: def-heun-quadratic-dense-output
 kind: definition
 title: "Quadratic continuous extension for Heun's method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

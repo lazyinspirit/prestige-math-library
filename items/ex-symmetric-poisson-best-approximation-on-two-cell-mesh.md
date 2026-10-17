@@ -2,7 +2,7 @@
 id: ex-symmetric-poisson-best-approximation-on-two-cell-mesh
 kind: example
 title: A two-cell linear finite element best approximation for Poisson
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

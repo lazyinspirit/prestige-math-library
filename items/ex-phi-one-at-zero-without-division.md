@@ -2,7 +2,7 @@
 id: ex-phi-one-at-zero-without-division
 kind: example
 title: "The value phi_1(0) is obtained directly from its series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

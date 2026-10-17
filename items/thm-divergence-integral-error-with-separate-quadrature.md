@@ -2,7 +2,7 @@
 id: thm-divergence-integral-error-with-separate-quadrature
 title: "Global divergence-integral error separates state and quadrature error"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

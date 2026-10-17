@@ -2,7 +2,7 @@
 id: def-nested-rare-event-levels
 kind: definition
 title: Nested rare-event levels and conditional laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

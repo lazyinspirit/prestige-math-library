@@ -1,7 +1,7 @@
 ---
 page: krylov-methods-and-lanczos-convergence
 title: "Krylov methods and Lanczos convergence"
-status: draft
+status: published
 items:
   - lem-scaled-chebyshev-filter-bound-on-a-separated-interval
   - thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound

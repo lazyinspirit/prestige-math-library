@@ -1,7 +1,7 @@
 ---
 page: computed-schur-decompositions-and-nonnormal-spectra
 title: Computed Schur decompositions and nonnormal spectra
-status: draft
+status: published
 items:
   - def-real-and-complex-schur-forms
   - def-exact-real-2x2-discriminant-sign-predicate

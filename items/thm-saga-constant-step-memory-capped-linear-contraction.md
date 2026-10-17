@@ -2,7 +2,7 @@
 id: thm-saga-constant-step-memory-capped-linear-contraction
 kind: theorem
 title: SAGA constant-step linear contraction with a memory-capped factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-sqp-linearized-quadratic-subproblem
 kind: definition
 title: "The linearized quadratic subproblem in sequential quadratic programming"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

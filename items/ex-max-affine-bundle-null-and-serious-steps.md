@@ -2,7 +2,7 @@
 id: ex-max-affine-bundle-null-and-serious-steps
 kind: example
 title: "A max-affine kink produces one null and one serious bundle step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

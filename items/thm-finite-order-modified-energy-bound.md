@@ -2,7 +2,7 @@
 id: thm-finite-order-modified-energy-bound
 kind: theorem
 title: Finite-order modified energy control on a compact tube
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps:

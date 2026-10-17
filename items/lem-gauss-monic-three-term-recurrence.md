@@ -2,7 +2,7 @@
 id: lem-gauss-monic-three-term-recurrence
 kind: lemma
 title: Monic orthogonal polynomials satisfy a three-term recurrence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

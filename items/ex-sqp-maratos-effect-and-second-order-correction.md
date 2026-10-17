@@ -2,7 +2,7 @@
 id: ex-sqp-maratos-effect-and-second-order-correction
 kind: example
 title: "A full SQP step is rejected by the L1 merit test and repaired by SOC"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

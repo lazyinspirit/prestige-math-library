@@ -2,7 +2,7 @@
 id: ex-index-two-maximum-fails-the-index-one-certificate
 kind: example
 title: "A local maximum has the wrong Morse index for the saddle certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

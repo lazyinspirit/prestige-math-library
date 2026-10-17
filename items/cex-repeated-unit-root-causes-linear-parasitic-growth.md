@@ -2,7 +2,7 @@
 id: cex-repeated-unit-root-causes-linear-parasitic-growth
 kind: counterexample
 title: "A repeated unit root causes a linearly growing parasitic mode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

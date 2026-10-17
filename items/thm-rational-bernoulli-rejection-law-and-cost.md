@@ -2,7 +2,7 @@
 id: thm-rational-bernoulli-rejection-law-and-cost
 kind: theorem
 title: "Rational Bernoulli rejection has exact law, geometric failure, and bounded expected bit cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

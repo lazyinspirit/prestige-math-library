@@ -2,7 +2,7 @@
 id: thm-adaptive-finite-candidate-gp-search-posterior-correct
 kind: theorem
 title: Adaptive finite-candidate Gaussian-process search uses the correct sequential posterior
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

@@ -1,7 +1,7 @@
 ---
 page: differential-algebraic-equations-and-consistent-initialization
 title: "Differential algebraic equations and consistent initialization"
-status: draft
+status: published
 items:
   - def-semi-explicit-index-one-dae-and-consistent-initial-data
   - def-regular-differentiation-index

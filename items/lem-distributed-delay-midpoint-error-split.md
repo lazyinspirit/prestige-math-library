@@ -2,7 +2,7 @@
 id: lem-distributed-delay-midpoint-error-split
 kind: lemma
 title: "Distributed-delay midpoint error separates history and quadrature errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

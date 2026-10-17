@@ -2,7 +2,7 @@
 id: thm-shift-invert-map-and-inexact-solve-residual-transfer
 kind: theorem
 title: "Shift-invert maps eigenvalues exactly and transfers an inexact solve residual to the original eigenpair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

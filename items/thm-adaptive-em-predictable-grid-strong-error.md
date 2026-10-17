@@ -2,7 +2,7 @@
 id: thm-adaptive-em-predictable-grid-strong-error
 kind: theorem
 title: Strong error bound for Euler–Maruyama on a predictable grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

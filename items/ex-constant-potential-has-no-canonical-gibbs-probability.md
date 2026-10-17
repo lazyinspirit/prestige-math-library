@@ -2,7 +2,7 @@
 id: ex-constant-potential-has-no-canonical-gibbs-probability
 kind: example
 title: "A constant potential has no canonical Gibbs probability on the line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

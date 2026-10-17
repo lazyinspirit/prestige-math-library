@@ -2,7 +2,7 @@
 id: thm-trapezoidal-a-stable-not-l-stable
 kind: theorem
 title: "The trapezoidal rule is A-stable but not L-stable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

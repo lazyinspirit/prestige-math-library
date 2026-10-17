@@ -1,7 +1,7 @@
 ---
 page: gauss-newton-and-levenberg-marquardt-methods
 title: "Gauss-Newton and Levenberg-Marquardt methods"
-status: draft
+status: published
 items:
   - thm-nonlinear-least-squares-gradient-and-hessian
   - lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian

@@ -2,7 +2,7 @@
 id: alg-baoab-underdamped-langevin-splitting
 kind: algorithm
 title: "BAOAB underdamped Langevin splitting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

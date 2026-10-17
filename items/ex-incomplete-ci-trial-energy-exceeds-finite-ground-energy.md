@@ -7,7 +7,7 @@ verification:
 id: ex-incomplete-ci-trial-energy-exceeds-finite-ground-energy
 kind: example
 title: "An incomplete finite trial space can lie strictly above the Hamiltonian ground energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

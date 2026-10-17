@@ -1,7 +1,7 @@
 ---
 page: sparse-grid-cubature-and-mixed-regularity
 title: "Sparse grid cubature and mixed regularity"
-status: draft
+status: published
 requires:
   - composite-quadrature-rules
   - clenshaw-curtis-and-extrapolation-quadrature

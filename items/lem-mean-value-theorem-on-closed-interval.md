@@ -2,7 +2,7 @@
 id: lem-mean-value-theorem-on-closed-interval
 kind: lemma
 title: Mean value theorem on a closed real interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

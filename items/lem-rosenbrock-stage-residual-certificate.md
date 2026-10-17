@@ -2,7 +2,7 @@
 id: lem-rosenbrock-stage-residual-certificate
 title: "A computed shifted-system residual has a certified upper bound"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

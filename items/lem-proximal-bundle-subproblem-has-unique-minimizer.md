@@ -2,7 +2,7 @@
 id: lem-proximal-bundle-subproblem-has-unique-minimizer
 kind: lemma
 title: "The proximal bundle model subproblem has a unique minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-near-degenerate-saddle-modes-rotate-under-small-perturbations
 kind: example
 title: "A small spectral gap makes the dimer mode sensitive to perturbations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

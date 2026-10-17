@@ -2,7 +2,7 @@
 id: ex-two-stage-rosenbrock-factorization-reuse
 title: "Two stage right-hand sides reuse one shifted-Jacobian factorization"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

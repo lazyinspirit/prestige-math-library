@@ -2,7 +2,7 @@
 id: lem-continuous-functions-riemann-integrable
 kind: lemma
 title: Continuous functions have an oriented Riemann integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

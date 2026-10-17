@@ -2,7 +2,7 @@
 id: thm-composite-simpson-error-for-chebyshev-weighted-mass-matrix
 kind: theorem
 title: "Composite Simpson error bound for Chebyshev weighted mass entries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

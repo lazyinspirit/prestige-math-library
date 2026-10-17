@@ -2,7 +2,7 @@
 id: lem-polynomial-squarefree-decomposition-and-multiplicity
 kind: lemma
 title: Exact gcd squarefree decomposition preserves roots and multiplicities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

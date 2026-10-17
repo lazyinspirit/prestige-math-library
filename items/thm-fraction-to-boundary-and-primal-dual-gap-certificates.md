@@ -2,7 +2,7 @@
 id: thm-fraction-to-boundary-and-primal-dual-gap-certificates
 kind: theorem
 title: "Fraction-to-boundary steps preserve positivity and exact primal-dual feasibility certifies a gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-sqp-working-set-qp-terminates-under-nondegeneracy-anticycling
 kind: theorem
 title: "A feasible working-set QP solve terminates under nondegenerate steps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-nonnegative-orthant-log-barrier
 kind: lemma
 title: "The orthant logarithmic barrier has parameter equal to its dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: alg-mprk22-1
 kind: algorithm
 title: "The positive-interior MPRK22(1) step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-bfgs-updates-preserve-secant-symmetry-and-spd
 kind: lemma
 title: "Bfgs updates preserve the secant equations, symmetry, and positive definiteness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

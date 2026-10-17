@@ -2,7 +2,7 @@
 id: def-logarithmic-norm-for-complex-matrices
 kind: definition
 title: "The Euclidean logarithmic norm of a complex matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

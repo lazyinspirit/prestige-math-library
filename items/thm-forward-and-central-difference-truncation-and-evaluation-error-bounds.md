@@ -2,7 +2,7 @@
 id: thm-forward-and-central-difference-truncation-and-evaluation-error-bounds
 kind: theorem
 title: "Forward and central differences have first- and second-order error bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

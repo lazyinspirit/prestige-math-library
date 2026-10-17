@@ -1,7 +1,7 @@
 ---
 page: automatic-differentiation-and-computational-graphs-examples
 title: "Automatic differentiation and computational graphs — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-branchwise-ad-at-the-absolute-value-switch

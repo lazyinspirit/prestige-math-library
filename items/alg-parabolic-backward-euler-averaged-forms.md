@@ -2,7 +2,7 @@
 id: alg-parabolic-backward-euler-averaged-forms
 kind: algorithm
 title: Backward Euler FEM with interval-averaged forms and load
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

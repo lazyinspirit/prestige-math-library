@@ -2,7 +2,7 @@
 id: thm-inexact-proximal-gradient-summable-error-bound
 kind: theorem
 title: "Summable certified prox errors preserve an O(1/k) best-iterate bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

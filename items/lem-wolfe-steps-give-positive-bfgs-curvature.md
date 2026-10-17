@@ -2,7 +2,7 @@
 id: lem-wolfe-steps-give-positive-bfgs-curvature
 kind: lemma
 title: "A Wolfe step gives positive Bfgs curvature on a descent direction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-finite-state-streams-eventually-periodic
 kind: theorem
 title: "Every deterministic finite-state stream is eventually periodic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

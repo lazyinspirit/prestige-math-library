@@ -2,7 +2,7 @@
 id: ex-regular-and-singular-pencil-determinant-witnesses
 kind: example
 title: "A regular pencil and an identically singular determinant pencil"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

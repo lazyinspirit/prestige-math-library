@@ -2,7 +2,7 @@
 id: lem-exponential-integrator-interaction-picture-stability
 kind: lemma
 title: One-step stability after removing the exact linear flow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

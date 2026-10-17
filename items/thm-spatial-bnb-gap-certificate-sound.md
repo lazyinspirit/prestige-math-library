@@ -2,7 +2,7 @@
 id: thm-spatial-bnb-gap-certificate-sound
 kind: theorem
 title: A spatial branch-and-bound gap certificate proves global epsilon-optimality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

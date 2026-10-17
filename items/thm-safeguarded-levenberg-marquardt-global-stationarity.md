@@ -2,7 +2,7 @@
 id: thm-safeguarded-levenberg-marquardt-global-stationarity
 kind: theorem
 title: "Exact safeguarded Levenberg-Marquardt iterates approach stationarity on compact sublevels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: ex-xd-periodic-iteration-versus-stationarity
 kind: example
 title: "Periodic iteration can fail while the stationary solve is well-defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

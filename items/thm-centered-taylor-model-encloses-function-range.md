@@ -2,7 +2,7 @@
 id: thm-centered-taylor-model-encloses-function-range
 kind: theorem
 title: Centered Taylor models with derivative intervals enclose the function range
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

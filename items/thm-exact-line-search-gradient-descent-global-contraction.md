@@ -2,7 +2,7 @@
 id: thm-exact-line-search-gradient-descent-global-contraction
 kind: theorem
 title: "Exact gradient line search has a global objective-gap contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-lsqr-residual-minimizes-on-krylov-subspace
 kind: theorem
 title: A nonbreakdown LSQR iterate minimizes residual on its Krylov space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

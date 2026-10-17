@@ -1,7 +1,7 @@
 ---
 page: coordinate-and-block-descent-methods-examples
 title: Coordinate and block descent methods — Examples
-status: draft
+status: published
 requires:
   - coordinate-and-block-descent-methods
 items:

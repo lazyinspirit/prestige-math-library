@@ -2,7 +2,7 @@
 id: ex-upwind-versus-downwind-advection
 kind: example
 title: Upwind damping versus downwind growth on a periodic grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

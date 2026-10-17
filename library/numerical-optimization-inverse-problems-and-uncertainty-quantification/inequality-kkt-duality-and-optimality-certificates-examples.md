@@ -1,7 +1,7 @@
 ---
 page: inequality-kkt-duality-and-optimality-certificates-examples
 title: Inequality KKT duality and optimality certificates — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-failed-constraint-qualification-blocks-kkt

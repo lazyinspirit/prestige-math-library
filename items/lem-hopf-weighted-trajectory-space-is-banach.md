@@ -2,7 +2,7 @@
 id: lem-hopf-weighted-trajectory-space-is-banach
 kind: lemma
 title: The weighted trajectory space is complete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

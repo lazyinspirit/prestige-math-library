@@ -2,7 +2,7 @@
 id: lem-na-computed-unitary-butterfly-error-bound
 kind: lemma
 title: "A computed unitary radix-two butterfly has error at most (10u + εtw) times its input norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

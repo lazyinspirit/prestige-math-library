@@ -2,7 +2,7 @@
 id: lem-positive-diagonal-map-preserves-closed-convexity
 kind: lemma
 title: Positive diagonal maps preserve closed convex sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

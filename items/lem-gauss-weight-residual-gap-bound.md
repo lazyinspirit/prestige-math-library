@@ -2,7 +2,7 @@
 id: lem-gauss-weight-residual-gap-bound
 kind: lemma
 title: A residual and spectral gap bound a Gaussian weight error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

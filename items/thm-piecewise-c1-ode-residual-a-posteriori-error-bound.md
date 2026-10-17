@@ -2,7 +2,7 @@
 id: thm-piecewise-c1-ode-residual-a-posteriori-error-bound
 kind: theorem
 title: "Choice-free residual error bound for piecewise-C1 ODE reconstructions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

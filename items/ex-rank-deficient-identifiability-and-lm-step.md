@@ -2,7 +2,7 @@
 id: ex-rank-deficient-identifiability-and-lm-step
 kind: example
 title: "Rank-deficient data do not identify both parameters, while LM has a unique damped step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

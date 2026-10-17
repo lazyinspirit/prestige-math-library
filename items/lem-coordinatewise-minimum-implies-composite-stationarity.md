@@ -2,7 +2,7 @@
 id: lem-coordinatewise-minimum-implies-composite-stationarity
 kind: lemma
 title: "Coordinatewise minima of a separable convex composite are global minima"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-repeated-interior-root-preserves-bounded-powers
 kind: example
 title: "A repeated interior root preserves bounded companion powers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

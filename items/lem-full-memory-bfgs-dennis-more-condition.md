@@ -2,7 +2,7 @@
 id: lem-full-memory-bfgs-dennis-more-condition
 kind: lemma
 title: "Locally Lipschitz Hessians give the BFGS Dennis–Moré condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

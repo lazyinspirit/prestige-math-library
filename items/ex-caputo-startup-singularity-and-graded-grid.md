@@ -2,7 +2,7 @@
 id: ex-caputo-startup-singularity-and-graded-grid
 kind: example
 title: A Caputo startup singularity and a graded-grid calculation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

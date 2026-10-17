@@ -2,7 +2,7 @@
 id: alg-fem-control-active-set-box-quadratic-solve
 kind: algorithm
 title: Finite exhaustive active-set solve for a box-constrained positive quadratic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

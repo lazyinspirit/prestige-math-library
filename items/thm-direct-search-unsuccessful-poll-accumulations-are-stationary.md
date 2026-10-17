@@ -2,7 +2,7 @@
 id: thm-direct-search-unsuccessful-poll-accumulations-are-stationary
 kind: theorem
 title: "Unsuccessful-poll accumulation points are stationary under shrinking mesh"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

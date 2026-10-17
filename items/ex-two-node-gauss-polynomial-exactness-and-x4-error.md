@@ -2,7 +2,7 @@
 id: ex-two-node-gauss-polynomial-exactness-and-x4-error
 kind: example
 title: Two-node Gauss is exact through degree three but not for x to the fourth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

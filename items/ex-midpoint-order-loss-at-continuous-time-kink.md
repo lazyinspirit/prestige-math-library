@@ -2,7 +2,7 @@
 id: ex-midpoint-order-loss-at-continuous-time-kink
 kind: example
 title: "Explicit midpoint loses its uniform second-order defect bound at a time kink"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

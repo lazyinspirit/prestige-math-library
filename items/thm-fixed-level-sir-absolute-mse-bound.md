@@ -2,7 +2,7 @@
 id: thm-fixed-level-sir-absolute-mse-bound
 kind: theorem
 title: Fixed-level SIR has an absolute O(L/N) mean-square bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

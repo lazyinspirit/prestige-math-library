@@ -2,7 +2,7 @@
 id: thm-randomized-coordinate-proximal-composite-strong-convexity-contraction
 kind: theorem
 title: "Proximal coordinate contraction from strong convexity of the composite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

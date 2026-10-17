@@ -2,7 +2,7 @@
 id: ex-curved-double-well-has-a-circular-minimum-energy-path
 kind: example
 title: "A curved double well has an exact circular minimum-energy path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

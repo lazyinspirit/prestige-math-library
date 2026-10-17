@@ -2,7 +2,7 @@
 id: alg-sqp-feasible-working-set-qp-solve
 kind: algorithm
 title: "Feasible active-set QP solve with blocking constraints and a finite cap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

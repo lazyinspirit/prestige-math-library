@@ -2,7 +2,7 @@
 id: def-gauss-polynomial-moment-inner-product
 kind: definition
 title: The polynomial moment pairing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

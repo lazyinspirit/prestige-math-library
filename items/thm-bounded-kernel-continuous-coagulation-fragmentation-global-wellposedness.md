@@ -2,7 +2,7 @@
 id: thm-bounded-kernel-continuous-coagulation-fragmentation-global-wellposedness
 kind: theorem
 title: Bounded binary coagulation-fragmentation is globally well posed in weighted total variation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

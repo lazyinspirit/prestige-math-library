@@ -2,7 +2,7 @@
 id: ex-neumaier-recovers-low-order-term-after-cancellation
 kind: example
 title: "Neumaier summation recovers a low order term after cancellation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

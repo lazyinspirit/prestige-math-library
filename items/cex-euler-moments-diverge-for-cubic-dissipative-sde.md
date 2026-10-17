@@ -2,7 +2,7 @@
 id: cex-euler-moments-diverge-for-cubic-dissipative-sde
 kind: counterexample
 title: "Explicit Euler moments diverge for a cubic dissipative SDE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

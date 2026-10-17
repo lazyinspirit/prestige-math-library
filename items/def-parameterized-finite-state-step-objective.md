@@ -2,7 +2,7 @@
 id: def-parameterized-finite-state-step-objective
 kind: definition
 title: Finite parameterized state-step graphs and objectives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

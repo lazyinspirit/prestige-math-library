@@ -2,7 +2,7 @@
 id: def-saddle-point-for-convex-concave-lagrangian
 kind: definition
 title: "Saddle points of extended-real Lagrangians"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

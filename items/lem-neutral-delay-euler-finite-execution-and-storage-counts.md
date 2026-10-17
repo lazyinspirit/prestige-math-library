@@ -2,7 +2,7 @@
 id: lem-neutral-delay-euler-finite-execution-and-storage-counts
 kind: lemma
 title: "Finite execution and storage counts for compatible neutral Euler"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

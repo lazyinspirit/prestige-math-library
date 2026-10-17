@@ -2,7 +2,7 @@
 id: ex-repeated-eigenvalue-subspace-stable-but-eigenvector-choice-unstable
 kind: example
 title: A repeated eigenspace can be stable while chosen eigenvectors oscillate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: direct-transcription-and-numerical-ode-optimal-control
 title: Direct transcription and numerical ode optimal control
-status: draft
+status: published
 items:
   - def-ctrl1-linear-lqr-control-problem
   - def-ctrl1-smooth-transcription-data

@@ -2,7 +2,7 @@
 id: lem-complex-scaled-householder-step-termination-and-status
 kind: lemma
 title: "The scaled complex Householder wrapper terminates and has a unitary representative on success"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

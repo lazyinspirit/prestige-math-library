@@ -2,7 +2,7 @@
 id: thm-bounded-adaptive-runge-kutta-controller-terminates
 kind: theorem
 title: "The bounded adaptive Runge–Kutta controller terminates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

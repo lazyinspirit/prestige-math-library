@@ -1,7 +1,7 @@
 ---
 page: finite-precision-direct-factorizations-examples
 title: "Finite-precision direct factorizations and least squares — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-subnormal-and-overflow-range-failure

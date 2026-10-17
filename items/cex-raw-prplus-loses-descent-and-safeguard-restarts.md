@@ -2,7 +2,7 @@
 id: cex-raw-prplus-loses-descent-and-safeguard-restarts
 kind: counterexample
 title: "A strong Wolfe step can leave PR+ ascending; the safeguard restarts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

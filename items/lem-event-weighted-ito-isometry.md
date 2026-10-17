@@ -2,7 +2,7 @@
 id: lem-event-weighted-ito-isometry
 kind: lemma
 title: "Event-weighted Ito isometry after a conditioning time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: alg-monte-carlo-permutation-shapley-effects
 kind: algorithm
 title: Monte Carlo permutation estimator for Shapley effects
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

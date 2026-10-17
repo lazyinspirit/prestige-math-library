@@ -2,7 +2,7 @@
 id: thm-lagrange-interpolation-remainder
 kind: theorem
 title: "Pointwise Lagrange interpolation remainder"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-riemannian-trust-region-ratio-accuracy-for-small-radii
 kind: lemma
 title: Retraction trust-region ratios are accurate at small radii
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

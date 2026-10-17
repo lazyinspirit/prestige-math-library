@@ -2,7 +2,7 @@
 id: thm-smooth-advection-stencils-consistent
 kind: theorem
 title: Smooth consistency orders for the five periodic advection stencils
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

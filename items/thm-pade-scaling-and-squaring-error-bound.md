@@ -2,7 +2,7 @@
 id: thm-pade-scaling-and-squaring-error-bound
 kind: theorem
 title: "Padé error and squaring defects give a conditional exponential error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

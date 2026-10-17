@@ -2,7 +2,7 @@
 id: ex-pseudo-arclength-crosses-x-squared-fold
 kind: example
 title: 'Pseudo arclength crosses the fold $x^2-\lambda=0$'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

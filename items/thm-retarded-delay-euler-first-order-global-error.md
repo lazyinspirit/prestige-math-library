@@ -2,7 +2,7 @@
 id: thm-retarded-delay-euler-first-order-global-error
 kind: theorem
 title: "Grid-aligned Euler has first-order error for retarded delays"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

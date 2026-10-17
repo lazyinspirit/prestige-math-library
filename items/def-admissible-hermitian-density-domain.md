@@ -2,7 +2,7 @@
 id: def-admissible-hermitian-density-domain
 kind: definition
 title: The fixed-particle admissible Hermitian density domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

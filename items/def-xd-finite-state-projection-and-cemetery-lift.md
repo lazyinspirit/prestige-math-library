@@ -2,7 +2,7 @@
 id: def-xd-finite-state-projection-and-cemetery-lift
 kind: definition
 title: "Killed finite-state projection and cemetery lift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

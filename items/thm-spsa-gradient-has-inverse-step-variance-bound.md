@@ -2,7 +2,7 @@
 id: thm-spsa-gradient-has-inverse-step-variance-bound
 kind: theorem
 title: "Weighted simulator moments give an inverse-step SPSA variance bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: sparse-direct-elimination-and-ordering-examples
 title: Sparse direct elimination and ordering — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-star-orderings-produce-different-sparse-fill

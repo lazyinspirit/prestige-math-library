@@ -2,7 +2,7 @@
 id: lem-admm-exact-subproblem-optimality-relations
 kind: lemma
 title: "Optimality relations for exact two-block ADMM subproblems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-fenchel-young-equality-characterizes-subgradients
 kind: lemma
 title: "Fenchel–Young inequality and its equality case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

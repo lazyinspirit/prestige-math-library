@@ -2,7 +2,7 @@
 id: thm-continuous-lyapunov-integral-and-positivity
 kind: theorem
 title: "The Hurwitz Lyapunov integral is the unique solution and has the stated positivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

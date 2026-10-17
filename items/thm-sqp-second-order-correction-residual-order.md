@@ -2,7 +2,7 @@
 id: thm-sqp-second-order-correction-residual-order
 kind: theorem
 title: "Second-order correction reduces the active constraint residual to cubic order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-canonical-kick-and-drift-shears-have-symplectic-jacobians
 kind: lemma
 title: Canonical kick and drift shears satisfy the symplectic Jacobian identity
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

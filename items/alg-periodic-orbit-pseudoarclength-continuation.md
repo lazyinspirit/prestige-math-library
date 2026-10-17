@@ -2,7 +2,7 @@
 id: alg-periodic-orbit-pseudoarclength-continuation
 kind: algorithm
 title: "Finite pseudo-arclength continuation of phase-fixed periodic orbits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

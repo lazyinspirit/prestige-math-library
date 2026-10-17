@@ -2,7 +2,7 @@
 id: cor-parareal-continuous-target-error-decomposition
 kind: corollary
 title: "Separate Parareal iteration error from fine-method error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

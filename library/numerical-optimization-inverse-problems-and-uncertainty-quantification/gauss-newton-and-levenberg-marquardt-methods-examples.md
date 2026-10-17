@@ -1,7 +1,7 @@
 ---
 page: gauss-newton-and-levenberg-marquardt-methods-examples
 title: "Gauss-Newton and Levenberg-Marquardt methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-exponential-kinetics-gauss-newton-fit

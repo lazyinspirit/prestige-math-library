@@ -2,7 +2,7 @@
 id: lem-scaled-complex-householder-and-givens-local-backward-error
 kind: lemma
 title: Scaled complex Householder and Givens steps have explicit local backward errors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -1,7 +1,7 @@
 ---
 page: rare-event-importance-sampling-and-multilevel-splitting
 title: Rare event importance sampling and multilevel splitting
-status: draft
+status: published
 items:
   - def-rare-event-efficiency-criteria
   - lem-standard-normal-mills-ratio

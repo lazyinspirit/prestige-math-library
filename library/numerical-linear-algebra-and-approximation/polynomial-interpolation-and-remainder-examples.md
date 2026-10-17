@@ -1,7 +1,7 @@
 ---
 page: polynomial-interpolation-and-remainder-examples
 title: "Polynomial interpolation and remainder — Examples"
-status: draft
+status: published
 requires:
   - polynomial-interpolation-and-remainder
   - approximation-and-compactness-in-ck

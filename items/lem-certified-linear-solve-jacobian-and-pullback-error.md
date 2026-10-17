@@ -2,7 +2,7 @@
 id: lem-certified-linear-solve-jacobian-and-pullback-error
 kind: lemma
 title: Certified inverse defects and primal residuals bound linear-solve Jacobian and pullback errors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

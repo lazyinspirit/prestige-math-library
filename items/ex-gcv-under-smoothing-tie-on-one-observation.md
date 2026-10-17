@@ -2,7 +2,7 @@
 id: ex-gcv-under-smoothing-tie-on-one-observation
 kind: example
 title: A one-observation GCV tie can select severe undersmoothing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

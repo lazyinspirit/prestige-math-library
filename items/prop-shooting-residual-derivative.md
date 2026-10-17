@@ -2,7 +2,7 @@
 id: prop-shooting-residual-derivative
 kind: proposition
 title: "Derivative of the nonlinear shooting residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

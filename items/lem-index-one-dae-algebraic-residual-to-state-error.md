@@ -2,7 +2,7 @@
 id: lem-index-one-dae-algebraic-residual-to-state-error
 title: "An index-one algebraic residual locally bounds algebraic state error"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

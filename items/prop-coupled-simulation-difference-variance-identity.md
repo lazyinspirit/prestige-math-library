@@ -2,7 +2,7 @@
 id: prop-coupled-simulation-difference-variance-identity
 kind: proposition
 title: "Coupled finite differences have a covariance-controlled variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: alg-fem-control-proximal-gradient-certified-residual
 kind: algorithm
 title: Finite-budget projected-gradient loop with state-adjoint residual certificates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

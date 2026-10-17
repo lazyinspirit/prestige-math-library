@@ -1,7 +1,7 @@
 ---
 page: finite-element-pde-constrained-optimization
 title: "Finite element pde constrained optimization"
-status: draft
+status: published
 items:
   - def-pde-box-control-set
   - lem-separable-hilbert-bounded-sequence-weak-subsequence

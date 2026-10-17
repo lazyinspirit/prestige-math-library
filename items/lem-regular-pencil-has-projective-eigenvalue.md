@@ -2,7 +2,7 @@
 id: lem-regular-pencil-has-projective-eigenvalue
 kind: lemma
 title: "Every regular complex pencil has a homogeneous eigenvalue pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

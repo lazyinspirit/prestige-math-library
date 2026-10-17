@@ -2,7 +2,7 @@
 id: cex-cauchy-input-has-no-degree-one-chaos
 kind: counterexample
 title: A Cauchy input has no L2 degree-one polynomial chaos
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-hermitian-definite-pencil-has-real-spectrum-and-b-orthogonal-eigenbasis
 kind: theorem
 title: "A Hermitian-definite pencil has a real spectrum and a B-orthonormal eigenbasis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

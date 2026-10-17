@@ -2,7 +2,7 @@
 id: alg-amsgrad-update
 kind: algorithm
 title: Bias-corrected AMSGrad update
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

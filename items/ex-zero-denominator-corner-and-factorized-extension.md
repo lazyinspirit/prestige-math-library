@@ -2,7 +2,7 @@
 id: ex-zero-denominator-corner-and-factorized-extension
 kind: example
 title: "A zero compartment makes the standard ratio undefined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

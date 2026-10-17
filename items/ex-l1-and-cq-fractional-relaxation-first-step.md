@@ -2,7 +2,7 @@
 id: ex-l1-and-cq-fractional-relaxation-first-step
 kind: example
 title: First steps for a scalar fractional relaxation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

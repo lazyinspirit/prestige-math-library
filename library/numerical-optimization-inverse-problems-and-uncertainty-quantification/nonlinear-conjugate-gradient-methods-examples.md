@@ -1,7 +1,7 @@
 ---
 page: nonlinear-conjugate-gradient-methods-examples
 title: "Nonlinear conjugate gradient methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-rosenbrock-fr-prplus-trace

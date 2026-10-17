@@ -2,7 +2,7 @@
 id: lem-fem-control-gradient-residual-bound
 kind: lemma
 title: State and adjoint Strang bounds give a reduced-gradient error certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

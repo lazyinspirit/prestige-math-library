@@ -2,7 +2,7 @@
 id: ex-linear-electromechanical-multirate-block-cost
 title: "A dissipative electromechanical toy model under slow-fast blocking"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

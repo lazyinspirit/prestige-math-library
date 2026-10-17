@@ -2,7 +2,7 @@
 id: lem-rational-box-affine-chart-and-dyadic-enclosure
 kind: lemma
 title: "Rational boxes admit dyadic enclosure boundaries and exact affine root charts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-index-one-dae-finite-budget-solvers-terminate
 title: "The finite-budget index-one DAE solvers return a status in finite work"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

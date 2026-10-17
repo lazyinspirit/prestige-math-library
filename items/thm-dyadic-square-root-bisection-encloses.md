@@ -2,7 +2,7 @@
 id: thm-dyadic-square-root-bisection-encloses
 kind: theorem
 title: Dyadic square-root bisection gives outward endpoints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

@@ -2,7 +2,7 @@
 id: lem-proximal-three-point-inequality
 kind: lemma
 title: "Three-point inequality for the proximal-gradient model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

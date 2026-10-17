@@ -2,7 +2,7 @@
 id: thm-low-rank-adi-exact-residual-factor-identity
 kind: theorem
 title: "Low-rank ADI has an exact residual factor identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

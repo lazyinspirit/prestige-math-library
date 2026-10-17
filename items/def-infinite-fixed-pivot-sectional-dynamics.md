@@ -2,7 +2,7 @@
 id: def-infinite-fixed-pivot-sectional-dynamics
 kind: definition
 title: Unbounded-grid fixed-pivot coagulation-fragmentation dynamics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

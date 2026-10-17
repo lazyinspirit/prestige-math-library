@@ -2,7 +2,7 @@
 id: thm-local-information-positive-definite-iff-full-column-rank
 kind: theorem
 title: "The weighted information matrix is positive definite exactly at full sensitivity rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

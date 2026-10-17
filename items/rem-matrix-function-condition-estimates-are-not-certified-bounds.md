@@ -2,7 +2,7 @@
 id: rem-matrix-function-condition-estimates-are-not-certified-bounds
 kind: remark
 title: "Condition estimates and certified matrix-function error bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

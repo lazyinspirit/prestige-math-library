@@ -2,7 +2,7 @@
 id: thm-minimum-intensity-tau-leap-level-variance
 kind: theorem
 title: "Order-one correction variance for coupled Poisson tau-leap levels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

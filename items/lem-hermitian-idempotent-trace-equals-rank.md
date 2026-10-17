@@ -2,7 +2,7 @@
 id: lem-hermitian-idempotent-trace-equals-rank
 kind: lemma
 title: "A Hermitian idempotent has trace equal to its rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

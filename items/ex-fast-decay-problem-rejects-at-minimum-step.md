@@ -2,7 +2,7 @@
 id: ex-fast-decay-problem-rejects-at-minimum-step
 kind: example
 title: "A fast-decay test problem is rejected at the minimum step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

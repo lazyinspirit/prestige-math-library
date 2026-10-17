@@ -2,7 +2,7 @@
 id: thm-poisson-tau-leap-weak-order-one-with-exit-bound
 kind: theorem
 title: "Weak order one for finite-state Poisson tau-leaping with an exit bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

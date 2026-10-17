@@ -2,7 +2,7 @@
 id: thm-damped-newton-vector-residual-accepted-merit-decrease
 kind: theorem
 title: "An accepted damped Newton step strictly decreases the residual merit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

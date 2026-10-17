@@ -2,7 +2,7 @@
 id: thm-parareal-binomial-error-bound
 kind: theorem
 title: "A conditional binomial error bound for Parareal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

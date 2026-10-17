@@ -2,7 +2,7 @@
 id: lem-small-step-implicit-rk-branch-and-residual-error
 title: "Small-step implicit Runge–Kutta stages have a unique branch and controlled residual error"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

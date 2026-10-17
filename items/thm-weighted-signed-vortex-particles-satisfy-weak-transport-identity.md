@@ -2,7 +2,7 @@
 id: thm-weighted-signed-vortex-particles-satisfy-weak-transport-identity
 kind: theorem
 title: Exact weak transport identity for weighted signed vortex particles
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

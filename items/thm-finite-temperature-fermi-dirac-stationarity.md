@@ -2,7 +2,7 @@
 id: thm-finite-temperature-fermi-dirac-stationarity
 kind: theorem
 title: "Interior finite-temperature stationarity gives Fermi-Dirac occupations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

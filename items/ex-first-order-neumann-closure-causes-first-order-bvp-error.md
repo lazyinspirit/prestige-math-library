@@ -2,7 +2,7 @@
 id: ex-first-order-neumann-closure-causes-first-order-bvp-error
 kind: example
 title: A first-order Neumann closure limits the global rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-centered-difference-dirichlet-bvp]

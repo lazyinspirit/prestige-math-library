@@ -2,7 +2,7 @@
 id: rem-chebyshev-collocation-conditioning-and-spectral-radius-scope
 kind: remark
 title: "Chebyshev collocation spectral-radius growth is setup-specific conditioning context"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

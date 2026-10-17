@@ -2,7 +2,7 @@
 id: alg-tensor-simpson-force-evaluator
 kind: algorithm
 title: Tensor composite Simpson force evaluator on a rectangle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

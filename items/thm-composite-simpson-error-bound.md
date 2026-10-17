@@ -2,7 +2,7 @@
 id: thm-composite-simpson-error-bound
 kind: theorem
 title: Composite Simpson error bound for a four-times continuously differentiable function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

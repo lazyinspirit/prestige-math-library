@@ -2,7 +2,7 @@
 id: lem-two-sided-unitary-equivalence-errors-accumulate-for-pencil
 kind: lemma
 title: "Two-sided unitary errors in a matrix pencil accumulate as a backward perturbation pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

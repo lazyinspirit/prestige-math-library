@@ -2,7 +2,7 @@
 id: ex-left-preconditioned-residual-can-understate-physical-residual
 kind: example
 title: "A small left-preconditioned residual can hide a large physical residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

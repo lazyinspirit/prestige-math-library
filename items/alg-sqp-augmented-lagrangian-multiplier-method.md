@@ -2,7 +2,7 @@
 id: alg-sqp-augmented-lagrangian-multiplier-method
 kind: algorithm
 title: "Finite-budget augmented-Lagrangian multiplier method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

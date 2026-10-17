@@ -2,7 +2,7 @@
 id: lem-small-block-determinant-separation-lower-bound
 kind: lemma
 title: "A determinant and Frobenius norm give a certified lower bound for small-block separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

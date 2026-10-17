@@ -2,7 +2,7 @@
 id: thm-composite-simpson-exact-through-degree-three
 kind: theorem
 title: Composite Simpson rule is exact through cubic degree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: constrained-dynamics-shake-and-rattle
 title: Constrained dynamics shake and rattle
-status: draft
+status: published
 items:
   - def-regular-holonomic-phase-space-and-dynamics
   - lem-smooth-residual-quotient-extension

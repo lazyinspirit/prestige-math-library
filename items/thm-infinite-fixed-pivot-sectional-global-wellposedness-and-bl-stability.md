@@ -2,7 +2,7 @@
 id: thm-infinite-fixed-pivot-sectional-global-wellposedness-and-bl-stability
 kind: theorem
 title: Unbounded-grid fixed-pivot dynamics are globally well posed and stable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

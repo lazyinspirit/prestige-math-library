@@ -2,7 +2,7 @@
 id: thm-uniform-sensitivity-error-controls-design-gap
 kind: theorem
 title: "Uniform information errors control approximate D-optimal design gaps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-dimension-dependent-empirical-w1-error
 kind: example
 title: A dimension-dependent lower bound for empirical W1 error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

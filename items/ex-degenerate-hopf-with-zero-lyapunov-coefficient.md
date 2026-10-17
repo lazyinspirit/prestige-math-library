@@ -2,7 +2,7 @@
 id: ex-degenerate-hopf-with-zero-lyapunov-coefficient
 kind: example
 title: An imaginary eigenvalue crossing with zero Lyapunov coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

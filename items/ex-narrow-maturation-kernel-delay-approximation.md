@@ -2,7 +2,7 @@
 id: ex-narrow-maturation-kernel-delay-approximation
 kind: example
 title: A narrow maturation kernel approaches a delayed birth term
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-mgrit-two-level-call-counts
 kind: lemma
 title: "Propagator call counts for the two-level MGRIT cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

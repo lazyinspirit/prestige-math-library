@@ -2,7 +2,7 @@
 id: alg-age-structured-positive-birth-quadrature
 kind: algorithm
 title: Positive composite or capped-adaptive quadrature for renewal births
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

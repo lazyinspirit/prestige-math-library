@@ -2,7 +2,7 @@
 id: def-nonlinear-two-point-bvp-and-boundary-residual
 kind: definition
 title: "Square nonlinear two-point boundary-value problems and endpoint residuals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

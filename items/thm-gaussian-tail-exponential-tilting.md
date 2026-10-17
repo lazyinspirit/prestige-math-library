@@ -2,7 +2,7 @@
 id: thm-gaussian-tail-exponential-tilting
 kind: theorem
 title: Gaussian tail tilting is logarithmically efficient but not bounded-relative-error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

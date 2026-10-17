@@ -2,7 +2,7 @@
 id: thm-outward-rounded-operations-are-isotone-and-dag-sound
 kind: theorem
 title: Outward-rounded operations are inclusion-isotone and enclose DAG evaluations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

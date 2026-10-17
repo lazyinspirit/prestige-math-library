@@ -1,7 +1,7 @@
 ---
 page: barrier-and-primal-dual-interior-point-methods
 title: "Barrier and primal dual interior point methods"
-status: draft
+status: published
 requires:
   - finite-precision-direct-factorizations
   - inequality-kkt-duality-and-optimality-certificates

@@ -2,7 +2,7 @@
 id: thm-flexible-gmres-residual-minimization-on-actual-preconditioned-span
 kind: theorem
 title: "Flexible GMRES minimizes over the actual preconditioned-vector span"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

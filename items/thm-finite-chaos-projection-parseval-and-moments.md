@@ -2,7 +2,7 @@
 id: thm-finite-chaos-projection-parseval-and-moments
 kind: theorem
 title: Finite chaos projection, Parseval identity, mean, and variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

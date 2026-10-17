@@ -2,7 +2,7 @@
 id: ex-nonsymmetric-coercive-form-attains-cea-factor
 kind: example
 title: A nonsymmetric coercive form attains the M over alpha factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

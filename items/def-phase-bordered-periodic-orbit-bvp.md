@@ -2,7 +2,7 @@
 id: def-phase-bordered-periodic-orbit-bvp
 kind: definition
 title: "The phase-bordered periodic-orbit BVP residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

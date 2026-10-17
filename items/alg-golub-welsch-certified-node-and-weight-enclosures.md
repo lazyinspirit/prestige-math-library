@@ -2,7 +2,7 @@
 id: alg-golub-welsch-certified-node-and-weight-enclosures
 kind: algorithm
 title: Certified Gaussian nodes and weights by Golub–Welsch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 10

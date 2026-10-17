@@ -2,7 +2,7 @@
 id: lem-continuous-coagulation-operator-weighted-total-variation-bound
 kind: lemma
 title: Bounded coagulation is bilinear and bounded in weighted total variation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

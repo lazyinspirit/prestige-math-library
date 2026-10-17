@@ -2,7 +2,7 @@
 id: cor-landweber-discrepancy-stopped-convergence-rate
 kind: corollary
 title: Landweber discrepancy stopping converges under a source condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

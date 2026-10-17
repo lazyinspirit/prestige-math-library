@@ -2,7 +2,7 @@
 id: lem-strong-rrqr-column-swap-volume-ratio
 kind: lemma
 title: "A strong RRQR column swap multiplies selected volume by its score"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

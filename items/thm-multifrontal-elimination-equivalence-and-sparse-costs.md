@@ -2,7 +2,7 @@
 id: thm-multifrontal-elimination-equivalence-and-sparse-costs
 kind: theorem
 title: Scalar multifrontal elimination is equivalent to sparse Cholesky with column-count costs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

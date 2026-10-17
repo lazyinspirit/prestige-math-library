@@ -2,7 +2,7 @@
 id: thm-periodic-centered-wave-amplification-and-endpoint
 kind: theorem
 title: Periodic leapfrog amplification, finite-time bounds, and the Nyquist endpoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

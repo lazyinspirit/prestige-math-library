@@ -2,7 +2,7 @@
 id: ex-sdc-constant-predictor-too-few-sweeps
 kind: example
 title: Too few sweeps lower the order from Gauss collocation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

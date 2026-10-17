@@ -2,7 +2,7 @@
 id: thm-gauss-polynomial-moment-pairing-is-an-inner-product
 kind: theorem
 title: The polynomial moment pairing is a real inner product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

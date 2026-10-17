@@ -2,7 +2,7 @@
 id: alg-safeguarded-hybrid-event-location-and-restart
 kind: algorithm
 title: "Safeguarded certified event location and mode restart"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: def-analytic-primary-matrix-function
 kind: definition
 title: "Analytic primary matrix functions by Jordan blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-two-stage-rosenbrock-global-order-two
 title: "The selected two-stage Rosenbrock W-method has a second-order global error bound"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

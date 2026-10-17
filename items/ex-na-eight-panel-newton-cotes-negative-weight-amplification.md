@@ -2,7 +2,7 @@
 id: ex-na-eight-panel-newton-cotes-negative-weight-amplification
 kind: example
 title: "Negative weights amplify sample perturbations in the nine-point Newton–Cotes rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature-examples

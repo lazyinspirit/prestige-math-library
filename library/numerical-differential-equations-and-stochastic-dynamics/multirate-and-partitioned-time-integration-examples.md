@@ -1,7 +1,7 @@
 ---
 page: multirate-and-partitioned-time-integration-examples
 title: Multirate and partitioned time integration — Examples
-status: draft
+status: published
 requires:
   - multirate-and-partitioned-time-integration
 items: []

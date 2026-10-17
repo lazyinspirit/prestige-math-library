@@ -2,7 +2,7 @@
 id: lem-convex-smooth-component-gradient-cocoercivity
 kind: lemma
 title: Cocoercive gradient bound for a convex smooth finite sum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

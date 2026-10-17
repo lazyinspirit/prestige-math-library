@@ -2,7 +2,7 @@
 id: thm-patankar-inexact-solve-residual-ledger
 kind: theorem
 title: "Certified residuals bound mass drift and the exact-solve positivity margin"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

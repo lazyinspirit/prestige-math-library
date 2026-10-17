@@ -2,7 +2,7 @@
 id: lem-separable-hilbert-bounded-sequence-weak-subsequence
 kind: lemma
 title: A bounded sequence in a separable Hilbert space has a weakly convergent subsequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

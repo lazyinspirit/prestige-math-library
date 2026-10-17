@@ -2,7 +2,7 @@
 id: alg-strong-rank-revealing-qr-with-finite-swaps
 kind: algorithm
 title: "Strong rank-revealing QR with finite swaps and explicit statuses"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

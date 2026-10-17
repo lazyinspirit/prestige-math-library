@@ -2,7 +2,7 @@
 id: thm-complex-resolvent-cover-validator-soundness
 kind: theorem
 title: The finite disk cover validator returns a uniform resolvent bound on success
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

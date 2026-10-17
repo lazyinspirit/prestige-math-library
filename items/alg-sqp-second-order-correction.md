@@ -2,7 +2,7 @@
 id: alg-sqp-second-order-correction
 kind: algorithm
 title: "Minimum-norm second-order correction for identified active constraints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

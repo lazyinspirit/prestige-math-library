@@ -2,7 +2,7 @@
 id: lem-companion-powers-bounded-under-root-condition
 kind: lemma
 title: "The root condition is equivalent to bounded powers of the multistep companion matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

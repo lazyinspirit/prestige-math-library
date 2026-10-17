@@ -2,7 +2,7 @@
 id: ex-noisy-biological-simulator-finite-candidate-gp-acquisition
 kind: example
 title: A noisy biological simulator search is conditional on its chosen Gaussian-process model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound-examples

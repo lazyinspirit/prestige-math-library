@@ -2,7 +2,7 @@
 id: def-continuity-and-derivative-on-real-interval
 kind: definition
 title: Continuity and derivative on a real interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

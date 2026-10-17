@@ -2,7 +2,7 @@
 id: thm-dobrushin-w1-stability-for-characteristic-flows
 kind: theorem
 title: Dobrushin stability in 1-Wasserstein distance for mean-field flows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-noisy-simulator-intrinsic-noise-and-input-sensitivity
 kind: example
 title: Noisy simulator output separates intrinsic noise from input variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

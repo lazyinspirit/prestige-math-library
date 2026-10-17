@@ -2,7 +2,7 @@
 id: thm-infinite-fixed-pivot-sectional-grid-error
 kind: theorem
 title: The unbounded fixed-pivot flow has first-order grid error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

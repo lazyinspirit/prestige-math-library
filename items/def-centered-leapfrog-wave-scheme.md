@@ -2,7 +2,7 @@
 id: def-centered-leapfrog-wave-scheme
 kind: definition
 title: Centered leapfrog wave recurrence with Dirichlet and periodic rows
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

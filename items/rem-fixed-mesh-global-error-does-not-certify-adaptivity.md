@@ -2,7 +2,7 @@
 id: rem-fixed-mesh-global-error-does-not-certify-adaptivity
 kind: remark
 title: "A fixed-mesh global error theorem does not certify an adaptive controller"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

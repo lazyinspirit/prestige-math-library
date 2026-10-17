@@ -1,7 +1,7 @@
 ---
 page: gaussian-quadrature
 title: "Gaussian quadrature"
-status: draft
+status: published
 requires:
   - inner-product-spaces-and-orthogonality
   - polynomial-interpolation-and-remainder

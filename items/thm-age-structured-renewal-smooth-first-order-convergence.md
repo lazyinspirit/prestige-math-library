@@ -2,7 +2,7 @@
 id: thm-age-structured-renewal-smooth-first-order-convergence
 kind: theorem
 title: First-order finite-volume convergence for compatible smooth renewal data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

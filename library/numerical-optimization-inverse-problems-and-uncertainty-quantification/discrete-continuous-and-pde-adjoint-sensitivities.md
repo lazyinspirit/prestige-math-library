@@ -1,7 +1,7 @@
 ---
 page: discrete-continuous-and-pde-adjoint-sensitivities
 title: "Discrete continuous and pde adjoint sensitivities"
-status: draft
+status: published
 items:
   - def-parameterized-finite-state-step-objective
   - def-parameterized-elliptic-variational-problem

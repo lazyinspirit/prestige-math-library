@@ -2,7 +2,7 @@
 id: thm-block-projector-frechet-derivative-and-bound
 kind: theorem
 title: A separated block spectral projector is Frechet differentiable with a resolvent bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

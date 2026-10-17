@@ -2,7 +2,7 @@
 id: ex-correlated-design-lasso-coordinate-cycle
 kind: example
 title: "One cyclic coordinate-descent cycle for correlated-design Lasso"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-xd-two-state-gating-uniformization
 kind: example
 title: "Two-state gating through uniformization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: iterative-regularization-and-early-stopping-examples
 title: "Iterative regularization and early stopping — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-full-lsqr-can-amplify-data-noise

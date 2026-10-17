@@ -2,7 +2,7 @@
 id: ex-newton-budget-exhaustion-with-a-unique-backward-euler-root
 title: "Newton can exhaust its budget although the dissipative backward Euler root is unique"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-stiff-explicit-partition-is-unstable
 kind: example
 title: "An explicitly treated stiff decay mode is unstable for a large step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

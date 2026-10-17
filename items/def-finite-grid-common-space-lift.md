@@ -2,7 +2,7 @@
 id: def-finite-grid-common-space-lift
 kind: definition
 title: "Finite-grid restriction, reconstruction, and common-space lift"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

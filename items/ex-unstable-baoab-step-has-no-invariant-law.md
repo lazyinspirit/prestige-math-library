@@ -2,7 +2,7 @@
 id: ex-unstable-baoab-step-has-no-invariant-law
 kind: example
 title: "An unstable harmonic BAOAB step has no invariant probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

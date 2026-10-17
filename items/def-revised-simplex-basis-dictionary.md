@@ -2,7 +2,7 @@
 id: def-revised-simplex-basis-dictionary
 kind: definition
 title: "Basis dictionaries and reduced costs for revised simplex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

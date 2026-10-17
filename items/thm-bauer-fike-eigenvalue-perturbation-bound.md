@@ -2,7 +2,7 @@
 id: thm-bauer-fike-eigenvalue-perturbation-bound
 kind: theorem
 title: "Bauer-Fike bounds eigenvalue motion by the eigenvector condition number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

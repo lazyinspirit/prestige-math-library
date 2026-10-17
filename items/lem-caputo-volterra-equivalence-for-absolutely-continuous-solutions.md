@@ -2,7 +2,7 @@
 id: lem-caputo-volterra-equivalence-for-absolutely-continuous-solutions
 kind: lemma
 title: Caputo and Volterra formulations are equivalent for absolutely continuous solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

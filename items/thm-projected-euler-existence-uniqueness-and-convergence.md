@@ -2,7 +2,7 @@
 id: thm-projected-euler-existence-uniqueness-and-convergence
 kind: theorem
 title: Existence and uniqueness for projected dynamics and convergence of projection Euler under countable and dependent choice
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

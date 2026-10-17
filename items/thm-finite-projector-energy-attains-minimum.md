@@ -2,7 +2,7 @@
 id: thm-finite-projector-energy-attains-minimum
 kind: theorem
 title: "A finite-basis projector energy attains a global minimum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

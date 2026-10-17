@@ -2,7 +2,7 @@
 id: ex-three-pixel-blur-landweber-reconstruction
 kind: example
 title: Landweber reconstructs a three-pixel blurred signal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

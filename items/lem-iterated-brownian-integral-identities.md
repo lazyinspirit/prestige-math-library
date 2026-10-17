@@ -2,7 +2,7 @@
 id: lem-iterated-brownian-integral-identities
 kind: lemma
 title: "Product identity and conditional moments for iterated Brownian integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

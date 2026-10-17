@@ -2,7 +2,7 @@
 id: lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder
 kind: lemma
 title: "Uniform Hessian bounds control gradient changes and Taylor remainders"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

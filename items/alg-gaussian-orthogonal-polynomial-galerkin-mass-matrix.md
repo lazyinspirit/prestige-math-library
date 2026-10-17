@@ -2,7 +2,7 @@
 id: alg-gaussian-orthogonal-polynomial-galerkin-mass-matrix
 kind: algorithm
 title: "Assemble a weighted Galerkin mass matrix from Gaussian nodes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

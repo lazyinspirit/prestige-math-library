@@ -2,7 +2,7 @@
 id: lem-smolyak-adaptive-surplus-termination
 kind: lemma
 title: Termination of finite-cap surplus selection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

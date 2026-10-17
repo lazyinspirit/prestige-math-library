@@ -1,7 +1,7 @@
 ---
 page: linear-scheme-stability-and-lax-equivalence
 title: "Linear scheme stability and Lax equivalence"
-status: draft
+status: published
 items:
   - def-common-space-linear-scheme-interface
   - thm-diagonal-heat-semigroup-on-c-zero

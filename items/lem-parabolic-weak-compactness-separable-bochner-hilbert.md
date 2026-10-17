@@ -2,7 +2,7 @@
 id: lem-parabolic-weak-compactness-separable-bochner-hilbert
 kind: lemma
 title: Bounded sequences in a separable Hilbert space have weakly convergent subsequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

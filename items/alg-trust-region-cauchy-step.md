@@ -2,7 +2,7 @@
 id: alg-trust-region-cauchy-step
 kind: algorithm
 title: "The Cauchy step for a quadratic trust-region model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

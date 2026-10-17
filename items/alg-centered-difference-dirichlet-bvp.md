@@ -2,7 +2,7 @@
 id: alg-centered-difference-dirichlet-bvp
 kind: algorithm
 title: Centered finite differences for the zero-Dirichlet boundary-value problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: []

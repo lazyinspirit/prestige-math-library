@@ -2,7 +2,7 @@
 id: def-semi-explicit-index-one-dae-and-consistent-initial-data
 title: "Semi-explicit index-one DAEs and consistent initial data"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

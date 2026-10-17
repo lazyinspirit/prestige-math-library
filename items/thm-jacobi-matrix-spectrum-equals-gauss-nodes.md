@@ -2,7 +2,7 @@
 id: thm-jacobi-matrix-spectrum-equals-gauss-nodes
 kind: theorem
 title: The Jacobi matrix spectrum is the set of Gauss nodes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

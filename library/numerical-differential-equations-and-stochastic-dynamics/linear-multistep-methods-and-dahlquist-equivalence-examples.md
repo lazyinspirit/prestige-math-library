@@ -1,7 +1,7 @@
 ---
 page: linear-multistep-methods-and-dahlquist-equivalence-examples
 title: "Linear multistep methods and Dahlquist equivalence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-repeated-interior-root-preserves-bounded-powers

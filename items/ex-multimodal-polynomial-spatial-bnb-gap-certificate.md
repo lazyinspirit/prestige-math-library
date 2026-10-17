@@ -2,7 +2,7 @@
 id: ex-multimodal-polynomial-spatial-bnb-gap-certificate
 kind: example
 title: A multimodal quartic receives an exact spatial branch-and-bound gap certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound-examples

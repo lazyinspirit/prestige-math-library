@@ -2,7 +2,7 @@
 id: ex-sdc-cost-accounting-per-sweep
 kind: example
 title: Work and storage counts for an M-node SDC sweep
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

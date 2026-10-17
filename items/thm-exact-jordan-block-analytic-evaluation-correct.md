@@ -2,7 +2,7 @@
 id: thm-exact-jordan-block-analytic-evaluation-correct
 kind: theorem
 title: "A verified Jordan evaluation returns the primary matrix function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

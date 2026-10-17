@@ -2,7 +2,7 @@
 id: ex-parareal-nonlinear-tube-escape
 kind: example
 title: "A nonlinear Parareal iterate can leave its local Lipschitz tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

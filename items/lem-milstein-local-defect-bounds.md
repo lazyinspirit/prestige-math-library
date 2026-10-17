@@ -2,7 +2,7 @@
 id: lem-milstein-local-defect-bounds
 kind: lemma
 title: "Conditional local defect bounds for the Milstein Taylor increment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-dobrushin-zero-sum-l1-coefficient
 kind: lemma
 title: "Column-overlap formula for the zero-sum ℓ1 coefficient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

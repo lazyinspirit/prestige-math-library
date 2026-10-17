@@ -2,7 +2,7 @@
 id: lem-complex-hermitian-eigenvalues-lipschitz
 kind: lemma
 title: "Ordered eigenvalues of Hermitian matrices are operator-norm Lipschitz"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

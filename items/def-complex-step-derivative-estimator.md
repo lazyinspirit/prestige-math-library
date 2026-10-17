@@ -2,7 +2,7 @@
 id: def-complex-step-derivative-estimator
 kind: definition
 title: "The complex-step derivative estimator and its component-error model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

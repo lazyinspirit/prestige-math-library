@@ -2,7 +2,7 @@
 id: thm-na-euler-maclaurin-composite-trapezoid-remainder
 kind: theorem
 title: "Finite Euler–Maclaurin formula for the composite trapezoid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

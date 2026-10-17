@@ -2,7 +2,7 @@
 id: thm-graph-gradient-error-from-local-jacobian-perturbations
 kind: theorem
 title: "Local Jacobian perturbations give a pathwise bound for graph-gradient error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, thm-reverse-mode-computes-gradient, lem-composition-operator-norm-inequality, thm-cauchy-schwarz-in-an-inner-product-space]

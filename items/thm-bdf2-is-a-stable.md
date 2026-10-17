@@ -2,7 +2,7 @@
 id: thm-bdf2-is-a-stable
 kind: theorem
 title: "Constant-step BDF2 is A-stable under the multistep root condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

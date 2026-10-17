@@ -1,7 +1,7 @@
 ---
 page: sparse-direct-elimination-and-ordering
 title: Sparse direct elimination and ordering
-status: draft
+status: published
 items:
   - alg-threshold-partial-pivot-sparse-lu
   - def-hermitian-structural-graph-adapter

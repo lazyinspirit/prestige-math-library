@@ -2,7 +2,7 @@
 id: lem-collocation-polynomial-scaled-derivatives
 kind: lemma
 title: Collocation polynomial derivatives scale with the step size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-explicit-midpoint-local-order-drop-at-nonsmooth-time-kink
 kind: example
 title: "A time kink reduces the explicit midpoint local order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-one-step-ode-method-local-defect-order-and-stability]

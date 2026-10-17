@@ -2,7 +2,7 @@
 id: lem-linear-multistep-order-conditions-from-taylor
 kind: lemma
 title: "Taylor moment conditions characterize the order of a linear multistep method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

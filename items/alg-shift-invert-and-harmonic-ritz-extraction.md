@@ -2,7 +2,7 @@
 id: alg-shift-invert-and-harmonic-ritz-extraction
 kind: algorithm
 title: "Shift-invert and harmonic Ritz extraction with solve and pencil status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

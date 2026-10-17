@@ -2,7 +2,7 @@
 id: thm-gmres-true-residual-gap-from-computed-arnoldi-relation
 kind: theorem
 title: "A computed GMRES correction has an explicit finite-precision residual gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

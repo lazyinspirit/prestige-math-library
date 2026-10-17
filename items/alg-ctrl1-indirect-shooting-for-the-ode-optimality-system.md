@@ -2,7 +2,7 @@
 id: alg-ctrl1-indirect-shooting-for-the-ode-optimality-system
 kind: algorithm
 title: "Finite-budget indirect shooting for an interior-control ODE optimality system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

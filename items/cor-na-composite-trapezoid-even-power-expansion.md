@@ -2,7 +2,7 @@
 id: cor-na-composite-trapezoid-even-power-expansion
 kind: corollary
 title: "Even-power expansion of trapezoid levels with a uniform remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

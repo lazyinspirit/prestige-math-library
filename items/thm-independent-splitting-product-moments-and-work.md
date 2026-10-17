@@ -2,7 +2,7 @@
 id: thm-independent-splitting-product-moments-and-work
 kind: theorem
 title: Independent splitting estimator moments and work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

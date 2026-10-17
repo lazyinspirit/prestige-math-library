@@ -2,7 +2,7 @@
 id: ex-centered-difference-dirichlet-quadratic-exact
 kind: example
 title: The quadratic Dirichlet solution is represented exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-centered-difference-dirichlet-bvp, lem-centered-difference-dirichlet-inverse-maxnorm]

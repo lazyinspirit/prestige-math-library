@@ -2,7 +2,7 @@
 id: cex-naive-three-block-admm-divergence
 kind: counterexample
 title: "The direct three-block ADMM extension can diverge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

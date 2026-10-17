@@ -2,7 +2,7 @@
 id: ex-gaussian-barrier-exponential-tilting
 kind: example
 title: Gaussian barrier under the prescribed exponential tilt
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

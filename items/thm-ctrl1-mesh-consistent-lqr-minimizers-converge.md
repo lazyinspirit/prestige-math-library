@@ -2,7 +2,7 @@
 id: thm-ctrl1-mesh-consistent-lqr-minimizers-converge
 kind: theorem
 title: "Mesh-consistent LQR minimizers converge to the unique continuous minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

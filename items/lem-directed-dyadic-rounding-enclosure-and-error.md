@@ -2,7 +2,7 @@
 id: lem-directed-dyadic-rounding-enclosure-and-error
 kind: lemma
 title: Directed dyadic rounding encloses with explicit underflow and overflow bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

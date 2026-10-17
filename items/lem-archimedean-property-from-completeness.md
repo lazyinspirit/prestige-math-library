@@ -2,7 +2,7 @@
 id: lem-archimedean-property-from-completeness
 kind: lemma
 title: Dedekind completeness implies the Archimedean property
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

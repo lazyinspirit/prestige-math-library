@@ -2,7 +2,7 @@
 id: thm-parareal-inexact-sweep-error-ledger
 kind: theorem
 title: "An additive error ledger for inexact Parareal sweeps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

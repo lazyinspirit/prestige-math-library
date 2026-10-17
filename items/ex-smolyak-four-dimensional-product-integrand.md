@@ -2,7 +2,7 @@
 id: ex-smolyak-four-dimensional-product-integrand
 kind: example
 title: A four-dimensional product exactly integrated on a sparse node union
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity-examples

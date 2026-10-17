@@ -2,7 +2,7 @@
 id: ex-trust-region-newton-cauchy-truncated-cg
 kind: example
 title: "Newton, Cauchy, and truncated-CG steps on one indefinite model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

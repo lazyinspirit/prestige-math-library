@@ -2,7 +2,7 @@
 id: thm-na-clenshaw-curtis-exactness-and-near-best-error
 kind: theorem
 title: "Polynomial exactness and best-approximation error for Clenshaw–Curtis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

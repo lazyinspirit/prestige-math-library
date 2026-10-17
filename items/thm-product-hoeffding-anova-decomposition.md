@@ -2,7 +2,7 @@
 id: thm-product-hoeffding-anova-decomposition
 kind: theorem
 title: Independent product inputs have an orthogonal Hoeffding decomposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

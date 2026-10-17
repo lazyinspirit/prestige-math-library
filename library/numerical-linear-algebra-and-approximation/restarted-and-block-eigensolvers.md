@@ -1,7 +1,7 @@
 ---
 page: restarted-and-block-eigensolvers
 title: "Restarted and block eigensolvers"
-status: draft
+status: published
 items:
   - alg-thick-and-implicitly-restarted-arnoldi-with-locking
   - thm-implicit-restart-polynomial-subspace-and-residual-identity

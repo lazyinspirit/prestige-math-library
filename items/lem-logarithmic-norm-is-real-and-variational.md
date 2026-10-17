@@ -2,7 +2,7 @@
 id: lem-logarithmic-norm-is-real-and-variational
 kind: lemma
 title: "The Euclidean logarithmic norm is a real Rayleigh-quotient maximum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

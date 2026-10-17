@@ -2,7 +2,7 @@
 id: thm-tensor-product-gauss-exactness-and-exponential-node-count
 kind: theorem
 title: Tensor-product Gaussian quadrature preserves coordinatewise exactness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

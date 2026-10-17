@@ -2,7 +2,7 @@
 id: lem-regular-holonomic-phase-residuals-control-distance-to-phase-manifold
 kind: lemma
 title: Holonomic phase residuals control distance to the consistent phase manifold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

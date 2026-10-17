@@ -1,7 +1,7 @@
 ---
 page: polynomial-interpolation-and-remainder
 title: "Polynomial interpolation and remainder"
-status: draft
+status: published
 requires:
   - darboux-lhopital-and-taylor
   - fundamental-trigonometric-identities

@@ -1,7 +1,7 @@
 ---
 page: minimum-energy-paths-string-neb-and-saddle-certificates
 title: Minimum energy paths string neb and saddle certificates
-status: draft
+status: published
 items:
   - def-regular-minimum-energy-path-in-a-collision-free-tube
   - lem-dimer-central-force-hessian-vector-error

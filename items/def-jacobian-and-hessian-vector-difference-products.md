@@ -2,7 +2,7 @@
 id: def-jacobian-and-hessian-vector-difference-products
 kind: definition
 title: "Forward and central finite-difference Jacobian-vector and Hessian-vector products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

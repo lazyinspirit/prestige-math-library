@@ -2,7 +2,7 @@
 id: def-sqp-l1-exact-penalty-merit
 kind: definition
 title: "L1 exact-penalty merit and predicted decrease for SQP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

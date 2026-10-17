@@ -2,7 +2,7 @@
 id: thm-lagrange-point-evaluation-threshold-on-reference-simplex
 kind: theorem
 title: Sobolev threshold for Lagrange point evaluations on a reference simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

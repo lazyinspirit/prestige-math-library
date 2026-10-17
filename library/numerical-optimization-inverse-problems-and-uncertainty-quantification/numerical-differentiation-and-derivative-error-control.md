@@ -1,7 +1,7 @@
 ---
 page: numerical-differentiation-and-derivative-error-control
 title: "Numerical differentiation and derivative error control"
-status: draft
+status: published
 items:
   - def-complex-step-derivative-estimator
   - def-finite-difference-stencils-and-evaluation-error-model

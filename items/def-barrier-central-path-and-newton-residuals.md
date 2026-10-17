@@ -2,7 +2,7 @@
 id: def-barrier-central-path-and-newton-residuals
 kind: definition
 title: "Log-barrier central paths and primal-dual Newton residuals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

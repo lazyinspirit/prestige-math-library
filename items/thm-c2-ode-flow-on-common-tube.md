@@ -2,7 +2,7 @@
 id: thm-c2-ode-flow-on-common-tube
 kind: theorem
 title: "A $C^2$ vector field has a $C^2$ flow on a common compact tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

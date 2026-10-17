@@ -2,7 +2,7 @@
 id: thm-retarded-delay-method-of-steps-well-posedness
 kind: theorem
 title: "Method of steps gives a unique retarded-delay solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

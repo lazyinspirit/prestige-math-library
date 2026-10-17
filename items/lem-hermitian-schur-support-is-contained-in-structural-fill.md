@@ -2,7 +2,7 @@
 id: lem-hermitian-schur-support-is-contained-in-structural-fill
 kind: lemma
 title: Hermitian Schur-complement support stays inside the symmetric filled graph
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

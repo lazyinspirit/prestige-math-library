@@ -2,7 +2,7 @@
 id: thm-positive-tangent-hessian-implies-strict-projector-minimum
 kind: theorem
 title: "A positive tangent Hessian gives a strict local projector minimum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

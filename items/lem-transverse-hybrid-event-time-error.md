@@ -2,7 +2,7 @@
 id: lem-transverse-hybrid-event-time-error
 kind: lemma
 title: "A transverse hybrid event time is stable under dense-output and root error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

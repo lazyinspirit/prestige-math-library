@@ -2,7 +2,7 @@
 id: thm-nonlinear-cg-finite-budget-terminates
 kind: theorem
 title: "Finite-budget nonlinear conjugate gradient returns a status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

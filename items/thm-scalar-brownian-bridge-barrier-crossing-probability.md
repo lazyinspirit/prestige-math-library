@@ -2,7 +2,7 @@
 id: thm-scalar-brownian-bridge-barrier-crossing-probability
 kind: theorem
 title: Scalar Brownian bridge barrier-crossing probability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

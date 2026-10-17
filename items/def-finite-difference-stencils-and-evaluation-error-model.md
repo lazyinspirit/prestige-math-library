@@ -2,7 +2,7 @@
 id: def-finite-difference-stencils-and-evaluation-error-model
 kind: definition
 title: "Forward and central difference stencils with bounded evaluation errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

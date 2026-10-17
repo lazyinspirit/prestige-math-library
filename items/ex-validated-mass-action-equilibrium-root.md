@@ -2,7 +2,7 @@
 id: ex-validated-mass-action-equilibrium-root
 kind: example
 title: A validated mass-action chemical equilibrium root
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation-examples

@@ -2,7 +2,7 @@
 id: ex-occupied-projector-discontinuity-at-zero-gap
 kind: example
 title: The occupied spectral projector has no continuous extension through a zero gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

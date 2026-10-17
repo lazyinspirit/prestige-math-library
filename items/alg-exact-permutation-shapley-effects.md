@@ -2,7 +2,7 @@
 id: alg-exact-permutation-shapley-effects
 kind: algorithm
 title: Exact finite-permutation Shapley effects
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

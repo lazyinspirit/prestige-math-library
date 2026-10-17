@@ -2,7 +2,7 @@
 id: lem-backward-euler-cq-principal-branch-generating-function
 kind: lemma
 title: Principal-branch generating function for backward-Euler convolution quadrature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-na-prime-length-five-bluestein-transform
 kind: example
 title: "The length-five all-ones vector through Bluestein"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution-examples

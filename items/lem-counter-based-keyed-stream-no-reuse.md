@@ -2,7 +2,7 @@
 id: lem-counter-based-keyed-stream-no-reuse
 kind: lemma
 title: "A keyed permutation stream does not reuse outputs before its counter interval ends"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

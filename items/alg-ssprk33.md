@@ -2,7 +2,7 @@
 id: alg-ssprk33
 kind: algorithm
 title: "The three-stage third-order SSP Runge–Kutta step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

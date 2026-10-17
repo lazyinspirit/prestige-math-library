@@ -2,7 +2,7 @@
 id: lem-truncated-cg-iterates-are-krylov-vectors
 kind: lemma
 title: "Truncated-CG iterates are feasible and lie in generated Krylov subspaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

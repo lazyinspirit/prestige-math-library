@@ -2,7 +2,7 @@
 id: ex-cubic-interpolation-pointwise-remainder
 kind: example
 title: "A cubic gives equality in the pointwise interpolation remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

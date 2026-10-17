@@ -2,7 +2,7 @@
 id: alg-iteratively-regularized-gauss-newton-step
 kind: algorithm
 title: Unanchored Levenberg–Marquardt step with explicit early stopping
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

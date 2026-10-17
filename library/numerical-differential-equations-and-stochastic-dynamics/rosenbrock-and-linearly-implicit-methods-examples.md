@@ -1,7 +1,7 @@
 ---
 page: rosenbrock-and-linearly-implicit-methods-examples
 title: Rosenbrock and linearly implicit methods — Examples
-status: draft
+status: published
 requires:
   - rosenbrock-and-linearly-implicit-methods
 items: []

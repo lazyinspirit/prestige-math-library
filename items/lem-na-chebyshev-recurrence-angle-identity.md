@@ -2,7 +2,7 @@
 id: lem-na-chebyshev-recurrence-angle-identity
 kind: lemma
 title: "The Chebyshev recurrence agrees with cosine multiple angles"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

@@ -2,7 +2,7 @@
 id: ex-mesh-grid-norm-hides-common-space-instability
 kind: example
 title: "A mesh-dependent grid norm hides common-space instability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

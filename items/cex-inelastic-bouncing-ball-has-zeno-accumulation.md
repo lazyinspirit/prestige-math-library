@@ -2,7 +2,7 @@
 id: cex-inelastic-bouncing-ball-has-zeno-accumulation
 kind: counterexample
 title: "Inelastic bouncing-ball impacts can accumulate in finite time"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

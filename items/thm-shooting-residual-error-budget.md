@@ -2,7 +2,7 @@
 id: thm-shooting-residual-error-budget
 kind: theorem
 title: "Shooting error separates IVP integration and nonlinear residual error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

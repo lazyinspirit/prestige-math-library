@@ -1,7 +1,7 @@
 ---
 page: tau-leaping-and-reaction-diffusion-model-error
 title: Tau Leaping and Reaction Diffusion Model Error
-status: draft
+status: published
 items:
   - lem-shared-minimum-poisson-count-coupling
   - alg-explicit-poisson-tau-leaping

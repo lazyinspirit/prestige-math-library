@@ -2,7 +2,7 @@
 id: def-uniform-grid-and-difference-operators
 kind: definition
 title: Uniform periodic, infinite, and Dirichlet grid conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

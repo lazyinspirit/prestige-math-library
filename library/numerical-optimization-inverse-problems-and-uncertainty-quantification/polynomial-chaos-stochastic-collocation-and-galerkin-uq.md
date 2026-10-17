@@ -1,7 +1,7 @@
 ---
 page: polynomial-chaos-stochastic-collocation-and-galerkin-uq
 title: Polynomial chaos stochastic collocation and Galerkin UQ
-status: draft
+status: published
 requires:
   - finite-element-meshes-and-interpolation
   - ceas-lemma-and-aubin-nitsche-error-estimates

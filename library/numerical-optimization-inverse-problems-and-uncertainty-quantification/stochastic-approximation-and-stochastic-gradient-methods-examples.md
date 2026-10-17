@@ -1,7 +1,7 @@
 ---
 page: stochastic-approximation-and-stochastic-gradient-methods-examples
 title: Stochastic approximation and stochastic gradient methods — Examples
-status: draft
+status: published
 requires:
   - stochastic-approximation-and-stochastic-gradient-methods
 items: []

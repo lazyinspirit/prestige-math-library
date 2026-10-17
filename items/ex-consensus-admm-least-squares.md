@@ -2,7 +2,7 @@
 id: ex-consensus-admm-least-squares
 kind: example
 title: "Two-agent consensus least squares with exact ADMM iterates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

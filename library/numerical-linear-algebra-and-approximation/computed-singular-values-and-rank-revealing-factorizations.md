@@ -1,7 +1,7 @@
 ---
 page: computed-singular-values-and-rank-revealing-factorizations
 title: Computed singular values and rank revealing factorizations
-status: draft
+status: published
 items:
   - alg-householder-bidiagonalization
   - alg-strong-rank-revealing-qr-with-finite-swaps

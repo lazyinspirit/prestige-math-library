@@ -2,7 +2,7 @@
 id: lem-smolyak-dyadic-tensor-simpson-convergence
 kind: lemma
 title: Convergence of dyadic tensor composite-Simpson rules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

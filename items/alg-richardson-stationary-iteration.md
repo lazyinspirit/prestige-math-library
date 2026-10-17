@@ -2,7 +2,7 @@
 id: alg-richardson-stationary-iteration
 kind: algorithm
 title: "Finite-budget Richardson stationary iteration"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

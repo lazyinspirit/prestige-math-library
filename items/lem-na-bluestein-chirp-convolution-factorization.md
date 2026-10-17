@@ -2,7 +2,7 @@
 id: lem-na-bluestein-chirp-convolution-factorization
 kind: lemma
 title: "Bluestein’s chirp identity embeds an arbitrary DFT in a padded cyclic convolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

@@ -2,7 +2,7 @@
 id: cor-projected-subgradient-fixed-step-square-root-rate
 kind: corollary
 title: "The fixed-step projected subgradient rate is O(1/√N)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

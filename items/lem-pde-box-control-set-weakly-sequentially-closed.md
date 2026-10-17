@@ -2,7 +2,7 @@
 id: lem-pde-box-control-set-weakly-sequentially-closed
 kind: lemma
 title: A pointwise L2 box is weakly sequentially closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-nested-dissection-fronts-are-boundary-limited
 kind: lemma
 title: Nested-dissection grid fronts are bounded by a box separator and its exterior boundary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

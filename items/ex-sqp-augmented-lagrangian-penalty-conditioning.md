@@ -2,7 +2,7 @@
 id: ex-sqp-augmented-lagrangian-penalty-conditioning
 kind: example
 title: "A quadratic equality model shows the AL conditioning tradeoff"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: restarted-and-block-eigensolvers-examples
 title: "Restarted and block eigensolvers — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-implicit-restart-shift-can-suppress-wanted-component

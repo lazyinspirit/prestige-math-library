@@ -2,7 +2,7 @@
 id: thm-gauss-rule-exact-through-degree-2m-minus-1-and-positive-weights
 kind: theorem
 title: Gaussian quadrature is exact through degree 2m−1 and has positive weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: thm-sqp-reduced-bfgs-superlinear-under-dm
 kind: theorem
 title: "Reduced-BFGS SQP is locally superlinear under reduced Dennis-More and inverse bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

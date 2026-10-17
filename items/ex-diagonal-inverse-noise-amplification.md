@@ -2,7 +2,7 @@
 id: ex-diagonal-inverse-noise-amplification
 kind: example
 title: "A small singular value makes the Tikhonov noise bound sharp"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

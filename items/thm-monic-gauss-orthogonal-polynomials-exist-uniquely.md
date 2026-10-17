@@ -2,7 +2,7 @@
 id: thm-monic-gauss-orthogonal-polynomials-exist-uniquely
 kind: theorem
 title: Monic orthogonal polynomials exist uniquely through the quadrature order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

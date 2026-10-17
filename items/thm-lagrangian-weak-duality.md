@@ -2,7 +2,7 @@
 id: thm-lagrangian-weak-duality
 kind: theorem
 title: Every Lagrangian dual feasible pair is a lower-bound certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

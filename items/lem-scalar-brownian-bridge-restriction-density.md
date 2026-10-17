@@ -2,7 +2,7 @@
 id: lem-scalar-brownian-bridge-restriction-density
 kind: lemma
 title: Endpoint law and restriction density of a scalar Brownian bridge
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

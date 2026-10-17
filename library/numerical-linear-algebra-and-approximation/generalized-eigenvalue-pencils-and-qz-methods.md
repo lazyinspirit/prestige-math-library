@@ -1,7 +1,7 @@
 ---
 page: generalized-eigenvalue-pencils-and-qz-methods
 title: Generalized eigenvalue pencils and QZ methods
-status: draft
+status: published
 requires:
   - direct-matrix-factorisations-lu-cholesky-and-qr
   - the-spectral-theorem-and-singular-value-decomposition

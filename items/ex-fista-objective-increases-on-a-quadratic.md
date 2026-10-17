@@ -2,7 +2,7 @@
 id: ex-fista-objective-increases-on-a-quadratic
 kind: example
 title: "FISTA can increase the objective between consecutive iterates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

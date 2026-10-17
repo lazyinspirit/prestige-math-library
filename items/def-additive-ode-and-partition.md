@@ -2,7 +2,7 @@
 id: def-additive-ode-and-partition
 kind: definition
 title: "Additive autonomous ODE partitions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

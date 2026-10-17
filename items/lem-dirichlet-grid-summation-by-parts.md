@@ -2,7 +2,7 @@
 id: lem-dirichlet-grid-summation-by-parts
 kind: lemma
 title: One-dimensional discrete summation by parts with boundary terms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

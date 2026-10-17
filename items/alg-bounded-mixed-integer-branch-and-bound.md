@@ -2,7 +2,7 @@
 id: alg-bounded-mixed-integer-branch-and-bound
 kind: algorithm
 title: Bounded mixed-integer branch and bound with a finite enumeration fallback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

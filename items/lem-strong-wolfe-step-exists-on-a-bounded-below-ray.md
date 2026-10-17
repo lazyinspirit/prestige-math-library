@@ -2,7 +2,7 @@
 id: lem-strong-wolfe-step-exists-on-a-bounded-below-ray
 kind: lemma
 title: "A strong Wolfe step exists on a bounded-below descent ray"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

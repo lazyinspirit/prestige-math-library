@@ -2,7 +2,7 @@
 id: ex-certified-ill-conditioned-two-by-two-linear-solve
 kind: example
 title: A certified residual enclosure remains valid for an ill-conditioned 2 by 2 solve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

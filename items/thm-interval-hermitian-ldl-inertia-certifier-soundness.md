@@ -2,7 +2,7 @@
 id: thm-interval-hermitian-ldl-inertia-certifier-soundness
 kind: theorem
 title: The interval block LDL certifier returns the exact inertia on success
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

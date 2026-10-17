@@ -2,7 +2,7 @@
 id: cor-constant-step-bdf2-order-two-with-consistent-start
 title: "Constant-step BDF2 is second-order convergent with a consistent start and selected roots"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

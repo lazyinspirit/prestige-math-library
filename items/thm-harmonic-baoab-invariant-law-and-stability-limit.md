@@ -2,7 +2,7 @@
 id: thm-harmonic-baoab-invariant-law-and-stability-limit
 kind: theorem
 title: "Exact invariant covariance and stability threshold for scalar harmonic BAOAB"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

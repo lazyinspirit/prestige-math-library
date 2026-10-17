@@ -2,7 +2,7 @@
 id: prop-rosenbrock-euler-is-one-newton-correction-of-backward-euler
 title: "Autonomous Rosenbrock–Euler is one Newton correction of backward Euler"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: stochastic-approximation-and-stochastic-gradient-methods
 title: Stochastic approximation and stochastic gradient methods
-status: draft
+status: published
 requires:
   - proximal-gradient-and-accelerated-composite-optimization
   - numerical-optimization-globalization-and-inexact-certificates

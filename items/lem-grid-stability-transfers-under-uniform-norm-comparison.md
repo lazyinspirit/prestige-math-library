@@ -2,7 +2,7 @@
 id: lem-grid-stability-transfers-under-uniform-norm-comparison
 kind: lemma
 title: "Grid and common-space stability agree under uniform norm comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

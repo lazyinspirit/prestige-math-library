@@ -2,7 +2,7 @@
 id: thm-uniform-constraint-margin-enables-empty-box-detection
 kind: theorem
 title: A positive constraint-separation margin permits finite certified empty-box detection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

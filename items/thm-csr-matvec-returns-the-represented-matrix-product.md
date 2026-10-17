@@ -2,7 +2,7 @@
 id: thm-csr-matvec-returns-the-represented-matrix-product
 kind: theorem
 title: "CSR matrix-vector multiplication returns the represented product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

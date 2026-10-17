@@ -2,7 +2,7 @@
 id: thm-parabolic-fe-gradient-error-with-time-dependent-ritz
 kind: theorem
 title: Parabolic finite-element gradient errors include the time-dependent Ritz residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

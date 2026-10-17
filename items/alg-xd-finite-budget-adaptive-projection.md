@@ -2,7 +2,7 @@
 id: alg-xd-finite-budget-adaptive-projection
 kind: algorithm
 title: "Finite-budget adaptive finite-state projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

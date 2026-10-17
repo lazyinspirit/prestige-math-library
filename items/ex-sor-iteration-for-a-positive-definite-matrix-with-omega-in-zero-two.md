@@ -2,7 +2,7 @@
 id: ex-sor-iteration-for-a-positive-definite-matrix-with-omega-in-zero-two
 kind: example
 title: "SOR on a positive-definite system with relaxation parameter in (0, 2)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

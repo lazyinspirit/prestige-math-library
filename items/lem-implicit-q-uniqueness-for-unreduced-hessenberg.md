@@ -2,7 +2,7 @@
 id: lem-implicit-q-uniqueness-for-unreduced-hessenberg
 kind: lemma
 title: "An unreduced Hessenberg similarity is determined up to column phases by its first unitary column"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

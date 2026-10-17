@@ -2,7 +2,7 @@
 id: lem-coordinate-separable-penalty-is-proper-closed-convex
 kind: lemma
 title: "Finite separable block penalties are proper, closed, and convex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-central-path-barrier-gap-and-dual-certificate
 kind: theorem
 title: "Exact central points have barrier gap m/t or nu/t"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

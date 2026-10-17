@@ -2,7 +2,7 @@
 id: thm-rattle-scaled-solve-residual-error-budget
 kind: theorem
 title: Scaled RATTLE residuals bound the finite solve trajectory error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

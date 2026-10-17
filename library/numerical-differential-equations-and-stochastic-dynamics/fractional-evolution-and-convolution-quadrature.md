@@ -1,7 +1,7 @@
 ---
 page: fractional-evolution-and-convolution-quadrature
 title: Fractional evolution and convolution quadrature
-status: draft
+status: published
 items:
   - lem-fractional-integral-kernel-power-integral
   - def-caputo-derivative-and-fractional-integral

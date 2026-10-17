@@ -2,7 +2,7 @@
 id: alg-inexact-newton-krylov-with-descent-safeguard
 kind: algorithm
 title: "Finite-budget inexact Newton–Krylov with a descent safeguard"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

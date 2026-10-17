@@ -2,7 +2,7 @@
 id: ex-implicit-linear-solve-adjoint
 kind: example
 title: "An implicit linear solve and its adjoint gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [thm-implicit-differentiation-forward-and-adjoint-formulas, lem-certified-linear-solve-jacobian-and-pullback-error]

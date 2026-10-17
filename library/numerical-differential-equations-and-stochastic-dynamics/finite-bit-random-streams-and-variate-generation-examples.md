@@ -1,7 +1,7 @@
 ---
 page: finite-bit-random-streams-and-variate-generation-examples
 title: Finite bit random streams and variate generation — Examples
-status: draft
+status: published
 requires: [finite-bit-random-streams-and-variate-generation]
 items: []
 examples:

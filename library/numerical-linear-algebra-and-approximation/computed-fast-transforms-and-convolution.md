@@ -1,7 +1,7 @@
 ---
 page: computed-fast-transforms-and-convolution
 title: Computed fast transforms and convolution
-status: draft
+status: published
 items:
   - def-na-dct-ii-and-dst-i-even-odd-extension
   - lem-na-bluestein-chirp-convolution-factorization

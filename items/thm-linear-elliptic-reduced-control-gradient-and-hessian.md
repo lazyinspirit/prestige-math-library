@@ -2,7 +2,7 @@
 id: thm-linear-elliptic-reduced-control-gradient-and-hessian
 kind: theorem
 title: Reduced gradient and coercive Hessian for linear elliptic tracking control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

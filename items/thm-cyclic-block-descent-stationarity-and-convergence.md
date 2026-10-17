@@ -2,7 +2,7 @@
 id: thm-cyclic-block-descent-stationarity-and-convergence
 kind: theorem
 title: "Cyclic exact block descent has globally optimal accumulation points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

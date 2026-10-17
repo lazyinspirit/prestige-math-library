@@ -2,7 +2,7 @@
 id: thm-implicit-differentiation-forward-and-adjoint-formulas
 kind: theorem
 title: "Implicit differentiation and adjoint formulas under a nonsingular residual Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [thm-euclidean-implicit-function-theorem, thm-chain-rule-for-total-derivatives]

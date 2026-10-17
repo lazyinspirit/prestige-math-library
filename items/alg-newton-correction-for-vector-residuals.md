@@ -2,7 +2,7 @@
 id: alg-newton-correction-for-vector-residuals
 kind: algorithm
 title: "Newton correction for a square vector residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

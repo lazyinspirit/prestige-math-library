@@ -2,7 +2,7 @@
 id: thm-complex-elementary-range-enclosures
 kind: theorem
 title: Certified complex exponential and principal logarithm enclose their ranges
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

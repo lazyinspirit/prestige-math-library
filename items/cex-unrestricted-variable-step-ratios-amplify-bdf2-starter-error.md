@@ -2,7 +2,7 @@
 id: cex-unrestricted-variable-step-ratios-amplify-bdf2-starter-error
 kind: counterexample
 title: "Unrestricted variable-step ratios amplify a vanishing BDF2 starter error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

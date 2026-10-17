@@ -2,7 +2,7 @@
 id: ex-finite-state-birth-death-reaction-simulation
 kind: example
 title: "Gillespie simulation of a finite birth-death reaction network"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

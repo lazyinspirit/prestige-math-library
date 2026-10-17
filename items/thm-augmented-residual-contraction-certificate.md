@@ -2,7 +2,7 @@
 id: thm-augmented-residual-contraction-certificate
 kind: theorem
 title: "A bounded residual and derivative error give a local root certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

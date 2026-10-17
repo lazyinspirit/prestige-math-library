@@ -1,7 +1,7 @@
 ---
 page: event-location-and-hybrid-trajectory-error
 title: Event location and hybrid trajectory error
-status: draft
+status: published
 items:
   - def-hybrid-mode-guard-reset-system
   - lem-hybrid-guard-derivative-along-mode

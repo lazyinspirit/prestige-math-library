@@ -2,7 +2,7 @@
 id: thm-optimal-step-for-forward-and-central-difference-error-bounds
 kind: theorem
 title: "The forward and central error bounds have explicit balancing steps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

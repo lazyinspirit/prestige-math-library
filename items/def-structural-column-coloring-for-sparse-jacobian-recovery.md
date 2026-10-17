@@ -2,7 +2,7 @@
 id: def-structural-column-coloring-for-sparse-jacobian-recovery
 kind: definition
 title: "The column-interference graph and collision-free coloring for a sparse Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

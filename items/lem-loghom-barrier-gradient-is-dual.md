@@ -2,7 +2,7 @@
 id: lem-loghom-barrier-gradient-is-dual
 kind: lemma
 title: "The negative gradient of a log-homogeneous cone barrier is dual feasible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

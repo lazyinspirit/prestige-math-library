@@ -2,7 +2,7 @@
 id: ex-strict-versus-weak-semidefinite-feasibility
 kind: example
 title: "Strict feasibility, boundary feasibility, and a weakly infeasible SDP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

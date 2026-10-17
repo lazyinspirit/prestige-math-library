@@ -2,7 +2,7 @@
 id: alg-certified-adaptive-simpson
 kind: algorithm
 title: Certified adaptive Simpson from derivative enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

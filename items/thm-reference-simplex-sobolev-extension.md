@@ -2,7 +2,7 @@
 id: thm-reference-simplex-sobolev-extension
 kind: theorem
 title: A reference simplex is an integer-order Sobolev extension domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

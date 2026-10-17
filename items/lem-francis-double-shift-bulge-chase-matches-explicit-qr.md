@@ -2,7 +2,7 @@
 id: lem-francis-double-shift-bulge-chase-matches-explicit-qr
 kind: lemma
 title: "Under unreduced hypotheses, the Francis double-shift chase matches explicit shifted QR"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-source-factored-production-destruction-rates
 kind: definition
 title: "Source-factored transfer rates for zero compartments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

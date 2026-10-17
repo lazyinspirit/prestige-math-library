@@ -2,7 +2,7 @@
 id: lem-centered-difference-dirichlet-truncation-residual
 kind: lemma
 title: Centered-difference residual bound with exact Dirichlet closure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-centered-difference-dirichlet-bvp, cor-taylor-remainder-bound, lem-of-triangle-inequality]

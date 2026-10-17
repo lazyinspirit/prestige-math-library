@@ -2,7 +2,7 @@
 id: ex-nonzero-residual-gauss-newton-is-only-linear
 kind: example
 title: "A nonzero-residual stationary point gives only linear Gauss-Newton convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

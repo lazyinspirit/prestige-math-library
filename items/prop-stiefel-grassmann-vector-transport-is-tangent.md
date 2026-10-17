@@ -2,7 +2,7 @@
 id: prop-stiefel-grassmann-vector-transport-is-tangent
 kind: proposition
 title: Projected vector transports return tangent representatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

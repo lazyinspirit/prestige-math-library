@@ -2,7 +2,7 @@
 id: thm-factorable-dual-certificate-is-valid-box-lower-bound
 kind: theorem
 title: A verified dual certificate for a McCormick relaxation is a valid global lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

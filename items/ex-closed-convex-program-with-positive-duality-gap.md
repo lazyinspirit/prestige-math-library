@@ -2,7 +2,7 @@
 id: ex-closed-convex-program-with-positive-duality-gap
 kind: example
 title: A closed convex program with a positive duality gap when Slater fails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

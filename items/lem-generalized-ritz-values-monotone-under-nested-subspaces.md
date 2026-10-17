@@ -2,7 +2,7 @@
 id: lem-generalized-ritz-values-monotone-under-nested-subspaces
 kind: lemma
 title: "Generalized Ritz values obey min-max bounds and are monotone under trial-space inclusion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

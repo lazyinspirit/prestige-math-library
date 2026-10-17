@@ -2,7 +2,7 @@
 id: lem-hermitian-rayleigh-residual-spectrum-distance
 kind: lemma
 title: A Hermitian approximate-eigenpair residual locates a spectral value
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

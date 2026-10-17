@@ -2,7 +2,7 @@
 id: ex-perfectly-correlated-inputs-and-shapley-allocation
 kind: example
 title: Perfectly correlated inputs share a Shapley effect
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

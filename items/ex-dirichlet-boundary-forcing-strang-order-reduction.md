@@ -2,7 +2,7 @@
 id: ex-dirichlet-boundary-forcing-strang-order-reduction
 kind: example
 title: "Boundary-incompatible forcing reduces Strang order to five quarters in a Dirichlet modal model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

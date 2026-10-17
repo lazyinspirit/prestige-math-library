@@ -2,7 +2,7 @@
 id: thm-elliptic-finite-difference-l2-error-on-rectangles
 kind: theorem
 title: Second-order grid L2 error for rectangular Dirichlet flux differences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

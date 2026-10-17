@@ -2,7 +2,7 @@
 id: thm-chebyshev-lobatto-interpolation-near-best-weighted-error
 kind: theorem
 title: "Chebyshev–Lobatto interpolation inherits a weighted near-best bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

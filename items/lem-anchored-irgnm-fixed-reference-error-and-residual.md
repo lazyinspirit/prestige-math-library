@@ -2,7 +2,7 @@
 id: lem-anchored-irgnm-fixed-reference-error-and-residual
 kind: lemma
 title: "Anchored IRGNM error identity and fixed-reference residual inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

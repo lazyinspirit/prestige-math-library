@@ -2,7 +2,7 @@
 id: ex-importance-sampling-finite-mean-infinite-second-moment
 kind: example
 title: An unbiased importance-sampling weight can have infinite second moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

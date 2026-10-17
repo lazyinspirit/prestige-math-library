@@ -2,7 +2,7 @@
 id: lem-hybrid-guard-derivative-along-mode
 kind: lemma
 title: "The derivative of a guard along an ODE mode is its Lie derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-coordinatewise-product-moment-functional
 kind: definition
 title: Coordinatewise product-moment functional for tensor polynomials
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: imex-and-operator-splitting-methods
 title: Imex and operator splitting methods
-status: draft
+status: published
 items:
   - def-additive-ode-and-partition
   - def-dirichlet-sine-mode-heat-splitting-model

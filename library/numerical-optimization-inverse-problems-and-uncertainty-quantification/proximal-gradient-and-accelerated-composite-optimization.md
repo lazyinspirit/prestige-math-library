@@ -1,7 +1,7 @@
 ---
 page: proximal-gradient-and-accelerated-composite-optimization
 title: Proximal gradient and accelerated composite optimization
-status: draft
+status: published
 requires:
   - constrained-variational-problems-and-variational-inequalities
   - convex-and-semicontinuous-functions-on-rn

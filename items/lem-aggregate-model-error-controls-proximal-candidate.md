@@ -2,7 +2,7 @@
 id: lem-aggregate-model-error-controls-proximal-candidate
 kind: lemma
 title: "Vanishing aggregate-model error controls the proximal candidate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

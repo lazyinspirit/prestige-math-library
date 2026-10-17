@@ -2,7 +2,7 @@
 id: thm-mollified-biot-savart-kernel-has-l1-consistency
 kind: theorem
 title: L1 consistency of the mollified Biot-Savart kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

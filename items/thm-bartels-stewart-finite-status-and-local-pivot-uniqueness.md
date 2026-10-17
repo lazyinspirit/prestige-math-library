@@ -2,7 +2,7 @@
 id: thm-bartels-stewart-finite-status-and-local-pivot-uniqueness
 kind: theorem
 title: Finite Bartels–Stewart statuses and successful-pivot uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -2,7 +2,7 @@
 id: lem-elementary-power-series-converge-uniformly-on-bounded-sets
 kind: lemma
 title: Elementary factorial and geometric series converge uniformly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

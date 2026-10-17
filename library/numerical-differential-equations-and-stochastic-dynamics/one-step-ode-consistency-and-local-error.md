@@ -1,7 +1,7 @@
 ---
 page: one-step-ode-consistency-and-local-error
 title: One-step ODE Consistency and Local Error
-status: draft
+status: published
 items:
   - def-one-step-ode-method-local-defect-order-and-stability
   - lem-time-along-ode-solution-derivative-bound

@@ -2,7 +2,7 @@
 id: thm-index-one-dae-bdf2-second-order-with-residuals
 title: "Coupled constant-step BDF2 is second order for a regular index-one DAE"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

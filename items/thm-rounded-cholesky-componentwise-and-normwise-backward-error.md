@@ -2,7 +2,7 @@
 id: thm-rounded-cholesky-componentwise-and-normwise-backward-error
 kind: theorem
 title: "A successful rounded Cholesky factorization has componentwise and normwise backward error bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

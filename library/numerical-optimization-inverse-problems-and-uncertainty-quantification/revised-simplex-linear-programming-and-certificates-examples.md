@@ -1,7 +1,7 @@
 ---
 page: revised-simplex-linear-programming-and-certificates-examples
 title: "Revised simplex linear programming and certificates — Examples"
-status: draft
+status: published
 requires: [revised-simplex-linear-programming-and-certificates]
 items: []
 examples:

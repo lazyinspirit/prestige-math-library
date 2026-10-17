@@ -2,7 +2,7 @@
 id: lem-ctrl1-lqr-cost-is-weakly-lower-semicontinuous
 kind: lemma
 title: "Under Countable Choice, the LQR objective is weakly lower semicontinuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

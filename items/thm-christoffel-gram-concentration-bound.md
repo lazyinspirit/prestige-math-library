@@ -2,7 +2,7 @@
 id: thm-christoffel-gram-concentration-bound
 kind: theorem
 title: Bounded-Christoffel sampling stabilizes the empirical Gram matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

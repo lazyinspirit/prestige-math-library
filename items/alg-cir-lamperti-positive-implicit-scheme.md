@@ -2,7 +2,7 @@
 id: alg-cir-lamperti-positive-implicit-scheme
 kind: algorithm
 title: "Positive Lamperti drift-implicit scheme for the CIR process"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

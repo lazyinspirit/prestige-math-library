@@ -2,7 +2,7 @@
 id: lem-hilbert-tikhonov-noise-amplification-bound
 kind: lemma
 title: "Hilbert-space Tikhonov amplifies data by at most $1/(2\\sqrt{\\lambda})$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

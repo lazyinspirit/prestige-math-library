@@ -2,7 +2,7 @@
 id: thm-second-order-sufficient-condition-on-the-critical-cone
 kind: theorem
 title: Strict second-order positivity on the critical cone gives a strict local minimum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

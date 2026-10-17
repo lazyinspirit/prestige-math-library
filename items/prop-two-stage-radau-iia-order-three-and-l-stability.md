@@ -2,7 +2,7 @@
 id: prop-two-stage-radau-iia-order-three-and-l-stability
 title: "Two-stage Radau IIA has order three and is scalar L-stable"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

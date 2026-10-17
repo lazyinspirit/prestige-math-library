@@ -2,7 +2,7 @@
 id: lem-mccormick-envelope-equals-graph-convex-hull
 kind: lemma
 title: The four McCormick inequalities give the convex hull of a bilinear graph over a box
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

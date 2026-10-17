@@ -2,7 +2,7 @@
 id: cor-symmetric-galerkin-best-approximation-in-energy-norm
 kind: corollary
 title: Hermitian Galerkin solutions are best in the energy norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

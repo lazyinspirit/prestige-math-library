@@ -2,7 +2,7 @@
 id: def-density-scaled-jump-and-chemical-langevin-generators
 kind: definition
 title: "Density-scaled reaction jump and chemical Langevin generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-finite-coefficient-vector-has-polynomial-representative
 kind: lemma
 title: "A finite coefficient vector has a canonical polynomial representative"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: thm-local-hopf-certificate-is-sound
 kind: theorem
 title: A certified interval Hopf record verifies only the local Hopf hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

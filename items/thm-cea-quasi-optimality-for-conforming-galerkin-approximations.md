@@ -2,7 +2,7 @@
 id: thm-cea-quasi-optimality-for-conforming-galerkin-approximations
 kind: theorem
 title: Céa quasi-optimality for coercive conforming Galerkin problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

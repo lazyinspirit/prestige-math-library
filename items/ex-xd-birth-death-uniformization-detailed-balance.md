@@ -2,7 +2,7 @@
 id: ex-xd-birth-death-uniformization-detailed-balance
 kind: example
 title: "A three-state birth–death generator and detailed balance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

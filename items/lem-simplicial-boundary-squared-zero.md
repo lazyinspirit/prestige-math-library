@@ -2,7 +2,7 @@
 id: lem-simplicial-boundary-squared-zero
 kind: lemma
 title: The simplicial boundary of a boundary is zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

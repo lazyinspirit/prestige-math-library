@@ -2,7 +2,7 @@
 id: alg-adaptive-euler-maruyama-on-predictable-grid
 kind: algorithm
 title: Euler–Maruyama on a predictable grid with bridge-refinement status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

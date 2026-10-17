@@ -2,7 +2,7 @@
 id: alg-scaled-taylor-exponential-action
 kind: algorithm
 title: "Finite scaled Taylor action for the matrix exponential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

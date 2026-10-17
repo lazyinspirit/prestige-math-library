@@ -2,7 +2,7 @@
 id: lem-xd-uniformized-matrix-is-stochastic
 kind: lemma
 title: "The finite uniformized matrix is column stochastic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-cardinal-polynomial-interpolation
 kind: definition
 title: "Cardinal-polynomial interpolation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

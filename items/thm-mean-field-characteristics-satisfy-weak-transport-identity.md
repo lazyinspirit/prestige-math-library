@@ -2,7 +2,7 @@
 id: thm-mean-field-characteristics-satisfy-weak-transport-identity
 kind: theorem
 title: Weak transport identity for characteristic mean-field solutions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-self-consistent-projector-two-cycle-with-gap
 kind: example
 title: A finite-basis occupied projector map can two-cycle despite a uniform gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

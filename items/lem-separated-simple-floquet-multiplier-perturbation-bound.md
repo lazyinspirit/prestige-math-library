@@ -2,7 +2,7 @@
 id: lem-separated-simple-floquet-multiplier-perturbation-bound
 kind: lemma
 title: "A separated simple Floquet multiplier has a left/right-conditioned finite enclosure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

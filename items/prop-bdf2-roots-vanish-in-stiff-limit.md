@@ -2,7 +2,7 @@
 id: prop-bdf2-roots-vanish-in-stiff-limit
 kind: proposition
 title: "Both constant-step BDF2 test roots vanish in the stiff limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

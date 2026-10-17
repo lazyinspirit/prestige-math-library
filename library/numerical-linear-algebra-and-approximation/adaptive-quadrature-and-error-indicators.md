@@ -1,7 +1,7 @@
 ---
 page: adaptive-quadrature-and-error-indicators
 title: Adaptive quadrature and error indicators
-status: draft
+status: published
 items:
   - def-adaptive-simpson-refinement-indicator
   - lem-composite-simpson-asymptotic-error-expansion

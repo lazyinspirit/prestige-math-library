@@ -2,7 +2,7 @@
 id: thm-dyadic-brownian-bridge-tree-increment-laws
 kind: theorem
 title: Exact increment laws in the dyadic Brownian bridge tree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

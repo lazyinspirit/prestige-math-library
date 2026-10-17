@@ -2,7 +2,7 @@
 id: lem-exact-rational-two-by-two-discriminant-sign
 kind: lemma
 title: Rational or dyadic stored real blocks have a finite exact discriminant-sign evaluator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -2,7 +2,7 @@
 id: alg-minimum-intensity-coupling-for-reaction-networks
 kind: algorithm
 title: "Minimum-intensity coupling of reaction networks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

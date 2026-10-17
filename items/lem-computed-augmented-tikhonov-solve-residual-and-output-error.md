@@ -2,7 +2,7 @@
 id: lem-computed-augmented-tikhonov-solve-residual-and-output-error
 kind: lemma
 title: Computed augmented Tikhonov solves have certified residual and output-error bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -2,7 +2,7 @@
 id: thm-continuous-coagulation-fragmentation-moment-bounds
 kind: theorem
 title: Bounded-kernel measure solutions conserve mass and control number and second moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

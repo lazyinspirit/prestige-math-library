@@ -2,7 +2,7 @@
 id: ex-sdc-inexact-midpoint-stage-residual
 kind: example
 title: An inexact midpoint stage solve has a controlled update error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

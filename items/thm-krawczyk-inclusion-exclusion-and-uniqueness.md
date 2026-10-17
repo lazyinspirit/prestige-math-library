@@ -2,7 +2,7 @@
 id: thm-krawczyk-inclusion-exclusion-and-uniqueness
 kind: theorem
 title: Krawczyk inclusion proves existence, disjointness excludes roots, and contraction proves uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

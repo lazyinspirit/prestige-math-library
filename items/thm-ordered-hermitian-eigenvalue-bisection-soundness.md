@@ -2,7 +2,7 @@
 id: thm-ordered-hermitian-eigenvalue-bisection-soundness
 kind: theorem
 title: The ordered Hermitian bisection certifier returns valid intervals or an inconclusive status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

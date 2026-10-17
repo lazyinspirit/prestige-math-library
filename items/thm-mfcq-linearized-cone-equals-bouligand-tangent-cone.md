@@ -2,7 +2,7 @@
 id: thm-mfcq-linearized-cone-equals-bouligand-tangent-cone
 kind: theorem
 title: MFCQ identifies the linearized and Bouligand tangent cones
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

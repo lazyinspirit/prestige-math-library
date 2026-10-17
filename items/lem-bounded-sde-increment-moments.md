@@ -2,7 +2,7 @@
 id: lem-bounded-sde-increment-moments
 kind: lemma
 title: "Second and fourth moments of bounded-coefficient SDE increments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

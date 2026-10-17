@@ -2,7 +2,7 @@
 id: thm-gauss-newton-zero-residual-quadratic-convergence
 kind: theorem
 title: "Gauss-Newton converges quadratically at a full-rank zero-residual root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

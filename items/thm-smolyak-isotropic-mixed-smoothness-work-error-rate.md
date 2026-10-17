@@ -2,7 +2,7 @@
 id: thm-smolyak-isotropic-mixed-smoothness-work-error-rate
 kind: theorem
 title: Explicit work and error rate for dyadic Simpson Smolyak cubature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

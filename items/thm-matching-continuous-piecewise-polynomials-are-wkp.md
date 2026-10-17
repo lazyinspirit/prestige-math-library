@@ -2,7 +2,7 @@
 id: thm-matching-continuous-piecewise-polynomials-are-wkp
 kind: theorem
 title: Continuous matching piecewise polynomials belong to W1p
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

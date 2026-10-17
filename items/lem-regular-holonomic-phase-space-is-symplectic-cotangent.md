@@ -2,7 +2,7 @@
 id: lem-regular-holonomic-phase-space-is-symplectic-cotangent
 kind: lemma
 title: The regular holonomic phase space is a symplectic cotangent bundle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

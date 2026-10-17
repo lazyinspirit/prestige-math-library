@@ -2,7 +2,7 @@
 id: def-parabolic-ritz-projection
 kind: definition
 title: The elliptic Ritz projection for a conforming finite-element space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

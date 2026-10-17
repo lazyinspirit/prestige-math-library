@@ -2,7 +2,7 @@
 id: alg-certified-bracketed-cdf-inversion
 kind: algorithm
 title: "Certified bracketed bisection for a continuous CDF"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

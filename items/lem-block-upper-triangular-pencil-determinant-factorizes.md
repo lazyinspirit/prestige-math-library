@@ -2,7 +2,7 @@
 id: lem-block-upper-triangular-pencil-determinant-factorizes
 kind: lemma
 title: "The homogeneous determinant factors across a block upper triangular pencil"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

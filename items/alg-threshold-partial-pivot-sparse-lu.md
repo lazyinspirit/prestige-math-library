@@ -2,7 +2,7 @@
 id: alg-threshold-partial-pivot-sparse-lu
 kind: algorithm
 title: Threshold partial-pivot sparse LU with explicit fill and failure statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

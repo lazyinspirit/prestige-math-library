@@ -2,7 +2,7 @@
 id: thm-finite-budget-rattle-solver-returns-status
 kind: theorem
 title: The finite budget RATTLE solver returns a status in finite work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

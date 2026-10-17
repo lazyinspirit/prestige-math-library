@@ -2,7 +2,7 @@
 id: lem-cutoff-overflow-return-error-bound
 kind: lemma
 title: Finite cutoff differs from the unbounded pivot model by a controlled return error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

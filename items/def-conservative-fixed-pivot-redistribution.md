@@ -2,7 +2,7 @@
 id: def-conservative-fixed-pivot-redistribution
 kind: definition
 title: Conservative fixed-pivot redistribution on a finite positive grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

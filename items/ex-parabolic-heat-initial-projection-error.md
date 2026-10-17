@@ -2,7 +2,7 @@
 id: ex-parabolic-heat-initial-projection-error
 kind: example
 title: The L2 projection and Ritz projection give different initial data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

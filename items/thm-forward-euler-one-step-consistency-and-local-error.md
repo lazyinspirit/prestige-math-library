@@ -2,7 +2,7 @@
 id: thm-forward-euler-one-step-consistency-and-local-error
 kind: theorem
 title: "Forward Euler has uniform local order one and a one-step Lipschitz bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

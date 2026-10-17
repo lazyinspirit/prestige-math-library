@@ -2,7 +2,7 @@
 id: alg-floquet-multiplier-cluster-certifier
 kind: algorithm
 title: "Finite complex-contour validation of Floquet multiplier clusters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

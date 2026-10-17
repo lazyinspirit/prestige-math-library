@@ -2,7 +2,7 @@
 id: ex-cross-entropy-pilot-misses-event-support
 kind: example
 title: A pilot with no rare-event hit returns failure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

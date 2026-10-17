@@ -2,7 +2,7 @@
 id: thm-implicit-restart-polynomial-subspace-and-residual-identity
 kind: theorem
 title: "Exact implicit Arnoldi restart applies its shift polynomial and preserves an Arnoldi residual identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

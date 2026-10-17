@@ -2,7 +2,7 @@
 id: lem-periodic-heat-difference-amplification-symbol
 kind: lemma
 title: Periodic heat-stencil eigenvalues and θ amplification factor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

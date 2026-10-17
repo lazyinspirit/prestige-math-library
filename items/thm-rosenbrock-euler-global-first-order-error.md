@@ -2,7 +2,7 @@
 id: thm-rosenbrock-euler-global-first-order-error
 title: "Rosenbrock–Euler has a first-order global error bound on a common tube"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

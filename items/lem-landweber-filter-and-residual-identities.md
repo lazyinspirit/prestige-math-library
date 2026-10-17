@@ -2,7 +2,7 @@
 id: lem-landweber-filter-and-residual-identities
 kind: lemma
 title: Landweber iterates and residuals are spectral-filter iterates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

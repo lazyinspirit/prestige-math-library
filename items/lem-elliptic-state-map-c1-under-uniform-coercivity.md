@@ -2,7 +2,7 @@
 id: lem-elliptic-state-map-c1-under-uniform-coercivity
 kind: lemma
 title: A uniformly coercive elliptic variational state is C1 in its parameter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

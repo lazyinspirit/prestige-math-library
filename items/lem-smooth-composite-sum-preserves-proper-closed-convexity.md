@@ -2,7 +2,7 @@
 id: lem-smooth-composite-sum-preserves-proper-closed-convexity
 kind: lemma
 title: "A finite continuous convex summand preserves proper closed convexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

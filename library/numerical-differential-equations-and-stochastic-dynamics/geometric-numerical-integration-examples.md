@@ -1,7 +1,7 @@
 ---
 page: geometric-numerical-integration-examples
 title: Geometric numerical integration — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-symplectic-euler-harmonic-oscillator

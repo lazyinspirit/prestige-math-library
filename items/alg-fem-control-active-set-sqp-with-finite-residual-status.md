@@ -2,7 +2,7 @@
 id: alg-fem-control-active-set-sqp-with-finite-residual-status
 kind: algorithm
 title: Finite-budget active-set SQP with a certified KKT-system residual status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

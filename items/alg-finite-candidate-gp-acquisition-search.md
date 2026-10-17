@@ -2,7 +2,7 @@
 id: alg-finite-candidate-gp-acquisition-search
 kind: algorithm
 title: Finite-candidate Gaussian-process acquisition search with explicit statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

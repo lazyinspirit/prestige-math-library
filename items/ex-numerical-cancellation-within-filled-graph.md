@@ -2,7 +2,7 @@
 id: ex-numerical-cancellation-within-filled-graph
 kind: example
 title: "Numerical cancellation can zero an entry while the filled graph retains its edge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

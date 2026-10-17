@@ -1,7 +1,7 @@
 ---
 page: variational-crimes-and-strang-lemmas
 title: "Variational crimes and Strang lemmas"
-status: draft
+status: published
 items:
   - def-variational-crime-error-framework
   - lem-discrete-form-perturbation-preserves-coercivity

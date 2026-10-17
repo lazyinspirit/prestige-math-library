@@ -2,7 +2,7 @@
 id: lem-normal-cone-maximal-monotone-and-projection-resolvent
 kind: lemma
 title: The convex normal-cone operator is maximal monotone and its resolvent is projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

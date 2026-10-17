@@ -2,7 +2,7 @@
 id: thm-randomized-coordinate-gradient-descent-rates
 kind: theorem
 title: "Rates for randomized coordinate gradient descent and importance sampling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

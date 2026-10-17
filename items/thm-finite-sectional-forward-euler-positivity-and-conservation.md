@@ -2,7 +2,7 @@
 id: thm-finite-sectional-forward-euler-positivity-and-conservation
 kind: theorem
 title: The sectional forward-Euler step is positive and conserves augmented mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

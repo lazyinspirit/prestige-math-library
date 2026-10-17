@@ -2,7 +2,7 @@
 id: thm-finite-budget-francis-schur-termination-and-status
 kind: theorem
 title: Finite Francis procedure terminates with explicit statuses and verifies its Schur pattern on success
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -1,7 +1,7 @@
 ---
 page: matrix-exponential-and-phi-function-actions
 title: "Matrix exponential and phi function actions"
-status: draft
+status: published
 items:
   - def-phi-functions-by-everywhere-convergent-series
   - def-logarithmic-norm-for-complex-matrices

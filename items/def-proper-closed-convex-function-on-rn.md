@@ -2,7 +2,7 @@
 id: def-proper-closed-convex-function-on-rn
 kind: definition
 title: "Proper closed convex extended-real functions on $\\mathbb R^n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

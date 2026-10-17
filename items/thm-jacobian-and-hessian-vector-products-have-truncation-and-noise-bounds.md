@@ -2,7 +2,7 @@
 id: thm-jacobian-and-hessian-vector-products-have-truncation-and-noise-bounds
 kind: theorem
 title: "Directional Jacobian and Hessian differences retain Taylor and evaluation-noise errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

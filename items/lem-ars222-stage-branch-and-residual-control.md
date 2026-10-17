@@ -2,7 +2,7 @@
 id: lem-ars222-stage-branch-and-residual-control
 kind: lemma
 title: "The two implicit ARS stages have selected branches and residual bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cor-computed-singular-values-absolute-error-from-backward-stability
 kind: corollary
 title: "Computed singular-value error is bounded by backward perturbation plus readout error"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

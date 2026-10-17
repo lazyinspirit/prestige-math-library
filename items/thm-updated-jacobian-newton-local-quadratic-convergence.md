@@ -2,7 +2,7 @@
 id: thm-updated-jacobian-newton-local-quadratic-convergence
 kind: theorem
 title: "Updated-Jacobian Newton has local quadratic convergence at a simple root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

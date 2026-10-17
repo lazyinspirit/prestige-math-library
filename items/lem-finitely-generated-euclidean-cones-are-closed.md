@@ -2,7 +2,7 @@
 id: lem-finitely-generated-euclidean-cones-are-closed
 kind: lemma
 title: A finitely generated cone in Euclidean space is closed
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

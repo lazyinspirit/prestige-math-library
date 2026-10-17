@@ -2,7 +2,7 @@
 id: thm-local-sde-existence-and-uniqueness-until-exit
 kind: theorem
 title: "Local strong existence and uniqueness up to exit for locally Lipschitz SDEs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

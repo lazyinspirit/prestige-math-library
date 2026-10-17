@@ -2,7 +2,7 @@
 id: lem-finite-temperature-entropy-continuous-at-endpoints
 kind: lemma
 title: "The finite-temperature trace entropy is continuous at occupation endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

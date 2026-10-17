@@ -2,7 +2,7 @@
 id: ex-midpoint-underintegrated-p2-stiffness-loses-coercivity
 kind: example
 title: One midpoint sample destroys a quadratic stiffness coercivity bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

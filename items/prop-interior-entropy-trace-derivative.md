@@ -2,7 +2,7 @@
 id: prop-interior-entropy-trace-derivative
 kind: proposition
 title: "The finite-temperature matrix entropy has its interior trace derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

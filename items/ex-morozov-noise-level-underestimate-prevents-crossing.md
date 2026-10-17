@@ -2,7 +2,7 @@
 id: ex-morozov-noise-level-underestimate-prevents-crossing
 kind: example
 title: Underestimated noise can put the Morozov target below every residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

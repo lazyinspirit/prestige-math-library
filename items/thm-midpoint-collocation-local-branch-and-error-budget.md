@@ -2,7 +2,7 @@
 id: thm-midpoint-collocation-local-branch-and-error-budget
 kind: theorem
 title: "Local second-order midpoint collocation error with an algebraic residual budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

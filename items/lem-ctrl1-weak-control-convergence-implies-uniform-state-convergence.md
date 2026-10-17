@@ -2,7 +2,7 @@
 id: lem-ctrl1-weak-control-convergence-implies-uniform-state-convergence
 kind: lemma
 title: "Weakly convergent bounded controls have uniformly convergent states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

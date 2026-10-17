@@ -2,7 +2,7 @@
 id: lem-prox-l1-is-soft-thresholding
 kind: lemma
 title: "The proximal map of the l1 norm is soft thresholding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

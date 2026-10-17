@@ -2,7 +2,7 @@
 id: alg-multiple-shooting-for-nonlinear-bvps
 kind: algorithm
 title: "Finite-budget multiple shooting for a nonlinear two-point BVP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

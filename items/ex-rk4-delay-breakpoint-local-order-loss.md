@@ -2,7 +2,7 @@
 id: ex-rk4-delay-breakpoint-local-order-loss
 kind: example
 title: "A breakpoint-crossing RK4 step has a second-order defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

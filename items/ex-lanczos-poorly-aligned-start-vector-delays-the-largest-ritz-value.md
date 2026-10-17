@@ -2,7 +2,7 @@
 id: ex-lanczos-poorly-aligned-start-vector-delays-the-largest-ritz-value
 kind: example
 title: "A poorly aligned start delays the largest Ritz value and requires the start-angle factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: alg-improved-tangent-climbing-neb
 kind: algorithm
 title: "Finite-budget improved-tangent NEB with a climbing image"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-damped-newton-halves-step-before-local-phase
 kind: example
 title: "A damped Newton step precedes the local quadratic phase"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

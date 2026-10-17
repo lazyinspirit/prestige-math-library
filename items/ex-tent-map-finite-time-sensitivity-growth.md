@@ -2,7 +2,7 @@
 id: ex-tent-map-finite-time-sensitivity-growth
 kind: example
 title: A strict tent-map itinerary has exponential finite-time sensitivity growth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

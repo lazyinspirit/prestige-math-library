@@ -2,7 +2,7 @@
 id: def-finite-straight-line-computational-program
 kind: definition
 title: "Finite straight-line computational programs and real-arithmetic tapes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-c-one-map-and-local-inverse, def-total-derivative-in-euclidean-space]

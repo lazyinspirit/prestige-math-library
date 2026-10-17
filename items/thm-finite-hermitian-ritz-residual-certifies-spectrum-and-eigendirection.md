@@ -2,7 +2,7 @@
 id: thm-finite-hermitian-ritz-residual-certifies-spectrum-and-eigendirection
 kind: theorem
 title: A Hermitian Ritz residual certifies spectral proximity and a gap-conditioned direction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

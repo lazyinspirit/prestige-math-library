@@ -2,7 +2,7 @@
 id: ex-colored-jacobian-of-two-independent-reactions
 kind: example
 title: "One color recovers two separated reaction columns of a sparse Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

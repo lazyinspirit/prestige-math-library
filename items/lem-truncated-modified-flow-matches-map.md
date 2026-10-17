@@ -2,7 +2,7 @@
 id: lem-truncated-modified-flow-matches-map
 kind: lemma
 title: A fixed finite modified flow matches its method map to the stated Taylor order
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

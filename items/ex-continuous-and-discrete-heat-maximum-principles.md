@@ -2,7 +2,7 @@
 id: ex-continuous-and-discrete-heat-maximum-principles
 kind: example
 title: Continuous and discrete heat maximum bounds on sampled data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: alg-dogleg-trust-region-step
 kind: algorithm
 title: "Dogleg steps for positive-definite trust-region models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

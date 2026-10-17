@@ -2,7 +2,7 @@
 id: ex-forward-euler-frequency-step-restriction
 kind: example
 title: "Forward Euler's stability region restricts both decay rate and frequency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

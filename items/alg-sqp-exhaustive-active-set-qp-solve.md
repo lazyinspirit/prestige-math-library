@@ -2,7 +2,7 @@
 id: alg-sqp-exhaustive-active-set-qp-solve
 kind: algorithm
 title: "Exact exhaustive active-set solve for the SQP quadratic subproblem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

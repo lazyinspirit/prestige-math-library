@@ -1,7 +1,7 @@
 ---
 page: variance-reduced-finite-sum-and-adaptive-gradient-optimization-examples
 title: Variance reduced finite sum and adaptive gradient optimization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-regularized-logistic-finite-sum

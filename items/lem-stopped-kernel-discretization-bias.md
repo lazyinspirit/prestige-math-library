@@ -2,7 +2,7 @@
 id: lem-stopped-kernel-discretization-bias
 kind: lemma
 title: Truncation and total-variation errors for stopped crossings
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-global-error-from-one-step-defect-and-stability
 title: "Global error from uniform one-step defect and stability"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

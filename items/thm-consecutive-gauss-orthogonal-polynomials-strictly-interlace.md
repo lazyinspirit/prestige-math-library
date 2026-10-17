@@ -2,7 +2,7 @@
 id: thm-consecutive-gauss-orthogonal-polynomials-strictly-interlace
 kind: theorem
 title: "Consecutive Gaussian orthogonal polynomials and Jacobi truncations strictly interlace"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

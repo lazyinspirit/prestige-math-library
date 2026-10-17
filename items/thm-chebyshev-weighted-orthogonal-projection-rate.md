@@ -2,7 +2,7 @@
 id: thm-chebyshev-weighted-orthogonal-projection-rate
 kind: theorem
 title: "Weighted Chebyshev projection has its spectral Sobolev rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

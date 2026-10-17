@@ -2,7 +2,7 @@
 id: lem-parabolic-energy-pairing-and-trace
 kind: lemma
 title: The evolution-space energy identity and continuous H trace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

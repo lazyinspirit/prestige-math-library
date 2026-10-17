@@ -2,7 +2,7 @@
 id: alg-complex-resolvent-cover-validator
 kind: algorithm
 title: Finite complex contour resolvent validator with cover and inconclusive statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-zero-boundary-piecewise-polynomials-in-w10p
 kind: theorem
 title: Zero-boundary conforming polynomials lie in W0 1p and satisfy Poincare
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

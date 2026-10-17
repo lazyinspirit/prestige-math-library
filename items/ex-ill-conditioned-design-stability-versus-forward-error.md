@@ -2,7 +2,7 @@
 id: ex-ill-conditioned-design-stability-versus-forward-error
 kind: example
 title: "An ill conditioned design with large forward sensitivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

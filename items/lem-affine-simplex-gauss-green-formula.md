@@ -2,7 +2,7 @@
 id: lem-affine-simplex-gauss-green-formula
 kind: lemma
 title: Gauss–Green formula on an affine simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

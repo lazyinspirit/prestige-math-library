@@ -2,7 +2,7 @@
 id: cex-finite-support-makes-high-degree-moment-gram-singular
 kind: counterexample
 title: Finite support can make a higher-degree moment Gram matrix singular
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

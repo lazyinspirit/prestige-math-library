@@ -2,7 +2,7 @@
 id: ex-chebyshev-lobatto-endpoint-clustering
 kind: example
 title: "Chebyshev–Lobatto nodes cluster quadratically at the endpoints"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: spectral-collocation-and-galerkin-methods-examples

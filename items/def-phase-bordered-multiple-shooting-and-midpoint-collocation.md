@@ -2,7 +2,7 @@
 id: def-phase-bordered-multiple-shooting-and-midpoint-collocation
 kind: definition
 title: "Multiple-shooting and midpoint-collocation residuals for a phase-fixed periodic orbit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

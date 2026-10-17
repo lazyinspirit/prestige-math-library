@@ -2,7 +2,7 @@
 id: cex-dependent-level-samples-bias-product-estimator
 kind: counterexample
 title: Correct level marginals do not justify a dependent product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

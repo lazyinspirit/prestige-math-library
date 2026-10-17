@@ -2,7 +2,7 @@
 id: thm-complete-chaos-tensor-expansions-give-sobol-coefficients
 kind: theorem
 title: Complete orthonormal tensor expansions group into Sobol components
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

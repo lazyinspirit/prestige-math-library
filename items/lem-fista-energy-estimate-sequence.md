@@ -2,7 +2,7 @@
 id: lem-fista-energy-estimate-sequence
 kind: lemma
 title: "FISTA energy estimate-sequence recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

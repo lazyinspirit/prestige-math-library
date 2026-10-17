@@ -2,7 +2,7 @@
 id: thm-level-shift-fixed-projector-equivalence
 kind: theorem
 title: A level shift preserves a fixed occupied projector exactly under block ordering
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: iterative-regularization-and-early-stopping
 title: "Iterative regularization and early stopping"
-status: draft
+status: published
 items:
   - alg-landweber-iteration-with-discrepancy-stopping
   - alg-golub-kahan-lsqr-with-givens-and-status

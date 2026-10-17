@@ -2,7 +2,7 @@
 id: alg-full-memory-bfgs-with-curvature-safeguards
 kind: algorithm
 title: "Full-memory Bfgs with Wolfe search, descent reset, and Powell damping"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

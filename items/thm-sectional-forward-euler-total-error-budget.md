@@ -2,7 +2,7 @@
 id: thm-sectional-forward-euler-total-error-budget
 kind: theorem
 title: Sectional forward Euler separates temporal, quadrature, and cutoff errors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

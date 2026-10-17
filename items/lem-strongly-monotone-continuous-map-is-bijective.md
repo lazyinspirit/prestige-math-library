@@ -2,7 +2,7 @@
 id: lem-strongly-monotone-continuous-map-is-bijective
 title: "A continuous strongly monotone map of finite-dimensional space is bijective"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

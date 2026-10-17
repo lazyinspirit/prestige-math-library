@@ -2,7 +2,7 @@
 id: ex-revised-simplex-ill-conditioned-basis-residual
 kind: example
 title: "A small residual at an ill-conditioned basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: lem-projective-determinant-is-homogeneous-and-scale-invariant
 kind: lemma
 title: "The pencil determinant is homogeneous and its zero condition is scale invariant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

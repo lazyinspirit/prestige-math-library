@@ -2,7 +2,7 @@
 id: thm-contractive-scf-convergence-and-inexact-error-bound
 kind: theorem
 title: A contractive self-consistent map converges and admits residual and inexact-solve bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

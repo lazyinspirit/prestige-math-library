@@ -2,7 +2,7 @@
 id: ex-ctrl1-single-versus-multiple-shooting-two-intervals
 kind: example
 title: "Two-interval single and multiple shooting for x-prime equals u"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

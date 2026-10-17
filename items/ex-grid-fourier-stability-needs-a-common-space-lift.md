@@ -2,7 +2,7 @@
 id: ex-grid-fourier-stability-needs-a-common-space-lift
 kind: example
 title: Grid Fourier stability alone does not instantiate Lax equivalence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

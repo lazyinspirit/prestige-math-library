@@ -2,7 +2,7 @@
 id: thm-explicit-euler-absolute-stability-disk
 kind: theorem
 title: "Forward Euler has the closed unit disk centered at −1 as its absolute-stability region"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

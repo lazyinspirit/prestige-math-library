@@ -1,7 +1,7 @@
 ---
 page: nonsmooth-contact-time-stepping-and-projections-examples
 title: Nonsmooth contact time stepping and projections — Examples
-status: draft
+status: published
 requires:
   - nonsmooth-contact-time-stepping-and-projections
 items: []

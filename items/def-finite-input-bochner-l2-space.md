@@ -2,7 +2,7 @@
 id: def-finite-input-bochner-l2-space
 kind: definition
 title: Bochner L2 space for a finite product-law input
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

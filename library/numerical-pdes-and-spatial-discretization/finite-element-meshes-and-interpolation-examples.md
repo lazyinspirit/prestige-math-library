@@ -1,7 +1,7 @@
 ---
 page: finite-element-meshes-and-interpolation-examples
 title: "Finite-element meshes and interpolation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-affine-triangle-and-parallelogram-maps

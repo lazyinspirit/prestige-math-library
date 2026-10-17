@@ -2,7 +2,7 @@
 id: thm-inertia-guided-bisection-loop-soundness
 kind: theorem
 title: Certified inertia counts maintain ordered eigenvalue brackets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

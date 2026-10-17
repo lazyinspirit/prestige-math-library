@@ -2,7 +2,7 @@
 id: lem-pde-l2-control-space-separable
 kind: lemma
 title: L2 controls on a bounded spatial region form a separable Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

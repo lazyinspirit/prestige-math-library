@@ -2,7 +2,7 @@
 id: alg-ctrl1-finite-budget-transcription-solver-dispatch
 kind: algorithm
 title: "Finite-budget barrier or SQP solve for a transcription NLP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

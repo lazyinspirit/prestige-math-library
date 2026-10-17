@@ -2,7 +2,7 @@
 id: alg-index-one-dae-bdf2-stepper
 title: "Finite-budget coupled constant-step BDF2 for an index-one DAE"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

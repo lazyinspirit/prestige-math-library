@@ -2,7 +2,7 @@
 id: alg-event-driven-frictionless-sphere-contact-with-certified-events
 kind: algorithm
 title: Event-driven integration for isolated frictionless spherical impacts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 10

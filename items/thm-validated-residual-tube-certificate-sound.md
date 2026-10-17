@@ -2,7 +2,7 @@
 id: thm-validated-residual-tube-certificate-sound
 kind: theorem
 title: "A validated rational residual-tube certificate encloses an exact ODE solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

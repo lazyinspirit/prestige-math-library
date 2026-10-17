@@ -2,7 +2,7 @@
 id: alg-multifrontal-cholesky-and-sparse-triangular-solves
 kind: algorithm
 title: Scalar multifrontal Cholesky and solves on the elimination forest
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

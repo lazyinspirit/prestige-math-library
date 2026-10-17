@@ -2,7 +2,7 @@
 id: lem-rosenbrock-shifted-matrix-invertibility-bound
 title: "A small shifted Jacobian has an explicit inverse bound"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

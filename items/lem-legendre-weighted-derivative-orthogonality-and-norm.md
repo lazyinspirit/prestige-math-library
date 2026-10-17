@@ -2,7 +2,7 @@
 id: lem-legendre-weighted-derivative-orthogonality-and-norm
 kind: lemma
 title: "Legendre polynomials have explicit norms and weighted derivative orthogonality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

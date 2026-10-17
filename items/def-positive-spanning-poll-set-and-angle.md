@@ -2,7 +2,7 @@
 id: def-positive-spanning-poll-set-and-angle
 kind: definition
 title: "Positive-spanning poll sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

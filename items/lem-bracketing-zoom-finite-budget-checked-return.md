@@ -2,7 +2,7 @@
 id: lem-bracketing-zoom-finite-budget-checked-return
 kind: lemma
 title: "Bracketing and zoom terminate with a checked step or a failure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

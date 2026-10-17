@@ -2,7 +2,7 @@
 id: alg-differentiate-finite-fixed-point-iteration
 kind: algorithm
 title: "Differentiate a finite fixed-point iteration as a finite composed map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, alg-forward-mode-automatic-differentiation]

@@ -2,7 +2,7 @@
 id: ex-streaming-least-squares-single-sample-update
 kind: example
 title: "One streaming least-squares SGD update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-solver-tolerance-can-reverse-a-design-ranking
 kind: example
 title: "A small sensitivity solve error can reverse a two-design ranking"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

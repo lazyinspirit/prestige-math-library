@@ -2,7 +2,7 @@
 id: lem-regular-curve-chart-and-pseudo-arclength-predictor-defect
 kind: lemma
 title: "A regular solution curve has a unique local arclength chart and a quadratic predictor defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

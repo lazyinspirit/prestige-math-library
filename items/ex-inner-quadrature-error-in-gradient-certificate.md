@@ -7,7 +7,7 @@ verification:
 id: ex-inner-quadrature-error-in-gradient-certificate
 kind: example
 title: "Inner quadrature error enters an outer gradient certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

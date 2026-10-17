@@ -1,7 +1,7 @@
 ---
 page: simulation-gradient-estimation-and-simultaneous-perturbation
 title: "Simulation gradient estimation and simultaneous perturbation"
-status: draft
+status: published
 items:
   - def-simulation-gradient-objective-and-payoff-oracle
   - cex-uniform-payoff-convergence-does-not-imply-gradient-convergence

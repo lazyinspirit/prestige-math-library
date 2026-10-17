@@ -2,7 +2,7 @@
 id: def-regular-differentiation-index
 title: "Differentiation index for a regular local semi-explicit DAE"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

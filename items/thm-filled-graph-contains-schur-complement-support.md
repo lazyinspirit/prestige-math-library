@@ -2,7 +2,7 @@
 id: thm-filled-graph-contains-schur-complement-support
 kind: theorem
 title: "The filled graph contains every off-diagonal Schur-complement nonzero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

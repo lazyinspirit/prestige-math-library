@@ -2,7 +2,7 @@
 id: lem-finite-budget-newton-work-and-status
 kind: lemma
 title: "Finite-budget Newton preserves its domain and returns a status in bounded outer work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

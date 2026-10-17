@@ -2,7 +2,7 @@
 id: lem-one-dimensional-zero-boundary-poincare
 kind: lemma
 title: Zero-boundary Poincaré inequality on the unit interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

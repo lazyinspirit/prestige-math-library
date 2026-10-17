@@ -1,7 +1,7 @@
 ---
 page: langevin-splittings-and-invariant-measure-error-examples
 title: Langevin splittings and invariant measure error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-harmonic-baoab-thermostat-covariance

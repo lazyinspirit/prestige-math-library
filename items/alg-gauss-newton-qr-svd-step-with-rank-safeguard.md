@@ -2,7 +2,7 @@
 id: alg-gauss-newton-qr-svd-step-with-rank-safeguard
 kind: algorithm
 title: "Gauss-Newton linearized least-squares step with QR/SVD rank safeguards"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

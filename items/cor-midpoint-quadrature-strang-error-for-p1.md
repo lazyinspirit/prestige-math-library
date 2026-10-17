@@ -2,7 +2,7 @@
 id: cor-midpoint-quadrature-strang-error-for-p1
 kind: corollary
 title: A midpoint-quadrature P1 solve has an explicit Strang error budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-proximal-gradient-o1k-objective-bound
 kind: theorem
 title: "The proximal-gradient method has an O(1/k) objective bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

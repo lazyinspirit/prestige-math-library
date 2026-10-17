@@ -2,7 +2,7 @@
 id: def-validated-periodic-shooting-jet-enclosure
 kind: definition
 title: "Certified residual, Jacobian, trajectory, and monodromy enclosures for periodic shooting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

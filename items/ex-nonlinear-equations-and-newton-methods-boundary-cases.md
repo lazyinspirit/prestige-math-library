@@ -2,7 +2,7 @@
 id: ex-nonlinear-equations-and-newton-methods-boundary-cases
 kind: example
 title: "Fixed points, local Newton behavior, and failure boundaries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

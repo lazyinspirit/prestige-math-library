@@ -2,7 +2,7 @@
 id: lem-randomized-coordinate-prox-subproblem-well-defined
 kind: lemma
 title: "Coordinate proximal subproblems are attained uniquely and descend"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

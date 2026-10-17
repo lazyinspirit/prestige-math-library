@@ -2,7 +2,7 @@
 id: thm-fr-and-raw-prplus-exact-line-search-match-linear-cg
 kind: theorem
 title: "FR and unrestarted PR+ match linear CG on SPD quadratics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

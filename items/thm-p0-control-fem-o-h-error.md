@@ -2,7 +2,7 @@
 id: thm-p0-control-fem-o-h-error
 kind: theorem
 title: Piecewise-constant control with shape-regular finite elements has O(h) error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

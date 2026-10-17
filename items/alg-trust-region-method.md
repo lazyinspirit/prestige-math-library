@@ -2,7 +2,7 @@
 id: alg-trust-region-method
 kind: algorithm
 title: "A finite-budget trust-region method with ratio-based radius updates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

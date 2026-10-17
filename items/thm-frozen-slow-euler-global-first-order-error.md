@@ -2,7 +2,7 @@
 id: thm-frozen-slow-euler-global-first-order-error
 title: "Fixed-time first-order error bound for frozen-slow Euler"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

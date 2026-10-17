@@ -2,7 +2,7 @@
 id: lem-cir-lamperti-transform-and-positive-root
 kind: lemma
 title: "CIR Lamperti equation and unique positive implicit root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

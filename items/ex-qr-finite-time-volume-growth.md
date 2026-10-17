@@ -2,7 +2,7 @@
 id: ex-qr-finite-time-volume-growth
 kind: example
 title: A finite QR record recovers the tangent-volume change
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

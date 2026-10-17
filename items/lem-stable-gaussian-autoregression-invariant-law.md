@@ -2,7 +2,7 @@
 id: lem-stable-gaussian-autoregression-invariant-law
 kind: lemma
 title: "Invariant Gaussian law and uniqueness for a stable autoregression"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

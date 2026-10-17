@@ -2,7 +2,7 @@
 id: cex-uniform-payoff-convergence-does-not-imply-gradient-convergence
 kind: counterexample
 title: "Uniform payoff convergence does not imply gradient convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

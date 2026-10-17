@@ -2,7 +2,7 @@
 id: thm-bidiagonal-svd-backward-error-under-local-stability
 kind: theorem
 title: "Local stable reflectors and rotations give an aggregate SVD backward error"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

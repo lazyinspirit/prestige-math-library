@@ -2,7 +2,7 @@
 id: ex-neutral-delay-derivative-amplification
 kind: example
 title: "Neutral derivative feedback amplifies outside the stable branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

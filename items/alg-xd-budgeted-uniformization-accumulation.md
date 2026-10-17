@@ -2,7 +2,7 @@
 id: alg-xd-budgeted-uniformization-accumulation
 kind: algorithm
 title: "Budgeted uniformization accumulation with time splitting"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-half-size-division-numerical-moment-budget
 kind: example
 title: Half-size division preserves the discrete biomass budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

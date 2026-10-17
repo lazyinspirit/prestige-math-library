@@ -1,7 +1,7 @@
 ---
 page: ceas-lemma-and-aubin-nitsche-error-estimates
 title: "Céa and Aubin–Nitsche error estimates"
-status: draft
+status: published
 items:
   - lem-galerkin-orthogonality-for-conforming-galerkin-approximations
   - thm-adjoint-problem-for-bounded-coercive-variational-forms

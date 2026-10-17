@@ -2,7 +2,7 @@
 id: prop-central-string-projected-force-consistency
 kind: proposition
 title: "Centered-tangent string residuals are second-order consistent on a regular MEP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

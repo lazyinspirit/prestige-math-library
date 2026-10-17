@@ -2,7 +2,7 @@
 id: ex-forward-difference-noise-bound-has-a-balanced-step
 kind: example
 title: "A quadratic attains the forward truncation bound and exhibits the balanced noisy step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

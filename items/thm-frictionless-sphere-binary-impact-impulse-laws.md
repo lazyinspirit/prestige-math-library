@@ -2,7 +2,7 @@
 id: thm-frictionless-sphere-binary-impact-impulse-laws
 kind: theorem
 title: Impulse, momentum, and kinetic-energy laws for an isolated frictionless sphere impact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

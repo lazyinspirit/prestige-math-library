@@ -2,7 +2,7 @@
 id: alg-golub-kahan-lsqr-with-givens-and-status
 kind: algorithm
 title: Exact-arithmetic LSQR with Golub–Kahan bidiagonalization and explicit statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

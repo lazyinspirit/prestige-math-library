@@ -2,7 +2,7 @@
 id: alg-chebyshev-composite-simpson-weighted-mass-matrix
 kind: algorithm
 title: "Composite-Simpson assembly of the Chebyshev weighted mass matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

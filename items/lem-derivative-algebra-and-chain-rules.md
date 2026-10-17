@@ -2,7 +2,7 @@
 id: lem-derivative-algebra-and-chain-rules
 kind: lemma
 title: Sum, product, quotient, and chain rules from difference quotients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

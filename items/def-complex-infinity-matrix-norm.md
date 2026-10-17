@@ -2,7 +2,7 @@
 id: def-complex-infinity-matrix-norm
 kind: definition
 title: The complex induced infinity matrix norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

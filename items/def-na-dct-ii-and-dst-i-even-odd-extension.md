@@ -2,7 +2,7 @@
 id: def-na-dct-ii-and-dst-i-even-odd-extension
 kind: definition
 title: "DCT-II and DST-I with fixed even and odd extension conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

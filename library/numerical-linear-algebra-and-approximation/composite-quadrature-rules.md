@@ -1,7 +1,7 @@
 ---
 page: composite-quadrature-rules
 title: Composite quadrature rules
-status: draft
+status: published
 items:
   - alg-composite-midpoint-rule
   - alg-composite-simpson-rule

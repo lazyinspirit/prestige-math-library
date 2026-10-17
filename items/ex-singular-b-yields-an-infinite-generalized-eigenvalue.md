@@ -2,7 +2,7 @@
 id: ex-singular-b-yields-an-infinite-generalized-eigenvalue
 kind: example
 title: "A singular B can give a regular pencil with an infinite generalized eigenvalue"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

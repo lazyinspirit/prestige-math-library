@@ -2,7 +2,7 @@
 id: lem-second-order-jet-on-a-regular-level-set
 kind: lemma
 title: A regular level set realizes every compatible second-order jet
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

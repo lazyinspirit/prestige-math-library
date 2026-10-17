@@ -2,7 +2,7 @@
 id: cex-nonconvex-set-can-have-nonunique-nearest-points
 kind: counterexample
 title: A closed nonconvex set can have two nearest points
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

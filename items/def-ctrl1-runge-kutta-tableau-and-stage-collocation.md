@@ -2,7 +2,7 @@
 id: def-ctrl1-runge-kutta-tableau-and-stage-collocation
 kind: definition
 title: "Runge–Kutta tableaux and stage collocation equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

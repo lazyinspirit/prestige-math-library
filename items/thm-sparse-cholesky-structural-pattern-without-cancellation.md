@@ -2,7 +2,7 @@
 id: thm-sparse-cholesky-structural-pattern-without-cancellation
 kind: theorem
 title: Ordered sparse Cholesky has the symbolic filled pattern when no cancellation occurs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

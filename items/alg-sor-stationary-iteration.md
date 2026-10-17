@@ -2,7 +2,7 @@
 id: alg-sor-stationary-iteration
 kind: algorithm
 title: "Finite-budget successive over-relaxation stationary iteration"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

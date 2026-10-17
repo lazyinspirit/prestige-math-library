@@ -2,7 +2,7 @@
 id: lem-two-block-admm-energy-and-objective-estimates
 kind: lemma
 title: "Two-block ADMM energy descent and objective gap estimates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-csr-matvec-algorithm-terminates-with-status
 kind: theorem
 title: "Validated CSR matrix-vector multiplication terminates with a status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

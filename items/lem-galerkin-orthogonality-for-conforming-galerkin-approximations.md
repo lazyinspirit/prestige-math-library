@@ -2,7 +2,7 @@
 id: lem-galerkin-orthogonality-for-conforming-galerkin-approximations
 kind: lemma
 title: Galerkin orthogonality for conforming approximations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-lanczos-ritz-value-is-not-a-norm-certificate
 kind: example
 title: "A Lanczos Ritz value can miss the operator norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

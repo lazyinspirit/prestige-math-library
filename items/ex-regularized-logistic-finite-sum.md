@@ -2,7 +2,7 @@
 id: ex-regularized-logistic-finite-sum
 kind: example
 title: A regularized logistic finite sum with an exact minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

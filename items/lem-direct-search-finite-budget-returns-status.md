@@ -2,7 +2,7 @@
 id: lem-direct-search-finite-budget-returns-status
 kind: lemma
 title: "Deterministic direct search returns within its finite poll budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: cor-l2-inverse-error-budget-and-cross-term-condition
 kind: corollary
 title: "An inverse-error chain obeys Minkowski in $L^2$; root-sum-square is equivalent to aggregate cross-term cancellation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

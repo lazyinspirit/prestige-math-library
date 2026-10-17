@@ -2,7 +2,7 @@
 id: alg-interval-linear-krawczyk-certifier
 kind: algorithm
 title: Interval Krawczyk linear system certifier with explicit statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

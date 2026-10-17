@@ -2,7 +2,7 @@
 id: lem-affine-piola-transport-preserves-commuting-interpolation
 kind: lemma
 title: Affine Piola transport preserves commuting interpolation diagrams
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

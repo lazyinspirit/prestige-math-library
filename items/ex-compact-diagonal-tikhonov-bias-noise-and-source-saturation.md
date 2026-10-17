@@ -2,7 +2,7 @@
 id: ex-compact-diagonal-tikhonov-bias-noise-and-source-saturation
 kind: example
 title: A compact diagonal model displays the Tikhonov bias-noise balance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: thm-finite-sectional-positivity-and-mass-reservoir-conservation
 kind: theorem
 title: Finite sectional event dynamics preserve positivity and retained-plus-reservoir mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

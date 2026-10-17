@@ -2,7 +2,7 @@
 id: lem-parabolic-zero-boundary-sobolev-space-is-separable
 kind: lemma
 title: The zero-boundary Sobolev energy space is a separable Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

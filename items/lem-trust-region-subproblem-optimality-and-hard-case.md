@@ -2,7 +2,7 @@
 id: lem-trust-region-subproblem-optimality-and-hard-case
 kind: lemma
 title: "Global trust-region minimizers satisfy the shifted-Hessian conditions, including the hard case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

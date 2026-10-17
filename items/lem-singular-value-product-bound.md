@@ -2,7 +2,7 @@
 id: lem-singular-value-product-bound
 kind: lemma
 title: "Singular values contract under left and right multiplication"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

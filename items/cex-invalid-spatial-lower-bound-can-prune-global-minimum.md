@@ -2,7 +2,7 @@
 id: cex-invalid-spatial-lower-bound-can-prune-global-minimum
 kind: counterexample
 title: An invalid lower bound can prune the true global minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound-examples

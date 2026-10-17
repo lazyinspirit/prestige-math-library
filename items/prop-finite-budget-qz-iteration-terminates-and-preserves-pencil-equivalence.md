@@ -2,7 +2,7 @@
 id: prop-finite-budget-qz-iteration-terminates-and-preserves-pencil-equivalence
 kind: proposition
 title: "Every finite-budget QZ run returns a status and records unitary transforms and explicit deflations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

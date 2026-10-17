@@ -2,7 +2,7 @@
 id: def-finite-chaos-orthogonal-projection
 kind: definition
 title: Finite polynomial-chaos orthogonal projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

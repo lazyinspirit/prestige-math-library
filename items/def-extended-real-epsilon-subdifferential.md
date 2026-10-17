@@ -2,7 +2,7 @@
 id: def-extended-real-epsilon-subdifferential
 kind: definition
 title: "Subdifferentials of proper extended-real convex functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

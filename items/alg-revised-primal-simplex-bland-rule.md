@@ -2,7 +2,7 @@
 id: alg-revised-primal-simplex-bland-rule
 kind: algorithm
 title: "Primal revised simplex with Bland's rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

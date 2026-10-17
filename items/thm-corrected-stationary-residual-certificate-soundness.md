@@ -2,7 +2,7 @@
 id: thm-corrected-stationary-residual-certificate-soundness
 kind: theorem
 title: "Termination and soundness of the corrected stationary residual certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

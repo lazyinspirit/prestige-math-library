@@ -2,7 +2,7 @@
 id: lem-characteristic-roots-stay-in-separated-neighborhoods
 kind: lemma
 title: Characteristic roots preserve separated cluster counts under matrix perturbation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

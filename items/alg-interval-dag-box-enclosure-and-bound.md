@@ -2,7 +2,7 @@
 id: alg-interval-dag-box-enclosure-and-bound
 kind: algorithm
 title: Outward-rounded interval enclosures for factorable expression DAGs on boxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

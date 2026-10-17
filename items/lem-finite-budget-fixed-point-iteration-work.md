@@ -2,7 +2,7 @@
 id: lem-finite-budget-fixed-point-iteration-work
 kind: lemma
 title: "Finite-budget fixed-point iteration returns a status in bounded outer work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

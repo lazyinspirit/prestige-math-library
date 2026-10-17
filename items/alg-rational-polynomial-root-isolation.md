@@ -2,7 +2,7 @@
 id: alg-rational-polynomial-root-isolation
 kind: algorithm
 title: Exact dyadic Sturm isolation of all real roots of a nonzero rational polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

@@ -2,7 +2,7 @@
 id: lem-poisson-tau-leap-moment-and-covariance-identities
 kind: lemma
 title: "Conditional moments of one Poisson tau-leap increment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

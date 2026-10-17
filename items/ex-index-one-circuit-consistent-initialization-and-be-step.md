@@ -2,7 +2,7 @@
 id: ex-index-one-circuit-consistent-initialization-and-be-step
 title: "A capacitor-resistor circuit has one consistent algebraic current"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-corner-and-cusp-break-the-string-tangent-hypotheses
 kind: example
 title: "A corner has no unique tangent and a cusp gives a zero centered chord"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

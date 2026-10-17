@@ -2,7 +2,7 @@
 id: thm-separable-vortex-inspired-leapfrog-is-reversible-symplectic-volume-preserving-order-two
 kind: theorem
 title: Local geometric properties and second-order error of the separable regularized vortex-inspired leapfrog
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

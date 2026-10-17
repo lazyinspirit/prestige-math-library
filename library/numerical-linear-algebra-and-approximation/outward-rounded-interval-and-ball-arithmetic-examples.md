@@ -1,7 +1,7 @@
 ---
 page: outward-rounded-interval-and-ball-arithmetic-examples
 title: Outward rounded interval and ball arithmetic — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-division-by-interval-containing-zero

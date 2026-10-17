@@ -2,7 +2,7 @@
 id: thm-finite-candidate-gp-search-terminates
 kind: theorem
 title: Finite-candidate Gaussian-process acquisition search terminates within its budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

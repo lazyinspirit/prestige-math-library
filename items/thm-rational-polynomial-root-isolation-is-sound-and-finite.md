@@ -2,7 +2,7 @@
 id: thm-rational-polynomial-root-isolation-is-sound-and-finite
 kind: theorem
 title: Exact Sturm bisection isolates every distinct real root of a nonzero rational polynomial
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

@@ -2,7 +2,7 @@
 id: ex-index-three-pendulum-by-differentiation
 title: "The constrained pendulum has differentiation index three"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

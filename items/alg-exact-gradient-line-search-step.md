@@ -2,7 +2,7 @@
 id: alg-exact-gradient-line-search-step
 kind: algorithm
 title: "Ideal exact gradient line-search step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-robust-least-squares-as-a-second-order-cone-program
 kind: example
 title: "Norm-bounded robust least squares as an SOCP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

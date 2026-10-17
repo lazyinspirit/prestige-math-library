@@ -2,7 +2,7 @@
 id: ex-noncommuting-matrices-show-lie-and-strang-orders
 kind: example
 title: "Noncommuting two-by-two matrices distinguish Lie and Strang local errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

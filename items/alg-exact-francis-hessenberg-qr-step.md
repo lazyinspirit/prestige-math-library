@@ -2,7 +2,7 @@
 id: alg-exact-francis-hessenberg-qr-step
 kind: algorithm
 title: "Exact finite Francis single- or double-shift Hessenberg QR step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

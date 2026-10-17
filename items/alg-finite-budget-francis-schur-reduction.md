@@ -2,7 +2,7 @@
 id: alg-finite-budget-francis-schur-reduction
 kind: algorithm
 title: "Finite-budget computed Francis Schur reduction with explicit statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

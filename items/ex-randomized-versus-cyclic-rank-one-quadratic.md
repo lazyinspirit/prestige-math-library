@@ -2,7 +2,7 @@
 id: ex-randomized-versus-cyclic-rank-one-quadratic
 kind: example
 title: "Randomized and cyclic updates on a rank-one quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

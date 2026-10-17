@@ -2,7 +2,7 @@
 id: ex-active-set-quadratic-kkt-certificate
 kind: example
 title: Active-set quadratic with an exact KKT certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

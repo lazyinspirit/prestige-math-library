@@ -2,7 +2,7 @@
 id: cor-shape-regular-affine-fe-primal-energy-approximation
 kind: corollary
 title: Primal H¹ approximation on shape-regular affine finite-element meshes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

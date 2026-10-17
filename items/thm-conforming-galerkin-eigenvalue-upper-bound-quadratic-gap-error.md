@@ -2,7 +2,7 @@
 id: thm-conforming-galerkin-eigenvalue-upper-bound-quadratic-gap-error
 kind: theorem
 title: Conforming finite-element eigenvalues have a quadratic best-approximation error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

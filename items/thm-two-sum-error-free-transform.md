@@ -2,7 +2,7 @@
 id: thm-two-sum-error-free-transform
 kind: theorem
 title: "TwoSum returns the exact rounding error of a floating point sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

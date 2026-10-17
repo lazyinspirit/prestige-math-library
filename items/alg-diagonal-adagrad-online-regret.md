@@ -2,7 +2,7 @@
 id: alg-diagonal-adagrad-online-regret
 kind: algorithm
 title: Diagonal AdaGrad for online convex losses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

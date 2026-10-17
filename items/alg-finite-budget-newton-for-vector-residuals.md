@@ -2,7 +2,7 @@
 id: alg-finite-budget-newton-for-vector-residuals
 kind: algorithm
 title: "Finite-budget Newton for a square vector residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

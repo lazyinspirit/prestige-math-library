@@ -2,7 +2,7 @@
 id: ex-na-three-sample-dct-chebyshev-coefficients
 kind: example
 title: "Three Chebyshev-root samples recover a quadratic by DCT-II"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution-examples

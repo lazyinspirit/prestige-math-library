@@ -2,7 +2,7 @@
 id: alg-christoffel-weighted-least-squares-collocation
 kind: algorithm
 title: Christoffel-weighted least-squares polynomial collocation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

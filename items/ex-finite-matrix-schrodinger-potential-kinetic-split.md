@@ -2,7 +2,7 @@
 id: ex-finite-matrix-schrodinger-potential-kinetic-split
 kind: example
 title: "A finite-matrix Schrödinger split preserves norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

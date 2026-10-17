@@ -2,7 +2,7 @@
 id: ex-uniform-step-bdf2-satisfies-dahlquist-conditions
 kind: example
 title: "Uniform-step BDF2 satisfies the Dahlquist conditions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

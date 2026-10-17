@@ -2,7 +2,7 @@
 id: cor-sqp-augmented-lagrangian-finite-budget-status
 kind: corollary
 title: "The augmented-Lagrangian multiplier procedure preserves its domain and returns within its caps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-commutative-milstein-strong-order-one
 kind: theorem
 title: "Strong order one for scalar and commutative-noise Milstein schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

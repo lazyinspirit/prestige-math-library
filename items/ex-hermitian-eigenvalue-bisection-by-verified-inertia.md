@@ -2,7 +2,7 @@
 id: ex-hermitian-eigenvalue-bisection-by-verified-inertia
 kind: example
 title: Ordered eigenvalue bisection by exact inertia queries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

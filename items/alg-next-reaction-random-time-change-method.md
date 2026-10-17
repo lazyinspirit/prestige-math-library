@@ -2,7 +2,7 @@
 id: alg-next-reaction-random-time-change-method
 kind: algorithm
 title: "Next-reaction method by internal Poisson clocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

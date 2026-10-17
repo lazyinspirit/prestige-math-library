@@ -2,7 +2,7 @@
 id: alg-sqp-exact-hessian-newton-step
 kind: algorithm
 title: "Full-step exact-Hessian SQP after active-set identification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

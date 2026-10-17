@@ -2,7 +2,7 @@
 id: def-richardson-extrapolation-under-a-fourth-order-remainder
 kind: definition
 title: "Richardson extrapolation for a central difference with a fourth-order remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

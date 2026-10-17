@@ -2,7 +2,7 @@
 id: thm-certified-bracketed-inverse-error
 kind: theorem
 title: "Certified bisection controls CDF residual, spatial error, and distribution error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

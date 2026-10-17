@@ -2,7 +2,7 @@
 id: def-periodic-one-way-advection-schemes
 kind: definition
 title: Periodic advection schemes and the finite-interval upwind row
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

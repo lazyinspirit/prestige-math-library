@@ -2,7 +2,7 @@
 id: thm-gaussian-orthogonal-polynomial-galerkin-mass-matrix-exact
 kind: theorem
 title: "Gaussian quadrature exactly assembles the orthogonal Galerkin mass matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

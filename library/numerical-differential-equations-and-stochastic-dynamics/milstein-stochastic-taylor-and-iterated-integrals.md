@@ -1,7 +1,7 @@
 ---
 page: milstein-stochastic-taylor-and-iterated-integrals
 title: Milstein stochastic taylor and iterated integrals
-status: draft
+status: published
 items:
   - def-milstein-scheme-and-iterated-integrals
   - lem-iterated-brownian-integral-identities

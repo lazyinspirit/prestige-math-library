@@ -2,7 +2,7 @@
 id: lem-gauss-collocation-weighted-defect-bound
 kind: lemma
 title: A Gaussian collocation defect has a high-order weighted endpoint bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

@@ -1,7 +1,7 @@
 ---
 page: numerical-inverse-problems-and-regularization-error
 title: "Numerical Inverse Problems and Regularization Error"
-status: draft
+status: published
 items:
   - lem-hilbert-tikhonov-normal-operator-invertible
   - lem-truncated-svd-bias-and-data-noise-decomposition

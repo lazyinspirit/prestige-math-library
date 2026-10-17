@@ -2,7 +2,7 @@
 id: def-local-periodic-orbit-poincare-and-floquet-data
 kind: definition
 title: Local periodic-orbit, Poincare-return, and Floquet data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

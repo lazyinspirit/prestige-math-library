@@ -1,7 +1,7 @@
 ---
 page: interacting-particle-mean-field-and-vortex-blob-error-examples
 title: Interacting particle mean field and vortex blob error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-softened-newtonian-particles-not-collision-model

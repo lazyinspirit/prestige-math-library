@@ -2,7 +2,7 @@
 id: ex-cg-denominator-failure-and-minres-on-an-indefinite-system
 kind: example
 title: "CG's positive-denominator hypothesis fails on an indefinite system while MINRES can start"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

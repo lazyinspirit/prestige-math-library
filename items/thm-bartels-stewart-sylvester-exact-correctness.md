@@ -2,7 +2,7 @@
 id: thm-bartels-stewart-sylvester-exact-correctness
 kind: theorem
 title: "Successful certified Bartels-Stewart substitution returns the exact Sylvester solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

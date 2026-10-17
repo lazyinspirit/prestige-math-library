@@ -2,7 +2,7 @@
 id: thm-backward-euler-dissipative-resolvent-contraction
 title: "Backward Euler has a globally defined nonexpansive resolvent (contractive when strongly dissipative)"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

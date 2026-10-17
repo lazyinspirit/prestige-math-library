@@ -2,7 +2,7 @@
 id: alg-forward-mode-automatic-differentiation
 kind: algorithm
 title: "Forward-mode automatic differentiation on a finite computational graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program]

@@ -2,7 +2,7 @@
 id: thm-full-memory-bfgs-global-linear-convergence
 kind: theorem
 title: "Full-memory Bfgs converges globally and linearly on a uniformly strongly convex level set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-ilu0-fixed-pattern-factorization
 kind: algorithm
 title: "Fixed-pattern ILU(0) factorization and application"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

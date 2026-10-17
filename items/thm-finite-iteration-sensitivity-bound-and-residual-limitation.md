@@ -2,7 +2,7 @@
 id: thm-finite-iteration-sensitivity-bound-and-residual-limitation
 kind: theorem
 title: "Finite fixed-point iteration sensitivity error bounds and the limits of residual control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-differentiate-finite-fixed-point-iteration, thm-euclidean-implicit-function-theorem, thm-forward-mode-computes-directional-derivative, thm-chain-rule-for-total-derivatives, thm-mean-value-inequality-for-total-derivatives, thm-singular-value-decomposition]

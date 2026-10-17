@@ -2,7 +2,7 @@
 id: lem-complex-hermitian-eigenvalue-perturbation
 kind: lemma
 title: Hermitian eigenvalues move by at most the spectral norm perturbation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

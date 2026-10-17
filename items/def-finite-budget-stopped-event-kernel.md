@@ -2,7 +2,7 @@
 id: def-finite-budget-stopped-event-kernel
 kind: definition
 title: Finite-budget stopped-event kernel with a cemetery outcome
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

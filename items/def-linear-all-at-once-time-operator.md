@@ -2,7 +2,7 @@
 id: def-linear-all-at-once-time-operator
 kind: definition
 title: "The all-at-once bidiagonal time operator and C/F points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

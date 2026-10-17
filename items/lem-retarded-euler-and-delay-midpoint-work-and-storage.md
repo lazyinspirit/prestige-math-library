@@ -2,7 +2,7 @@
 id: lem-retarded-euler-and-delay-midpoint-work-and-storage
 kind: lemma
 title: "Stored retarded Euler and distributed midpoint work, storage, and grid alignment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

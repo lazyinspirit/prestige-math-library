@@ -2,7 +2,7 @@
 id: ex-minimum-intensity-coupling-reduces-one-step-variance
 kind: example
 title: "A minimum-intensity coupling reduces a Poisson count correction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

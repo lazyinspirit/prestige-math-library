@@ -2,7 +2,7 @@
 id: thm-hyperbolic-local-map-stability
 kind: theorem
 title: A hyperbolic fixed point of a local map is stable exactly when all multipliers contract
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

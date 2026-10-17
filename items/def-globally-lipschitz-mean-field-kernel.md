@@ -2,7 +2,7 @@
 id: def-globally-lipschitz-mean-field-kernel
 kind: definition
 title: Globally Lipschitz mean-field interaction kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

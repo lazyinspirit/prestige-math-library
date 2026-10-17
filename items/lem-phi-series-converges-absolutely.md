@@ -2,7 +2,7 @@
 id: lem-phi-series-converges-absolutely
 kind: lemma
 title: "The scalar and matrix phi series converge absolutely"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

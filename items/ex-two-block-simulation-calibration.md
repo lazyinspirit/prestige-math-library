@@ -2,7 +2,7 @@
 id: ex-two-block-simulation-calibration
 kind: example
 title: "A two-block least-squares calibration sweep"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

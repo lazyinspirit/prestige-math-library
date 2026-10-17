@@ -2,7 +2,7 @@
 id: lem-hermitian-block-ldl-inertia-additivity
 kind: lemma
 title: Block LDL congruence adds the Hermitian pivot inertias
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

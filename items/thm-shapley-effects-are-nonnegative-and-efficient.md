@@ -2,7 +2,7 @@
 id: thm-shapley-effects-are-nonnegative-and-efficient
 kind: theorem
 title: Dependent-input Shapley effects are nonnegative and sum to one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

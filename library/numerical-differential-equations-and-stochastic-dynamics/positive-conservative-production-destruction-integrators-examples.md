@@ -1,7 +1,7 @@
 ---
 page: positive-conservative-production-destruction-integrators-examples
 title: Positive Conservative Production Destruction Integrators — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-two-compartment-stiff-reversible-transfer

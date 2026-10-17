@@ -2,7 +2,7 @@
 id: lem-cardinal-basis-degree-and-values
 kind: lemma
 title: "Cardinal interpolation functions are polynomials of the stated degrees"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

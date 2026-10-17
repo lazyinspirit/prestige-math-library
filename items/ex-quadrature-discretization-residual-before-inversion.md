@@ -2,7 +2,7 @@
 id: ex-quadrature-discretization-residual-before-inversion
 kind: example
 title: "A scalar quadrature residual appears before the regularized inverse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

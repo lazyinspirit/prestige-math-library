@@ -2,7 +2,7 @@
 id: thm-full-rank-sensitivity-implies-local-identifiability
 kind: theorem
 title: "Full column rank of the sensitivity Jacobian implies local identifiability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: prop-finite-projector-energy-reality-and-gradient
 kind: proposition
 title: "The finite projector energy is real and has the stated Frobenius gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

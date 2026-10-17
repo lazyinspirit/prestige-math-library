@@ -1,7 +1,7 @@
 ---
 page: variational-crimes-and-strang-lemmas-examples
 title: "Variational crimes and Strang lemmas — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-midpoint-underintegrated-p2-stiffness-loses-coercivity

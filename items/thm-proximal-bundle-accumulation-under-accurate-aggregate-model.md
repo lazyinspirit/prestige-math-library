@@ -2,7 +2,7 @@
 id: thm-proximal-bundle-accumulation-under-accurate-aggregate-model
 kind: theorem
 title: "Proximal bundle accumulation under vanishing aggregate-model error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

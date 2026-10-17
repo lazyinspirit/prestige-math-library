@@ -2,7 +2,7 @@
 id: lem-chebyshev-lobatto-mode-aliasing
 kind: lemma
 title: "Chebyshev–Lobatto interpolation folds polynomial modes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

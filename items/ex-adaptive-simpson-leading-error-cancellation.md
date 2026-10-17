@@ -2,7 +2,7 @@
 id: ex-adaptive-simpson-leading-error-cancellation
 kind: example
 title: Cancellation of the leading Simpson error coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

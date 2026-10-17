@@ -2,7 +2,7 @@
 id: lem-finite-double-sum-interchange
 kind: lemma
 title: "Interchanging two finite real sums"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

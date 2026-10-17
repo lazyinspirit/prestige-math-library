@@ -2,7 +2,7 @@
 id: ex-age-cutoff-versus-outflow-tail-error
 kind: example
 title: A longer run exposes age-cutoff outflow error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: alg-dyadic-square-root-bisection
 kind: algorithm
 title: Exact dyadic bisection for square-root endpoints
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

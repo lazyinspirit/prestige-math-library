@@ -2,7 +2,7 @@
 id: thm-bartels-stewart-dense-operation-count
 kind: theorem
 title: "Linearly budgeted dense Bartels-Stewart work with explicit controller costs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

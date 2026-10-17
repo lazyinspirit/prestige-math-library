@@ -2,7 +2,7 @@
 id: ex-absolute-versus-relative-singular-value-error
 kind: example
 title: "Absolute error can erase a tiny singular value while relative error preserves it"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

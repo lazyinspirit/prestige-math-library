@@ -2,7 +2,7 @@
 id: lem-smolyak-mixed-simpson-detail-decay
 kind: lemma
 title: Mixed-derivative bounds for dyadic Simpson details
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

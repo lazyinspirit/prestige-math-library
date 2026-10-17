@@ -2,7 +2,7 @@
 id: lem-complex-infinity-neumann-inverse-norm-bound
 kind: lemma
 title: A complex infinity-norm defect bounds the inverse norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-sylvester-separation-controls-the-frobenius-error
 kind: lemma
 title: "Positive Sylvester separation bounds the inverse operator norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

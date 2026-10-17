@@ -2,7 +2,7 @@
 id: def-mean-field-and-weighted-vortex-particle-systems
 kind: definition
 title: Equal-probability mean-field and weighted signed vortex particle systems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

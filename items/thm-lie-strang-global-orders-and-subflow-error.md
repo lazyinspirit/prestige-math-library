@@ -2,7 +2,7 @@
 id: thm-lie-strang-global-orders-and-subflow-error
 kind: theorem
 title: "Lie and Strang splitting have global orders one and two, with separate subflow errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

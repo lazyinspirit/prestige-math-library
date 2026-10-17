@@ -2,7 +2,7 @@
 id: def-conic-optimization-primal-dual-models
 kind: definition
 title: "Conic, LP, and convex QP primal-dual models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

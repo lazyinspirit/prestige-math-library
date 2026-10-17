@@ -2,7 +2,7 @@
 id: lem-ac-zero-derivative-and-integral-reconstruction-under-countable-choice
 kind: lemma
 title: "AC zero-derivative constancy and integrable-derivative reconstruction under Countable Choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

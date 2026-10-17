@@ -2,7 +2,7 @@
 id: ex-parabolic-crank-nicolson-time-regularity-order-loss
 kind: example
 title: A solution with only H1 time regularity loses CN second order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

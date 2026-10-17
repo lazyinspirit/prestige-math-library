@@ -2,7 +2,7 @@
 id: ex-coupled-fast-mode-destabilizes-frozen-slow-euler
 title: "A stable coupled model has an unstable explicit fast microstep"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

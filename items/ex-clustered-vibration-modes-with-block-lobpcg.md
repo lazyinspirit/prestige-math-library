@@ -2,7 +2,7 @@
 id: ex-clustered-vibration-modes-with-block-lobpcg
 kind: example
 title: "A two-vector LOBPCG block resolves a clustered pair in one finite Rayleigh-Ritz update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

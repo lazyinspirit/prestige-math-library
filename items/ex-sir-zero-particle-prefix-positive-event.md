@@ -2,7 +2,7 @@
 id: ex-sir-zero-particle-prefix-positive-event
 kind: example
 title: A zero-particle prefix does not prove a zero event probability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

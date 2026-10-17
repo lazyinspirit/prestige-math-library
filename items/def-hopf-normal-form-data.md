@@ -2,7 +2,7 @@
 id: def-hopf-normal-form-data
 kind: definition
 title: Hopf spectral and multilinear normal-form data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

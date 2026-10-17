@@ -2,7 +2,7 @@
 id: lem-truncated-svd-bias-and-data-noise-decomposition
 kind: lemma
 title: "A truncated SVD separates discarded-direction bias from retained data noise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

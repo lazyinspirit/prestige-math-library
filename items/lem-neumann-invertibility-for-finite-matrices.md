@@ -2,7 +2,7 @@
 id: lem-neumann-invertibility-for-finite-matrices
 kind: lemma
 title: "A finite matrix within unit distance of the identity is invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

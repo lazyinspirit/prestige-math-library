@@ -1,7 +1,7 @@
 ---
 page: composite-quadrature-rules-examples
 title: Composite quadrature rules — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-convex-composite-midpoint-and-trapezoid-bracketing

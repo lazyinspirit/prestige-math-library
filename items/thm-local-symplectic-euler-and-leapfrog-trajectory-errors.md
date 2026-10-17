@@ -2,7 +2,7 @@
 id: thm-local-symplectic-euler-and-leapfrog-trajectory-errors
 kind: theorem
 title: Local and finite-time trajectory error for symplectic Euler and leapfrog
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

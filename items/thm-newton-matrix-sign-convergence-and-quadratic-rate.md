@@ -2,7 +2,7 @@
 id: thm-newton-matrix-sign-convergence-and-quadratic-rate
 kind: theorem
 title: "Newton sign iteration converges off the imaginary axis and is locally quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

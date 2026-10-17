@@ -2,7 +2,7 @@
 id: thm-revised-dual-simplex-invariant-and-farkas
 kind: theorem
 title: "Dual-simplex invariant and Farkas infeasibility certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

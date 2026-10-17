@@ -2,7 +2,7 @@
 id: thm-mgrit-contraction-implies-residual-and-error-decay
 kind: theorem
 title: "A verified MGRIT error-matrix contraction controls error and residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

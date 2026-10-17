@@ -2,7 +2,7 @@
 id: ex-box-muller-zero-endpoint
 kind: example
 title: "A raw zero uniform breaks Box–Muller but the midpoint avoids it"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

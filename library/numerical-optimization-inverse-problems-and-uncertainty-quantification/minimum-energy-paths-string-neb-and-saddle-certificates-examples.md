@@ -1,7 +1,7 @@
 ---
 page: minimum-energy-paths-string-neb-and-saddle-certificates-examples
 title: Minimum energy paths string neb and saddle certificates — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-dimer-hessian-vector-bias-noise-tradeoff

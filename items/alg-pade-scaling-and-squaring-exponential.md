@@ -2,7 +2,7 @@
 id: alg-pade-scaling-and-squaring-exponential
 kind: algorithm
 title: "Finite-order Padé scaling-and-squaring exponential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

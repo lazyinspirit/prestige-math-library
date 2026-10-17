@@ -2,7 +2,7 @@
 id: thm-gauss-newton-local-linear-contraction
 kind: theorem
 title: "Gauss-Newton contracts linearly under a controlled residual-curvature bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

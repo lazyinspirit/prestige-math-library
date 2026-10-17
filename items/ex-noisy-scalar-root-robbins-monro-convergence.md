@@ -2,7 +2,7 @@
 id: ex-noisy-scalar-root-robbins-monro-convergence
 kind: example
 title: "A bounded-noise Robbins–Monro scalar root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

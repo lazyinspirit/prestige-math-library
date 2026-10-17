@@ -2,7 +2,7 @@
 id: lem-finite-sum-gradient-is-average
 kind: lemma
 title: Gradient of a finite sum is the finite sum of gradients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

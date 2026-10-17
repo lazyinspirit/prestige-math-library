@@ -2,7 +2,7 @@
 id: lem-positive-moment-gram-produces-univariate-chaos-polynomials
 kind: lemma
 title: Positive moment Gram matrices produce orthonormal polynomial families
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

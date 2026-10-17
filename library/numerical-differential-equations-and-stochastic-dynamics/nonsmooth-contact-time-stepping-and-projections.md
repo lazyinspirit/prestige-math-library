@@ -1,7 +1,7 @@
 ---
 page: nonsmooth-contact-time-stepping-and-projections
 title: Nonsmooth contact time stepping and projections
-status: draft
+status: published
 requires:
   - convex-and-semicontinuous-functions-on-rn
   - inequality-kkt-duality-and-optimality-certificates

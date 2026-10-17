@@ -2,7 +2,7 @@
 id: ex-rattle-residual-budget-and-global-trajectory-drift
 kind: example
 title: A fixed RATTLE residual budget allows an O(epsilon) drift envelope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

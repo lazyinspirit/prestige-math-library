@@ -1,7 +1,7 @@
 ---
 page: self-consistent-projector-iterations-and-certified-mixing
 title: "Self consistent projector iterations and certified mixing"
-status: draft
+status: published
 items:
   - lem-capped-diis-coefficient-minimizer-exists
   - def-self-consistent-projector-response-map

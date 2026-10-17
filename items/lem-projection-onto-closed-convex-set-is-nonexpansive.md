@@ -2,7 +2,7 @@
 id: lem-projection-onto-closed-convex-set-is-nonexpansive
 kind: lemma
 title: Projection onto a closed convex set is nonexpansive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

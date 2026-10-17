@@ -2,7 +2,7 @@
 id: lem-local-lipschitz-derivative-quadratic-remainder
 kind: lemma
 title: A Lipschitz Fréchet derivative gives a quadratic linearization remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

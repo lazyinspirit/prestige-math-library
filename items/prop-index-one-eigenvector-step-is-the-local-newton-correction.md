@@ -2,7 +2,7 @@
 id: prop-index-one-eigenvector-step-is-the-local-newton-correction
 kind: proposition
 title: "An exact index-one eigenvector-following step is the Newton correction at a saddle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-zero-feature-column-lasso-coordinate
 kind: example
 title: "The zero-feature-column Lasso update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

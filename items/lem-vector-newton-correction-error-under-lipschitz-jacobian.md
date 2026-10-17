@@ -2,7 +2,7 @@
 id: lem-vector-newton-correction-error-under-lipschitz-jacobian
 kind: lemma
 title: "Vector Newton remainder under a Lipschitz Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

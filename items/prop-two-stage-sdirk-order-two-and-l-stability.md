@@ -2,7 +2,7 @@
 id: prop-two-stage-sdirk-order-two-and-l-stability
 title: "The selected two-stage SDIRK method has order two and is scalar L-stable"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-intervals-rectangles-and-complex-balls
 kind: definition
 title: Real intervals, complex rectangles and ball enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

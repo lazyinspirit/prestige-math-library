@@ -2,7 +2,7 @@
 id: thm-orbital-stability-from-certified-floquet-multipliers
 kind: theorem
 title: "Strict Floquet cluster enclosures certify orbital asymptotic stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 10

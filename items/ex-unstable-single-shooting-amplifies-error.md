@@ -2,7 +2,7 @@
 id: ex-unstable-single-shooting-amplifies-error
 kind: example
 title: "Single shooting amplifies an initial-slope error on a decaying-mode BVP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

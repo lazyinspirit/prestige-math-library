@@ -2,7 +2,7 @@
 id: thm-kkt-residual-vanishes-exactly-on-kkt-tuples
 kind: theorem
 title: The scaled KKT residual vanishes exactly at KKT tuples
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

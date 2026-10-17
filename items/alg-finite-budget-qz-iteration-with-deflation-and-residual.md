@@ -2,7 +2,7 @@
 id: alg-finite-budget-qz-iteration-with-deflation-and-residual
 kind: algorithm
 title: "Finite-budget QZ iteration with homogeneous status and residual output"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

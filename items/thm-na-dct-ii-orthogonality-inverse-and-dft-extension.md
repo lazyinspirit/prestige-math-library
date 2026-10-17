@@ -2,7 +2,7 @@
 id: thm-na-dct-ii-orthogonality-inverse-and-dft-extension
 kind: theorem
 title: "DCT-II is orthogonal with the stated endpoint normalization and even extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

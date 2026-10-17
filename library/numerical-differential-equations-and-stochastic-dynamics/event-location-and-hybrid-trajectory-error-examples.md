@@ -1,7 +1,7 @@
 ---
 page: event-location-and-hybrid-trajectory-error-examples
 title: Event location and hybrid trajectory error — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-inelastic-bouncing-ball-has-zeno-accumulation

@@ -2,7 +2,7 @@
 id: lem-box-control-projection-is-pointwise-clipping
 kind: lemma
 title: The L2 projection onto a pointwise box is clipping
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

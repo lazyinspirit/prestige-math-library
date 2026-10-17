@@ -2,7 +2,7 @@
 id: def-fenchel-conjugate-on-finite-dimensional-euclidean-space
 kind: definition
 title: "Fenchel conjugate of an extended-real function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

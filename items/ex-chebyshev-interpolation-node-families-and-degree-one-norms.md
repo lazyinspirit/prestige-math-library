@@ -2,7 +2,7 @@
 id: ex-chebyshev-interpolation-node-families-and-degree-one-norms
 kind: example
 title: "Degree-one root and Lobatto interpolation norms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

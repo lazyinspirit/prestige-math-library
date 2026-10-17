@@ -2,7 +2,7 @@
 id: def-hybrid-mode-guard-reset-system
 kind: definition
 title: "Smooth hybrid ODE modes, guards, resets, and deterministic event priority"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

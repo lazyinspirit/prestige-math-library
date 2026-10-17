@@ -2,7 +2,7 @@
 id: lem-parareal-first-k-nodes-are-fine-exact
 kind: lemma
 title: "Parareal reproduces the first k fine-grid nodes after k sweeps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

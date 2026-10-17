@@ -2,7 +2,7 @@
 id: lem-unit-interval-lebesgue-gauss-data-valid
 kind: lemma
 title: Lebesgue measure on the unit interval supplies Gaussian moment data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

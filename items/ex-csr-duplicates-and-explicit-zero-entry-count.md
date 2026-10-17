@@ -2,7 +2,7 @@
 id: ex-csr-duplicates-and-explicit-zero-entry-count
 kind: example
 title: "Duplicate columns and explicit zeros count as stored entries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

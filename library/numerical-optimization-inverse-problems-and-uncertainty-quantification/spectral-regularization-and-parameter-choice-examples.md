@@ -1,7 +1,7 @@
 ---
 page: spectral-regularization-and-parameter-choice-examples
 title: "Spectral regularization and parameter choice — Examples"
-status: draft
+status: published
 examples: [ex-gcv-under-smoothing-tie-on-one-observation, ex-compact-diagonal-tikhonov-bias-noise-and-source-saturation, ex-morozov-noise-level-underestimate-prevents-crossing]
 ---
 

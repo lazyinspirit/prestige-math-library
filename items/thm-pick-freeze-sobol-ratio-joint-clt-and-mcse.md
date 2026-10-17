@@ -2,7 +2,7 @@
 id: thm-pick-freeze-sobol-ratio-joint-clt-and-mcse
 kind: theorem
 title: Pick-freeze Sobol ratios are consistent and have a joint delta-method CLT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

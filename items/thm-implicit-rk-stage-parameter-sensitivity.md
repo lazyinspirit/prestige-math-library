@@ -2,7 +2,7 @@
 id: thm-implicit-rk-stage-parameter-sensitivity
 kind: theorem
 title: An implicit Runge-Kutta stage has the stated parameter sensitivity on its selected branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

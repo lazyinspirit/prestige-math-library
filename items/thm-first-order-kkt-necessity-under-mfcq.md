@@ -2,7 +2,7 @@
 id: thm-first-order-kkt-necessity-under-mfcq
 kind: theorem
 title: MFCQ gives KKT multipliers at a smooth local minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

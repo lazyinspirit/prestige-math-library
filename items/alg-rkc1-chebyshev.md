@@ -2,7 +2,7 @@
 id: alg-rkc1-chebyshev
 kind: algorithm
 title: "First-order stabilized explicit Runge–Kutta–Chebyshev step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

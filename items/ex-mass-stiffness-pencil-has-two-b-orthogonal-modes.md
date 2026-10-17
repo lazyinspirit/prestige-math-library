@@ -2,7 +2,7 @@
 id: ex-mass-stiffness-pencil-has-two-b-orthogonal-modes
 kind: example
 title: "A mass-stiffness pencil has real B-orthogonal modes and a residual enclosure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

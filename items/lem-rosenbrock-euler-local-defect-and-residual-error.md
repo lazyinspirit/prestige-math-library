@@ -2,7 +2,7 @@
 id: lem-rosenbrock-euler-local-defect-and-residual-error
 title: "Rosenbrock–Euler has an explicit one-step defect and solve-residual allowance"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-levenberg-marquardt-step-is-scaled-trust-region-minimizer
 kind: lemma
 title: "A damped least-squares step solves a scaled trust-region model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

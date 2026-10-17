@@ -2,7 +2,7 @@
 id: lem-complex-hermitian-realification-identities
 kind: lemma
 title: Realification preserves Hermitian spectra, norms, and congruence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-signed-split-transport-cost
 kind: definition
 title: Sign-preserving transport cost for finite signed measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

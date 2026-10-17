@@ -2,7 +2,7 @@
 id: def-bounded-lipschitz-discrepancy-for-measures
 kind: definition
 title: Bounded-Lipschitz discrepancy for finite measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

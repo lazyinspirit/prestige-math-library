@@ -1,7 +1,7 @@
 ---
 page: finite-precision-direct-factorizations
 title: "Finite-precision direct factorizations and least squares"
-status: draft
+status: published
 items:
   - def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma
   - lem-finite-arithmetic-schedule-termination-and-count

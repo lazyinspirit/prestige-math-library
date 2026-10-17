@@ -2,7 +2,7 @@
 id: lem-finite-budget-scf-iteration-work
 kind: lemma
 title: "Finite-budget SCF response iterations return a status in bounded outer work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

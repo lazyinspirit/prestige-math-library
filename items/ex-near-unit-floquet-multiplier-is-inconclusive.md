@@ -2,7 +2,7 @@
 id: ex-near-unit-floquet-multiplier-is-inconclusive
 kind: example
 title: "A near-unit multiplier enclosure does not decide stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

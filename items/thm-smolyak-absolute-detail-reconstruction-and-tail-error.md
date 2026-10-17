@@ -2,7 +2,7 @@
 id: thm-smolyak-absolute-detail-reconstruction-and-tail-error
 kind: theorem
 title: Absolute detail reconstruction and omitted-tail error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

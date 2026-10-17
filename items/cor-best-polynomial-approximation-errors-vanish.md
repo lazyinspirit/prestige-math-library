@@ -2,7 +2,7 @@
 id: cor-best-polynomial-approximation-errors-vanish
 kind: corollary
 title: "Best polynomial errors vanish for continuous functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

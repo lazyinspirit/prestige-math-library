@@ -2,7 +2,7 @@
 id: thm-poincare-map-stability-implies-orbital-stability
 kind: theorem
 title: Hyperbolic return-map stability is orbital stability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

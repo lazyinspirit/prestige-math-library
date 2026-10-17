@@ -2,7 +2,7 @@
 id: lem-generalized-inverse-sublevel-identity
 kind: lemma
 title: "Generalized inverse sublevel identity for a CDF"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

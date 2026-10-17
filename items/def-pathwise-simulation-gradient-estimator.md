@@ -2,7 +2,7 @@
 id: def-pathwise-simulation-gradient-estimator
 kind: definition
 title: "Pathwise and reparameterized simulation-gradient estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-adaptive-simpson-cap-reached
 kind: example
 title: A narrow peak reaches the adaptive Simpson depth cap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

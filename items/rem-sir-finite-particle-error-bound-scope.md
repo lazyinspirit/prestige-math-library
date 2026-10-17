@@ -2,7 +2,7 @@
 id: rem-sir-finite-particle-error-bound-scope
 kind: remark
 title: Finite-particle SIR absolute and relative error scope
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-parabolic-semidiscrete-ritz-error-identity
 kind: example
 title: Direct derivation of the semidiscrete Ritz residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

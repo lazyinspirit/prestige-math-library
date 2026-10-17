@@ -2,7 +2,7 @@
 id: lem-weighted-continuous-path-space-is-complete
 kind: lemma
 title: Completeness of the weighted continuous trajectory space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

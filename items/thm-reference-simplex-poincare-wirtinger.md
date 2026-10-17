@@ -2,7 +2,7 @@
 id: thm-reference-simplex-poincare-wirtinger
 kind: theorem
 title: Poincare–Wirtinger inequality on a reference simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

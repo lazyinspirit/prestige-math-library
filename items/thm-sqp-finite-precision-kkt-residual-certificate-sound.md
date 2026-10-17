@@ -2,7 +2,7 @@
 id: thm-sqp-finite-precision-kkt-residual-certificate-sound
 kind: theorem
 title: "The computed KKT residual certificate bounds the exact linear-system residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-xd-birth-death-poisson-tail
 kind: example
 title: "Three-state birth-death chain with a certified Poisson tail"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

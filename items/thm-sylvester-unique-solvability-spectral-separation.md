@@ -2,7 +2,7 @@
 id: thm-sylvester-unique-solvability-spectral-separation
 kind: theorem
 title: "A Sylvester equation is uniquely solvable exactly when the spectra are disjoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

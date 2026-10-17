@@ -2,7 +2,7 @@
 id: lem-polynomial-highest-derivative
 kind: lemma
 title: "The highest derivative of a polynomial"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

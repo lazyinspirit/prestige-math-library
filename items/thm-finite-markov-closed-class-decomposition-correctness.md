@@ -2,7 +2,7 @@
 id: thm-finite-markov-closed-class-decomposition-correctness
 kind: theorem
 title: "Correctness of finite Markov closed-class decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

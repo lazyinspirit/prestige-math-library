@@ -2,7 +2,7 @@
 id: cex-reentrant-corner-poisson-solution-not-h2
 kind: counterexample
 title: A reentrant corner prevents automatic H² dual regularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

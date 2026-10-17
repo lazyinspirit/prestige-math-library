@@ -2,7 +2,7 @@
 id: lem-local-root-from-uniformly-small-residual
 kind: lemma
 title: "A small residual gives a nearby root under a uniform inverse and Lipschitz bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

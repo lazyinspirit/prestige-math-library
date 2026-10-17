@@ -2,7 +2,7 @@
 id: thm-age-structured-renewal-semigroup-growth-and-data-stability
 kind: theorem
 title: Positive age-renewal evolution and L1 data stability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

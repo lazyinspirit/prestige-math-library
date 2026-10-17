@@ -2,7 +2,7 @@
 id: lem-simpson-panel-peano-kernel
 kind: lemma
 title: Peano kernel identity for one Simpson panel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

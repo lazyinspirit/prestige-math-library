@@ -2,7 +2,7 @@
 id: alg-jacobi-stationary-iteration
 kind: algorithm
 title: "Finite-budget Jacobi stationary iteration"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

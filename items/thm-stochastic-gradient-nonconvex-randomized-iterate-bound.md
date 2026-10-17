@@ -2,7 +2,7 @@
 id: thm-stochastic-gradient-nonconvex-randomized-iterate-bound
 kind: theorem
 title: "Nonconvex SGD stationarity bound for a uniform randomized iterate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

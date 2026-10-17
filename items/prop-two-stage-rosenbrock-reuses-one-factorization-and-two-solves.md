@@ -2,7 +2,7 @@
 id: prop-two-stage-rosenbrock-reuses-one-factorization-and-two-solves
 title: "The two-stage Rosenbrock update reuses one shifted factorization for two solves"
 kind: proposition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

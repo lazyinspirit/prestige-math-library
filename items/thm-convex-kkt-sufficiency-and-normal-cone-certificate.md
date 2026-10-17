@@ -2,7 +2,7 @@
 id: thm-convex-kkt-sufficiency-and-normal-cone-certificate
 kind: theorem
 title: Convex KKT conditions certify a global minimum and an outward normal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

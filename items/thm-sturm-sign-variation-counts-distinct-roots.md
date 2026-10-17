@@ -2,7 +2,7 @@
 id: thm-sturm-sign-variation-counts-distinct-roots
 kind: theorem
 title: Sturm sign variation counts distinct real polynomial roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

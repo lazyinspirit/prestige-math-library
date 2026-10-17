@@ -1,7 +1,7 @@
 ---
 page: gaussian-quadrature-examples
 title: "Gaussian quadrature — Examples"
-status: draft
+status: published
 requires:
   - gaussian-quadrature
   - the-lebesgue-and-riemann-integrals-compared

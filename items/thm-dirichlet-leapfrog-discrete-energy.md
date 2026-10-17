@@ -2,7 +2,7 @@
 id: thm-dirichlet-leapfrog-discrete-energy
 kind: theorem
 title: Coercive discrete energy for the Dirichlet leapfrog wave scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

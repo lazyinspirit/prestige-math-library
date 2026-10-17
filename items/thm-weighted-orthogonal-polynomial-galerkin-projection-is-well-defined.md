@@ -2,7 +2,7 @@
 id: thm-weighted-orthogonal-polynomial-galerkin-projection-is-well-defined
 kind: theorem
 title: "The weighted orthogonal-polynomial Galerkin projection is well-defined"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

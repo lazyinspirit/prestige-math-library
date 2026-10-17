@@ -2,7 +2,7 @@
 id: thm-multiplicative-design-update-well-defined-and-terminates
 kind: theorem
 title: "Finite-budget multiplicative design updates preserve the simplex and nonsingularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

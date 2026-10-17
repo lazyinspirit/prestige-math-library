@@ -2,7 +2,7 @@
 id: thm-pathwise-simulation-gradient-is-unbiased-under-envelope
 kind: theorem
 title: "A dominated pathwise simulation gradient is unbiased"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-brouwer-fixed-point-for-closed-box
 kind: lemma
 title: A continuous self-map of a nonempty closed box has a fixed point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

@@ -2,7 +2,7 @@
 id: alg-validate-local-hopf-certificate
 kind: algorithm
 title: Validate a proof-carrying local Hopf certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

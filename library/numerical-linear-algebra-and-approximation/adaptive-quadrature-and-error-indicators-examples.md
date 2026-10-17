@@ -1,7 +1,7 @@
 ---
 page: adaptive-quadrature-and-error-indicators-examples
 title: Adaptive quadrature and error indicators — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-adaptive-simpson-misses-narrow-feature

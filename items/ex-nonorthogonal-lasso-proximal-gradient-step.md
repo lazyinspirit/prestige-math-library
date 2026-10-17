@@ -2,7 +2,7 @@
 id: ex-nonorthogonal-lasso-proximal-gradient-step
 kind: example
 title: "One proximal-gradient step for a nonorthogonal Lasso design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

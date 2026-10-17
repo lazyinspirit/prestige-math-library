@@ -2,7 +2,7 @@
 id: thm-parabolic-theta-scheme-local-truncation-error
 kind: theorem
 title: Local truncation residual for the θ heat scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

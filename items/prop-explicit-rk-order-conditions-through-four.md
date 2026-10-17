@@ -2,7 +2,7 @@
 id: prop-explicit-rk-order-conditions-through-four
 kind: proposition
 title: "Sufficient explicit Runge–Kutta order conditions through order four"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

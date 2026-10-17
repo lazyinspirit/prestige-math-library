@@ -2,7 +2,7 @@
 id: ex-diagonal-stiff-diffusion-with-reaction-etd
 kind: example
 title: A diagonal stiff diffusion step with linear reaction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

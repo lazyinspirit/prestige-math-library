@@ -2,7 +2,7 @@
 id: lem-singular-values-lipschitz-in-spectral-norm
 kind: lemma
 title: "Singular values are Lipschitz in the spectral norm"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

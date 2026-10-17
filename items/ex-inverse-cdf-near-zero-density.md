@@ -2,7 +2,7 @@
 id: ex-inverse-cdf-near-zero-density
 kind: example
 title: "A vanishing density prevents a uniform linear spatial inverse bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

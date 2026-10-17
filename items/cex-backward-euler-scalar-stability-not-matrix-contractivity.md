@@ -2,7 +2,7 @@
 id: cex-backward-euler-scalar-stability-not-matrix-contractivity
 kind: counterexample
 title: "Backward Euler scalar A-stability does not imply matrix contractivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

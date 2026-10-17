@@ -2,7 +2,7 @@
 id: alg-truncated-cg-trust-region-step
 kind: algorithm
 title: "Truncated conjugate gradients with boundary and negative-curvature exits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

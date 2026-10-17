@@ -2,7 +2,7 @@
 id: thm-robbins-monro-strongly-monotone-root-convergence
 kind: theorem
 title: "Robbins–Monro converges almost surely for a strongly monotone root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

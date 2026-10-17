@@ -2,7 +2,7 @@
 id: ex-real-conjugate-pair-schur-block
 kind: example
 title: "A real Schur block represents a conjugate eigenvalue pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-diagonal-pade-approximant-for-exponential
 kind: definition
 title: "Diagonal Padé approximant to the exponential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

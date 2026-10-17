@@ -2,7 +2,7 @@
 id: ex-polynomial-chaos-coefficients-and-sobol-indices
 kind: example
 title: Polynomial-chaos coefficients group by variable support
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

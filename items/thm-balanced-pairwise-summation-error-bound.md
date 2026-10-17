@@ -2,7 +2,7 @@
 id: thm-balanced-pairwise-summation-error-bound
 kind: theorem
 title: "Balanced pairwise summation has a depth-dependent error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: deferred-correction-and-collocation-iterations-examples
 title: Deferred correction and collocation iterations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-sdc-cost-accounting-per-sweep

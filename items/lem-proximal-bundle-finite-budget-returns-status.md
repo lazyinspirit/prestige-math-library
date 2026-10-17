@@ -2,7 +2,7 @@
 id: lem-proximal-bundle-finite-budget-returns-status
 kind: lemma
 title: "The proximal bundle method returns within its finite trial budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

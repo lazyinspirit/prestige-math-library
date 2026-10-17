@@ -2,7 +2,7 @@
 id: ex-forward-euler-local-error-for-scalar-linear-ode
 kind: example
 title: "Forward Euler on the scalar linear equation $y'=y$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

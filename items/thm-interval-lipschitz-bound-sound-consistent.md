@@ -2,7 +2,7 @@
 id: thm-interval-lipschitz-bound-sound-consistent
 kind: theorem
 title: Outward interval and Lipschitz midpoint bounds are sound and consistent under refinement
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

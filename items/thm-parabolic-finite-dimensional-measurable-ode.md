@@ -2,7 +2,7 @@
 id: thm-parabolic-finite-dimensional-measurable-ode
 kind: theorem
 title: Finite-dimensional parabolic Galerkin ODEs with measurable coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

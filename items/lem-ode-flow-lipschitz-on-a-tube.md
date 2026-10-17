@@ -2,7 +2,7 @@
 id: lem-ode-flow-lipschitz-on-a-tube
 kind: lemma
 title: "A Lipschitz ODE mode flow is stable to its initial state on a tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

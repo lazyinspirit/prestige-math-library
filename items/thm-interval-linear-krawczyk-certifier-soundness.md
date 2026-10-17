@@ -2,7 +2,7 @@
 id: thm-interval-linear-krawczyk-certifier-soundness
 kind: theorem
 title: The interval Krawczyk certifier has the stated per-system guarantee
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-firmly-nonexpansive-picard-iteration-converges
 kind: lemma
 title: "Picard iterates of a firmly nonexpansive map converge in finite dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

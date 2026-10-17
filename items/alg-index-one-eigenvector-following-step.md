@@ -2,7 +2,7 @@
 id: alg-index-one-eigenvector-following-step
 kind: algorithm
 title: "Finite-budget index-one eigenvector-following Newton step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

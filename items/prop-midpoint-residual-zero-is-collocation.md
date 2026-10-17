@@ -2,7 +2,7 @@
 id: prop-midpoint-residual-zero-is-collocation
 kind: proposition
 title: "Zeros of the normalized midpoint residual are precisely midpoint collocation solutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-tikhonov-forward-discretization-and-stopping-coupling
 kind: theorem
 title: Forward discretization enters before inversion and controls the Tikhonov parameter coupling
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

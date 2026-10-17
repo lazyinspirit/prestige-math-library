@@ -7,7 +7,7 @@ verification:
 id: ex-zero-tangent-angle-makes-bordered-corrector-singular
 kind: example
 title: "A zero tangent angle makes the bordered corrector singular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

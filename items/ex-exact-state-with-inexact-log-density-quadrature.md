@@ -2,7 +2,7 @@
 id: ex-exact-state-with-inexact-log-density-quadrature
 title: "Zero state error can coexist with nonzero log-density quadrature error"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

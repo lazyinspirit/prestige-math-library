@@ -2,7 +2,7 @@
 id: thm-rk4-global-error-for-regularized-vortex-particles
 kind: theorem
 title: Fourth-order global error for RK4 on a regularized vortex particle tube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

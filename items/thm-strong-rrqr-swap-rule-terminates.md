@@ -2,7 +2,7 @@
 id: thm-strong-rrqr-swap-rule-terminates
 kind: theorem
 title: "The strong RRQR swap rule terminates after finitely many swaps"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

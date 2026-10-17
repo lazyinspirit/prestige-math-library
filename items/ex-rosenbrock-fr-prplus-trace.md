@@ -2,7 +2,7 @@
 id: ex-rosenbrock-fr-prplus-trace
 kind: example
 title: "One accepted Rosenbrock step gives different FR and PR+ coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

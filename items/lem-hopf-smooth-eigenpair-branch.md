@@ -2,7 +2,7 @@
 id: lem-hopf-smooth-eigenpair-branch
 kind: lemma
 title: A simple eigenpair has a regularity-matched gauge-fixed parameter branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

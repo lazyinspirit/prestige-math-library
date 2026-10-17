@@ -2,7 +2,7 @@
 id: lem-hermitian-eigenvalue-frobenius-bound
 kind: lemma
 title: Hermitian eigenvalues lie within a certified Frobenius bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

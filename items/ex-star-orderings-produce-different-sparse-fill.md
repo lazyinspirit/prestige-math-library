@@ -2,7 +2,7 @@
 id: ex-star-orderings-produce-different-sparse-fill
 kind: example
 title: A star graph has no fill in leaf-first order and a leaf clique in center-first order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-svrg-epoch-expected-linear-contraction
 kind: theorem
 title: Expected linear contraction of an SVRG epoch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

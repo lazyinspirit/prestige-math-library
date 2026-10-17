@@ -2,7 +2,7 @@
 id: lem-christoffel-sampling-law-and-gram-mean
 kind: lemma
 title: Christoffel sampling is normalized and its weighted Gram has mean identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

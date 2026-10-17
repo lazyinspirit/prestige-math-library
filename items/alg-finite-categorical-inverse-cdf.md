@@ -2,7 +2,7 @@
 id: alg-finite-categorical-inverse-cdf
 kind: algorithm
 title: "Finite categorical sampling by inverse CDF and binary search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

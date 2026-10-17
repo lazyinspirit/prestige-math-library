@@ -2,7 +2,7 @@
 id: thm-finite-temperature-free-energy-attains-minimum
 kind: theorem
 title: "The finite-temperature free energy attains a minimum on the density domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

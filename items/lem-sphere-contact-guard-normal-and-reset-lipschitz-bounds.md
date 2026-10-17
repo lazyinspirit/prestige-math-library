@@ -2,7 +2,7 @@
 id: lem-sphere-contact-guard-normal-and-reset-lipschitz-bounds
 kind: lemma
 title: "Sphere-contact guards, normals and binary resets have explicit tube bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

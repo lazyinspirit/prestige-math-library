@@ -2,7 +2,7 @@
 id: lem-exact-ornstein-uhlenbeck-momentum-substep
 kind: lemma
 title: "Exact Ornstein–Uhlenbeck momentum transition and covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-simpson-richardson-error-estimator-asymptotic
 kind: theorem
 title: Conditional asymptotic validity of the Simpson /15 indicator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

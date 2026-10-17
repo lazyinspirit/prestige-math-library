@@ -2,7 +2,7 @@
 id: alg-safeguarded-levenberg-marquardt
 kind: algorithm
 title: "Finite-budget Levenberg-Marquardt with a trust-ratio safeguard"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

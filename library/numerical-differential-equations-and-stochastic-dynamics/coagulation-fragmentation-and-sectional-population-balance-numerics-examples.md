@@ -1,7 +1,7 @@
 ---
 page: coagulation-fragmentation-and-sectional-population-balance-numerics-examples
 title: Coagulation Fragmentation and Sectional Population Balance Numerics — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-binary-fragmentation-preserves-first-moment

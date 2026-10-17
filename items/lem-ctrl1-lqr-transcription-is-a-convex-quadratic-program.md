@@ -2,7 +2,7 @@
 id: lem-ctrl1-lqr-transcription-is-a-convex-quadratic-program
 kind: lemma
 title: "A linear-quadratic transcription with affine constraints is a convex QP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

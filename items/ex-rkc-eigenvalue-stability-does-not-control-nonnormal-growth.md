@@ -2,7 +2,7 @@
 id: ex-rkc-eigenvalue-stability-does-not-control-nonnormal-growth
 kind: example
 title: "Scalar eigenvalue stability does not control nonnormal matrix growth"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

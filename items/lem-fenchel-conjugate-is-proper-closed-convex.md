@@ -2,7 +2,7 @@
 id: lem-fenchel-conjugate-is-proper-closed-convex
 kind: lemma
 title: "The Fenchel conjugate of a proper closed convex function is proper closed convex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

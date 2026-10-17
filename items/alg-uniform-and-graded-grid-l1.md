@@ -2,7 +2,7 @@
 id: alg-uniform-and-graded-grid-l1
 kind: algorithm
 title: Uniform-grid and graded-grid L1 discretization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

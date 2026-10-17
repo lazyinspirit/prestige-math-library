@@ -2,7 +2,7 @@
 id: lem-fractional-integral-kernel-power-integral
 kind: lemma
 title: Integral of the fractional power kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

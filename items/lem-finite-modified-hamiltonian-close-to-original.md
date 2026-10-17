@@ -2,7 +2,7 @@
 id: lem-finite-modified-hamiltonian-close-to-original
 kind: lemma
 title: A fixed finite modified Hamiltonian is close to the original energy
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [lem-finite-modified-hamiltonian-exists, thm-extreme-value-metric]

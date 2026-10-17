@@ -2,7 +2,7 @@
 id: thm-parabolic-crank-nicolson-second-order
 kind: theorem
 title: Second-order Crank–Nicolson nodal error for exact initial data under H2 time regularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-stiefel-retractions-are-first-order
 kind: theorem
 title: The QR and polar maps are first-order Stiefel and Grassmann retractions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

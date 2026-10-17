@@ -2,7 +2,7 @@
 id: def-hurwitz-matrix-and-continuous-lyapunov-equation
 kind: definition
 title: "Hurwitz matrices and the continuous Lyapunov equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

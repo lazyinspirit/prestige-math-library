@@ -1,7 +1,7 @@
 ---
 page: milstein-stochastic-taylor-and-iterated-integrals-examples
 title: Milstein stochastic taylor and iterated integrals — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-geometric-brownian-milstein-update

@@ -2,7 +2,7 @@
 id: ex-affine-triangle-and-parallelogram-maps
 kind: example
 title: Affine maps for a triangle and a parallelogram
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

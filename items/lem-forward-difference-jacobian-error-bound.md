@@ -2,7 +2,7 @@
 id: lem-forward-difference-jacobian-error-bound
 kind: lemma
 title: "Forward-difference Jacobian error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-na-two-point-circular-aliasing
 kind: example
 title: "Two-point circular convolution aliases the linear endpoint term"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution-examples

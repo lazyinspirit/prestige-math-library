@@ -2,7 +2,7 @@
 id: lem-two-stage-rosenbrock-local-defect-and-residual-error
 title: "The two-stage Rosenbrock W-method has a cubic local defect and explicit stage-residual allowance"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

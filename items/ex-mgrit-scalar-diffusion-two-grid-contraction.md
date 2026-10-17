@@ -2,7 +2,7 @@
 id: ex-mgrit-scalar-diffusion-two-grid-contraction
 kind: example
 title: "A scalar diffusion mode gives an explicit two-grid MGRIT matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

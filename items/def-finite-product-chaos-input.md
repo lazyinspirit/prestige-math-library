@@ -2,7 +2,7 @@
 id: def-finite-product-chaos-input
 kind: definition
 title: Finite product-law polynomial-chaos input data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

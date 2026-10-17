@@ -1,7 +1,7 @@
 ---
 page: computed-singular-values-and-rank-revealing-factorizations-examples
 title: Computed singular values and rank revealing factorizations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-nearly-rank-deficient-design-matrix

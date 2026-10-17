@@ -2,7 +2,7 @@
 id: thm-affine-random-diffusion-solution-is-bochner
 kind: theorem
 title: Affine random diffusion has a measurable Bochner solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-bdf2-root-locus-location
 kind: lemma
 title: "BDF2 roots on or outside the unit disk map to the closed right half-plane"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

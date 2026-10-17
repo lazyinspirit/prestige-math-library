@@ -2,7 +2,7 @@
 id: def-linear-multistep-method-consistency-order-and-root-condition
 kind: definition
 title: "Linear multistep methods, consistency, order, and the root condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

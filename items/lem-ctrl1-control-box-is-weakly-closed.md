@@ -2,7 +2,7 @@
 id: lem-ctrl1-control-box-is-weakly-closed
 kind: lemma
 title: "Under Countable Choice, pointwise compact convex control constraints are weakly closed in L2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

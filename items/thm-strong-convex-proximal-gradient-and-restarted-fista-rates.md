@@ -2,7 +2,7 @@
 id: thm-strong-convex-proximal-gradient-and-restarted-fista-rates
 kind: theorem
 title: "Strong convexity gives linear proximal-gradient and restarted-FISTA rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

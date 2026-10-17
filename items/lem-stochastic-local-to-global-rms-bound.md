@@ -2,7 +2,7 @@
 id: lem-stochastic-local-to-global-rms-bound
 kind: lemma
 title: "Discrete stochastic local-to-global RMS stability bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

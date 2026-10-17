@@ -2,7 +2,7 @@
 id: alg-certified-elementary-range-evaluation
 kind: algorithm
 title: Certified range evaluation for elementary real and complex functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

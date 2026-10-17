@@ -2,7 +2,7 @@
 id: lem-smolyak-rectangular-telescope
 kind: lemma
 title: Rectangular telescoping of tensor details
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

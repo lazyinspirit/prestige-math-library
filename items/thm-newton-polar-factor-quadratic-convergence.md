@@ -2,7 +2,7 @@
 id: thm-newton-polar-factor-quadratic-convergence
 kind: theorem
 title: "Newton polar iterates converge quadratically under an explicit norm condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

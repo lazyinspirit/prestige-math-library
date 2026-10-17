@@ -2,7 +2,7 @@
 id: thm-empirical-measures-solve-mean-field-equation-exactly
 kind: theorem
 title: Exact weak mean-field identity for empirical particle measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

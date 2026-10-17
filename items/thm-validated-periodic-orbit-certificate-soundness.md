@@ -2,7 +2,7 @@
 id: thm-validated-periodic-orbit-certificate-soundness
 kind: theorem
 title: "A Krawczyk inclusion certifies a unique phase-fixed nonconstant periodic orbit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

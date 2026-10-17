@@ -2,7 +2,7 @@
 id: lem-cq-quadratic-generating-coefficient-estimate
 kind: lemma
 title: Generating-coefficient estimate for the quadratic CQ datum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-lorentz-cone-log-barrier
 kind: lemma
 title: "The Lorentz logarithmic barrier has parameter two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

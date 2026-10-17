@@ -2,7 +2,7 @@
 id: lem-variable-step-bdf2-interpolation-and-local-defect
 kind: lemma
 title: "Quadratic interpolation gives the variable-step BDF2 formula and cubic residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -2,7 +2,7 @@
 id: alg-scalar-interval-newton-certification
 kind: algorithm
 title: Finite-budget scalar interval Newton root certification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

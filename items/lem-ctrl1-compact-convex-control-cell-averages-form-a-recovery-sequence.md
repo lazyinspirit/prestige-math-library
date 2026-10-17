@@ -2,7 +2,7 @@
 id: lem-ctrl1-compact-convex-control-cell-averages-form-a-recovery-sequence
 kind: lemma
 title: "Cell averages give a strong recovery sequence for compact convex controls"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

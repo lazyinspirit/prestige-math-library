@@ -2,7 +2,7 @@
 id: lem-linear-smoother-gcv-expression
 kind: lemma
 title: The ridge leave-one-out identity yields the generalized cross-validation score
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

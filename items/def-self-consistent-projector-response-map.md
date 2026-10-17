@@ -2,7 +2,7 @@
 id: def-self-consistent-projector-response-map
 kind: definition
 title: The occupied-projector response map on its strict-gap domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

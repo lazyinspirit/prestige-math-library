@@ -2,7 +2,7 @@
 id: thm-projected-stochastic-gradient-convex-average-bound
 kind: theorem
 title: "Finite-time projected SGD bound for a convex objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

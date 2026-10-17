@@ -2,7 +2,7 @@
 id: thm-inexact-gradient-residual-distance-certificate
 kind: theorem
 title: "An inexact gradient residual certifies distance under strong convexity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

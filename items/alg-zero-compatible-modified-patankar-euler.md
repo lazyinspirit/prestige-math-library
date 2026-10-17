@@ -2,7 +2,7 @@
 id: alg-zero-compatible-modified-patankar-euler
 kind: algorithm
 title: "Zero-compatible modified Patankar Euler in rate-factor form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

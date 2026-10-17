@@ -2,7 +2,7 @@
 id: ex-two-call-spsa-biological-simulator
 kind: example
 title: "One two-call SPSA estimate for an expensive biological simulator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

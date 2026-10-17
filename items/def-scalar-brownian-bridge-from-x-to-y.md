@@ -2,7 +2,7 @@
 id: def-scalar-brownian-bridge-from-x-to-y
 kind: definition
 title: Scalar Brownian bridge from x to y
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

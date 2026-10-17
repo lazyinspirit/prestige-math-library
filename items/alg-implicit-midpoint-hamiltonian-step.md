@@ -2,7 +2,7 @@
 id: alg-implicit-midpoint-hamiltonian-step
 kind: algorithm
 title: Local implicit midpoint step for a Hamiltonian vector field
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

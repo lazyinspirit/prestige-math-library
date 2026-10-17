@@ -2,7 +2,7 @@
 id: thm-matrix-function-rational-contour-error-bound
 kind: theorem
 title: "A resolvent contour bound transfers scalar rational error to matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

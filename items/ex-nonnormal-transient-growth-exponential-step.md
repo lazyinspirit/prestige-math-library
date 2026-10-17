@@ -2,7 +2,7 @@
 id: ex-nonnormal-transient-growth-exponential-step
 kind: example
 title: Exact exponential stepping captures nonnormal transient growth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

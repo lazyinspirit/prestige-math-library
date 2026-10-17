@@ -2,7 +2,7 @@
 id: lem-finite-temperature-density-domain-compact
 kind: lemma
 title: "The fixed-particle density-matrix domain is nonempty and compact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

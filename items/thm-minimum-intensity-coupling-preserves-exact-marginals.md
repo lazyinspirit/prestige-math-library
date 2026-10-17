@@ -2,7 +2,7 @@
 id: thm-minimum-intensity-coupling-preserves-exact-marginals
 kind: theorem
 title: "The minimum-intensity reaction coupling preserves both marginals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

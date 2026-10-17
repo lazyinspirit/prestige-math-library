@@ -1,7 +1,7 @@
 ---
 page: numerical-boundary-value-problems
 title: Linear numerical boundary-value problems
-status: draft
+status: published
 items:
   - alg-centered-difference-dirichlet-bvp
   - lem-centered-difference-dirichlet-inverse-maxnorm

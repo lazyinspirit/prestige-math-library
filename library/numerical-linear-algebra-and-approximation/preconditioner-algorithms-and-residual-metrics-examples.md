@@ -1,7 +1,7 @@
 ---
 page: preconditioner-algorithms-and-residual-metrics-examples
 title: "Preconditioner algorithms and residual metrics — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-left-preconditioned-residual-can-understate-physical-residual

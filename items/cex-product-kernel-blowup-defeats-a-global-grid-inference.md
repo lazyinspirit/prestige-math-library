@@ -2,7 +2,7 @@
 id: cex-product-kernel-blowup-defeats-a-global-grid-inference
 kind: counterexample
 title: Finite-grid mass conservation does not bound the product-kernel continuum second moment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-geometry-tensor-gap-bounds-cellwise-form-defect
 kind: lemma
 title: Cellwise geometry tensor gaps bound form error and stability loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

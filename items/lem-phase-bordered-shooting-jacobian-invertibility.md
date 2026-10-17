@@ -2,7 +2,7 @@
 id: lem-phase-bordered-shooting-jacobian-invertibility
 kind: lemma
 title: "A simple neutral multiplier and transverse phase make the shooting Jacobian invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

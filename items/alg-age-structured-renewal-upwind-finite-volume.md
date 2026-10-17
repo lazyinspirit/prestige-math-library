@@ -2,7 +2,7 @@
 id: alg-age-structured-renewal-upwind-finite-volume
 kind: algorithm
 title: Finite-volume upwind scheme for age renewal transport
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-parabolic-backward-euler-error-and-reconstruction
 kind: theorem
 title: Backward Euler stability, first-order error for exact initial data, and reconstruction bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

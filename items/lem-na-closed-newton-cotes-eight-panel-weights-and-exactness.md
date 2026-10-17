@@ -2,7 +2,7 @@
 id: lem-na-closed-newton-cotes-eight-panel-weights-and-exactness
 kind: lemma
 title: "Exact weights and degree-nine exactness of the eight-panel rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

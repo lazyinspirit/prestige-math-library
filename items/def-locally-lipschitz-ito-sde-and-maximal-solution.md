@@ -2,7 +2,7 @@
 id: def-locally-lipschitz-ito-sde-and-maximal-solution
 kind: definition
 title: "Locally Lipschitz Itô SDE on an open state domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

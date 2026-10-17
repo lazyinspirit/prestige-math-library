@@ -2,7 +2,7 @@
 id: lem-local-c1-step-consistency-implies-tangent-adjoint-gradient-order
 kind: lemma
 title: "Local C1 step consistency gives tangent, adjoint and gradient order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

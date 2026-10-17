@@ -2,7 +2,7 @@
 id: def-finite-discrete-coagulation-fragmentation-system
 kind: definition
 title: Finite discrete coagulation and fragmentation with a mass reservoir
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

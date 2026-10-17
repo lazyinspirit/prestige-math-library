@@ -1,7 +1,7 @@
 ---
 page: sparse-matrix-models-and-kernel-costs-examples
 title: "Sparse matrix models and kernel costs — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-csr-tridiagonal-matrix

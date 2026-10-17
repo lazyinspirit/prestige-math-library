@@ -2,7 +2,7 @@
 id: alg-backward-euler-convolution-quadrature
 kind: algorithm
 title: Backward-Euler convolution quadrature for a Caputo equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

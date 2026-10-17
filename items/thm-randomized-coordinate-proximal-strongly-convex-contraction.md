@@ -2,7 +2,7 @@
 id: thm-randomized-coordinate-proximal-strongly-convex-contraction
 kind: theorem
 title: "Strongly convex smooth-part proximal coordinate contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

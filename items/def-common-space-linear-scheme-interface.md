@@ -2,7 +2,7 @@
 id: def-common-space-linear-scheme-interface
 kind: definition
 title: "Common Banach-space interface for a linear IVP and its time schemes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

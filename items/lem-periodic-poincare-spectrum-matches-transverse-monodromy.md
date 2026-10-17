@@ -2,7 +2,7 @@
 id: lem-periodic-poincare-spectrum-matches-transverse-monodromy
 kind: lemma
 title: "The Poincare derivative has precisely the non-phase monodromy multipliers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

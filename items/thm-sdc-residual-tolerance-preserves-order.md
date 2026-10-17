@@ -2,7 +2,7 @@
 id: thm-sdc-residual-tolerance-preserves-order
 kind: theorem
 title: A stage residual tolerance preserves collocation order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: def-reference-finite-element-and-unisolvent-dofs
 kind: definition
 title: Reference finite elements and unisolvent degrees of freedom
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

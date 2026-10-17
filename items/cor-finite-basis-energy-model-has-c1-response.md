@@ -2,7 +2,7 @@
 id: cor-finite-basis-energy-model-has-c1-response
 kind: corollary
 title: The finite-basis projector energy model supplies a C1 Hermitian response map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

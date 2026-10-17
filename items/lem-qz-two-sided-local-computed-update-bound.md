@@ -2,7 +2,7 @@
 id: lem-qz-two-sided-local-computed-update-bound
 kind: lemma
 title: Common computed Givens actions certify both pencil matrices and factor residuals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

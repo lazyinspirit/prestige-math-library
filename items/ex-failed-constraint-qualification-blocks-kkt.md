@@ -2,7 +2,7 @@
 id: ex-failed-constraint-qualification-blocks-kkt
 kind: example
 title: A true minimizer with no KKT multipliers when MFCQ fails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

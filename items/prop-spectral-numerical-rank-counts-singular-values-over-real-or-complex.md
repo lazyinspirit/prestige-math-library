@@ -2,7 +2,7 @@
 id: prop-spectral-numerical-rank-counts-singular-values-over-real-or-complex
 kind: proposition
 title: "Spectral numerical rank counts singular values above threshold over R or C"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

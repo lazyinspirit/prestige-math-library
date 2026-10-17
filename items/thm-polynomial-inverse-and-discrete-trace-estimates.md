@@ -2,7 +2,7 @@
 id: thm-polynomial-inverse-and-discrete-trace-estimates
 kind: theorem
 title: Polynomial inverse and discrete trace inequalities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

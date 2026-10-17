@@ -2,7 +2,7 @@
 id: def-linear-elliptic-pde-constrained-control-problem
 kind: definition
 title: Linear coercive elliptic PDE control problem and reduced objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

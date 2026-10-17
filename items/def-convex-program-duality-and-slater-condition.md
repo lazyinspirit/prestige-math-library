@@ -2,7 +2,7 @@
 id: def-convex-program-duality-and-slater-condition
 kind: definition
 title: Finite-dimensional convex program, Lagrangian dual, and Slater condition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

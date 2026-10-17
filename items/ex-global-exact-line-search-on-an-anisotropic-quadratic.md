@@ -2,7 +2,7 @@
 id: ex-global-exact-line-search-on-an-anisotropic-quadratic
 kind: example
 title: "Exact and Armijo rates on an anisotropic quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

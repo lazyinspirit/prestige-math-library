@@ -2,7 +2,7 @@
 id: alg-factorable-mccormick-box-relaxation
 kind: algorithm
 title: Finite McCormick convex relaxation construction for factorable box problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

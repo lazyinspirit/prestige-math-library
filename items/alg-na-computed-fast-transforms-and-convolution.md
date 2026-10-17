@@ -2,7 +2,7 @@
 id: alg-na-computed-fast-transforms-and-convolution
 kind: algorithm
 title: "Arbitrary-length mixed-radix and Bluestein DFT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

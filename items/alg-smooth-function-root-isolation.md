@@ -2,7 +2,7 @@
 id: alg-smooth-function-root-isolation
 kind: algorithm
 title: Finite-budget interval isolation for smooth scalar roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

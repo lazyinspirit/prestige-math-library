@@ -2,7 +2,7 @@
 id: ex-forward-euler-parabolic-cfl-threshold-and-nyquist-growth
 kind: example
 title: Forward Euler at and above the parabolic CFL threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

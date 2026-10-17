@@ -2,7 +2,7 @@
 id: ex-xd-reducible-absorbing-class-weights
 kind: example
 title: "Two absorbing classes retain initial-law-dependent weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

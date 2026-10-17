@@ -2,7 +2,7 @@
 id: ex-two-node-gauss-weights-from-cardinal-squares
 kind: example
 title: Two Gaussian weights are the squared norms of the two cardinal polynomials
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

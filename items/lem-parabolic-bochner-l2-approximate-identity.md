@@ -2,7 +2,7 @@
 id: lem-parabolic-bochner-l2-approximate-identity
 kind: lemma
 title: Smooth mollifiers approximate Bochner L² functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

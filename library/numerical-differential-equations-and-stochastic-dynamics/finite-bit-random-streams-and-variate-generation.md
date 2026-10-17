@@ -1,7 +1,7 @@
 ---
 page: finite-bit-random-streams-and-variate-generation
 title: Finite bit random streams and variate generation
-status: draft
+status: published
 requires:
   - conditional-and-finite-group-exact-inference
   - probability-spaces-random-variables-and-expectation

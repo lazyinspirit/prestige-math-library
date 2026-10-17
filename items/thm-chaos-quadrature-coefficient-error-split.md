@@ -2,7 +2,7 @@
 id: thm-chaos-quadrature-coefficient-error-split
 kind: theorem
 title: Projection and quadrature errors split in L2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

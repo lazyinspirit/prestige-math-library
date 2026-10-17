@@ -1,7 +1,7 @@
 ---
 page: nonlinear-boundary-value-solvers-examples
 title: "Nonlinear Boundary-Value Solvers — Examples"
-status: draft
+status: published
 requires: [nonlinear-boundary-value-solvers]
 items: []
 examples: [ex-midpoint-collocation-has-two-branches, ex-unstable-single-shooting-amplifies-error, ex-newton-shooting-fails-from-singular-start]

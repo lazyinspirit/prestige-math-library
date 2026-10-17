@@ -2,7 +2,7 @@
 id: thm-weighted-least-squares-stability-and-error
 kind: theorem
 title: Weighted least squares is stable on the good Gram event
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

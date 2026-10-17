@@ -2,7 +2,7 @@
 id: thm-local-holonomic-constrained-hamiltonian-flow
 kind: theorem
 title: The constrained Hamiltonian vector field has a unique local flow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

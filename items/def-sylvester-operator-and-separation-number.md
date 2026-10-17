@@ -2,7 +2,7 @@
 id: def-sylvester-operator-and-separation-number
 kind: definition
 title: "Sylvester operator and Frobenius separation number"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

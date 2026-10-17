@@ -2,7 +2,7 @@
 id: lem-hilbert-tikhonov-normal-operator-invertible
 kind: lemma
 title: "The shifted Hilbert-space normal operator is invertible with inverse norm at most $1/\\lambda$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

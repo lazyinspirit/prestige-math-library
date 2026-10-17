@@ -1,7 +1,7 @@
 ---
 page: verified-linear-systems-and-spectral-enclosures-examples
 title: "Verified linear systems and spectral enclosures — Examples"
-status: draft
+status: published
 requires: [verified-linear-systems-and-spectral-enclosures]
 items: []
 examples:

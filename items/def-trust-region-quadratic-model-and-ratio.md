@@ -2,7 +2,7 @@
 id: def-trust-region-quadratic-model-and-ratio
 kind: definition
 title: "Quadratic trust-region models and the actual-to-predicted reduction ratio"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

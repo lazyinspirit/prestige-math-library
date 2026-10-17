@@ -2,7 +2,7 @@
 id: alg-generalized-hessenberg-triangular-reduction
 kind: algorithm
 title: "Givens reduction of a matrix pair to Hessenberg-triangular form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

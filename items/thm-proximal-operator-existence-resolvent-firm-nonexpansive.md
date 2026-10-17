@@ -2,7 +2,7 @@
 id: thm-proximal-operator-existence-resolvent-firm-nonexpansive
 kind: theorem
 title: "Existence, resolvent characterization, and firm nonexpansiveness of the proximal map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

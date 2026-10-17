@@ -2,7 +2,7 @@
 id: thm-hopf-local-branch-and-stability
 kind: theorem
 title: A simple nondegenerate Hopf point creates a local periodic branch
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-sdc-sweep-work-and-storage-bound
 kind: lemma
 title: Stage-call, storage and arithmetic bounds for a finite SDC execution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

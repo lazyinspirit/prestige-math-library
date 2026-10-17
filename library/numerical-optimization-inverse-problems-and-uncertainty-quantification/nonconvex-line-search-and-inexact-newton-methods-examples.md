@@ -1,7 +1,7 @@
 ---
 page: nonconvex-line-search-and-inexact-newton-methods-examples
 title: "Nonconvex line search and inexact newton methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-rosenbrock-newton-step-satisfies-strong-wolfe

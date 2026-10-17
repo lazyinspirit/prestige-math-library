@@ -2,7 +2,7 @@
 id: lem-shape-regular-affine-simplex-scaling
 kind: lemma
 title: Shape regularity controls affine simplex geometry
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

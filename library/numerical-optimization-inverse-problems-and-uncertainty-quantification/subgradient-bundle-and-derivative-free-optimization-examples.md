@@ -1,7 +1,7 @@
 ---
 page: subgradient-bundle-and-derivative-free-optimization-examples
 title: Subgradient bundle and derivative free optimization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-nelder-mead-flat-plateau-stagnation

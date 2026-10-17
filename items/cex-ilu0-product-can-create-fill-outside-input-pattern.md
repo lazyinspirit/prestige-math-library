@@ -2,7 +2,7 @@
 id: cex-ilu0-product-can-create-fill-outside-input-pattern
 kind: counterexample
 title: "The product of ILU(0) factors can contain a fill position"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: ex-crank-nicolson-preserves-high-frequency-amplitude
 kind: example
 title: Crank–Nicolson is stable but does not strongly damp the highest mode
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

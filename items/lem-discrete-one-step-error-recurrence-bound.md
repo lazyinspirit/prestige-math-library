@@ -2,7 +2,7 @@
 id: lem-discrete-one-step-error-recurrence-bound
 title: "Finite geometric error bound from a one-step recurrence"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

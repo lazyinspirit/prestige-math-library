@@ -2,7 +2,7 @@
 id: alg-gauss-seidel-stationary-iteration
 kind: algorithm
 title: "Finite-budget Gauss–Seidel stationary iteration"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

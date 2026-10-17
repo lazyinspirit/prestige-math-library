@@ -2,7 +2,7 @@
 id: lem-standard-normal-mills-ratio
 kind: lemma
 title: Standard-normal Mills bounds and logarithmic tail asymptotics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

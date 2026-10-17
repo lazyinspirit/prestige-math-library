@@ -2,7 +2,7 @@
 id: thm-product-chaos-and-spatial-density-in-bochner-l2
 kind: theorem
 title: Tensor products are dense in Bochner L2 under scalar and spatial density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

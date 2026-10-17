@@ -2,7 +2,7 @@
 id: thm-full-memory-bfgs-local-superlinear-convergence
 kind: theorem
 title: "Full-memory Bfgs is locally superlinear when the Hessian is Lipschitz"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

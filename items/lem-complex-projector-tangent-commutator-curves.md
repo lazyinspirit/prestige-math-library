@@ -2,7 +2,7 @@
 id: lem-complex-projector-tangent-commutator-curves
 kind: lemma
 title: "Complex projector tangents are skew-Hermitian commutator directions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

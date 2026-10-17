@@ -2,7 +2,7 @@
 id: alg-index-one-dae-backward-euler-stepper
 title: "Finite-budget coupled backward Euler for an index-one DAE"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

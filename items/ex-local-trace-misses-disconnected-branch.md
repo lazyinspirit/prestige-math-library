@@ -2,7 +2,7 @@
 id: ex-local-trace-misses-disconnected-branch
 kind: example
 title: "A finite local trace misses a disconnected solution branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

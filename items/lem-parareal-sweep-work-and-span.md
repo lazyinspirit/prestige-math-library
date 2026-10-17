@@ -2,7 +2,7 @@
 id: lem-parareal-sweep-work-and-span
 kind: lemma
 title: "Work and idealized span of completed Parareal sweeps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

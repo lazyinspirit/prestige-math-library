@@ -2,7 +2,7 @@
 id: alg-finite-barycentric-interpolation-evaluator
 kind: algorithm
 title: "Finite barycentric interpolation evaluator"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

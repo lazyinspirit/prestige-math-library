@@ -2,7 +2,7 @@
 id: thm-phi-recurrence-and-augmented-matrix-actions
 kind: theorem
 title: "Phi recurrence and augmented-matrix action identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: prop-ssprk33-third-order-and-convex-preservation
 kind: proposition
 title: "SSPRK(3,3) is third order and preserves conditional convex bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

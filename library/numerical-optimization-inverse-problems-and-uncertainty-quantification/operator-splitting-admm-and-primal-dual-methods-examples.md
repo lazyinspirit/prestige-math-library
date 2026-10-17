@@ -1,7 +1,7 @@
 ---
 page: operator-splitting-admm-and-primal-dual-methods-examples
 title: Operator splitting ADMM and primal dual methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-naive-three-block-admm-divergence

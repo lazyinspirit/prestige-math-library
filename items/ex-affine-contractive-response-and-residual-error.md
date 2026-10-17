@@ -2,7 +2,7 @@
 id: ex-affine-contractive-response-and-residual-error
 kind: example
 title: An affine response map realizes the contraction and residual estimates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

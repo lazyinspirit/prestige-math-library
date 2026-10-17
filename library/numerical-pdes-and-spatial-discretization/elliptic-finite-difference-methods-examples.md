@@ -1,7 +1,7 @@
 ---
 page: elliptic-finite-difference-methods-examples
 title: Elliptic finite-difference methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-first-order-neumann-closure-causes-first-order-error

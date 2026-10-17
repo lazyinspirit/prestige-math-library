@@ -2,7 +2,7 @@
 id: def-separable-regularized-vortex-interaction-hamiltonian
 kind: definition
 title: Separable regularized vortex-inspired Hamiltonian comparison system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

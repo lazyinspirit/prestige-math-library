@@ -2,7 +2,7 @@
 id: thm-complex-resolvent-cover-certificate-soundness
 kind: theorem
 title: Diskwise Neumann certificates bound a complex matrix resolvent
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

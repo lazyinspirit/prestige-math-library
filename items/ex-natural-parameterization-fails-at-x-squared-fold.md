@@ -7,7 +7,7 @@ verification:
 id: ex-natural-parameterization-fails-at-x-squared-fold
 kind: example
 title: 'The natural parameter fails at the fold $x^2-\lambda=0$'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

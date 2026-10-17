@@ -2,7 +2,7 @@
 id: alg-scaled-complex-householder-and-givens-updates
 kind: algorithm
 title: Scaled real and complex Householder and Givens update arithmetic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

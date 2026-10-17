@@ -2,7 +2,7 @@
 id: thm-nested-dissection-grid-work-and-storage-bounds
 kind: theorem
 title: Nested dissection gives the stated work and factor-storage bounds on regular grids
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

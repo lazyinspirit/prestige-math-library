@@ -2,7 +2,7 @@
 id: thm-backward-euler-algebraic-update-residual-error-budget
 title: "Backward Euler propagates unscaled algebraic update residuals"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

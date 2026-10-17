@@ -2,7 +2,7 @@
 id: cex-ctrl1-terminal-constraints-break-pointwise-control-vi
 kind: counterexample
 title: "An active terminal constraint invalidates the pointwise control-only variational inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

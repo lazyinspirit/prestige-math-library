@@ -2,7 +2,7 @@
 id: thm-complex-stiefel-grassmann-tangent-projections
 kind: theorem
 title: Complex Stiefel and Grassmann tangent projections
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

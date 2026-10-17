@@ -2,7 +2,7 @@
 id: def-real-and-complex-schur-forms
 kind: definition
 title: "Real and complex Schur forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

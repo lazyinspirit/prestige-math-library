@@ -2,7 +2,7 @@
 id: thm-age-structured-renewal-finite-cutoff-characteristic-solution
 kind: theorem
 title: Characteristic solution and mass bound for the finite-age renewal model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

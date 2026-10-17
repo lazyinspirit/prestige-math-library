@@ -2,7 +2,7 @@
 id: lem-sdc-fixed-point-is-collocation-stage
 kind: lemma
 title: Fixed points of the SDC sweep are collocation stages
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

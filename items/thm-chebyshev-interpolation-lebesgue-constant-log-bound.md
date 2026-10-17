@@ -2,7 +2,7 @@
 id: thm-chebyshev-interpolation-lebesgue-constant-log-bound
 kind: theorem
 title: "Chebyshev-root and Lobatto interpolation norms have logarithmic upper bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

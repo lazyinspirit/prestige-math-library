@@ -2,7 +2,7 @@
 id: ex-exponential-best-error-rate-for-chebyshev-interpolation
 kind: example
 title: "An exponential best-error rate transferred to Chebyshev interpolation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

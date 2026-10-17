@@ -2,7 +2,7 @@
 id: ex-two-pixel-total-variation-proximal-map
 kind: example
 title: "The two-pixel total-variation proximal map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

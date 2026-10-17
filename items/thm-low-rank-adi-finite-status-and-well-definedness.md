@@ -2,7 +2,7 @@
 id: thm-low-rank-adi-finite-status-and-well-definedness
 kind: theorem
 title: Finite ADI shifts have well-defined solves and explicit statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

@@ -2,7 +2,7 @@
 id: alg-bounded-mixed-precision-iterative-refinement
 kind: algorithm
 title: "Bounded mixed-precision iterative refinement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

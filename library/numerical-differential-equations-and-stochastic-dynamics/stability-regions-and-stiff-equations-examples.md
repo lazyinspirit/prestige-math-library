@@ -1,7 +1,7 @@
 ---
 page: stability-regions-and-stiff-equations-examples
 title: Stability regions and stiff equations — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-backward-euler-scalar-stability-not-matrix-contractivity

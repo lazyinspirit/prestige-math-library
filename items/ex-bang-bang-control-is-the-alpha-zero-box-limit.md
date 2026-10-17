@@ -2,7 +2,7 @@
 id: ex-bang-bang-control-is-the-alpha-zero-box-limit
 kind: example
 title: The alpha-zero linear box problem has a bang-bang active set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 generation:

@@ -2,7 +2,7 @@
 id: lem-rosenbrock-euler-jacobian-approximation-defect
 title: "The one-stage update has an explicit Jacobian-approximation defect"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-b-inner-product-and-dual-norm-for-definite-pencil
 kind: definition
 title: "The B-inner product, B-norm, and dual residual norm"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

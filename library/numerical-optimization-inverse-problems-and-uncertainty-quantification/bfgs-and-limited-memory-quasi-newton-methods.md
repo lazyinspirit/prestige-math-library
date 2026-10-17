@@ -1,7 +1,7 @@
 ---
 page: bfgs-and-limited-memory-quasi-newton-methods
 title: "Bfgs and limited memory quasi newton methods"
-status: draft
+status: published
 items:
   - def-bfgs-curvature-pair-and-update-formulas
   - lem-bfgs-hessian-bounds-control-gradient-and-taylor-remainder

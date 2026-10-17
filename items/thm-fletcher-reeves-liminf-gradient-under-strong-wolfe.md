@@ -2,7 +2,7 @@
 id: thm-fletcher-reeves-liminf-gradient-under-strong-wolfe
 kind: theorem
 title: "Fletcher–Reeves has vanishing gradient liminf under strong Wolfe"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

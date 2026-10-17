@@ -2,7 +2,7 @@
 id: def-uniformly-elliptic-affine-random-diffusion
 kind: definition
 title: Uniformly elliptic affine random diffusion model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

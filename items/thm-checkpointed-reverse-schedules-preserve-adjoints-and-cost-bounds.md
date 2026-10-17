@@ -2,7 +2,7 @@
 id: thm-checkpointed-reverse-schedules-preserve-adjoints-and-cost-bounds
 kind: theorem
 title: "Uniform-block and binomial checkpoint schedules preserve reverse adjoints with stated costs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, alg-checkpointed-reverse-schedules, alg-reverse-mode-automatic-differentiation, thm-reverse-mode-computes-gradient]

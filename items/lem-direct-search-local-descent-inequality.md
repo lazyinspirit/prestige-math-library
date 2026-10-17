@@ -2,7 +2,7 @@
 id: lem-direct-search-local-descent-inequality
 kind: lemma
 title: "Local descent inequality for a Lipschitz gradient on an open segment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

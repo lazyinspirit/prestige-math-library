@@ -2,7 +2,7 @@
 id: lem-safeguarded-pr-plus-uniform-angle
 kind: lemma
 title: "The safeguarded PR+ direction has a uniform angle bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

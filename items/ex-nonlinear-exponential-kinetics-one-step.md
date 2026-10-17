@@ -2,7 +2,7 @@
 id: ex-nonlinear-exponential-kinetics-one-step
 kind: example
 title: One regularized Gauss–Newton step for exponential reaction kinetics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

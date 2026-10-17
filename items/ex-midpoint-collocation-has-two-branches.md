@@ -2,7 +2,7 @@
 id: ex-midpoint-collocation-has-two-branches
 kind: example
 title: "A midpoint BVP residual can have two simple solution branches"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

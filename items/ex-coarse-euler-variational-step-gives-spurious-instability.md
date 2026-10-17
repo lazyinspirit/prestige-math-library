@@ -2,7 +2,7 @@
 id: ex-coarse-euler-variational-step-gives-spurious-instability
 kind: example
 title: "A coarse Euler variational step gives a spurious unstable multiplier"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

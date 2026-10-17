@@ -2,7 +2,7 @@
 id: lem-dimer-central-force-hessian-vector-error
 kind: lemma
 title: "Paired force evaluations give a second-order Hessian-vector estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

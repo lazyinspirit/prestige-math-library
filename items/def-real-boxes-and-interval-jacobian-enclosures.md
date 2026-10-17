@@ -2,7 +2,7 @@
 id: def-real-boxes-and-interval-jacobian-enclosures
 kind: definition
 title: Real boxes and interval Jacobian enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

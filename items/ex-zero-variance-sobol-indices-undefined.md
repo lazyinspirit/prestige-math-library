@@ -2,7 +2,7 @@
 id: ex-zero-variance-sobol-indices-undefined
 kind: example
 title: A constant output has no normalized Sobol indices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: alg-gcv-finite-grid-parameter-choice
 kind: algorithm
 title: Finite-grid generalized cross-validation for Tikhonov regularization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: thm-finite-chain-closed-class-cesaro-weight-decomposition
 kind: theorem
 title: "Closed-class stationary laws and initial-law-dependent Cesàro weights"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

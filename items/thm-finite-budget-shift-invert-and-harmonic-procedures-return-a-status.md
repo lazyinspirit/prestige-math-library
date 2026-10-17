@@ -2,7 +2,7 @@
 id: thm-finite-budget-shift-invert-and-harmonic-procedures-return-a-status
 kind: theorem
 title: "Finite-budget shift-invert and harmonic extraction return a status under finite-return primitives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

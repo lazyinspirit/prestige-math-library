@@ -2,7 +2,7 @@
 id: alg-two-stage-rosenbrock-w-method
 title: "Two-stage second-order Rosenbrock W-method with shared factorization"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-primal-dual-lp-qp-newton-matrix-nonsingular
 kind: lemma
 title: "The LP/QP primal-dual Newton matrix is nonsingular from a strict positive start"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

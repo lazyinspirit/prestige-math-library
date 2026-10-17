@@ -2,7 +2,7 @@
 id: thm-tikhonov-error-chain-with-discretization-and-residual
 kind: theorem
 title: "Tikhonov error separates bias, data noise, discretization and solve residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

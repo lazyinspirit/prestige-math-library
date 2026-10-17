@@ -2,7 +2,7 @@
 id: ex-binomial-guard-prevents-invalid-counts-but-changes-noise
 kind: example
 title: "A binomial guard prevents overdraw but changes Poisson noise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

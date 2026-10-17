@@ -2,7 +2,7 @@
 id: thm-linear-elliptic-control-existence-and-variational-inequality
 kind: theorem
 title: Existence, uniqueness, and variational inequality for elliptic PDE control
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-dimer-hessian-vector-bias-noise-tradeoff
 kind: example
 title: "Dimer finite-difference bias competes with force-evaluation error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

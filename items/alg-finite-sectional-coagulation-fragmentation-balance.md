@@ -2,7 +2,7 @@
 id: alg-finite-sectional-coagulation-fragmentation-balance
 kind: algorithm
 title: Finite sectional coagulation-fragmentation balance with reported overflow
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

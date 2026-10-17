@@ -2,7 +2,7 @@
 id: lem-binary-rounding-grid-and-ordered-two-sum
 kind: lemma
 title: "Binary rounding grids, exact subtraction, and ordered TwoSum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

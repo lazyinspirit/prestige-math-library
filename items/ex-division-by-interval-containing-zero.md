@@ -2,7 +2,7 @@
 id: ex-division-by-interval-containing-zero
 kind: example
 title: "Division of [1,2] by [-1,1] has no finite hull"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic-examples

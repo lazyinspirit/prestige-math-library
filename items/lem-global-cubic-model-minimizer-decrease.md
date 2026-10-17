@@ -2,7 +2,7 @@
 id: lem-global-cubic-model-minimizer-decrease
 kind: lemma
 title: "Global cubic minimizers, admissible inexact steps, and cubic Cauchy decrease"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

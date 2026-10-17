@@ -2,7 +2,7 @@
 id: ex-exponential-kinetics-gauss-newton-fit
 kind: example
 title: "An exponential-decay kinetics fit has a full-rank exact solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: thm-age-structured-renewal-upwind-positivity-mass-bound-and-stability
 kind: theorem
 title: Positivity, L1 growth and data stability of the renewal finite-volume step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

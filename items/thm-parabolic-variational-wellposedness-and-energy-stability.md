@@ -2,7 +2,7 @@
 id: thm-parabolic-variational-wellposedness-and-energy-stability
 kind: theorem
 title: Well-posedness for measurable coercive parabolic forms
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

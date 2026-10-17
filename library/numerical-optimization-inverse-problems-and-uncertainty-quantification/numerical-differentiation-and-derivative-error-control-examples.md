@@ -1,7 +1,7 @@
 ---
 page: numerical-differentiation-and-derivative-error-control-examples
 title: "Numerical differentiation and derivative error control — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-colliding-column-colors-do-not-identify-a-jacobian

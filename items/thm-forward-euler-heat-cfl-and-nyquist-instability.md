@@ -2,7 +2,7 @@
 id: thm-forward-euler-heat-cfl-and-nyquist-instability
 kind: theorem
 title: Forward Euler heat CFL stability and sharp Nyquist instability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

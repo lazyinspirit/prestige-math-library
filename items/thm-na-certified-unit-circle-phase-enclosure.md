@@ -2,7 +2,7 @@
 id: thm-na-certified-unit-circle-phase-enclosure
 kind: theorem
 title: "Certified phase output encloses the exact unit-circle value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

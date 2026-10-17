@@ -2,7 +2,7 @@
 id: lem-taylor-lagrange-remainder-from-mean-value
 kind: lemma
 title: Taylor's Lagrange remainder follows from repeated Rolle steps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

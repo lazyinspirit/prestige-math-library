@@ -1,7 +1,7 @@
 ---
 page: operator-splitting-admm-and-primal-dual-methods
 title: Operator splitting ADMM and primal dual methods
-status: draft
+status: published
 requires:
   - sparse-matrix-models-and-kernel-costs
   - inequality-kkt-duality-and-optimality-certificates

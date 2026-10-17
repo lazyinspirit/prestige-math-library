@@ -2,7 +2,7 @@
 id: thm-csr-storage-and-exact-matvec-cost
 kind: theorem
 title: "CSR storage and exact matrix-vector operation counts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: coordinate-and-block-descent-methods
 title: Coordinate and block descent methods
-status: draft
+status: published
 requires:
   - sparse-high-dimensional-estimation-and-covariance
   - proximal-gradient-and-accelerated-composite-optimization

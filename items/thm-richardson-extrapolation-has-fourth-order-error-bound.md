@@ -2,7 +2,7 @@
 id: thm-richardson-extrapolation-has-fourth-order-error-bound
 kind: theorem
 title: "Richardson extrapolation cancels the second-order term with a fourth-order remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: def-na-clenshaw-curtis-dct-i
 kind: definition
 title: "Type-I cosine transform for Chebyshev–Lobatto data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

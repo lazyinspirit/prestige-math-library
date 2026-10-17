@@ -2,7 +2,7 @@
 id: thm-size-structured-positivity-number-and-weighted-moment-identities
 kind: theorem
 title: Size characteristics, positivity, and discrete number and size-moment balances
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

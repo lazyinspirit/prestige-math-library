@@ -2,7 +2,7 @@
 id: ex-nonunique-lasso-coefficients-unique-fitted-value
 kind: example
 title: "Nonunique Lasso coefficients with a unique fitted value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

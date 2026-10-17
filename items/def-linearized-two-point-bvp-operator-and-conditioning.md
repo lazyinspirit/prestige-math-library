@@ -2,7 +2,7 @@
 id: def-linearized-two-point-bvp-operator-and-conditioning
 kind: definition
 title: "Continuous linearized BVP operator and its conditioning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

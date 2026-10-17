@@ -2,7 +2,7 @@
 id: ex-subcritical-hopf-cubic-normal-form
 kind: example
 title: A subcritical planar cubic Hopf bifurcation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

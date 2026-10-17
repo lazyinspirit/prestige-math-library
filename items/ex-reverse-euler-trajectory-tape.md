@@ -2,7 +2,7 @@
 id: ex-reverse-euler-trajectory-tape
 kind: example
 title: "Reverse-mode differentiation of an Euler trajectory tape"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-reverse-mode-automatic-differentiation, thm-reverse-mode-computes-gradient]

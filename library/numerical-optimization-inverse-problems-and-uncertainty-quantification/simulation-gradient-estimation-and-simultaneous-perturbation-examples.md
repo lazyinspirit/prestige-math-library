@@ -1,7 +1,7 @@
 ---
 page: simulation-gradient-estimation-and-simultaneous-perturbation-examples
 title: "Simulation gradient estimation and simultaneous perturbation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-moving-support-score-estimator-misses-boundary-term

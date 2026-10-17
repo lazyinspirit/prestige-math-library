@@ -2,7 +2,7 @@
 id: lem-hurwitz-negative-shift-matrix-invertible
 kind: lemma
 title: "A negative-real-part shift of a Hurwitz matrix is invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

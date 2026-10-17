@@ -2,7 +2,7 @@
 id: ex-two-level-nonlinear-projector-stationary-maximum
 kind: example
 title: "A two-level nonlinear projector model has a stationary strict maximum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

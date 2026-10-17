@@ -2,7 +2,7 @@
 id: alg-dimension-adaptive-smolyak-surplus-selection
 kind: algorithm
 title: Finite-budget dimension-adaptive Smolyak surplus selection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

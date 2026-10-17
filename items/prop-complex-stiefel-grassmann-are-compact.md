@@ -2,7 +2,7 @@
 id: prop-complex-stiefel-grassmann-are-compact
 kind: proposition
 title: Finite-dimensional complex Stiefel and Grassmann manifolds are compact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: alg-bounded-adaptive-runge-kutta-controller
 kind: algorithm
 title: "Finite-budget adaptive Runge–Kutta controller"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

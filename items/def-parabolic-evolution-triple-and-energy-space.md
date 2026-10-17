@@ -2,7 +2,7 @@
 id: def-parabolic-evolution-triple-and-energy-space
 kind: definition
 title: Evolution triples and the parabolic energy space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

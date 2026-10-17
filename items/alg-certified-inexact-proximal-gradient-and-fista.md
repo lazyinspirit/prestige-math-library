@@ -2,7 +2,7 @@
 id: alg-certified-inexact-proximal-gradient-and-fista
 kind: algorithm
 title: "Certified inexact proximal-gradient and FISTA updates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

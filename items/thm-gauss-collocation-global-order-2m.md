@@ -2,7 +2,7 @@
 id: thm-gauss-collocation-global-order-2m
 kind: theorem
 title: M-node Gauss collocation has global order 2M
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

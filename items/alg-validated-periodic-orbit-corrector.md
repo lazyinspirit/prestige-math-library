@@ -2,7 +2,7 @@
 id: alg-validated-periodic-orbit-corrector
 kind: algorithm
 title: "Finite-budget phase-fixed periodic-orbit correction and validation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

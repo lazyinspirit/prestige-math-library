@@ -1,7 +1,7 @@
 ---
 page: stochastic-reaction-jump-simulation-and-coupling-examples
 title: Stochastic Reaction Jump Simulation and Coupling — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-quadratic-pure-birth-reaction-network-explodes

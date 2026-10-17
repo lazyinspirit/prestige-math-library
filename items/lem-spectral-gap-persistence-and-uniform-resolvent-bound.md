@@ -2,7 +2,7 @@
 id: lem-spectral-gap-persistence-and-uniform-resolvent-bound
 kind: lemma
 title: A spectral gap persists on a computable matrix ball with a uniform resolvent bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

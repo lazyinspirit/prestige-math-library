@@ -1,7 +1,7 @@
 ---
 page: geometric-numerical-integration
 title: Geometric numerical integration
-status: draft
+status: published
 items:
   - def-local-leapfrog-domain-on-an-open-configuration-set
   - lem-local-hamiltonian-flow-preserves-symplectic-matrix

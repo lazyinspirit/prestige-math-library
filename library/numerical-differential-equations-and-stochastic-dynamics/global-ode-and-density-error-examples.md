@@ -1,7 +1,7 @@
 ---
 page: global-ode-and-density-error-examples
 title: Global ODE and Log-density Integration Error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-euler-linear-flow-exact-log-density-update

@@ -2,7 +2,7 @@
 id: ex-ctrl1-chemical-dosing-linear-model
 kind: example
 title: "A chemical-dosing model under a constant admissible dose"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

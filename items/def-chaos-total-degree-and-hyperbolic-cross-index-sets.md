@@ -2,7 +2,7 @@
 id: def-chaos-total-degree-and-hyperbolic-cross-index-sets
 kind: definition
 title: Total-degree and hyperbolic-cross chaos index sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

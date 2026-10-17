@@ -2,7 +2,7 @@
 id: thm-local-finite-element-interpolation-estimates
 kind: theorem
 title: Local interpolation estimates on shape-regular affine meshes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

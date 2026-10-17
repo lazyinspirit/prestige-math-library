@@ -2,7 +2,7 @@
 id: thm-fem-control-proximal-gradient-residual-distance-bound
 kind: theorem
 title: A certified projected-gradient residual bounds distance to the control-mesh optimum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

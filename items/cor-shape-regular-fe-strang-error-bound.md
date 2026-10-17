@@ -2,7 +2,7 @@
 id: cor-shape-regular-fe-strang-error-bound
 kind: corollary
 title: Shape-regular affine finite elements supply the Strang approximation term
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

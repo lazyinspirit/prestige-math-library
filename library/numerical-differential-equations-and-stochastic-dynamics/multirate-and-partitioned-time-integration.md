@@ -1,7 +1,7 @@
 ---
 page: multirate-and-partitioned-time-integration
 title: Multirate and partitioned time integration
-status: draft
+status: published
 requires:
   - global-ode-and-density-error
   - imex-and-operator-splitting-methods

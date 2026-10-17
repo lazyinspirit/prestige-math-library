@@ -2,7 +2,7 @@
 id: alg-reverse-mode-automatic-differentiation
 kind: algorithm
 title: "Reverse-mode automatic differentiation for a scalar graph output"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program]

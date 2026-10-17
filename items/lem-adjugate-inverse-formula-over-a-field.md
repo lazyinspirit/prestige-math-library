@@ -2,7 +2,7 @@
 id: lem-adjugate-inverse-formula-over-a-field
 kind: lemma
 title: "The adjugate gives an explicit inverse formula over a field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

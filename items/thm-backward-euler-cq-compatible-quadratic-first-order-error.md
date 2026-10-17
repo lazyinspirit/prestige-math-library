@@ -2,7 +2,7 @@
 id: thm-backward-euler-cq-compatible-quadratic-first-order-error
 kind: theorem
 title: First-order CQ error for a compatible quadratic datum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

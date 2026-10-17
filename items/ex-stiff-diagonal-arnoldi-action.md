@@ -2,7 +2,7 @@
 id: ex-stiff-diagonal-arnoldi-action
 kind: example
 title: "A one-dimensional Arnoldi projection misses a slow mode of a stiff diagonal matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

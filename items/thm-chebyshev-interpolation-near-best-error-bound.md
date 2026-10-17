@@ -2,7 +2,7 @@
 id: thm-chebyshev-interpolation-near-best-error-bound
 kind: theorem
 title: "Chebyshev interpolation error is controlled by best polynomial error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

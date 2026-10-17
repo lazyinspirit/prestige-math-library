@@ -2,7 +2,7 @@
 id: lem-ctrl1-single-and-multiple-shooting-nlps-are-equivalent
 kind: lemma
 title: "Exact single and multiple shooting have the same reduced feasible controls"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

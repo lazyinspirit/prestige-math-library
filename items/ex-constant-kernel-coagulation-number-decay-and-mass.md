@@ -2,7 +2,7 @@
 id: ex-constant-kernel-coagulation-number-decay-and-mass
 kind: example
 title: Constant-kernel aggregation conserves mass and has explicit number decay
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

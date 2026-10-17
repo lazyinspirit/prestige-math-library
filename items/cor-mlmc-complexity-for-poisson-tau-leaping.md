@@ -2,7 +2,7 @@
 id: cor-mlmc-complexity-for-poisson-tau-leaping
 kind: corollary
 title: "MLMC work bound for bounded finite-state Poisson tau-leaping"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

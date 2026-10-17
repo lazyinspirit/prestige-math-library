@@ -2,7 +2,7 @@
 id: lem-index-one-dae-bdf2-local-branch
 title: "The coupled index-one constant-step BDF2 equations have a local branch"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

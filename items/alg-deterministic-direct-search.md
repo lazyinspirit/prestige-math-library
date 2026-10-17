@@ -2,7 +2,7 @@
 id: alg-deterministic-direct-search
 kind: algorithm
 title: "Finite-budget deterministic direct search with positive-spanning polling"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

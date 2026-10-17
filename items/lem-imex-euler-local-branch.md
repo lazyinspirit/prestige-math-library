@@ -2,7 +2,7 @@
 id: lem-imex-euler-local-branch
 kind: lemma
 title: "A local IMEX Euler branch from contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

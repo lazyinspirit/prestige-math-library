@@ -2,7 +2,7 @@
 id: ex-first-order-neumann-closure-causes-first-order-error
 kind: example
 title: A one-sided Neumann closure gives only first-order error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

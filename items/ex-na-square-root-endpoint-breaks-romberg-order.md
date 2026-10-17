@@ -2,7 +2,7 @@
 id: ex-na-square-root-endpoint-breaks-romberg-order
 kind: example
 title: "The square-root endpoint does not have Romberg's even-power order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature-examples

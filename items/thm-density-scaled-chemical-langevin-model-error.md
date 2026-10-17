@@ -2,7 +2,7 @@
 id: thm-density-scaled-chemical-langevin-model-error
 kind: theorem
 title: "Stopped density-scaled jump versus chemical Langevin weak model error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

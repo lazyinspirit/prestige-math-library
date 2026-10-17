@@ -2,7 +2,7 @@
 id: alg-fixed-level-sir-splitting
 kind: algorithm
 title: Full-resampling fixed-level SIR splitting with invariant mutations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

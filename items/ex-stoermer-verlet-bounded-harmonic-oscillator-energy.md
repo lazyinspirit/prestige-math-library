@@ -2,7 +2,7 @@
 id: ex-stoermer-verlet-bounded-harmonic-oscillator-energy
 kind: example
 title: Störmer–Verlet has bounded oscillatory energy error on the harmonic oscillator
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

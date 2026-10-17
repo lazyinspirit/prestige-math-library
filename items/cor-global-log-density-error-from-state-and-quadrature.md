@@ -2,7 +2,7 @@
 id: cor-global-log-density-error-from-state-and-quadrature
 title: "Global continuous-flow log-density error from state and quadrature bounds"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

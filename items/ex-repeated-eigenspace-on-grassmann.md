@@ -2,7 +2,7 @@
 id: ex-repeated-eigenspace-on-grassmann
 kind: example
 title: A repeated eigenvalue gives a continuum of Grassmann minimizers
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-exact-real-2x2-discriminant-sign-predicate
 kind: definition
 title: "Exact sign predicate for a real 2x2 characteristic discriminant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

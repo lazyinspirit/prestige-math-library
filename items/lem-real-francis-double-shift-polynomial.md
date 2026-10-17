@@ -2,7 +2,7 @@
 id: lem-real-francis-double-shift-polynomial
 kind: lemma
 title: "The real Francis double-shift polynomial is real and annihilates its trailing block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

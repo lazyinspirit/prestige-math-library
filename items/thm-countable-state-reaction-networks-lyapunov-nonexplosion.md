@@ -2,7 +2,7 @@
 id: thm-countable-state-reaction-networks-lyapunov-nonexplosion
 kind: theorem
 title: "A proper Lyapunov bound prevents reaction-network explosion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

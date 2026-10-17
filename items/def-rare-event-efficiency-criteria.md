@@ -2,7 +2,7 @@
 id: def-rare-event-efficiency-criteria
 kind: definition
 title: Rare-event efficiency and work criteria
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

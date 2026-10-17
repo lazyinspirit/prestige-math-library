@@ -2,7 +2,7 @@
 id: alg-nested-dissection-ordering-on-regular-grids
 kind: algorithm
 title: Recursive coordinate-separator ordering for two- and three-dimensional grids
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

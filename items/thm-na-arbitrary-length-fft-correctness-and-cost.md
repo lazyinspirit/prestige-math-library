@@ -2,7 +2,7 @@
 id: thm-na-arbitrary-length-fft-correctness-and-cost
 kind: theorem
 title: "Mixed-radix and Bluestein reductions compute every finite DFT in O(N log N) arithmetic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

@@ -2,7 +2,7 @@
 id: cex-saga-linear-factor-fails-under-standard-initialization
 kind: counterexample
 title: The assigned SAGA Lyapunov factor fails under standard initialization
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-explicit-runge-kutta-tableau-and-stage-map
 kind: definition
 title: "Explicit Runge–Kutta tableaus, stage maps, and failure status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

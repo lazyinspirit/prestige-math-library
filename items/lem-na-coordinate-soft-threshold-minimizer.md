@@ -2,7 +2,7 @@
 id: lem-na-coordinate-soft-threshold-minimizer
 kind: lemma
 title: "The one-coordinate absolute-value quadratic minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

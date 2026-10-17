@@ -2,7 +2,7 @@
 id: thm-m-step-dobrushin-stationary-residual-bound
 kind: theorem
 title: "m-step Dobrushin certificate for a stationary probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

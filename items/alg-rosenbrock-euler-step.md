@@ -2,7 +2,7 @@
 id: alg-rosenbrock-euler-step
 title: "Finite-precision one-stage Rosenbrock step with residual status"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

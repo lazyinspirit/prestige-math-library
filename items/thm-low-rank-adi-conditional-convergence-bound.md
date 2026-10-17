@@ -2,7 +2,7 @@
 id: thm-low-rank-adi-conditional-convergence-bound
 kind: theorem
 title: "A proved rational shift bound implies low-rank ADI convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

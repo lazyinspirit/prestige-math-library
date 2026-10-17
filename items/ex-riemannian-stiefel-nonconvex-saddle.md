@@ -2,7 +2,7 @@
 id: ex-riemannian-stiefel-nonconvex-saddle
 kind: example
 title: A strict saddle of a quadratic Stiefel objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

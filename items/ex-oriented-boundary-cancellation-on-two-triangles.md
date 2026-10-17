@@ -2,7 +2,7 @@
 id: ex-oriented-boundary-cancellation-on-two-triangles
 kind: example
 title: Opposite orientations cancel on a two-triangle mesh
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-xd-finite-state-projection-loss-and-observable-bound
 kind: theorem
 title: "Finite-state killed projection has an exact lost-mass certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: finite-element-pde-constrained-optimization-examples
 title: "Finite element pde constrained optimization — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-distributed-heat-source-control-with-an-exact-box-optimum

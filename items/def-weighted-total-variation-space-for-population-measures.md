@@ -2,7 +2,7 @@
 id: def-weighted-total-variation-space-for-population-measures
 kind: definition
 title: Weighted total-variation space for population measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

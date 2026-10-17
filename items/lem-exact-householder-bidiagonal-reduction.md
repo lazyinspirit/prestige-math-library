@@ -2,7 +2,7 @@
 id: lem-exact-householder-bidiagonal-reduction
 kind: lemma
 title: "Exact unitary equivalence of Householder bidiagonalization"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

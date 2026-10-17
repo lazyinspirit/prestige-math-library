@@ -2,7 +2,7 @@
 id: alg-linear-congruential-generator-mod-power-of-two
 kind: algorithm
 title: "Linear congruential generator modulo a power of two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

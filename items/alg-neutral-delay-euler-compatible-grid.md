@@ -2,7 +2,7 @@
 id: alg-neutral-delay-euler-compatible-grid
 kind: algorithm
 title: "Explicit Euler for a scalar neutral delay on a compatible grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

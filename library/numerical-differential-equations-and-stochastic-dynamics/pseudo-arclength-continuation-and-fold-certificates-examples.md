@@ -1,7 +1,7 @@
 ---
 page: pseudo-arclength-continuation-and-fold-certificates-examples
 title: Pseudo arclength continuation and fold certificates — Examples
-status: draft
+status: published
 requires: [pseudo-arclength-continuation-and-fold-certificates]
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: alg-local-symplectic-euler-step
 kind: algorithm
 title: Local kick-then-drift symplectic Euler step
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-local-leapfrog-domain-on-an-open-configuration-set]

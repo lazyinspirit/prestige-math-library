@@ -2,7 +2,7 @@
 id: def-verified-linear-residual-certificate-data
 kind: definition
 title: Verified point and uniform linear residual certificate data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

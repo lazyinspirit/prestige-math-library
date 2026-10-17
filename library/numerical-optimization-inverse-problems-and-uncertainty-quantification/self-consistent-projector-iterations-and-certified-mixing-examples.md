@@ -1,7 +1,7 @@
 ---
 page: self-consistent-projector-iterations-and-certified-mixing-examples
 title: "Self consistent projector iterations and certified mixing — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-occupied-projector-discontinuity-at-zero-gap

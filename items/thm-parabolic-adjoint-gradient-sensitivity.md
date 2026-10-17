@@ -2,7 +2,7 @@
 id: thm-parabolic-adjoint-gradient-sensitivity
 kind: theorem
 title: A parabolic adjoint gives the gradient when the state map is differentiable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

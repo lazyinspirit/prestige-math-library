@@ -2,7 +2,7 @@
 id: lem-parabolic-ritz-projection-well-defined
 kind: lemma
 title: Existence, uniqueness, linearity, and boundedness of the Ritz projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

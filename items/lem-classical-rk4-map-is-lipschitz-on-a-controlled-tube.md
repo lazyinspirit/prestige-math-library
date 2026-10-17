@@ -2,7 +2,7 @@
 id: lem-classical-rk4-map-is-lipschitz-on-a-controlled-tube
 kind: lemma
 title: One-step Lipschitz bound for classical RK4 on an admitted tube
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

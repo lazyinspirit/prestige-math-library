@@ -2,7 +2,7 @@
 id: lem-sylvester-vectorization-isometry-and-kronecker-identity
 kind: lemma
 title: "Column vectorization is an isometry and represents the Sylvester map by a Kronecker sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: alg-complex-scaled-householder-reflector-step
 kind: algorithm
 title: "Scaled complex Householder reflector step with explicit range status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

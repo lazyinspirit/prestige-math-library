@@ -2,7 +2,7 @@
 id: ex-cubic-observation-is-locally-identifiable-with-zero-jacobian
 kind: example
 title: "A zero Jacobian does not prevent local identifiability of the cubic map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

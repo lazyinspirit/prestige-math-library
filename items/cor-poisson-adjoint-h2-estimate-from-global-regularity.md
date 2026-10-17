@@ -2,7 +2,7 @@
 id: cor-poisson-adjoint-h2-estimate-from-global-regularity
 kind: corollary
 title: A global H² bound for the Poisson adjoint on a C² domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

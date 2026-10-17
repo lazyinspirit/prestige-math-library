@@ -2,7 +2,7 @@
 id: ex-quadratic-exact-for-composite-simpson
 kind: example
 title: Simpson rule integrates a quadratic exactly on one two-panel block
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

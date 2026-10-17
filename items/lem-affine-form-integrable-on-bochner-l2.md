@@ -2,7 +2,7 @@
 id: lem-affine-form-integrable-on-bochner-l2
 kind: lemma
 title: Affine diffusion forms are well-defined on Bochner L2
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

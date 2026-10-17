@@ -2,7 +2,7 @@
 id: ex-hopf-interval-enclosure-containing-zero
 kind: example
 title: An interval containing zero makes a Hopf certificate inconclusive
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

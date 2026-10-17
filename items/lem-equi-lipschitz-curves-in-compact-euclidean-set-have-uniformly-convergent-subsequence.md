@@ -2,7 +2,7 @@
 id: lem-equi-lipschitz-curves-in-compact-euclidean-set-have-uniformly-convergent-subsequence
 kind: lemma
 title: Compactness of equi-Lipschitz curves with values in a compact Euclidean set
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

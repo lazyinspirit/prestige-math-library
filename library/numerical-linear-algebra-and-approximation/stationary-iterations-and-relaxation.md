@@ -1,7 +1,7 @@
 ---
 page: stationary-iterations-and-relaxation
 title: "Stationary iterations and relaxation"
-status: draft
+status: published
 items:
   - def-diagonal-lower-upper-splitting-convention
   - alg-richardson-stationary-iteration

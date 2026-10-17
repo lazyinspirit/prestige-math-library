@@ -2,7 +2,7 @@
 id: alg-drift-implicit-euler-sde
 kind: algorithm
 title: "Drift-implicit Euler–Maruyama with explicit solve-failure status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

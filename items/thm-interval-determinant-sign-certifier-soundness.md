@@ -2,7 +2,7 @@
 id: thm-interval-determinant-sign-certifier-soundness
 kind: theorem
 title: The interval determinant sign certifier is sound and failure means unknown
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

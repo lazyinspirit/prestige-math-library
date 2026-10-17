@@ -1,7 +1,7 @@
 ---
 page: interval-newton-krawczyk-and-polynomial-root-isolation-examples
 title: Interval newton krawczyk and polynomial root isolation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-double-polynomial-root-has-no-sign-change

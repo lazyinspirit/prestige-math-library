@@ -2,7 +2,7 @@
 id: ex-gaussian-and-simpson-weighted-mass-matrix-check
 kind: example
 title: "Gaussian and Simpson mass assembly give distinct exact and approximate checks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: spectral-collocation-and-galerkin-methods-examples

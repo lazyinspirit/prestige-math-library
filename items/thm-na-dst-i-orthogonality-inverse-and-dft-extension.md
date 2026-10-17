@@ -2,7 +2,7 @@
 id: thm-na-dst-i-orthogonality-inverse-and-dft-extension
 kind: theorem
 title: "DST-I is orthogonal with the stated endpoint normalization and odd extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

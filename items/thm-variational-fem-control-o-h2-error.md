@@ -2,7 +2,7 @@
 id: thm-variational-fem-control-o-h2-error
 kind: theorem
 title: Conditional O(h2) variational control error under H2 regularity and full uniform L2 estimates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

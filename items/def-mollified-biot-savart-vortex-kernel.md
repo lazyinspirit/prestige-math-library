@@ -2,7 +2,7 @@
 id: def-mollified-biot-savart-vortex-kernel
 kind: definition
 title: Smooth mollified Biot-Savart kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

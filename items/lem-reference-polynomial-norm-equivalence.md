@@ -2,7 +2,7 @@
 id: lem-reference-polynomial-norm-equivalence
 kind: lemma
 title: Polynomial derivative and face norms are controlled on a reference simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

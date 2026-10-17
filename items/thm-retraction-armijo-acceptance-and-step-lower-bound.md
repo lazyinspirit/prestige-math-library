@@ -2,7 +2,7 @@
 id: thm-retraction-armijo-acceptance-and-step-lower-bound
 kind: theorem
 title: Uniform pullback smoothness guarantees an Armijo step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

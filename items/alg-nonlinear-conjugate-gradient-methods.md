@@ -2,7 +2,7 @@
 id: alg-nonlinear-conjugate-gradient-methods
 kind: algorithm
 title: "Fletcher–Reeves and safeguarded Polak–Ribière nonlinear conjugate gradients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

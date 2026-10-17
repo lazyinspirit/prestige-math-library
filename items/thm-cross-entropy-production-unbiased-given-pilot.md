@@ -2,7 +2,7 @@
 id: thm-cross-entropy-production-unbiased-given-pilot
 kind: theorem
 title: Independent cross-entropy production is conditionally unbiased
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

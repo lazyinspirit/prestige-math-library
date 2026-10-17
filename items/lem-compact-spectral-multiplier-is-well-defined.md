@@ -2,7 +2,7 @@
 id: lem-compact-spectral-multiplier-is-well-defined
 kind: lemma
 title: Bounded multipliers on compact self-adjoint eigenspaces define bounded operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

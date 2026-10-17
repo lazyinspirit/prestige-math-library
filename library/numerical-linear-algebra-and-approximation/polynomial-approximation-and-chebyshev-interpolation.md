@@ -1,7 +1,7 @@
 ---
 page: polynomial-approximation-and-chebyshev-interpolation
 title: "Polynomial approximation and Chebyshev interpolation"
-status: draft
+status: published
 items:
   - def-best-uniform-polynomial-approximation-error-and-chebyshev-interpolants
   - lem-sine-chord-and-lipschitz-bounds

@@ -2,7 +2,7 @@
 id: thm-waveform-relaxation-contraction-and-error-bound
 title: "Contraction and finite-sweep error bound for synchronous waveform relaxation"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

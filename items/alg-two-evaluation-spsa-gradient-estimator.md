@@ -2,7 +2,7 @@
 id: alg-two-evaluation-spsa-gradient-estimator
 kind: algorithm
 title: "Two-evaluation simultaneous-perturbation gradient estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

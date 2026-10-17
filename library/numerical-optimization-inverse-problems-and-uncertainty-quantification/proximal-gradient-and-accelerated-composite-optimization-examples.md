@@ -1,7 +1,7 @@
 ---
 page: proximal-gradient-and-accelerated-composite-optimization-examples
 title: Proximal gradient and accelerated composite optimization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-two-pixel-total-variation-proximal-map

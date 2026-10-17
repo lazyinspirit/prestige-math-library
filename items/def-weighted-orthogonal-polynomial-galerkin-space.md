@@ -2,7 +2,7 @@
 id: def-weighted-orthogonal-polynomial-galerkin-space
 kind: definition
 title: "Weighted orthogonal-polynomial Galerkin spaces and spectral scale"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

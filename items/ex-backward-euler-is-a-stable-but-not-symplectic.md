@@ -2,7 +2,7 @@
 id: ex-backward-euler-is-a-stable-but-not-symplectic
 kind: example
 title: Backward Euler is A-stable but not symplectic
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-symplectic-form-and-symplectic-manifold]

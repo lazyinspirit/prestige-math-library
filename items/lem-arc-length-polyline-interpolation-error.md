@@ -2,7 +2,7 @@
 id: lem-arc-length-polyline-interpolation-error
 kind: lemma
 title: "Polyline interpolation and equal-length redistribution approximate a smooth arc-length path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-discrete-l-curve-grid-search-is-well-defined
 kind: theorem
 title: The discrete L-curve rule terminates with failure or a maximum-curvature grid point
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

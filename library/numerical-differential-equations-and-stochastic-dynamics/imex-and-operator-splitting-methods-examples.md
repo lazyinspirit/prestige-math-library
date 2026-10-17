@@ -1,7 +1,7 @@
 ---
 page: imex-and-operator-splitting-methods-examples
 title: Imex and operator splitting methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-stiff-explicit-partition-is-unstable

@@ -2,7 +2,7 @@
 id: alg-douglas-rachford-splitting
 kind: algorithm
 title: "Douglas–Rachford splitting for two maximal-monotone relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

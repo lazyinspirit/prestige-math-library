@@ -7,7 +7,7 @@ verification:
 id: ex-small-gradient-can-hide-error-at-ill-conditioned-minimizer
 kind: example
 title: "A small gradient can hide error when the minimizer is ill conditioned"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: generalized-eigenvalue-pencils-and-qz-methods-examples
 title: Generalized eigenvalue pencils and QZ methods — Examples
-status: draft
+status: published
 requires: [generalized-eigenvalue-pencils-and-qz-methods]
 items: []
 examples:

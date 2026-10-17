@@ -2,7 +2,7 @@
 id: alg-riemannian-trust-region
 kind: algorithm
 title: Finite-budget Riemannian trust-region method
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

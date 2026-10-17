@@ -2,7 +2,7 @@
 id: thm-scaled-taylor-exponential-action-error-and-work
 kind: theorem
 title: "Scaled Taylor action has a finite normwise truncation and roundoff certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: cex-complex-step-absolute-value-returns-the-wrong-derivative
 kind: counterexample
 title: "The absolute-value extension gives a zero complex-step quotient despite its real derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

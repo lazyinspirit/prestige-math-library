@@ -2,7 +2,7 @@
 id: ex-overlap-whitening-can-amplify-coefficient-errors
 kind: example
 title: "An ill-conditioned overlap preserves exact Ritz values but amplifies coordinate errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: sqp-active-set-and-augmented-lagrangian-methods-examples
 title: Sqp active set and augmented lagrangian methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-sqp-engineering-design-active-inequality

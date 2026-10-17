@@ -2,7 +2,7 @@
 id: lem-autonomous-periodic-orbit-has-neutral-floquet-multiplier
 kind: lemma
 title: "An autonomous periodic orbit has a neutral Floquet multiplier"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

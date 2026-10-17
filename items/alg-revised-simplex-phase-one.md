@@ -2,7 +2,7 @@
 id: alg-revised-simplex-phase-one
 kind: algorithm
 title: "Phase I revised simplex and rank reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

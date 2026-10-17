@@ -2,7 +2,7 @@
 id: lem-stopping-time-ito-step-interval-sum
 kind: lemma
 title: Itô integral of a step on a stopping-time interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

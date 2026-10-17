@@ -2,7 +2,7 @@
 id: lem-smooth-density-on-reference-simplex
 kind: lemma
 title: Smooth functions are dense in finite-order Sobolev spaces on a reference simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

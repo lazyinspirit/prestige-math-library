@@ -2,7 +2,7 @@
 id: ex-shape-regular-and-sliver-triangle-families
 kind: example
 title: A shape-regular family and a degenerating sliver family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

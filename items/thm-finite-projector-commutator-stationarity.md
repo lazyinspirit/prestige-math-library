@@ -2,7 +2,7 @@
 id: thm-finite-projector-commutator-stationarity
 kind: theorem
 title: "Projector-energy stationarity is equivalent to Fock commutation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-inexact-newton-error-recurrence-under-lipschitz-jacobian
 kind: lemma
 title: "An inexact Newton residual gives a local error recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

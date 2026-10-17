@@ -2,7 +2,7 @@
 id: thm-backward-euler-a-and-l-stability
 kind: theorem
 title: "Backward Euler is A-stable and L-stable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

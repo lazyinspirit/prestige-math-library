@@ -2,7 +2,7 @@
 id: thm-age-structured-renewal-cutoff-tail-and-outflow-bound
 kind: theorem
 title: Age-cutoff survival, outflow and infinite-age tail bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

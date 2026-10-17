@@ -2,7 +2,7 @@
 id: ex-event-root-with-derivative-separated-from-zero
 kind: example
 title: An event root with derivative bounded away from zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation-examples

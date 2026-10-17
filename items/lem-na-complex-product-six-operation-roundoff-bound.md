@@ -2,7 +2,7 @@
 id: lem-na-complex-product-six-operation-roundoff-bound
 kind: lemma
 title: "Six-operation complex multiplication has a normwise roundoff bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

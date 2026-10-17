@@ -2,7 +2,7 @@
 id: alg-randomized-coordinate-proximal-descent
 kind: algorithm
 title: "Randomized proximal coordinate descent with certified inner solves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

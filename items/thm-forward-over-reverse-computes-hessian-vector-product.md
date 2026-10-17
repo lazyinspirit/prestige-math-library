@@ -2,7 +2,7 @@
 id: thm-forward-over-reverse-computes-hessian-vector-product
 kind: theorem
 title: "Forward-over-reverse mode computes the Hessian-vector product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, lem-finite-straight-line-program-defines-c2-map, alg-forward-over-reverse-hessian-vector-product, thm-forward-mode-computes-directional-derivative, thm-reverse-mode-computes-gradient, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]

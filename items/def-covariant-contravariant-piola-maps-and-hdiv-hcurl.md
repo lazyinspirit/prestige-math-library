@@ -2,7 +2,7 @@
 id: def-covariant-contravariant-piola-maps-and-hdiv-hcurl
 kind: definition
 title: Covariant and contravariant Piola maps and H(div)/H(curl) spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

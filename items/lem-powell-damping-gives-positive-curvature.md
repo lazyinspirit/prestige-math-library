@@ -2,7 +2,7 @@
 id: lem-powell-damping-gives-positive-curvature
 kind: lemma
 title: "Powell damping gives a strictly positive curvature pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

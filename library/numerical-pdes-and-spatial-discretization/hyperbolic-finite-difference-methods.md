@@ -1,7 +1,7 @@
 ---
 page: hyperbolic-finite-difference-methods
 title: "Hyperbolic finite-difference methods"
-status: draft
+status: published
 items:
   - def-uniform-grid-and-difference-operators
   - def-periodic-one-way-advection-schemes

@@ -2,7 +2,7 @@
 id: alg-flexible-gmres-variable-right-preconditioning
 kind: algorithm
 title: "Flexible GMRES with variable right preconditioning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

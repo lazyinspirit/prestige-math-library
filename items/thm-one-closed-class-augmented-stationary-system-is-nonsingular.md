@@ -2,7 +2,7 @@
 id: thm-one-closed-class-augmented-stationary-system-is-nonsingular
 kind: theorem
 title: "One closed class makes the normalized stationary system nonsingular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

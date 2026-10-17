@@ -2,7 +2,7 @@
 id: thm-xd-uniformization-truncation-and-error
 kind: theorem
 title: "Uniformization truncation, mass loss, and arithmetic-error ledger"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

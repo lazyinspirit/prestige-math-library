@@ -2,7 +2,7 @@
 id: thm-drift-implicit-euler-sde-strong-order-half
 kind: theorem
 title: "Strong order one-half for drift-implicit Euler–Maruyama"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

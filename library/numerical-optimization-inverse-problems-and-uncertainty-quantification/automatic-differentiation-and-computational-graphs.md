@@ -1,7 +1,7 @@
 ---
 page: automatic-differentiation-and-computational-graphs
 title: "Automatic differentiation and computational graphs"
-status: draft
+status: published
 items:
   - def-finite-straight-line-computational-program
   - lem-implicit-sensitivity-error-controlled-by-residual

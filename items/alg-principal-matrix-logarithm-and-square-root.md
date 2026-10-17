@@ -2,7 +2,7 @@
 id: alg-principal-matrix-logarithm-and-square-root
 kind: algorithm
 title: "Principal matrix logarithm and square root by branch-aware Schur–Parlett"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

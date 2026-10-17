@@ -1,7 +1,7 @@
 ---
 page: inequality-kkt-duality-and-optimality-certificates
 title: Inequality KKT duality and optimality certificates
-status: draft
+status: published
 items:
   - def-inequality-constrained-program-and-kkt-geometry
   - def-convex-program-duality-and-slater-condition

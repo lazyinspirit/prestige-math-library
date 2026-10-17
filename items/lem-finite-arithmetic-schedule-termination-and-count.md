@@ -2,7 +2,7 @@
 id: lem-finite-arithmetic-schedule-termination-and-count
 kind: lemma
 title: "Finite arithmetic schedules terminate, with early failure counted separately"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

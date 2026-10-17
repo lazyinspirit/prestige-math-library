@@ -2,7 +2,7 @@
 id: ex-zero-discrete-neb-residual-does-not-fix-a-continuum-path
 kind: example
 title: "Zero discrete force does not select a unique continuum path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

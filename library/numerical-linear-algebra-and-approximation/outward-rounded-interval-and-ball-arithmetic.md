@@ -1,7 +1,7 @@
 ---
 page: outward-rounded-interval-and-ball-arithmetic
 title: Outward rounded interval and ball arithmetic
-status: draft
+status: published
 items:
   - def-complete-ordered-real-field
   - def-continuity-and-derivative-on-real-interval

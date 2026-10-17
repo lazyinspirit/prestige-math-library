@@ -2,7 +2,7 @@
 id: lem-brownian-ito-integral-bdg-moment-bound
 kind: lemma
 title: "Lp maximal moment bound for Brownian Itô integrals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

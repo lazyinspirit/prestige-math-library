@@ -2,7 +2,7 @@
 id: ex-rotation-logarithm-branch-cut
 kind: example
 title: "A half-turn lies on the principal logarithm branch cut"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

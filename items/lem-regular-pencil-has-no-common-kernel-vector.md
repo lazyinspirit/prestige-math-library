@@ -2,7 +2,7 @@
 id: lem-regular-pencil-has-no-common-kernel-vector
 kind: lemma
 title: "A regular pencil has no nonzero vector in both kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

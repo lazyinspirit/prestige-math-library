@@ -1,7 +1,7 @@
 ---
 page: adaptive-ode-solvers-and-error-estimation
 title: Adaptive ODE solvers and error estimation
-status: draft
+status: published
 items:
   - lem-maximal-ode-solution-extends-from-compact-tube
   - thm-ode-residual-a-posteriori-error-bound

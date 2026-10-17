@@ -2,7 +2,7 @@
 id: def-hermitian-residual-orthogonality-certificate
 kind: definition
 title: Residual and near-orthogonality data for an approximate Hermitian eigenbasis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

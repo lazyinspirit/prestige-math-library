@@ -2,7 +2,7 @@
 id: alg-chebyshev-dirichlet-bvp-collocation-boundary-elimination
 kind: algorithm
 title: "Boundary-eliminated Chebyshev collocation for a two-point Dirichlet BVP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

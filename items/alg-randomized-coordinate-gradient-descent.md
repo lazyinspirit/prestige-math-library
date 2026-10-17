@@ -2,7 +2,7 @@
 id: alg-randomized-coordinate-gradient-descent
 kind: algorithm
 title: "Randomized coordinate gradient descent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

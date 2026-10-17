@@ -2,7 +2,7 @@
 id: lem-nonnegative-square-root-exists-and-unique
 kind: lemma
 title: Nonnegative real square roots exist uniquely
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

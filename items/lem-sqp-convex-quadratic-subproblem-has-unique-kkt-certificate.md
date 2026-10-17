@@ -2,7 +2,7 @@
 id: lem-sqp-convex-quadratic-subproblem-has-unique-kkt-certificate
 kind: lemma
 title: "A feasible strictly convex linear-constrained QP has a unique KKT minimizer with independent active support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

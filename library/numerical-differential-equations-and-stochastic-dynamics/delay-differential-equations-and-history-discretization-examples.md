@@ -1,7 +1,7 @@
 ---
 page: delay-differential-equations-and-history-discretization-examples
 title: Delay differential equations and history discretization — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-retarded-delayed-feedback-euler

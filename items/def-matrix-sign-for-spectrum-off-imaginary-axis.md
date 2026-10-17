@@ -2,7 +2,7 @@
 id: def-matrix-sign-for-spectrum-off-imaginary-axis
 kind: definition
 title: "Primary matrix sign for spectra off the imaginary axis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

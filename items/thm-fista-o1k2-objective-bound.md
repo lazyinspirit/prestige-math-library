@@ -2,7 +2,7 @@
 id: thm-fista-o1k2-objective-bound
 kind: theorem
 title: "FISTA has an O(1/k^2) objective bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

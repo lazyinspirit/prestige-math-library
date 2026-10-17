@@ -2,7 +2,7 @@
 id: thm-zoutendijk-summability-for-wolfe-steps
 kind: theorem
 title: "Wolfe steps imply the Zoutendijk summability condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

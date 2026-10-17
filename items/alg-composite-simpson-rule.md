@@ -2,7 +2,7 @@
 id: alg-composite-simpson-rule
 kind: algorithm
 title: Composite Simpson rule on an even uniform grid
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

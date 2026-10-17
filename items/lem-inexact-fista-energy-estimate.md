@@ -2,7 +2,7 @@
 id: lem-inexact-fista-energy-estimate
 kind: lemma
 title: "FISTA energy recurrence with certified proximal errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-simple-fold-complement-splitting-and-projection
 kind: definition
 title: "Complement splitting and range projection for a simple fold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

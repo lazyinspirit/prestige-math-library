@@ -2,7 +2,7 @@
 id: ex-symplectic-euler-harmonic-oscillator
 kind: example
 title: Kick-then-drift symplectic Euler on the harmonic oscillator
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

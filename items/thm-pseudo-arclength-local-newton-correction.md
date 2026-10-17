@@ -2,7 +2,7 @@
 id: thm-pseudo-arclength-local-newton-correction
 kind: theorem
 title: "A transverse pseudo-arclength section has a locally quadratic Newton corrector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

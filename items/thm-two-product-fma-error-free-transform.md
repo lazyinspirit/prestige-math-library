@@ -2,7 +2,7 @@
 id: thm-two-product-fma-error-free-transform
 kind: theorem
 title: "TwoProduct with fused multiply-add returns the exact product residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

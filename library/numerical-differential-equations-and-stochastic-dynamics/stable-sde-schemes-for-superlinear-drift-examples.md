@@ -1,7 +1,7 @@
 ---
 page: stable-sde-schemes-for-superlinear-drift-examples
 title: Stable sde schemes for superlinear drift — Examples
-status: draft
+status: published
 requires:
   - stable-sde-schemes-for-superlinear-drift
 items: []

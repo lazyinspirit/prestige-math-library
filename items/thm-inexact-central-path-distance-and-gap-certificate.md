@@ -2,7 +2,7 @@
 id: thm-inexact-central-path-distance-and-gap-certificate
 kind: theorem
 title: "A verified inexact gradient residual bounds central-path distance and objective error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: stable-sde-schemes-for-superlinear-drift
 title: Stable sde schemes for superlinear drift
-status: draft
+status: published
 requires:
   - euler-maruyama-convergence
   - milstein-stochastic-taylor-and-iterated-integrals

@@ -2,7 +2,7 @@
 id: def-backward-euler-step-equation
 title: "Backward Euler step equation and algebraic residual"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

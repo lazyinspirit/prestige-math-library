@@ -2,7 +2,7 @@
 id: lem-neumann-inverse-norm-bound
 kind: lemma
 title: A Neumann defect bounds the inverse norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

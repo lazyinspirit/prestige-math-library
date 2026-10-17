@@ -2,7 +2,7 @@
 id: ex-first-order-kinetic-rates-are-confounded-by-total-decay
 kind: example
 title: "Parallel first-order decay observations depend only on the sum of two rates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

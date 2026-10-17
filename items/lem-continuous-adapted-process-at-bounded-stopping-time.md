@@ -2,7 +2,7 @@
 id: lem-continuous-adapted-process-at-bounded-stopping-time
 kind: lemma
 title: Continuous adapted processes are measurable at bounded stopping times
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

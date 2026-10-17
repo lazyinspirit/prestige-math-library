@@ -1,7 +1,7 @@
 ---
 page: spectral-collocation-and-galerkin-methods
 title: Spectral collocation and Galerkin methods
-status: draft
+status: published
 items:
   - def-periodic-fourier-collocation-grid
   - lem-periodic-fourier-mode-aliasing-under-sampling

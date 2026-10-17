@@ -2,7 +2,7 @@
 id: lem-na-clenshaw-curtis-dct-i-orthogonality
 kind: lemma
 title: "Weighted cosine orthogonality on the Lobatto grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

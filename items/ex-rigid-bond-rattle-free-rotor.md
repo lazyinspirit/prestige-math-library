@@ -2,7 +2,7 @@
 id: ex-rigid-bond-rattle-free-rotor
 kind: example
 title: RATTLE gives an exact step and a cubic phase defect for a free rigid bond
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

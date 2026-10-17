@@ -1,7 +1,7 @@
 ---
 page: clenshaw-curtis-and-extrapolation-quadrature-examples
 title: "Clenshaw–Curtis and extrapolation quadrature — Examples"
-status: draft
+status: published
 requires:
   - clenshaw-curtis-and-extrapolation-quadrature
 items: []

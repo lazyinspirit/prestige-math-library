@@ -2,7 +2,7 @@
 id: ex-jacobi-iteration-for-a-strictly-diagonally-dominant-matrix
 kind: example
 title: "Jacobi iteration on a strictly row-diagonally-dominant system"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

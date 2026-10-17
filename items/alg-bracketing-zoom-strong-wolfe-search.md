@@ -2,7 +2,7 @@
 id: alg-bracketing-zoom-strong-wolfe-search
 kind: algorithm
 title: "Finite-budget bracketing and zoom for a strong Wolfe step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

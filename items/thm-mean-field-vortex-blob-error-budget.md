@@ -2,7 +2,7 @@
 id: thm-mean-field-vortex-blob-error-budget
 kind: theorem
 title: Mean-field vortex blob error budget with signed particles, force quadrature, and RK4
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: alg-interval-determinant-sign-certifier
 kind: algorithm
 title: Outward Leibniz determinant sign and nonsingularity certifier
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

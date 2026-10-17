@@ -2,7 +2,7 @@
 id: thm-landweber-source-and-noise-error-bounds
 kind: theorem
 title: Landweber converges for exact data and balances source bias with noise
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

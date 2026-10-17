@@ -2,7 +2,7 @@
 id: lem-absolutely-convergent-series-cauchy-product
 kind: lemma
 title: Cauchy products of absolutely convergent series multiply their sums
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

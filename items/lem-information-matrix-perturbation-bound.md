@@ -2,7 +2,7 @@
 id: lem-information-matrix-perturbation-bound
 kind: lemma
 title: "Computed Jacobian error controls the weighted information-matrix error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-resolvent-of-a-monotone-relation
 kind: definition
 title: "Resolvent of a monotone relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

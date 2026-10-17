@@ -2,7 +2,7 @@
 id: def-age-structured-renewal-transport-problem
 kind: definition
 title: Linear age-structured renewal transport problem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

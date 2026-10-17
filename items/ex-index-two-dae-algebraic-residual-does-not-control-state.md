@@ -2,7 +2,7 @@
 id: ex-index-two-dae-algebraic-residual-does-not-control-state
 title: "An index-two DAE can have zero algebraic residual and an arbitrary algebraic variable"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

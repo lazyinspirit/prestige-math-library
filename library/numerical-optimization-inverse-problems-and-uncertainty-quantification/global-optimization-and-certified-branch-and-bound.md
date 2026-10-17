@@ -1,7 +1,7 @@
 ---
 page: global-optimization-and-certified-branch-and-bound
 title: "Global optimization and certified branch and bound"
-status: draft
+status: published
 requires:
   - matrix-norms-condition-numbers-and-numerical-stability
   - nonlinear-equations-and-newton-methods

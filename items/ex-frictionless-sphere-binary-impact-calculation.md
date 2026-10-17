@@ -2,7 +2,7 @@
 id: ex-frictionless-sphere-binary-impact-calculation
 kind: example
 title: A two-sphere impact with unequal masses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

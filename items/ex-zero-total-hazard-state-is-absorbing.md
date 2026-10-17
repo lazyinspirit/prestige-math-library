@@ -2,7 +2,7 @@
 id: ex-zero-total-hazard-state-is-absorbing
 kind: example
 title: "A zero-total-hazard state is absorbing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

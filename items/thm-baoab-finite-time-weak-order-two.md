@@ -2,7 +2,7 @@
 id: thm-baoab-finite-time-weak-order-two
 kind: theorem
 title: "Finite-time weak order two of BAOAB"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

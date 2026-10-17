@@ -2,7 +2,7 @@
 id: lem-frozen-slow-euler-local-defect-bound
 title: "Local defect bound for frozen-slow Euler with fast microsteps"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

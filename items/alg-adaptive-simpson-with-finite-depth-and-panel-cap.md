@@ -2,7 +2,7 @@
 id: alg-adaptive-simpson-with-finite-depth-and-panel-cap
 kind: algorithm
 title: Finite-depth adaptive Simpson with an indicator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

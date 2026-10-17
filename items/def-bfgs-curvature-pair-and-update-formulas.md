@@ -2,7 +2,7 @@
 id: def-bfgs-curvature-pair-and-update-formulas
 kind: definition
 title: "Bfgs curvature pairs and Hessian/inverse updates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

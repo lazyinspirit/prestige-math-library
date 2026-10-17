@@ -2,7 +2,7 @@
 id: ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace
 kind: example
 title: "A stationary split converges from an error missing its unstable eigenspace"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

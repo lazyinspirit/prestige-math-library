@@ -2,7 +2,7 @@
 id: ex-simple-unit-circle-roots-give-bounded-oscillation
 kind: example
 title: "Simple unit-circle roots give bounded oscillatory modes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

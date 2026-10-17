@@ -2,7 +2,7 @@
 id: ex-inexact-newton-forcing-tolerance-cost-and-rate
 kind: example
 title: "A scalar inexact Newton solve trades inner work for outer error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

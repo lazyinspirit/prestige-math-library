@@ -2,7 +2,7 @@
 id: def-spatial-global-optimization-problem
 kind: definition
 title: Compact-box global minimization problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

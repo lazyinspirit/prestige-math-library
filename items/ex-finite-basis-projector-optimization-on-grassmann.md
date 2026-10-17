@@ -2,7 +2,7 @@
 id: ex-finite-basis-projector-optimization-on-grassmann
 kind: example
 title: Complex finite-basis PC-VAR optimization on Grassmann
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

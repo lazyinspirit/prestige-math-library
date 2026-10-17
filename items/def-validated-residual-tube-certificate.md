@@ -2,7 +2,7 @@
 id: def-validated-residual-tube-certificate
 kind: definition
 title: "Finite rational residual-tube certificate for an ODE trajectory"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

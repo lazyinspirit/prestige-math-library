@@ -1,7 +1,7 @@
 ---
 page: finite-element-eigenvalue-approximation
 title: "Finite-element eigenvalue approximation"
-status: draft
+status: published
 items:
   - def-eigenspace-best-approximation-gap
   - thm-compact-coercive-form-spectrum-and-minmax

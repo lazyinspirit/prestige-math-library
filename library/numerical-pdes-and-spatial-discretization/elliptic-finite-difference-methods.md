@@ -1,7 +1,7 @@
 ---
 page: elliptic-finite-difference-methods
 title: Elliptic finite-difference methods
-status: draft
+status: published
 items:
   - def-rectangular-grid-and-dirichlet-flux-stencil
   - lem-discrete-summation-by-parts-poincare-and-inverse-bound

@@ -2,7 +2,7 @@
 id: ex-tikhonov-bias-noise-tradeoff
 kind: example
 title: "Increasing the Tikhonov parameter trades smaller data response for more bias"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

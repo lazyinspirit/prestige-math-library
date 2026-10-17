@@ -2,7 +2,7 @@
 id: lem-scaled-real-householder-step-termination-and-status
 kind: lemma
 title: "The scaled real-column Householder procedure terminates with defined statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

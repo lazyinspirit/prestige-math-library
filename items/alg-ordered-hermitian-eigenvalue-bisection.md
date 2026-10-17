@@ -2,7 +2,7 @@
 id: alg-ordered-hermitian-eigenvalue-bisection
 kind: algorithm
 title: Budgeted ordered Hermitian eigenvalue bisection by verified inertia
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

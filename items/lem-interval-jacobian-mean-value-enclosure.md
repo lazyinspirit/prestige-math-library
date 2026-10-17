@@ -2,7 +2,7 @@
 id: lem-interval-jacobian-mean-value-enclosure
 kind: lemma
 title: An interval Jacobian encloses a vector mean-value matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

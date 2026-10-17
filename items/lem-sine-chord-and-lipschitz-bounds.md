@@ -2,7 +2,7 @@
 id: lem-sine-chord-and-lipschitz-bounds
 kind: lemma
 title: "Sine chord and Lipschitz bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-continuous-fractional-integral-is-holder
 kind: lemma
 title: Fractional integrals of continuous data are Hölder continuous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

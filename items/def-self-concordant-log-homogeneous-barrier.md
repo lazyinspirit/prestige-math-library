@@ -2,7 +2,7 @@
 id: def-self-concordant-log-homogeneous-barrier
 kind: definition
 title: "Self-concordant log-homogeneous barriers and their local geometry"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

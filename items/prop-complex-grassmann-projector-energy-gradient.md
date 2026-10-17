@@ -2,7 +2,7 @@
 id: prop-complex-grassmann-projector-energy-gradient
 kind: proposition
 title: Gradient of a unitary-invariant Hermitian projector energy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

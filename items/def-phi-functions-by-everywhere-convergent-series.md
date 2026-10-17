@@ -2,7 +2,7 @@
 id: def-phi-functions-by-everywhere-convergent-series
 kind: definition
 title: "The phi-function family by everywhere-convergent series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

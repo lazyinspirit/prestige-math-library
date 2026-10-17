@@ -2,7 +2,7 @@
 id: alg-lipschitz-midpoint-box-lower-bound
 kind: algorithm
 title: Validated Lipschitz midpoint lower bounds on boxes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

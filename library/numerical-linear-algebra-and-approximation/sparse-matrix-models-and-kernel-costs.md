@@ -1,7 +1,7 @@
 ---
 page: sparse-matrix-models-and-kernel-costs
 title: "Sparse matrix models and kernel costs"
-status: draft
+status: published
 items:
   - def-csr-matrix-with-stored-entry-semantics
   - def-symmetric-structural-elimination-graph-and-ordering

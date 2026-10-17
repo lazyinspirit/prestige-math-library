@@ -2,7 +2,7 @@
 id: ex-certified-sine-near-a-multiple-of-pi
 kind: example
 title: Certified sine range near a multiple of pi
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic-examples

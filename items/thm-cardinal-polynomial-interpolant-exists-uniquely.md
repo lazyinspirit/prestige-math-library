@@ -2,7 +2,7 @@
 id: thm-cardinal-polynomial-interpolant-exists-uniquely
 kind: theorem
 title: "Existence and uniqueness of the cardinal-polynomial interpolant"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

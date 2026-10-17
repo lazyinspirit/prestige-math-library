@@ -2,7 +2,7 @@
 id: ex-kkt-stationary-saddle-point
 kind: example
 title: An unconstrained KKT point that is a saddle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-variable-coefficient-flux-and-expanded-stencils
 kind: example
 title: Flux and expanded variable-coefficient stencils differ by a second-order term
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

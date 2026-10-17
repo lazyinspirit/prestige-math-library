@@ -2,7 +2,7 @@
 id: lem-implicit-sensitivity-error-controlled-by-residual
 kind: lemma
 title: "An implicit sensitivity evaluated at an approximate state has a local residual bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [thm-euclidean-implicit-function-theorem, thm-mean-value-inequality-for-total-derivatives, thm-chain-rule-for-total-derivatives]

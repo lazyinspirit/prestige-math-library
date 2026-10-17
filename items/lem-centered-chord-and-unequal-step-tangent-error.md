@@ -2,7 +2,7 @@
 id: lem-centered-chord-and-unequal-step-tangent-error
 kind: lemma
 title: "Second-order centered and unequal-step tangent estimates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

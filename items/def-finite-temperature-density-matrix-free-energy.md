@@ -2,7 +2,7 @@
 id: def-finite-temperature-density-matrix-free-energy
 kind: definition
 title: "Fixed-particle finite-temperature density-matrix free energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

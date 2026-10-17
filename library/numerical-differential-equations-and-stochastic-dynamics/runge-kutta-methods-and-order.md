@@ -1,7 +1,7 @@
 ---
 page: runge-kutta-methods-and-order
 title: Runge–Kutta Methods and Order
-status: draft
+status: published
 items:
   - lem-chebyshev-rkc-bounds-and-endpoint-derivatives
   - def-explicit-runge-kutta-tableau-and-stage-map

@@ -2,7 +2,7 @@
 id: alg-size-structured-finite-volume-flux-and-kernel-quadrature
 kind: algorithm
 title: Finite-volume size transport with positive division quadrature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

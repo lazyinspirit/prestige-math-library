@@ -2,7 +2,7 @@
 id: thm-validated-residual-tube-checker-terminates
 kind: theorem
 title: "The rational residual-tube certificate checker terminates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

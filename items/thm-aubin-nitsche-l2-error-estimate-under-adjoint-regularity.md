@@ -2,7 +2,7 @@
 id: thm-aubin-nitsche-l2-error-estimate-under-adjoint-regularity
 kind: theorem
 title: Aubin–Nitsche L² error estimate from adjoint approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

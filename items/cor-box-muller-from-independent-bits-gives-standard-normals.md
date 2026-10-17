@@ -2,7 +2,7 @@
 id: cor-box-muller-from-independent-bits-gives-standard-normals
 kind: corollary
 title: "Disjoint ideal fair-bit streams yield independent standard normals by Box–Muller"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

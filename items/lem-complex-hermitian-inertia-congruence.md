@@ -2,7 +2,7 @@
 id: lem-complex-hermitian-inertia-congruence
 kind: lemma
 title: Complex Hermitian inertia is invariant under nonsingular congruence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-branchwise-ad-at-the-absolute-value-switch
 kind: example
 title: "Branchwise AD for absolute value and the nondifferentiable switch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program]

@@ -1,7 +1,7 @@
 ---
 page: adaptive-stochastic-paths-and-brownian-bridge-coupling-examples
 title: Adaptive stochastic paths and brownian bridge coupling — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-redrawing-rejected-increment-biases-path

@@ -2,7 +2,7 @@
 id: thm-ctrl1-lqr-existence-and-unique-optimal-control
 kind: theorem
 title: "A bounded-control linear-quadratic ODE has a unique minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

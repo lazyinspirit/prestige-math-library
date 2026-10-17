@@ -2,7 +2,7 @@
 id: thm-ars222-additive-order-two-and-tolerance
 kind: theorem
 title: "The ARS(2,2,2) pair is second order under distinct stage residual tolerances"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-continuous-coagulation-fragmentation-bounded-lipschitz-stability
 kind: theorem
 title: Bounded-kernel measure solutions are stable in bounded-Lipschitz discrepancy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

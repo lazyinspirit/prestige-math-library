@@ -2,7 +2,7 @@
 id: def-periodic-fourier-collocation-grid
 kind: definition
 title: "Periodic Fourier collocation grid and even-grid Nyquist convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-underdamped-langevin-canonical-measure-is-stationary
 kind: theorem
 title: "The canonical Gibbs measure is stationary for underdamped Langevin dynamics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

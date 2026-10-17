@@ -2,7 +2,7 @@
 id: thm-finite-input-bochner-l2-is-hilbert
 kind: theorem
 title: Finite-input Bochner L2 of a separable Hilbert space is Hilbert
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

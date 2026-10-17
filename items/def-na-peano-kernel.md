@@ -2,7 +2,7 @@
 id: def-na-peano-kernel
 kind: definition
 title: "Peano kernel of a finite quadrature functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

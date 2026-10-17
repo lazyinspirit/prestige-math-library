@@ -2,7 +2,7 @@
 id: thm-discrete-continuous-gradient-error-order-p
 kind: theorem
 title: Discrete and continuous ODE gradients agree to order p under augmented error bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

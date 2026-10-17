@@ -2,7 +2,7 @@
 id: ex-nonconforming-broken-eigenvalue-below-dirichlet-ground-state
 kind: example
 title: A broken piecewise-constant trial space can give an eigenvalue below the Dirichlet ground state
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

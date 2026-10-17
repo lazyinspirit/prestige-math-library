@@ -2,7 +2,7 @@
 id: lem-wolfe-step-lower-bound-from-the-descent-angle
 kind: lemma
 title: "A Wolfe step has a lower bound from its descent angle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

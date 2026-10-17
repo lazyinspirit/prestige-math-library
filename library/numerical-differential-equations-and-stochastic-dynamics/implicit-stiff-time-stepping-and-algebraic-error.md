@@ -1,7 +1,7 @@
 ---
 page: implicit-stiff-time-stepping-and-algebraic-error
 title: Implicit stiff time stepping and algebraic error
-status: draft
+status: published
 items:
   - def-implicit-residual-and-algebraic-error-units
   - lem-strongly-monotone-continuous-map-is-bijective

@@ -2,7 +2,7 @@
 id: lem-computed-sensitivity-singular-value-perturbation
 kind: lemma
 title: "Computed sensitivity errors perturb every singular value by at most their operator-norm error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

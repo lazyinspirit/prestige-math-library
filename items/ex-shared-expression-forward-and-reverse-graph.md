@@ -2,7 +2,7 @@
 id: ex-shared-expression-forward-and-reverse-graph
 kind: example
 title: "Forward and reverse derivatives on a shared-expression graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, thm-forward-mode-computes-directional-derivative, thm-reverse-mode-computes-gradient]

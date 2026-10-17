@@ -2,7 +2,7 @@
 id: ex-dirichlet-laplacian-has-uniform-infinity-inverse-bound
 kind: example
 title: A Dirichlet Laplacian inverse is uniformly bounded in the maximum norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

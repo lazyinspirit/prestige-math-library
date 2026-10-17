@@ -1,7 +1,7 @@
 ---
 page: exponential-and-integrating-factor-integrators-examples
 title: Exponential and integrating factor integrators — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-diagonal-stiff-diffusion-with-reaction-etd

@@ -2,7 +2,7 @@
 id: ex-noise-induced-instability-in-explicit-em
 kind: example
 title: "Noise destabilizes explicit Euler while drift-implicit Euler contracts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

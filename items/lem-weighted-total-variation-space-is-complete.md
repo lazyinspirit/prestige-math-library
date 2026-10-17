@@ -2,7 +2,7 @@
 id: lem-weighted-total-variation-space-is-complete
 kind: lemma
 title: The weighted total-variation measure space is complete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

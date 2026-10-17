@@ -2,7 +2,7 @@
 id: ex-na-clenshaw-curtis-integrates-quadratics
 kind: example
 title: "Three-point Clenshaw–Curtis integration of a quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature-examples

@@ -2,7 +2,7 @@
 id: def-verified-flow-variational-range-oracle
 kind: definition
 title: "Exact range-oracle contract for validated flow and monodromy enclosures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

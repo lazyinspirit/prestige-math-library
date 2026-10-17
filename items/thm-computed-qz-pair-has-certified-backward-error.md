@@ -2,7 +2,7 @@
 id: thm-computed-qz-pair-has-certified-backward-error
 kind: theorem
 title: "Certified QZ residuals give a backward error bound for both pencil matrices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

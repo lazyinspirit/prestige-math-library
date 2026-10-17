@@ -2,7 +2,7 @@
 id: def-product-hoeffding-anova-components
 kind: definition
 title: Product-law Hoeffding ANOVA components
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

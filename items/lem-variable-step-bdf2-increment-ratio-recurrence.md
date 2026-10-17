@@ -2,7 +2,7 @@
 id: lem-variable-step-bdf2-increment-ratio-recurrence
 kind: lemma
 title: "The variable-step BDF2 parasitic increment contracts below the sharp ratio threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

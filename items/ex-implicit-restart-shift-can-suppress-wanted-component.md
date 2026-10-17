@@ -2,7 +2,7 @@
 id: ex-implicit-restart-shift-can-suppress-wanted-component
 kind: example
 title: "A shift near the wanted eigenvalue suppresses its component under repeated implicit restarts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

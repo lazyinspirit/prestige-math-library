@@ -1,7 +1,7 @@
 ---
 page: numerical-identifiability-and-optimal-experiment-design-examples
 title: "Numerical identifiability and optimal experiment design — Examples"
-status: draft
+status: published
 requires:
   - numerical-identifiability-and-optimal-experiment-design
 items:

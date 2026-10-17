@@ -2,7 +2,7 @@
 id: alg-discrete-l-curve-parameter-choice
 kind: algorithm
 title: Discrete maximum-curvature L-curve parameter selection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

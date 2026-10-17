@@ -2,7 +2,7 @@
 id: ex-retarded-delayed-feedback-euler
 kind: example
 title: "Delayed feedback gives an explicit two-block Euler recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

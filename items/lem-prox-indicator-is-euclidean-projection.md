@@ -2,7 +2,7 @@
 id: lem-prox-indicator-is-euclidean-projection
 kind: lemma
 title: "The proximal map of an indicator is Euclidean projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

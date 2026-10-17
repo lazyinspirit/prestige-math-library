@@ -2,7 +2,7 @@
 id: thm-bidiagonal-singular-values-relative-under-componentwise-perturbations
 kind: theorem
 title: "Componentwise relative perturbations of bidiagonal matrices control every singular value relatively"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

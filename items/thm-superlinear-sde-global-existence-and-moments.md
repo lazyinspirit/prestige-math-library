@@ -2,7 +2,7 @@
 id: thm-superlinear-sde-global-existence-and-moments
 kind: theorem
 title: "Global existence and finite-horizon moments for one-sided Lipschitz SDEs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

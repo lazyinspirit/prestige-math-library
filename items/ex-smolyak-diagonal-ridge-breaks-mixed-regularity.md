@@ -2,7 +2,7 @@
 id: ex-smolyak-diagonal-ridge-breaks-mixed-regularity
 kind: example
 title: A diagonal ridge fails the mixed fourth-derivative hypothesis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity-examples

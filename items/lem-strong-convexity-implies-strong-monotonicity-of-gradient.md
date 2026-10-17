@@ -2,7 +2,7 @@
 id: lem-strong-convexity-implies-strong-monotonicity-of-gradient
 kind: lemma
 title: "Strong convexity makes a differentiable gradient strongly monotone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-block-principal-angle-squared-ritz-enclosure
 kind: lemma
 title: "A principal-angle bound encloses the largest selected generalized Ritz value across a spectral gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

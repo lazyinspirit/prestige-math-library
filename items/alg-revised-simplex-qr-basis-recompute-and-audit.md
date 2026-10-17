@@ -2,7 +2,7 @@
 id: alg-revised-simplex-qr-basis-recompute-and-audit
 kind: algorithm
 title: Revised-simplex basis QR recomputation with finite residual and pivot statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

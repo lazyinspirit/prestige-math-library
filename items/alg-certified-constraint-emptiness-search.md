@@ -2,7 +2,7 @@
 id: alg-certified-constraint-emptiness-search
 kind: algorithm
 title: Certified constraint-emptiness search with a finite query budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

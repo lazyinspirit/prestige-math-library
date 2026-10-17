@@ -2,7 +2,7 @@
 id: def-parabolic-theta-finite-difference-scheme
 kind: definition
 title: Fully discrete θ heat finite-difference scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

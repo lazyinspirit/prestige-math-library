@@ -2,7 +2,7 @@
 id: ex-one-pass-pece-differs-from-implicit-adams-stability
 kind: example
 title: "One-pass PECE and fully implicit Adams have different stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

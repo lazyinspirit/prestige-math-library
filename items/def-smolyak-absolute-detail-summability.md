@@ -2,7 +2,7 @@
 id: def-smolyak-absolute-detail-summability
 kind: definition
 title: Absolute summability of a multi-index detail family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

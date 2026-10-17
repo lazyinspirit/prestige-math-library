@@ -1,7 +1,7 @@
 ---
 page: stationary-iterations-and-relaxation-examples
 title: "Stationary iterations and relaxation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-stationary-splitting-with-an-initial-error-missing-an-unstable-eigenspace

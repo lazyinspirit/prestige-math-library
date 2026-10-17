@@ -2,7 +2,7 @@
 id: thm-retraction-armijo-best-iterate-complexity
 kind: theorem
 title: Retraction Armijo reaches an epsilon-gradient iterate in finite budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

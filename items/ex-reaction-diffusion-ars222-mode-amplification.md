@@ -2,7 +2,7 @@
 id: ex-reaction-diffusion-ars222-mode-amplification
 kind: example
 title: "ARS(2,2,2) amplification on a two-cell reaction-diffusion grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

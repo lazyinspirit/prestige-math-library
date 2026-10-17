@@ -1,7 +1,7 @@
 ---
 page: finite-basis-projector-energies-and-variational-electronic-structure
 title: Finite basis projector energies and variational electronic structure
-status: draft
+status: published
 items: [def-rank-r-orthogonal-projector-domain,
         def-finite-temperature-density-matrix-free-energy,
         lem-complex-hermitian-eigenvalues-lipschitz,

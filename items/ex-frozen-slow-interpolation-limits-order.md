@@ -2,7 +2,7 @@
 id: ex-frozen-slow-interpolation-limits-order
 title: "Freezing a varying slow waveform leaves a first-order coupling error"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

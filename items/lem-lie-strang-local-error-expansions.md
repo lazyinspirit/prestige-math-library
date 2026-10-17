@@ -2,7 +2,7 @@
 id: lem-lie-strang-local-error-expansions
 kind: lemma
 title: "Lie and Strang splitting errors have commutator expansions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

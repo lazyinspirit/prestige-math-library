@@ -2,7 +2,7 @@
 id: ex-bfgs-secant-on-a-strongly-convex-quadratic
 kind: example
 title: "An exact Bfgs secant update on a two-variable quadratic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

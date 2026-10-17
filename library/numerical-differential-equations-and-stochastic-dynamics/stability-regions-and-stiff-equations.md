@@ -1,7 +1,7 @@
 ---
 page: stability-regions-and-stiff-equations
 title: Stability regions and stiff equations
-status: draft
+status: published
 items:
   - def-matrix-contractivity-and-logarithmic-norm
   - def-absolute-stability-regions-for-one-step-and-multistep-methods

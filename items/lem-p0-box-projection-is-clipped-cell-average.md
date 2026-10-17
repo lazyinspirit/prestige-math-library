@@ -2,7 +2,7 @@
 id: lem-p0-box-projection-is-clipped-cell-average
 kind: lemma
 title: The L2 projection onto a cellwise constant box clips cell averages
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

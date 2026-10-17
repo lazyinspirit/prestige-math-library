@@ -2,7 +2,7 @@
 id: alg-smolyak-node-deduplication
 kind: algorithm
 title: Deterministic node merging for Smolyak cubature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity

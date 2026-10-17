@@ -2,7 +2,7 @@
 id: def-chebyshev-gauss-lobatto-collocation-grid
 kind: definition
 title: "Chebyshev–Gauss–Lobatto collocation grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

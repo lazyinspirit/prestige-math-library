@@ -2,7 +2,7 @@
 id: thm-revised-simplex-primal-dual-residual-gap
 kind: theorem
 title: "Primal-dual residual gap bound for a simplex candidate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

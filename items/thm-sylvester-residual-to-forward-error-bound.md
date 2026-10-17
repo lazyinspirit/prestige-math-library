@@ -2,7 +2,7 @@
 id: thm-sylvester-residual-to-forward-error-bound
 kind: theorem
 title: "Sylvester separation converts a residual into a forward error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

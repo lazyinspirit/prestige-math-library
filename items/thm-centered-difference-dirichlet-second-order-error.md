@@ -2,7 +2,7 @@
 id: thm-centered-difference-dirichlet-second-order-error
 kind: theorem
 title: Second-order max-norm error for the centered Dirichlet scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-centered-difference-dirichlet-bvp, lem-centered-difference-dirichlet-inverse-maxnorm, lem-centered-difference-dirichlet-truncation-residual, lem-of-triangle-inequality]

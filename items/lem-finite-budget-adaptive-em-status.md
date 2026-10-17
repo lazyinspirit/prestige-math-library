@@ -2,7 +2,7 @@
 id: lem-finite-budget-adaptive-em-status
 kind: lemma
 title: A finite adaptive Euler–Maruyama budget returns a status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

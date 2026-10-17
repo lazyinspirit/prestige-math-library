@@ -1,7 +1,7 @@
 ---
 page: barrier-and-primal-dual-interior-point-methods-examples
 title: "Barrier and primal dual interior point methods — Examples"
-status: draft
+status: published
 requires:
   - barrier-and-primal-dual-interior-point-methods
 items: []

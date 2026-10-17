@@ -2,7 +2,7 @@
 id: alg-newton-chord-implicit-residual-with-factorization-reuse
 title: "Finite-budget Newton and chord solves with scheduled factorization reuse"
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-gauss-weights-equal-mu0-times-first-eigenvector-coordinate-squared
 kind: theorem
 title: Gaussian weights equal the total mass times a Jacobi eigenvector's first-coordinate square
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

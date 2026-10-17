@@ -2,7 +2,7 @@
 id: thm-strict-row-diagonal-dominance-implies-jacobi-and-gauss-seidel-convergence
 kind: theorem
 title: "Strict row diagonal dominance guarantees Jacobi and Gauss–Seidel convergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

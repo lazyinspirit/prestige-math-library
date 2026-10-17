@@ -2,7 +2,7 @@
 id: lem-two-cell-hat-and-quadratic-functions-lie-in-h10
 kind: lemma
 title: The two-cell hat and quadratic functions belong to H¹₀
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-nonlinear-least-squares-gradient-and-hessian
 kind: theorem
 title: "The nonlinear least-squares gradient and Hessian formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

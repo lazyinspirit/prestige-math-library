@@ -1,7 +1,7 @@
 ---
 page: numerical-boundary-value-problems-examples
 title: Linear numerical boundary-value problems — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-centered-difference-dirichlet-quadratic-exact

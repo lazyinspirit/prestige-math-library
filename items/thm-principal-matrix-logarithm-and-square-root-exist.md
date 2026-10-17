@@ -2,7 +2,7 @@
 id: thm-principal-matrix-logarithm-and-square-root-exist
 kind: theorem
 title: "The principal matrix logarithm and square root exist off the closed negative-real axis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

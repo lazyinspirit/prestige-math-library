@@ -2,7 +2,7 @@
 id: def-caputo-derivative-and-fractional-integral
 kind: definition
 title: Fractional integral and Caputo derivative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

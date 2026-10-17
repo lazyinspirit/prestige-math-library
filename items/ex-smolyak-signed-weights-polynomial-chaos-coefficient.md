@@ -2,7 +2,7 @@
 id: ex-smolyak-signed-weights-polynomial-chaos-coefficient
 kind: example
 title: A signed Simpson-Smolyak weight makes a nonnegative chaos coefficient estimate negative
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: sparse-grid-cubature-and-mixed-regularity-examples

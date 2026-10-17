@@ -2,7 +2,7 @@
 id: cor-linear-elliptic-control-projection-formula
 kind: corollary
 title: The optimal elliptic control is the clipped negative adjoint
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

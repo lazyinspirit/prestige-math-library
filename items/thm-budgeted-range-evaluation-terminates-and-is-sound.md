@@ -2,7 +2,7 @@
 id: thm-budgeted-range-evaluation-terminates-and-is-sound
 kind: theorem
 title: Budgeted range evaluation terminates and certifies only sound enclosures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

@@ -2,7 +2,7 @@
 id: alg-counter-based-keyed-permutation-stream
 kind: algorithm
 title: "Counter stream from a keyed finite permutation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

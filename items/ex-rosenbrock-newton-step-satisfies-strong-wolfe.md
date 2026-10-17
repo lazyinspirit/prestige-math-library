@@ -2,7 +2,7 @@
 id: ex-rosenbrock-newton-step-satisfies-strong-wolfe
 kind: example
 title: "The standard Rosenbrock start accepts a full Newton step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-diis-singular-gram-fallback
 kind: example
 title: A reported singular DIIS Gram system triggers the baseline fallback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

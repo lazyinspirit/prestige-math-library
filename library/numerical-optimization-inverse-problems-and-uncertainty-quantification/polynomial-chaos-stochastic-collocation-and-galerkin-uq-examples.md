@@ -1,7 +1,7 @@
 ---
 page: polynomial-chaos-stochastic-collocation-and-galerkin-uq-examples
 title: Polynomial chaos stochastic collocation and Galerkin UQ — Examples
-status: draft
+status: published
 requires:
   - polynomial-chaos-stochastic-collocation-and-galerkin-uq
 items: []

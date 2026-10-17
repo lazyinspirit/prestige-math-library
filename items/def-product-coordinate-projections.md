@@ -2,7 +2,7 @@
 id: def-product-coordinate-projections
 kind: definition
 title: Product-coordinate averaging operators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

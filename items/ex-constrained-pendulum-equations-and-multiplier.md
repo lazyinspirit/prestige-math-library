@@ -2,7 +2,7 @@
 id: ex-constrained-pendulum-equations-and-multiplier
 kind: example
 title: The constrained pendulum multiplier follows from tangency
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

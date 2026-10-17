@@ -2,7 +2,7 @@
 id: alg-short-step-self-concordant-path-following
 kind: algorithm
 title: "Short-step self-concordant path following with finite failure statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

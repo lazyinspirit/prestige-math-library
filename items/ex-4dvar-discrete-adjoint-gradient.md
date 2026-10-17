@@ -2,7 +2,7 @@
 id: ex-4dvar-discrete-adjoint-gradient
 kind: example
 title: A two-observation 4DVAR objective has an exact reverse gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

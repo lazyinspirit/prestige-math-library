@@ -2,7 +2,7 @@
 id: cex-grazing-event-time-error-is-not-linearly-bounded
 kind: counterexample
 title: "A grazing guard contact has square-root rather than linear root-location sensitivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: alg-na-computed-fft-cyclic-and-linear-convolution
 kind: algorithm
 title: "Computed FFT cyclic convolution and zero-padded linear convolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

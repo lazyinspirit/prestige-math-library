@@ -2,7 +2,7 @@
 id: ex-lp-primal-dual-residual-and-gap
 kind: example
 title: "An LP primal-dual residual and exact gap certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

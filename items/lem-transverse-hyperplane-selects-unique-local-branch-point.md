@@ -2,7 +2,7 @@
 id: lem-transverse-hyperplane-selects-unique-local-branch-point
 kind: lemma
 title: "A transverse predictor hyperplane selects one nearby point of a regular branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

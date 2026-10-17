@@ -2,7 +2,7 @@
 id: ex-two-sum-recovers-a-rounded-away-low-part
 kind: example
 title: "TwoSum recovers a rounded away low part"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-frozen-slow-euler-variation-bounds
 title: "Block variation bounds for a frozen-slow Euler step"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

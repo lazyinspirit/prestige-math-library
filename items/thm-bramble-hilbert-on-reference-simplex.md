@@ -2,7 +2,7 @@
 id: thm-bramble-hilbert-on-reference-simplex
 kind: theorem
 title: Bramble–Hilbert approximation on a reference simplex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

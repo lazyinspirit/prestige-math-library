@@ -2,7 +2,7 @@
 id: lem-tensor-product-moment-functional-equals-product-measure-integral
 kind: lemma
 title: "Tensor product moments equal integration against the finite product measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

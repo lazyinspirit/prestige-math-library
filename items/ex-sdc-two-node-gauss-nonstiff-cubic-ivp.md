@@ -2,7 +2,7 @@
 id: ex-sdc-two-node-gauss-nonstiff-cubic-ivp
 kind: example
 title: Two-node Gauss collocation gives the exact endpoint for a nonstiff cubic IVP
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

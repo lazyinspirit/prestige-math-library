@@ -1,7 +1,7 @@
 ---
 page: parallel-in-time-parareal-and-mgrit-examples
 title: Parallel in time parareal and mgrit — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-parareal-dissipative-scalar-heat-mode

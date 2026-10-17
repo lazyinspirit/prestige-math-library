@@ -2,7 +2,7 @@
 id: ex-queue-overflow-and-redundant-splitting-work
 kind: example
 title: Two-stage queue overflow and a redundant split at equal work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

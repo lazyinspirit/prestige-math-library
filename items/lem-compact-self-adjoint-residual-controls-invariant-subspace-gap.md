@@ -2,7 +2,7 @@
 id: lem-compact-self-adjoint-residual-controls-invariant-subspace-gap
 kind: lemma
 title: A residual and a spectral separation bound an invariant-subspace gap
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

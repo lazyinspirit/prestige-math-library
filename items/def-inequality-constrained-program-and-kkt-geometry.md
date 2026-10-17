@@ -2,7 +2,7 @@
 id: def-inequality-constrained-program-and-kkt-geometry
 kind: definition
 title: Inequality constrained programs, tangent cones, constraint qualifications, and KKT
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

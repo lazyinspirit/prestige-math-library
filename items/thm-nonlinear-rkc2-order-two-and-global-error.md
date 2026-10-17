@@ -2,7 +2,7 @@
 id: thm-nonlinear-rkc2-order-two-and-global-error
 kind: theorem
 title: "Undamped nonlinear RKC2 has fixed-stage order two on an admitted tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

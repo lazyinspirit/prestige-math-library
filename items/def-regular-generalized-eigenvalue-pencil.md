@@ -2,7 +2,7 @@
 id: def-regular-generalized-eigenvalue-pencil
 kind: definition
 title: "Regular matrix pencils and homogeneous generalized eigenvalues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

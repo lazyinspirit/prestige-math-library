@@ -2,7 +2,7 @@
 id: thm-inexact-fista-weighted-error-bound
 kind: theorem
 title: "Weighted prox-error summability preserves an O(1/k^2) FISTA bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

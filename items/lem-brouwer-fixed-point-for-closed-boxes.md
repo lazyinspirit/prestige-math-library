@@ -2,7 +2,7 @@
 id: lem-brouwer-fixed-point-for-closed-boxes
 kind: lemma
 title: Brouwer fixed points exist on every nonempty closed box
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

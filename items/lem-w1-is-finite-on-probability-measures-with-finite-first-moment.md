@@ -2,7 +2,7 @@
 id: lem-w1-is-finite-on-probability-measures-with-finite-first-moment
 kind: lemma
 title: The coupling infimum is finite for finite-first-moment probabilities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

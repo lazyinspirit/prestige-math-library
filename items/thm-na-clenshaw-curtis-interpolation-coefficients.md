@@ -2,7 +2,7 @@
 id: thm-na-clenshaw-curtis-interpolation-coefficients
 kind: theorem
 title: "DCT-I coefficients of the Chebyshev–Lobatto interpolant"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

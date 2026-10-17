@@ -2,7 +2,7 @@
 id: thm-fixed-level-sir-relative-mse-under-conditional-event-second-moment-bounds
 kind: theorem
 title: "Conditional event second moments give a finite-particle SIR relative MSE bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

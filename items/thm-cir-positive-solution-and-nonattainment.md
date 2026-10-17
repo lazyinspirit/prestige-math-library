@@ -2,7 +2,7 @@
 id: thm-cir-positive-solution-and-nonattainment
 kind: theorem
 title: "CIR paths stay positive and do not explode under the Feller condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

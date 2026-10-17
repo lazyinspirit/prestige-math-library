@@ -1,7 +1,7 @@
 ---
 page: one-step-ode-consistency-and-local-error-examples
 title: One-step ODE Consistency and Local Error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-forward-euler-local-error-for-scalar-linear-ode

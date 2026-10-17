@@ -1,7 +1,7 @@
 ---
 page: constrained-dynamics-shake-and-rattle-examples
 title: Constrained dynamics shake and rattle — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-constrained-pendulum-equations-and-multiplier

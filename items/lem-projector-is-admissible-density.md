@@ -2,7 +2,7 @@
 id: lem-projector-is-admissible-density
 kind: lemma
 title: Every rank-r orthogonal projector is an admissible density
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

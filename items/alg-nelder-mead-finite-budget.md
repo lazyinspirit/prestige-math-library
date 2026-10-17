@@ -2,7 +2,7 @@
 id: alg-nelder-mead-finite-budget
 kind: algorithm
 title: "Finite-budget Nelder–Mead simplex procedure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

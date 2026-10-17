@@ -2,7 +2,7 @@
 id: cex-classical-column-pivoted-qr-is-not-strong-with-factor-one
 kind: counterexample
 title: "Classical column-pivoted QR can fail the strong coefficient bound"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

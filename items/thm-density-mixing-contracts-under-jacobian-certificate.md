@@ -2,7 +2,7 @@
 id: thm-density-mixing-contracts-under-jacobian-certificate
 kind: theorem
 title: A uniform derivative bound certifies contraction of relaxed density mixing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

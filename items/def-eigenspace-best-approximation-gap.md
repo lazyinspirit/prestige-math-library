@@ -2,7 +2,7 @@
 id: def-eigenspace-best-approximation-gap
 kind: definition
 title: Best-approximation gap of a finite-dimensional eigenspace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

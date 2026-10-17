@@ -2,7 +2,7 @@
 id: def-diagonal-lower-upper-splitting-convention
 kind: definition
 title: "Diagonal, lower, and upper parts in the stationary-iteration convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: cex-state-error-alone-does-not-control-gradient
 kind: counterexample
 title: Uniform state accuracy alone does not bound parameter-gradient error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

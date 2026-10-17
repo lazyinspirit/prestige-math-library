@@ -2,7 +2,7 @@
 id: ex-cutoff-overflow-is-reported-as-lost-mass
 kind: example
 title: An above-cutoff product moves mass into the reported reservoir
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

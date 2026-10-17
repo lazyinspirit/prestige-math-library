@@ -2,7 +2,7 @@
 id: alg-box-muller-finite-bit-transform
 kind: algorithm
 title: "Finite-bit Box–Muller with certified elementary-function evaluators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 13

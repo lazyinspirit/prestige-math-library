@@ -1,7 +1,7 @@
 ---
 page: numerical-inverse-problems-and-regularization-error-examples
 title: "Numerical Inverse Problems and Regularization Error — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-diagonal-inverse-noise-amplification

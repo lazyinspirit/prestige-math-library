@@ -2,7 +2,7 @@
 id: lem-density-mixing-preserves-domain-but-not-projectors
 kind: lemma
 title: Density mixing preserves admissibility but need not preserve idempotence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

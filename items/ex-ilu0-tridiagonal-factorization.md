@@ -2,7 +2,7 @@
 id: ex-ilu0-tridiagonal-factorization
 kind: example
 title: "ILU(0) factors of a three-row tridiagonal matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

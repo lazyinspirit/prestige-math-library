@@ -1,7 +1,7 @@
 ---
 page: certified-stationary-distribution-and-hitting-statistic-numerics-examples
 title: "Certified stationary distribution and hitting statistic numerics — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-xd-finite-credit-absorption-hitting-statistics

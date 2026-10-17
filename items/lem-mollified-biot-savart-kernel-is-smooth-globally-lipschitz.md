@@ -2,7 +2,7 @@
 id: lem-mollified-biot-savart-kernel-is-smooth-globally-lipschitz
 kind: lemma
 title: The mollified Biot-Savart kernel is smooth and globally Lipschitz
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: tau-leaping-and-reaction-diffusion-model-error-examples
 title: Tau Leaping and Reaction Diffusion Model Error — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-minimum-intensity-coupling-reduces-one-step-variance

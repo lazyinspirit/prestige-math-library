@@ -2,7 +2,7 @@
 id: alg-arnoldi-exponential-and-phi-actions
 kind: algorithm
 title: "Arnoldi projection for exponential and phi-function actions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

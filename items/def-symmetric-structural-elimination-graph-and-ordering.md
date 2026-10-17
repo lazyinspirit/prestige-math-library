@@ -2,7 +2,7 @@
 id: def-symmetric-structural-elimination-graph-and-ordering
 kind: definition
 title: "Structural graphs and ordered symmetric elimination"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

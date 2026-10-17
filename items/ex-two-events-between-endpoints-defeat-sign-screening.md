@@ -2,7 +2,7 @@
 id: ex-two-events-between-endpoints-defeat-sign-screening
 kind: example
 title: "Two guard crossings between endpoints defeat sign-only screening"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

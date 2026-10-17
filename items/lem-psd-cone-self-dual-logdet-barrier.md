@@ -2,7 +2,7 @@
 id: lem-psd-cone-self-dual-logdet-barrier
 kind: lemma
 title: "The positive semidefinite cone is self-dual and its log determinant barrier has parameter n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

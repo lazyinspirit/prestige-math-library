@@ -2,7 +2,7 @@
 id: ex-xd-immigration-death-finite-state-projection
 kind: example
 title: "Immigration-death chain projected onto two states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

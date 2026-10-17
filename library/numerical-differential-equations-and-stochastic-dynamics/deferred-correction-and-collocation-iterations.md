@@ -1,7 +1,7 @@
 ---
 page: deferred-correction-and-collocation-iterations
 title: Deferred correction and collocation iterations
-status: draft
+status: published
 requires:
   - polynomial-interpolation-and-remainder
   - global-ode-and-density-error

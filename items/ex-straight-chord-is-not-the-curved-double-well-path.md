@@ -2,7 +2,7 @@
 id: ex-straight-chord-is-not-the-curved-double-well-path
 kind: example
 title: "The straight chord misses the curved double-well minimum-energy path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

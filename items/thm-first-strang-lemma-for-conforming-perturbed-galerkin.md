@@ -2,7 +2,7 @@
 id: thm-first-strang-lemma-for-conforming-perturbed-galerkin
 kind: theorem
 title: First Strang estimate for conforming perturbed Galerkin problems
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

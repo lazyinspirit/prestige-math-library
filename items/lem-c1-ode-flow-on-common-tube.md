@@ -2,7 +2,7 @@
 id: lem-c1-ode-flow-on-common-tube
 kind: lemma
 title: "Initial-data sensitivity of an ODE flow on a common compact tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

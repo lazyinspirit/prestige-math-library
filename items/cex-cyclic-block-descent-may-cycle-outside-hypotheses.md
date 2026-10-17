@@ -2,7 +2,7 @@
 id: cex-cyclic-block-descent-may-cycle-outside-hypotheses
 kind: counterexample
 title: "Cyclic exact block minimization can cycle outside the convex separable hypotheses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

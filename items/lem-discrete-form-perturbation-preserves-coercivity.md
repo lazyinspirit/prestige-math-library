@@ -2,7 +2,7 @@
 id: lem-discrete-form-perturbation-preserves-coercivity
 kind: lemma
 title: A bounded form defect preserves discrete coercivity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

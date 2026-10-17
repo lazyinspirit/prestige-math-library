@@ -2,7 +2,7 @@
 id: thm-discrete-adjoint-gradient-recursion
 kind: theorem
 title: The reverse recursion is the exact gradient of a finite state-step objective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

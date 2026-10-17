@@ -2,7 +2,7 @@
 id: ex-ishigami-function-sobol-decomposition
 kind: example
 title: The Ishigami function's only possible interaction is X1-X3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

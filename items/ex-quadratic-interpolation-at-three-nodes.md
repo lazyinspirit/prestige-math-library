@@ -2,7 +2,7 @@
 id: ex-quadratic-interpolation-at-three-nodes
 kind: example
 title: "Quadratic interpolation at three nodes is exact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

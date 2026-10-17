@@ -2,7 +2,7 @@
 id: ex-nearly-dependent-constraints-amplify-rattle-residuals
 kind: example
 title: Nearly dependent constraints make the multiplier solve ill conditioned
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-projected-gradient-fixed-point-kkt-certificate
 kind: theorem
 title: "Projected-gradient fixed points are normal-cone certificates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

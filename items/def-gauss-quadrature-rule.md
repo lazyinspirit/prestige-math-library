@@ -2,7 +2,7 @@
 id: def-gauss-quadrature-rule
 kind: definition
 title: The m-node Gaussian quadrature rule for a positive measure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

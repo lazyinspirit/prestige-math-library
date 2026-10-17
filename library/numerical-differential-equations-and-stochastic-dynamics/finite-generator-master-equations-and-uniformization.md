@@ -1,7 +1,7 @@
 ---
 page: finite-generator-master-equations-and-uniformization
 title: "Finite generator master equations and uniformization"
-status: draft
+status: published
 items:
   - def-xd-finite-column-generator
   - lem-xd-finite-matrix-exponential-series

@@ -2,7 +2,7 @@
 id: lem-rank-r-projector-grassmann-chart-and-tangent
 kind: lemma
 title: "Graph charts and tangent directions for complex rank-r projectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

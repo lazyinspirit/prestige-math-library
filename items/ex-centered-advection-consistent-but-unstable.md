@@ -2,7 +2,7 @@
 id: ex-centered-advection-consistent-but-unstable
 kind: example
 title: Centered advection is consistent and unstable under the CFL bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

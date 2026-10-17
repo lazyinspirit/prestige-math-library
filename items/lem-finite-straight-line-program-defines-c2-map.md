@@ -2,7 +2,7 @@
 id: lem-finite-straight-line-program-defines-c2-map
 kind: lemma
 title: "A finite straight-line C2 program defines a C2 map on each fixed branch"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, lem-finite-straight-line-program-defines-c1-map, thm-chain-sum-product-and-composition-rules-for-banach-derivatives]

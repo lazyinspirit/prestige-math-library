@@ -2,7 +2,7 @@
 id: ex-black-box-simulator-direct-search-fit
 kind: example
 title: "A black-box quadratic simulator fit using direct search"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

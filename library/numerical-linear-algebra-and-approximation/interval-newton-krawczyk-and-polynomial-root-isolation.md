@@ -1,7 +1,7 @@
 ---
 page: interval-newton-krawczyk-and-polynomial-root-isolation
 title: Interval newton krawczyk and polynomial root isolation
-status: draft
+status: published
 items:
   - lem-polynomial-squarefree-decomposition-and-multiplicity
   - thm-sturm-sign-variation-counts-distinct-roots

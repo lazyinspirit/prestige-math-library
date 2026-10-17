@@ -1,7 +1,7 @@
 ---
 page: local-bifurcation-normal-forms-and-numerical-certificates-examples
 title: Local bifurcation normal forms and numerical certificates — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-degenerate-hopf-with-zero-lyapunov-coefficient

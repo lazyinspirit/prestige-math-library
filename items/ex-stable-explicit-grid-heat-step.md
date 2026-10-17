@@ -2,7 +2,7 @@
 id: ex-stable-explicit-grid-heat-step
 kind: example
 title: "A stable consistent explicit spectral-grid heat step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

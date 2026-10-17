@@ -2,7 +2,7 @@
 id: thm-signed-regularized-vorticity-characteristics-preserve-total-variation
 kind: theorem
 title: Characteristic existence and total-variation preservation for regularized signed vorticity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

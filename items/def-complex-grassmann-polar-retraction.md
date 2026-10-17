@@ -2,7 +2,7 @@
 id: def-complex-grassmann-polar-retraction
 kind: definition
 title: Polar retraction on the complex Grassmannian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

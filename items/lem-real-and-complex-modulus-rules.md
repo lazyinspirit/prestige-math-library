@@ -2,7 +2,7 @@
 id: lem-real-and-complex-modulus-rules
 kind: lemma
 title: Real and complex modulus product and triangle inequalities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

@@ -2,7 +2,7 @@
 id: ex-dirichlet-inverse-infinity-norm-tight-at-n3
 kind: example
 title: The inverse infinity row-sum bound is uniform and sharp
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-centered-difference-dirichlet-bvp, lem-centered-difference-dirichlet-inverse-maxnorm, lem-of-triangle-inequality]

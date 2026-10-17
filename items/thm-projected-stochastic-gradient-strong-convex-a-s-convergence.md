@@ -2,7 +2,7 @@
 id: thm-projected-stochastic-gradient-strong-convex-a-s-convergence
 kind: theorem
 title: "Projected SGD converges almost surely on a strongly convex objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: thm-two-block-admm-residual-objective-and-dual-convergence
 kind: theorem
 title: "Two-block ADMM residual, objective and dual sequence convergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

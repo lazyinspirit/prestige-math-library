@@ -2,7 +2,7 @@
 id: lem-discrete-summation-by-parts-poincare-and-inverse-bound
 kind: lemma
 title: Discrete summation by parts, Poincaré inequality and inverse bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

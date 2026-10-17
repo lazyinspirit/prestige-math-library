@@ -2,7 +2,7 @@
 id: cex-omitting-rosenbrock-stage-correction-loses-order-two
 title: "Omitting the second-stage correction destroys cubic local accuracy"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

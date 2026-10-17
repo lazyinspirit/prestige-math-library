@@ -2,7 +2,7 @@
 id: lem-two-sided-scaled-householder-similarity-error
 kind: lemma
 title: Left and right scaled Householder errors give a concrete similarity bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

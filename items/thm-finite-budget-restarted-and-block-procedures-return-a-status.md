@@ -2,7 +2,7 @@
 id: thm-finite-budget-restarted-and-block-procedures-return-a-status
 kind: theorem
 title: "Finite-budget restarted Arnoldi and block LOBPCG return a status under finite-return primitives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

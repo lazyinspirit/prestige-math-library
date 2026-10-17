@@ -2,7 +2,7 @@
 id: thm-uniform-linear-residual-solution-enclosure
 kind: theorem
 title: A uniform approximate inverse and residual enclose every linear solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

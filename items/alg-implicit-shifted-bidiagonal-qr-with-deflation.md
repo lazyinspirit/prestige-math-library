@@ -2,7 +2,7 @@
 id: alg-implicit-shifted-bidiagonal-qr-with-deflation
 kind: algorithm
 title: "Finite budget implicit shifted QR for bidiagonal singular values"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

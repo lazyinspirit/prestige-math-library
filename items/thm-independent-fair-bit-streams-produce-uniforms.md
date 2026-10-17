@@ -2,7 +2,7 @@
 id: thm-independent-fair-bit-streams-produce-uniforms
 kind: theorem
 title: "Disjoint streams of independent fair bits produce independent uniform variables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

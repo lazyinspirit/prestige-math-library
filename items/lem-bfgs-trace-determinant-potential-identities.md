@@ -2,7 +2,7 @@
 id: lem-bfgs-trace-determinant-potential-identities
 kind: lemma
 title: "Bfgs trace and determinant identities give a matrix potential inequality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

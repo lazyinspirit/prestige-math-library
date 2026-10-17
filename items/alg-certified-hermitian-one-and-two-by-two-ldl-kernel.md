@@ -2,7 +2,7 @@
 id: alg-certified-hermitian-one-and-two-by-two-ldl-kernel
 kind: algorithm
 title: Certified real-component Hermitian one-by-one and two-by-two LDL* kernels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

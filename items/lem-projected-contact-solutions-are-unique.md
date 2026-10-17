@@ -2,7 +2,7 @@
 id: lem-projected-contact-solutions-are-unique
 kind: lemma
 title: Solutions of projected contact dynamics are unique under the inherited choice assumptions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

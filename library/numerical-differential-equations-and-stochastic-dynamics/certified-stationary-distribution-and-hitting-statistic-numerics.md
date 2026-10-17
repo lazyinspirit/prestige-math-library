@@ -1,7 +1,7 @@
 ---
 page: certified-stationary-distribution-and-hitting-statistic-numerics
 title: "Certified stationary distribution and hitting statistic numerics"
-status: draft
+status: published
 items:
   - def-finite-column-stochastic-matrix-and-law
   - lem-finite-transient-block-geometric-escape

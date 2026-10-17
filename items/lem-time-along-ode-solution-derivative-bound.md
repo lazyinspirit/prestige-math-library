@@ -2,7 +2,7 @@
 id: lem-time-along-ode-solution-derivative-bound
 kind: lemma
 title: "A vector field along an ODE solution has an explicit derivative bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

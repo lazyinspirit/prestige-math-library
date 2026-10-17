@@ -2,7 +2,7 @@
 id: lem-l-smoothness-descent-inequality
 kind: lemma
 title: "Descent inequality for a Lipschitz gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

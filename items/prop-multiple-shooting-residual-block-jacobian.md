@@ -2,7 +2,7 @@
 id: prop-multiple-shooting-residual-block-jacobian
 kind: proposition
 title: "The multiple-shooting Jacobian is bordered block-bidiagonal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

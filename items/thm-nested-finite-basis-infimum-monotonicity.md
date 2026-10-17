@@ -2,7 +2,7 @@
 id: thm-nested-finite-basis-infimum-monotonicity
 kind: theorem
 title: "Nested finite-basis infima decrease to the infimum over their union"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

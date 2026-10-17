@@ -2,7 +2,7 @@
 id: lem-tikhonov-bias-converges-for-minimum-norm-solution
 kind: lemma
 title: Compact-operator Tikhonov bias vanishes on the minimum-norm solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

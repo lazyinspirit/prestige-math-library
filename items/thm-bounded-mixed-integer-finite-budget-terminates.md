@@ -2,7 +2,7 @@
 id: thm-bounded-mixed-integer-finite-budget-terminates
 kind: theorem
 title: Finite-budget bounded mixed-integer branch and bound terminates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

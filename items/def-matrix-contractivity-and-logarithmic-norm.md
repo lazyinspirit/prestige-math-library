@@ -2,7 +2,7 @@
 id: def-matrix-contractivity-and-logarithmic-norm
 kind: definition
 title: "Matrix-step contractivity and the logarithmic norm in a specified inner product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

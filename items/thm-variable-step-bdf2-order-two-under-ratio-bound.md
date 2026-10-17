@@ -2,7 +2,7 @@
 id: thm-variable-step-bdf2-order-two-under-ratio-bound
 kind: theorem
 title: "Variable-step BDF2 is second-order convergent under a uniform ratio bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

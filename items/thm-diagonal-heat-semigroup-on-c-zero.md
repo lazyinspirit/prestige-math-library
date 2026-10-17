@@ -2,7 +2,7 @@
 id: thm-diagonal-heat-semigroup-on-c-zero
 kind: theorem
 title: "The diagonal heat semigroup on $c_0$ is contractive and strongly continuous"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

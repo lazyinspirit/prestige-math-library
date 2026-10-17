@@ -2,7 +2,7 @@
 id: thm-projected-subgradient-best-and-average-bound
 kind: theorem
 title: "Projected subgradient best-iterate and weighted-average bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

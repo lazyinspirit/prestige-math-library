@@ -1,7 +1,7 @@
 ---
 page: numerical-optimization-globalization-and-inexact-certificates-examples
 title: Numerical optimization globalization and inexact certificates — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-global-exact-line-search-on-an-anisotropic-quadratic

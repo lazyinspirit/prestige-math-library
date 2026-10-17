@@ -2,7 +2,7 @@
 id: alg-mgrit-two-level-cycle
 kind: algorithm
 title: "A declared two-level MGRIT coarse-correction cycle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

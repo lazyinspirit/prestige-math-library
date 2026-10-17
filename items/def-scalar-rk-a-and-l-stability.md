@@ -2,7 +2,7 @@
 id: def-scalar-rk-a-and-l-stability
 title: "Scalar stability function, A-stability, and L-stability for Runge–Kutta methods"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

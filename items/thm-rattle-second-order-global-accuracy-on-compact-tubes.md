@@ -2,7 +2,7 @@
 id: thm-rattle-second-order-global-accuracy-on-compact-tubes
 kind: theorem
 title: Exact RATTLE has second order global accuracy on compact tubes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

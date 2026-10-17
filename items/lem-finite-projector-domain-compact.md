@@ -2,7 +2,7 @@
 id: lem-finite-projector-domain-compact
 kind: lemma
 title: "The finite rank-r projector domain is nonempty and compact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-xd-finite-matrix-exponential-series
 kind: lemma
 title: "Finite matrix exponential series and its identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

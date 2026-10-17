@@ -1,7 +1,7 @@
 ---
 page: interacting-particle-mean-field-and-vortex-blob-error
 title: Interacting particle mean field and vortex blob error
-status: draft
+status: published
 items:
   - def-bounded-lipschitz-dual-norm-for-signed-measures
   - def-globally-lipschitz-mean-field-kernel

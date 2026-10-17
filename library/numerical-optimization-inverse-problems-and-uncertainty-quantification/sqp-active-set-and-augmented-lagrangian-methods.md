@@ -1,7 +1,7 @@
 ---
 page: sqp-active-set-and-augmented-lagrangian-methods
 title: Sqp active set and augmented lagrangian methods
-status: draft
+status: published
 items:
   - def-sqp-linearized-quadratic-subproblem
   - def-sqp-augmented-lagrangian-equality-and-inequality

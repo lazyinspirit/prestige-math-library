@@ -2,7 +2,7 @@
 id: lem-compact-gram-operator-is-positive-and-has-kernel
 kind: lemma
 title: A compact Hilbert-space Gram operator is positive and has the forward kernel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

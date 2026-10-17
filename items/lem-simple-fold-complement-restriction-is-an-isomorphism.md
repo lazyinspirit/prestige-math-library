@@ -2,7 +2,7 @@
 id: lem-simple-fold-complement-restriction-is-an-isomorphism
 kind: lemma
 title: "The simple-fold complement restriction is an isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

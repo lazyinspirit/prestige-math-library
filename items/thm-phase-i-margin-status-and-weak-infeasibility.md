@@ -2,7 +2,7 @@
 id: thm-phase-i-margin-status-and-weak-infeasibility
 kind: theorem
 title: "The conic phase-I margin separates strict feasibility but may leave weak infeasibility undecided"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

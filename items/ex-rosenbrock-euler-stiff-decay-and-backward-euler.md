@@ -2,7 +2,7 @@
 id: ex-rosenbrock-euler-stiff-decay-and-backward-euler
 title: "Rosenbrock–Euler damps a stiff scalar decay with the backward-Euler factor"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-two-stage-rosenbrock-scalar-l-stability
 title: "The selected exact-J two-stage Rosenbrock method is scalar L-stable"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

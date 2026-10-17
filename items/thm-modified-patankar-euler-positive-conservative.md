@@ -2,7 +2,7 @@
 id: thm-modified-patankar-euler-positive-conservative
 kind: theorem
 title: "Modified Patankar Euler preserves positivity and total mass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

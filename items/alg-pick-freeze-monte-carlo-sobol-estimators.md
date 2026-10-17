@@ -2,7 +2,7 @@
 id: alg-pick-freeze-monte-carlo-sobol-estimators
 kind: algorithm
 title: Pick-freeze Monte Carlo estimators for Sobol indices
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

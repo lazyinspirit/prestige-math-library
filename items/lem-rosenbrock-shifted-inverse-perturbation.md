@@ -2,7 +2,7 @@
 id: lem-rosenbrock-shifted-inverse-perturbation
 title: "Perturbing a shifted Jacobian perturbs its inverse explicitly"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

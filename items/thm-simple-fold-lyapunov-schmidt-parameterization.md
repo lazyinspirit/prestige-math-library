@@ -2,7 +2,7 @@
 id: thm-simple-fold-lyapunov-schmidt-parameterization
 kind: theorem
 title: "A simple fold has a unique local Lyapunov–Schmidt chart and nonzero parameter curvature"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

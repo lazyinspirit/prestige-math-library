@@ -2,7 +2,7 @@
 id: ex-nested-trial-spaces-may-have-equal-energies
 kind: example
 title: "Nested trial spaces give nonincreasing energies, sometimes with equality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-forward-mode-computes-directional-derivative
 kind: theorem
 title: "Forward mode computes the exact directional derivative of the real-arithmetic graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, lem-finite-straight-line-program-defines-c1-map, alg-forward-mode-automatic-differentiation, thm-chain-rule-for-total-derivatives]

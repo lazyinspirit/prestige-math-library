@@ -2,7 +2,7 @@
 id: def-characteristic-mean-field-solution
 kind: definition
 title: Characteristic solution of a probability mean-field equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

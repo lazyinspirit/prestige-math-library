@@ -2,7 +2,7 @@
 id: lem-dirichlet-grid-poincare-inequality
 kind: lemma
 title: A finite-grid Poincare inequality for zero endpoint values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

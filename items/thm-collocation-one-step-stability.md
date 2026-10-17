@@ -2,7 +2,7 @@
 id: thm-collocation-one-step-stability
 kind: theorem
 title: Small-step collocation maps are Lipschitz stable
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

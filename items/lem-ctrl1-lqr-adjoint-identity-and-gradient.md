@@ -2,7 +2,7 @@
 id: lem-ctrl1-lqr-adjoint-identity-and-gradient
 kind: lemma
 title: "The LQR adjoint identity gives the reduced gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

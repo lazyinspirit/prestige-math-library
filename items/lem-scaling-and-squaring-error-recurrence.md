@@ -2,7 +2,7 @@
 id: lem-scaling-and-squaring-error-recurrence
 kind: lemma
 title: "Error propagation through exact and perturbed squaring steps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

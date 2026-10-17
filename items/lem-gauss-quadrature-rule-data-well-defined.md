@@ -2,7 +2,7 @@
 id: lem-gauss-quadrature-rule-data-well-defined
 kind: lemma
 title: The Gaussian nodes, cardinal polynomials and weights are well-defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

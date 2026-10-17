@@ -2,7 +2,7 @@
 id: def-regular-minimum-energy-path-in-a-collision-free-tube
 kind: definition
 title: "Regular minimum-energy paths on a declared collision-free tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

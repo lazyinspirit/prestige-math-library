@@ -2,7 +2,7 @@
 id: prop-local-leapfrog-and-symplectic-euler-are-symplectic
 kind: proposition
 title: Local leapfrog and kick-then-drift symplectic Euler are symplectic
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

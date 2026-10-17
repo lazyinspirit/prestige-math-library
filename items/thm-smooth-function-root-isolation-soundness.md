@@ -2,7 +2,7 @@
 id: thm-smooth-function-root-isolation-soundness
 kind: theorem
 title: Soundness and finite termination of smooth-function root isolation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: interval-newton-krawczyk-and-polynomial-root-isolation

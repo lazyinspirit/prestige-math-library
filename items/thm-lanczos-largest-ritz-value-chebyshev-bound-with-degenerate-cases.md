@@ -2,7 +2,7 @@
 id: thm-lanczos-largest-ritz-value-chebyshev-bound-with-degenerate-cases
 kind: theorem
 title: "Lanczos largest Ritz values obey a Chebyshev start-angle bound, including degenerate branches"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

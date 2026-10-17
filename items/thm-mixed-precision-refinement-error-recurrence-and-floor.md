@@ -2,7 +2,7 @@
 id: thm-mixed-precision-refinement-error-recurrence-and-floor
 kind: theorem
 title: "Mixed-precision refinement has an error recurrence and a finite precision floor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

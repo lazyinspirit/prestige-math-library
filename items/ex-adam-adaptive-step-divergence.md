@@ -2,7 +2,7 @@
 id: ex-adam-adaptive-step-divergence
 kind: example
 title: A bounded periodic gradient sequence with divergent Adam iterates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

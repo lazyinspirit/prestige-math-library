@@ -2,7 +2,7 @@
 id: ex-density-mixture-leaves-projector-manifold
 kind: example
 title: A convex density mixture can be admissible without being a projector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

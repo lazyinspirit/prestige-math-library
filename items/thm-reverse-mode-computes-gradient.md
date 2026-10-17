@@ -2,7 +2,7 @@
 id: thm-reverse-mode-computes-gradient
 kind: theorem
 title: "Reverse mode computes the exact gradient of the real-arithmetic graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, lem-finite-straight-line-program-defines-c1-map, alg-reverse-mode-automatic-differentiation, thm-chain-rule-for-total-derivatives]

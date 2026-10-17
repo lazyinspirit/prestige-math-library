@@ -1,7 +1,7 @@
 ---
 page: matrix-functions-and-scaling-squaring-examples
 title: "Matrix Functions and Scaling Squaring — Examples"
-status: draft
+status: published
 order: 2421
 category: numerical-linear-algebra-and-approximation
 companion: matrix-functions-and-scaling-squaring

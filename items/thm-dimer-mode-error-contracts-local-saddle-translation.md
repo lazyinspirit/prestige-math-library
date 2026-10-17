@@ -2,7 +2,7 @@
 id: thm-dimer-mode-error-contracts-local-saddle-translation
 kind: theorem
 title: "A gap-controlled dimer mode gives a local saddle-translation error recurrence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

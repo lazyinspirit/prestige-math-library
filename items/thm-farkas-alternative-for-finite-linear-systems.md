@@ -2,7 +2,7 @@
 id: thm-farkas-alternative-for-finite-linear-systems
 kind: theorem
 title: Farkas alternative for a finite linear system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

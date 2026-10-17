@@ -1,7 +1,7 @@
 ---
 page: coagulation-fragmentation-and-sectional-population-balance-numerics
 title: Coagulation Fragmentation and Sectional Population Balance Numerics
-status: draft
+status: published
 items:
   - def-bounded-lipschitz-discrepancy-for-measures
   - def-conservative-fixed-pivot-redistribution

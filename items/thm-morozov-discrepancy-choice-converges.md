@@ -2,7 +2,7 @@
 id: thm-morozov-discrepancy-choice-converges
 kind: theorem
 title: Morozov discrepancy roots exist and converge for nonzero exact data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

@@ -2,7 +2,7 @@
 id: lem-real-complex-hilbert-source-powers-and-tikhonov-filter-bounds
 kind: lemma
 title: "Real and complex Hilbert source powers and fixed-reference Tikhonov filter bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

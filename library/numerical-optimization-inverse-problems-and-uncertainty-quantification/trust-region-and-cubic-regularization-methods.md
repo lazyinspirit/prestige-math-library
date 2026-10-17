@@ -1,7 +1,7 @@
 ---
 page: trust-region-and-cubic-regularization-methods
 title: "Trust region and cubic regularization methods"
-status: draft
+status: published
 items:
   - def-trust-region-quadratic-model-and-ratio
   - def-adaptive-cubic-regularization-model

@@ -2,7 +2,7 @@
 id: lem-svrg-unbiasedness-and-variance-bound
 kind: lemma
 title: SVRG conditional unbiasedness and variance bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

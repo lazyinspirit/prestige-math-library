@@ -2,7 +2,7 @@
 id: thm-block-ldl-star-residual-with-actual-growth
 kind: theorem
 title: Block LDL* residual errors propagate with actual block growth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: renewal-age-and-size-structured-numerical-methods-examples
 title: "Renewal age and size structured numerical methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-narrow-maturation-kernel-delay-approximation

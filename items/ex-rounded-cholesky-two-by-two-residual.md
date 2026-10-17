@@ -2,7 +2,7 @@
 id: ex-rounded-cholesky-two-by-two-residual
 kind: example
 title: "A rounded two by two Cholesky factor and its residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

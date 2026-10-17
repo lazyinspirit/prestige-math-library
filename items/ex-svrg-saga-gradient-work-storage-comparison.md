@@ -2,7 +2,7 @@
 id: ex-svrg-saga-gradient-work-storage-comparison
 kind: example
 title: SVRG and SAGA gradient-work and storage ledger
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

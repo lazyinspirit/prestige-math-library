@@ -2,7 +2,7 @@
 id: def-implicit-residual-and-algebraic-error-units
 title: "Implicit residuals and their update and derivative units"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

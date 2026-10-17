@@ -2,7 +2,7 @@
 id: cex-understated-thinning-envelope-is-invalid
 kind: counterexample
 title: "Clipping an understated thinning envelope changes the waiting-time law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

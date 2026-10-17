@@ -2,7 +2,7 @@
 id: thm-barycentric-interpolation-identities
 kind: theorem
 title: "Barycentric interpolation identities"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-bounded-lipschitz-dual-norm-for-signed-measures
 kind: definition
 title: Bounded-Lipschitz dual discrepancy for finite signed measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

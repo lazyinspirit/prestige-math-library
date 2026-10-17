@@ -2,7 +2,7 @@
 id: lem-coordinate-block-smoothness-descent-model
 kind: lemma
 title: "Coordinate-block smoothness descent model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

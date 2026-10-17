@@ -2,7 +2,7 @@
 id: prop-phase-bordered-bvp-root-equivalence
 kind: proposition
 title: "Zeros of the phase-bordered BVP are phase-fixed periodic orbits"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

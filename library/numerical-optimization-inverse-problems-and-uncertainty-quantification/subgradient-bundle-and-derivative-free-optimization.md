@@ -1,7 +1,7 @@
 ---
 page: subgradient-bundle-and-derivative-free-optimization
 title: Subgradient bundle and derivative free optimization
-status: draft
+status: published
 items:
   - alg-nelder-mead-finite-budget
   - alg-projected-subgradient-method

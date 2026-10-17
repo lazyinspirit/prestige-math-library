@@ -2,7 +2,7 @@
 id: ex-indefinite-trust-region-boundary-minimizer
 kind: example
 title: "An indefinite quadratic has a unique boundary trust-region minimizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

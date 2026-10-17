@@ -2,7 +2,7 @@
 id: thm-finite-budget-spatial-bnb-terminates
 kind: theorem
 title: Finite-budget spatial branch and bound always returns a declared status
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

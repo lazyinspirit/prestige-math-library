@@ -2,7 +2,7 @@
 id: thm-golub-welsch-certified-enclosures-are-sound
 kind: theorem
 title: Certified Golub–Welsch intervals contain the Gaussian nodes and weights
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

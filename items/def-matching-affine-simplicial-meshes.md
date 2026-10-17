@@ -2,7 +2,7 @@
 id: def-matching-affine-simplicial-meshes
 kind: definition
 title: Matching affine simplicial meshes and shape regularity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

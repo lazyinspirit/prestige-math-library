@@ -2,7 +2,7 @@
 id: thm-neutral-delay-euler-first-order-error
 kind: theorem
 title: "Compatible-grid Euler has first-order solution and derivative error for a stable neutral delay"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

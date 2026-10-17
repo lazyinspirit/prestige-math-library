@@ -2,7 +2,7 @@
 id: ex-small-semidefinite-relaxation-primal-dual-certificate
 kind: example
 title: "A two-variable semidefinite relaxation with a matching dual certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-one-node-gauss-data-is-midpoint
 kind: lemma
 title: One-node Gauss data are midpoint data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-continuous-size-coagulation-fragmentation-weak-model
 kind: definition
 title: Continuous-size coagulation-fragmentation weak model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

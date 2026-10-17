@@ -2,7 +2,7 @@
 id: lem-signed-bl-norm-dominated-by-split-coupling-cost
 kind: lemma
 title: The bounded-Lipschitz dual discrepancy is bounded by split transport cost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: trust-region-and-cubic-regularization-methods-examples
 title: "Trust region and cubic regularization methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-indefinite-trust-region-boundary-minimizer

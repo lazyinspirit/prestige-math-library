@@ -2,7 +2,7 @@
 id: lem-saga-estimator-and-table-recurrence
 kind: lemma
 title: SAGA conditional estimator, variance, and table recurrence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

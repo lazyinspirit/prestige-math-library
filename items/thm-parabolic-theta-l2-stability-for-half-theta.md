@@ -2,7 +2,7 @@
 id: thm-parabolic-theta-l2-stability-for-half-theta
 kind: theorem
 title: Unconditional weighted L2 stability for θ at least one half
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

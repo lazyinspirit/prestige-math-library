@@ -2,7 +2,7 @@
 id: alg-capped-diis-projector-proposal
 kind: algorithm
 title: Finite-memory capped DIIS projector proposal with fallback
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-distributed-delay-midpoint-history-error
 kind: example
 title: "Distributed-delay midpoint quadrature separates two history errors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

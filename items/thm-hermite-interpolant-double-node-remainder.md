@@ -2,7 +2,7 @@
 id: thm-hermite-interpolant-double-node-remainder
 kind: theorem
 title: Double-node Hermite interpolation has the stated pointwise remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-implicit-rk-stage-jacobian-nonsingular-on-branch
 kind: lemma
 title: A contractive implicit Runge-Kutta stage branch has a nonsingular residual Jacobian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

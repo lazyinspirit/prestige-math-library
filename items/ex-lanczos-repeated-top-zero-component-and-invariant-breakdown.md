@@ -2,7 +2,7 @@
 id: ex-lanczos-repeated-top-zero-component-and-invariant-breakdown
 kind: example
 title: "Lanczos handles repeated top eigenvalues, absent top components, and exact breakdown"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

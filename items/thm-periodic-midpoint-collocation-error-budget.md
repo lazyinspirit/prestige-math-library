@@ -2,7 +2,7 @@
 id: thm-periodic-midpoint-collocation-error-budget
 kind: theorem
 title: "Periodic midpoint collocation has an explicit local second-order error budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

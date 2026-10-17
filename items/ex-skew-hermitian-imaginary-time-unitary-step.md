@@ -2,7 +2,7 @@
 id: ex-skew-hermitian-imaginary-time-unitary-step
 kind: example
 title: Real-time unitary and imaginary-time finite-matrix propagation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

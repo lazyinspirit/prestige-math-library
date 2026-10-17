@@ -2,7 +2,7 @@
 id: lem-reset-error-after-a-mistimed-hybrid-event
 kind: lemma
 title: "Reset and smooth-mode flow propagate a transverse event-time error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-broken-and-conforming-polynomial-spaces
 kind: definition
 title: Broken and conforming polynomial spaces on a matching mesh
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

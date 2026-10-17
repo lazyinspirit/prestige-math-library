@@ -2,7 +2,7 @@
 id: ex-dissipative-backward-euler-residual-contraction
 title: "A dissipative backward Euler solve with a controlled update residual"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

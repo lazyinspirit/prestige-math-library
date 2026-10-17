@@ -2,7 +2,7 @@
 id: thm-euler-global-state-and-log-density-error
 title: "Euler global state and log-density error on a bounded C² tube"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

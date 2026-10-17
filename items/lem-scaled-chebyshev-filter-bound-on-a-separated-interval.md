@@ -2,7 +2,7 @@
 id: lem-scaled-chebyshev-filter-bound-on-a-separated-interval
 kind: lemma
 title: "A scaled Chebyshev polynomial suppresses a separated interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

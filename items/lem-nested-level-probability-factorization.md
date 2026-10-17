@@ -2,7 +2,7 @@
 id: lem-nested-level-probability-factorization
 kind: lemma
 title: Nested-event probabilities factor into conditional levels
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

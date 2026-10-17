@@ -2,7 +2,7 @@
 id: ex-rkc-self-adjoint-heat-stability-work
 kind: example
 title: "A self-adjoint heat spectrum gives a long RKC1 stability step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

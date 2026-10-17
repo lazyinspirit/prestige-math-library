@@ -1,7 +1,7 @@
 ---
 page: revised-simplex-linear-programming-and-certificates
 title: "Revised simplex linear programming and certificates"
-status: draft
+status: published
 requires:
   - finite-precision-direct-factorizations
   - sparse-matrix-models-and-kernel-costs

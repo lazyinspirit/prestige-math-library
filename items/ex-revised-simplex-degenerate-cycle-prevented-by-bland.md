@@ -2,7 +2,7 @@
 id: ex-revised-simplex-degenerate-cycle-prevented-by-bland
 kind: example
 title: "A degenerate six-pivot cycle prevented by Bland's rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

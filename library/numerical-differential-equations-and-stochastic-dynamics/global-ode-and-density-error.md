@@ -1,7 +1,7 @@
 ---
 page: global-ode-and-density-error
 title: Global ODE and Log-density Integration Error
-status: draft
+status: published
 items:
   - lem-discrete-one-step-error-recurrence-bound
   - thm-continuous-flow-log-density-equation

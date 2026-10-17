@@ -2,7 +2,7 @@
 id: thm-safeguarded-hybrid-event-locator-is-sound-and-budgeted
 kind: theorem
 title: "The hybrid event locator returns sound certificates or explicit failure within its budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

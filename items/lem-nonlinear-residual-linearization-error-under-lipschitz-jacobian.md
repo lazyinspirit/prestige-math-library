@@ -2,7 +2,7 @@
 id: lem-nonlinear-residual-linearization-error-under-lipschitz-jacobian
 kind: lemma
 title: "Rectangular residual linearization error under a Lipschitz Jacobian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

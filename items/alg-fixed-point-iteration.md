@@ -2,7 +2,7 @@
 id: alg-fixed-point-iteration
 kind: algorithm
 title: "Fixed-point iteration with a residual stop and finite budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

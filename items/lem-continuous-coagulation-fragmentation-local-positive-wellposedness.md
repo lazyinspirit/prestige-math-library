@@ -2,7 +2,7 @@
 id: lem-continuous-coagulation-fragmentation-local-positive-wellposedness
 kind: lemma
 title: Bounded kernels give a local positive measure-valued solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-lbfgs-two-loop-with-curvature-filter
 kind: algorithm
 title: "Limited-memory Bfgs two-loop recursion with curvature filtering"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: positive-conservative-production-destruction-integrators
 title: Positive Conservative Production Destruction Integrators
-status: draft
+status: published
 items:
   - def-finite-conservative-production-destruction-system
   - lem-strict-column-dominance-implies-nonnegative-inverse

@@ -2,7 +2,7 @@
 id: thm-mprk22-1-positive-conservative
 kind: theorem
 title: "MPRK22(1) preserves positivity and total mass on positive inputs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

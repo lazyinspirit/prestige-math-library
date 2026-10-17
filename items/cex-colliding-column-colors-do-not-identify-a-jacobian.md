@@ -2,7 +2,7 @@
 id: cex-colliding-column-colors-do-not-identify-a-jacobian
 kind: counterexample
 title: "A colliding color seed cannot distinguish two Jacobians with different entries"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

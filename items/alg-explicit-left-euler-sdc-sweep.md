@@ -2,7 +2,7 @@
 id: alg-explicit-left-euler-sdc-sweep
 kind: algorithm
 title: Finite explicit-left-Euler spectral deferred-correction sweep
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

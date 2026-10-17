@@ -2,7 +2,7 @@
 id: ex-distributed-heat-source-control-with-an-exact-box-optimum
 kind: example
 title: A distributed heat source has an exact box-constrained optimum
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

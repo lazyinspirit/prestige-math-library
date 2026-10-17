@@ -2,7 +2,7 @@
 id: alg-near-orthonormal-hermitian-eigenvalue-certifier
 kind: algorithm
 title: Certified Hermitian eigenvalue intervals from residual and Gram bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-modified-patankar-euler-positive-tube-local-error-and-stability
 kind: lemma
 title: "Modified Patankar Euler has a uniform first-order defect and one-step bound on positive tubes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

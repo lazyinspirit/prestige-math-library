@@ -2,7 +2,7 @@
 id: alg-forward-over-reverse-hessian-vector-product
 kind: algorithm
 title: "Forward-over-reverse Hessian-vector products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-finite-straight-line-computational-program, alg-forward-mode-automatic-differentiation, alg-reverse-mode-automatic-differentiation]

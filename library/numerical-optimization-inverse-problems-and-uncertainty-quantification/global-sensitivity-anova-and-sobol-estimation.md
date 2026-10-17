@@ -1,7 +1,7 @@
 ---
 page: global-sensitivity-anova-and-sobol-estimation
 title: Global sensitivity anova and sobol estimation
-status: draft
+status: published
 items:
   - def-dependent-input-shapley-effects
   - def-product-coordinate-projections

@@ -2,7 +2,7 @@
 id: cex-composite-strong-convexity-alone-does-not-give-coordinate-factor
 kind: counterexample
 title: "Strong convexity of the composite alone does not give the stated coordinate factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

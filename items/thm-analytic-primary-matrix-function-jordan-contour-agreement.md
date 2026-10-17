@@ -2,7 +2,7 @@
 id: thm-analytic-primary-matrix-function-jordan-contour-agreement
 kind: theorem
 title: "Jordan, contour, similarity, and normal-functional-calculus formulas agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

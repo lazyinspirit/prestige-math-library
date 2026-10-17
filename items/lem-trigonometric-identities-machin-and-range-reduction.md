@@ -2,7 +2,7 @@
 id: lem-trigonometric-identities-machin-and-range-reduction
 kind: lemma
 title: Trigonometric identities, Machin's formula and reduced Taylor tails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

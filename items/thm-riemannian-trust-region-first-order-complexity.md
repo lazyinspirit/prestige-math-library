@@ -2,7 +2,7 @@
 id: thm-riemannian-trust-region-first-order-complexity
 kind: theorem
 title: Riemannian trust regions reach an epsilon-gradient iterate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

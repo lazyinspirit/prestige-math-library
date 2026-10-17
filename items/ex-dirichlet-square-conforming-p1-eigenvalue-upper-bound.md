@@ -2,7 +2,7 @@
 id: ex-dirichlet-square-conforming-p1-eigenvalue-upper-bound
 kind: example
 title: A conforming P1 Dirichlet discretization gives a first Ritz upper bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-na-certified-unit-circle-phase
 kind: algorithm
 title: "Certified dyadic enclosures for unit-circle phases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

@@ -2,7 +2,7 @@
 id: lem-rational-expression-derivative-recursion-correct
 kind: lemma
 title: "Symbolic derivative recursion for a rational expression DAG is correct"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

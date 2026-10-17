@@ -1,7 +1,7 @@
 ---
 page: sparse-grid-cubature-and-mixed-regularity-examples
 title: "Sparse grid cubature and mixed regularity — Examples"
-status: draft
+status: published
 requires:
   - sparse-grid-cubature-and-mixed-regularity
 items: []

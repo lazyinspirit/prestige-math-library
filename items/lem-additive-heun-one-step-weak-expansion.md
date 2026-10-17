@@ -2,7 +2,7 @@
 id: lem-additive-heun-one-step-weak-expansion
 kind: lemma
 title: "One-step moment matching for additive-noise stochastic Heun"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

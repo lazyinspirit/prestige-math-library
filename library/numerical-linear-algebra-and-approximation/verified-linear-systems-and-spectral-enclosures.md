@@ -1,7 +1,7 @@
 ---
 page: verified-linear-systems-and-spectral-enclosures
 title: "Verified linear systems and spectral enclosures"
-status: draft
+status: published
 requires:
   - dual-spaces-bilinear-forms-and-inertia
   - the-spectral-theorem-and-singular-value-decomposition

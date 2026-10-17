@@ -2,7 +2,7 @@
 id: def-stochastic-gradient-oracle-and-unconstrained-update
 kind: definition
 title: "Filtration-adapted stochastic-gradient oracles and Robbins–Monro updates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

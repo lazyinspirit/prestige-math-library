@@ -2,7 +2,7 @@
 id: cex-critical-lagrange-point-evaluation-on-h1-in-two-dimensions
 kind: counterexample
 title: Point evaluation is unbounded at the two-dimensional H1 threshold
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

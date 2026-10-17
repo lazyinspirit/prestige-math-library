@@ -2,7 +2,7 @@
 id: alg-landweber-iteration-with-discrepancy-stopping
 kind: algorithm
 title: Landweber iteration with discrepancy and budget statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

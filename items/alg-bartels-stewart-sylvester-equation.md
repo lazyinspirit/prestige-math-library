@@ -2,7 +2,7 @@
 id: alg-bartels-stewart-sylvester-equation
 kind: algorithm
 title: "Finite-budget Bartels-Stewart solve for a Sylvester equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

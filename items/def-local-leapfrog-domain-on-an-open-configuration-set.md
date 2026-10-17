@@ -2,7 +2,7 @@
 id: def-local-leapfrog-domain-on-an-open-configuration-set
 kind: definition
 title: Local domain restriction for kick, drift, and leapfrog maps
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-leapfrog-step-map]

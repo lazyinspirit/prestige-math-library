@@ -2,7 +2,7 @@
 id: thm-index-one-dae-implicit-function-reduction
 title: "A regular index-one DAE has a local reduced ODE branch"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

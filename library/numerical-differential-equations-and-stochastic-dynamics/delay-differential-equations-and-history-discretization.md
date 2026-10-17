@@ -1,7 +1,7 @@
 ---
 page: delay-differential-equations-and-history-discretization
 title: Delay differential equations and history discretization
-status: draft
+status: published
 items:
   - def-retarded-delay-equation-and-history-space
   - lem-delay-history-space-is-banach

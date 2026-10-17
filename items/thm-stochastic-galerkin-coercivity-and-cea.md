@@ -2,7 +2,7 @@
 id: thm-stochastic-galerkin-coercivity-and-cea
 kind: theorem
 title: Stochastic Galerkin coercivity and Cea quasi-optimality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

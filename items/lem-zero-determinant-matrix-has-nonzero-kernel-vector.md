@@ -2,7 +2,7 @@
 id: lem-zero-determinant-matrix-has-nonzero-kernel-vector
 kind: lemma
 title: "A square matrix with zero determinant has a nonzero kernel vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

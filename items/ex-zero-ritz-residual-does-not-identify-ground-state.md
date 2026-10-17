@@ -2,7 +2,7 @@
 id: ex-zero-ritz-residual-does-not-identify-ground-state
 kind: example
 title: "A zero Ritz residual can belong to an excited eigenstate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

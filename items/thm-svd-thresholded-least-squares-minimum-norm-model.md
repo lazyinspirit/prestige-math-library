@@ -2,7 +2,7 @@
 id: thm-svd-thresholded-least-squares-minimum-norm-model
 kind: theorem
 title: "The SVD threshold solver gives the unique minimum-norm fit to its truncated model"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

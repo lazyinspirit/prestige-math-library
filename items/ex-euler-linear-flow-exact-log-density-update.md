@@ -2,7 +2,7 @@
 id: ex-euler-linear-flow-exact-log-density-update
 title: "Euler has state error but exact log-density quadrature for a linear flow"
 kind: example
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: parabolic-finite-difference-methods
 title: Parabolic finite-difference methods
-status: draft
+status: published
 items:
   - def-parabolic-theta-finite-difference-scheme
   - lem-parabolic-dirichlet-laplacian-is-positive-selfadjoint

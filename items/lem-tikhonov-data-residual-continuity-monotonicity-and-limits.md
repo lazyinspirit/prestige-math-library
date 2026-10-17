@@ -2,7 +2,7 @@
 id: lem-tikhonov-data-residual-continuity-monotonicity-and-limits
 kind: lemma
 title: Compact-operator Tikhonov residuals are continuous and increase from range distance to data norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

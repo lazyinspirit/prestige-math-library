@@ -2,7 +2,7 @@
 id: thm-revised-simplex-bland-rule-finite-termination
 kind: theorem
 title: "Bland-rule finite termination and optimal-basis existence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

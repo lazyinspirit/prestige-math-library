@@ -2,7 +2,7 @@
 id: alg-pseudo-arclength-continuation-with-certified-local-corrector
 kind: algorithm
 title: "Finite-budget pseudo-arclength continuation with a certified local corrector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

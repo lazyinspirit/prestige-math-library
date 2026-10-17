@@ -1,7 +1,7 @@
 ---
 page: nonlinear-equations-and-newton-methods-examples
 title: "Nonlinear equations and Newton methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-nonlinear-equations-and-newton-methods-boundary-cases

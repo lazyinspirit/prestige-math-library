@@ -2,7 +2,7 @@
 id: cor-tensor-gauss-exact-chaos-coefficients
 kind: corollary
 title: Tensor Gaussian rules recover polynomial-chaos coefficients exactly
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

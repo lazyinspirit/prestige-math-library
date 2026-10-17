@@ -2,7 +2,7 @@
 id: thm-finite-transient-hitting-and-mean-exit-residual-bound
 kind: theorem
 title: "Transient hitting, mean exit, and residual bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-rosenbrock-euler-scalar-a-and-l-stability
 title: "The Rosenbrock–Euler scalar stability function is A-stable exactly for gamma at least one half"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: pseudo-arclength-continuation-and-fold-certificates
 title: Pseudo arclength continuation and fold certificates
-status: draft
+status: published
 requires: [the-inverse-function-theorem-completed, nonlinear-equations-and-newton-methods]
 items:
   - lem-pseudo-arclength-border-matrix-invertibility-and-inverse-bound

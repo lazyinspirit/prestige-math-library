@@ -2,7 +2,7 @@
 id: thm-complex-grassmann-polar-retraction-is-first-order
 kind: theorem
 title: The complex Grassmann polar map is a first-order retraction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

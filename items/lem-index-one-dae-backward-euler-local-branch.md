@@ -2,7 +2,7 @@
 id: lem-index-one-dae-backward-euler-local-branch
 title: "The coupled index-one backward-Euler equations have a local branch"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

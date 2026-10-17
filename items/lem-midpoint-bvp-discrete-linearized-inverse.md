@@ -2,7 +2,7 @@
 id: lem-midpoint-bvp-discrete-linearized-inverse
 kind: lemma
 title: "Uniform inverse bound for the sampled midpoint linearized BVP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

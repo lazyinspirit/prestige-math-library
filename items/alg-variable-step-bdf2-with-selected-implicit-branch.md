@@ -2,7 +2,7 @@
 id: alg-variable-step-bdf2-with-selected-implicit-branch
 kind: algorithm
 title: "Variable-step BDF2 with an explicit local implicit-branch rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

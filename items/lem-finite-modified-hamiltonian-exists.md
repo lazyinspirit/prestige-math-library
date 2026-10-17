@@ -2,7 +2,7 @@
 id: lem-finite-modified-hamiltonian-exists
 kind: lemma
 title: A finite formal logarithm has Hamiltonian coefficients on a star-shaped domain
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

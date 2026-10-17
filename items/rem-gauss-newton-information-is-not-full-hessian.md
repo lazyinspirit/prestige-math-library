@@ -2,7 +2,7 @@
 id: rem-gauss-newton-information-is-not-full-hessian
 kind: remark
 title: "The Gauss–Newton information term omits residual curvature from the full Hessian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-heun-dense-output-local-order-two
 kind: theorem
 title: "Heun's quadratic dense output has local order two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

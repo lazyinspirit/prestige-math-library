@@ -1,7 +1,7 @@
 ---
 page: langevin-splittings-and-invariant-measure-error
 title: Langevin splittings and invariant measure error
-status: draft
+status: published
 items:
   - def-underdamped-langevin-equation-and-canonical-gibbs-density
   - alg-baoab-underdamped-langevin-splitting

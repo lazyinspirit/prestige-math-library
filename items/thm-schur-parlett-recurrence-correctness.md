@@ -2,7 +2,7 @@
 id: thm-schur-parlett-recurrence-correctness
 kind: theorem
 title: "Separated Schur–Parlett blocks reconstruct the analytic matrix function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

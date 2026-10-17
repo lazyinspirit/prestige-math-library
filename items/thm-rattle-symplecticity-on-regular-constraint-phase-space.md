@@ -2,7 +2,7 @@
 id: thm-rattle-symplecticity-on-regular-constraint-phase-space
 kind: theorem
 title: Exact RATTLE is symplectic on the constrained phase space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

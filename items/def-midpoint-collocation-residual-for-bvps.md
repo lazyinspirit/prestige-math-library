@@ -2,7 +2,7 @@
 id: def-midpoint-collocation-residual-for-bvps
 kind: definition
 title: "Normalized implicit-midpoint collocation residual for a two-point BVP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

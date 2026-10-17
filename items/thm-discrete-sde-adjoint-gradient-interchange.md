@@ -2,7 +2,7 @@
 id: thm-discrete-sde-adjoint-gradient-interchange
 kind: theorem
 title: "A finite stochastic adjoint gives the discrete gradient under domination"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

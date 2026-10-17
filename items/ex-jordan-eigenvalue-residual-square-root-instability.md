@@ -2,7 +2,7 @@
 id: ex-jordan-eigenvalue-residual-square-root-instability
 kind: example
 title: "A Jordan eigenpair residual can be much smaller than its eigenvalue error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

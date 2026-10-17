@@ -2,7 +2,7 @@
 id: thm-sor-converges-iff-a-is-positive-definite-and-zero-less-than-omega-less-than-two
 kind: theorem
 title: "SOR converges exactly for positive-definite A and relaxation parameter in (0, 2)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

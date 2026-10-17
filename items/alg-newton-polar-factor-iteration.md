@@ -2,7 +2,7 @@
 id: alg-newton-polar-factor-iteration
 kind: algorithm
 title: "Finite-budget Newton iteration for the nonsingular polar factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

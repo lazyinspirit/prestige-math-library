@@ -2,7 +2,7 @@
 id: thm-cir-lamperti-scheme-converges-in-probability
 kind: theorem
 title: "Lamperti drift-implicit CIR scheme converges on finite horizons in probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

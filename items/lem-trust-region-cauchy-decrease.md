@@ -2,7 +2,7 @@
 id: lem-trust-region-cauchy-decrease
 kind: lemma
 title: "The Cauchy step gives a quantitative model decrease"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

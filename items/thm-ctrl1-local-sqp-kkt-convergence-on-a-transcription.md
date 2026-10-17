@@ -2,7 +2,7 @@
 id: thm-ctrl1-local-sqp-kkt-convergence-on-a-transcription
 kind: theorem
 title: "Exact-Hessian SQP converges locally to a regular transcription KKT point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 10

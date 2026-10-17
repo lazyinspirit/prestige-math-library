@@ -2,7 +2,7 @@
 id: thm-strong-rrqr-singular-value-comparisons
 kind: theorem
 title: "Strong RRQR block singular values compare to the full matrix spectrum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

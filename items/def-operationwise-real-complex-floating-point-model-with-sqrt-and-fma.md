@@ -2,7 +2,7 @@
 id: def-operationwise-real-complex-floating-point-model-with-sqrt-and-fma
 kind: definition
 title: "Operationwise real and complex floating point arithmetic with rounded square roots and fused multiply-add"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

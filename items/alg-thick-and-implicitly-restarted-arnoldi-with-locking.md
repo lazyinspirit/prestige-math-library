@@ -2,7 +2,7 @@
 id: alg-thick-and-implicitly-restarted-arnoldi-with-locking
 kind: algorithm
 title: "Finite-budget thick and implicitly restarted Arnoldi with residual acceptance and locking"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

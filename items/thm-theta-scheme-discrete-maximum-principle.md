@@ -2,7 +2,7 @@
 id: thm-theta-scheme-discrete-maximum-principle
 kind: theorem
 title: A boundary-aware discrete maximum principle for the θ scheme
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

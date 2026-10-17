@@ -2,7 +2,7 @@
 id: alg-block-lobpcg-with-rank-loss-status
 kind: algorithm
 title: "Finite-budget block LOBPCG for a Hermitian-definite pencil with explicit rank-loss status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

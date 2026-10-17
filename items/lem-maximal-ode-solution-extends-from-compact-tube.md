@@ -2,7 +2,7 @@
 id: lem-maximal-ode-solution-extends-from-compact-tube
 kind: lemma
 title: "A maximal ODE solution cannot remain in a compact tube to a finite endpoint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

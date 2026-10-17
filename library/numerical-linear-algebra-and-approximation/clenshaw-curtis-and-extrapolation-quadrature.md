@@ -1,7 +1,7 @@
 ---
 page: clenshaw-curtis-and-extrapolation-quadrature
 title: "Clenshaw–Curtis and extrapolation quadrature"
-status: draft
+status: published
 requires:
   - polynomial-interpolation-and-remainder
   - computed-fast-transforms-and-convolution

@@ -1,7 +1,7 @@
 ---
 page: preconditioner-algorithms-and-residual-metrics
 title: "Preconditioner algorithms and residual metrics"
-status: draft
+status: published
 items:
   - alg-ilu0-fixed-pattern-factorization
   - thm-ilu0-factor-pattern-and-work-counts

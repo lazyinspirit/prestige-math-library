@@ -2,7 +2,7 @@
 id: thm-na-computed-fft-convolution-error-bound
 kind: theorem
 title: "Computed FFT convolution error separates transform, product, inverse, and final-scale terms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

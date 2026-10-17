@@ -2,7 +2,7 @@
 id: ex-projected-overdamped-particle-euler-trajectory
 kind: example
 title: Projected Euler for a constrained overdamped particle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

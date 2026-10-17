@@ -2,7 +2,7 @@
 id: thm-gauge-fixed-stable-discrete-path-comparison
 kind: theorem
 title: "A gauge-fixed stable discrete path lies within second order of a smooth MEP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

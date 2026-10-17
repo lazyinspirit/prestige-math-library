@@ -2,7 +2,7 @@
 id: ex-total-degree-versus-tensor-product-work
 kind: example
 title: Three-input degree-two chaos uses ten total-degree modes versus twenty-seven tensor modes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

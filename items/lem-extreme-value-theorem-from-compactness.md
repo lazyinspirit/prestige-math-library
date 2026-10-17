@@ -2,7 +2,7 @@
 id: lem-extreme-value-theorem-from-compactness
 kind: lemma
 title: Continuous functions on a closed interval attain their extrema
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

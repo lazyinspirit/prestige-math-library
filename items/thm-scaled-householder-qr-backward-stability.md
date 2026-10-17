@@ -2,7 +2,7 @@
 id: thm-scaled-householder-qr-backward-stability
 kind: theorem
 title: "The scaled Householder QR implementation is backward stable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

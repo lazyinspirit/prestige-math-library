@@ -2,7 +2,7 @@
 id: ex-rkc-stage-roundoff-quadratic-amplification
 kind: example
 title: "Equal additive stage perturbations attain quadratic RKC1 amplification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

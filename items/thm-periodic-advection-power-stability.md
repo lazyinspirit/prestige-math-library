@@ -2,7 +2,7 @@
 id: thm-periodic-advection-power-stability
 kind: theorem
 title: Scheme-specific periodic power stability for scalar advection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

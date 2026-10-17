@@ -2,7 +2,7 @@
 id: thm-zero-compatible-modified-patankar-euler-admissibility
 kind: theorem
 title: "The factorized zero-state step is well-defined, nonnegative, conservative, and locally first order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

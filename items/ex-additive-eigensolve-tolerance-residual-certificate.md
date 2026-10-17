@@ -2,7 +2,7 @@
 id: ex-additive-eigensolve-tolerance-residual-certificate
 kind: example
 title: An additive response-evaluation tolerance enters the fixed-point residual certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

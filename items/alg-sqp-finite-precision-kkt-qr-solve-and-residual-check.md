@@ -2,7 +2,7 @@
 id: alg-sqp-finite-precision-kkt-qr-solve-and-residual-check
 kind: algorithm
 title: "Finite-precision reduced-QR KKT solve with certified residual status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-outward-rounded-interval-and-ball-operations
 kind: definition
 title: Outward-rounded interval, rectangle and ball operations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

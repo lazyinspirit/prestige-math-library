@@ -2,7 +2,7 @@
 id: lem-one-point-extension-for-finite-dimensional-nonexpansive-map
 kind: lemma
 title: "One-point extension of a nonexpansive map in finite dimensions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

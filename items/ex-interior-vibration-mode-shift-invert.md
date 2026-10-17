@@ -2,7 +2,7 @@
 id: ex-interior-vibration-mode-shift-invert
 kind: example
 title: "Shift-invert isolates an interior vibration mode and records solve error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

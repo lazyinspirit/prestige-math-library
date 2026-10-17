@@ -2,7 +2,7 @@
 id: lem-ctrl1-lqr-adjoint-exists-uniquely
 kind: lemma
 title: "The backward LQR adjoint equation has a unique solution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-one-step-modified-energy-defect
 kind: lemma
 title: The finite modified Hamiltonian has a bounded one-step defect
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:

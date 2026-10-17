@@ -2,7 +2,7 @@
 id: lem-phase-border-implies-periodic-bvp-linearization-bounded-inverse
 kind: lemma
 title: "A transverse phase border makes the periodic BVP linearization boundedly invertible"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

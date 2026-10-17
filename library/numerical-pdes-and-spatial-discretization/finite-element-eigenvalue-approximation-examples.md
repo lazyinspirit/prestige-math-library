@@ -1,7 +1,7 @@
 ---
 page: finite-element-eigenvalue-approximation-examples
 title: "Finite-element eigenvalue approximation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-nearly-dependent-overlap-matrix-whitening-and-conditioning

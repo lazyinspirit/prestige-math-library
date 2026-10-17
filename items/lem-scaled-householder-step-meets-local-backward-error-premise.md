@@ -2,7 +2,7 @@
 id: lem-scaled-householder-step-meets-local-backward-error-premise
 kind: lemma
 title: "The scaled computed Householder step satisfies the local backward error premise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -1,7 +1,7 @@
 ---
 page: nonconvex-line-search-and-inexact-newton-methods
 title: "Nonconvex line search and inexact newton methods"
-status: draft
+status: published
 items:
   - def-wolfe-and-strong-wolfe-conditions
   - lem-strong-wolfe-step-exists-on-a-bounded-below-ray

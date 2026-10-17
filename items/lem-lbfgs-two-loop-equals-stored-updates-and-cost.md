@@ -2,7 +2,7 @@
 id: lem-lbfgs-two-loop-equals-stored-updates-and-cost
 kind: lemma
 title: "The L-Bfgs two-loop recursion equals the stored inverse updates and costs linear memory work"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-legendre-polynomial-family-and-l2-pairing
 kind: definition
 title: "Legendre polynomials by Rodrigues' formula and their unweighted pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

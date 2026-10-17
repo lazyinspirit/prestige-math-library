@@ -1,7 +1,7 @@
 ---
 page: linear-multistep-methods-and-dahlquist-equivalence
 title: "Linear multistep methods and Dahlquist equivalence"
-status: draft
+status: published
 items:
   - def-linear-multistep-method-consistency-order-and-root-condition
   - lem-variable-step-adams-lagrange-weights

@@ -1,7 +1,7 @@
 ---
 page: finite-element-meshes-and-interpolation
 title: "Finite-element meshes and interpolation"
-status: draft
+status: published
 items:
   - def-matching-affine-simplicial-meshes
   - def-oriented-simplicial-cell-chains

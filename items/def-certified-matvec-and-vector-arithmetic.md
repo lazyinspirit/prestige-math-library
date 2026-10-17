@@ -2,7 +2,7 @@
 id: def-certified-matvec-and-vector-arithmetic
 kind: definition
 title: "Normwise certified matrix-vector and vector-step arithmetic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-rattle-scaled-position-and-momentum-branches
 kind: lemma
 title: Scaled RATTLE equations have unique local multiplier branches
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-distributed-delay-equation-and-window-integral
 kind: definition
 title: "Distributed delays through a finite-window history integral"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

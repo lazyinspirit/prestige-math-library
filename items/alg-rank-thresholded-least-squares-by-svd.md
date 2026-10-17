@@ -2,7 +2,7 @@
 id: alg-rank-thresholded-least-squares-by-svd
 kind: algorithm
 title: "Rank-thresholded least squares by the singular value decomposition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

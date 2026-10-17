@@ -2,7 +2,7 @@
 id: thm-age-structured-renewal-bv-l1-convergence
 kind: theorem
 title: L1 convergence for BV data without renewal-boundary compatibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

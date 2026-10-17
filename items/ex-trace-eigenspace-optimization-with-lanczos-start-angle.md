@@ -2,7 +2,7 @@
 id: ex-trace-eigenspace-optimization-with-lanczos-start-angle
 kind: example
 title: A trace eigenspace objective and a Lanczos start-angle bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

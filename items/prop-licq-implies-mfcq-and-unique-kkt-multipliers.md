@@ -2,7 +2,7 @@
 id: prop-licq-implies-mfcq-and-unique-kkt-multipliers
 kind: proposition
 title: LICQ implies MFCQ and makes KKT multipliers unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

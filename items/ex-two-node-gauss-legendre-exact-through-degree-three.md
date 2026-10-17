@@ -2,7 +2,7 @@
 id: ex-two-node-gauss-legendre-exact-through-degree-three
 kind: example
 title: The two-node Gauss–Legendre rule is exact through degree three
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

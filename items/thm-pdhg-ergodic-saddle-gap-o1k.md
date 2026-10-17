@@ -2,7 +2,7 @@
 id: thm-pdhg-ergodic-saddle-gap-o1k
 kind: theorem
 title: "PDHG has an O(1/k) ergodic saddle-gap bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

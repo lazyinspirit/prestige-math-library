@@ -2,7 +2,7 @@
 id: thm-stochastic-gradient-strong-convex-diminishing-step-rate
 kind: theorem
 title: "Last-iterate SGD rate for smooth strongly convex objectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-xd-geometric-poisson-tail-bound
 kind: lemma
 title: "A geometric upper bound for a Poisson right tail"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

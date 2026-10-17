@@ -2,7 +2,7 @@
 id: thm-rattle-exact-constraint-preservation-and-reversibility
 kind: theorem
 title: Exact RATTLE preserves both constraints and is symmetric
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

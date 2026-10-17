@@ -2,7 +2,7 @@
 id: alg-sparse-cholesky-with-invalid-pivot-status
 kind: algorithm
 title: Ordered sparse Cholesky with explicit pivot and range statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

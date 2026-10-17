@@ -2,7 +2,7 @@
 id: lem-implicit-bidiagonal-qr-bulge-chase-unitary-equivalence
 kind: lemma
 title: "Bulge chase preserves bidiagonal singular values"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

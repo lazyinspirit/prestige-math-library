@@ -2,7 +2,7 @@
 id: alg-adams-pece-one-correction
 kind: algorithm
 title: "Variable-step Adams predictor-evaluate-correct-evaluate procedure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

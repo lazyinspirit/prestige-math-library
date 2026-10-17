@@ -2,7 +2,7 @@
 id: thm-revised-simplex-phase-one-extraction-and-farkas
 kind: theorem
 title: "Phase I feasible-basis extraction and infeasibility certificate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

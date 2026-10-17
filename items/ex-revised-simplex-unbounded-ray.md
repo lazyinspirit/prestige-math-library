@@ -2,7 +2,7 @@
 id: ex-revised-simplex-unbounded-ray
 kind: example
 title: "A revised-simplex unbounded ray"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

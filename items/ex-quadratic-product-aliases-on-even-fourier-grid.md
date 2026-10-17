@@ -2,7 +2,7 @@
 id: ex-quadratic-product-aliases-on-even-fourier-grid
 kind: example
 title: "A quadratic Fourier product aliases two high modes on an even grid"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: spectral-collocation-and-galerkin-methods-examples

@@ -2,7 +2,7 @@
 id: cor-cubic-defect-gives-second-order-for-symmetric-multirate-composition
 title: "Second-order global bound under symmetric coupling and a cubic defect"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

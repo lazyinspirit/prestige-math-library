@@ -1,7 +1,7 @@
 ---
 page: adaptive-stochastic-paths-and-brownian-bridge-coupling
 title: Adaptive stochastic paths and brownian bridge coupling
-status: draft
+status: published
 items:
   - alg-dyadic-brownian-bridge-increment-tree
   - thm-dyadic-brownian-bridge-tree-increment-laws

@@ -2,7 +2,7 @@
 id: thm-box-muller-finite-bit-coupling-error
 kind: theorem
 title: "Certified finite-bit Box–Muller has explicit BL and W1 error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 14

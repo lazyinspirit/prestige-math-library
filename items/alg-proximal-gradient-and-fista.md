@@ -2,7 +2,7 @@
 id: alg-proximal-gradient-and-fista
 kind: algorithm
 title: "Proximal-gradient, FISTA, and fixed-period restarted FISTA"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

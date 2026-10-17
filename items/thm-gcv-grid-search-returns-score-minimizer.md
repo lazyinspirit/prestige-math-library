@@ -2,7 +2,7 @@
 id: thm-gcv-grid-search-returns-score-minimizer
 kind: theorem
 title: Finite-grid GCV is well-defined and minimizes its supplied score
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

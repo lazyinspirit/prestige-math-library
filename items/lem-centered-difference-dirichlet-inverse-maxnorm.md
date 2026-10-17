@@ -2,7 +2,7 @@
 id: lem-centered-difference-dirichlet-inverse-maxnorm
 kind: lemma
 title: Discrete maximum principle and uniform inverse bound for the Dirichlet stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [alg-centered-difference-dirichlet-bvp]

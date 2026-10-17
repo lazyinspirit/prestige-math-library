@@ -2,7 +2,7 @@
 id: lem-chebyshev-cardinal-polynomial-formulas
 kind: lemma
 title: "Trigonometric formulas for Chebyshev cardinal polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

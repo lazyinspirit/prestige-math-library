@@ -2,7 +2,7 @@
 id: ex-interval-subtraction-dependency
 kind: example
 title: Natural interval subtraction loses repeated-input correlation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic-examples

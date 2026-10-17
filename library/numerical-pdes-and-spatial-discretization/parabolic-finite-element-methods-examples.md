@@ -1,7 +1,7 @@
 ---
 page: parabolic-finite-element-methods-examples
 title: "Parabolic finite-element methods — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-parabolic-crank-nicolson-time-regularity-order-loss

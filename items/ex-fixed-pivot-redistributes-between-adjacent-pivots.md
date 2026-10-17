@@ -2,7 +2,7 @@
 id: ex-fixed-pivot-redistributes-between-adjacent-pivots
 kind: example
 title: A product between pivots is split without changing number or mass
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

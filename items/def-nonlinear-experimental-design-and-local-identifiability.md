@@ -2,7 +2,7 @@
 id: def-nonlinear-experimental-design-and-local-identifiability
 kind: definition
 title: "Finite nonlinear observation designs, local identifiability, and weighted information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-second-order-necessary-condition-on-the-critical-cone
 kind: theorem
 title: Second-order necessity on the critical cone under LICQ
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

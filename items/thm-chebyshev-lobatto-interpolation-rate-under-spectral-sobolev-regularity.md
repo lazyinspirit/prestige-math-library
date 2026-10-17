@@ -2,7 +2,7 @@
 id: thm-chebyshev-lobatto-interpolation-rate-under-spectral-sobolev-regularity
 kind: theorem
 title: "Chebyshev–Lobatto interpolation has an algebraic weighted spectral-Sobolev rate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

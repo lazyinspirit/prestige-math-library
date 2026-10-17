@@ -2,7 +2,7 @@
 id: ex-binary-fragmentation-preserves-first-moment
 kind: example
 title: A binary split preserves first moment and increases number by one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

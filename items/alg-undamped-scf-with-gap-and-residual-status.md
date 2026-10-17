@@ -2,7 +2,7 @@
 id: alg-undamped-scf-with-gap-and-residual-status
 kind: algorithm
 title: Finite-budget undamped self-consistent projector iteration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

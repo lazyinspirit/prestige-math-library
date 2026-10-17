@@ -2,7 +2,7 @@
 id: thm-short-step-complexity-and-primal-gap-bound
 kind: theorem
 title: "Short-step path following takes $O(\\sqrt{\\nu}\\log(\\nu/(\\varepsilon t_0)))$ Newton steps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

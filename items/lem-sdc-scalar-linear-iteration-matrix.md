@@ -2,7 +2,7 @@
 id: lem-sdc-scalar-linear-iteration-matrix
 kind: lemma
 title: SDC iteration matrix for the scalar linear test equation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

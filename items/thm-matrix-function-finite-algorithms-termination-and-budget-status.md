@@ -2,7 +2,7 @@
 id: thm-matrix-function-finite-algorithms-termination-and-budget-status
 kind: theorem
 title: Finite matrix-function algorithms preserve primitive budgets and terminate with explicit statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

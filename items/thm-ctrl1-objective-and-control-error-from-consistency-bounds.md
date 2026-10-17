@@ -2,7 +2,7 @@
 id: thm-ctrl1-objective-and-control-error-from-consistency-bounds
 kind: theorem
 title: "Strong convexity converts transcription objective error into a control bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

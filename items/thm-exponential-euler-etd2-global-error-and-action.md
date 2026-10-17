@@ -2,7 +2,7 @@
 id: thm-exponential-euler-etd2-global-error-and-action
 kind: theorem
 title: Fixed-matrix global orders and certified-action error propagation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

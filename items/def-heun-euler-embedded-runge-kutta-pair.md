@@ -2,7 +2,7 @@
 id: def-heun-euler-embedded-runge-kutta-pair
 kind: definition
 title: "Euler–Heun embedded Runge–Kutta pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

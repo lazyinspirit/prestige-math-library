@@ -2,7 +2,7 @@
 id: thm-elliptic-adjoint-reduced-gradient
 kind: theorem
 title: The elliptic adjoint gives the reduced parameter gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-dirichlet-sine-mode-heat-splitting-model
 kind: definition
 title: "Diagonal Dirichlet sine-mode heat model with constant forcing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

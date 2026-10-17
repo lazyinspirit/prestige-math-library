@@ -2,7 +2,7 @@
 id: lem-square-summable-sequences-form-a-hilbert-space
 kind: lemma
 title: The real square-summable sequence space is complete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

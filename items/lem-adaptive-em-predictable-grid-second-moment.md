@@ -2,7 +2,7 @@
 id: lem-adaptive-em-predictable-grid-second-moment
 kind: lemma
 title: Uniform second moment for Euler–Maruyama on predictable grids
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-unisolvent-dofs-define-reference-interpolant
 kind: lemma
 title: Unisolvent degrees of freedom define a unique reference interpolant
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: computed-schur-decompositions-and-nonnormal-spectra-examples
 title: Computed Schur decompositions and nonnormal spectra — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-jordan-block-epsilon-pseudospectrum

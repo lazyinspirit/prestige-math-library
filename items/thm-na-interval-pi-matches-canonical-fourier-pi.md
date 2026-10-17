@@ -2,7 +2,7 @@
 id: thm-na-interval-pi-matches-canonical-fourier-pi
 kind: theorem
 title: "The interval evaluator's arctangent definition uses the canonical Fourier pi"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

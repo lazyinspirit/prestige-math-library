@@ -1,7 +1,7 @@
 ---
 page: local-bifurcation-normal-forms-and-numerical-certificates
 title: Local bifurcation normal forms and numerical certificates
-status: draft
+status: published
 items:
   - def-hopf-normal-form-data
   - def-hopf-weighted-trajectory-space

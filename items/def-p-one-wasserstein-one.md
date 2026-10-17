@@ -2,7 +2,7 @@
 id: def-p-one-wasserstein-one
 kind: definition
 title: The coupling definition of the 1-Wasserstein distance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

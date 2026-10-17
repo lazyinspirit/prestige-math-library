@@ -2,7 +2,7 @@
 id: ex-phase-singularity-in-stable-planar-oscillator
 kind: example
 title: "A stable planar cycle can have a singular phase slice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

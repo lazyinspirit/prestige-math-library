@@ -2,7 +2,7 @@
 id: alg-sqp-reduced-bfgs-kkt-step
 kind: algorithm
 title: "Reduced-BFGS SQP KKT step with projected Hessian error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

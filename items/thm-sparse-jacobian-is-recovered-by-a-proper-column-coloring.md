@@ -2,7 +2,7 @@
 id: thm-sparse-jacobian-is-recovered-by-a-proper-column-coloring
 kind: theorem
 title: "A collision-free column coloring recovers every structurally sparse Jacobian entry"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

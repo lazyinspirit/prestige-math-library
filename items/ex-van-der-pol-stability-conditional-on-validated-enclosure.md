@@ -2,7 +2,7 @@
 id: ex-van-der-pol-stability-conditional-on-validated-enclosure
 kind: example
 title: "Conditional van der Pol stability from a validated enclosure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

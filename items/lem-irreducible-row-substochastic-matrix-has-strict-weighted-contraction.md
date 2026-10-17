@@ -2,7 +2,7 @@
 id: lem-irreducible-row-substochastic-matrix-has-strict-weighted-contraction
 kind: lemma
 title: "An irreducible row-substochastic matrix with a strict row has a weighted contraction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

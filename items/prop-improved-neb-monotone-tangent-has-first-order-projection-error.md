@@ -2,7 +2,7 @@
 id: prop-improved-neb-monotone-tangent-has-first-order-projection-error
 kind: proposition
 title: "The improved NEB monotone branch is generally only first-order consistent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

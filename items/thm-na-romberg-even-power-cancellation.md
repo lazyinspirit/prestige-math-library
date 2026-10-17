@@ -2,7 +2,7 @@
 id: thm-na-romberg-even-power-cancellation
 kind: theorem
 title: "Romberg cancels a proved finite even-power expansion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

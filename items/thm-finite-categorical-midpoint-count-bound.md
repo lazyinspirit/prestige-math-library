@@ -2,7 +2,7 @@
 id: thm-finite-categorical-midpoint-count-bound
 kind: theorem
 title: "Midpoint categorical frequencies have at most one-grid-cell error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

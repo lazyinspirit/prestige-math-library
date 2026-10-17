@@ -2,7 +2,7 @@
 id: thm-validated-euler-flow-and-monodromy-enclosure-soundness
 kind: theorem
 title: "The validated Euler tube encloses the exact periodic flow and monodromy matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

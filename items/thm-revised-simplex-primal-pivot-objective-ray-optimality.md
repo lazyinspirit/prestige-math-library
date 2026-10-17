@@ -2,7 +2,7 @@
 id: thm-revised-simplex-primal-pivot-objective-ray-optimality
 kind: theorem
 title: "Primal revised-simplex pivot identities and certificates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

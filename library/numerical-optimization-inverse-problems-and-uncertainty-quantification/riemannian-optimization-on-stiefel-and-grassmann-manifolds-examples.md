@@ -1,7 +1,7 @@
 ---
 page: riemannian-optimization-on-stiefel-and-grassmann-manifolds-examples
 title: Riemannian optimization on stiefel and grassmann manifolds — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-repeated-eigenspace-on-grassmann

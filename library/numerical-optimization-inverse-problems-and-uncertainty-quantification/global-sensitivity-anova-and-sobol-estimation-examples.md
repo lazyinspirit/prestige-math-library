@@ -1,7 +1,7 @@
 ---
 page: global-sensitivity-anova-and-sobol-estimation-examples
 title: Global sensitivity anova and sobol estimation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-perfectly-correlated-inputs-and-shapley-allocation

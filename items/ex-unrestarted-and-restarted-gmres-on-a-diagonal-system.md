@@ -2,7 +2,7 @@
 id: ex-unrestarted-and-restarted-gmres-on-a-diagonal-system
 kind: example
 title: "Unrestarted GMRES solves a two-dimensional diagonal system in two steps while GMRES(1) restarts after one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

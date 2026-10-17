@@ -2,7 +2,7 @@
 id: thm-affine-piola-differential-and-trace-moment-identities
 kind: theorem
 title: Affine Piola maps commute with differential operators and preserve moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

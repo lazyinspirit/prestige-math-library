@@ -2,7 +2,7 @@
 id: lem-piecewise-constant-control-h1-projection-error
 kind: lemma
 title: Cell averaging preserves constant box bounds and has an H1 error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

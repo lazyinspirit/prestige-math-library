@@ -2,7 +2,7 @@
 id: thm-bounded-mixed-integer-gap-certificate-sound
 kind: theorem
 title: A bounded mixed-integer gap certificate proves global epsilon-optimality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

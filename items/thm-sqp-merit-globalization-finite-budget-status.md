@@ -2,7 +2,7 @@
 id: thm-sqp-merit-globalization-finite-budget-status
 kind: theorem
 title: "Finite merit-globalization budgets return a defined status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

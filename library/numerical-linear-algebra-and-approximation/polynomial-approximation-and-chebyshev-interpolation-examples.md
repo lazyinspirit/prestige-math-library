@@ -1,7 +1,7 @@
 ---
 page: polynomial-approximation-and-chebyshev-interpolation-examples
 title: "Polynomial approximation and Chebyshev interpolation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-equispaced-runge-function-interpolation-diverges

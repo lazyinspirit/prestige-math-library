@@ -2,7 +2,7 @@
 id: ex-uncertain-linear-matrix-family-contains-singular-member
 kind: example
 title: An interval matrix family can contain a singular member
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

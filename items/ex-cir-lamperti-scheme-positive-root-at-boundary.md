@@ -2,7 +2,7 @@
 id: ex-cir-lamperti-scheme-positive-root-at-boundary
 kind: example
 title: "The CIR Lamperti step remains positive from the boundary value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

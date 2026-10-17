@@ -2,7 +2,7 @@
 id: ex-full-rank-least-squares-normal-equations-versus-qr
 kind: example
 title: "A full rank least squares problem where rounded normal equations lose the pivot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

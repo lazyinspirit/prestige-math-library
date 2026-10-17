@@ -2,7 +2,7 @@
 id: ex-spd-square-root-and-polar-factor
 kind: example
 title: "A positive diagonal Gram matrix gives a nontrivial polar factor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

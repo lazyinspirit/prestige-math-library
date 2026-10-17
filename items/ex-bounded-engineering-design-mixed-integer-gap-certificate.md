@@ -2,7 +2,7 @@
 id: ex-bounded-engineering-design-mixed-integer-gap-certificate
 kind: example
 title: A bounded engineering design has an exact mixed-integer gap certificate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound-examples

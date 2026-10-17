@@ -2,7 +2,7 @@
 id: alg-parabolic-crank-nicolson-cg1
 kind: algorithm
 title: Crank–Nicolson and cG(1) for an autonomous parabolic form
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

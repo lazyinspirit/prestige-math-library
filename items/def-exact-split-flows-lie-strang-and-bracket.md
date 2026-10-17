@@ -2,7 +2,7 @@
 id: def-exact-split-flows-lie-strang-and-bracket
 kind: definition
 title: "Lie and Strang compositions of exact split flows"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

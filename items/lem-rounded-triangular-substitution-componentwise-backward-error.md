@@ -2,7 +2,7 @@
 id: lem-rounded-triangular-substitution-componentwise-backward-error
 kind: lemma
 title: Rounded triangular substitution has a componentwise matrix backward error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

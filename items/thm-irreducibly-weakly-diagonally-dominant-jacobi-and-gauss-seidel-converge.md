@@ -2,7 +2,7 @@
 id: thm-irreducibly-weakly-diagonally-dominant-jacobi-and-gauss-seidel-converge
 kind: theorem
 title: "Irreducibly weak row diagonal dominance with a strict row guarantees Jacobi and Gauss–Seidel convergence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

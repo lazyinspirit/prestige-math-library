@@ -2,7 +2,7 @@
 id: lem-finite-hermite-interpolation-for-jordan-data
 kind: lemma
 title: "Finite Hermite data at distinct eigenvalues have a unique polynomial representative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

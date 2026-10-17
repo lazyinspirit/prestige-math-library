@@ -1,7 +1,7 @@
 ---
 page: computed-fast-transforms-and-convolution-examples
 title: Computed fast transforms and convolution — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-na-prime-length-five-bluestein-transform

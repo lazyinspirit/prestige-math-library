@@ -2,7 +2,7 @@
 id: thm-parabolic-fem-semidiscrete-existence-energy
 kind: theorem
 title: Well-posedness and energy stability of the semidiscrete FEM system
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-revised-simplex-basic-feasible-extreme-point-equivalence
 kind: lemma
 title: "Basic feasible solutions, extreme points, and basis existence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

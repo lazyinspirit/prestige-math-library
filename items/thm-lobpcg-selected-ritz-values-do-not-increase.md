@@ -2,7 +2,7 @@
 id: thm-lobpcg-selected-ritz-values-do-not-increase
 kind: theorem
 title: "A successful LOBPCG Rayleigh-Ritz update cannot increase the selected Ritz values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-linear-elliptic-control-state-and-adjoint-wellposedness
 kind: theorem
 title: Well-posedness of elliptic control state and adjoint equations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

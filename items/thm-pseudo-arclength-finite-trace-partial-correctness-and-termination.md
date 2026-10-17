@@ -2,7 +2,7 @@
 id: thm-pseudo-arclength-finite-trace-partial-correctness-and-termination
 kind: theorem
 title: Certified pseudo-arclength traces are locally sound and conditionally terminate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

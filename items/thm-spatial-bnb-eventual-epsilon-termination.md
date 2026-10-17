@@ -2,7 +2,7 @@
 id: thm-spatial-bnb-eventual-epsilon-termination
 kind: theorem
 title: Consistent bounds and exhaustive longest-side branching give eventual epsilon termination
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: global-optimization-and-certified-branch-and-bound

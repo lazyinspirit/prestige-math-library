@@ -2,7 +2,7 @@
 id: alg-na-computed-clenshaw-curtis-via-fast-dft
 kind: algorithm
 title: "Computed Clenshaw–Curtis from an even-extension DFT"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

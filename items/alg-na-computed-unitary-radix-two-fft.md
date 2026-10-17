@@ -2,7 +2,7 @@
 id: alg-na-computed-unitary-radix-two-fft
 kind: algorithm
 title: "Computed unitary radix-two FFT with certified twiddle phases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

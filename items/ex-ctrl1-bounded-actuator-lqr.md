@@ -2,7 +2,7 @@
 id: ex-ctrl1-bounded-actuator-lqr
 kind: example
 title: "A bounded-actuator LQR control and its exact objective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: stochastic-reaction-jump-simulation-and-coupling
 title: Stochastic Reaction Jump Simulation and Coupling
-status: draft
+status: published
 items:
   - def-reaction-network-propensity-system-and-generator
   - lem-competing-exponential-race-for-reaction-channels

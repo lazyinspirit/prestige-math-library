@@ -2,7 +2,7 @@
 id: lem-range-reduced-exp-log-and-arctan-series-enclosures
 kind: lemma
 title: Range-reduced exponential, logarithm and arctangent series have certified tails
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

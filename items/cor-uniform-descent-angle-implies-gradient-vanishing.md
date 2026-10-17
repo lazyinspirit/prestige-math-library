@@ -2,7 +2,7 @@
 id: cor-uniform-descent-angle-implies-gradient-vanishing
 kind: corollary
 title: "A uniform descent angle makes the Wolfe gradient norms vanish"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

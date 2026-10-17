@@ -2,7 +2,7 @@
 id: ex-nearly-colliding-sylvester-eigenvalue-sums
 kind: example
 title: "Nearly colliding eigenvalue sums make a Sylvester solve sensitive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

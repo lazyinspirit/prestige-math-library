@@ -2,7 +2,7 @@
 id: ex-rosenbrock-indefinite-hessian-requires-descent-safeguard
 kind: example
 title: "An indefinite Rosenbrock Hessian makes the raw Newton direction ascend"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

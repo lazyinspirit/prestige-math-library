@@ -2,7 +2,7 @@
 id: lem-cardinal-lagrange-interpolation-and-operator-norm
 kind: lemma
 title: "Chebyshev cardinal interpolation reproduces polynomials and its norm is the cardinal sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

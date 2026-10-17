@@ -2,7 +2,7 @@
 id: thm-equivalence-violation-bounds-d-optimal-design-gap
 kind: theorem
 title: "The D-equivalence violation bounds the finite-budget design's log-determinant gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

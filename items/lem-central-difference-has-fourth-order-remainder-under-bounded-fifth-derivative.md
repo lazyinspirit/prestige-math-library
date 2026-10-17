@@ -2,7 +2,7 @@
 id: lem-central-difference-has-fourth-order-remainder-under-bounded-fifth-derivative
 kind: lemma
 title: "A bounded fifth derivative gives the central-difference expansion required by Richardson extrapolation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

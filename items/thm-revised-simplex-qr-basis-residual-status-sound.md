@@ -2,7 +2,7 @@
 id: thm-revised-simplex-qr-basis-residual-status-sound
 kind: theorem
 title: Finite QR basis recomputation has sound residual and stored-data audit statuses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

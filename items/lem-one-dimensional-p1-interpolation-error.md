@@ -2,7 +2,7 @@
 id: lem-one-dimensional-p1-interpolation-error
 kind: lemma
 title: One-dimensional P1 interpolation has a first-derivative error bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-dominating-thinning-exactly-simulates-reaction-rates
 kind: theorem
 title: "Dominating thinning has the prescribed reaction law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

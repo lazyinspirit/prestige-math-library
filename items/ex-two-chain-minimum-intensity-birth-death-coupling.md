@@ -2,7 +2,7 @@
 id: ex-two-chain-minimum-intensity-birth-death-coupling
 kind: example
 title: "Minimum-intensity coupling of two birth-death chains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

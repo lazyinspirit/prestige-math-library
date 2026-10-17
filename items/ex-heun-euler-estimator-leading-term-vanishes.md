@@ -2,7 +2,7 @@
 id: ex-heun-euler-estimator-leading-term-vanishes
 kind: example
 title: "The leading Euler–Heun estimator coefficient can vanish"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

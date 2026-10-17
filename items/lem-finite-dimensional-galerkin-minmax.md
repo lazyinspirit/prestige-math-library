@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-galerkin-minmax
 kind: lemma
 title: Finite-dimensional conforming Ritz values satisfy min–max
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

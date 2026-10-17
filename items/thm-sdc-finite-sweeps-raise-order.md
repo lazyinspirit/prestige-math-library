@@ -2,7 +2,7 @@
 id: thm-sdc-finite-sweeps-raise-order
 kind: theorem
 title: Each SDC sweep raises the order up to the collocation order
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

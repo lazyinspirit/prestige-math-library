@@ -1,7 +1,7 @@
 ---
 page: rare-event-importance-sampling-and-multilevel-splitting-examples
 title: Rare event importance sampling and multilevel splitting — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-barrier-exponential-tilting

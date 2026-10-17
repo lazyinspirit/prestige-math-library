@@ -2,7 +2,7 @@
 id: thm-interval-determinant-sign-certificate-soundness
 kind: theorem
 title: An interval determinant excluding zero certifies nonsingularity and sign
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

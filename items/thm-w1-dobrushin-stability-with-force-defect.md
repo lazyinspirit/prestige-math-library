@@ -2,7 +2,7 @@
 id: thm-w1-dobrushin-stability-with-force-defect
 kind: theorem
 title: Probability W1 stability under bounded force defects
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-neutral-delay-shift-neumann-inverse
 kind: lemma
 title: "The neutral derivative shift has a bounded Neumann inverse when $|a|<1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

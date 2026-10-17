@@ -2,7 +2,7 @@
 id: ex-same-sign-smooth-vortex-blob-approximation
 kind: example
 title: Same-sign smooth vortex density and probability blob error budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

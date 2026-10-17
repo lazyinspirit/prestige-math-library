@@ -2,7 +2,7 @@
 id: ex-five-point-laplacian-is-exact-on-quadratics
 kind: example
 title: The five-point Laplacian is exact on a quadratic solution
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

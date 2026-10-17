@@ -2,7 +2,7 @@
 id: lem-certified-exponential-step-action-error
 kind: lemma
 title: Certified action bounds control one exponential-integrator step
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

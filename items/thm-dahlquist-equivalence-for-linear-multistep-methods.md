@@ -2,7 +2,7 @@
 id: thm-dahlquist-equivalence-for-linear-multistep-methods
 kind: theorem
 title: "Dahlquist equivalence for a consistent linear multistep method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

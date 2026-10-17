@@ -2,7 +2,7 @@
 id: lem-local-hamiltonian-flow-preserves-symplectic-matrix
 kind: lemma
 title: A smooth local Hamiltonian flow preserves the canonical symplectic matrix
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

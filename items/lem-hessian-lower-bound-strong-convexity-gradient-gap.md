@@ -2,7 +2,7 @@
 id: lem-hessian-lower-bound-strong-convexity-gradient-gap
 kind: lemma
 title: "A Hessian lower bound gives strong convexity and gradient-gap bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

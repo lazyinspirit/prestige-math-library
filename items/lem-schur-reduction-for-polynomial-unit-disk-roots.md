@@ -2,7 +2,7 @@
 id: lem-schur-reduction-for-polynomial-unit-disk-roots
 kind: lemma
 title: "Schur reduction preserves strict unit-disk root location"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

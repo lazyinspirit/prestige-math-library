@@ -2,7 +2,7 @@
 id: ex-four-dimensional-gauss-product-has-sixteen-nodes
 kind: example
 title: Four two-node Gaussian rules give a sixteen-node tensor rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 9

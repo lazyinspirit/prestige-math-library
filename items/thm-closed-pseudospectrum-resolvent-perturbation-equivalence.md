@@ -2,7 +2,7 @@
 id: thm-closed-pseudospectrum-resolvent-perturbation-equivalence
 kind: theorem
 title: "Closed pseudospectrum equals the resolvent, singular-value, and perturbation tests"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-product-of-linear-factors-is-monic-polynomial
 kind: lemma
 title: "A finite product of monic linear factors is monic"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

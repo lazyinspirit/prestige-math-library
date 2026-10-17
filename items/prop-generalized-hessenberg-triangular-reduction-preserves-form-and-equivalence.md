@@ -2,7 +2,7 @@
 id: prop-generalized-hessenberg-triangular-reduction-preserves-form-and-equivalence
 kind: proposition
 title: "Givens reduction terminates with a unitary-equivalent Hessenberg-triangular pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

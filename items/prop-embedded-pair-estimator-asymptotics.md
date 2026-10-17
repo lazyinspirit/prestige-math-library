@@ -2,7 +2,7 @@
 id: prop-embedded-pair-estimator-asymptotics
 kind: proposition
 title: "A nonzero leading defect makes the embedded difference asymptotically match the low-order defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

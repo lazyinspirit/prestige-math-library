@@ -1,7 +1,7 @@
 ---
 page: renewal-age-and-size-structured-numerical-methods
 title: "Renewal age and size structured numerical methods"
-status: draft
+status: published
 items:
   - def-age-structured-renewal-transport-problem
   - def-size-structured-transport-and-division-kernel

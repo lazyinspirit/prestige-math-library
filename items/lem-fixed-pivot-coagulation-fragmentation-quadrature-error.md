@@ -2,7 +2,7 @@
 id: lem-fixed-pivot-coagulation-fragmentation-quadrature-error
 kind: lemma
 title: Fixed-pivot projection has first-order bounded-Lipschitz kernel quadrature error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

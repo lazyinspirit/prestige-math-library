@@ -2,7 +2,7 @@
 id: def-revised-simplex-standard-form-linear-program
 kind: definition
 title: "Revised simplex standard-form linear program"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

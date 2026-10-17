@@ -2,7 +2,7 @@
 id: ex-trust-region-singular-hard-case
 kind: example
 title: "A singular shifted Hessian produces two hard-case minimizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

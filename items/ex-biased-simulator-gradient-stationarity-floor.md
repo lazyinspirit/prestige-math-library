@@ -2,7 +2,7 @@
 id: ex-biased-simulator-gradient-stationarity-floor
 kind: example
 title: "A biased simulator gradient has limiting squared gradient $b^2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

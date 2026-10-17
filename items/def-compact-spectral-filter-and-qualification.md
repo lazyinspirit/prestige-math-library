@@ -2,7 +2,7 @@
 id: def-compact-spectral-filter-and-qualification
 kind: definition
 title: Compact spectral filters, source conditions, and qualification
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

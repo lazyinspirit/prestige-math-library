@@ -2,7 +2,7 @@
 id: alg-exact-jordan-block-analytic-evaluation
 kind: algorithm
 title: "Finite analytic evaluation from a supplied exact Jordan decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

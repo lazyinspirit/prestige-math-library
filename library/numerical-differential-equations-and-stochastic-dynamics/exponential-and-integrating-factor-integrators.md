@@ -1,7 +1,7 @@
 ---
 page: exponential-and-integrating-factor-integrators
 title: Exponential and integrating factor integrators
-status: draft
+status: published
 items:
   - lem-finite-matrix-semilinear-variation-of-constants
   - lem-skew-hermitian-matrix-exponential-is-unitary

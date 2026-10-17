@@ -2,7 +2,7 @@
 id: thm-mprk22-1-global-second-order-error
 kind: theorem
 title: "MPRK22(1) has global second-order error on a compact positive tube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

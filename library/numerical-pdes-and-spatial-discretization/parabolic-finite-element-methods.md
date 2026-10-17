@@ -1,7 +1,7 @@
 ---
 page: parabolic-finite-element-methods
 title: "Parabolic finite-element methods"
-status: draft
+status: published
 items:
   - def-parabolic-evolution-triple-and-energy-space
   - lem-parabolic-bochner-l2-approximate-identity

@@ -2,7 +2,7 @@
 id: ex-local-identifiability-does-not-imply-global-identifiability
 kind: example
 title: "The observation theta squared is locally identifiable but globally aliased"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

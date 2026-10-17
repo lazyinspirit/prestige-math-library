@@ -2,7 +2,7 @@
 id: lem-gapped-projector-map-well-defined
 kind: lemma
 title: A strict occupied gap defines a unique rank-r spectral projector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

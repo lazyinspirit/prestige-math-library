@@ -2,7 +2,7 @@
 id: ex-two-compartment-stiff-reversible-transfer
 kind: example
 title: "A stiff reversible two-compartment transfer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

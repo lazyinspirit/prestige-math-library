@@ -2,7 +2,7 @@
 id: def-underdamped-langevin-equation-and-canonical-gibbs-density
 kind: definition
 title: "Underdamped Langevin equation and canonical Gibbs density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

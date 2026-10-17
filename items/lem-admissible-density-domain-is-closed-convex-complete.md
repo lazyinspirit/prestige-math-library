@@ -2,7 +2,7 @@
 id: lem-admissible-density-domain-is-closed-convex-complete
 kind: lemma
 title: The admissible Hermitian density domain is closed, convex, and complete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

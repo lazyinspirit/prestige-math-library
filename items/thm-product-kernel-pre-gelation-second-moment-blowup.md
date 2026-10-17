@@ -2,7 +2,7 @@
 id: thm-product-kernel-pre-gelation-second-moment-blowup
 kind: theorem
 title: The discrete product-kernel solution has finite-time second-moment blow-up
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

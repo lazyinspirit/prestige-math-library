@@ -2,7 +2,7 @@
 id: thm-near-orthonormal-hermitian-eigenvalue-enclosure
 kind: theorem
 title: Near-orthonormal residual data enclose all ordered Hermitian eigenvalues
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

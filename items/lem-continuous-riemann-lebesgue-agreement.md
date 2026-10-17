@@ -2,7 +2,7 @@
 id: lem-continuous-riemann-lebesgue-agreement
 kind: lemma
 title: Riemann and Lebesgue integrals agree for continuous data on [0,1]
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

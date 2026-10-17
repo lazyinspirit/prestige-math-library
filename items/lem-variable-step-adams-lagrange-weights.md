@@ -2,7 +2,7 @@
 id: lem-variable-step-adams-lagrange-weights
 kind: lemma
 title: "Variable-step Adams weights are integrals of the actual-node Lagrange bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: []

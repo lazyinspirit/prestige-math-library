@@ -2,7 +2,7 @@
 id: thm-composite-midpoint-error-bound
 kind: theorem
 title: Composite midpoint error bound for a twice continuously differentiable function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

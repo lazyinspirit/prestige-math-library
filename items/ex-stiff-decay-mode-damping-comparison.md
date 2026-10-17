@@ -2,7 +2,7 @@
 id: ex-stiff-decay-mode-damping-comparison
 kind: example
 title: "Backward Euler and BDF2 damp a fast scalar mode while trapezoidal does not"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

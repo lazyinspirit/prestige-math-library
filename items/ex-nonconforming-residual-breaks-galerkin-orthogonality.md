@@ -2,7 +2,7 @@
 id: ex-nonconforming-residual-breaks-galerkin-orthogonality
 kind: example
 title: A broken P1 test exposes a nonzero consistency residual
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

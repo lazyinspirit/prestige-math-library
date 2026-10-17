@@ -2,7 +2,7 @@
 id: thm-likelihood-ratio-gradient-identity-on-fixed-support
 kind: theorem
 title: "The likelihood-ratio score gradient is unbiased on fixed support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

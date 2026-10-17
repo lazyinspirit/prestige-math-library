@@ -2,7 +2,7 @@
 id: lem-matrix-action-defect-variation-of-constants
 kind: lemma
 title: "Variation of constants for a finite-matrix action defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

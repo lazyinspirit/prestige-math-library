@@ -2,7 +2,7 @@
 id: alg-morozov-discrepancy-bracketing-and-bisection
 kind: algorithm
 title: Exact-residual Morozov discrepancy bracketing and bisection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

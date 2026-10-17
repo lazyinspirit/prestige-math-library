@@ -2,7 +2,7 @@
 id: thm-lbfgs-fixed-memory-linear-convergence
 kind: theorem
 title: "Fixed-memory L-Bfgs converges linearly under uniform curvature and scale bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

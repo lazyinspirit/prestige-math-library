@@ -2,7 +2,7 @@
 id: thm-threshold-sparse-lu-residual-with-growth
 kind: theorem
 title: Real threshold sparse LU has a backward residual bound with actual growth
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

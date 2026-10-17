@@ -2,7 +2,7 @@
 id: alg-low-rank-alternating-direction-implicit-lyapunov
 kind: algorithm
 title: "Low-rank ADI for a continuous Lyapunov equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

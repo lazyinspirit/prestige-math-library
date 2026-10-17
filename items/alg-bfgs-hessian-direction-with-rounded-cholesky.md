@@ -2,7 +2,7 @@
 id: alg-bfgs-hessian-direction-with-rounded-cholesky
 kind: algorithm
 title: "Bfgs Hessian direction by failure-aware Cholesky solve"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

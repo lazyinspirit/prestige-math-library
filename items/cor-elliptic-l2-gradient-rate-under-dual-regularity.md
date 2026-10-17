@@ -2,7 +2,7 @@
 id: cor-elliptic-l2-gradient-rate-under-dual-regularity
 kind: corollary
 title: An elliptic reduced-gradient L2 rate follows under dual approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

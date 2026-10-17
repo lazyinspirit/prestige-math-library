@@ -2,7 +2,7 @@
 id: def-validated-eigenvalue-enclosures-for-an-index-one-hessian
 kind: definition
 title: "Validated ordered eigenvalue enclosures for an index-one Hessian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

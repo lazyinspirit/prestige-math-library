@@ -2,7 +2,7 @@
 id: thm-gauss-hermite-mean-value-remainder
 kind: theorem
 title: Gaussian quadrature has the Hermite mean-value remainder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 8

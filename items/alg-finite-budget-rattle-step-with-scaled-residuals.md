@@ -2,7 +2,7 @@
 id: alg-finite-budget-rattle-step-with-scaled-residuals
 kind: algorithm
 title: Finite budget RATTLE solve with scaled constraint residuals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

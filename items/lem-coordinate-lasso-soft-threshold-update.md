@@ -2,7 +2,7 @@
 id: lem-coordinate-lasso-soft-threshold-update
 kind: lemma
 title: "Exact Lasso coordinate update, including a zero column"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

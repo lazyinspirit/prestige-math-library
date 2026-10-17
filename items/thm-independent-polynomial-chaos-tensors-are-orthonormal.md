@@ -2,7 +2,7 @@
 id: thm-independent-polynomial-chaos-tensors-are-orthonormal
 kind: theorem
 title: Independent polynomial-chaos tensor products are orthonormal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

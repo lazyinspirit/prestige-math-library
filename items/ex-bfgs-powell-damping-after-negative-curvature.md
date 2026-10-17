@@ -2,7 +2,7 @@
 id: ex-bfgs-powell-damping-after-negative-curvature
 kind: example
 title: "Powell damping repairs a negative-curvature trial pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

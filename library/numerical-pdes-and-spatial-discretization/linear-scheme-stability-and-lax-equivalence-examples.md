@@ -1,7 +1,7 @@
 ---
 page: linear-scheme-stability-and-lax-equivalence-examples
 title: "Linear scheme stability and Lax equivalence — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-stable-explicit-grid-heat-step

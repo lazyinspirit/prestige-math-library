@@ -2,7 +2,7 @@
 id: thm-milstein-mlmc-level-variance-and-cost
 kind: theorem
 title: "Milstein MLMC correction variance and inverse-epsilon-squared cost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: alg-validated-euler-flow-and-monodromy-enclosure
 kind: algorithm
 title: "Validated forward-Euler tube for the periodic flow and variational equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

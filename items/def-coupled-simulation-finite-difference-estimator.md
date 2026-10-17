@@ -2,7 +2,7 @@
 id: def-coupled-simulation-finite-difference-estimator
 kind: definition
 title: "Coupled finite-difference simulation-gradient estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

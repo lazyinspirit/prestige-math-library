@@ -2,7 +2,7 @@
 id: ex-nonsingular-indefinite-requires-two-by-two-pivot
 kind: example
 title: A nonsingular indefinite matrix with no admissible one-by-one diagonal pivot
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

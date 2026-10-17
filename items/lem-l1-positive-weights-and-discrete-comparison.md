@@ -2,7 +2,7 @@
 id: lem-l1-positive-weights-and-discrete-comparison
 kind: lemma
 title: Positive L1 weights, discrete comparison, and residual stability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: lem-pde-box-control-set-basic-properties
 kind: lemma
 title: A pointwise L2 box is nonempty, bounded, closed, and convex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

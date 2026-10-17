@@ -2,7 +2,7 @@
 id: thm-backward-euler-cq-scalar-resolvent-stability
 kind: theorem
 title: Scalar resolvent stability for backward-Euler convolution quadrature
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

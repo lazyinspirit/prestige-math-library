@@ -2,7 +2,7 @@
 id: alg-imex-euler-step
 kind: algorithm
 title: "One-step IMEX Euler with an implicit branch and residual status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

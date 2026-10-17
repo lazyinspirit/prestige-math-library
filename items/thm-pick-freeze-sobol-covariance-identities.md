@@ -2,7 +2,7 @@
 id: thm-pick-freeze-sobol-covariance-identities
 kind: theorem
 title: Pick-freeze covariances recover first and total Sobol numerators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

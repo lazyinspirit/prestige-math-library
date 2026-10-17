@@ -1,7 +1,7 @@
 ---
 page: sylvester-and-lyapunov-matrix-equations-examples
 title: Sylvester and lyapunov matrix equations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-stable-linear-noise-lyapunov-covariance

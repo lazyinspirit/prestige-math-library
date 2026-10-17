@@ -2,7 +2,7 @@
 id: lem-chebyshev-rkc-bounds-and-endpoint-derivatives
 kind: lemma
 title: "Chebyshev bounds and endpoint derivatives used by stabilized Runge–Kutta methods"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

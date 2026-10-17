@@ -2,7 +2,7 @@
 id: alg-midpoint-collocation-for-nonlinear-bvps
 kind: algorithm
 title: "Finite-budget implicit-midpoint collocation for a nonlinear BVP"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

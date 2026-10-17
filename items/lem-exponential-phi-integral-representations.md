@@ -2,7 +2,7 @@
 id: lem-exponential-phi-integral-representations
 kind: lemma
 title: Integral representations of the first two phi functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

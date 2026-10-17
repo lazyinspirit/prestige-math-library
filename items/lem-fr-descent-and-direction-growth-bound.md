@@ -2,7 +2,7 @@
 id: lem-fr-descent-and-direction-growth-bound
 kind: lemma
 title: "Fletcher–Reeves descent and direction-growth bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

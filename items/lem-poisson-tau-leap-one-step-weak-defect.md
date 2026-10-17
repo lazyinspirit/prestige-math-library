@@ -2,7 +2,7 @@
 id: lem-poisson-tau-leap-one-step-weak-defect
 kind: lemma
 title: "One-step weak defect of finite-state Poisson tau-leaping"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

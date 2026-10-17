@@ -2,7 +2,7 @@
 id: thm-scalar-fold-transcritical-pitchfork-local-normal-forms
 kind: theorem
 title: Scalar fold, transcritical, and symmetric pitchfork equilibrium branches
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

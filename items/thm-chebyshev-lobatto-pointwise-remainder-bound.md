@@ -2,7 +2,7 @@
 id: thm-chebyshev-lobatto-pointwise-remainder-bound
 kind: theorem
 title: "Chebyshev–Lobatto interpolation remainder bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

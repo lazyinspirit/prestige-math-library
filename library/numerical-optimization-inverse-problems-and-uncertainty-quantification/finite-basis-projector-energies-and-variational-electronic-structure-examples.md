@@ -1,7 +1,7 @@
 ---
 page: finite-basis-projector-energies-and-variational-electronic-structure-examples
 title: Finite basis projector energies and variational electronic structure — Examples
-status: draft
+status: published
 items: []
 examples: [ex-incomplete-ci-trial-energy-exceeds-finite-ground-energy,
            ex-nested-trial-spaces-may-have-equal-energies,

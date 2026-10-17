@@ -2,7 +2,7 @@
 id: lem-hopf-first-lyapunov-coefficient-from-multilinear-data
 kind: lemma
 title: The first Lyapunov coefficient is the frequency-normalized radial cubic Hopf coefficient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

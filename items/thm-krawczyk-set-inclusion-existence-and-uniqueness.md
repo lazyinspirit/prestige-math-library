@@ -2,7 +2,7 @@
 id: thm-krawczyk-set-inclusion-existence-and-uniqueness
 kind: theorem
 title: Krawczyk inclusion gives solutions and contraction gives uniqueness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

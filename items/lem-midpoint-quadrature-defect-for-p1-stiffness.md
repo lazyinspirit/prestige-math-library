@@ -2,7 +2,7 @@
 id: lem-midpoint-quadrature-defect-for-p1-stiffness
 kind: lemma
 title: Midpoint quadrature defect for one-dimensional P1 stiffness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

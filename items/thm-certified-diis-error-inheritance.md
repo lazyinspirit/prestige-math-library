@@ -2,7 +2,7 @@
 id: thm-certified-diis-error-inheritance
 kind: theorem
 title: Residual-certified DIIS candidates inherit the contractive SCF error budget
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

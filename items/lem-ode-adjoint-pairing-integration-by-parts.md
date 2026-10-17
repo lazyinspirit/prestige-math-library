@@ -2,7 +2,7 @@
 id: lem-ode-adjoint-pairing-integration-by-parts
 kind: lemma
 title: A tangent and adjoint pairing gives the ODE gradient boundary identity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: ex-softened-newtonian-particles-not-collision-model
 kind: example
 title: Softened Newtonian particles do not specify the physical collision force
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

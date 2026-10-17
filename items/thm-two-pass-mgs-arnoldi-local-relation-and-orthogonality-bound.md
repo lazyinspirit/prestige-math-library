@@ -2,7 +2,7 @@
 id: thm-two-pass-mgs-arnoldi-local-relation-and-orthogonality-bound
 kind: theorem
 title: "Two-pass MGS Arnoldi has an explicit local relation and an a posteriori orthogonality bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

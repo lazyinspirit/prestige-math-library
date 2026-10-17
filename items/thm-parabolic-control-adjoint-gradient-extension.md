@@ -2,7 +2,7 @@
 id: thm-parabolic-control-adjoint-gradient-extension
 kind: theorem
 title: Parabolic linear-quadratic control has an energy adjoint and reduced gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: alg-pdhg-primal-dual-hybrid-gradient
 kind: algorithm
 title: "Chambolle–Pock primal-dual hybrid gradient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

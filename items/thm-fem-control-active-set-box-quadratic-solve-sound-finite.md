@@ -2,7 +2,7 @@
 id: thm-fem-control-active-set-box-quadratic-solve-sound-finite
 kind: theorem
 title: The exhaustive box quadratic solve returns the unique minimizer in finite time
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

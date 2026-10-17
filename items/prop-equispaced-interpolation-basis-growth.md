@@ -2,7 +2,7 @@
 id: prop-equispaced-interpolation-basis-growth
 kind: proposition
 title: "Equispaced interpolation has linearly growing basis amplification"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

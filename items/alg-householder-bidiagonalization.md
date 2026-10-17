@@ -2,7 +2,7 @@
 id: alg-householder-bidiagonalization
 kind: algorithm
 title: "Householder bidiagonalization and its finite precision status"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

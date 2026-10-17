@@ -2,7 +2,7 @@
 id: lem-naive-all-pairs-collision-search-has-quadratic-work
 kind: lemma
 title: Naive all-pairs sphere-contact search has quadratic work
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 11

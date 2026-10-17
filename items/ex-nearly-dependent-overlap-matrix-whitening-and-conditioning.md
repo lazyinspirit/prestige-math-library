@@ -2,7 +2,7 @@
 id: ex-nearly-dependent-overlap-matrix-whitening-and-conditioning
 kind: example
 title: A nearly dependent finite basis has an ill-conditioned overlap matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-levenberg-marquardt-large-damping-forces-sufficient-decrease
 kind: lemma
 title: "Uniformly large damping forces an acceptable LM trial in finitely many attempts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

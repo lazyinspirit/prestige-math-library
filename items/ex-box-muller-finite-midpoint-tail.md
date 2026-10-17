@@ -2,7 +2,7 @@
 id: ex-box-muller-finite-midpoint-tail
 kind: example
 title: "Eight-bit Box–Muller has a finite radial cutoff"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

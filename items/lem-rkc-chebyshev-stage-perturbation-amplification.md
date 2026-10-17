@@ -2,7 +2,7 @@
 id: lem-rkc-chebyshev-stage-perturbation-amplification
 kind: lemma
 title: "Chebyshev stage perturbations have an explicit quadratic bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

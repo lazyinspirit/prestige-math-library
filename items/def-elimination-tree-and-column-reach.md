@@ -2,7 +2,7 @@
 id: def-elimination-tree-and-column-reach
 kind: definition
 title: Elimination-tree column patterns and reach
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

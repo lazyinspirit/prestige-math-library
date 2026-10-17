@@ -2,7 +2,7 @@
 id: def-absolute-stability-regions-for-one-step-and-multistep-methods
 kind: definition
 title: "Scalar absolute stability, A-stability, L-stability, and multistep root regions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

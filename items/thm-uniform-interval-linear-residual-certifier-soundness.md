@@ -2,7 +2,7 @@
 id: thm-uniform-interval-linear-residual-certifier-soundness
 kind: theorem
 title: The uniform interval residual certifier is sound on success
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

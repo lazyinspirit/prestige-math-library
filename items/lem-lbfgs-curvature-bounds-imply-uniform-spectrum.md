@@ -2,7 +2,7 @@
 id: lem-lbfgs-curvature-bounds-imply-uniform-spectrum
 kind: lemma
 title: "Fixed-memory L-Bfgs curvature and scale bounds imply uniform spectral bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

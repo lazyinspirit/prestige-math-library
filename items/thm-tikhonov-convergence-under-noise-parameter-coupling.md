@@ -2,7 +2,7 @@
 id: thm-tikhonov-convergence-under-noise-parameter-coupling
 kind: theorem
 title: Vanishing Tikhonov bias and controlled noise amplification imply convergence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

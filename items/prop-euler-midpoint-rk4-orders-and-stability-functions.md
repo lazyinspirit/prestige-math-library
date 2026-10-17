@@ -2,7 +2,7 @@
 id: prop-euler-midpoint-rk4-orders-and-stability-functions
 kind: proposition
 title: "Orders and scalar stability functions of Euler, midpoint, and classical RK4"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

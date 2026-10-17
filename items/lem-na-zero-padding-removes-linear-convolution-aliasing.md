@@ -2,7 +2,7 @@
 id: lem-na-zero-padding-removes-linear-convolution-aliasing
 kind: lemma
 title: "Zero padding embeds linear convolution in cyclic convolution without aliasing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

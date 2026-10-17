@@ -1,7 +1,7 @@
 ---
 page: ceas-lemma-and-aubin-nitsche-error-estimates-examples
 title: "Céa and Aubin–Nitsche error estimates — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-nonsymmetric-coercive-form-attains-cea-factor

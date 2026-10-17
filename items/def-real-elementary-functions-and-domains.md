@@ -2,7 +2,7 @@
 id: def-real-elementary-functions-and-domains
 kind: definition
 title: Real elementary functions and their domains
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: outward-rounded-interval-and-ball-arithmetic

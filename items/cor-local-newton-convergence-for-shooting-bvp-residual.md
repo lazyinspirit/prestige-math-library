@@ -2,7 +2,7 @@
 id: cor-local-newton-convergence-for-shooting-bvp-residual
 kind: corollary
 title: "Local Newton convergence for a simple nonlinear shooting root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

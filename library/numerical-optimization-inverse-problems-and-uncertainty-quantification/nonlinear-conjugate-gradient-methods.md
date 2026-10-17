@@ -1,7 +1,7 @@
 ---
 page: nonlinear-conjugate-gradient-methods
 title: "Nonlinear conjugate gradient methods"
-status: draft
+status: published
 items:
   - alg-nonlinear-conjugate-gradient-methods
   - lem-fr-descent-and-direction-growth-bound

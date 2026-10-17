@@ -2,7 +2,7 @@
 id: thm-irreducible-finite-class-has-unique-invariant-vector
 kind: theorem
 title: "An irreducible finite class has a unique invariant vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-box-muller-product-density-and-radius-moment
 kind: lemma
 title: "Box–Muller has a product Gaussian density and Rayleigh second moment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

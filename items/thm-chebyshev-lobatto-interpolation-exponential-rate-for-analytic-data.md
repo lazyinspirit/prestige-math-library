@@ -2,7 +2,7 @@
 id: thm-chebyshev-lobatto-interpolation-exponential-rate-for-analytic-data
 kind: theorem
 title: "Analytic ellipse data give exponential Chebyshev–Lobatto interpolation error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 6

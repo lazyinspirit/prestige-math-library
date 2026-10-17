@@ -2,7 +2,7 @@
 id: lem-na-bernoulli-polynomial-identities
 kind: lemma
 title: "Derivative, endpoint, parity, and boundedness identities for Bernoulli polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: clenshaw-curtis-and-extrapolation-quadrature

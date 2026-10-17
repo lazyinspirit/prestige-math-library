@@ -1,7 +1,7 @@
 ---
 page: adaptive-ode-solvers-and-error-estimation-examples
 title: Adaptive ODE solvers and error estimation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-below-roundoff-tolerance-breaks-embedded-estimate

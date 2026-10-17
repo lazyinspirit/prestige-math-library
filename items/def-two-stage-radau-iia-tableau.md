@@ -2,7 +2,7 @@
 id: def-two-stage-radau-iia-tableau
 title: "Two-stage Radau IIA tableau"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

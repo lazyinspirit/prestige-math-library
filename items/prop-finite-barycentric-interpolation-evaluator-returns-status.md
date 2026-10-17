@@ -2,7 +2,7 @@
 id: prop-finite-barycentric-interpolation-evaluator-returns-status
 kind: proposition
 title: "The finite barycentric evaluator terminates with an explicit status"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

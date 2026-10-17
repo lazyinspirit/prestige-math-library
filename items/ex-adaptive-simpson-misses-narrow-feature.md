@@ -2,7 +2,7 @@
 id: ex-adaptive-simpson-misses-narrow-feature
 kind: example
 title: The Simpson indicator misses a feature between its sample nodes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

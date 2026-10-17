@@ -2,7 +2,7 @@
 id: lem-na-mixed-radix-cooley-tukey-factorization
 kind: lemma
 title: "Mixed-radix Cooley–Tukey factorization with fixed index maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 page: computed-fast-transforms-and-convolution

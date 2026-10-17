@@ -2,7 +2,7 @@
 id: thm-computed-francis-schur-backward-error
 kind: theorem
 title: "A finite computed Francis similarity sequence has a conditional normwise backward-error bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

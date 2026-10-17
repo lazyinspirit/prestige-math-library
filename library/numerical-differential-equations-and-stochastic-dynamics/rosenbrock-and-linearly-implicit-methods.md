@@ -1,7 +1,7 @@
 ---
 page: rosenbrock-and-linearly-implicit-methods
 title: Rosenbrock and linearly implicit methods
-status: draft
+status: published
 requires:
   - finite-precision-direct-factorizations
   - nonlinear-equations-and-newton-methods

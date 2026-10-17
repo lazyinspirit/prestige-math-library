@@ -2,7 +2,7 @@
 id: cex-quadratic-pure-birth-reaction-network-explodes
 kind: counterexample
 title: "Quadratic pure-birth rates can explode"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

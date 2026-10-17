@@ -2,7 +2,7 @@
 id: lem-positive-convex-polygon-winding-index
 kind: lemma
 title: "A positively oriented convex polygon has winding index one inside and zero outside"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

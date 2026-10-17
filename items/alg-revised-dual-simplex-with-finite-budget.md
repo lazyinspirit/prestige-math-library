@@ -2,7 +2,7 @@
 id: alg-revised-dual-simplex-with-finite-budget
 kind: algorithm
 title: "Dual revised simplex with a finite pivot budget"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

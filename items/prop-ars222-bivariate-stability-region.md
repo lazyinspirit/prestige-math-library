@@ -2,7 +2,7 @@
 id: prop-ars222-bivariate-stability-region
 kind: proposition
 title: "The ARS(2,2,2) bivariate scalar stability function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

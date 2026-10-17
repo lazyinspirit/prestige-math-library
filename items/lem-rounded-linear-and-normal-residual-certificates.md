@@ -2,7 +2,7 @@
 id: lem-rounded-linear-and-normal-residual-certificates
 kind: lemma
 title: Rounded matrix products give certified linear and normal-equation residual allowances
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:

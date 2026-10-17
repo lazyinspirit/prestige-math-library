@@ -2,7 +2,7 @@
 id: thm-complex-step-derivative-has-second-order-error-under-holomorphy
 kind: theorem
 title: "Complex-step differentiation is second-order for holomorphic functions real on the real axis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 provenance:

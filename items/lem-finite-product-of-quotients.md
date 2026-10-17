@@ -2,7 +2,7 @@
 id: lem-finite-product-of-quotients
 kind: lemma
 title: "A finite product of quotients is the quotient of finite products"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

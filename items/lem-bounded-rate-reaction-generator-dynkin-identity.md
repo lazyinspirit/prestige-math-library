@@ -2,7 +2,7 @@
 id: lem-bounded-rate-reaction-generator-dynkin-identity
 kind: lemma
 title: "Dynkin identity for a bounded-rate finite stopped reaction chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

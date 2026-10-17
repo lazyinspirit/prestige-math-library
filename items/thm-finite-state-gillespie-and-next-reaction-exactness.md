@@ -2,7 +2,7 @@
 id: thm-finite-state-gillespie-and-next-reaction-exactness
 kind: theorem
 title: "Finite-state Gillespie and next-reaction methods have the specified CTMC law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

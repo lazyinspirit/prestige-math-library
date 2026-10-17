@@ -2,7 +2,7 @@
 id: lem-fractional-integral-semigroup
 kind: lemma
 title: Semigroup law for fractional integrals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 2

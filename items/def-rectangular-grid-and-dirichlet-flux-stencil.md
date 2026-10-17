@@ -2,7 +2,7 @@
 id: def-rectangular-grid-and-dirichlet-flux-stencil
 kind: definition
 title: Rectangular grid and Dirichlet flux stencil
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

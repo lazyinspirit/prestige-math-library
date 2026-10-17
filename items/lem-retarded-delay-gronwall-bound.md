@@ -2,7 +2,7 @@
 id: lem-retarded-delay-gronwall-bound
 kind: lemma
 title: "A Gronwall bound for retarded-delay inequalities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

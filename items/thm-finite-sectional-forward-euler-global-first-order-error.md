@@ -2,7 +2,7 @@
 id: thm-finite-sectional-forward-euler-global-first-order-error
 kind: theorem
 title: Sectional forward Euler converges globally with first-order error
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 4

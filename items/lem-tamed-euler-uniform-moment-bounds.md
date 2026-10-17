@@ -2,7 +2,7 @@
 id: lem-tamed-euler-uniform-moment-bounds
 kind: lemma
 title: "Uniform finite-horizon moments for tamed Euler approximations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

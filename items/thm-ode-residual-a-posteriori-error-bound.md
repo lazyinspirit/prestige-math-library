@@ -2,7 +2,7 @@
 id: thm-ode-residual-a-posteriori-error-bound
 kind: theorem
 title: "A posteriori ODE error bound from the continuous residual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

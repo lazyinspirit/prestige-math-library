@@ -2,7 +2,7 @@
 id: rem-chaos-completeness-and-spectral-rate-caveats
 kind: remark
 title: Completeness and spectral rates require law-specific hypotheses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

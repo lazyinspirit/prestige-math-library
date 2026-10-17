@@ -1,7 +1,7 @@
 ---
 page: discrete-continuous-and-pde-adjoint-sensitivities-examples
 title: "Discrete continuous and pde adjoint sensitivities — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-4dvar-discrete-adjoint-gradient

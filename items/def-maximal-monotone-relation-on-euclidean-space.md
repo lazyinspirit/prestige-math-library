@@ -2,7 +2,7 @@
 id: def-maximal-monotone-relation-on-euclidean-space
 kind: definition
 title: "Monotone and maximal-monotone relations on Euclidean space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

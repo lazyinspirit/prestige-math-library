@@ -1,7 +1,7 @@
 ---
 page: runge-kutta-methods-and-order-examples
 title: Runge–Kutta Methods and Order — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-midpoint-order-loss-at-continuous-time-kink

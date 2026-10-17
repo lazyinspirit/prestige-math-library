@@ -2,7 +2,7 @@
 id: alg-schur-parlett-matrix-function
 kind: algorithm
 title: "Finite Schur–Parlett recurrence with block merging and inconclusive statuses"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 7

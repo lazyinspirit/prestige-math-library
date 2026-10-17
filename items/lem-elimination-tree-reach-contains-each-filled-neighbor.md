@@ -2,7 +2,7 @@
 id: lem-elimination-tree-reach-contains-each-filled-neighbor
 kind: lemma
 title: Every later filled neighbor lies on the elimination-tree parent path
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

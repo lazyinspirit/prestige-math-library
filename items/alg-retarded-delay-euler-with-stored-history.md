@@ -2,7 +2,7 @@
 id: alg-retarded-delay-euler-with-stored-history
 kind: algorithm
 title: "Explicit Euler with a stored piecewise-linear delay history"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

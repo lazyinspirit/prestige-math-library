@@ -2,7 +2,7 @@
 id: cex-adam-periodic-linear-losses-force-divergence
 kind: counterexample
 title: Adam diverges on a periodic bounded-gradient loss sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-boundary-control-needs-a-trace-space
 kind: example
 title: A boundary flux control uses the H1 trace and a different control operator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

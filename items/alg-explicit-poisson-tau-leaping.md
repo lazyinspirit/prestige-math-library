@@ -2,7 +2,7 @@
 id: alg-explicit-poisson-tau-leaping
 kind: algorithm
 title: "Explicit Poisson tau-leaping with an invalid-state status"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

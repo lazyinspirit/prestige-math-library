@@ -2,7 +2,7 @@
 id: prop-rkc-stability-intervals-and-stage-degree
 kind: proposition
 title: "RKC stability polynomials and certified negative-real intervals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

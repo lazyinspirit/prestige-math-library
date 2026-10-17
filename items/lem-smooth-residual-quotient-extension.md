@@ -2,7 +2,7 @@
 id: lem-smooth-residual-quotient-extension
 kind: lemma
 title: 'A $C^{k+r}$ residual vanishing through order $r-1$ has a $C^k$ scaled extension'
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

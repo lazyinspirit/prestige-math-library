@@ -2,7 +2,7 @@
 id: lem-finite-coagulation-fragmentation-event-moments
 kind: lemma
 title: Stoichiometric number and mass changes for finite coagulation and fragmentation events
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

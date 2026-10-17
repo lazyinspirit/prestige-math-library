@@ -2,7 +2,7 @@
 id: ex-globally-lipschitz-alignment-model
 kind: example
 title: A globally Lipschitz alignment model with exact mean trajectory
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 3

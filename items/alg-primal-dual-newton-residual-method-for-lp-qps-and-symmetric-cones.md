@@ -2,7 +2,7 @@
 id: alg-primal-dual-newton-residual-method-for-lp-qps-and-symmetric-cones
 kind: algorithm
 title: "Finite-budget primal-dual Newton methods for LP, convex QP, and symmetric cones"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 5

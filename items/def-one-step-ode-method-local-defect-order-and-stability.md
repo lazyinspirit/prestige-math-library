@@ -2,7 +2,7 @@
 id: def-one-step-ode-method-local-defect-order-and-stability
 kind: definition
 title: "One-step ODE methods, local defect, uniform order, and step stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps: [def-euclidean-inner-product, def-first-order-ode-initial-value-problem-and-solution]

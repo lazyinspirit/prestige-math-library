@@ -2,7 +2,7 @@
 id: lem-rooted-tree-generating-function-series
 kind: lemma
 title: Rooted-tree series and the inverse of u exp(-u)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

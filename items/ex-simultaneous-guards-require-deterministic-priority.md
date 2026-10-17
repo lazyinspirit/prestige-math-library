@@ -2,7 +2,7 @@
 id: ex-simultaneous-guards-require-deterministic-priority
 kind: example
 title: "Simultaneous guards need a deterministic priority rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 1

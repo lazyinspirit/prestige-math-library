@@ -2,7 +2,7 @@
 id: alg-dyadic-brownian-bridge-increment-tree
 kind: algorithm
 title: Dyadic Brownian bridge increment tree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 dependency_level: 0

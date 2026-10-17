@@ -2,7 +2,7 @@
 id: lem-hermitian-block-ldl-kernel-roundoff-and-reconstruction-residual
 kind: lemma
 title: Hermitian block LDL* kernels have explicit roundoff and actual-factor residual bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: numerical-optimization-dynamics-2026-10-16
 deps:
