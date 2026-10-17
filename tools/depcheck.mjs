@@ -44,6 +44,7 @@ import { sectionText } from './facts-block.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 import { recordedPublishedRepair } from './published-repair-policy.mjs';
+import { reachedPhysicsMathContext } from './physics-math-context-import.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const itemScope = parseItemScope(process.argv.slice(2));
@@ -292,6 +293,15 @@ for (let i = 0; i < graphQueue.length; i++) {
     }
   }
 }
+// Verify only reached immutable physics-authored mathematical context. Imports
+// cannot become this frontier's audit/authoring subjects. Publication audit
+// requirements below remain unchanged.
+try {
+  reachedPhysicsMathContext(REPO, [...graphContext.keys()], {
+    selectedIds: itemScope.selected === null ? [...items.keys()] : [...itemScope.selected],
+  });
+} catch (error) { err('physics-math-context-import', error.message); }
+
 // An unresolved question cannot establish a claim, including through aliases
 // or an indirect prerequisite's well-definedness discharge.
 for (const id of graphContext.keys()) {

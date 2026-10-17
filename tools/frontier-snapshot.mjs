@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { yaml } from './pathway-lib.mjs';
+import { reachedPhysicsMathContext } from './physics-math-context-import.mjs';
 const safe = value => { if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid identity'); return value; };
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const read = path => existsSync(path) ? json(path) : null;
@@ -178,6 +179,10 @@ function dependency(s, id) {
       contract ? { id: contract.page.id, order: contract.page.order, requires: contract.page.requires } : null],
     deps: [...new Set(declarations.flatMap(i => [...(i.deps ?? []), ...(i.justified_by ?? []), ...(i.forward_refs ?? [])]))],
   };
+  const imported = reachedPhysicsMathContext(s.root, [id], {
+    selectedIds: [...s.items.keys()], cache: s.physicsMathContextCache ??= new Map(),
+  });
+  if (imported.bindings.length) value.bytes.push({ physics_math_context: imported.bindings });
   s.cache.set(id, value);
   return value;
 }
@@ -227,5 +232,9 @@ export function itemInputPaths(s, id, extra = []) {
     if (live) paths.add(join(s.root, 'research', `${s.run}-batch-${live.page.batch}.pages.json`));
     else if (s.planned.has(key)) paths.add(join(s.root, 'research', 'plan-spec.json'));
   }
+  const imported = reachedPhysicsMathContext(s.root, [...itemInputs(s, id, extra).keys()], {
+    selectedIds: [...s.items.keys()], cache: s.physicsMathContextCache ??= new Map(),
+  });
+  for (const path of imported.paths) paths.add(path);
   return [...paths];
 }
