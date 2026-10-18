@@ -84,3 +84,30 @@ mandatory; certification rejects missing current owner review for the item.
 Installation changes the workflow's static imports. Restart the controller
 and workflow host in fresh processes at the real paused/drained boundary
 before resuming. No native history or frozen pack is rewritten to load code.
+
+## Opt-in version 2: computed draft dependency levels
+
+Version 1 remains the sole hardcoded Box–Muller route above. An explicit payload `version:2` instead supplies nonempty `source_levels` (and no `source_level`):
+
+```json
+{
+  "version": 2,
+  "reason": "ACTUAL OWNER EXPLANATION OF THE COMPUTED METADATA DEFECT",
+  "carriers": [{"path":"research/RUN-batch-N.pages.json","before_file":"research/EXACT-NATIVE-MANIFEST.json"}],
+  "source_levels": [{"id":"EXISTING_DRAFT_ID","before":9,"after":2,"before_file":"research/EXACT-FULL-PREEDIT-SOURCE.md","historical_basis":"native-post"}]
+}
+```
+
+The recorder captures all complete current in-run sources and every current run manifest itself, plus actual paused/drained 5.1 state/request, frozen initial pack/frontier/baseline/verdicts and every successful original handoff. Callers cannot supply creation or current-graph archives. No initial collection or impact freeze/dispatch may exist. Numeric values and counts above illustrate fields, never authorize edits.
+
+Every listed source must be a true draft with unchanged ID/kind and every byte unchanged except one canonical top-level `dependency_level: INTEGER` numeric substitution. Both values are distinct nonnegative integers and the new value must equal the ordinary computed dependency level. Published source labels are expressly excluded: they require ordinary recorded published repair policy and the published-maintenance bridge. No body, Statement, Definition, deps, title, provenance, verification or other source edit is authorized by this adapter.
+
+`historical_basis:native-post` requires the full before source guard to equal the unique actually assigned original native report post and immutable final-output post; disposition, context hash and explicit uncertainty must agree. `historical_basis:baseline-keep` requires no original assignment or review, exact initial/baseline guard and the unique unchanged accepted Luna verdict. It creates no original review or rejection. The complete current draft graph must match these original post/baseline guards except the explicitly listed numeric substitutions; omitted numeric changes and unrelated current draft source changes fail closed.
+
+The complete source/manifest graph retains the original frozen item inventory and all original units. Every current source and manifest label must agree with the computed acyclic in-run dependency graph. Corrected manifests retain exact page/item identities, kind and other fields. Only current-source-backed title/deps/level mirrors may change. An actual nonempty `justified_by` mirror may additionally be corrected for a draft whose complete source is authenticated by its exact assigned original report/final native post (or numeric preimage). This reflects already-authored native source metadata; it never authors a new logical edge. Existing absent/empty optional justification mirrors are semantically empty and should remain untouched. Null/type/nonempty mismatches are not normalized.
+
+Every original native supporting manifest hash must match its preserved full before archive, including absolute native evidence paths. Missing changed carriers or forged preimages fail. Historical lookups retain these exact archives after later native work without pinning the live graph forever. All nonempty units additionally bind original prompt/log bytes and the exact immutable final-message identity; no session journal payload is consumed.
+
+Collection returns `historicalGuards` only for these drafts, preserves genuine original review rows in `historical_metadata_reviews`, and supplies no new current review. Unassigned baseline items have no invented historical row. The collection post remains actual current source bytes; existing decisions and repair counters retain their original meaning. Every changed draft ID is queued in `metadata_history_current_review_targets` for ordinary fresh native 5.2 review, certification, Sol judgment and gates, even though no public mathematical interface changed.
+
+When published repairs also change mirrors in the same manifest, preserve layering: keep original native manifests for this v2 history, apply draft-only mirrors, archive that intermediate state as the published bridge's metadata preimage, then apply only the authenticated published mirrors. Both receipts capture the same final complete current graph. This v2 carrier may span original-native to final source-backed mirrors; the published carrier remains strictly published-only. Do not overwrite historical pins or rewrite old reports.
